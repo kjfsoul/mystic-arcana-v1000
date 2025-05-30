@@ -1,0 +1,21 @@
+---
+description: 
+globs: src/app/**/page.tsx, src/app/**/layout.tsx, src/app/components/**, src/app/**/*.tsx
+alwaysApply: false
+---
+---
+description: User experience guidelines for spiritual wellness platform
+globs: ["**/frontend/**", "**/components/**", "**/*.jsx", "**/*.tsx"]
+alwaysApply: false
+---
+
+# Frontend UX Guidelines
+
+- Mobile-first progressive enhancement
+- Progressive disclosure: reveal complexity gradually
+- WCAG 2.1 AA accessibility compliance minimum
+- Performance budget: <3 second load times, <100KB initial bundle
+- Always indicate when content is AI-generated vs human-created
+- Mindful notifications that enhance rather than interrupt spiritual practice
+
+@component-template.tsx

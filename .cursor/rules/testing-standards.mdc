@@ -1,0 +1,20 @@
+---
+description: 
+globs: tests/**, **/*.test.*, **/*.spec.*
+alwaysApply: false
+---
+---
+description: Testing standards for spiritual wellness platform
+globs: ["**/*.test.*", "**/*.spec.*", "**/tests/**"]
+alwaysApply: false
+---
+
+# Testing Standards
+
+- Astronomical calculations verified against known historical events
+- Cultural sensitivity testing with practitioners from relevant traditions
+- Accessibility testing with real users who have disabilities
+- Privacy testing including penetration testing for spiritual data
+- Performance testing for peak usage (new moons, major astrological events)
+
+@test-template.ts

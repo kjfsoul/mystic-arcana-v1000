@@ -1,6 +1,5 @@
 {
   "mcpServers": {
-    // Core Development Environment Interaction
     "filesystem": {
       "command": "filesystem-mcp-server",
       "args": [],
@@ -99,7 +98,6 @@
       "env": {}
     },
 
-    // Data and API Interaction
     "fetch": {
       "command": "fetch",
       "args": [],
@@ -155,7 +153,6 @@
       "env": {}
     },
 
-    // Security and Reliability Enhancements
     "security-audit": {
       "command": "mcp-security-audit",
       "args": [],
@@ -204,7 +201,6 @@
       "env": {}
     },
 
-    // Project Context and Memory
     "ragdocs": {
       "command": "RagDocs",
       "args": [],
@@ -251,7 +247,6 @@
       "env": {}
     },
 
-    // Specialized Development Servers
     "nextjs-dev": {
       "command": "MCP-Dev-NextJS",
       "args": [],

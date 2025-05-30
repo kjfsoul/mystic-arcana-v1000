@@ -1,0 +1,20 @@
+---
+description: 
+globs: src/app/**/route.ts, src/app/api/**, src/app/lib/**
+alwaysApply: false
+---
+---
+description: API-first development standards for Mystic Arcana
+globs: ["**/api/**", "**/backend/**", "**/server/**"]
+alwaysApply: false
+---
+
+# API Architecture Standards
+
+- Every feature must expose clean, documented APIs
+- Use RESTful conventions with clear resource naming
+- Implement rate limiting and authentication on all endpoints
+- Separate astronomical calculations, user management, and content generation into distinct services
+- Cache astronomical data intelligently but never compromise accuracy for performance
+
+@api-template.ts
