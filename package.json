@@ -6,7 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "validate:astro": "python3 scripts/validate_ephemeris.py",
+    "validate:spiritual": "node scripts/validate_spiritual_references.js",
+    "setup:background": "chmod +x .cursor/install.sh && ./.cursor/install.sh",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "content:validate": "node scripts/content_generation_monitor.js"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",

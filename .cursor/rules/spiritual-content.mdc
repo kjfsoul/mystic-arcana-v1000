@@ -1,0 +1,28 @@
+---
+description: 
+globs: docs/**, README.md, **/*.md, *.md
+alwaysApply: false
+---
+---
+description: Documentation standards preserving spiritual authenticity and technical clarity
+globs: ["docs/**", "README.md", "**/*.md", "*.md"]
+alwaysApply: false
+---
+
+# Documentation and Spiritual Content Standards
+
+## Spiritual Knowledge Preservation
+Maintain academic rigor when documenting traditional tarot and astrological practices while ensuring practical application in digital format. All spiritual interpretations must reference authoritative sources and acknowledge cultural origins.
+
+## Multi-Reader Agent Documentation
+Document virtual guide personalities with clear attribution between AI-generated content and human expert knowledge. Each reader's memory and personality development must be tracked for consistency across user sessions.
+
+## API Documentation Standards
+Ensure all spiritual guidance features are properly documented for the API-first architecture. Include examples demonstrating respectful handling of sensitive spiritual data and proper error handling during spiritual crises.
+
+## Community and Legal Compliance
+Reference live legal documents for GDPR, CCPA, and spiritual counseling disclaimers. Maintain transparency about AI involvement in spiritual guidance while protecting user privacy as sacred trust.
+
+@docs/claude.md
+@docs/PRD.md
+@docs/project_overview.md

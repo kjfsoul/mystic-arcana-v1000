@@ -1,0 +1,30 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "terminals": [
+    {
+      "name": "main-dev",
+      "command": "npm run dev",
+      "description": "Main Next.js development server for Mystic Arcana platform with hot reloading"
+    },
+    {
+      "name": "astro-validation",
+      "command": "cd scripts && python3 -c 'import sys; sys.path.append(\".\"); from astronomical_validation import run_continuous_validation; run_continuous_validation()'",
+      "description": "Continuous astronomical calculation validation against Swiss Ephemeris and NASA data"
+    },
+    {
+      "name": "supabase-local",
+      "command": "npx supabase start",
+      "description": "Local Supabase instance for spiritual data testing and development"
+    },
+    {
+      "name": "content-pipeline",
+      "command": "cd scripts && node content_generation_monitor.js",
+      "description": "Monitors and validates AI-generated spiritual content for authenticity and cultural sensitivity"
+    }
+  ],
+  "install": "./.cursor/install.sh",
+  "start": "npm run supabase:start && sleep 5"
+}
