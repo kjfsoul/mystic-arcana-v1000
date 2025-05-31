@@ -1,0 +1,39 @@
+{
+  "working": [
+    {
+      "name": "filesystem",
+      "capabilities": {
+        "tools": {}
+      },
+      "serverInfo": {
+        "name": "secure-filesystem-server",
+        "version": "0.2.0"
+      }
+    },
+    {
+      "name": "git",
+      "capabilities": {
+        "experimental": {},
+        "tools": {
+          "listChanged": false
+        }
+      },
+      "serverInfo": {
+        "name": "mcp-git",
+        "version": "1.6.0"
+      }
+    },
+    {
+      "name": "memory",
+      "capabilities": {
+        "tools": {}
+      },
+      "serverInfo": {
+        "name": "memory-server",
+        "version": "0.6.3"
+      }
+    }
+  ],
+  "broken": [],
+  "total": 3
+}

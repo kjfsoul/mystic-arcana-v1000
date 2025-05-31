@@ -2,7 +2,9 @@
   "mcpServers": {
     "filesystem": {
       "command": "mcp-server-filesystem",
-      "args": ["/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"],
+      "args": [
+        "/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"
+      ],
       "env": {}
     },
     "filesystem-alt": {
@@ -97,7 +99,6 @@
       "args": [],
       "env": {}
     },
-
     "fetch": {
       "command": "mcp-server-fetch",
       "args": [],
@@ -152,7 +153,6 @@
       "args": [],
       "env": {}
     },
-
     "security-audit": {
       "command": "mcp-security-audit",
       "args": [],
@@ -200,7 +200,6 @@
       "args": [],
       "env": {}
     },
-
     "ragdocs": {
       "command": "ragdocs-mcp-server",
       "args": [],
@@ -246,7 +245,6 @@
       "args": [],
       "env": {}
     },
-
     "nextjs-dev": {
       "command": "mcp-dev-nextjs",
       "args": [],

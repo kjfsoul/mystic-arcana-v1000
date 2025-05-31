@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "filesystem": {
-      "command": "mcp-server-filesystem",
-      "args": ["/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"],
+      "command": "filesystem-mcp-server",
+      "args": [],
       "env": {}
     },
     "filesystem-alt": {
@@ -16,7 +16,7 @@
       "env": {}
     },
     "text-editor": {
-      "command": "mcp-text-editor",
+      "command": "tumf/mcp-text-editor",
       "args": [],
       "env": {}
     },
@@ -26,7 +26,7 @@
       "env": {}
     },
     "git": {
-      "command": "mcp-server-git",
+      "command": "git",
       "args": [],
       "env": {}
     },
@@ -48,22 +48,22 @@
       "env": {}
     },
     "language-server": {
-      "command": "mcp-language-server",
+      "command": "isaacphi/mcp-language-server",
       "args": [],
       "env": {}
     },
     "react-analyzer": {
-      "command": "react-analyzer-mcp",
+      "command": "azer/react-analyzer-mcp",
       "args": [],
       "env": {}
     },
     "file-scope": {
-      "command": "FileScopeMCP",
+      "command": "admica/FileScopeMCP",
       "args": [],
       "env": {}
     },
     "claude-code": {
-      "command": "mcp-claude-code",
+      "command": "SDGLBL/mcp-claude-code",
       "args": [],
       "env": {}
     },
@@ -99,26 +99,26 @@
     },
 
     "fetch": {
-      "command": "mcp-server-fetch",
+      "command": "fetch",
       "args": [],
       "env": {}
     },
     "firecrawl": {
-      "command": "firecrawl-mcp-server",
+      "command": "FireCrawl",
       "args": [],
       "env": {
         "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
       }
     },
     "dbhub": {
-      "command": "dbhub-mcp-server",
+      "command": "DBHub",
       "args": [],
       "env": {
         "DATABASE_URL": "${DATABASE_URL}"
       }
     },
     "gateway": {
-      "command": "gateway-mcp-server",
+      "command": "gateway",
       "args": [],
       "env": {}
     },
@@ -138,12 +138,12 @@
       }
     },
     "mcp-link": {
-      "command": "mcp-link",
+      "command": "automation-ai-labs/mcp-link",
       "args": [],
       "env": {}
     },
     "openapi": {
-      "command": "openapi-mcp-server",
+      "command": "snaggle-ai/openapi-mcp-server",
       "args": [],
       "env": {}
     },
@@ -166,22 +166,22 @@
       }
     },
     "osv": {
-      "command": "osv-mcp-server",
+      "command": "OSV-MCP",
       "args": [],
       "env": {}
     },
     "deebo": {
-      "command": "deebo-mcp-server",
+      "command": "Deebo",
       "args": [],
       "env": {}
     },
     "claude-debugs": {
-      "command": "claude-debugs-for-you",
+      "command": "jasonjmcghee/claude-debugs-for-you",
       "args": [],
       "env": {}
     },
     "user-feedback": {
-      "command": "user-feedback-mcp",
+      "command": "mrexodia/user-feedback-mcp",
       "args": [],
       "env": {}
     },
@@ -202,7 +202,7 @@
     },
 
     "ragdocs": {
-      "command": "ragdocs-mcp-server",
+      "command": "RagDocs",
       "args": [],
       "env": {}
     },
@@ -237,7 +237,7 @@
       "env": {}
     },
     "memgpt": {
-      "command": "memgpt-mcp-server",
+      "command": "Memgpt-MCP-Server",
       "args": [],
       "env": {}
     },
@@ -248,37 +248,37 @@
     },
 
     "nextjs-dev": {
-      "command": "mcp-dev-nextjs",
+      "command": "MCP-Dev-NextJS",
       "args": [],
       "env": {}
     },
     "react-ui": {
-      "command": "mcp-react-ui",
+      "command": "MCP-React-UI",
       "args": [],
       "env": {}
     },
     "netlify-docs": {
-      "command": "mcp-netlify-edgedocs",
+      "command": "MCP-Netlify-EdgeDocs",
       "args": [],
       "env": {}
     },
     "fullstack-turbo": {
-      "command": "mcp-fullstack-turbo",
+      "command": "MCP-Fullstack-Turbo",
       "args": [],
       "env": {}
     },
     "ai-function-pack": {
-      "command": "mcp-ai-functionpack",
+      "command": "MCP-AI-FunctionPack",
       "args": [],
       "env": {}
     },
     "cms-headless": {
-      "command": "mcp-cms-headless",
+      "command": "MCP-CMS-Headless",
       "args": [],
       "env": {}
     },
     "commerce-stripe": {
-      "command": "mcp-commerce-stripe",
+      "command": "MCP-Commerce-Stripe",
       "args": [],
       "env": {
         "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
@@ -286,7 +286,7 @@
       }
     },
     "design-system-tailwind": {
-      "command": "mcp-design-system-tailwind",
+      "command": "MCP-Design-System-Tailwind",
       "args": [],
       "env": {}
     }
