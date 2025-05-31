@@ -1,5 +1,30 @@
 ---
-description:
-globs:
+description: 
+globs: *.config.*, package.json, tsconfig.json, eslint.config.mjs, next.config.ts, netlify.toml
 alwaysApply: false
 ---
+---
+description: Configuration standards for Mystic Arcana multi-brand spiritual platform
+globs: ["*.config.*", "package.json", "tsconfig.json", "eslint.config.mjs", "next.config.ts", "netlify.toml"]
+alwaysApply: false
+---
+
+# Configuration and Build Standards
+
+## Multi-Brand Architecture Requirements
+Configure build processes to support Mystic Arcana, BirthdayGen, and EDM Shuffle brands with shared infrastructure but isolated user experiences and data.
+
+## Performance Targets for Spiritual Practice
+- Galaxy/starfield UI must maintain 60fps with WebGL/Three.js optimizations
+- Real-time astronomical calculations under 200ms response time
+- Mobile-first PWA capabilities for offline spiritual practice access
+- CDN optimization for tarot deck images and celestial chart assets
+
+## Integration Configuration
+- MCP server connections for Claude Code and virtual reader agents
+- Supabase environment variables with proper staging/production separation
+- Swiss Ephemeris and NASA/JPL API configurations for astronomical accuracy
+- n8n workflow automation endpoints for content generation and social media
+
+@docs/claude.md
+@docs/technical_architecture.md
