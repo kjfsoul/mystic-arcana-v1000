@@ -258,7 +258,7 @@ export class SwissEphemerisBridge {
     try {
       if (this.config.useMockData) {
         // Generate mock cosmic weather data
-        const cosmicWeather = this.generateMockCosmicWeather(datetime, location);
+        const cosmicWeather = this.generateMockCosmicWeather(datetime);
         this.setCache(cacheKey, cosmicWeather);
         return cosmicWeather;
       }
@@ -354,7 +354,7 @@ export class SwissEphemerisBridge {
         method: 'GET',
         signal: AbortSignal.timeout(this.config.timeout)
       });
-      
+
       return {
         success: response.ok,
         data: await response.text(),
@@ -406,12 +406,12 @@ export class SwissEphemerisBridge {
   private generateMockPlanetaryData(request: PlanetaryCalculationRequest): PlanetaryData[] {
     const now = Date.now();
     const dayOfYear = Math.floor((now - new Date(new Date().getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-    
+
     return request.planets.map((planetName, index) => {
       const baseAngle = (dayOfYear + index * 30) % 360;
       const ra = (baseAngle + Math.sin(now / 1000000) * 10) % 360;
       const dec = Math.sin((baseAngle + index * 45) * Math.PI / 180) * 23.5;
-      
+
       return {
         name: planetName,
         symbol: this.getPlanetSymbol(planetName),
@@ -441,14 +441,14 @@ export class SwissEphemerisBridge {
 
   private getZodiacSign(longitude: number): string {
     const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-                   'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
     return signs[Math.floor(longitude / 30) % 12];
   }
 
   private generateMockAspectData(planets: string[], datetime: Date, orbTolerance: number): AspectData[] {
     const aspects: AspectData[] = [];
     const aspectTypes: AspectData['type'][] = ['conjunction', 'sextile', 'square', 'trine', 'opposition'];
-    
+
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
         if (Math.random() < 0.3) { // 30% chance of aspect
@@ -467,7 +467,7 @@ export class SwissEphemerisBridge {
         }
       }
     }
-    
+
     return aspects;
   }
 
@@ -482,7 +482,7 @@ export class SwissEphemerisBridge {
   private getAspectInfluence(type: AspectData['type']): AspectData['influence'] {
     const harmonious: AspectData['type'][] = ['conjunction', 'sextile', 'trine'];
     const challenging: AspectData['type'][] = ['square', 'opposition'];
-    
+
     if (harmonious.includes(type)) return 'harmonious';
     if (challenging.includes(type)) return 'challenging';
     return 'neutral';
@@ -490,16 +490,16 @@ export class SwissEphemerisBridge {
 
   private generateMockRetrogradeData(planet: string, startDate: Date, endDate: Date): RetrogradeData[] {
     const retrogrades: RetrogradeData[] = [];
-    
+
     // Generate 1-3 retrograde periods in the date range
     const numRetrogrades = Math.floor(Math.random() * 3) + 1;
-    
+
     for (let i = 0; i < numRetrogrades; i++) {
       const start = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
       const duration = 30 + Math.random() * 60; // 30-90 days
       const end = new Date(start.getTime() + duration * 24 * 60 * 60 * 1000);
       const peak = new Date((start.getTime() + end.getTime()) / 2);
-      
+
       retrogrades.push({
         planet,
         startDate: start,
@@ -515,11 +515,11 @@ export class SwissEphemerisBridge {
         }
       });
     }
-    
+
     return retrogrades;
   }
 
-  private generateMockCosmicWeather(datetime: Date, _location: GeoLocation): CosmicInfluenceData {
+  private generateMockCosmicWeather(datetime: Date): CosmicInfluenceData {
     return {
       timestamp: datetime,
       moonPhase: {
@@ -634,7 +634,7 @@ export class SwissEphemerisBridge {
       const r = retro as Record<string, unknown>;
       const shadow = r.shadow as Record<string, unknown>;
       const zodiacRange = r.zodiac_range as Record<string, unknown>;
-      
+
       return {
         planet: r.planet as string,
         startDate: new Date(r.start_date as string),
@@ -654,7 +654,7 @@ export class SwissEphemerisBridge {
 
   private parseCosmicWeatherData(rawData: Record<string, unknown>): CosmicInfluenceData {
     const aspects = rawData.aspects as Record<string, unknown>;
-    
+
     return {
       timestamp: new Date(rawData.timestamp as string),
       moonPhase: rawData.moon_phase as CosmicInfluenceData['moonPhase'],

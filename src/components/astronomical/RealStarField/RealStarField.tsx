@@ -67,7 +67,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
         await astronomicalEngine.loadStarCatalog(finalRenderConfig.starCatalog);
 
         // Get visible stars for current time and location
-        const visibleStars = await astronomicalEngine.getVisibleStars(time, finalRenderConfig);
+        const visibleStars = await astronomicalEngine.getVisibleStars();
 
         setStars(visibleStars);
         console.log(`✨ Loaded ${visibleStars.length} visible stars`);
@@ -84,14 +84,10 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [location, finalRenderConfig, time]);
 
   // Convert star coordinates to screen positions
-  const getStarScreenPosition = useCallback((star: Star): ScreenCoordinates => {
-    return astronomicalEngine.transformCoordinates(
-      star.coordinates.rightAscension,
-      star.coordinates.declination,
-      location,
-      time
-    );
-  }, [location, time]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getStarScreenPosition = useCallback((_star: Star): ScreenCoordinates => {
+    return astronomicalEngine.transformCoordinates();
+  }, []);
 
   // Get star color based on B-V color index
   const getStarColor = useCallback((star: Star): string => {

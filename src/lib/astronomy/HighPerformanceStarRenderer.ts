@@ -46,6 +46,9 @@ export class HighPerformanceStarRenderer {
   // Uniform locations
   private uniforms: { [key: string]: WebGLUniformLocation | null } = {};
 
+  // Attribute locations
+  private attributes: { [key: string]: number } = {};
+
   // Rendering state
   private stars: Star[] = [];
   private renderData: StarRenderData | null = null;
@@ -69,6 +72,10 @@ export class HighPerformanceStarRenderer {
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
 
+    console.log('🎮 Initializing HighPerformanceStarRenderer...');
+    console.log(`📐 Canvas dimensions: ${canvas.width}x${canvas.height}`);
+    console.log(`📏 Canvas style: ${canvas.style.width}x${canvas.style.height}`);
+
     // Get WebGL2 context for advanced features
     const gl = canvas.getContext('webgl2', {
       alpha: false,
@@ -82,6 +89,7 @@ export class HighPerformanceStarRenderer {
       throw new Error('WebGL2 not supported');
     }
 
+    console.log('✅ WebGL2 context created');
     this.gl = gl;
     this.initializeWebGL();
   }
@@ -237,10 +245,26 @@ export class HighPerformanceStarRenderer {
     this.uniforms.time = this.gl.getUniformLocation(this.program, 'u_time');
     this.uniforms.pixelRatio = this.gl.getUniformLocation(this.program, 'u_pixelRatio');
     this.uniforms.resolution = this.gl.getUniformLocation(this.program, 'u_resolution');
+
+    // Get attribute locations
+    this.attributes.position = this.gl.getAttribLocation(this.program, 'a_position');
+    this.attributes.magnitude = this.gl.getAttribLocation(this.program, 'a_magnitude');
+    this.attributes.colorIndex = this.gl.getAttribLocation(this.program, 'a_colorIndex');
+    this.attributes.twinklePhase = this.gl.getAttribLocation(this.program, 'a_twinklePhase');
+
+    console.log('🔗 Attribute locations:', {
+      position: this.attributes.position,
+      magnitude: this.attributes.magnitude,
+      colorIndex: this.attributes.colorIndex,
+      twinklePhase: this.attributes.twinklePhase
+    });
   }
 
   private compileShader(source: string, type: number): WebGLShader {
     const { gl } = this;
+    const shaderType = type === gl.VERTEX_SHADER ? 'vertex' : 'fragment';
+    console.log(`🔧 Compiling ${shaderType} shader...`);
+
     const shader = gl.createShader(type);
 
     if (!shader) {
@@ -252,10 +276,13 @@ export class HighPerformanceStarRenderer {
 
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       const error = gl.getShaderInfoLog(shader);
+      console.error(`❌ ${shaderType} shader compilation failed:`, error);
+      console.error('Shader source:', source);
       gl.deleteShader(shader);
       throw new Error(`Shader compilation failed: ${error}`);
     }
 
+    console.log(`✅ ${shaderType} shader compiled successfully`);
     return shader;
   }
 
@@ -287,6 +314,7 @@ export class HighPerformanceStarRenderer {
 
   private prepareRenderData(): void {
     const starCount = this.stars.length;
+    console.log(`🔄 Preparing render data for ${starCount} stars...`);
 
     this.renderData = {
       position: new Float32Array(starCount * 3),
@@ -295,6 +323,8 @@ export class HighPerformanceStarRenderer {
       twinklePhase: new Float32Array(starCount),
       visible: new Uint8Array(starCount)
     };
+
+    console.log(`📊 Allocated arrays: positions(${this.renderData.position.length}), magnitudes(${this.renderData.magnitude.length}), colors(${this.renderData.colorIndex.length}), twinkle(${this.renderData.twinklePhase.length})`);
 
     // Convert star data to render format
     for (let i = 0; i < starCount; i++) {
@@ -371,7 +401,16 @@ export class HighPerformanceStarRenderer {
     const visibleCount = this.performFrustumCulling();
 
     // Render visible stars
+    if (this.frameCount % 60 === 0) { // Log every 60 frames (once per second at 60fps)
+      console.log(`🎨 Drawing ${visibleCount} stars... (frame ${this.frameCount})`);
+    }
     gl.drawArrays(gl.POINTS, 0, visibleCount);
+
+    // Check for WebGL errors
+    const error = gl.getError();
+    if (error !== gl.NO_ERROR) {
+      console.error('❌ WebGL error during draw:', error);
+    }
 
     // Update performance stats
     const renderTime = performance.now() - startTime;
@@ -384,24 +423,32 @@ export class HighPerformanceStarRenderer {
     const { gl } = this;
 
     // Position attribute
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-    gl.enableVertexAttribArray(0);
-    gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+    if (this.attributes.position !== null && this.attributes.position >= 0) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
+      gl.enableVertexAttribArray(this.attributes.position);
+      gl.vertexAttribPointer(this.attributes.position, 3, gl.FLOAT, false, 0, 0);
+    }
 
     // Magnitude attribute
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.magnitudeBuffer);
-    gl.enableVertexAttribArray(1);
-    gl.vertexAttribPointer(1, 1, gl.FLOAT, false, 0, 0);
+    if (this.attributes.magnitude !== null && this.attributes.magnitude >= 0) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.magnitudeBuffer);
+      gl.enableVertexAttribArray(this.attributes.magnitude);
+      gl.vertexAttribPointer(this.attributes.magnitude, 1, gl.FLOAT, false, 0, 0);
+    }
 
     // Color index attribute
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-    gl.enableVertexAttribArray(2);
-    gl.vertexAttribPointer(2, 1, gl.FLOAT, false, 0, 0);
+    if (this.attributes.colorIndex !== null && this.attributes.colorIndex >= 0) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
+      gl.enableVertexAttribArray(this.attributes.colorIndex);
+      gl.vertexAttribPointer(this.attributes.colorIndex, 1, gl.FLOAT, false, 0, 0);
+    }
 
     // Twinkle phase attribute
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.twinkleBuffer);
-    gl.enableVertexAttribArray(3);
-    gl.vertexAttribPointer(3, 1, gl.FLOAT, false, 0, 0);
+    if (this.attributes.twinklePhase !== null && this.attributes.twinklePhase >= 0) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.twinkleBuffer);
+      gl.enableVertexAttribArray(this.attributes.twinklePhase);
+      gl.vertexAttribPointer(this.attributes.twinklePhase, 1, gl.FLOAT, false, 0, 0);
+    }
   }
 
   private performFrustumCulling(): number {

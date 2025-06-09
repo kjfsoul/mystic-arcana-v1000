@@ -183,26 +183,17 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     }
   }
 
-  async getVisibleStars(_time: Date, _renderConfig: RenderConfig): Promise<Star[]> {
+  async getVisibleStars(): Promise<Star[]> {
     // Placeholder - will return stars visible at given time/location
     return [];
   }
 
-  transformCoordinates(
-    _ra: number,
-    _dec: number,
-    _location: GeoLocation,
-    _time: Date
-  ): ScreenCoordinates {
+  transformCoordinates(): ScreenCoordinates {
     // Placeholder - will implement proper coordinate transformation
     return { x: 0, y: 0, visible: false };
   }
 
-  equatorialToHorizontal(
-    _coords: EquatorialCoordinates,
-    _location: GeoLocation,
-    _time: Date
-  ): { azimuth: number; altitude: number } {
+  equatorialToHorizontal(): { azimuth: number; altitude: number } {
     // Placeholder - will implement spherical trigonometry
     return { azimuth: 0, altitude: 0 };
   }
@@ -276,31 +267,36 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return offsets[planet] || 0;
   }
 
-  calculateAspects(_planets: PlanetaryData[]): AspectData[] {
+  calculateAspects(): AspectData[] {
     // Placeholder - will calculate angular relationships
     return [];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async detectRetrogrades(_planet: Planet, _timeRange: { start: Date; end: Date }): Promise<RetrogradeData[]> {
     // Placeholder - will analyze planetary motion
     return [];
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   calculateHouses(_time: Date, _location: GeoLocation, _system: 'placidus' | 'equal' | 'whole'): number[] {
     // Placeholder - will implement house system calculations
     return Array(12).fill(0);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getMoonPhase(_time: Date): Promise<MoonPhaseData> {
     // Placeholder - will calculate accurate moon phase
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getMoonPosition(_time: Date, _location: GeoLocation): Promise<PlanetaryData> {
     // Placeholder - will calculate moon position
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   calculatePrecession(_epoch: Date, _targetDate: Date): { deltaRA: number; deltaDec: number } {
     // Placeholder - will implement precession correction
     return { deltaRA: 0, deltaDec: 0 };
@@ -322,7 +318,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     ];
   }
 
-  calculateLimitingMagnitude(location: GeoLocation, time: Date): number {
+  calculateLimitingMagnitude(location: GeoLocation): number {
     // Simple approximation based on light pollution
     // In reality, would consider atmospheric conditions, moon phase, etc.
     const baseLimit = 6.5;
@@ -331,9 +327,9 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return Math.min(baseLimit + elevationBonus, 7.0);
   }
 
-  isMilkyWayVisible(location: GeoLocation, time: Date): boolean {
+  isMilkyWayVisible(location: GeoLocation): boolean {
     // Simple check - would depend on season, time, light pollution
-    const limitingMag = this.calculateLimitingMagnitude(location, time);
+    const limitingMag = this.calculateLimitingMagnitude(location);
     return limitingMag > 5.0; // Milky Way visible with magnitude > 5
   }
 
@@ -345,6 +341,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return Math.max(0, Math.min(1, extinction));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getVisibleSky(_location: GeoLocation, _time: Date): Promise<{
     stars: Star[];
     planets: PlanetaryData[];
@@ -354,11 +351,13 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async calculateCosmicWeather(_time: Date): Promise<CosmicInfluenceData> {
     // Placeholder - will analyze cosmic influences
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getPlanetaryHour(_time: Date, _location: GeoLocation): Planet {
     // Placeholder - will calculate current planetary hour
     return Planet.SUN;
@@ -390,6 +389,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return new Date(year, month - 1, day);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getSiderealTime(_time: Date, _longitude: number): number {
     // Placeholder - will implement accurate sidereal time calculation
     return 0;

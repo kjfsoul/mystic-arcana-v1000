@@ -6,6 +6,7 @@ import { astronomicalEngine } from '../../../services/astronomical/AstronomicalE
 import { useGeolocation } from '../../../hooks/useGeolocation';
 import { RenderConfig } from '../../../types/astronomical';
 import { Star } from '../../../lib/astronomy/types';
+import { GalaxyBackground } from '../../effects/GalaxyBackground/GalaxyBackground';
 import styles from './HighPerformanceStarField.module.css';
 
 interface HighPerformanceStarFieldProps {
@@ -37,6 +38,12 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<HighPerformanceStarRenderer | null>(null);
   const animationRef = useRef<number>(0);
+  const onPerformanceUpdateRef = useRef(onPerformanceUpdate);
+
+  // Update the ref when the callback changes
+  useEffect(() => {
+    onPerformanceUpdateRef.current = onPerformanceUpdate;
+  }, [onPerformanceUpdate]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [starCount, setStarCount] = useState(0);
@@ -83,18 +90,57 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   }), [renderConfig]);
 
   /**
+   * Start the high-performance render loop
+   */
+  const startRenderLoop = useCallback(() => {
+    const render = (time: number) => {
+      if (rendererRef.current) {
+        const stats = rendererRef.current.render(time);
+
+        // Update performance callback
+        if (onPerformanceUpdateRef.current) {
+          onPerformanceUpdateRef.current({
+            totalStars: stats.totalStars,
+            visibleStars: stats.visibleStars,
+            fps: stats.fps,
+            renderTime: stats.renderTime
+          });
+        }
+      }
+
+      animationRef.current = requestAnimationFrame(render);
+    };
+
+    animationRef.current = requestAnimationFrame(render);
+  }, []);
+
+  /**
    * Initialize the high-performance renderer
    */
   const initializeRenderer = useCallback(async () => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current) {
+      console.log('❌ Canvas ref not available');
+      return;
+    }
 
     try {
       setIsLoading(true);
       setError(null);
 
+      console.log('🚀 Initializing high-performance star renderer...');
+
+      // Ensure canvas is properly sized
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      console.log(`📐 Canvas size: ${rect.width}x${rect.height}`);
+
       // Create high-performance renderer
-      const renderer = new HighPerformanceStarRenderer(canvasRef.current);
+      const renderer = new HighPerformanceStarRenderer(canvas);
       rendererRef.current = renderer;
+
+      // Ensure proper canvas sizing
+      renderer.resize(rect.width, rect.height);
+      console.log(`📐 Renderer resized to: ${rect.width}x${rect.height}`);
 
       // Load star data
       let stars: Star[] = [];
@@ -125,15 +171,20 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
         console.log(`✨ Loaded ${stars.length} real stars from ${finalRenderConfig.starCatalog} catalog`);
       } else {
         // Generate procedural stars for performance testing
+        console.log(`🎨 Generating ${finalRenderConfig.maxStars} procedural stars...`);
         stars = generateProceduralStars(finalRenderConfig.maxStars);
-        console.log(`🎨 Generated ${stars.length} procedural stars for testing`);
+        console.log(`✅ Generated ${stars.length} procedural stars for testing`);
+        console.log('Sample star:', stars[0]);
       }
 
       // Load stars into renderer
+      console.log(`📤 Loading ${stars.length} stars into renderer...`);
       renderer.loadStars(stars);
       setStarCount(stars.length);
+      console.log(`✅ Stars loaded into renderer`);
 
-      // Set up view matrices (simplified for demo)
+      // Set up view matrices for celestial sphere viewing
+      // Position camera at origin looking outward at the celestial sphere
       const viewMatrix = new Float32Array([
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -141,17 +192,23 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
         0, 0, 0, 1
       ]);
 
+      // Create projection matrix suitable for viewing unit sphere
+      const aspect = rect.width / rect.height;
       const projectionMatrix = createPerspectiveMatrix(
-        Math.PI / 3, // 60 degree FOV
-        canvasRef.current.width / canvasRef.current.height,
-        0.1,
-        1000
+        Math.PI / 2, // 90 degree FOV for wide sky view
+        aspect,
+        0.1,  // Near plane
+        10.0  // Far plane (stars are on unit sphere at distance ~1)
       );
+
+      console.log(`📷 Camera setup: FOV=90°, aspect=${aspect.toFixed(2)}, near=0.1, far=10.0`);
 
       renderer.updateMatrices(viewMatrix, projectionMatrix);
 
       // Start render loop
+      console.log(`🎬 Starting render loop...`);
       startRenderLoop();
+      console.log(`✅ Render loop started`);
 
     } catch (err) {
       console.error('Failed to initialize high-performance star renderer:', err);
@@ -214,31 +271,6 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   };
 
   /**
-   * Start the high-performance render loop
-   */
-  const startRenderLoop = useCallback(() => {
-    const render = (time: number) => {
-      if (rendererRef.current) {
-        const stats = rendererRef.current.render(time);
-
-        // Update performance callback
-        if (onPerformanceUpdate) {
-          onPerformanceUpdate({
-            totalStars: stats.totalStars,
-            visibleStars: stats.visibleStars,
-            fps: stats.fps,
-            renderTime: stats.renderTime
-          });
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(render);
-    };
-
-    animationRef.current = requestAnimationFrame(render);
-  }, [onPerformanceUpdate]);
-
-  /**
    * Handle canvas resize
    */
   const handleResize = useCallback(() => {
@@ -287,6 +319,14 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
 
   return (
     <div className={`${styles.starFieldContainer} ${className}`}>
+      {/* Galaxy background */}
+      <GalaxyBackground
+        intensity={0.8}
+        showMilkyWay={true}
+        animated={true}
+        className={styles.galaxyBackground}
+      />
+
       <canvas
         ref={canvasRef}
         className={styles.starCanvas}

@@ -21,9 +21,7 @@ import {
   HorizontalCoordinates,
   AspectData,
   RetrogradeData,
-  CosmicInfluenceData,
-  PrecessionCorrection,
-  VisibleCelestialBodies
+  CosmicInfluenceData
 } from '../../types/astronomical';
 // import { StarCatalogLoader } from './StarCatalogLoader';
 // import { SwissEphemerisBridge } from './SwissEphemerisBridge';
@@ -306,7 +304,7 @@ export class AstronomicalEngine {
       messierObjects: [],
       constellations: [],
       milkyWayVisible: false,
-      limitingMagnitude: this.calculateLimitingMagnitude(location, time)
+      limitingMagnitude: this.calculateLimitingMagnitude(location)
     };
 
     // Filter stars by visibility
@@ -332,7 +330,7 @@ export class AstronomicalEngine {
     visible.stars.sort((a, b) => a.magnitude - b.magnitude);
 
     // Check Milky Way visibility
-    visible.milkyWayVisible = this.isMilkyWayVisible(location, time);
+    visible.milkyWayVisible = this.isMilkyWayVisible(location);
 
     return visible;
   }
@@ -382,7 +380,7 @@ export class AstronomicalEngine {
   /**
    * Calculate limiting magnitude based on location and atmospheric conditions
    */
-  calculateLimitingMagnitude(location: GeoLocation, _time: Date): number {
+  calculateLimitingMagnitude(location: GeoLocation): number {
     // Simple approximation based on light pollution
     // In reality, would consider atmospheric conditions, moon phase, etc.
     const baseLimit = 6.5;
@@ -394,9 +392,9 @@ export class AstronomicalEngine {
   /**
    * Check if Milky Way is visible based on conditions
    */
-  isMilkyWayVisible(location: GeoLocation, time: Date): boolean {
+  isMilkyWayVisible(location: GeoLocation): boolean {
     // Simple check - would depend on season, time, light pollution
-    const limitingMag = this.calculateLimitingMagnitude(location, time);
+    const limitingMag = this.calculateLimitingMagnitude(location);
     return limitingMag > 5.0; // Milky Way visible with magnitude > 5
   }
 

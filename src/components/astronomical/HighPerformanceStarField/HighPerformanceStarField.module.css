@@ -3,11 +3,21 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 100%);
+  background: #000000;
   border-radius: 8px;
 }
 
+.galaxyBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 .starCanvas {
+  position: relative;
   width: 100%;
   height: 100%;
   display: block;
@@ -15,6 +25,7 @@
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  z-index: 2;
 }
 
 .starCanvas:hover {
@@ -49,8 +60,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loadingOverlay p {
@@ -190,24 +206,24 @@
     left: 8px;
     font-size: 11px;
   }
-  
+
   .starCount,
   .mode {
     padding: 3px 6px;
   }
-  
+
   .performanceStats {
     bottom: 8px;
     right: 8px;
     padding: 6px 8px;
     font-size: 10px;
   }
-  
+
   .errorMessage {
     margin: 16px;
     padding: 16px;
   }
-  
+
   .loadingOverlay p {
     font-size: 13px;
     padding: 0 16px;
@@ -215,7 +231,8 @@
 }
 
 /* High DPI display optimization */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
   .starCanvas {
     image-rendering: auto;
   }
@@ -234,11 +251,11 @@
     animation: none;
     border: 3px solid #FFD700;
   }
-  
+
   .errorMessage button {
     transition: none;
   }
-  
+
   .errorMessage button:hover {
     transform: none;
   }
