@@ -50,11 +50,19 @@ export interface PlanetaryData {
 export interface GeoLocation {
   lat: number;                   // Latitude in degrees
   lon: number;                   // Longitude in degrees
+  latitude?: number;             // Alternative latitude field for compatibility
+  longitude?: number;            // Alternative longitude field for compatibility
   altitude?: number;             // Altitude in meters
+  elevation?: number;            // Alternative elevation field for compatibility
   timezone?: string;             // IANA timezone
 }
 
 export interface CelestialCoordinates {
+  ra: number;                    // Right ascension in degrees
+  dec: number;                   // Declination in degrees
+}
+
+export interface EquatorialCoordinates {
   ra: number;                    // Right ascension in degrees
   dec: number;                   // Declination in degrees
 }
@@ -83,6 +91,8 @@ export interface AspectData {
   planet2: string;
   type: 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition' |
   'semisextile' | 'quincunx' | 'semisquare' | 'sesquiquadrate';
+  aspect: 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition' |
+  'semisextile' | 'quincunx' | 'semisquare' | 'sesquiquadrate';  // Alternative field name for compatibility
   angle: number;                 // Actual angle in degrees
   orb: number;                   // Degrees from exact
   exact: boolean;                // Within 1 degree of exact?
@@ -154,6 +164,43 @@ export interface ConstellationData {
   };
 }
 
+// === Planet and Aspect Type Enums ===
+
+export enum Planet {
+  SUN = 'sun',
+  MOON = 'moon',
+  MERCURY = 'mercury',
+  VENUS = 'venus',
+  MARS = 'mars',
+  JUPITER = 'jupiter',
+  SATURN = 'saturn',
+  URANUS = 'uranus',
+  NEPTUNE = 'neptune',
+  PLUTO = 'pluto'
+}
+
+export enum AspectType {
+  CONJUNCTION = 'conjunction',
+  SEXTILE = 'sextile',
+  SQUARE = 'square',
+  TRINE = 'trine',
+  OPPOSITION = 'opposition',
+  SEMISEXTILE = 'semisextile',
+  QUINCUNX = 'quincunx',
+  SEMISQUARE = 'semisquare',
+  SESQUIQUADRATE = 'sesquiquadrate'
+}
+
+export enum CosmicWeatherType {
+  CALM = 'calm',
+  ACTIVE = 'active',
+  TURBULENT = 'turbulent',
+  ECLIPSE = 'eclipse',
+  MERCURY_RETROGRADE = 'mercury_retrograde',
+  FULL_MOON = 'full_moon',
+  NEW_MOON = 'new_moon'
+}
+
 // === Cosmic Weather & Spiritual Correlations ===
 
 export interface CosmicInfluenceData {
@@ -174,7 +221,9 @@ export interface CosmicInfluenceData {
 
 export interface MoonPhaseData {
   phase: 'new' | 'waxing-crescent' | 'first-quarter' | 'waxing-gibbous' |
-  'full' | 'waning-gibbous' | 'last-quarter' | 'waning-crescent';
+  'full' | 'waning-gibbous' | 'last-quarter' | 'waning-crescent' |
+  'New Moon' | 'Waxing Crescent' | 'First Quarter' | 'Waxing Gibbous' |
+  'Full Moon' | 'Waning Gibbous' | 'Last Quarter' | 'Waning Crescent';  // Alternative format for compatibility
   illumination: number;         // 0-1
   age: number;                 // Days since new moon
   zodiacSign: string;

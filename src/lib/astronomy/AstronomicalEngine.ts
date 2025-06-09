@@ -17,14 +17,14 @@ import {
   PlanetaryData,
   GeoLocation,
   ScreenCoordinates,
-  CelestialCoordinates,
+  EquatorialCoordinates,
   HorizontalCoordinates,
   AspectData,
   RetrogradeData,
   CosmicInfluenceData,
   PrecessionCorrection,
   VisibleCelestialBodies
-} from './types';
+} from '../../types/astronomical';
 // import { StarCatalogLoader } from './StarCatalogLoader';
 // import { SwissEphemerisBridge } from './SwissEphemerisBridge';
 // import { CoordinateTransforms } from './CoordinateTransforms';
@@ -228,7 +228,7 @@ export class AstronomicalEngine {
       );
 
       // Get planet position (simplified - would use Swiss Ephemeris)
-      const position = this.getPlanetaryPositions(planet, currentDate);
+      const position = this.getPlanetPosition(planet, currentDate);
       const currentLongitude = position.eclipticLongitude;
 
       if (previousLongitude !== null) {
@@ -351,7 +351,78 @@ export class AstronomicalEngine {
     return await swissEphemeris.calculateCosmicWeather(time, location);
   }
 
-  // === Private Helper Methods ===
+  /**
+   * Get planet position (simplified - would use Swiss Ephemeris)
+   */
+  getPlanetPosition(planet: string, currentDate: Date): { eclipticLongitude: number } {
+    // Simple placeholder for retrograde detection
+    const baseAngle = (currentDate.getTime() / (1000 * 60 * 60 * 24)) + this.getPlanetOffset(planet);
+    return { eclipticLongitude: (baseAngle % 360) };
+  }
+
+  /**
+   * Calculate precession matrix for coordinate transformation
+   */
+  calculatePrecessionMatrix(zetaA: number, zA: number, thetaA: number): number[][] {
+    // Simplified 3x3 rotation matrix for precession
+    const cosZeta = Math.cos(zetaA);
+    const sinZeta = Math.sin(zetaA);
+    const cosZ = Math.cos(zA);
+    const sinZ = Math.sin(zA);
+    const cosTheta = Math.cos(thetaA);
+    const sinTheta = Math.sin(thetaA);
+
+    return [
+      [cosZeta * cosZ * cosTheta - sinZeta * sinZ, -sinZeta * cosZ * cosTheta - cosZeta * sinZ, -sinZ * cosTheta],
+      [cosZeta * sinZ * cosTheta + sinZeta * cosZ, -sinZeta * sinZ * cosTheta + cosZeta * cosZ, cosZ * cosTheta],
+      [cosZeta * sinTheta, -sinZeta * sinTheta, cosTheta]
+    ];
+  }
+
+  /**
+   * Calculate limiting magnitude based on location and atmospheric conditions
+   */
+  calculateLimitingMagnitude(location: GeoLocation, _time: Date): number {
+    // Simple approximation based on light pollution
+    // In reality, would consider atmospheric conditions, moon phase, etc.
+    const baseLimit = 6.5;
+    const elevation = location.altitude || 0;
+    const elevationBonus = elevation / 1000 * 0.1; // 0.1 mag per km elevation
+    return Math.min(baseLimit + elevationBonus, 7.0);
+  }
+
+  /**
+   * Check if Milky Way is visible based on conditions
+   */
+  isMilkyWayVisible(location: GeoLocation, time: Date): boolean {
+    // Simple check - would depend on season, time, light pollution
+    const limitingMag = this.calculateLimitingMagnitude(location, time);
+    return limitingMag > 5.0; // Milky Way visible with magnitude > 5
+  }
+
+  /**
+   * Calculate visual brightness based on altitude (atmospheric extinction)
+   */
+  calculateVisualBrightness(altitude: number): number {
+    // Atmospheric extinction model
+    if (altitude <= 0) return 0;
+    const airMass = 1 / Math.sin(altitude * Math.PI / 180);
+    const extinction = Math.exp(-0.2 * (airMass - 1));
+    return Math.max(0, Math.min(1, extinction));
+  }
+
+  /**
+   * Get planet offset for mock calculations
+   */
+  private getPlanetOffset(planet: string): number {
+    const offsets: { [key: string]: number } = {
+      mercury: 0, venus: 30, mars: 60, jupiter: 90,
+      saturn: 120, uranus: 150, neptune: 180, pluto: 210
+    };
+    return offsets[planet] || 0;
+  }
+
+  // === Private Helper Methods ==="
 
   private async loadHipparcosSubset(): Promise<Star[]> {
     // In production, this would load from actual Hipparcos catalog
@@ -427,9 +498,9 @@ export class AstronomicalEngine {
   }
 
   private applyPrecession(
-    coords: CelestialCoordinates,
+    coords: EquatorialCoordinates,
     date: Date
-  ): CelestialCoordinates {
+  ): EquatorialCoordinates {
     if (!this.config.highPrecision) return coords;
 
     const j2000 = new Date('2000-01-01T12:00:00Z');

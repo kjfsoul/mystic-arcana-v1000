@@ -519,7 +519,7 @@ export class SwissEphemerisBridge {
     return retrogrades;
   }
 
-  private generateMockCosmicWeather(datetime: Date, location: GeoLocation): CosmicInfluenceData {
+  private generateMockCosmicWeather(datetime: Date, _location: GeoLocation): CosmicInfluenceData {
     return {
       timestamp: datetime,
       moonPhase: {

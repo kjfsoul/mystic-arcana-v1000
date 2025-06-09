@@ -33,7 +33,7 @@ export class CosmicWeatherAPI {
     time: Date,
     location: GeoLocation
   ): Promise<CosmicInfluenceData> {
-    const cacheKey = `cosmic_weather_${time.getTime()}_${location.latitude}_${location.longitude}`;
+    const cacheKey = `cosmic_weather_${time.getTime()}_${location.lat}_${location.lon}`;
 
     // Check cache first
     const cached = this.getCachedData(cacheKey);
@@ -169,7 +169,7 @@ export class CosmicWeatherAPI {
 
     // Check aspect intensity
     const tensionAspects = aspects.filter(a =>
-      a.aspect === AspectType.SQUARE || a.aspect === AspectType.OPPOSITION
+      a.type === AspectType.SQUARE || a.type === AspectType.OPPOSITION
     );
 
     if (tensionAspects.length > 2) {
@@ -177,7 +177,7 @@ export class CosmicWeatherAPI {
     }
 
     const harmonicAspects = aspects.filter(a =>
-      a.aspect === AspectType.TRINE || a.aspect === AspectType.SEXTILE
+      a.type === AspectType.TRINE || a.type === AspectType.SEXTILE
     );
 
     if (harmonicAspects.length > 2) {
@@ -285,7 +285,7 @@ export class CosmicWeatherAPI {
 
     // Aspect influences (top 3)
     aspects.slice(0, 3).forEach(aspect => {
-      const planetNames = `${aspect.planet1} ${aspect.aspect.toLowerCase()} ${aspect.planet2}`;
+      const planetNames = `${aspect.planet1} ${aspect.type.toLowerCase()} ${aspect.planet2}`;
       influences.push(`${planetNames} brings ${this.getAspectInfluence(aspect)}`);
     });
 
@@ -308,7 +308,7 @@ export class CosmicWeatherAPI {
       [AspectType.SESQUIQUADRATE]: 'creative tension and breakthrough potential'
     };
 
-    return influences[aspect.aspect] || 'significant energetic influence';
+    return influences[aspect.type] || 'significant energetic influence';
   }
 
   /**
@@ -334,11 +334,11 @@ export class CosmicWeatherAPI {
 
     // Aspect correlations (simplified)
     aspects.slice(0, 2).forEach(aspect => {
-      if (aspect.aspect === AspectType.CONJUNCTION) {
+      if (aspect.type === AspectType.CONJUNCTION) {
         correlations.push('The Sun - Unity and clarity');
-      } else if (aspect.aspect === AspectType.OPPOSITION) {
+      } else if (aspect.type === AspectType.OPPOSITION) {
         correlations.push('Justice - Balance and decisions');
-      } else if (aspect.aspect === AspectType.SQUARE) {
+      } else if (aspect.type === AspectType.SQUARE) {
         correlations.push('The Tower - Breakthrough and change');
       }
     });
@@ -396,9 +396,9 @@ export class CosmicWeatherAPI {
 
     // Aspect bonuses
     aspects.forEach(aspect => {
-      if (aspect.aspect === AspectType.TRINE) score += 0.1;
-      else if (aspect.aspect === AspectType.SEXTILE) score += 0.05;
-      else if (aspect.aspect === AspectType.CONJUNCTION) score += 0.15;
+      if (aspect.type === AspectType.TRINE) score += 0.1;
+      else if (aspect.type === AspectType.SEXTILE) score += 0.05;
+      else if (aspect.type === AspectType.CONJUNCTION) score += 0.15;
     });
 
     return Math.min(1.0, score);
@@ -436,7 +436,7 @@ export class CosmicWeatherAPI {
   private calculateTransformationLevel(aspects: AspectData[], retrogrades: Planet[]): number {
     let level = retrogrades.length * 0.2;
     aspects.forEach(aspect => {
-      if (aspect.aspect === AspectType.SQUARE || aspect.aspect === AspectType.OPPOSITION) {
+      if (aspect.type === AspectType.SQUARE || aspect.type === AspectType.OPPOSITION) {
         level += 0.15;
       }
     });
@@ -458,7 +458,7 @@ export class CosmicWeatherAPI {
     let level = 0.5;
     aspects.forEach(aspect => {
       if (aspect.planet1 === Planet.VENUS || aspect.planet2 === Planet.VENUS) {
-        if (aspect.aspect === AspectType.TRINE || aspect.aspect === AspectType.SEXTILE) {
+        if (aspect.type === AspectType.TRINE || aspect.type === AspectType.SEXTILE) {
           level += 0.2;
         }
       }
@@ -477,8 +477,14 @@ export class CosmicWeatherAPI {
     return Math.min(1.0, level);
   }
 
-  private calculateWisdomLevel(aspects: AspectData[], _retrogrades: Planet[]): number {
+  private calculateWisdomLevel(aspects: AspectData[], retrogrades: Planet[]): number {
     let level = 0.5;
+    
+    // Add wisdom influence from Jupiter retrograde
+    if (retrogrades.includes(Planet.JUPITER)) {
+      level += 0.1;
+    }
+    
     aspects.forEach(aspect => {
       if (aspect.planet1 === Planet.JUPITER || aspect.planet2 === Planet.JUPITER) {
         level += 0.1;
