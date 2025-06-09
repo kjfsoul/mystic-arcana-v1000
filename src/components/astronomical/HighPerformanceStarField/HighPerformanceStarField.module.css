@@ -1,0 +1,256 @@
+.starFieldContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 100%);
+  border-radius: 8px;
+}
+
+.starCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.starCanvas:hover {
+  cursor: pointer;
+}
+
+/* Loading overlay */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  z-index: 100;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-top: 3px solid #FFD700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingOverlay p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* Error overlay */
+.errorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.errorMessage {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  max-width: 400px;
+}
+
+.errorMessage h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #FF6B6B;
+}
+
+.errorMessage p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+.errorMessage button {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: #FFD700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.errorMessage button:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Performance info */
+.performanceInfo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  z-index: 50;
+}
+
+.starCount {
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+}
+
+.mode {
+  background: rgba(0, 0, 0, 0.7);
+  color: #87CEEB;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(135, 206, 235, 0.3);
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+}
+
+/* Performance stats overlay (optional) */
+.performanceStats {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #00FF00;
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.performanceStats .statLine {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  min-width: 120px;
+}
+
+.performanceStats .statLine:last-child {
+  margin-bottom: 0;
+}
+
+.performanceStats .statLabel {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.performanceStats .statValue {
+  color: #00FF00;
+  font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .performanceInfo {
+    top: 8px;
+    left: 8px;
+    font-size: 11px;
+  }
+  
+  .starCount,
+  .mode {
+    padding: 3px 6px;
+  }
+  
+  .performanceStats {
+    bottom: 8px;
+    right: 8px;
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+  
+  .errorMessage {
+    margin: 16px;
+    padding: 16px;
+  }
+  
+  .loadingOverlay p {
+    font-size: 13px;
+    padding: 0 16px;
+  }
+}
+
+/* High DPI display optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .starCanvas {
+    image-rendering: auto;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .starFieldContainer {
+    background: radial-gradient(ellipse at center, #0a0a1a 0%, #000000 100%);
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .loadingSpinner {
+    animation: none;
+    border: 3px solid #FFD700;
+  }
+  
+  .errorMessage button {
+    transition: none;
+  }
+  
+  .errorMessage button:hover {
+    transform: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.starCanvas:focus {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+}
+
+.errorMessage button:focus {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+}

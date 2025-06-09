@@ -1,0 +1,25 @@
+# Swiss Ephemeris requirements for Mystic Arcana
+# High-precision astronomical calculations
+
+# Core Swiss Ephemeris library
+pyswisseph==2.10.3.2
+
+# Additional astronomical libraries
+astropy>=5.0.0
+ephem>=4.1.5
+
+# Data handling and computation
+numpy>=1.21.0
+scipy>=1.7.0
+
+# JSON and date handling (usually included with Python)
+python-dateutil>=2.8.0
+
+# Optional: For enhanced timezone handling
+pytz>=2021.3
+
+# Optional: For astronomical coordinate conversions
+astroquery>=0.4.6
+
+# Optional: For star catalog downloads
+astroplan>=0.8

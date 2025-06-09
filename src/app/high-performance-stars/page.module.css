@@ -1,0 +1,359 @@
+.demoPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.header {
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.headerControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.settingsButton {
+  padding: 12px 24px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  color: #FFD700;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settingsButton:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.performanceIndicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fpsIndicator {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.settingsPanel {
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mainDisplay {
+  position: relative;
+  height: 70vh;
+  min-height: 600px;
+}
+
+.starField {
+  width: 100%;
+  height: 100%;
+}
+
+.performanceOverlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 300px;
+  z-index: 100;
+}
+
+.performancePanel,
+.configPanel {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.performancePanel h3,
+.configPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #FFD700;
+}
+
+.statsGrid,
+.configGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statItem,
+.configItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.statValue {
+  color: #00FF00;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.configItem strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+}
+
+.configItem span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  text-align: right;
+}
+
+.starInfoPanel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+  max-width: 300px;
+  z-index: 100;
+}
+
+.starInfoPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #FFD700;
+}
+
+.starDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.starItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.starItem strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.starItem span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.closeButton {
+  width: 100%;
+  padding: 8px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 4px;
+  color: #FFD700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.technicalInfo {
+  padding: 48px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.technicalInfo h2 {
+  text-align: center;
+  margin: 0 0 32px 0;
+  font-size: 24px;
+  color: #FFD700;
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.techItem {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.techItem h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #87CEEB;
+}
+
+.techItem ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.techItem li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  padding-left: 16px;
+}
+
+.techItem li:last-child {
+  border-bottom: none;
+}
+
+.techItem li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #FFD700;
+}
+
+.footer {
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.status p {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.disclaimer {
+  color: #87CEEB !important;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 24px;
+  }
+  
+  .headerControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .performanceOverlay {
+    position: static;
+    max-width: none;
+    margin: 16px;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  
+  .performancePanel,
+  .configPanel {
+    min-width: 250px;
+  }
+  
+  .starInfoPanel {
+    position: static;
+    max-width: none;
+    margin: 16px;
+  }
+  
+  .techGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .mainDisplay {
+    height: 50vh;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 16px;
+  }
+  
+  .technicalInfo {
+    padding: 32px 16px;
+  }
+  
+  .techItem {
+    padding: 16px;
+  }
+  
+  .performanceOverlay {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-08T00:00:00Z",
+  "agents": {
+    "mysticArcana": {
+      "id": "mystic-arcana-primary",
+      "name": "Mystic Arcana Oracle",
+      "brand": "Mystic Arcana",
+      "type": "tarot-astrology",
+      "personality": {
+        "tone": "mystical, wise, compassionate",
+        "expertise": ["tarot", "astrology", "spiritual guidance"],
+        "style": "immersive and personalized"
+      },
+      "capabilities": [
+        "tarot_reading",
+        "astrology_chart_interpretation",
+        "daily_horoscope",
+        "birth_chart_analysis",
+        "compatibility_reading"
+      ],
+      "modelPreference": ["claude-3-opus", "gpt-4-turbo", "gemini-ultra"],
+      "active": true
+    },
+    "birthdayGen": {
+      "id": "birthday-gen-agent",
+      "name": "Birthday Cosmic Guide",
+      "brand": "BirthdayGen",
+      "type": "birthday-astrology",
+      "personality": {
+        "tone": "celebratory, insightful, personalized",
+        "expertise": ["birthday astrology", "solar returns", "life path"],
+        "style": "festive and enlightening"
+      },
+      "capabilities": [
+        "birthday_reading",
+        "solar_return_chart",
+        "birthday_numerology",
+        "yearly_forecast",
+        "birthday_tarot"
+      ],
+      "modelPreference": ["claude-3-opus", "gemini-ultra"],
+      "active": true
+    },
+    "edmShuffle": {
+      "id": "edm-shuffle-mystic",
+      "name": "EDM Mystic Mixer",
+      "brand": "EDM Shuffle",
+      "type": "music-spirituality",
+      "personality": {
+        "tone": "energetic, modern, spiritually-attuned",
+        "expertise": ["music energy reading", "festival astrology", "vibe alignment"],
+        "style": "high-energy and transformative"
+      },
+      "capabilities": [
+        "music_vibe_reading",
+        "festival_astrology",
+        "dj_set_energy_forecast",
+        "crowd_energy_prediction",
+        "spiritual_playlist_curation"
+      ],
+      "modelPreference": ["claude-3-opus", "gpt-4-turbo"],
+      "active": true
+    }
+  },
+  "sharedCapabilities": {
+    "memory": {
+      "type": "brand-specific",
+      "storage": "supabase",
+      "retention": "persistent"
+    },
+    "humanInTheLoop": {
+      "enabled": true,
+      "triggers": ["sensitive_content", "major_life_decisions", "health_advice"]
+    },
+    "fallbackChain": ["claude", "abacus.ai", "gemini", "chatgpt"],
+    "analytics": {
+      "tracking": true,
+      "attribution": true,
+      "compliance": "GDPR/CCPA"
+    }
+  },
+  "uiUxAgents": {
+    "animatedBackground": {
+      "id": "animated-background-agent",
+      "name": "Cosmic Background Animator",
+      "type": "visual-effects",
+      "capabilities": ["cosmic_weather", "shader_compilation", "particle_systems"],
+      "status": "active",
+      "lastActivity": "2025-01-08T00:00:00Z"
+    },
+    "accessibilityChecker": {
+      "id": "accessibility-audit-agent", 
+      "name": "Accessibility Guardian",
+      "type": "compliance-testing",
+      "capabilities": ["wcag_auditing", "lighthouse_testing", "aria_validation"],
+      "status": "active",
+      "lastActivity": "2025-01-08T00:00:00Z"
+    },
+    "tarotUxTester": {
+      "id": "tarot-ux-optimizer",
+      "name": "Tarot UX Optimizer",
+      "type": "ab-testing",
+      "capabilities": ["spread_optimization", "interaction_tracking", "conversion_analysis"],
+      "status": "active",
+      "lastActivity": "2025-01-08T00:00:00Z"
+    },
+    "personaAnimator": {
+      "id": "persona-animation-engine",
+      "name": "Virtual Reader Animator",
+      "type": "avatar-animation",
+      "capabilities": ["emotion_synthesis", "gesture_generation", "personality_evolution"],
+      "status": "active",
+      "lastActivity": "2025-01-08T00:00:00Z"
+    },
+    "competitiveAnalyst": {
+      "id": "competitive-research-agent",
+      "name": "Market Intelligence Agent",
+      "type": "research-analysis",
+      "capabilities": ["competitor_monitoring", "ux_benchmarking", "trend_analysis"],
+      "status": "active",
+      "lastActivity": "2025-01-08T00:00:00Z"
+    }
+  },
+  "integrations": {
+    "mcp": {
+      "servers": [
+        "knowledge-graph",
+        "ephemeris",
+        "tarot-deck",
+        "astrology-calculator",
+        "animated-background",
+        "accessibility-check",
+        "tarot-ux-test",
+        "persona-animation",
+        "competitive-research",
+        "design-system",
+        "cosmic-weather",
+        "user-personalization"
+      ]
+    },
+    "apis": {
+      "supabase": "auth, database, realtime",
+      "stripe": "payments",
+      "paypal": "payments",
+      "printify": "merchandise"
+    }
+  }
+}

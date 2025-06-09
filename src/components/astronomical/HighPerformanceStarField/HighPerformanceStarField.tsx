@@ -1,0 +1,328 @@
+'use client';
+
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
+import { HighPerformanceStarRenderer } from '../../../lib/astronomy/HighPerformanceStarRenderer';
+import { astronomicalEngine } from '../../../services/astronomical/AstronomicalEngine';
+import { useGeolocation } from '../../../hooks/useGeolocation';
+import { RenderConfig } from '../../../types/astronomical';
+import { Star } from '../../../lib/astronomy/types';
+import styles from './HighPerformanceStarField.module.css';
+
+interface HighPerformanceStarFieldProps {
+  useRealStars?: boolean;
+  renderConfig?: Partial<RenderConfig>;
+  className?: string;
+  onStarClick?: (star: Star) => void;
+  onPerformanceUpdate?: (stats: {
+    totalStars: number;
+    visibleStars: number;
+    fps: number;
+    renderTime: number;
+  }) => void;
+}
+
+/**
+ * High-Performance Star Field Component
+ * 
+ * Renders 100,000+ stars using WebGL2 with real astronomical data
+ * from Claude Opus 4's Swiss Ephemeris calculations.
+ */
+export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> = ({
+  useRealStars = false,
+  renderConfig = {},
+  className = '',
+  onStarClick,
+  onPerformanceUpdate
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rendererRef = useRef<HighPerformanceStarRenderer | null>(null);
+  const animationRef = useRef<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [starCount, setStarCount] = useState(0);
+
+  const { location, loading: locationLoading } = useGeolocation();
+
+  /**
+   * Convert astronomical Star to renderer Star format
+   */
+  const convertToRendererStar = useCallback((astronomicalStar: {
+    id: string;
+    name?: string;
+    coordinates: { rightAscension: number; declination: number };
+    magnitude: number;
+    spectralClass?: string;
+    colorIndex?: number;
+    constellation?: string;
+    parallax?: number;
+    properMotion?: { ra: number; dec: number };
+  }): Star => ({
+    id: astronomicalStar.id,
+    name: astronomicalStar.name,
+    ra: astronomicalStar.coordinates.rightAscension * 15, // Convert hours to degrees
+    dec: astronomicalStar.coordinates.declination,
+    magnitude: astronomicalStar.magnitude,
+    spectralType: astronomicalStar.spectralClass,
+    colorIndex: astronomicalStar.colorIndex,
+    constellation: astronomicalStar.constellation,
+    distance: astronomicalStar.parallax ? 1000 / astronomicalStar.parallax : undefined,
+    properMotion: astronomicalStar.properMotion
+  }), []);
+
+  // Default render configuration optimized for performance
+  const finalRenderConfig = useMemo((): RenderConfig => ({
+    starCatalog: 'hipparcos',
+    maxStars: 100000,
+    minMagnitude: 6.5,
+    showConstellations: false,
+    showPlanets: true,
+    showDeepSky: false,
+    coordinateSystem: 'horizontal',
+    projection: 'stereographic',
+    ...renderConfig
+  }), [renderConfig]);
+
+  /**
+   * Initialize the high-performance renderer
+   */
+  const initializeRenderer = useCallback(async () => {
+    if (!canvasRef.current) return;
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Create high-performance renderer
+      const renderer = new HighPerformanceStarRenderer(canvasRef.current);
+      rendererRef.current = renderer;
+
+      // Load star data
+      let stars: Star[] = [];
+
+      if (useRealStars && location) {
+        console.log('🌟 Loading real astronomical star data...');
+
+        // Initialize astronomical engine
+        await astronomicalEngine.initialize({
+          ephemerisAccuracy: 'high',
+          updateInterval: 1000,
+          precessionCorrection: true,
+          nutationCorrection: true,
+          aberrationCorrection: true,
+          refractionCorrection: true
+        });
+
+        // Load real star catalog
+        const astronomicalStars = await astronomicalEngine.loadStarCatalog(finalRenderConfig.starCatalog);
+
+        // Convert and filter stars based on configuration
+        stars = astronomicalStars
+          .filter(star => star.magnitude <= finalRenderConfig.minMagnitude)
+          .slice(0, finalRenderConfig.maxStars)
+          .sort((a, b) => a.magnitude - b.magnitude) // Brightest first
+          .map(convertToRendererStar);
+
+        console.log(`✨ Loaded ${stars.length} real stars from ${finalRenderConfig.starCatalog} catalog`);
+      } else {
+        // Generate procedural stars for performance testing
+        stars = generateProceduralStars(finalRenderConfig.maxStars);
+        console.log(`🎨 Generated ${stars.length} procedural stars for testing`);
+      }
+
+      // Load stars into renderer
+      renderer.loadStars(stars);
+      setStarCount(stars.length);
+
+      // Set up view matrices (simplified for demo)
+      const viewMatrix = new Float32Array([
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+      ]);
+
+      const projectionMatrix = createPerspectiveMatrix(
+        Math.PI / 3, // 60 degree FOV
+        canvasRef.current.width / canvasRef.current.height,
+        0.1,
+        1000
+      );
+
+      renderer.updateMatrices(viewMatrix, projectionMatrix);
+
+      // Start render loop
+      startRenderLoop();
+
+    } catch (err) {
+      console.error('Failed to initialize high-performance star renderer:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [useRealStars, location, finalRenderConfig]);
+
+  /**
+   * Generate procedural stars for testing
+   */
+  const generateProceduralStars = (count: number): Star[] => {
+    const stars: Star[] = [];
+
+    for (let i = 0; i < count; i++) {
+      // Random position on celestial sphere
+      const ra = Math.random() * 360;
+      const dec = (Math.random() - 0.5) * 180;
+
+      // Realistic magnitude distribution (more faint stars)
+      const magnitude = 1 + Math.pow(Math.random(), 0.3) * 5;
+
+      // Random color index (B-V)
+      const colorIndex = (Math.random() - 0.5) * 2;
+
+      stars.push({
+        id: `proc_${i}`,
+        ra,
+        dec,
+        magnitude,
+        colorIndex,
+        constellation: 'Generated',
+        name: `Star ${i}`,
+        spectralType: 'G2V'
+      });
+    }
+
+    return stars;
+  };
+
+  /**
+   * Create perspective projection matrix
+   */
+  const createPerspectiveMatrix = (
+    fov: number,
+    aspect: number,
+    near: number,
+    far: number
+  ): Float32Array => {
+    const f = 1.0 / Math.tan(fov / 2);
+    const rangeInv = 1 / (near - far);
+
+    return new Float32Array([
+      f / aspect, 0, 0, 0,
+      0, f, 0, 0,
+      0, 0, (near + far) * rangeInv, -1,
+      0, 0, near * far * rangeInv * 2, 0
+    ]);
+  };
+
+  /**
+   * Start the high-performance render loop
+   */
+  const startRenderLoop = useCallback(() => {
+    const render = (time: number) => {
+      if (rendererRef.current) {
+        const stats = rendererRef.current.render(time);
+
+        // Update performance callback
+        if (onPerformanceUpdate) {
+          onPerformanceUpdate({
+            totalStars: stats.totalStars,
+            visibleStars: stats.visibleStars,
+            fps: stats.fps,
+            renderTime: stats.renderTime
+          });
+        }
+      }
+
+      animationRef.current = requestAnimationFrame(render);
+    };
+
+    animationRef.current = requestAnimationFrame(render);
+  }, [onPerformanceUpdate]);
+
+  /**
+   * Handle canvas resize
+   */
+  const handleResize = useCallback(() => {
+    if (canvasRef.current && rendererRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      rendererRef.current.resize(rect.width, rect.height);
+    }
+  }, []);
+
+  // Initialize renderer when dependencies change
+  useEffect(() => {
+    if (!locationLoading) {
+      initializeRenderer();
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+      }
+    };
+  }, [initializeRenderer, locationLoading]);
+
+  // Handle window resize
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
+
+  // Handle canvas click for star selection
+  const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!onStarClick || !rendererRef.current) return;
+
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // TODO: Implement star picking using GPU-based selection
+    // For now, this is a placeholder
+    console.log(`Star click at (${x}, ${y})`);
+  }, [onStarClick]);
+
+  return (
+    <div className={`${styles.starFieldContainer} ${className}`}>
+      <canvas
+        ref={canvasRef}
+        className={styles.starCanvas}
+        onClick={handleCanvasClick}
+      />
+
+      {/* Loading overlay */}
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingSpinner} />
+          <p>Loading {useRealStars ? 'real astronomical' : 'procedural'} star data...</p>
+        </div>
+      )}
+
+      {/* Error overlay */}
+      {error && (
+        <div className={styles.errorOverlay}>
+          <div className={styles.errorMessage}>
+            <h3>⚠️ Rendering Error</h3>
+            <p>{error}</p>
+            <button onClick={() => setError(null)}>Retry</button>
+          </div>
+        </div>
+      )}
+
+      {/* Performance info */}
+      {!isLoading && !error && (
+        <div className={styles.performanceInfo}>
+          <span className={styles.starCount}>
+            ⭐ {starCount.toLocaleString()} stars
+          </span>
+          <span className={styles.mode}>
+            {useRealStars ? '🔬 Real Data' : '🎨 Procedural'}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -2,293 +2,32 @@
   "mcpServers": {
     "filesystem": {
       "command": "mcp-server-filesystem",
-      "args": ["/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"],
-      "env": {}
+      "args": [
+        "/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"
+      ]
     },
-    "filesystem-alt": {
-      "command": "mcp-server-fs",
-      "args": [],
-      "env": {}
+    "memory": {
+      "command": "mcp-server-memory",
+      "args": [
+        "/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"
+      ]
     },
-    "file-operations": {
-      "command": "mcp-file-operations-server",
-      "args": [],
-      "env": {}
-    },
-    "text-editor": {
-      "command": "mcp-text-editor",
-      "args": [],
-      "env": {}
-    },
-    "text-editor-alt": {
-      "command": "mcp-server-text-editor",
-      "args": [],
-      "env": {}
-    },
-    "git": {
-      "command": "mcp-server-git",
-      "args": [],
-      "env": {}
-    },
-    "git-mcp": {
-      "command": "git-mcp45",
-      "args": [],
-      "env": {}
-    },
-    "github": {
-      "command": "github-mcp-server",
-      "args": [],
+    "brave-search": {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
       "env": {
-        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+        "BRAVE_API_KEY": "BSA7N3mbuH1WLUgTE-C7wvOS5SR7Srl"
       }
-    },
-    "git-ingest": {
-      "command": "mcp-git-ingest",
-      "args": [],
-      "env": {}
-    },
-    "language-server": {
-      "command": "mcp-language-server",
-      "args": [],
-      "env": {}
-    },
-    "react-analyzer": {
-      "command": "react-analyzer-mcp",
-      "args": [],
-      "env": {}
-    },
-    "file-scope": {
-      "command": "FileScopeMCP",
-      "args": [],
-      "env": {}
-    },
-    "claude-code": {
-      "command": "mcp-claude-code",
-      "args": [],
-      "env": {}
-    },
-    "commands": {
-      "command": "mcp-server-commands",
-      "args": [],
-      "env": {}
-    },
-    "windows-cli": {
-      "command": "Windows-Command-Line-MCP-Server",
-      "args": [],
-      "env": {}
-    },
-    "mac-shell": {
-      "command": "mac-shell-mcp",
-      "args": [],
-      "env": {}
-    },
-    "unix-manual": {
-      "command": "mcp-unix-manual",
-      "args": [],
-      "env": {}
-    },
-    "code-runner": {
-      "command": "mcp-code-runner",
-      "args": [],
-      "env": {}
-    },
-    "vscode": {
-      "command": "vscode-mcp-server",
-      "args": [],
-      "env": {}
-    },
-
-    "fetch": {
-      "command": "mcp-server-fetch",
-      "args": [],
-      "env": {}
-    },
-    "firecrawl": {
-      "command": "firecrawl-mcp-server",
-      "args": [],
-      "env": {
-        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
-      }
-    },
-    "dbhub": {
-      "command": "dbhub-mcp-server",
-      "args": [],
-      "env": {
-        "DATABASE_URL": "${DATABASE_URL}"
-      }
-    },
-    "gateway": {
-      "command": "gateway-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "supabase": {
-      "command": "mcp-supabase",
-      "args": [],
-      "env": {
-        "SUPABASE_URL": "${SUPABASE_URL}",
-        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}"
-      }
-    },
-    "mysql": {
-      "command": "mysql-mcp-server",
-      "args": [],
-      "env": {
-        "MYSQL_CONNECTION_STRING": "${MYSQL_CONNECTION_STRING}"
-      }
-    },
-    "mcp-link": {
-      "command": "mcp-link",
-      "args": [],
-      "env": {}
-    },
-    "openapi": {
-      "command": "openapi-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "openapi-any": {
-      "command": "mcp-server-any-openapi",
-      "args": [],
-      "env": {}
-    },
-
-    "security-audit": {
-      "command": "mcp-security-audit",
-      "args": [],
-      "env": {}
-    },
-    "semgrep": {
-      "command": "mcp-server-semgrep",
-      "args": [],
-      "env": {
-        "SEMGREP_APP_TOKEN": "${SEMGREP_APP_TOKEN}"
-      }
-    },
-    "osv": {
-      "command": "osv-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "deebo": {
-      "command": "deebo-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "claude-debugs": {
-      "command": "claude-debugs-for-you",
-      "args": [],
-      "env": {}
-    },
-    "user-feedback": {
-      "command": "user-feedback-mcp",
-      "args": [],
-      "env": {}
-    },
-    "interactive": {
-      "command": "interactive-mcp",
-      "args": [],
-      "env": {}
-    },
-    "human-loop": {
-      "command": "mcp-human-loop",
-      "args": [],
-      "env": {}
-    },
-    "heimdall": {
-      "command": "heimdall",
-      "args": [],
-      "env": {}
-    },
-
-    "ragdocs": {
-      "command": "ragdocs-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "ragdocs-server": {
-      "command": "mcp-server-ragdocs",
-      "args": [],
-      "env": {}
-    },
-    "context7": {
-      "command": "context7-mcp",
-      "args": [],
-      "env": {}
-    },
-    "mcpdoc": {
-      "command": "mcpdoc",
-      "args": [],
-      "env": {}
-    },
-    "basic-memory": {
-      "command": "basic-memory",
-      "args": [],
-      "env": {}
-    },
-    "mem0": {
-      "command": "mem0-mcp",
-      "args": [],
-      "env": {}
-    },
-    "chain-of-draft": {
-      "command": "mcp-chain-of-draft-server",
-      "args": [],
-      "env": {}
-    },
-    "memgpt": {
-      "command": "memgpt-mcp-server",
-      "args": [],
-      "env": {}
-    },
-    "optimized-memory": {
-      "command": "optimized-memory-mcp-serverv2",
-      "args": [],
-      "env": {}
-    },
-
-    "nextjs-dev": {
-      "command": "mcp-dev-nextjs",
-      "args": [],
-      "env": {}
-    },
-    "react-ui": {
-      "command": "mcp-react-ui",
-      "args": [],
-      "env": {}
-    },
-    "netlify-docs": {
-      "command": "mcp-netlify-edgedocs",
-      "args": [],
-      "env": {}
-    },
-    "fullstack-turbo": {
-      "command": "mcp-fullstack-turbo",
-      "args": [],
-      "env": {}
-    },
-    "ai-function-pack": {
-      "command": "mcp-ai-functionpack",
-      "args": [],
-      "env": {}
-    },
-    "cms-headless": {
-      "command": "mcp-cms-headless",
-      "args": [],
-      "env": {}
-    },
-    "commerce-stripe": {
-      "command": "mcp-commerce-stripe",
-      "args": [],
-      "env": {
-        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
-        "STRIPE_WEBHOOK_SECRET": "${STRIPE_WEBHOOK_SECRET}"
-      }
-    },
-    "design-system-tailwind": {
-      "command": "mcp-design-system-tailwind",
-      "args": [],
-      "env": {}
     }
+  },
+  "context7": {
+    "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+    "args": [
+      "-y",
+      "@upstash/context7-mcp@latest"
+    ]
   }
 }

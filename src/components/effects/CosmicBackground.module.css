@@ -1,0 +1,262 @@
+/* Cosmic Background Styles */
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Static fallback for reduced motion */
+.staticBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0015 0%, #1a0030 50%, #0f001a 100%);
+}
+
+.staticStars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #ffd700, transparent),
+    radial-gradient(1px 1px at 90px 40px, #e6d7ff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #ff6b9d, transparent),
+    radial-gradient(2px 2px at 160px 30px, #9c88ff, transparent),
+    radial-gradient(1px 1px at 200px 60px, #ffffff, transparent),
+    radial-gradient(1px 1px at 240px 90px, #ffd700, transparent),
+    radial-gradient(2px 2px at 280px 20px, #e6d7ff, transparent),
+    radial-gradient(1px 1px at 320px 70px, #ff6b9d, transparent),
+    radial-gradient(2px 2px at 360px 40px, #9c88ff, transparent);
+  background-repeat: repeat;
+  background-size: 400px 200px;
+  opacity: 0.8;
+}
+
+.staticGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center, 
+    rgba(255, 215, 0, 0.02) 0%, 
+    rgba(255, 107, 157, 0.01) 50%, 
+    transparent 100%
+  );
+}
+
+/* Weather overlay effects */
+.weatherOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Mercury Retrograde Effect */
+.retrogradeEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 48%, 
+    rgba(255, 71, 87, 0.1) 49%, 
+    rgba(255, 71, 87, 0.1) 51%, 
+    transparent 52%
+  );
+  background-size: 20px 20px;
+  animation: glitchMove 8s infinite linear;
+  mix-blend-mode: overlay;
+}
+
+@keyframes glitchMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(20px); }
+}
+
+/* Full Moon Glow */
+.moonGlow {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(230, 215, 255, 0.3) 0%,
+    rgba(230, 215, 255, 0.1) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: moonPulse 4s ease-in-out infinite;
+}
+
+@keyframes moonPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+/* Eclipse Ring */
+.eclipseRing {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 200px;
+  height: 200px;
+  border: 3px solid rgba(255, 215, 0, 0.4);
+  border-radius: 50%;
+  animation: eclipseRotate 15s linear infinite;
+}
+
+.eclipseRing::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(156, 136, 255, 0.3);
+}
+
+@keyframes eclipseRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Conjunction Aura */
+.conjunctionAura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 215, 0, 0.1) 0deg,
+    rgba(255, 107, 157, 0.1) 120deg,
+    rgba(156, 136, 255, 0.1) 240deg,
+    rgba(255, 215, 0, 0.1) 360deg
+  );
+  border-radius: 50%;
+  animation: conjunctionSpin 20s linear infinite;
+}
+
+@keyframes conjunctionSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .moonGlow {
+    width: 100px;
+    height: 100px;
+    top: 5%;
+    right: 10%;
+  }
+  
+  .eclipseRing {
+    width: 150px;
+    height: 150px;
+    top: 15%;
+    left: 25%;
+  }
+  
+  .eclipseRing::before {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .conjunctionAura {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .staticStars {
+    background-size: 300px 150px;
+  }
+}
+
+/* Performance optimizations */
+.canvas {
+  will-change: auto;
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Accessibility - respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .retrogradeEffect,
+  .moonGlow,
+  .eclipseRing,
+  .conjunctionAura {
+    animation: none;
+  }
+  
+  .staticStars {
+    opacity: 0.4;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .staticBackground {
+    background: #000000;
+  }
+  
+  .staticStars {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+      radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
+      radial-gradient(1px 1px at 90px 40px, #ffffff, transparent);
+    opacity: 1;
+  }
+  
+  .weatherOverlay {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .container {
+    display: none;
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "errors": [
+    {
+      "id": "dom-error-001",
+      "timestamp": "2025-01-08T10:30:00Z",
+      "type": "DOM_MANIPULATION_ERROR",
+      "severity": "HIGH",
+      "error": {
+        "message": "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node",
+        "component": "AgentChat",
+        "location": "src/app/components/ui/AgentChat.tsx",
+        "stackTrace": "DOMException: Failed to execute 'removeChild' on 'Node'\n    at cleanupMessage\n    at useEffect cleanup\n    at React.StrictMode double-invocation"
+      },
+      "rootCause": {
+        "primary": "React 18 concurrent features and StrictMode double-invocation",
+        "contributing": [
+          "Direct DOM manipulation without parent node verification",
+          "Race conditions between React's virtual DOM updates and manual DOM operations",
+          "Cleanup functions running multiple times in development mode",
+          "Message elements being moved or removed by React before manual cleanup"
+        ]
+      },
+      "impact": {
+        "userExperience": "Error messages in console, potential UI glitches",
+        "functionality": "Chat messages may not display or animate correctly",
+        "performance": "Memory leaks from orphaned DOM nodes"
+      },
+      "fix": {
+        "description": "Implemented safe DOM manipulation with parent node checks",
+        "changes": [
+          {
+            "file": "src/app/components/ui/AgentChat.tsx",
+            "type": "CODE_CHANGE",
+            "details": "Added parent node verification before removeChild calls",
+            "code": "if (element.parentNode) { element.parentNode.removeChild(element); }"
+          },
+          {
+            "file": "src/app/components/ui/AgentChat.tsx",
+            "type": "CODE_CHANGE",
+            "details": "Implemented ref-based tracking for message elements",
+            "code": "const messageRefs = useRef<Map<string, HTMLDivElement>>(new Map());"
+          },
+          {
+            "file": "src/app/components/ui/AgentChat.tsx",
+            "type": "CODE_CHANGE",
+            "details": "Added try-catch blocks around DOM operations",
+            "code": "try { /* DOM operation */ } catch (error) { console.warn('DOM operation failed:', error); }"
+          }
+        ],
+        "testingPerformed": [
+          "Verified no console errors in StrictMode",
+          "Tested message lifecycle (creation, update, deletion)",
+          "Confirmed animations work correctly",
+          "Validated cleanup on component unmount"
+        ]
+      },
+      "preventionStrategies": {
+        "immediate": [
+          "Always check parentNode before removeChild operations",
+          "Use React refs for DOM element tracking",
+          "Implement proper cleanup in useEffect hooks",
+          "Add error boundaries for graceful degradation"
+        ],
+        "longTerm": [
+          "Migrate to React-based animations (Framer Motion, React Spring)",
+          "Use React portals for overlay elements",
+          "Implement virtual scrolling for large message lists",
+          "Add comprehensive DOM manipulation utilities with safety checks"
+        ],
+        "bestPractices": [
+          "Avoid direct DOM manipulation in React components",
+          "Use React's declarative APIs whenever possible",
+          "Test with StrictMode enabled in development",
+          "Implement proper error handling and logging",
+          "Document any necessary DOM manipulations with rationale"
+        ]
+      },
+      "relatedIssues": [
+        "React 18 StrictMode double-invocation behavior",
+        "Concurrent rendering and DOM manipulation conflicts",
+        "Memory leaks from improper cleanup"
+      ],
+      "references": [
+        "https://react.dev/reference/react/StrictMode#fixing-bugs-found-by-double-rendering-in-development",
+        "https://react.dev/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development",
+        "https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild"
+      ],
+      "resolution": {
+        "status": "RESOLVED",
+        "resolvedAt": "2025-01-08T11:45:00Z",
+        "resolvedBy": "Claude Code",
+        "verifiedBy": "Automated testing and manual verification"
+      }
+    }
+  ],
+  "metadata": {
+    "logVersion": "1.0.0",
+    "generatedAt": "2025-01-08T11:45:00Z",
+    "project": "Mystic Arcana",
+    "environment": "development",
+    "reactVersion": "18.x",
+    "nextVersion": "14.x"
+  }
+}

@@ -1,0 +1,1 @@
+export { GalaxyShader } from './GalaxyShader';
