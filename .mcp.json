@@ -1,15 +1,18 @@
 {
   "mcpServers": {
     "filesystem": {
-      "command": "mcp-server-filesystem",
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
       "args": [
-        "/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/kfitz/Documents/Mystic_Arcana_WebApp/mystic-arcana-v1000"
       ]
     },
     "memory": {
-      "command": "mcp-server-memory",
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
       "args": [
-        "/Users/kfitz/Documents/Projects/Mystic_Arcana_App/mystic_arcana_v1000"
+        "-y",
+        "@modelcontextprotocol/server-memory"
       ]
     },
     "brave-search": {
@@ -21,13 +24,68 @@
       "env": {
         "BRAVE_API_KEY": "BSA7N3mbuH1WLUgTE-C7wvOS5SR7Srl"
       }
+    },
+    "context7": {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "env": {
+        "UPSTASH_CONTEXT7_API_KEY": "upstash-context7-mcp-default-key"
+      }
+    },
+    "@21st-dev/magic": {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest"
+      ],
+      "env": {
+        "API_KEY": "c4437adf873bae7b5f6ff0641fb7bcccf25b4d8b20ceb00f6eb87c131ee51a05"
+      },
+      "autoApprove": [
+        "21st_magic_component_builder"
+      ]
+    },
+    "github.com/executeautomation/mcp-playwright": {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server",
+        "playwright-mcp-server"
+      ],
+      "autoApprove": [
+        "playwright_navigate",
+        "start_codegen_session",
+        "end_codegen_session",
+        "get_codegen_session",
+        "clear_codegen_session",
+        "playwright_screenshot",
+        "playwright_click",
+        "playwright_iframe_click",
+        "playwright_fill",
+        "playwright_select",
+        "playwright_hover",
+        "playwright_evaluate",
+        "playwright_console_logs",
+        "playwright_close",
+        "playwright_get",
+        "playwright_post",
+        "playwright_put",
+        "playwright_patch",
+        "playwright_delete",
+        "playwright_expect_response",
+        "playwright_assert_response",
+        "playwright_custom_user_agent",
+        "playwright_get_visible_text",
+        "playwright_get_visible_html",
+        "playwright_go_back",
+        "playwright_go_forward",
+        "playwright_drag",
+        "playwright_press_key",
+        "playwright_save_as_pdf"
+      ]
     }
-  },
-  "context7": {
-    "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
-    "args": [
-      "-y",
-      "@upstash/context7-mcp@latest"
-    ]
   }
 }
