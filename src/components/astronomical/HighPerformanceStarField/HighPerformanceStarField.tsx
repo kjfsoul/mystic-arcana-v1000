@@ -4,8 +4,7 @@ import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import { HighPerformanceStarRenderer } from '../../../lib/astronomy/HighPerformanceStarRenderer';
 import { astronomicalEngine } from '../../../services/astronomical/AstronomicalEngine';
 import { useGeolocation } from '../../../hooks/useGeolocation';
-import { RenderConfig } from '../../../types/astronomical';
-import { Star } from '../../../lib/astronomy/types';
+import { RenderConfig, Star } from '../../../types/astronomical';
 import { GalaxyBackground } from '../../effects/GalaxyBackground/GalaxyBackground';
 import styles from './HighPerformanceStarField.module.css';
 
@@ -53,28 +52,22 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   /**
    * Convert astronomical Star to renderer Star format
    */
-  const convertToRendererStar = useCallback((astronomicalStar: {
-    id: string;
-    name?: string;
-    coordinates: { rightAscension: number; declination: number };
-    magnitude: number;
-    spectralClass?: string;
-    colorIndex?: number;
-    constellation?: string;
-    parallax?: number;
-    properMotion?: { ra: number; dec: number };
-  }): Star => ({
-    id: astronomicalStar.id,
-    name: astronomicalStar.name,
-    ra: astronomicalStar.coordinates.rightAscension * 15, // Convert hours to degrees
-    dec: astronomicalStar.coordinates.declination,
-    magnitude: astronomicalStar.magnitude,
-    spectralType: astronomicalStar.spectralClass,
-    colorIndex: astronomicalStar.colorIndex,
-    constellation: astronomicalStar.constellation,
-    distance: astronomicalStar.parallax ? 1000 / astronomicalStar.parallax : undefined,
-    properMotion: astronomicalStar.properMotion
-  }), []);
+  const convertToRendererStar = useCallback((astronomicalStar: Star): Star => {
+    // The Star type from astronomical types is already compatible
+    // Just ensure optional fields have defaults for the renderer
+    return {
+      ...astronomicalStar,
+      // Ensure we have both coordinate formats
+      ra: astronomicalStar.ra ?? astronomicalStar.coordinates.ra,
+      dec: astronomicalStar.dec ?? astronomicalStar.coordinates.dec,
+      // Ensure required fields have defaults
+      colorIndex: astronomicalStar.colorIndex ?? 0,
+      spectralClass: astronomicalStar.spectralClass ?? 'Unknown',
+      spectralType: astronomicalStar.spectralType ?? astronomicalStar.spectralClass ?? 'Unknown',
+      constellation: astronomicalStar.constellation ?? 'Unknown',
+      properMotion: astronomicalStar.properMotion ?? { ra: 0, dec: 0 }
+    };
+  }, []);
 
   // Default render configuration optimized for performance
   const finalRenderConfig = useMemo((): RenderConfig => ({
@@ -112,7 +105,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
     };
 
     animationRef.current = requestAnimationFrame(render);
-  }, [convertToRendererStar]);
+  }, []);
 
   /**
    * Initialize the high-performance renderer
@@ -235,16 +228,20 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
       // Random color index (B-V)
       const colorIndex = (Math.random() - 0.5) * 2;
 
-      stars.push({
+      const star: Star = {
         id: `proc_${i}`,
-        ra,
-        dec,
+        name: `Star ${i}`,
+        coordinates: { ra, dec },
+        ra, // Compatibility field
+        dec, // Compatibility field
         magnitude,
         colorIndex,
-        constellation: 'Generated',
-        name: `Star ${i}`,
-        spectralType: 'G2V'
-      });
+        spectralClass: 'G2V',
+        spectralType: 'G2V', // Compatibility field
+        properMotion: { ra: 0, dec: 0 },
+        constellation: 'Generated'
+      };
+      stars.push(star);
     }
 
     return stars;

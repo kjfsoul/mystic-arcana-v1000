@@ -155,12 +155,12 @@ export default function AstronomicalDemoPage() {
 
                 <div className={styles.starItem}>
                   <strong>RA:</strong>
-                  <span>{selectedStar.coordinates.rightAscension.toFixed(4)}h</span>
+                  <span>{selectedStar.coordinates.ra.toFixed(4)}°</span>
                 </div>
 
                 <div className={styles.starItem}>
                   <strong>Dec:</strong>
-                  <span>{selectedStar.coordinates.declination.toFixed(4)}°</span>
+                  <span>{selectedStar.coordinates.dec.toFixed(4)}°</span>
                 </div>
               </div>
 

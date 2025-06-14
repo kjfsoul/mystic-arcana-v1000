@@ -1,0 +1,401 @@
+.panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  padding: 2rem;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 50%, rgba(15, 52, 96, 0.9) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.panel.active {
+  border-color: rgba(138, 43, 226, 0.6);
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.guestBadge {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.7em;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.cosmicInfluence {
+  color: #b19cd9;
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.spreadSelector {
+  margin-bottom: 2rem;
+}
+
+.spreadSelector h3 {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.spreadOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.spreadButton {
+  background: rgba(138, 43, 226, 0.1);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.spreadButton:hover:not(.locked) {
+  background: rgba(138, 43, 226, 0.2);
+  border-color: rgba(138, 43, 226, 0.5);
+  transform: translateY(-2px);
+}
+
+.spreadButton.selected {
+  background: rgba(138, 43, 226, 0.3);
+  border-color: rgba(138, 43, 226, 0.6);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+.spreadButton.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(100, 100, 100, 0.1);
+  border-color: rgba(100, 100, 100, 0.3);
+}
+
+.spreadInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.spreadName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffd700;
+}
+
+.spreadCards {
+  font-size: 0.9rem;
+  color: #b19cd9;
+}
+
+.spreadDescription {
+  font-size: 0.8rem;
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.lockIcon {
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.readingArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.startReading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.drawButton {
+  background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+  border: none;
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.drawButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #9932cc 0%, #a569c7 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+}
+
+.drawButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.instruction {
+  color: #b19cd9;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.cardsContainer {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cardsLayout {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  justify-items: center;
+}
+
+.cardsLayout.single {
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+
+.cardsLayout.three-card {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cardsLayout.celtic-cross {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cardPosition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.positionLabel {
+  color: #ffd700;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+  min-height: 1.2rem;
+}
+
+.tarotCard {
+  transition: all 0.3s ease;
+}
+
+.interpretation {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.interpretation h3 {
+  color: #ffd700;
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.interpretationText {
+  color: #ffffff;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.interpretationText p {
+  margin: 0 0 1rem 0;
+}
+
+.completedReading {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.completedMessage {
+  color: #b19cd9;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.newReadingButton {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newReadingButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.signupPrompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  z-index: 1000;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(138, 43, 226, 0.3);
+}
+
+.promptContent {
+  text-align: center;
+}
+
+.promptContent h3 {
+  color: #ffd700;
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.promptContent p {
+  color: #b19cd9;
+  margin: 0 0 1rem 0;
+}
+
+.promptContent ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.promptContent li {
+  color: #ffffff;
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+}
+
+.promptActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.signupButton {
+  background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.875rem 1.5rem;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signupButton:hover {
+  background: linear-gradient(135deg, #9932cc 0%, #a569c7 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+}
+
+.dismissButton {
+  background: none;
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 8px;
+  padding: 0.875rem 1.5rem;
+  color: #b19cd9;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dismissButton:hover {
+  background: rgba(138, 43, 226, 0.1);
+  border-color: rgba(138, 43, 226, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .panel {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .cardsLayout.three-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .cardsLayout.celtic-cross {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .signupPrompt {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .promptActions {
+    flex-direction: column;
+  }
+}

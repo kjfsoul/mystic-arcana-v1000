@@ -14,13 +14,23 @@
 
 // Browser-compatible Swiss Ephemeris bridge
 // Uses mock data for development and API endpoints for production
-import {
+import type {
   PlanetaryData,
   GeoLocation,
   AspectData,
-  RetrogradeData,
-  CosmicInfluenceData
+  CosmicInfluenceData,
+  MoonPhaseData
+} from '../../types/astronomical';
+
+import type {
+  RetrogradeData
 } from './types';
+
+import {
+  Planet,
+  ZodiacSign,
+  AspectType
+} from '../../types/astronomical';
 
 export interface SwissEphemerisConfig {
   apiEndpoint?: string;
@@ -117,8 +127,8 @@ export class SwissEphemerisBridge {
       const scriptArgs = [
         'planetary_positions.py',
         '--datetime', request.datetime.toISOString(),
-        '--latitude', request.location.lat.toString(),
-        '--longitude', request.location.lon.toString(),
+        '--latitude', request.location.latitude.toString(),
+        '--longitude', request.location.longitude.toString(),
         '--planets', request.planets.join(','),
         '--precision', this.config.precision
       ];
@@ -266,8 +276,8 @@ export class SwissEphemerisBridge {
       const scriptArgs = [
         'cosmic_weather.py',
         '--datetime', datetime.toISOString(),
-        '--latitude', location.lat.toString(),
-        '--longitude', location.lon.toString(),
+        '--latitude', location.latitude.toString(),
+        '--longitude', location.longitude.toString(),
         '--precision', this.config.precision
       ];
 
@@ -411,20 +421,26 @@ export class SwissEphemerisBridge {
       const baseAngle = (dayOfYear + index * 30) % 360;
       const ra = (baseAngle + Math.sin(now / 1000000) * 10) % 360;
       const dec = Math.sin((baseAngle + index * 45) * Math.PI / 180) * 23.5;
+      const zodiacSign = this.getZodiacSign(baseAngle);
 
       return {
+        planet: this.getPlanetEnum(planetName),
         name: planetName,
         symbol: this.getPlanetSymbol(planetName),
+        coordinates: { ra, dec },
         position: { ra, dec },
         eclipticLongitude: baseAngle,
         eclipticLatitude: Math.sin(now / 2000000 + index) * 5,
         distance: 1 + Math.sin(now / 5000000 + index) * 0.5,
         magnitude: index < 5 ? -2 + index * 0.5 : 2 + Math.random() * 3,
-        phase: planetName === 'moon' ? (Math.sin(now / 2500000) + 1) / 2 : 1,
+        phase: planetName.toLowerCase() === 'moon' ? (Math.sin(now / 2500000) + 1) / 2 : 1,
+        angularDiameter: 30 / (1 + index),
         angularSize: 30 / (1 + index),
         speed: 1 - index * 0.1,
         retrograde: Math.sin(now / 10000000 + index) < -0.8,
-        zodiacSign: this.getZodiacSign(baseAngle),
+        sign: this.getZodiacSignEnum(zodiacSign),
+        zodiacSign: zodiacSign,
+        degree: baseAngle % 30,
         zodiacDegree: baseAngle % 30,
         house: (Math.floor(baseAngle / 30) % 12) + 1
       };
@@ -445,22 +461,68 @@ export class SwissEphemerisBridge {
     return signs[Math.floor(longitude / 30) % 12];
   }
 
+  private getZodiacSignEnum(sign: string): ZodiacSign {
+    const signMap: { [key: string]: ZodiacSign } = {
+      'Aries': ZodiacSign.ARIES,
+      'Taurus': ZodiacSign.TAURUS,
+      'Gemini': ZodiacSign.GEMINI,
+      'Cancer': ZodiacSign.CANCER,
+      'Leo': ZodiacSign.LEO,
+      'Virgo': ZodiacSign.VIRGO,
+      'Libra': ZodiacSign.LIBRA,
+      'Scorpio': ZodiacSign.SCORPIO,
+      'Sagittarius': ZodiacSign.SAGITTARIUS,
+      'Capricorn': ZodiacSign.CAPRICORN,
+      'Aquarius': ZodiacSign.AQUARIUS,
+      'Pisces': ZodiacSign.PISCES
+    };
+    return signMap[sign] || ZodiacSign.ARIES;
+  }
+
+  private getPlanetEnum(planetName: string): Planet {
+    const planetMap: { [key: string]: Planet } = {
+      'sun': Planet.SUN,
+      'moon': Planet.MOON,
+      'mercury': Planet.MERCURY,
+      'venus': Planet.VENUS,
+      'mars': Planet.MARS,
+      'jupiter': Planet.JUPITER,
+      'saturn': Planet.SATURN,
+      'uranus': Planet.URANUS,
+      'neptune': Planet.NEPTUNE,
+      'pluto': Planet.PLUTO,
+      'chiron': Planet.CHIRON,
+      'north node': Planet.NORTH_NODE,
+      'south node': Planet.SOUTH_NODE
+    };
+    return planetMap[planetName.toLowerCase()] || Planet.SUN;
+  }
+
   private generateMockAspectData(planets: string[], datetime: Date, orbTolerance: number): AspectData[] {
     const aspects: AspectData[] = [];
-    const aspectTypes: AspectData['type'][] = ['conjunction', 'sextile', 'square', 'trine', 'opposition'];
+    const aspectTypes: AspectType[] = [
+      AspectType.CONJUNCTION, 
+      AspectType.SEXTILE, 
+      AspectType.SQUARE, 
+      AspectType.TRINE, 
+      AspectType.OPPOSITION
+    ];
 
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
         if (Math.random() < 0.3) { // 30% chance of aspect
           const aspectType = aspectTypes[Math.floor(Math.random() * aspectTypes.length)];
+          const applying = Math.random() < 0.5;
           aspects.push({
-            planet1: planets[i],
-            planet2: planets[j],
+            planet1: this.getPlanetEnum(planets[i]),
+            planet2: this.getPlanetEnum(planets[j]),
+            aspect: aspectType,
             type: aspectType,
             angle: this.getAspectAngle(aspectType) + (Math.random() - 0.5) * orbTolerance,
             orb: Math.random() * orbTolerance,
             exact: Math.random() < 0.1,
-            applying: Math.random() < 0.5,
+            applying: applying,
+            separating: !applying,
             influence: this.getAspectInfluence(aspectType),
             strength: Math.random()
           });
@@ -471,17 +533,24 @@ export class SwissEphemerisBridge {
     return aspects;
   }
 
-  private getAspectAngle(type: AspectData['type']): number {
-    const angles = {
-      conjunction: 0, sextile: 60, square: 90, trine: 120, opposition: 180,
-      semisextile: 30, quincunx: 150, semisquare: 45, sesquiquadrate: 135
+  private getAspectAngle(type: AspectType): number {
+    const angles: { [key in AspectType]: number } = {
+      [AspectType.CONJUNCTION]: 0,
+      [AspectType.SEXTILE]: 60,
+      [AspectType.SQUARE]: 90,
+      [AspectType.TRINE]: 120,
+      [AspectType.OPPOSITION]: 180,
+      [AspectType.SEMISEXTILE]: 30,
+      [AspectType.QUINCUNX]: 150,
+      [AspectType.SEMISQUARE]: 45,
+      [AspectType.SESQUIQUADRATE]: 135
     };
     return angles[type] || 0;
   }
 
-  private getAspectInfluence(type: AspectData['type']): AspectData['influence'] {
-    const harmonious: AspectData['type'][] = ['conjunction', 'sextile', 'trine'];
-    const challenging: AspectData['type'][] = ['square', 'opposition'];
+  private getAspectInfluence(type: AspectType): 'harmonious' | 'challenging' | 'neutral' {
+    const harmonious: AspectType[] = [AspectType.CONJUNCTION, AspectType.SEXTILE, AspectType.TRINE];
+    const challenging: AspectType[] = [AspectType.SQUARE, AspectType.OPPOSITION];
 
     if (harmonious.includes(type)) return 'harmonious';
     if (challenging.includes(type)) return 'challenging';
@@ -501,7 +570,7 @@ export class SwissEphemerisBridge {
       const peak = new Date((start.getTime() + end.getTime()) / 2);
 
       retrogrades.push({
-        planet,
+        planet: this.getPlanetEnum(planet),
         startDate: start,
         endDate: end,
         peakDate: peak,
@@ -520,27 +589,29 @@ export class SwissEphemerisBridge {
   }
 
   private generateMockCosmicWeather(datetime: Date): CosmicInfluenceData {
+    const moonPhase: MoonPhaseData = {
+      phase: 'Waxing Gibbous',
+      illumination: 0.75,
+      age: 10,
+      zodiacSign: 'Cancer',
+      distance: 384400,
+      angularSize: 31,
+      libration: { longitude: 0, latitude: 0 },
+      nextPhase: { type: 'Full Moon', date: new Date(datetime.getTime() + 3 * 24 * 60 * 60 * 1000) }
+    };
+
     return {
       timestamp: datetime,
-      moonPhase: {
-        phase: 'waxing-gibbous' as const,
-        illumination: 0.75,
-        age: 10,
-        zodiacSign: 'Cancer',
-        distance: 384400,
-        angularSize: 31,
-        libration: { longitude: 0, latitude: 0 },
-        nextPhase: { type: 'full', date: new Date(datetime.getTime() + 3 * 24 * 60 * 60 * 1000) }
-      },
+      moonPhase,
       planetaryHours: {
         current: { planet: 'Venus', startTime: datetime, endTime: new Date(datetime.getTime() + 60 * 60 * 1000) },
         next: { planet: 'Mercury', startTime: new Date(datetime.getTime() + 60 * 60 * 1000) },
         ruler: 'Sun',
-        dayNight: datetime.getHours() < 18 ? 'day' as const : 'night' as const
+        dayNight: datetime.getHours() < 18 ? 'day' : 'night'
       },
       aspects: { major: [], minor: [], applying: [] },
       retrogrades: [],
-      cosmicIntensity: 'active' as const,
+      cosmicIntensity: 'active',
       spiritualInfluences: [],
       optimalActivities: []
     };
@@ -590,9 +661,15 @@ export class SwissEphemerisBridge {
     // Parse the JSON response from Python script into PlanetaryData objects
     return rawData.planets.map((planet: unknown) => {
       const p = planet as Record<string, unknown>;
+      const zodiacSign = p.zodiac_sign as string;
       return {
+        planet: this.getPlanetEnum(p.name as string),
         name: p.name as string,
         symbol: p.symbol as string,
+        coordinates: {
+          ra: p.ra as number,
+          dec: p.dec as number
+        },
         position: {
           ra: p.ra as number,
           dec: p.dec as number
@@ -602,10 +679,13 @@ export class SwissEphemerisBridge {
         distance: p.distance as number,
         magnitude: p.magnitude as number,
         phase: (p.phase as number) || 1,
+        angularDiameter: p.angular_size as number,
         angularSize: p.angular_size as number,
         speed: p.speed as number,
         retrograde: p.retrograde as boolean,
-        zodiacSign: p.zodiac_sign as string,
+        sign: this.getZodiacSignEnum(zodiacSign),
+        zodiacSign: zodiacSign,
+        degree: p.zodiac_degree as number,
         zodiacDegree: p.zodiac_degree as number,
         house: p.house as number
       };
@@ -615,18 +695,36 @@ export class SwissEphemerisBridge {
   private parseAspectData(rawData: { aspects: unknown[] }): AspectData[] {
     return rawData.aspects.map((aspect: unknown) => {
       const a = aspect as Record<string, unknown>;
+      const aspectType = this.parseAspectType(a.type as string);
       return {
-        planet1: a.planet1 as string,
-        planet2: a.planet2 as string,
-        type: a.type as AspectData['type'],
+        planet1: this.getPlanetEnum(a.planet1 as string),
+        planet2: this.getPlanetEnum(a.planet2 as string),
+        aspect: aspectType,
+        type: aspectType,
         angle: a.angle as number,
         orb: a.orb as number,
         exact: a.exact as boolean,
         applying: a.applying as boolean,
-        influence: a.influence as AspectData['influence'],
+        separating: !(a.applying as boolean),
+        influence: a.influence as 'harmonious' | 'challenging' | 'neutral',
         strength: a.strength as number
       };
     });
+  }
+
+  private parseAspectType(type: string): AspectType {
+    const aspectMap: { [key: string]: AspectType } = {
+      'conjunction': AspectType.CONJUNCTION,
+      'sextile': AspectType.SEXTILE,
+      'square': AspectType.SQUARE,
+      'trine': AspectType.TRINE,
+      'opposition': AspectType.OPPOSITION,
+      'semisextile': AspectType.SEMISEXTILE,
+      'quincunx': AspectType.QUINCUNX,
+      'semisquare': AspectType.SEMISQUARE,
+      'sesquiquadrate': AspectType.SESQUIQUADRATE
+    };
+    return aspectMap[type.toLowerCase()] || AspectType.CONJUNCTION;
   }
 
   private parseRetrogradeData(rawData: { retrogrades: unknown[] }): RetrogradeData[] {

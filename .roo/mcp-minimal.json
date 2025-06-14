@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "mcp-server-filesystem",
+      "args": ["/Users/kfitz/mystic-arcana-v1000"],
+      "env": {}
+    },
+    "git": {
+      "command": "mcp-server-git",
+      "args": [],
+      "env": {}
+    },
+    "github": {
+      "command": "github-mcp-server",
+      "args": [],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "fetch": {
+      "command": "mcp-server-fetch",
+      "args": [],
+      "env": {}
+    },
+    "memory": {
+      "command": "basic-memory",
+      "args": [],
+      "env": {}
+    }
+  }
+}

@@ -20,7 +20,7 @@ import {
   Planet,
   ZodiacSign
 } from '../../types/astronomical';
-import { SwissEphemerisBridge } from '../../lib/astronomy/SwissEphemerisBridge.browser';
+import { SwissEphemerisBridge } from '../../lib/astronomy/SwissEphemerisBridge';
 import { StarCatalogLoader } from '../../lib/astronomy/StarCatalogLoader';
 
 export interface AstronomicalEngine {
@@ -163,9 +163,8 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
         id: catalogStar.id,
         name: catalogStar.name,
         coordinates: {
-          rightAscension: catalogStar.ra / 15, // Convert degrees to hours
-          declination: catalogStar.dec,
-          epoch: 2000.0
+          ra: catalogStar.ra ?? 0, // Keep in degrees
+          dec: catalogStar.dec ?? 0
         },
         magnitude: catalogStar.magnitude,
         colorIndex: catalogStar.colorIndex || 0,
@@ -205,11 +204,12 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
         planets: ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'],
         datetime: time,
         location: {
+          ...location,
+          // Add compatibility fields for the SwissEphemeris interface
           lat: location.latitude,
           lon: location.longitude,
-          altitude: location.elevation,
-          timezone: location.timezone
-        },
+          altitude: location.elevation
+        } as GeoLocation,
         options: {
           includeRetrograde: true,
           calculateAspects: false,
@@ -225,9 +225,8 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
         return {
           planet: p.name as Planet,
           coordinates: {
-            rightAscension: p.position.ra,
-            declination: p.position.dec,
-            epoch: 2000.0
+            ra: p.position?.ra ?? p.coordinates?.ra ?? 0,
+            dec: p.position?.dec ?? p.coordinates?.dec ?? 0
           },
           horizontalCoords: {
             azimuth: 0, // Will be calculated by coordinate transforms
@@ -236,7 +235,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
           eclipticLongitude: p.eclipticLongitude,
           eclipticLatitude: p.eclipticLatitude,
           distance: p.distance,
-          angularDiameter: p.angularSize,
+          angularDiameter: p.angularSize ?? p.angularDiameter ?? 0,
           magnitude: p.magnitude,
           phase: p.phase,
           retrograde: p.retrograde,
@@ -253,19 +252,19 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     }
   }
 
-  getPlanetPosition(planet: string, time: Date): { eclipticLongitude: number } {
-    // Simple placeholder for retrograde detection
-    const baseAngle = (time.getTime() / (1000 * 60 * 60 * 24)) + this.getPlanetOffset(planet);
-    return { eclipticLongitude: (baseAngle % 360) };
+  async getPlanetPosition(planet: Planet, time: Date, location: GeoLocation): Promise<PlanetaryData> {
+    // Get planet position using the same logic as calculatePlanetaryPositions
+    const positions = await this.getPlanetaryPositions(time, location);
+    const planetPosition = positions.find(p => p.planet === planet);
+    
+    if (!planetPosition) {
+      throw new Error(`Planet position not found: ${planet}`);
+    }
+    
+    return planetPosition;
   }
 
-  private getPlanetOffset(planet: string): number {
-    const offsets: { [key: string]: number } = {
-      mercury: 0, venus: 30, mars: 60, jupiter: 90,
-      saturn: 120, uranus: 150, neptune: 180, pluto: 210
-    };
-    return offsets[planet] || 0;
-  }
+  // Method removed - getPlanetPosition now uses calculatePlanetaryPositions
 
   calculateAspects(): AspectData[] {
     // Placeholder - will calculate angular relationships

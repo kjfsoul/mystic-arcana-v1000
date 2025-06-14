@@ -1,0 +1,78 @@
+<svg width="200" height="300" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="priestessBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#191970;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4B0082;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="robeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0000CD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Card Background -->
+  <rect width="200" height="300" rx="12" fill="url(#priestessBg)" stroke="rgba(138, 43, 226, 0.5)" stroke-width="2"/>
+  
+  <!-- Temple pillars -->
+  <rect x="30" y="40" width="20" height="180" fill="#708090"/>
+  <rect x="150" y="40" width="20" height="180" fill="#708090"/>
+  
+  <!-- Pillar capitals -->
+  <rect x="25" y="40" width="30" height="10" fill="#A9A9A9"/>
+  <rect x="145" y="40" width="30" height="10" fill="#A9A9A9"/>
+  
+  <!-- Pillar letters B and J -->
+  <text x="40" y="65" text-anchor="middle" fill="#000000" font-family="serif" font-size="14" font-weight="bold">B</text>
+  <text x="160" y="65" text-anchor="middle" fill="#FFFFFF" font-family="serif" font-size="14" font-weight="bold">J</text>
+  
+  <!-- Veil behind -->
+  <rect x="50" y="50" width="100" height="170" fill="#800080" opacity="0.7"/>
+  
+  <!-- Pomegranate pattern on veil -->
+  <g fill="#FF69B4" opacity="0.5">
+    <circle cx="75" cy="80" r="4"/>
+    <circle cx="125" cy="100" r="4"/>
+    <circle cx="90" cy="130" r="4"/>
+    <circle cx="110" cy="160" r="4"/>
+    <circle cx="80" cy="190" r="4"/>
+    <circle cx="120" cy="210" r="4"/>
+  </g>
+  
+  <!-- The High Priestess figure -->
+  <g transform="translate(100, 90)">
+    <!-- Head -->
+    <circle cx="0" cy="0" r="15" fill="#FDBCB4"/>
+    
+    <!-- Crown -->
+    <path d="M-15 -10 L-10 -20 L-5 -15 L0 -25 L5 -15 L10 -20 L15 -10" fill="#C0C0C0"/>
+    <circle cx="0" cy="-20" r="3" fill="#FFD700"/>
+    
+    <!-- Veil -->
+    <path d="M-20 -5 Q-25 10 -15 30 L15 30 Q25 10 20 -5 Z" fill="#E6E6FA" opacity="0.8"/>
+    
+    <!-- Robe -->
+    <path d="M-25 15 Q-30 40 -25 80 L-20 120 L20 120 L25 80 Q30 40 25 15 Z" fill="url(#robeBlue)"/>
+    
+    <!-- Cross on chest -->
+    <g stroke="#FFD700" stroke-width="3">
+      <line x1="0" y1="25" x2="0" y2="45"/>
+      <line x1="-10" y1="35" x2="10" y2="35"/>
+    </g>
+    
+    <!-- Scroll in lap -->
+    <rect x="-12" y="75" width="24" height="15" fill="#F5F5DC" rx="2"/>
+    <text x="0" y="85" text-anchor="middle" fill="#000000" font-family="serif" font-size="8">TORA</text>
+    
+    <!-- Crescent moon at feet -->
+    <path d="M-8 110 Q0 105 8 110 Q0 115 -8 110" fill="none" stroke="#C0C0C0" stroke-width="2"/>
+  </g>
+  
+  <!-- Water at base -->
+  <path d="M0 230 Q50 225 100 230 Q150 235 200 230 L200 240 Q150 245 100 240 Q50 235 0 240 Z" fill="#4682B4" opacity="0.6"/>
+  <path d="M0 240 Q50 235 100 240 Q150 245 200 240 L200 250 Q150 255 100 250 Q50 245 0 250 Z" fill="#4682B4" opacity="0.4"/>
+  
+  <!-- Title -->
+  <rect x="10" y="250" width="180" height="40" rx="8" fill="rgba(0,0,0,0.7)"/>
+  <text x="100" y="270" text-anchor="middle" fill="#FFD700" font-family="serif" font-size="14" font-weight="bold">II • HIGH PRIESTESS</text>
+  <text x="100" y="285" text-anchor="middle" fill="#FFFFFF" font-family="serif" font-size="10">Intuition</text>
+</svg>

@@ -227,12 +227,12 @@ export default function HighPerformanceStarsPage() {
 
               <div className={styles.starItem}>
                 <strong>RA:</strong>
-                <span>{selectedStar.ra.toFixed(4)}°</span>
+                <span>{(selectedStar.ra ?? selectedStar.coordinates.ra).toFixed(4)}°</span>
               </div>
 
               <div className={styles.starItem}>
                 <strong>Dec:</strong>
-                <span>{selectedStar.dec.toFixed(4)}°</span>
+                <span>{(selectedStar.dec ?? selectedStar.coordinates.dec).toFixed(4)}°</span>
               </div>
 
               {selectedStar.colorIndex !== undefined && (

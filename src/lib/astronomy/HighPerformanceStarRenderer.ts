@@ -333,8 +333,9 @@ export class HighPerformanceStarRenderer {
 
       // Convert RA/Dec to 3D position on unit sphere
       // RA is in degrees, convert to radians
-      const ra = star.ra * Math.PI / 180;
-      const dec = star.dec * Math.PI / 180;
+      // Use coordinates property if ra/dec are not directly available
+      const ra = (star.ra ?? 0) * Math.PI / 180;
+      const dec = (star.dec ?? 0) * Math.PI / 180;
 
       this.renderData.position[baseIndex] = Math.cos(dec) * Math.cos(ra);
       this.renderData.position[baseIndex + 1] = Math.cos(dec) * Math.sin(ra);

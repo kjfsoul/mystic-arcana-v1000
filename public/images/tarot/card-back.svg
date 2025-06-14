@@ -1,0 +1,62 @@
+<svg width="200" height="300" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="backGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8a2be2;stop-opacity:0.4" />
+      <stop offset="70%" style="stop-color:#8a2be2;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+    </radialGradient>
+    <pattern id="stars" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="#ffd700" opacity="0.3"/>
+      <circle cx="10" cy="10" r="0.5" fill="#ffffff" opacity="0.2"/>
+      <circle cx="30" cy="15" r="0.5" fill="#ffffff" opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Card Background -->
+  <rect width="200" height="300" rx="12" fill="url(#backGradient)" stroke="rgba(138, 43, 226, 0.5)" stroke-width="2"/>
+  
+  <!-- Star Pattern -->
+  <rect width="200" height="300" rx="12" fill="url(#stars)" opacity="0.5"/>
+  
+  <!-- Central Mystical Design -->
+  <circle cx="100" cy="150" r="60" fill="url(#centerGlow)"/>
+  
+  <!-- Ornate Border -->
+  <rect x="15" y="15" width="170" height="270" rx="8" fill="none" stroke="rgba(138, 43, 226, 0.3)" stroke-width="1"/>
+  <rect x="25" y="25" width="150" height="250" rx="6" fill="none" stroke="rgba(255, 215, 0, 0.2)" stroke-width="1"/>
+  
+  <!-- Central Symbol -->
+  <g transform="translate(100, 150)">
+    <!-- Outer circle -->
+    <circle r="35" fill="none" stroke="#8a2be2" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Inner design -->
+    <path d="M-20 0 L0 -20 L20 0 L0 20 Z" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.8"/>
+    <circle r="8" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.8"/>
+    
+    <!-- Mystical rays -->
+    <g stroke="#8a2be2" stroke-width="1" opacity="0.4">
+      <line x1="0" y1="-45" x2="0" y2="-35"/>
+      <line x1="32" y1="-32" x2="25" y2="-25"/>
+      <line x1="45" y1="0" x2="35" y2="0"/>
+      <line x1="32" y1="32" x2="25" y2="25"/>
+      <line x1="0" y1="45" x2="0" y2="35"/>
+      <line x1="-32" y1="32" x2="-25" y2="25"/>
+      <line x1="-45" y1="0" x2="-35" y2="0"/>
+      <line x1="-32" y1="-32" x2="-25" y2="-25"/>
+    </g>
+  </g>
+  
+  <!-- Corner decorations -->
+  <g fill="none" stroke="#8a2be2" stroke-width="1" opacity="0.3">
+    <path d="M30 30 Q35 25 40 30 Q35 35 30 30"/>
+    <path d="M170 30 Q165 25 160 30 Q165 35 170 30"/>
+    <path d="M30 270 Q35 275 40 270 Q35 265 30 270"/>
+    <path d="M170 270 Q165 275 160 270 Q165 265 170 270"/>
+  </g>
+</svg>

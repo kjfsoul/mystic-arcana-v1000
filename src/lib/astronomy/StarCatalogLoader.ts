@@ -7,10 +7,10 @@
  * Optimized for real-time rendering of 100,000+ stars.
  */
 
-import {
+import type {
   Star,
-  CelestialCoordinates
-} from './types';
+  EquatorialCoordinates
+} from '../../types/astronomical';
 
 export class StarCatalogLoader {
   private static readonly CATALOG_URLS = {
@@ -154,7 +154,7 @@ export class StarCatalogLoader {
 
   private getRealBrightStars(): Star[] {
     // Real data for the brightest stars
-    return [
+    const brightStarsData = [
       {
         id: 'HIP32349',
         name: 'Sirius',
@@ -279,6 +279,24 @@ export class StarCatalogLoader {
         variableType: 'LC'
       }
     ];
+
+    // Convert to the required Star format
+    return brightStarsData.map(star => ({
+      id: star.id,
+      name: star.name,
+      coordinates: { ra: star.ra, dec: star.dec },
+      ra: star.ra, // Compatibility field
+      dec: star.dec, // Compatibility field
+      magnitude: star.magnitude,
+      colorIndex: star.colorIndex,
+      spectralClass: star.spectralType,
+      spectralType: star.spectralType, // Compatibility field
+      properMotion: star.properMotion || { ra: 0, dec: 0 },
+      parallax: star.distance ? 1000 / star.distance : undefined,
+      distance: star.distance,
+      constellation: star.constellation,
+      variableType: star.variableType
+    }));
   }
 
   private generateRealisticStar(index: number, maxMagnitude: number): Star {
@@ -298,19 +316,26 @@ export class StarCatalogLoader {
     // Distance based on magnitude and spectral type
     const distance = this.estimateDistance(magnitude, spectralType);
 
+    const constellation = this.getConstellation(equatorial.ra, equatorial.dec);
+    const colorIndex = this.getColorIndex(spectralType);
+
     return {
       id: `SYN${index}`,
-      ra: equatorial.ra,
-      dec: equatorial.dec,
+      name: undefined,
+      coordinates: equatorial,
+      ra: equatorial.ra, // Compatibility field
+      dec: equatorial.dec, // Compatibility field
       magnitude,
-      spectralType,
+      colorIndex,
+      spectralClass: spectralType,
+      spectralType, // Compatibility field
+      properMotion: { ra: 0, dec: 0 },
       distance,
-      constellation: this.getConstellation(equatorial.ra, equatorial.dec),
-      colorIndex: this.getColorIndex(spectralType)
+      constellation
     };
   }
 
-  private galacticToEquatorial(l: number, b: number): CelestialCoordinates {
+  private galacticToEquatorial(l: number, b: number): EquatorialCoordinates {
     // Convert galactic coordinates to equatorial (J2000)
     const lRad = l * Math.PI / 180;
     const bRad = b * Math.PI / 180;
@@ -435,10 +460,15 @@ export class StarCatalogLoader {
     return messierObjects.map(obj => ({
       id: obj.id,
       name: obj.name,
-      ra: obj.ra,
-      dec: obj.dec,
+      coordinates: { ra: obj.ra, dec: obj.dec },
+      ra: obj.ra, // Compatibility field
+      dec: obj.dec, // Compatibility field
       magnitude: obj.magnitude,
-      spectralType: obj.type,
+      colorIndex: 0, // Default for deep sky objects
+      spectralClass: obj.type,
+      spectralType: obj.type, // Compatibility field
+      properMotion: { ra: 0, dec: 0 },
+      constellation: this.getConstellation(obj.ra, obj.dec),
       metadata: { messier: true, type: obj.type }
     }));
   }
@@ -447,10 +477,11 @@ export class StarCatalogLoader {
     if (options.maxMagnitude && star.magnitude > options.maxMagnitude) {
       return false;
     }
-    if (options.minDeclination && star.dec < options.minDeclination) {
+    const dec = star.dec ?? star.coordinates.dec;
+    if (options.minDeclination && dec < options.minDeclination) {
       return false;
     }
-    if (options.maxDeclination && star.dec > options.maxDeclination) {
+    if (options.maxDeclination && dec > options.maxDeclination) {
       return false;
     }
     if (options.constellations && star.constellation &&

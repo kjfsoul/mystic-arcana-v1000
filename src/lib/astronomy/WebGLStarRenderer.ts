@@ -225,8 +225,8 @@ export class WebGLStarRenderer {
       const baseIndex = i * 6;
 
       // Convert RA/Dec to 3D position on unit sphere
-      const ra = star.ra * Math.PI / 180; // Convert degrees to radians
-      const dec = star.dec * Math.PI / 180; // Convert degrees to radians
+      const ra = (star.ra ?? 0) * Math.PI / 180; // Convert degrees to radians
+      const dec = (star.dec ?? 0) * Math.PI / 180; // Convert degrees to radians
 
       const x = Math.cos(dec) * Math.cos(ra);
       const y = Math.cos(dec) * Math.sin(ra);

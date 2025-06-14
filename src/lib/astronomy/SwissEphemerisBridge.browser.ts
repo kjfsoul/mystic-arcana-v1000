@@ -11,13 +11,18 @@
  * - Type-safe interfaces
  */
 
-import {
+import type {
   PlanetaryData,
   GeoLocation,
   AspectData,
   RetrogradeData,
   CosmicInfluenceData
-} from './types';
+} from '../../types/astronomical';
+
+import {
+  Planet,
+  ZodiacSign
+} from '../../types/astronomical';
 
 export interface SwissEphemerisConfig {
   apiEndpoint?: string;
@@ -152,11 +157,18 @@ export class SwissEphemerisBridge {
       const ra = (baseAngle + Math.sin(now / 1000000) * 10) % 360;
       const dec = Math.sin((baseAngle + index * 45) * Math.PI / 180) * 23.5; // Ecliptic range
       
+      const zodiacSign = this.getZodiacSign(baseAngle);
+      
       return {
+        planet: this.getPlanetEnum(planetName),
         name: planetName,
         symbol: this.getPlanetSymbol(planetName),
+        coordinates: {
+          ra: ra,
+          dec: dec
+        },
         position: {
-          ra: ra / 15, // Convert to hours
+          ra: ra, 
           dec: dec
         },
         eclipticLongitude: baseAngle,
@@ -164,11 +176,14 @@ export class SwissEphemerisBridge {
         distance: 1 + Math.random() * 10, // AU
         magnitude: -2 + Math.random() * 8,
         phase: planetName === 'moon' ? (dayOfYear % 29.5) / 29.5 : 1,
-        angularSize: 10 + Math.random() * 50, // arcseconds
+        angularDiameter: 10 + Math.random() * 50, // arcseconds
+        angularSize: 10 + Math.random() * 50, // Compatibility field
         speed: 0.5 + Math.random() * 2, // degrees per day
         retrograde: Math.random() < 0.1, // 10% chance
-        zodiacSign: this.getZodiacSign(baseAngle),
-        zodiacDegree: baseAngle % 30,
+        sign: this.getZodiacSignEnum(zodiacSign),
+        zodiacSign: zodiacSign, // Compatibility field
+        degree: baseAngle % 30,
+        zodiacDegree: baseAngle % 30, // Compatibility field
         house: Math.floor(Math.random() * 12) + 1
       };
     });
@@ -206,14 +221,63 @@ export class SwissEphemerisBridge {
   }
 
   /**
+   * Get zodiac sign enum from string
+   */
+  private getZodiacSignEnum(sign: string): ZodiacSign {
+    const signMap: { [key: string]: ZodiacSign } = {
+      'Aries': ZodiacSign.ARIES,
+      'Taurus': ZodiacSign.TAURUS,
+      'Gemini': ZodiacSign.GEMINI,
+      'Cancer': ZodiacSign.CANCER,
+      'Leo': ZodiacSign.LEO,
+      'Virgo': ZodiacSign.VIRGO,
+      'Libra': ZodiacSign.LIBRA,
+      'Scorpio': ZodiacSign.SCORPIO,
+      'Sagittarius': ZodiacSign.SAGITTARIUS,
+      'Capricorn': ZodiacSign.CAPRICORN,
+      'Aquarius': ZodiacSign.AQUARIUS,
+      'Pisces': ZodiacSign.PISCES
+    };
+    return signMap[sign] || ZodiacSign.ARIES;
+  }
+
+  /**
+   * Get planet enum from string
+   */
+  private getPlanetEnum(planetName: string): Planet {
+    const planetMap: { [key: string]: Planet } = {
+      'sun': Planet.SUN,
+      'moon': Planet.MOON,
+      'mercury': Planet.MERCURY,
+      'venus': Planet.VENUS,
+      'mars': Planet.MARS,
+      'jupiter': Planet.JUPITER,
+      'saturn': Planet.SATURN,
+      'uranus': Planet.URANUS,
+      'neptune': Planet.NEPTUNE,
+      'pluto': Planet.PLUTO,
+      'chiron': Planet.CHIRON,
+      'north node': Planet.NORTH_NODE,
+      'south node': Planet.SOUTH_NODE
+    };
+    return planetMap[planetName.toLowerCase()] || Planet.SUN;
+  }
+
+  /**
    * Parse planetary data from API response
    */
   private parsePlanetaryData(data: { planets: unknown[] }): PlanetaryData[] {
     return data.planets.map((planet: unknown) => {
       const p = planet as Record<string, unknown>;
+      const zodiacSign = p.zodiac_sign as string;
       return {
+        planet: this.getPlanetEnum(p.name as string),
         name: p.name as string,
         symbol: p.symbol as string,
+        coordinates: {
+          ra: p.ra as number,
+          dec: p.dec as number
+        },
         position: {
           ra: p.ra as number,
           dec: p.dec as number
@@ -223,10 +287,13 @@ export class SwissEphemerisBridge {
         distance: p.distance as number,
         magnitude: p.magnitude as number,
         phase: (p.phase as number) || 1,
+        angularDiameter: p.angular_size as number,
         angularSize: p.angular_size as number,
         speed: p.speed as number,
         retrograde: p.retrograde as boolean,
-        zodiacSign: p.zodiac_sign as string,
+        sign: this.getZodiacSignEnum(zodiacSign),
+        zodiacSign: zodiacSign,
+        degree: p.zodiac_degree as number,
         zodiacDegree: p.zodiac_degree as number,
         house: p.house as number
       };

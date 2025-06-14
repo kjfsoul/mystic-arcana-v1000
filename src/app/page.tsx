@@ -1,9 +1,9 @@
-import { ThreePanelLayout } from '../components/layout/ThreePanelLayout';
+import { RefactoredHomepage } from '../components/layout/RefactoredHomepage';
 
 export default function Home() {
   return (
     <main className="min-h-screen w-full">
-      <ThreePanelLayout />
+      <RefactoredHomepage />
     </main>
   );
 }

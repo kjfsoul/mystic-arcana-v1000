@@ -190,9 +190,13 @@ Mystic Arcana is an AI-powered tarot and astrology platform featuring adaptive v
 * [x] **COMPLETED**: High-performance star field rendering system
 * [x] **COMPLETED**: Galaxy background visualization system
 * [x] **COMPLETED**: WebGL2 rendering pipeline optimization
+* [x] **COMPLETED**: Supabase database integration and schema setup
+* [x] **COMPLETED**: Tarot deck folder structure implementation
 * [ ] Integrate real Hipparcos star catalog
 * [ ] Add constellation line overlays
 * [ ] Implement interactive star selection
+* [ ] Complete tarot card loading logic for new deck structure
+* [ ] Upload Rider-Waite deck images to public/tarot/deck-rider-waite/
 
 ---
 
@@ -227,6 +231,50 @@ Mystic Arcana is an AI-powered tarot and astrology platform featuring adaptive v
 - Real star catalog integration (Hipparcos/Gaia)
 - Interactive constellation overlays
 - Deep sky object rendering (nebulae, galaxies, clusters)
+
+### Supabase Integration & Database Schema (December 2024)
+**Status**: ✅ **COMPLETED** - Database Ready
+
+#### Database Schema Implemented:
+- **Users Table**: Extends Supabase auth.users with email and timestamps
+- **User Profiles**: Birth data (date, time, location), chosen reader, preferences (JSONB)
+- **Tarot Readings**: Spread types (single, three-card, celtic-cross), cards drawn, interpretations, cosmic influences
+- **Row Level Security**: Full RLS policies for user data protection
+- **Automated Triggers**: User creation and timestamp updates
+
+#### Supabase Configuration:
+- **URL**: `https://pqfsbxcbsxuyfgqrxdob.supabase.co`
+- **Anon Key**: Configured in `.env.local` with NEXT_PUBLIC prefix
+- **Migration**: `supabase/migrations/001_initial_schema.sql`
+
+### Tarot Deck Organization System (December 2024)
+**Status**: ✅ **STRUCTURE COMPLETED** - Ready for Content
+
+#### Folder Structure:
+```
+public/tarot/
+├── deck-rider-waite/     # Default deck (JPG format)
+│   ├── major/           # 00-the-fool.jpg, 01-magician.jpg, etc.
+│   └── minor/           # ace-cups.jpg, two-cups.jpg, etc.
+├── deck-core/           # Custom core deck (future)
+├── deck-january/        # Monthly themed decks
+├── deck-february/
+├── deck-march/
+├── deck-april/
+├── deck-may/
+├── deck-june/
+├── deck-july/
+├── deck-august/
+├── deck-september/
+├── deck-october/
+├── deck-november/
+└── deck-december/
+```
+
+#### Naming Conventions:
+- **Major Arcana**: `00-the-fool.jpg`, `01-magician.jpg`, `02-high-priestess.jpg`
+- **Minor Arcana**: `ace-cups.jpg`, `two-cups.jpg`, `king-pentacles.jpg`
+- **Format Decision**: JPG acceptable for initial launch; SVG preferred for future animations
 
 ---
 

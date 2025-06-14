@@ -5,100 +5,26 @@
  * star catalogs, planetary ephemeris, and spiritual correlations.
  */
 
-// === Core Astronomical Types ===
+// Re-export all core types from the main astronomical types file
+export * from '../../types/astronomical';
 
-export interface Star {
-  id: string;                    // Catalog ID (e.g., HIP32349 for Sirius)
-  name?: string;                 // Common name if available
-  ra: number;                    // Right ascension (degrees)
-  dec: number;                   // Declination (degrees)
-  magnitude: number;             // Visual magnitude
-  spectralType?: string;         // Spectral classification
-  distance?: number;             // Distance in light years
-  properMotion?: {              // Proper motion in milliarcseconds/year
-    ra: number;
-    dec: number;
-  };
-  constellation?: string;        // IAU constellation
-  colorIndex?: number;          // B-V color index
-  variableType?: string;        // Variable star type if applicable
-  multiplicity?: string;        // Binary/multiple star info
-  metadata?: Record<string, unknown>;
-}
+// Import types needed for local interfaces
+import type { 
+  EquatorialCoordinates, 
+  HorizontalCoordinates, 
+  MoonPhaseData,
+  Star,
+  PlanetaryData
+} from '../../types/astronomical';
 
-export interface PlanetaryData {
-  name: string;
-  symbol: string;
-  position: CelestialCoordinates;
-  eclipticLongitude: number;
-  eclipticLatitude: number;
-  distance: number;              // AU from Earth
-  magnitude: number;
-  phase: number;                 // Illuminated fraction
-  angularSize: number;           // Arcseconds
-  speed: number;                 // Degrees per day
-  retrograde: boolean;
-  rise?: Date;
-  transit?: Date;
-  set?: Date;
-  zodiacSign: string;
-  zodiacDegree: number;
-  house?: number;
-  aspects?: AspectData[];
-}
+// === Additional Types ===
 
-export interface GeoLocation {
-  lat: number;                   // Latitude in degrees
-  lon: number;                   // Longitude in degrees
-  latitude?: number;             // Alternative latitude field for compatibility
-  longitude?: number;            // Alternative longitude field for compatibility
-  altitude?: number;             // Altitude in meters
-  elevation?: number;            // Alternative elevation field for compatibility
-  timezone?: string;             // IANA timezone
-}
-
-export interface CelestialCoordinates {
-  ra: number;                    // Right ascension in degrees
-  dec: number;                   // Declination in degrees
-}
-
-export interface EquatorialCoordinates {
-  ra: number;                    // Right ascension in degrees
-  dec: number;                   // Declination in degrees
-}
-
-export interface HorizontalCoordinates {
-  altitude: number;              // Degrees above horizon
-  azimuth: number;              // Degrees from north
-}
+// Alias for backward compatibility
+export type CelestialCoordinates = EquatorialCoordinates;
 
 export interface EclipticCoordinates {
   longitude: number;             // Ecliptic longitude in degrees
   latitude: number;              // Ecliptic latitude in degrees
-}
-
-export interface ScreenCoordinates {
-  x: number;                     // Normalized screen X (-1 to 1)
-  y: number;                     // Normalized screen Y (-1 to 1)
-  visible: boolean;              // Is above horizon?
-  brightness: number;            // Visual brightness factor (0-1)
-}
-
-// === Aspect Calculations ===
-
-export interface AspectData {
-  planet1: string;
-  planet2: string;
-  type: 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition' |
-  'semisextile' | 'quincunx' | 'semisquare' | 'sesquiquadrate';
-  aspect: 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition' |
-  'semisextile' | 'quincunx' | 'semisquare' | 'sesquiquadrate';  // Alternative field name for compatibility
-  angle: number;                 // Actual angle in degrees
-  orb: number;                   // Degrees from exact
-  exact: boolean;                // Within 1 degree of exact?
-  applying: boolean;             // Is aspect forming or separating?
-  influence?: 'harmonious' | 'challenging' | 'neutral';
-  strength?: number;             // 0-1 based on orb and planets
 }
 
 // === Retrograde Detection ===
@@ -145,7 +71,7 @@ export interface MessierObject {
   id: string;                   // M1-M110
   name?: string;                // Common name (e.g., "Orion Nebula")
   type: 'galaxy' | 'nebula' | 'cluster' | 'planetary-nebula';
-  coordinates: CelestialCoordinates;
+  coordinates: EquatorialCoordinates;
   magnitude: number;
   angularSize: number;          // Arc minutes
   distance?: number;            // Light years
@@ -166,135 +92,8 @@ export interface ConstellationData {
 
 // === Planet and Aspect Type Enums ===
 
-export enum Planet {
-  SUN = 'sun',
-  MOON = 'moon',
-  MERCURY = 'mercury',
-  VENUS = 'venus',
-  MARS = 'mars',
-  JUPITER = 'jupiter',
-  SATURN = 'saturn',
-  URANUS = 'uranus',
-  NEPTUNE = 'neptune',
-  PLUTO = 'pluto'
-}
-
-export enum AspectType {
-  CONJUNCTION = 'conjunction',
-  SEXTILE = 'sextile',
-  SQUARE = 'square',
-  TRINE = 'trine',
-  OPPOSITION = 'opposition',
-  SEMISEXTILE = 'semisextile',
-  QUINCUNX = 'quincunx',
-  SEMISQUARE = 'semisquare',
-  SESQUIQUADRATE = 'sesquiquadrate'
-}
-
-export enum CosmicWeatherType {
-  CALM = 'calm',
-  ACTIVE = 'active',
-  TURBULENT = 'turbulent',
-  ECLIPSE = 'eclipse',
-  MERCURY_RETROGRADE = 'mercury_retrograde',
-  FULL_MOON = 'full_moon',
-  NEW_MOON = 'new_moon'
-}
-
-// === Cosmic Weather & Spiritual Correlations ===
-
-export interface CosmicInfluenceData {
-  timestamp: Date;
-  moonPhase: MoonPhaseData;
-  planetaryHours: PlanetaryHourData;
-  aspects: {
-    major: AspectData[];
-    minor: AspectData[];
-    applying: AspectData[];
-  };
-  retrogrades: RetrogradeInfo[];
-  cosmicIntensity: 'calm' | 'active' | 'intense' | 'transformative';
-  spiritualInfluences: SpiritualInfluence[];
-  optimalActivities: OptimalActivity[];
-  warnings?: CosmicWarning[];
-}
-
-export interface MoonPhaseData {
-  phase: 'new' | 'waxing-crescent' | 'first-quarter' | 'waxing-gibbous' |
-  'full' | 'waning-gibbous' | 'last-quarter' | 'waning-crescent' |
-  'New Moon' | 'Waxing Crescent' | 'First Quarter' | 'Waxing Gibbous' |
-  'Full Moon' | 'Waning Gibbous' | 'Last Quarter' | 'Waning Crescent';  // Alternative format for compatibility
-  illumination: number;         // 0-1
-  age: number;                 // Days since new moon
-  zodiacSign: string;
-  distance: number;            // km from Earth
-  angularSize: number;         // Arc minutes
-  libration: {                 // Moon wobble
-    longitude: number;
-    latitude: number;
-  };
-  nextPhase: {
-    type: string;
-    date: Date;
-  };
-}
-
-export interface PlanetaryHourData {
-  current: {
-    planet: string;
-    startTime: Date;
-    endTime: Date;
-  };
-  next: {
-    planet: string;
-    startTime: Date;
-  };
-  ruler: string;               // Day ruler planet
-  dayNight: 'day' | 'night';
-}
-
-export interface RetrogradeInfo {
-  planet: string;
-  isRetrograde: boolean;
-  nextChange?: Date;
-  shadow: boolean;            // In shadow period?
-  influence: string;          // Description of influence
-}
-
-export interface SpiritualInfluence {
-  type: 'enhancing' | 'challenging' | 'neutral' | 'transformative';
-  source: string;             // What's causing this influence
-  areas: string[];           // Life areas affected
-  advice: string;            // Spiritual guidance
-  tarotCorrelation?: {
-    cards: string[];         // Related tarot cards
-    spread: string;          // Recommended spread
-  };
-}
-
-export interface OptimalActivity {
-  activity: string;
-  rating: number;            // 0-10
-  reason: string;
-  timing: {
-    start: Date;
-    peak: Date;
-    end: Date;
-  };
-  enhancers: string[];       // What enhances this activity
-  cautions: string[];        // What to be careful about
-}
-
-export interface CosmicWarning {
-  level: 'info' | 'caution' | 'warning';
-  type: string;
-  message: string;
-  duration: {
-    start: Date;
-    end: Date;
-  };
-  mitigation: string[];      // How to work with this energy
-}
+// Enums and additional cosmic weather types are re-exported from main types file
+// All CosmicInfluenceData, MoonPhaseData, etc. are already exported above
 
 // === Performance & Rendering Types ===
 
