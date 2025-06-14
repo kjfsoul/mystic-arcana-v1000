@@ -1,0 +1,579 @@
+/* Main Container */
+.main {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+/* Galaxy Background Layer */
+.galaxyLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+/* Cosmic Lobby Layout */
+.lobby {
+  position: relative;
+  z-index: 1;
+  height: calc(100vh - 80px);
+  display: grid;
+  grid-template-columns: 1.2fr auto 1.2fr;
+  grid-template-areas: "left center right";
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Side Panels */
+.sidePanel {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 75vh;
+  max-width: 450px;
+  width: 100%;
+}
+
+.leftPanel {
+  grid-area: left;
+  justify-self: end;
+}
+
+.rightPanel {
+  grid-area: right;
+  justify-self: start;
+}
+
+.sidePanel:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.panelGlass {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.centerSection {
+  grid-area: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 350px;
+  max-width: 450px;
+  min-height: 500px;
+}
+
+.leftPanel .panelGlass {
+  background: linear-gradient(
+    135deg,
+    rgba(75, 0, 130, 0.2) 0%,
+    rgba(138, 43, 226, 0.1) 100%
+  );
+  border-color: rgba(138, 43, 226, 0.3);
+}
+
+.leftPanel:hover .panelGlass {
+  background: linear-gradient(
+    135deg,
+    rgba(75, 0, 130, 0.3) 0%,
+    rgba(138, 43, 226, 0.2) 100%
+  );
+  border-color: rgba(138, 43, 226, 0.5);
+  box-shadow: 0 8px 32px rgba(138, 43, 226, 0.3);
+}
+
+.rightPanel .panelGlass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(255, 140, 0, 0.05) 100%
+  );
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.rightPanel:hover .panelGlass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(255, 140, 0, 0.1) 100%
+  );
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+}
+
+/* Center Section */
+.centerSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  background: rgba(25, 25, 112, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(72, 61, 139, 0.2);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.centerSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(72, 61, 139, 0.1) 0%,
+    transparent 50%,
+    rgba(123, 104, 238, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+/* Reading Room Styles */
+.readingRoom {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.backButton {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.backButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(-4px);
+}
+
+.roomContent {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.roomTitle {
+  font-size: 3rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.immersivePanel {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Awe View Styles */
+.aweView {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.cosmicRadar {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+}
+
+.radarCircle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radarSweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to top, transparent, #ffd700);
+  transform-origin: bottom center;
+  margin-left: -1px;
+  margin-top: -40px;
+}
+
+.radarCenter {
+  position: relative;
+  z-index: 2;
+}
+
+.currentViewEmoji {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.backButtonMinimal {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.backButtonMinimal:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.aweContent {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.viewHeader {
+  margin-bottom: 3rem;
+}
+
+.aweTitle {
+  font-size: 4rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.1em;
+}
+
+.aweDescription {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 3rem;
+}
+
+.cosmicControls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cosmicButton {
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: white;
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.cosmicButton:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.cosmicButton.active {
+  background: rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+}
+
+.cosmicButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonEmoji {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.buttonText {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.activeIndicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.transitionOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.transitionContent {
+  text-align: center;
+  color: white;
+}
+
+.transitionSpinner {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px currentColor);
+}
+
+.transitionContent p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.cosmicInsights {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+}
+
+.insightCard {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 250px;
+  text-align: center;
+  color: white;
+}
+
+.insightCard h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #ffd700;
+}
+
+.insightCard p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.insightButton {
+  background: linear-gradient(135deg, #ffd700, #ff6b6b);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.insightButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+}
+
+/* Removed duplicate impulseBuy - using cosmicInsights instead */
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .lobby {
+    grid-template-columns: 320px 1fr 320px;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .lobby {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .sidePanel {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .centerSection {
+    order: -1;
+    padding: 1rem 0;
+  }
+
+  .leftPanel {
+    order: 1;
+  }
+
+  .rightPanel {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .roomTitle {
+    font-size: 2rem;
+  }
+
+  .aweTitle {
+    font-size: 2.5rem;
+  }
+
+  .immersivePanel {
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+
+  .cosmicControls {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .cosmicButton {
+    width: 100%;
+  }
+
+  .impulseBuy {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lobby {
+    padding: 0.5rem;
+  }
+
+  .panelGlass {
+    border-radius: 1rem;
+  }
+
+  .backButton {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .immersivePanel {
+    padding: 1.5rem;
+  }
+}
+
+/* Accessibility */
+.sidePanel:focus-within {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+}
+
+.backButton:focus,
+.cosmicButton:focus,
+.impulseBuy:focus,
+.backButtonMinimal:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidePanel,
+  .cosmicButton,
+  .impulseBuy,
+  .backButton,
+  .backButtonMinimal {
+    transition: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase/client';
 import { TarotReading } from '../lib/tarot/TarotEngine';
 
 export interface DatabaseTarotReading {

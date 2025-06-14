@@ -31,23 +31,11 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
-    const resizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
     // Generate background stars
     const generateStars = () => {
-      const width = canvas.width / window.devicePixelRatio;
-      const height = canvas.height / window.devicePixelRatio;
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -130,7 +118,29 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
       }
     };
 
-    generateStars();
+    // Set canvas size and handle DPI scaling
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      
+      // Set the actual canvas size in memory
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      
+      // Scale the canvas back down using CSS
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      
+      // Scale the drawing context so everything draws at the correct size
+      ctx.scale(dpr, dpr);
+      
+      // Force regeneration after resize
+      generateStars();
+    };
+
+    // Initialize canvas
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     // Animation loop for twinkling effect
     let animationId: number;

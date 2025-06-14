@@ -303,6 +303,17 @@
     0 0 50px rgba(138, 43, 226, 0.3);
 }
 
+.signupPromptInline {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0 2rem 0;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(138, 43, 226, 0.2);
+}
+
 .promptContent {
   text-align: center;
 }

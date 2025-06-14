@@ -1,0 +1,135 @@
+.container {
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Feature Grid */
+.featureGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.featureCard {
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.featureCard:hover,
+.featureCard:focus {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+}
+
+.featureIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.featureInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.featureName {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.featureDesc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Cosmic Insight */
+.cosmicInsight {
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.insightTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 215, 0, 0.9);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.insightText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hint */
+.hint {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .featureCard {
+    padding: 1rem;
+  }
+  
+  .featureIcon {
+    font-size: 1.5rem;
+  }
+  
+  .featureName {
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility */
+.featureCard:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featureCard {
+    transition: none;
+  }
+}

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session, AuthError, AuthResponse } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase/client';
 
 interface AuthContextType {
   user: User | null;
@@ -25,10 +25,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
+      console.log('🔄 Getting initial session...');
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('❌ Error getting session:', error);
+        } else {
+          console.log('✅ Initial session loaded:', {
+            user: session?.user?.email || 'none',
+            session: session ? 'present' : 'missing',
+            accessToken: session?.access_token ? 'present' : 'missing'
+          });
+        }
+        
+        setSession(session);
+        setUser(session?.user ?? null);
+      } catch (error) {
+        console.error('❌ Unexpected error getting session:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getInitialSession();
@@ -36,6 +53,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('🔄 Auth state change:', {
+          event,
+          user: session?.user?.email || 'none',
+          session: session ? 'present' : 'missing'
+        });
+        
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);

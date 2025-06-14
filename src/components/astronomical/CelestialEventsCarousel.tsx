@@ -69,13 +69,17 @@ const mockEvents: CelestialEvent[] = [
   }
 ];
 
+interface CelestialEventsCarouselProps {
+  onEventClick?: () => void;
+}
+
 /**
  * Celestial Events Carousel Component
  * 
  * Displays current and upcoming astronomical events in an engaging carousel format.
  * Replaces the Virtual Reader panel with dynamic cosmic content.
  */
-export const CelestialEventsCarousel: React.FC = () => {
+export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = ({ onEventClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -140,6 +144,10 @@ export const CelestialEventsCarousel: React.FC = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
             style={{ '--event-color': currentEvent.color } as React.CSSProperties}
+            onClick={onEventClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && onEventClick?.()}
           >
             <div className={styles.eventIcon}>
               {currentEvent.icon}

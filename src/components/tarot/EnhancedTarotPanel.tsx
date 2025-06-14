@@ -7,6 +7,7 @@ import { TarotEngine, TarotReading, TarotCardData } from '../../lib/tarot/TarotE
 import { TarotService } from '../../services/TarotService';
 import { useAuth } from '../../contexts/AuthContext';
 import { AuthModal } from '../auth/AuthModal';
+import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
 import { useCosmicWeather } from '../../utils/cosmic-weather/useCosmicWeather';
 import styles from './EnhancedTarotPanel.module.css';
 
@@ -28,7 +29,7 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
   const [selectedSpread, setSelectedSpread] = useState<'single' | 'three-card' | 'celtic-cross'>('single');
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+  const [showUnlockModal, setShowUnlockModal] = useState(false);
   
   // Initialize tarot engine with user context
   const tarotEngine = useMemo(() => new TarotEngine({
@@ -47,7 +48,7 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
     setSelectedSpread(spreadType);
     setCurrentReading(null);
     setFlippedCards(new Set());
-    setShowSignupPrompt(false);
+    setShowUnlockModal(false);
   }, [isGuest]);
 
   const performReading = useCallback(async () => {
@@ -70,9 +71,9 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
         }
       }
       
-      // For guests, show signup prompt after single card reading
+      // For guests, show unlock modal after single card reading with interpretation
       if (isGuest && selectedSpread === 'single') {
-        setTimeout(() => setShowSignupPrompt(true), 3000);
+        setTimeout(() => setShowUnlockModal(true), 4000);
       }
     } catch (error) {
       console.error('Error performing reading:', error);
@@ -85,8 +86,8 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
     setFlippedCards(prev => new Set([...prev, cardIndex]));
   }, []);
 
-  const handleSignupPrompt = useCallback(() => {
-    setShowAuthModal(true);
+  const handleCloseUnlockModal = useCallback(() => {
+    setShowUnlockModal(false);
   }, []);
 
   return (
@@ -254,45 +255,12 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
         )}
       </motion.div>
 
-      {/* Guest Sign-up Prompt */}
-      <AnimatePresence>
-        {showSignupPrompt && isGuest && (
-          <motion.div
-            className={styles.signupPrompt}
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.8 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          >
-            <div className={styles.promptContent}>
-              <h3>✨ Unlock Your Full Journey ✨</h3>
-              <p>
-                You&apos;ve experienced the magic of tarot! Sign up to:
-              </p>
-              <ul>
-                <li>🎴 Access all spread types</li>
-                <li>💾 Save your readings</li>
-                <li>🌟 Get personalized interpretations</li>
-                <li>🔮 Connect with virtual readers</li>
-              </ul>
-              <div className={styles.promptActions}>
-                <button
-                  className={styles.signupButton}
-                  onClick={handleSignupPrompt}
-                >
-                  Begin Your Journey
-                </button>
-                <button
-                  className={styles.dismissButton}
-                  onClick={() => setShowSignupPrompt(false)}
-                >
-                  Continue as Guest
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Unlock Journey Modal - positioned below reading content */}
+      <UnlockJourneyModal
+        isVisible={showUnlockModal}
+        onClose={handleCloseUnlockModal}
+        type="tarot"
+      />
 
       {/* Auth Modal */}
       <AuthModal

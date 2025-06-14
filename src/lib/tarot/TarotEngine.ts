@@ -1,3 +1,5 @@
+import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
+
 export interface TarotCardData {
   id: string;
   name: string;
@@ -30,52 +32,6 @@ export interface TarotEngineOptions {
   cosmicInfluence?: unknown;
 }
 
-// Mock tarot deck for MVP
-const MOCK_TAROT_DECK: TarotCardData[] = [
-  {
-    id: 'fool',
-    name: 'The Fool',
-    arcana: 'major',
-    number: 0,
-    frontImage: '/images/tarot/major/fool.svg',
-    backImage: '/images/tarot/card-back.svg',
-    meaning: {
-      upright: 'New beginnings, innocence, spontaneity, free spirit',
-      reversed: 'Holding back, recklessness, risk-taking',
-      keywords: ['beginning', 'journey', 'innocence', 'faith']
-    },
-    description: 'The Fool represents new beginnings and having faith in the future.'
-  },
-  {
-    id: 'magician',
-    name: 'The Magician',
-    arcana: 'major',
-    number: 1,
-    frontImage: '/images/tarot/major/magician.svg',
-    backImage: '/images/tarot/card-back.svg',
-    meaning: {
-      upright: 'Manifestation, resourcefulness, power, inspired action',
-      reversed: 'Manipulation, poor planning, untapped talents',
-      keywords: ['manifestation', 'power', 'skill', 'concentration']
-    },
-    description: 'The Magician represents the power to manifest your desires through focused will.'
-  },
-  {
-    id: 'high-priestess',
-    name: 'The High Priestess',
-    arcana: 'major',
-    number: 2,
-    frontImage: '/images/tarot/major/high-priestess.svg',
-    backImage: '/images/tarot/card-back.svg',
-    meaning: {
-      upright: 'Intuition, sacred knowledge, divine feminine, subconscious mind',
-      reversed: 'Secrets, disconnected from intuition, withdrawal',
-      keywords: ['intuition', 'mystery', 'subconscious', 'inner knowing']
-    },
-    description: 'The High Priestess represents intuitive wisdom and the mysteries of the subconscious.'
-  }
-];
-
 // Mock interpretations for different spreads
 const MOCK_INTERPRETATIONS = {
   single: [
@@ -99,7 +55,7 @@ export class TarotEngine {
   private options: TarotEngineOptions;
 
   constructor(options: TarotEngineOptions = { isGuest: false }) {
-    this.deck = [...MOCK_TAROT_DECK];
+    this.deck = [...RIDER_WAITE_DECK];
     this.options = options;
   }
 

@@ -53,6 +53,15 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.eventCard:hover {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--event-color, rgba(255, 255, 255, 0.4));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
 }
 
 .eventCard::before {
