@@ -56,7 +56,7 @@ export default function DebugStarsPage() {
 
       // Draw stars
       let drawnCount = 0;
-      stars.forEach((star, index) => {
+      stars.forEach((star) => {
         // Only draw stars brighter than magnitude 6
         if (star.magnitude <= 6) {
           // Calculate size based on magnitude (brighter = larger)

@@ -112,7 +112,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
     };
 
     animationRef.current = requestAnimationFrame(render);
-  }, []);
+  }, [convertToRendererStar]);
 
   /**
    * Initialize the high-performance renderer
@@ -216,7 +216,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
     } finally {
       setIsLoading(false);
     }
-  }, [useRealStars, location, finalRenderConfig]);
+  }, [useRealStars, location, finalRenderConfig, convertToRendererStar, startRenderLoop]);
 
   /**
    * Generate procedural stars for testing
