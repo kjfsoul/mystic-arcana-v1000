@@ -117,7 +117,7 @@ export class AstronomicalEngine {
     time: Date
   ): ScreenCoordinates {
     // Check cache first
-    const cacheKey = `${ra}_${dec}_${location.lat}_${location.lon}_${time.getTime()}`;
+    const cacheKey = `${ra}_${dec}_${location.latitude}_${location.longitude}_${time.getTime()}`;
     const cached = this.coordinateCache.get(cacheKey);
     if (cached && Date.now() - this.lastUpdateTime < this.config.cacheTimeout!) {
       this.renderStats.cacheHits++;
@@ -518,7 +518,7 @@ export class AstronomicalEngine {
     time: Date
   ): HorizontalCoordinates {
     // Calculate local sidereal time
-    const lst = this.calculateLocalSiderealTime(location.lon, time);
+    const lst = this.calculateLocalSiderealTime(location.longitude, time);
 
     // Hour angle
     const ha = lst - celestial.ra;
@@ -526,7 +526,7 @@ export class AstronomicalEngine {
     // Convert to radians
     const haRad = ha * Math.PI / 180;
     const decRad = celestial.dec * Math.PI / 180;
-    const latRad = location.lat * Math.PI / 180;
+    const latRad = location.latitude * Math.PI / 180;
 
     // Calculate altitude
     const sinAlt = Math.sin(decRad) * Math.sin(latRad) +
