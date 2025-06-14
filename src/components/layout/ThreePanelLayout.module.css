@@ -179,6 +179,14 @@
   height: 100%;
 }
 
+/* Authentication */
+.authContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 300;
+}
+
 /* Quick Actions */
 .quickActions {
   position: fixed;
@@ -272,14 +280,19 @@
   .desktopLayout {
     display: none;
   }
-  
+
+  .authContainer {
+    top: 10px;
+    right: 10px;
+  }
+
   .quickActions {
-    top: 20px;
+    top: 70px;
     right: 20px;
     transform: none;
     flex-direction: row;
   }
-  
+
   .quickButton {
     width: 40px;
     height: 40px;
@@ -292,18 +305,23 @@
     top: 10px;
     left: 10px;
   }
-  
+
   .weatherIndicator {
     padding: 6px 12px;
     font-size: 0.75rem;
   }
-  
-  .quickActions {
+
+  .authContainer {
     top: 10px;
+    right: 10px;
+  }
+
+  .quickActions {
+    top: 60px;
     right: 10px;
     gap: 8px;
   }
-  
+
   .quickButton {
     width: 36px;
     height: 36px;

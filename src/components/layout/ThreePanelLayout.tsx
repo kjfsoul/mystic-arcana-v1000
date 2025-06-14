@@ -6,6 +6,7 @@ import { ReaderPanel } from '../panels/ReaderPanel';
 import { AstrologyPanel } from '../panels/AstrologyPanel';
 import { CosmicBackground } from '../effects/CosmicBackground';
 import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
+import { AuthButton } from '../auth/AuthButton';
 import styles from './ThreePanelLayout.module.css';
 
 export type ActivePanel = 'tarot' | 'reader' | 'astrology';
@@ -216,23 +217,28 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
           )}
         </main>
 
+        {/* Authentication Button */}
+        <div className={styles.authContainer}>
+          <AuthButton />
+        </div>
+
         {/* Quick Actions Floating Menu */}
         <div className={styles.quickActions}>
-          <button 
+          <button
             className={styles.quickButton}
             aria-label="Quick Draw - Get an instant tarot card"
             title="Quick Draw (Ctrl+Q)"
           >
             🎴
           </button>
-          <button 
+          <button
             className={styles.quickButton}
             aria-label="Toggle Night Mode"
             title="Night Mode (Ctrl+N)"
           >
             🌙
           </button>
-          <button 
+          <button
             className={styles.quickButton}
             aria-label="Open Settings"
             title="Settings (Ctrl+,)"
