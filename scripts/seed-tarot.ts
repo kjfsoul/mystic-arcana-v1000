@@ -483,7 +483,7 @@ const COMPLETE_RIDER_WAITE_DECK = [
     arcana_type: 'minor',
     suit: 'pentacles',
     meaning_upright: 'Hard work, productivity, routine, conservatism',
-    meaning_reversed: 'Self-discipline, boredom, feeling 'stuck', perfectionism',
+    meaning_reversed: 'Self-discipline, boredom, feeling stuck, perfectionism',
     image_url: '/tarot/deck-rider-waite/minor/knight-pentacles.jpg',
     keywords: ['hard work', 'productivity', 'routine', 'conservatism']
   },
