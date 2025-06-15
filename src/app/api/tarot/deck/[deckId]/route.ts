@@ -3,28 +3,45 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * GET /api/tarot/deck/[deckId]
- * 
+ *
  * Fetches all cards for a given deck from the database.
- * This endpoint is used by the Tarot Reading Room to get card data dynamically.
- * 
+ * This endpoint serves the Tarot Data Engine by providing dynamic card data
+ * to replace hardcoded arrays in the frontend.
+ *
+ * Features:
+ * - Public access (no authentication required)
+ * - Data transformation to match frontend TarotCardData interface
+ * - Comprehensive error handling
+ * - Performance optimized with single query
+ * - Statistics included for frontend consumption
+ *
  * @param deckId - UUID of the deck to fetch cards for
- * @returns JSON response with deck info and all cards
+ * @returns JSON response with deck info, all cards, and statistics
  */
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ deckId: string }> }
 ) {
+  const startTime = Date.now();
+
   try {
     const { deckId } = await params;
-    
+
     // Validate deck ID format (basic UUID check)
     if (!deckId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(deckId)) {
+      console.warn(`[Tarot API] Invalid deck ID format: ${deckId}`);
       return NextResponse.json(
-        { error: 'Invalid deck ID format' },
+        {
+          error: 'Invalid deck ID format',
+          message: 'Deck ID must be a valid UUID',
+          code: 'INVALID_DECK_ID'
+        },
         { status: 400 }
       );
     }
+
+    console.log(`[Tarot API] Fetching deck: ${deckId}`);
 
     const supabase = await createClient();
 
@@ -37,9 +54,14 @@ export async function GET(
       .single();
 
     if (deckError || !deck) {
-      console.error('Deck fetch error:', deckError);
+      console.error(`[Tarot API] Deck fetch error for ${deckId}:`, deckError);
       return NextResponse.json(
-        { error: 'Deck not found or inactive' },
+        {
+          error: 'Deck not found or inactive',
+          message: 'The requested deck does not exist or has been deactivated',
+          code: 'DECK_NOT_FOUND',
+          deckId
+        },
         { status: 404 }
       );
     }
@@ -63,9 +85,14 @@ export async function GET(
       .order('card_number', { ascending: true });
 
     if (cardsError) {
-      console.error('Cards fetch error:', cardsError);
+      console.error(`[Tarot API] Cards fetch error for deck ${deckId}:`, cardsError);
       return NextResponse.json(
-        { error: 'Failed to fetch cards' },
+        {
+          error: 'Failed to fetch cards',
+          message: 'Unable to retrieve cards for this deck',
+          code: 'CARDS_FETCH_ERROR',
+          deckId
+        },
         { status: 500 }
       );
     }
@@ -112,12 +139,26 @@ export async function GET(
       }
     };
 
-    return NextResponse.json(response);
+    const responseTime = Date.now() - startTime;
+    console.log(`[Tarot API] Successfully fetched deck ${deckId} with ${transformedCards.length} cards in ${responseTime}ms`);
+
+    return NextResponse.json(response, {
+      headers: {
+        'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400', // Cache for 1 hour
+        'X-Response-Time': `${responseTime}ms`,
+        'X-Cards-Count': transformedCards.length.toString()
+      }
+    });
 
   } catch (error) {
-    console.error('Unexpected error in deck API:', error);
+    const responseTime = Date.now() - startTime;
+    console.error(`[Tarot API] Unexpected error in deck API (${responseTime}ms):`, error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      {
+        error: 'Internal server error',
+        message: 'An unexpected error occurred while processing your request',
+        code: 'INTERNAL_ERROR'
+      },
       { status: 500 }
     );
   }

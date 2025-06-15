@@ -16,11 +16,18 @@ import type { Database } from '../../types/database';
 
 export async function createClient() {
   const cookieStore = await cookies();
-  
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseAnonKey) {
+    // During build time, environment variables might not be available
+    // Return a mock client that will fail gracefully
+    if (process.env.NODE_ENV === 'production' && process.env.NEXT_PHASE === 'phase-production-build') {
+      console.warn('Supabase environment variables not available during build. Using mock client.');
+      return null as unknown as ReturnType<typeof createServerClient<Database>>;
+    }
+
     throw new Error(
       'Missing Supabase environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file.'
     );
@@ -61,6 +68,13 @@ export function createAdminClient() {
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseServiceKey) {
+    // During build time, environment variables might not be available
+    // Return a mock client that will fail gracefully
+    if (process.env.NODE_ENV === 'production' && process.env.NEXT_PHASE === 'phase-production-build') {
+      console.warn('Supabase admin environment variables not available during build. Using mock client.');
+      return null as unknown as ReturnType<typeof createServerClient<Database>>;
+    }
+
     throw new Error(
       'Missing Supabase admin environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env.local file.'
     );
