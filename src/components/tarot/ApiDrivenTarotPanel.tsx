@@ -6,7 +6,7 @@ import { TarotEngine, TarotReading } from '../../lib/tarot/TarotEngine';
 import { TarotCard } from './TarotCard';
 import { useTarotDeck } from '../../hooks/useTarotDeck';
 import { TarotService } from '../../services/TarotService';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../lib/auth/LocalAuthProvider';
 import styles from './ApiDrivenTarotPanel.module.css';
 
 interface ApiDrivenTarotPanelProps {

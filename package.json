@@ -17,7 +17,8 @@
     "content:validate": "node scripts/content_generation_monitor.js",
     "seed:tarot": "npx tsx scripts/seed-tarot.ts",
     "test:tarot": "npx tsx scripts/test-tarot-api.ts",
-    "setup:tarot": "npx tsx scripts/setup-tarot-engine.ts"
+    "setup:tarot": "npx tsx scripts/setup-tarot-engine.ts",
+    "setup:local": "npx tsx scripts/setup-local-tarot.ts"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",

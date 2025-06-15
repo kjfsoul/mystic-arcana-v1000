@@ -7,7 +7,7 @@ import { ApiDrivenTarotPanel } from '../tarot/ApiDrivenTarotPanel';
 import { AstrologyPanel } from '../panels/AstrologyPanel';
 import { CelestialEventsCarousel } from '../astronomical/CelestialEventsCarousel';
 import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../lib/auth/LocalAuthProvider';
 import styles from './EnhancedHomepage.module.css';
 
 export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
