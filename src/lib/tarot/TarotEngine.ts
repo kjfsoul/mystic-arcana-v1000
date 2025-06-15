@@ -1,4 +1,5 @@
-import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
+// Note: RIDER_WAITE_DECK import removed - now using API-driven data
+// import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
 
 export interface TarotCardData {
   id: string;
@@ -30,6 +31,7 @@ export interface TarotReading {
 export interface TarotEngineOptions {
   isGuest: boolean;
   cosmicInfluence?: unknown;
+  deckId?: string; // Allow custom deck selection
 }
 
 // Mock interpretations for different spreads
@@ -53,10 +55,42 @@ const MOCK_INTERPRETATIONS = {
 export class TarotEngine {
   private deck: TarotCardData[];
   private options: TarotEngineOptions;
+  private deckLoaded: boolean = false;
 
   constructor(options: TarotEngineOptions = { isGuest: false }) {
-    this.deck = [...RIDER_WAITE_DECK];
+    this.deck = [];
     this.options = options;
+    // Deck will be loaded asynchronously via loadDeck()
+  }
+
+  /**
+   * Load deck data from API
+   */
+  async loadDeck(): Promise<void> {
+    if (this.deckLoaded && this.deck.length > 0) {
+      return; // Already loaded
+    }
+
+    try {
+      const deckId = this.options.deckId || '00000000-0000-0000-0000-000000000001';
+      const response = await fetch(`/api/tarot/deck/${deckId}`);
+
+      if (!response.ok) {
+        throw new Error(`Failed to load deck: ${response.status}`);
+      }
+
+      const data = await response.json();
+      this.deck = data.cards || [];
+      this.deckLoaded = true;
+
+      console.log(`✅ TarotEngine loaded ${this.deck.length} cards`);
+    } catch (error) {
+      console.error('❌ Failed to load tarot deck:', error);
+      // Fallback to empty deck - components should handle this gracefully
+      this.deck = [];
+      this.deckLoaded = false;
+      throw error;
+    }
   }
 
   /**
@@ -74,9 +108,15 @@ export class TarotEngine {
   /**
    * Draw cards for a specific spread type
    */
-  drawCards(spreadType: 'single' | 'three-card' | 'celtic-cross'): TarotCardData[] {
+  async drawCards(spreadType: 'single' | 'three-card' | 'celtic-cross'): Promise<TarotCardData[]> {
+    await this.loadDeck(); // Ensure deck is loaded
+
+    if (this.deck.length === 0) {
+      throw new Error('No cards available - deck failed to load');
+    }
+
     const shuffled = this.shuffleDeck();
-    
+
     switch (spreadType) {
       case 'single':
         return [shuffled[0]];
@@ -149,7 +189,7 @@ export class TarotEngine {
     // Simulate shuffling delay for dramatic effect
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    const cards = this.drawCards(spreadType);
+    const cards = await this.drawCards(spreadType); // Now async
     const positions = this.getSpreadPositions(spreadType);
     const interpretation = this.generateInterpretation(cards, spreadType, positions);
 
@@ -196,8 +236,17 @@ export class TarotEngine {
   /**
    * Get a specific card by ID
    */
-  getCard(cardId: string): TarotCardData | undefined {
+  async getCard(cardId: string): Promise<TarotCardData | undefined> {
+    await this.loadDeck(); // Ensure deck is loaded
     return this.deck.find(card => card.id === cardId);
+  }
+
+  /**
+   * Get all cards in the deck
+   */
+  async getAllCards(): Promise<TarotCardData[]> {
+    await this.loadDeck(); // Ensure deck is loaded
+    return [...this.deck];
   }
 
   /**
