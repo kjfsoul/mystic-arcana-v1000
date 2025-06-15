@@ -156,7 +156,7 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           {availableSpreads.map((spread) => (
             <button
               key={spread.id}
-              onClick={() => handleSpreadSelection(spread.id as any)}
+              onClick={() => handleSpreadSelection(spread.id as 'single' | 'three-card' | 'celtic-cross')}
               className={`${styles.spreadButton} ${
                 selectedSpread === spread.id ? styles.active : ''
               } ${

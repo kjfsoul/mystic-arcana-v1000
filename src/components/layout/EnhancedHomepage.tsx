@@ -29,7 +29,6 @@ interface EnhancedHomepageProps {
 export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
   className = ''
 }) => {
-  const { user, isGuest } = useAuth();
   const [readingMode, setReadingMode] = useState<ReadingMode>('home');
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.8);
 
@@ -210,7 +209,7 @@ interface TarotRoomProps {
   onBack: () => void;
 }
 
-const TarotRoom: React.FC<TarotRoomProps> = ({ onBack }) => {
+const TarotRoom: React.FC<TarotRoomProps> = () => {
   return (
     <motion.div
       className={styles.readingRoom}
@@ -239,7 +238,7 @@ interface AstrologyRoomProps {
   onBack: () => void;
 }
 
-const AstrologyRoom: React.FC<AstrologyRoomProps> = ({ onBack }) => {
+const AstrologyRoom: React.FC<AstrologyRoomProps> = () => {
   return (
     <motion.div
       className={styles.readingRoom}
