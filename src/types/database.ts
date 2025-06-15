@@ -21,6 +21,79 @@ export interface Database {
           updated_at?: string;
         };
       };
+      decks: {
+        Row: {
+          id: string;
+          name: string;
+          description: string | null;
+          image_url: string | null;
+          is_active: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          description?: string | null;
+          image_url?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          description?: string | null;
+          image_url?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      cards: {
+        Row: {
+          id: string;
+          deck_id: string;
+          name: string;
+          card_number: number | null;
+          suit: string | null;
+          arcana_type: 'major' | 'minor';
+          meaning_upright: string;
+          meaning_reversed: string;
+          image_url: string | null;
+          keywords: string[] | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          deck_id: string;
+          name: string;
+          card_number?: number | null;
+          suit?: string | null;
+          arcana_type: 'major' | 'minor';
+          meaning_upright: string;
+          meaning_reversed: string;
+          image_url?: string | null;
+          keywords?: string[] | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          deck_id?: string;
+          name?: string;
+          card_number?: number | null;
+          suit?: string | null;
+          arcana_type?: 'major' | 'minor';
+          meaning_upright?: string;
+          meaning_reversed?: string;
+          image_url?: string | null;
+          keywords?: string[] | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
       user_profiles: {
         Row: {
           id: string;
