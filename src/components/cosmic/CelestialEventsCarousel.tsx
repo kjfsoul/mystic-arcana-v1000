@@ -151,7 +151,7 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
                 <span className={styles.zodiacLabel}>Affects:</span>
                 {events[currentIndex].zodiacSigns.map((sign, index) => (
                   <span key={sign} className={styles.zodiacSign}>
-                    {sign}{index < events[currentIndex].zodiacSigns.length - 1 ? ', ' : ''}
+                    {sign}{index < events[currentIndex].zodiacSigns!.length - 1 ? ', ' : ''}
                   </span>
                 ))}
               </div>
