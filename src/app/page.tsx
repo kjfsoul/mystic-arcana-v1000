@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../components/effects/GalaxyBackground/GalaxyBackground';
 import { TarotZonePreview } from '../components/panels/TarotZonePreview';
 import { AstrologyZonePreview } from '../components/panels/AstrologyZonePreview';
-import { CosmicWeather } from '../components/cosmic/CosmicWeather';
+import { CelestialEventsCarousel } from '../components/cosmic/CelestialEventsCarousel';
 import { EnhancedTarotPanel } from '../components/tarot/EnhancedTarotPanel';
 import { AstrologyReadingRoom } from '../components/astrology/AstrologyReadingRoom';
 import { Header } from '../components/layout/Header';
@@ -144,7 +144,7 @@ const CosmicLobby: React.FC<{
         exit={{ y: -50, opacity: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <CosmicWeather onClick={onEnterAweView} />
+        <CelestialEventsCarousel onClick={onEnterAweView} />
       </motion.section>
 
       {/* Right Panel - Astrology Zone Preview */}
@@ -335,16 +335,23 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
-          {Object.entries(viewConfig).map(([viewKey, config]) => (
+          {Object.entries(viewConfig).map(([viewKey, config], index) => (
             <motion.button
               key={viewKey}
               className={`${styles.cosmicButton} ${
                 currentView === viewKey ? styles.active : ''
               } ${isTransitioning ? styles.disabled : ''}`}
               onClick={() => handleViewChange(viewKey as 'earth' | 'moon' | 'mars' | 'deep-space')}
-              whileHover={!isTransitioning ? { scale: 1.05, y: -2 } : {}}
+              whileHover={!isTransitioning ? { 
+                scale: 1.05, 
+                y: -2,
+                boxShadow: '0 12px 40px rgba(102, 126, 234, 0.3)'
+              } : {}}
               whileTap={!isTransitioning ? { scale: 0.95 } : {}}
               disabled={isTransitioning}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + (0.1 * index) }}
             >
               <span className={styles.buttonEmoji}>{config.emoji}</span>
               <span className={styles.buttonText}>
