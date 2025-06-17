@@ -14,7 +14,10 @@
     "setup:background": "chmod +x .cursor/install.sh && ./.cursor/install.sh",
     "supabase:start": "supabase start",
     "supabase:stop": "supabase stop",
-    "content:validate": "node scripts/content_generation_monitor.js"
+    "content:validate": "node scripts/content_generation_monitor.js",
+    "seed:tarot": "npx tsx scripts/seed-tarot.ts",
+    "test:tarot": "npx tsx scripts/test-tarot-api.ts",
+    "setup:tarot": "npx tsx scripts/setup-tarot-engine.ts"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -38,6 +41,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "tailwindcss": "^4",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

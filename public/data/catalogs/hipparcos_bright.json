@@ -1,0 +1,62 @@
+[
+  {
+    "id": "HIP1",
+    "name": "Alpheratz",
+    "ra": 2.096916,
+    "dec": 29.090431,
+    "magnitude": 2.06,
+    "colorIndex": 0.13,
+    "spectralClass": "B8IVpMnHg",
+    "properMotion": { "ra": 135.68, "dec": -162.95 },
+    "parallax": 33.62,
+    "constellation": "Andromeda"
+  },
+  {
+    "id": "HIP2",
+    "name": "Caph",
+    "ra": 2.294583,
+    "dec": 59.149722,
+    "magnitude": 2.27,
+    "colorIndex": 0.59,
+    "spectralClass": "F2III-IV",
+    "properMotion": { "ra": 523.39, "dec": -179.77 },
+    "parallax": 59.58,
+    "constellation": "Cassiopeia"
+  },
+  {
+    "id": "HIP3",
+    "name": "Algenib",
+    "ra": 0.220833,
+    "dec": 15.183611,
+    "magnitude": 2.83,
+    "colorIndex": -0.05,
+    "spectralClass": "B2IV",
+    "properMotion": { "ra": -8.24, "dec": -9.91 },
+    "parallax": 9.19,
+    "constellation": "Pegasus"
+  },
+  {
+    "id": "HIP4",
+    "name": "Ankaa",
+    "ra": 0.438056,
+    "dec": -42.306111,
+    "magnitude": 2.39,
+    "colorIndex": 1.09,
+    "spectralClass": "K0III",
+    "properMotion": { "ra": 232.76, "dec": -353.62 },
+    "parallax": 42.11,
+    "constellation": "Phoenix"
+  },
+  {
+    "id": "HIP5",
+    "name": "Schedar",
+    "ra": 10.126944,
+    "dec": 56.537222,
+    "magnitude": 2.23,
+    "colorIndex": 1.17,
+    "spectralClass": "K0IIIa",
+    "properMotion": { "ra": 50.36, "dec": -32.17 },
+    "parallax": 14.27,
+    "constellation": "Cassiopeia"
+  }
+]

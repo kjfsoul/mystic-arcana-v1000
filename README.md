@@ -74,13 +74,11 @@ Mystic Arcana is more than an app—it’s a digital sanctuary. Users can receiv
 
 ## Deployment
 
-* **Netlify** (primary):
+* **Vercel** (primary):
 
-  * Deploy via Git integration or CLI using your connected Netlify account.
+  * Deploy via Git integration or CLI using your connected Vercel account.
   * Main branch deploys to production; preview branches supported.
-* **Vercel** (optional):
-
-  * For preview builds or alternative deployment scenarios.
+  * Automatic deployments from GitHub repository.
 
 ## Documentation
 
