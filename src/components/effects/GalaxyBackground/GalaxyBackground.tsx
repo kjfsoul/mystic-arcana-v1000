@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
+import { PlanetaryOverlay } from '../../cosmic/PlanetaryOverlay';
+import { AsteroidField } from '../../cosmic/AsteroidField';
 import styles from './GalaxyBackground.module.css';
 
 interface GalaxyBackgroundProps {
@@ -8,6 +10,12 @@ interface GalaxyBackgroundProps {
   intensity?: number; // 0-1, controls brightness
   showMilkyWay?: boolean;
   animated?: boolean;
+  showPlanets?: boolean;
+  showAsteroids?: boolean;
+  showLunarPhase?: boolean;
+  showSolarWind?: boolean;
+  asteroidDensity?: 'low' | 'medium' | 'high';
+  interactive?: boolean;
 }
 
 /**
@@ -20,7 +28,13 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
   className = '',
   intensity = 0.7,
   showMilkyWay = true,
-  animated = true
+  animated = true,
+  showPlanets = true,
+  showAsteroids = false,
+  showLunarPhase = true,
+  showSolarWind = true,
+  asteroidDensity = 'medium',
+  interactive = false
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -199,6 +213,30 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
       {/* Animated cosmic dust overlay */}
       {animated && (
         <div className={styles.cosmicDust} style={{ opacity: intensity * 0.3 }} />
+      )}
+
+      {/* Real-time Planetary Overlay */}
+      {showPlanets && (
+        <PlanetaryOverlay
+          className={styles.planetaryOverlay}
+          showPlanets={showPlanets}
+          showLunarPhase={showLunarPhase}
+          showSolarWind={showSolarWind}
+          showTrails={animated}
+          intensity={intensity}
+        />
+      )}
+
+      {/* Asteroid Field */}
+      {showAsteroids && (
+        <AsteroidField
+          className={styles.asteroidField}
+          density={asteroidDensity}
+          animated={animated}
+          interactive={interactive}
+          showLabels={interactive}
+          intensity={intensity}
+        />
       )}
     </div>
   );
