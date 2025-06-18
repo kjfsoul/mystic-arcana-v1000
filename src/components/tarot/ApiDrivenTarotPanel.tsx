@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { TarotEngine, TarotReading } from '../../lib/tarot/TarotEngine';
-import { TarotCard } from './TarotCard';
-import { useTarotDeck } from '../../hooks/useTarotDeck';
-import { TarotService } from '../../services/TarotService';
-import { useAuth } from '../../contexts/AuthContext';
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useCallback, useMemo, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { useTarotDeck } from "../../hooks/useTarotDeck";
+import { TarotEngine, TarotReading } from "../../lib/tarot/TarotEngine";
+import { TarotService } from "../../services/TarotService";
 import styles from './ApiDrivenTarotPanel.module.css';
+import { TarotCard } from "./TarotCard";
 
 interface ApiDrivenTarotPanelProps {
   className?: string;

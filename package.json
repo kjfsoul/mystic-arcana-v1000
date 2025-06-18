@@ -17,7 +17,8 @@
     "content:validate": "node scripts/content_generation_monitor.js",
     "seed:tarot": "npx tsx scripts/seed-tarot.ts",
     "test:tarot": "npx tsx scripts/test-tarot-api.ts",
-    "setup:tarot": "npx tsx scripts/setup-tarot-engine.ts"
+    "setup:tarot": "npx tsx scripts/setup-tarot-engine.ts",
+    "setup:local": "npx tsx scripts/setup-local-tarot.ts"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -26,11 +27,14 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.0",
+    "@vercel/analytics": "^1.5.0",
     "antd": "^5.25.3",
     "framer-motion": "^12.18.1",
     "next": "15.3.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^9.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

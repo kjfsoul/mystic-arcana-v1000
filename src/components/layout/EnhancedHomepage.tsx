@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { AccessibilityProvider } from "../accessibility/AccessibilityProvider";
+import { CelestialEventsCarousel } from "../astronomical/CelestialEventsCarousel";
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
-import { ApiDrivenTarotPanel } from '../tarot/ApiDrivenTarotPanel';
-import { AstrologyPanel } from '../panels/AstrologyPanel';
-import { CelestialEventsCarousel } from '../astronomical/CelestialEventsCarousel';
-import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
-import { useAuth } from '../../contexts/AuthContext';
+import { AstrologyPanel } from "../panels/AstrologyPanel";
+import { ApiDrivenTarotPanel } from "../tarot/ApiDrivenTarotPanel";
 import styles from './EnhancedHomepage.module.css';
 
 export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
