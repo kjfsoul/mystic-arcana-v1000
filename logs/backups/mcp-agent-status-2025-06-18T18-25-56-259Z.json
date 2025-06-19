@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-06-18T18:22:09.666Z",
+    "project": "Mystic Arcana",
+    "environment": "development",
+    "reportingAgent": "Augment Agent",
+    "targetAgents": [
+      "Augment Agent",
+      "Claude Code"
+    ],
+    "logLevel": "INFO"
+  },
+  "mcpServers": {
+    "status": "DEGRADED",
+    "lastCheck": "2025-01-14T12:00:00Z",
+    "totalConfigured": 3,
+    "totalWorking": 0,
+    "totalBroken": 3,
+    "servers": {
+      "filesystem": {
+        "status": "BROKEN",
+        "command": "mcp-server-filesystem",
+        "error": "Command not found in PATH",
+        "lastWorking": null,
+        "repairAttempts": 0,
+        "priority": "HIGH",
+        "capabilities": [
+          "file_operations",
+          "directory_listing",
+          "file_search"
+        ],
+        "dockerAlternative": "modelcontextprotocol/filesystem-server:latest"
+      },
+      "git": {
+        "status": "BROKEN",
+        "command": "mcp-server-git",
+        "error": "Command not found in PATH",
+        "lastWorking": null,
+        "repairAttempts": 0,
+        "priority": "HIGH",
+        "capabilities": [
+          "git_operations",
+          "commit_history",
+          "branch_management"
+        ],
+        "dockerAlternative": "modelcontextprotocol/git-server:latest"
+      },
+      "memory": {
+        "status": "BROKEN",
+        "command": "mcp-server-memory",
+        "error": "Command not found in PATH",
+        "lastWorking": null,
+        "repairAttempts": 0,
+        "priority": "MEDIUM",
+        "capabilities": [
+          "persistent_memory",
+          "context_storage",
+          "session_management"
+        ],
+        "dockerAlternative": "modelcontextprotocol/memory-server:latest"
+      }
+    },
+    "repairStrategies": {
+      "immediate": [
+        "Install Docker MCP toolkit when available",
+        "Use Docker Compose for MCP server orchestration",
+        "Fallback to npm global installation",
+        "Create HTTP proxy endpoints for containerized servers"
+      ],
+      "recommended": [
+        "Migrate to Docker-based MCP servers",
+        "Implement health checks and auto-restart",
+        "Add monitoring dashboards",
+        "Set up alerting for server failures"
+      ]
+    }
+  },
+  "registeredAgents": {
+    "status": "ACTIVE",
+    "lastCheck": "2025-01-14T12:00:00Z",
+    "totalAgents": 9,
+    "activeAgents": 6,
+    "completedAgents": 1,
+    "inactiveAgents": 2,
+    "agents": {
+      "mysticArcana": {
+        "id": "mystic-arcana-primary",
+        "status": "ACTIVE",
+        "type": "tarot-astrology",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "tarot_reading",
+          "astrology_chart_interpretation",
+          "daily_horoscope"
+        ],
+        "issues": []
+      },
+      "birthdayGen": {
+        "id": "birthday-gen-agent",
+        "status": "ACTIVE",
+        "type": "birthday-astrology",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "birthday_reading",
+          "solar_return_chart",
+          "yearly_forecast"
+        ],
+        "issues": []
+      },
+      "edmShuffle": {
+        "id": "edm-shuffle-mystic",
+        "status": "ACTIVE",
+        "type": "music-spirituality",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "music_vibe_reading",
+          "festival_astrology",
+          "crowd_energy_prediction"
+        ],
+        "issues": []
+      },
+      "animatedBackground": {
+        "id": "animated-background-agent",
+        "status": "ACTIVE",
+        "type": "visual-effects",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "cosmic_weather",
+          "shader_compilation",
+          "particle_systems"
+        ],
+        "issues": []
+      },
+      "accessibilityChecker": {
+        "id": "accessibility-audit-agent",
+        "status": "ACTIVE",
+        "type": "compliance-testing",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "wcag_auditing",
+          "lighthouse_testing",
+          "aria_validation"
+        ],
+        "issues": []
+      },
+      "tarotUxTester": {
+        "id": "tarot-ux-optimizer",
+        "status": "ACTIVE",
+        "type": "ab-testing",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "spread_optimization",
+          "interaction_tracking",
+          "conversion_analysis"
+        ],
+        "issues": []
+      },
+      "personaAnimator": {
+        "id": "persona-animation-engine",
+        "status": "ACTIVE",
+        "type": "avatar-animation",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "emotion_synthesis",
+          "gesture_generation",
+          "personality_evolution"
+        ],
+        "issues": []
+      },
+      "competitiveAnalyst": {
+        "id": "competitive-research-agent",
+        "status": "ACTIVE",
+        "type": "research-analysis",
+        "lastActivity": "2025-01-08T00:00:00Z",
+        "health": "GOOD",
+        "capabilities": [
+          "competitor_monitoring",
+          "ux_benchmarking",
+          "trend_analysis"
+        ],
+        "issues": []
+      },
+      "astronomicalVisualization": {
+        "id": "astronomical-visualization-agent",
+        "status": "COMPLETED",
+        "type": "webgl-rendering",
+        "lastActivity": "2024-12-19T20:30:00Z",
+        "health": "EXCELLENT",
+        "capabilities": [
+          "webgl2_star_rendering",
+          "galaxy_background_generation",
+          "performance_optimization"
+        ],
+        "achievements": {
+          "stars_rendered": 100000,
+          "target_fps": 60,
+          "achieved_fps": 60,
+          "critical_bugs_fixed": 4
+        },
+        "issues": []
+      }
+    }
+  },
+  "systemHealth": {
+    "overall": "CRITICAL",
+    "mcpConnectivity": "BROKEN",
+    "agentRegistry": "HEALTHY",
+    "dockerAvailability": "UNKNOWN",
+    "criticalIssues": [
+      {
+        "id": "mcp-servers-offline",
+        "severity": "HIGH",
+        "description": "All MCP servers are offline due to missing installations",
+        "impact": "Limited context and tool capabilities",
+        "recommendedAction": "Install Docker MCP toolkit or npm packages"
+      },
+      {
+        "id": "docker-npm-error",
+        "severity": "HIGH",
+        "description": "Docker containers failing due to npm install errors",
+        "impact": "MCP servers cannot start in Docker containers",
+        "recommendedAction": "Use npm global installation as fallback",
+        "timestamp": "2025-06-18T18:22:09.665Z"
+      }
+    ],
+    "warnings": [
+      {
+        "id": "agent-activity-stale",
+        "severity": "MEDIUM",
+        "description": "Most agents show last activity from 2025-01-08",
+        "impact": "Agents may not be actively monitoring or responding",
+        "recommendedAction": "Trigger agent health checks and activity updates"
+      },
+      {
+        "id": "docker-compose-yaml-error",
+        "severity": "MEDIUM",
+        "description": "Docker Compose YAML syntax error preventing MCP server startup",
+        "impact": "Cannot start containerized MCP servers",
+        "recommendedAction": "Create simpler Docker run commands or fix YAML syntax",
+        "timestamp": "2025-06-18T18:19:00.590Z"
+      }
+    ]
+  },
+  "recommendedActions": {
+    "immediate": [
+      {
+        "action": "Check Docker MCP toolkit availability",
+        "priority": "HIGH",
+        "assignee": "Augment Agent",
+        "command": "docker --help | grep mcp || echo 'Docker MCP not available'"
+      },
+      {
+        "action": "Install fallback MCP servers via npm",
+        "priority": "HIGH",
+        "assignee": "Claude Code",
+        "command": "npm install -g @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-git @modelcontextprotocol/server-memory"
+      },
+      {
+        "action": "Test MCP server connectivity",
+        "priority": "HIGH",
+        "assignee": "Both",
+        "command": "node scripts/mcp-tester.js mcp-final-working-config.json"
+      }
+    ],
+    "shortTerm": [
+      {
+        "action": "Create Docker Compose configuration for MCP servers",
+        "priority": "MEDIUM",
+        "assignee": "Augment Agent",
+        "deliverable": "docker-compose.mcp.yml"
+      },
+      {
+        "action": "Implement agent health check system",
+        "priority": "MEDIUM",
+        "assignee": "Claude Code",
+        "deliverable": "scripts/agent-health-check.js"
+      },
+      {
+        "action": "Set up automated MCP server monitoring",
+        "priority": "MEDIUM",
+        "assignee": "Both",
+        "deliverable": "cron job or systemd service"
+      }
+    ],
+    "longTerm": [
+      {
+        "action": "Develop specialized MCP servers for Mystic Arcana",
+        "priority": "LOW",
+        "assignee": "Claude Code",
+        "deliverables": [
+          "mcp-tarot-server",
+          "mcp-astrology-server",
+          "mcp-spiritual-content-server"
+        ]
+      },
+      {
+        "action": "Create agent orchestration system",
+        "priority": "LOW",
+        "assignee": "Augment Agent",
+        "deliverable": "Agent coordination and task distribution system"
+      }
+    ]
+  },
+  "communicationProtocol": {
+    "updateFrequency": "Every 15 minutes",
+    "escalationTriggers": [
+      "All MCP servers offline for >30 minutes",
+      "Critical agent failures",
+      "System health drops to CRITICAL"
+    ],
+    "notificationChannels": [
+      "Log file updates",
+      "Console output",
+      "Error file generation"
+    ],
+    "handoffProcedure": {
+      "augmentToClaude": "Update this log with HANDOFF_TO_CLAUDE: {reason}",
+      "claudeToAugment": "Update this log with HANDOFF_TO_AUGMENT: {reason}",
+      "bothActive": "Update this log with COLLABORATIVE_MODE: {task}"
+    }
+  },
+  "nextSteps": {
+    "assignedTo": "Augment Agent",
+    "dueBy": "2025-01-14T13:00:00Z",
+    "tasks": [
+      "Execute immediate recommended actions",
+      "Update this log with results",
+      "Escalate to Claude Code if Docker MCP unavailable"
+    ]
+  }
+}

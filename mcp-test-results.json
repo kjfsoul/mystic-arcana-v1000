@@ -1,39 +1,21 @@
 {
-  "working": [
+  "working": [],
+  "broken": [
     {
       "name": "filesystem",
-      "capabilities": {
-        "tools": {}
-      },
-      "serverInfo": {
-        "name": "secure-filesystem-server",
-        "version": "0.2.0"
-      }
+      "error": "Process closed unexpectedly",
+      "details": "Exit code: 1, Signal: null"
     },
     {
       "name": "git",
-      "capabilities": {
-        "experimental": {},
-        "tools": {
-          "listChanged": false
-        }
-      },
-      "serverInfo": {
-        "name": "mcp-git",
-        "version": "1.6.0"
-      }
+      "error": "Process closed unexpectedly",
+      "details": "Exit code: 1, Signal: null"
     },
     {
       "name": "memory",
-      "capabilities": {
-        "tools": {}
-      },
-      "serverInfo": {
-        "name": "memory-server",
-        "version": "0.6.3"
-      }
+      "error": "Process closed unexpectedly",
+      "details": "Exit code: 1, Signal: null"
     }
   ],
-  "broken": [],
   "total": 3
 }

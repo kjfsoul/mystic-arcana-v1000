@@ -1,0 +1,420 @@
+version: '3.8'
+
+services:
+  # Simple HTTP-based MCP servers for testing
+  mcp-filesystem:
+    image: node:18-alpine
+    container_name: mcp-filesystem-server
+    working_dir: /app
+    volumes:
+      - .:/workspace:ro
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - MCP_ROOT_PATH=/workspace
+    command: >
+      sh -c "
+        npm init -y &&
+        npm install express cors &&
+        cat > server.js << 'EOF' &&
+const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
+const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');
+const express = require('express');
+const cors = require('cors');
+const fs = require('fs').promises;
+const path = require('path');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// MCP Server instance
+const server = new Server(
+  {
+    name: 'filesystem-server',
+    version: '1.0.0',
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+// File operations tools
+server.setRequestHandler('tools/list', async () => {
+  return {
+    tools: [
+      {
+        name: 'read_file',
+        description: 'Read contents of a file',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            path: { type: 'string', description: 'File path relative to workspace' }
+          },
+          required: ['path']
+        }
+      },
+      {
+        name: 'list_directory',
+        description: 'List contents of a directory',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            path: { type: 'string', description: 'Directory path relative to workspace' }
+          },
+          required: ['path']
+        }
+      }
+    ]
+  };
+});
+
+server.setRequestHandler('tools/call', async (request) => {
+  const { name, arguments: args } = request.params;
+  const workspacePath = process.env.MCP_ROOT_PATH || '/workspace';
+  
+  try {
+    switch (name) {
+      case 'read_file':
+        const filePath = path.join(workspacePath, args.path);
+        const content = await fs.readFile(filePath, 'utf8');
+        return { content: [{ type: 'text', text: content }] };
+        
+      case 'list_directory':
+        const dirPath = path.join(workspacePath, args.path || '');
+        const entries = await fs.readdir(dirPath, { withFileTypes: true });
+        const items = entries.map(entry => ({
+          name: entry.name,
+          type: entry.isDirectory() ? 'directory' : 'file'
+        }));
+        return { content: [{ type: 'text', text: JSON.stringify(items, null, 2) }] };
+        
+      default:
+        throw new Error(\`Unknown tool: \${name}\`);
+    }
+  } catch (error) {
+    throw new Error(\`Tool execution failed: \${error.message}\`);
+  }
+});
+
+// HTTP endpoint for MCP communication
+app.post('/mcp', async (req, res) => {
+  try {
+    const response = await server.handleRequest(req.body);
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'healthy', service: 'mcp-filesystem' });
+});
+
+const port = process.env.MCP_PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(\`MCP Filesystem Server running on port \${port}\`);
+});
+EOF
+        fi &&
+        node server.js
+      "
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MCP Git Server  
+  mcp-git:
+    image: node:18-alpine
+    container_name: mcp-git-server
+    working_dir: /app
+    volumes:
+      - .:/workspace
+      - ./mcp-servers/git:/app
+      - ~/.gitconfig:/root/.gitconfig:ro
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=production
+      - MCP_WORKSPACE_PATH=/workspace
+      - MCP_PORT=3000
+    command: >
+      sh -c "
+        apk add --no-cache git &&
+        if [ ! -f package.json ]; then
+          npm init -y &&
+          npm install @modelcontextprotocol/sdk express cors simple-git &&
+          cat > server.js << 'EOF'
+const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
+const express = require('express');
+const cors = require('cors');
+const simpleGit = require('simple-git');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const git = simpleGit(process.env.MCP_WORKSPACE_PATH || '/workspace');
+
+const server = new Server(
+  {
+    name: 'git-server',
+    version: '1.0.0',
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+server.setRequestHandler('tools/list', async () => {
+  return {
+    tools: [
+      {
+        name: 'git_status',
+        description: 'Get git repository status',
+        inputSchema: { type: 'object', properties: {} }
+      },
+      {
+        name: 'git_log',
+        description: 'Get git commit history',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            maxCount: { type: 'number', description: 'Maximum number of commits', default: 10 }
+          }
+        }
+      },
+      {
+        name: 'git_diff',
+        description: 'Get git diff',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            file: { type: 'string', description: 'Specific file to diff (optional)' }
+          }
+        }
+      }
+    ]
+  };
+});
+
+server.setRequestHandler('tools/call', async (request) => {
+  const { name, arguments: args } = request.params;
+  
+  try {
+    switch (name) {
+      case 'git_status':
+        const status = await git.status();
+        return { content: [{ type: 'text', text: JSON.stringify(status, null, 2) }] };
+        
+      case 'git_log':
+        const log = await git.log({ maxCount: args.maxCount || 10 });
+        return { content: [{ type: 'text', text: JSON.stringify(log, null, 2) }] };
+        
+      case 'git_diff':
+        const diff = args.file ? await git.diff([args.file]) : await git.diff();
+        return { content: [{ type: 'text', text: diff }] };
+        
+      default:
+        throw new Error(\`Unknown tool: \${name}\`);
+    }
+  } catch (error) {
+    throw new Error(\`Git operation failed: \${error.message}\`);
+  }
+});
+
+app.post('/mcp', async (req, res) => {
+  try {
+    const response = await server.handleRequest(req.body);
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'healthy', service: 'mcp-git' });
+});
+
+const port = process.env.MCP_PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(\`MCP Git Server running on port \${port}\`);
+});
+EOF
+        fi &&
+        node server.js
+      "
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MCP Memory Server
+  mcp-memory:
+    image: node:18-alpine
+    container_name: mcp-memory-server
+    working_dir: /app
+    volumes:
+      - ./mcp-servers/memory:/app
+      - mcp-memory-data:/data
+    ports:
+      - "3003:3000"
+    environment:
+      - NODE_ENV=production
+      - MCP_MEMORY_PATH=/data
+      - MCP_PORT=3000
+    command: >
+      sh -c "
+        if [ ! -f package.json ]; then
+          npm init -y &&
+          npm install @modelcontextprotocol/sdk express cors sqlite3 &&
+          cat > server.js << 'EOF'
+const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
+const express = require('express');
+const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const dbPath = path.join(process.env.MCP_MEMORY_PATH || '/data', 'memory.db');
+const db = new sqlite3.Database(dbPath);
+
+// Initialize database
+db.serialize(() => {
+  db.run(\`CREATE TABLE IF NOT EXISTS memories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    key TEXT UNIQUE,
+    value TEXT,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+  )\`);
+});
+
+const server = new Server(
+  {
+    name: 'memory-server',
+    version: '1.0.0',
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+server.setRequestHandler('tools/list', async () => {
+  return {
+    tools: [
+      {
+        name: 'store_memory',
+        description: 'Store a memory with a key',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            key: { type: 'string', description: 'Memory key' },
+            value: { type: 'string', description: 'Memory value' }
+          },
+          required: ['key', 'value']
+        }
+      },
+      {
+        name: 'retrieve_memory',
+        description: 'Retrieve a memory by key',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            key: { type: 'string', description: 'Memory key' }
+          },
+          required: ['key']
+        }
+      },
+      {
+        name: 'list_memories',
+        description: 'List all stored memories',
+        inputSchema: { type: 'object', properties: {} }
+      }
+    ]
+  };
+});
+
+server.setRequestHandler('tools/call', async (request) => {
+  const { name, arguments: args } = request.params;
+  
+  return new Promise((resolve, reject) => {
+    switch (name) {
+      case 'store_memory':
+        db.run('INSERT OR REPLACE INTO memories (key, value) VALUES (?, ?)', 
+               [args.key, args.value], function(err) {
+          if (err) reject(new Error(\`Failed to store memory: \${err.message}\`));
+          else resolve({ content: [{ type: 'text', text: \`Memory stored: \${args.key}\` }] });
+        });
+        break;
+        
+      case 'retrieve_memory':
+        db.get('SELECT value FROM memories WHERE key = ?', [args.key], (err, row) => {
+          if (err) reject(new Error(\`Failed to retrieve memory: \${err.message}\`));
+          else if (row) resolve({ content: [{ type: 'text', text: row.value }] });
+          else resolve({ content: [{ type: 'text', text: 'Memory not found' }] });
+        });
+        break;
+        
+      case 'list_memories':
+        db.all('SELECT key, value, timestamp FROM memories ORDER BY timestamp DESC', (err, rows) => {
+          if (err) reject(new Error(\`Failed to list memories: \${err.message}\`));
+          else resolve({ content: [{ type: 'text', text: JSON.stringify(rows, null, 2) }] });
+        });
+        break;
+        
+      default:
+        reject(new Error(\`Unknown tool: \${name}\`));
+    }
+  });
+});
+
+app.post('/mcp', async (req, res) => {
+  try {
+    const response = await server.handleRequest(req.body);
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'healthy', service: 'mcp-memory' });
+});
+
+const port = process.env.MCP_PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(\`MCP Memory Server running on port \${port}\`);
+});
+EOF
+        fi &&
+        node server.js
+      "
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mcp-memory-data:
+    driver: local
+
+networks:
+  default:
+    name: mcp-network

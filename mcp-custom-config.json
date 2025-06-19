@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node",
+      "args": ["./mcp-servers/filesystem-server.js"],
+      "env": {}
+    },
+    "git": {
+      "command": "node",
+      "args": ["./mcp-servers/git-server.js"],
+      "env": {}
+    },
+    "memory": {
+      "command": "node",
+      "args": ["./mcp-servers/memory-server.js"],
+      "env": {}
+    }
+  }
+}

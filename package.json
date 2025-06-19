@@ -23,6 +23,7 @@
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
     "@ant-design/icons": "^6.0.0",
+    "@modelcontextprotocol/sdk": "^1.12.3",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.6.1",
