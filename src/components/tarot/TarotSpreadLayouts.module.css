@@ -1,0 +1,254 @@
+.spreadContainer {
+  width: 100%;
+  min-height: 600px;
+  padding: 2rem 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardsLayout {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cardWrapper {
+  position: absolute;
+  cursor: pointer;
+  transition: z-index 0.3s;
+}
+
+.cardPositionLabel {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.card {
+  width: 80px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(138, 43, 226, 0.2);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardName {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.cardBack {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    #16213e 50%,
+    #0f3460 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardBackPattern {
+  width: 60%;
+  height: 60%;
+  background-image: 
+    radial-gradient(circle at center, rgba(138, 43, 226, 0.3) 0%, transparent 70%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(138, 43, 226, 0.1) 10px,
+      rgba(138, 43, 226, 0.1) 20px
+    );
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 20px rgba(138, 43, 226, 0.3),
+    0 0 30px rgba(138, 43, 226, 0.2);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Position Guide for Celtic Cross */
+.positionGuide {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+.guideTitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.guideItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(138, 43, 226, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.guideNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(138, 43, 226, 0.3);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.guideLabel {
+  flex: 1;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .spreadContainer {
+    padding: 1rem 0.5rem;
+  }
+
+  .cardsLayout {
+    transform: scale(0.7);
+    height: 400px;
+  }
+
+  .card {
+    width: 70px;
+    height: 105px;
+  }
+
+  .cardPositionLabel {
+    font-size: 0.65rem;
+    top: -20px;
+  }
+
+  /* Adjust Celtic Cross layout for mobile */
+  .cardWrapper:nth-child(7),
+  .cardWrapper:nth-child(8),
+  .cardWrapper:nth-child(9),
+  .cardWrapper:nth-child(10) {
+    transform: scale(0.9) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardsLayout {
+    transform: scale(0.6);
+    height: 350px;
+  }
+
+  .card {
+    width: 60px;
+    height: 90px;
+  }
+
+  .cardName {
+    font-size: 0.6rem;
+    padding: 0.25rem;
+  }
+
+  .guideGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .cardsLayout {
+    transform: scale(0.85);
+  }
+}
+
+/* Accessibility */
+.cardWrapper:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+}
+
+.cardWrapper:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cardBackPattern {
+    animation: none;
+  }
+  
+  .cardWrapper {
+    transition: none;
+  }
+}

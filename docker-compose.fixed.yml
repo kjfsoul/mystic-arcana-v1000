@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # Simple MCP Server (working)
+  mcp-simple:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM node:18-alpine
+        WORKDIR /app
+        COPY package*.json ./
+        RUN npm install --only=production
+        COPY simple-mcp-server.js ./
+        EXPOSE 3000
+        CMD ["node", "simple-mcp-server.js"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/workspace:ro
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Design MCP Server (working)
+  mcp-design:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM node:18-alpine
+        WORKDIR /app
+        COPY package*.json ./
+        RUN npm install --only=production
+        COPY mcp-design-server.js ./
+        EXPOSE 3001
+        CMD ["node", "mcp-design-server.js"]
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/workspace:ro
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Agent Manager
+  agent-manager:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM node:18-alpine
+        WORKDIR /app
+        COPY package*.json ./
+        RUN npm install --only=production
+        COPY agents/ ./agents/
+        COPY scripts/ ./scripts/
+        COPY logs/ ./logs/
+        CMD ["node", "agents/design-agent.js", "start"]
+    volumes:
+      - .:/workspace
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mcp-simple
+      - mcp-design
+    restart: unless-stopped
+
+networks:
+  default:
+    name: mcp-network

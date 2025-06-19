@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-06-19T00:35:49.595Z",
+    "lastUpdated": "2025-06-19T00:21:56.326Z",
     "project": "Mystic Arcana",
     "environment": "development",
     "reportingAgent": "Augment Agent",
@@ -214,6 +214,14 @@
         "description": "All MCP servers are offline due to missing installations",
         "impact": "Limited context and tool capabilities",
         "recommendedAction": "Install Docker MCP toolkit or npm packages"
+      },
+      {
+        "id": "docker-npm-error",
+        "severity": "HIGH",
+        "description": "Docker containers failing due to npm install errors",
+        "impact": "MCP servers cannot start in Docker containers",
+        "recommendedAction": "Use npm global installation as fallback",
+        "timestamp": "2025-06-18T18:22:09.665Z"
       },
       {
         "id": "mcp-sdk-error",

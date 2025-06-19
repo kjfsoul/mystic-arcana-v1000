@@ -1,0 +1,4 @@
+🚀 Simple MCP Server running on port 3000
+📋 API Documentation: http://localhost:3000/
+❤️  Health Check: http://localhost:3000/health
+🔧 Capabilities: filesystem, git, memory
