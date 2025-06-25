@@ -5,6 +5,14 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
 import { AuthModal } from '../auth/AuthModal';
+import { InteractiveBirthChart } from './InteractiveBirthChart';
+import { CompatibilityInsights } from './CompatibilityInsights';
+import { CareerInsights } from './CareerInsights';
+import { AdvancedChartPreview } from './AdvancedChartPreview';
+import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
+import { LocationSearch } from '../forms/LocationSearch';
+import { LocationResult } from '@/lib/location/GeocodingService';
+import { UserTimeline, LifeEvent } from '../timeline';
 import styles from './AstrologyReadingRoom.module.css';
 
 interface AstrologyReadingRoomProps {
@@ -22,9 +30,23 @@ type UserTier = 'guest' | 'signed-up' | 'subscriber';
 export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBack }) => {
   const { user, isGuest } = useAuth();
   const [userTier, setUserTier] = useState<UserTier>('guest');
-  const [selectedService, setSelectedService] = useState<'chart' | 'horoscope' | null>(null);
+  const [selectedService, setSelectedService] = useState<'chart' | 'horoscope' | 'compatibility' | 'career' | 'advanced' | 'timeline' | null>(null);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showBirthForm, setShowBirthForm] = useState(false);
+  const [birthData, setBirthData] = useState<BirthData>({
+    date: new Date('1990-06-15T14:30:00Z'),
+    latitude: 40.7128, // New York City default
+    longitude: -74.0060,
+    timezone: 'America/New_York'
+  });
+  const [formData, setFormData] = useState({
+    date: '1990-06-15',
+    time: '14:30',
+    timezone: 'America/New_York'
+  });
+  const [selectedLocation, setSelectedLocation] = useState<LocationResult | null>(null);
+  const [lifeEvents, setLifeEvents] = useState<LifeEvent[]>([]);
 
   useEffect(() => {
     if (isGuest) {
@@ -36,41 +58,60 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     }
   }, [user, isGuest]);
 
-  const handleServiceSelection = (service: 'chart' | 'horoscope') => {
+  const handleServiceSelection = (service: 'chart' | 'horoscope' | 'compatibility' | 'career' | 'advanced' | 'timeline') => {
     setSelectedService(service);
     
     if (service === 'chart') {
-      if (userTier === 'guest') {
-        // Show example chart and then unlock modal
-        setTimeout(() => setShowUnlockModal(true), 3000);
+      // Chart always needs birth form
+      setShowBirthForm(true);
+    } else if (service === 'compatibility' || service === 'career') {
+      // For compatibility and career, only show form if no birth data exists
+      // Otherwise, show the component directly with current birth data
+      const hasValidBirthData = birthData && birthData.date && birthData.latitude && birthData.longitude;
+      if (!hasValidBirthData) {
+        setShowBirthForm(true);
+      } else {
+        setShowBirthForm(false);
       }
-      // For MVP, both guest and signed-up users see the same content
+    }
+    // Advanced chart and timeline don't need birth form - timeline is standalone, advanced is a preview/upsell
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!selectedLocation) {
+      alert('Please select a birth location');
+      return;
+    }
+    
+    const combinedDateTime = new Date(`${formData.date}T${formData.time}:00`);
+    
+    setBirthData({
+      date: combinedDateTime,
+      latitude: selectedLocation.latitude,
+      longitude: selectedLocation.longitude,
+      timezone: selectedLocation.timezone || formData.timezone
+    });
+    
+    setShowBirthForm(false);
+    
+    // Show unlock modal for guests after they see the chart
+    if (userTier === 'guest') {
+      setTimeout(() => setShowUnlockModal(true), 5000);
     }
   };
 
-  const exampleChart = {
-    sun: { sign: 'Leo', degree: 15, house: 5 },
-    moon: { sign: 'Pisces', degree: 28, house: 12 },
-    rising: { sign: 'Aries', degree: 3, house: 1 },
-    mercury: { sign: 'Cancer', degree: 22, house: 4 },
-    venus: { sign: 'Virgo', degree: 8, house: 6 },
-    mars: { sign: 'Gemini', degree: 11, house: 3 }
+  const handlePlanetClick = (planet: PlanetPosition) => {
+    console.log('Planet clicked:', planet);
   };
 
-  const getPlanetEmoji = (planet: string) => {
-    const planetMap: Record<string, string> = {
-      sun: '☉',
-      moon: '☽',
-      mercury: '☿',
-      venus: '♀',
-      mars: '♂',
-      jupiter: '♃',
-      saturn: '♄'
-    };
-    return planetMap[planet] || '✦';
+  const handleHouseClick = (house: HousePosition) => {
+    console.log('House clicked:', house);
   };
 
-  const renderGuestExperience = () => (
+
+  const renderBirthDataForm = () => (
     <motion.div 
       className={styles.chartContainer}
       initial={{ opacity: 0, scale: 0.95 }}
@@ -78,59 +119,120 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       transition={{ duration: 0.5 }}
     >
       <div className={styles.chartHeader}>
-        <h3>✨ Sample Birth Chart</h3>
+        <h3>✨ Enter Your Birth Information</h3>
         <p className={styles.chartSubtitle}>
-          This is an example of what your personalized chart could reveal
+          Generate your personalized interactive birth chart
         </p>
       </div>
 
-      <div className={styles.chartWheel}>
-        <div className={styles.wheelCenter}>
-          <div className={styles.coreIdentity}>
-            <div className={styles.sunSign}>
-              {getPlanetEmoji('sun')} Leo Rising
-            </div>
-            <div className={styles.moonSign}>
-              {getPlanetEmoji('moon')} Pisces Moon
-            </div>
+      <form onSubmit={handleFormSubmit} className={styles.birthForm}>
+        <div className={styles.formGrid}>
+          <div className={styles.formField}>
+            <label>Birth Date:</label>
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              required
+            />
           </div>
-        </div>
-
-        <div className={styles.planetaryPositions}>
-          {Object.entries(exampleChart).map(([planet, data]) => (
-            <motion.div
-              key={planet}
-              className={styles.planetPosition}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className={styles.planetSymbol}>{getPlanetEmoji(planet)}</span>
-              <span className={styles.planetInfo}>
-                {data.sign} {data.degree}°
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.sampleInterpretation}>
-        <h4>🌟 Key Insights</h4>
-        <div className={styles.insights}>
-          <div className={styles.insight}>
-            <strong>Creative Fire:</strong> Your Leo energy brings natural leadership and creative expression
-          </div>
-          <div className={styles.insight}>
-            <strong>Intuitive Depths:</strong> Pisces Moon grants deep emotional intelligence and psychic abilities
-          </div>
-          <div className={styles.insight}>
-            <strong>Dynamic Action:</strong> Mars in Gemini creates versatile communication skills
+          
+          <div className={styles.formField}>
+            <label>Birth Time:</label>
+            <input
+              type="time"
+              value={formData.time}
+              onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+              required
+            />
           </div>
         </div>
         
-        <div className={styles.upgradeHint}>
-          <p>This is just the beginning. Your complete chart reveals so much more...</p>
+        <div className={styles.locationField}>
+          <LocationSearch
+            value={selectedLocation}
+            onChange={setSelectedLocation}
+            placeholder="Enter your birth city, state, country, or ZIP code"
+            label="Birth Location"
+          />
         </div>
+        
+        <div className={styles.formActions}>
+          <button type="submit" className={styles.generateButton}>
+            Generate My Birth Chart ✨
+          </button>
+          <button 
+            type="button" 
+            className={styles.cancelButton}
+            onClick={() => setShowBirthForm(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </motion.div>
+  );
+
+  const renderInteractiveChart = () => (
+    <motion.div 
+      className={styles.chartContainer}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className={styles.chartHeader}>
+        <h3>✨ Your Interactive Birth Chart</h3>
+        <p className={styles.chartSubtitle}>
+          Click any planet, house, or zodiac sign to explore deeper meanings
+        </p>
+        <button 
+          className={styles.editBirthData}
+          onClick={() => setShowBirthForm(true)}
+        >
+          Edit Birth Info
+        </button>
+      </div>
+
+      <InteractiveBirthChart
+        birthData={birthData}
+        onPlanetClick={handlePlanetClick}
+        onHouseClick={handleHouseClick}
+        className={styles.birthChart}
+      />
+
+      <div className={styles.chartInstructions}>
+        <h4>🔮 How to Use Your Chart</h4>
+        <div className={styles.instructions}>
+          <div className={styles.instruction}>
+            <span className={styles.icon}>🪐</span>
+            <strong>Click Planets:</strong> Discover what each celestial body reveals about you
+          </div>
+          <div className={styles.instruction}>
+            <span className={styles.icon}>🏠</span>
+            <strong>Click Houses:</strong> Explore the 12 areas of your life
+          </div>
+          <div className={styles.instruction}>
+            <span className={styles.icon}>♈</span>
+            <strong>Click Signs:</strong> Learn about zodiac influences
+          </div>
+          <div className={styles.instruction}>
+            <span className={styles.icon}>▶️</span>
+            <strong>Toggle Animation:</strong> Watch the cosmos come alive
+          </div>
+        </div>
+        
+        {userTier === 'guest' && (
+          <div className={styles.upgradeHint}>
+            <p>Want to save your chart and unlock advanced features? 
+              <button 
+                className={styles.signUpLink}
+                onClick={() => setShowAuthModal(true)}
+              >
+                Sign up for free!
+              </button>
+            </p>
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -251,18 +353,123 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <span className={styles.accessBadge}>Free for All</span>
               </div>
             </motion.div>
+
+            <motion.div 
+              className={styles.serviceCard}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleServiceSelection('compatibility')}
+            >
+              <div className={styles.serviceIcon}>💫</div>
+              <h3>Compatibility Insights</h3>
+              <p>Discover your cosmic connection with another</p>
+              <div className={styles.serviceAccess}>
+                {userTier === 'guest' && <span className={styles.accessBadge}>Demo Available</span>}
+                {userTier === 'signed-up' && <span className={styles.accessBadge}>Full Access</span>}
+                {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium</span>}
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className={styles.serviceCard}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleServiceSelection('career')}
+            >
+              <div className={styles.serviceIcon}>💼</div>
+              <h3>Career Insights</h3>
+              <p>Unlock your professional purpose and potential</p>
+              <div className={styles.serviceAccess}>
+                {userTier === 'guest' && <span className={styles.accessBadge}>Demo Available</span>}
+                {userTier === 'signed-up' && <span className={styles.accessBadge}>Full Access</span>}
+                {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium Plus</span>}
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className={styles.serviceCard}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleServiceSelection('timeline')}
+              data-service="timeline"
+            >
+              <div className={styles.serviceIcon}>📅</div>
+              <h3>Life Timeline</h3>
+              <p>Map your journey through key life events</p>
+              <div className={styles.serviceAccess}>
+                <span className={styles.accessBadge}>Free for All</span>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className={`${styles.serviceCard} ${styles.advancedCard}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleServiceSelection('advanced')}
+            >
+              <div className={styles.serviceIcon}>🌌</div>
+              <h3>Advanced Chart</h3>
+              <p>Dive deep into your inner cosmic fabric</p>
+              <div className={styles.serviceAccess}>
+                <span className={styles.comingSoonBadge}>Coming 2025</span>
+              </div>
+            </motion.div>
           </div>
         ) : (
           <div className={styles.serviceContent}>
-            {selectedService === 'chart' && renderGuestExperience()}
+            {selectedService === 'chart' && (
+              <>
+                {showBirthForm && renderBirthDataForm()}
+                {!showBirthForm && renderInteractiveChart()}
+              </>
+            )}
             {selectedService === 'horoscope' && renderDailyHoroscope()}
+            {selectedService === 'compatibility' && (
+              <>
+                {showBirthForm && renderBirthDataForm()}
+                {!showBirthForm && (
+                  <CompatibilityInsights 
+                    userBirthData={birthData}
+                    onBack={() => setSelectedService(null)}
+                  />
+                )}
+              </>
+            )}
+            {selectedService === 'career' && (
+              <>
+                {showBirthForm && renderBirthDataForm()}
+                {!showBirthForm && (
+                  <CareerInsights 
+                    userBirthData={birthData}
+                    onBack={() => setSelectedService(null)}
+                  />
+                )}
+              </>
+            )}
+            {selectedService === 'timeline' && (
+              <UserTimeline 
+                events={lifeEvents}
+                onEventsChange={setLifeEvents}
+              />
+            )}
+            {selectedService === 'advanced' && (
+              <AdvancedChartPreview 
+                onBack={() => setSelectedService(null)}
+                lifeEvents={lifeEvents}
+              />
+            )}
             
-            <button 
-              className={styles.backToServices}
-              onClick={() => setSelectedService(null)}
-            >
-              ← Choose Different Service
-            </button>
+            {selectedService !== 'compatibility' && selectedService !== 'career' && selectedService !== 'advanced' && selectedService !== 'timeline' && (
+              <button 
+                className={styles.backToServices}
+                onClick={() => {
+                  setSelectedService(null);
+                  setShowBirthForm(false);
+                }}
+              >
+                ← Choose Different Service
+              </button>
+            )}
           </div>
         )}
       </motion.div>

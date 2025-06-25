@@ -4,26 +4,32 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  border: 1px solid rgba(138, 43, 226, 0.3);
+  border: 1px solid rgba(138, 43, 226, 0.4);
   border-radius: 16px;
   padding: 2rem;
-  width: 90%;
-  max-width: 400px;
+  width: 90vw;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(138, 43, 226, 0.2);
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(138, 43, 226, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   z-index: 1001;
+  margin: 1rem;
 }
 
 .closeButton {
@@ -139,7 +145,7 @@
 
 .divider {
   display: flex;
-  items: center;
+  align-items: center;
   margin: 1.5rem 0 1rem 0;
   color: #b19cd9;
   font-size: 0.875rem;
@@ -215,4 +221,51 @@
 
 .linkButton:hover {
   color: #9370db;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .modal {
+    width: 95vw;
+    max-width: 95vw;
+    padding: 1.5rem;
+    max-height: 95vh;
+    border-radius: 12px;
+    margin: 0.5rem;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .input,
+  .submitButton,
+  .googleButton {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .closeButton {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 1.25rem;
+    margin: 0.25rem;
+  }
+  
+  .header {
+    margin-bottom: 1.5rem;
+  }
 }

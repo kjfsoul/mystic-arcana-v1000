@@ -1,0 +1,401 @@
+.chartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 500px;
+  padding: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(25, 25, 112, 0.05) 0%,
+    rgba(72, 61, 139, 0.03) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chartWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 8px 32px rgba(138, 43, 226, 0.1));
+  background: radial-gradient(
+    circle at center,
+    rgba(25, 25, 112, 0.03) 0%,
+    rgba(72, 61, 139, 0.02) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+}
+
+.outerCircle {
+  filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.3));
+}
+
+/* Zodiac Signs */
+.zodiacSymbol {
+  font-size: 24px;
+  font-weight: bold;
+  fill: #9370DB;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.zodiacSymbol:hover {
+  fill: #DDA0DD;
+  filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.6));
+}
+
+/* House Numbers */
+.houseNumber {
+  font-size: 16px;
+  font-weight: bold;
+  fill: #483D8B;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.houseNumber:hover {
+  fill: #9370DB;
+  filter: drop-shadow(0 0 6px rgba(72, 61, 139, 0.8));
+}
+
+/* Planets */
+.planetSymbol {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}
+
+.planetSymbol:hover {
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+.sunSymbol {
+  font-size: 24px;
+}
+
+.sunSymbol:hover {
+  filter: drop-shadow(0 0 16px #FFD700);
+}
+
+.moonSymbol {
+  font-size: 22px;
+}
+
+.moonSymbol:hover {
+  filter: drop-shadow(0 0 14px #C0C0C0);
+}
+
+.planetGlow {
+  transition: all 0.3s ease;
+}
+
+.planetSymbol:hover + .planetGlow,
+.planetGlow:hover {
+  opacity: 0.4;
+  r: 16;
+}
+
+.retrograde {
+  font-size: 12px;
+  fill: #FF6B6B;
+  opacity: 0.8;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: linear-gradient(
+    135deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(72, 61, 139, 0.85) 50%,
+    rgba(138, 43, 226, 0.8) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 
+    0 20px 60px rgba(138, 43, 226, 0.3),
+    inset 0 0 20px rgba(138, 43, 226, 0.1);
+  color: white;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modalSymbol {
+  font-size: 48px;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+.modalBody {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.modalBody p {
+  margin-bottom: 1rem;
+}
+
+.modalBody strong {
+  color: #DDA0DD;
+}
+
+.interpretation {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 4px solid #FFD700;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.retrogradeText {
+  color: #FF6B6B;
+  font-weight: 500;
+}
+
+.backButton {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #191970;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.backButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.backButton:active {
+  transform: translateY(0);
+}
+
+/* Animation Toggle Button */
+.animationToggle {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(138, 43, 226, 0.8);
+  border: 1px solid rgba(138, 43, 226, 0.6);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+.animationToggle:hover {
+  background: rgba(138, 43, 226, 1);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chartContainer {
+    min-height: 400px;
+    padding: 0.5rem;
+  }
+  
+  .zodiacSymbol {
+    font-size: 20px;
+  }
+  
+  .houseNumber {
+    font-size: 14px;
+  }
+  
+  .planetSymbol {
+    font-size: 18px;
+  }
+  
+  .sunSymbol {
+    font-size: 20px;
+  }
+  
+  .moonSymbol {
+    font-size: 19px;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+    margin: 0.5rem;
+    max-height: 90vh;
+  }
+  
+  .modalHeader h3 {
+    font-size: 1.5rem;
+  }
+  
+  .modalSymbol {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zodiacSymbol {
+    font-size: 16px;
+  }
+  
+  .houseNumber {
+    font-size: 12px;
+  }
+  
+  .planetSymbol {
+    font-size: 14px;
+  }
+  
+  .sunSymbol {
+    font-size: 16px;
+  }
+  
+  .moonSymbol {
+    font-size: 15px;
+  }
+  
+  .modalContent {
+    padding: 1rem;
+  }
+  
+  .modalHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .modalSymbol {
+    font-size: 32px;
+  }
+  
+  .modalHeader h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .zodiacSymbol,
+  .houseNumber,
+  .planetSymbol {
+    font-size: 22px;
+  }
+  
+  .planetGlow {
+    r: 14;
+    opacity: 0.3;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+  }
+}
+
+/* Animation classes */
+@keyframes planetOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes moonPhase {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes sunGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px #FFD700); }
+  50% { filter: drop-shadow(0 0 16px #FFD700); }
+}
+
+.planetSymbol.animating {
+  animation: planetOrbit 60s linear infinite;
+}
+
+.moonSymbol.animating {
+  animation: moonPhase 3s ease-in-out infinite;
+}
+
+.sunSymbol.animating {
+  animation: sunGlow 4s ease-in-out infinite;
+}

@@ -21,6 +21,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   subtitle = 'Sign in to unlock your personalized journey'
 }) => {
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
+  
+  // Sync internal mode with prop when modal opens
+  React.useEffect(() => {
+    if (isOpen) {
+      setMode(initialMode);
+      setEmail('');
+      setPassword('');
+      setError(null);
+    }
+  }, [isOpen, initialMode]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -74,16 +84,18 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            className={styles.backdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
-
+        <motion.div
+          className={styles.backdrop}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={(e) => {
+            // Only close if clicking the backdrop, not the modal
+            if (e.target === e.currentTarget) {
+              onClose();
+            }
+          }}
+        >
           {/* Modal */}
           <motion.div
             className={styles.modal}
@@ -91,6 +103,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               className={styles.closeButton}
@@ -192,7 +205,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               )}
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );

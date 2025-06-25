@@ -1,229 +1,224 @@
 {
-  "version": "1.2.0",
-  "lastUpdated": "2025-01-18T00:00:00Z",
+  "registry_version": "1.0",
+  "last_updated": "2025-06-22T04:26:30.599Z",
   "agents": {
     "mysticArcana": {
       "id": "mystic-arcana-primary",
-      "name": "Mystic Arcana Oracle",
-      "brand": "Mystic Arcana",
-      "type": "tarot-astrology",
-      "personality": {
-        "tone": "mystical, wise, compassionate",
-        "expertise": ["tarot", "astrology", "spiritual guidance"],
-        "style": "immersive and personalized"
-      },
+      "name": "Mystic Arcana Primary Agent",
+      "type": "tarot_astrology_reader",
+      "brand": "mystic-arcana",
+      "status": "dormant",
+      "entrypoint": "src/agents/mystic-arcana/index.ts",
+      "last_task": "init",
       "capabilities": [
-        "tarot_reading",
-        "astrology_chart_interpretation",
-        "daily_horoscope",
-        "birth_chart_analysis",
-        "compatibility_reading"
+        "tarot_readings",
+        "astrology_charts",
+        "cosmic_interpretation",
+        "user_profile_management"
       ],
-      "modelPreference": ["claude-3-opus", "gpt-4-turbo", "gemini-ultra"],
-      "active": true
+      "memory_context": "brand-specific tarot and astrology guidance",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.188Z"
     },
     "birthdayGen": {
       "id": "birthday-gen-agent",
-      "name": "Birthday Cosmic Guide",
-      "brand": "BirthdayGen",
-      "type": "birthday-astrology",
-      "personality": {
-        "tone": "celebratory, insightful, personalized",
-        "expertise": ["birthday astrology", "solar returns", "life path"],
-        "style": "festive and enlightening"
-      },
+      "name": "BirthdayGen Specialized Agent",
+      "type": "birthday_astrology_reader",
+      "brand": "birthday-gen",
+      "status": "dormant",
+      "entrypoint": "src/agents/birthday-gen/index.ts",
+      "last_task": "none",
       "capabilities": [
-        "birthday_reading",
-        "solar_return_chart",
-        "birthday_numerology",
-        "yearly_forecast",
-        "birthday_tarot"
+        "birthday_readings",
+        "solar_return_analysis",
+        "age_progression_insights"
       ],
-      "modelPreference": ["claude-3-opus", "gemini-ultra"],
-      "active": true
+      "memory_context": "birthday-focused astrological guidance",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.191Z"
     },
     "edmShuffle": {
-      "id": "edm-shuffle-mystic",
-      "name": "EDM Mystic Mixer",
-      "brand": "EDM Shuffle",
-      "type": "music-spirituality",
-      "personality": {
-        "tone": "energetic, modern, spiritually-attuned",
-        "expertise": [
-          "music energy reading",
-          "festival astrology",
-          "vibe alignment"
-        ],
-        "style": "high-energy and transformative"
-      },
+      "id": "edm-shuffle-agent",
+      "name": "EDM Shuffle Music Astrology Agent",
+      "type": "music_astrology_reader",
+      "brand": "edm-shuffle",
+      "status": "dormant",
+      "entrypoint": "src/agents/edm-shuffle/index.ts",
+      "last_task": "none",
       "capabilities": [
-        "music_vibe_reading",
-        "festival_astrology",
-        "dj_set_energy_forecast",
-        "crowd_energy_prediction",
-        "spiritual_playlist_curation"
+        "music_astrology",
+        "festival_timing",
+        "genre_alignment",
+        "dj_compatibility"
       ],
-      "modelPreference": ["claude-3-opus", "gpt-4-turbo"],
-      "active": true
-    }
-  },
-  "sharedCapabilities": {
-    "memory": {
-      "type": "brand-specific",
-      "storage": "supabase",
-      "retention": "persistent"
-    },
-    "humanInTheLoop": {
-      "enabled": true,
-      "triggers": ["sensitive_content", "major_life_decisions", "health_advice"]
-    },
-    "fallbackChain": ["claude", "abacus.ai", "gemini", "chatgpt"],
-    "analytics": {
-      "tracking": true,
-      "attribution": true,
-      "compliance": "GDPR/CCPA"
-    }
-  },
-  "uiUxAgents": {
-    "animatedBackground": {
-      "id": "animated-background-agent",
-      "name": "Cosmic Background Animator",
-      "type": "visual-effects",
-      "capabilities": [
-        "cosmic_weather",
-        "shader_compilation",
-        "particle_systems"
-      ],
-      "status": "active",
-      "lastActivity": "2025-01-08T00:00:00Z"
-    },
-    "accessibilityChecker": {
-      "id": "accessibility-audit-agent",
-      "name": "Accessibility Guardian",
-      "type": "compliance-testing",
-      "capabilities": [
-        "wcag_auditing",
-        "lighthouse_testing",
-        "aria_validation"
-      ],
-      "status": "active",
-      "lastActivity": "2025-01-08T00:00:00Z"
-    },
-    "tarotUxTester": {
-      "id": "tarot-ux-optimizer",
-      "name": "Tarot UX Optimizer",
-      "type": "ab-testing",
-      "capabilities": [
-        "spread_optimization",
-        "interaction_tracking",
-        "conversion_analysis"
-      ],
-      "status": "active",
-      "lastActivity": "2025-01-08T00:00:00Z"
-    },
-    "personaAnimator": {
-      "id": "persona-animation-engine",
-      "name": "Virtual Reader Animator",
-      "type": "avatar-animation",
-      "capabilities": [
-        "emotion_synthesis",
-        "gesture_generation",
-        "personality_evolution"
-      ],
-      "status": "active",
-      "lastActivity": "2025-01-08T00:00:00Z"
-    },
-    "competitiveAnalyst": {
-      "id": "competitive-research-agent",
-      "name": "Market Intelligence Agent",
-      "type": "research-analysis",
-      "capabilities": [
-        "competitor_monitoring",
-        "ux_benchmarking",
-        "trend_analysis"
-      ],
-      "status": "active",
-      "lastActivity": "2025-01-08T00:00:00Z"
+      "memory_context": "music and festival astrological guidance",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.196Z"
     },
     "astronomicalVisualization": {
-      "id": "astronomical-visualization-agent",
+      "id": "astro-viz-agent",
       "name": "Astronomical Visualization Agent",
-      "type": "webgl-rendering",
+      "type": "webgl_renderer",
+      "brand": "system",
+      "status": "dormant",
+      "entrypoint": "src/agents/astro-viz/index.ts",
+      "last_task": "webgl_star_field_optimization",
       "capabilities": [
-        "webgl2_star_rendering",
-        "galaxy_background_generation",
-        "performance_optimization",
-        "react_hook_debugging",
-        "shader_programming"
+        "webgl2_rendering",
+        "star_field_generation",
+        "galaxy_background",
+        "constellation_overlays"
       ],
-      "status": "completed",
-      "lastActivity": "2024-12-19T20:30:00Z",
-      "achievements": {
-        "stars_rendered": 100000,
-        "target_fps": 60,
-        "achieved_fps": 60,
-        "critical_bugs_fixed": 4,
-        "components_created": 3
-      },
-      "outputs": [
-        "HighPerformanceStarField component",
-        "GalaxyBackground component",
-        "HighPerformanceStarRenderer class",
-        "WebGL2 shader programs"
-      ]
+      "memory_context": "high-performance astronomical rendering",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.202Z"
     },
     "legalComplianceAgent": {
       "id": "legal-compliance-agent",
-      "name": "Legal Compliance Agent",
-      "type": "legal-framework",
+      "name": "Legal & Compliance Agent",
+      "type": "compliance_monitor",
+      "brand": "system",
+      "status": "dormant",
+      "entrypoint": "src/agents/legal/index.ts",
+      "last_task": "privacy_policy_implementation",
       "capabilities": [
-        "privacy_policy_generation",
-        "terms_of_service_creation",
-        "gdpr_ccpa_compliance",
-        "legal_document_rendering",
-        "hydration_error_resolution"
+        "gdpr_compliance",
+        "ccpa_compliance",
+        "spiritual_disclaimer_management",
+        "cookie_policy_enforcement"
       ],
-      "status": "completed",
-      "lastActivity": "2025-01-18T00:00:00Z",
-      "achievements": {
-        "legal_pages_created": 4,
-        "hydration_errors_fixed": 1,
-        "dependencies_added": 2,
-        "responsive_components_created": 2
+      "memory_context": "legal framework and compliance monitoring",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.208Z"
+    },
+    "tarotDataEngine": {
+      "id": "tarot-data-engine-agent",
+      "name": "Tarot Data Engine Agent",
+      "type": "data_management",
+      "brand": "system",
+      "status": "dormant",
+      "entrypoint": "src/agents/tarot-data/index.ts",
+      "last_task": "deck_api_implementation",
+      "capabilities": [
+        "deck_management",
+        "card_data_seeding",
+        "api_endpoint_management",
+        "database_optimization"
+      ],
+      "memory_context": "tarot deck and card data management",
+      "created_at": "2025-06-19T00:00:00Z",
+      "last_active": "2025-06-19T04:50:26.210Z"
+    },
+    "claudeInitAgent": {
+      "id": "claude-init-agent",
+      "name": "Claude Session Initialization Agent",
+      "type": "system_initialization",
+      "brand": "system",
+      "status": "active",
+      "entrypoint": "src/agents/claude-init/index.ts",
+      "last_task": "session_briefing",
+      "capabilities": [
+        "session_initialization",
+        "memory_retrieval",
+        "context_briefing",
+        "task_log_management",
+        "todo_synchronization",
+        "project_state_summary"
+      ],
+      "memory_context": "claude session management and initialization",
+      "created_at": "2025-06-19T05:15:00Z",
+      "last_active": "2025-06-19T05:15:00Z",
+      "auto_trigger": "on_session_start"
+    },
+    "emailNotifier": {
+      "id": "email-notifier-agent",
+      "name": "Email Notification Agent",
+      "type": "notification_system",
+      "brand": "system",
+      "status": "active",
+      "entrypoint": "src/agents/email-notifier/index.ts",
+      "last_task": "daily_report",
+      "capabilities": [
+        "email_reporting",
+        "task_completion_tracking",
+        "urgent_notifications",
+        "system_health_monitoring",
+        "challenge_identification",
+        "todo_aggregation"
+      ],
+      "memory_context": "email notification and reporting",
+      "created_at": "2025-06-19T05:28:00Z",
+      "last_active": "2025-06-19T05:28:00Z",
+      "schedule": {
+        "daily_report": "0 9 * * *",
+        "urgent_check": "*/15 * * * *"
       },
-      "outputs": [
-        "Privacy Policy page (/legal/privacy)",
-        "Terms of Service page (/legal/terms)",
-        "Disclaimer page (/legal/disclaimer)",
-        "Cookie Policy page (/legal/cookies)",
-        "LegalDocument component",
-        "Footer component with legal links",
-        "Complete legal framework"
-      ]
+      "recipient": "kjfsoul@gmail.com"
     }
   },
-  "integrations": {
-    "mcp": {
-      "servers": [
-        "knowledge-graph",
+  "mcp_servers": {
+    "astro": {
+      "url": "astro.mcp.server:443",
+      "status": "offline",
+      "capabilities": [
         "ephemeris",
-        "tarot-deck",
-        "astrology-calculator",
-        "animated-background",
-        "accessibility-check",
-        "tarot-ux-test",
-        "persona-animation",
-        "competitive-research",
-        "design-system",
-        "cosmic-weather",
-        "user-personalization"
-      ]
+        "planetary_positions",
+        "aspects"
+      ],
+      "last_check": "2025-06-19T04:43:36.065Z",
+      "response_time": 166,
+      "error_message": "fetch failed"
     },
-    "apis": {
-      "supabase": "auth, database, realtime",
-      "stripe": "payments",
-      "paypal": "payments",
-      "printify": "merchandise"
+    "content": {
+      "url": "content.mcp.server:443",
+      "status": "offline",
+      "capabilities": [
+        "content_generation",
+        "spiritual_validation"
+      ],
+      "last_check": "2025-06-19T04:43:36.231Z",
+      "response_time": 134,
+      "error_message": "fetch failed"
+    },
+    "imggen": {
+      "url": "imggen.mcp.server:443",
+      "status": "offline",
+      "capabilities": [
+        "cosmic_backgrounds",
+        "card_generation"
+      ],
+      "last_check": "2025-06-19T04:43:36.365Z",
+      "response_time": 119,
+      "error_message": "fetch failed"
+    },
+    "payments": {
+      "url": "payments.mcp.server:443",
+      "status": "offline",
+      "capabilities": [
+        "stripe_integration",
+        "subscription_management"
+      ],
+      "last_check": "2025-06-19T04:43:36.485Z",
+      "response_time": 155,
+      "error_message": "fetch failed"
+    },
+    "moderation": {
+      "url": "moderation.mcp.server:443",
+      "status": "offline",
+      "capabilities": [
+        "content_filtering",
+        "spiritual_accuracy"
+      ],
+      "last_check": "2025-06-19T04:43:36.640Z",
+      "response_time": 105,
+      "error_message": "fetch failed"
     }
+  },
+  "system_health": {
+    "overall_status": "stopped",
+    "active_agents": 4,
+    "dormant_agents": 2,
+    "failed_agents": 0,
+    "mcp_connectivity": "0/5 online"
   }
 }

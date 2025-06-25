@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from "react";
 import styles from './GalaxyBackground.module.css';
 
 interface GalaxyBackgroundProps {
@@ -8,19 +8,21 @@ interface GalaxyBackgroundProps {
   intensity?: number; // 0-1, controls brightness
   showMilkyWay?: boolean;
   animated?: boolean;
+  starCount?: number; // Optional star count override for performance
 }
 
 /**
  * Galaxy Background Component
- * 
+ *
  * Renders a beautiful Milky Way galaxy background using CSS gradients
  * and canvas-based star field for astronomical accuracy.
  */
 export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
-  className = '',
+  className = "",
   intensity = 0.7,
   showMilkyWay = true,
-  animated = true
+  animated = true,
+  starCount,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -28,7 +30,7 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Generate background stars
@@ -39,14 +41,15 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      // Create starry background
-      const starCount = Math.floor((width * height) / 1000); // Density based on area
+      // Create starry background with optional override - reduced for better readability
+      const finalStarCount =
+        starCount || Math.min(75, Math.floor((width * height) / 16000)); // Significantly reduced density
 
-      for (let i = 0; i < starCount; i++) {
+      for (let i = 0; i < finalStarCount; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
-        const size = Math.random() * 2;
-        const opacity = Math.random() * intensity;
+        const size = Math.random() * 1.5; // Smaller stars
+        const opacity = Math.random() * intensity * 0.4; // Much dimmer stars
 
         // Create star color based on temperature
         const temp = Math.random();
@@ -68,12 +71,12 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
         ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Add subtle glow for brighter stars
-        if (opacity > 0.5) {
+        // Add subtle glow only for the brightest stars (much reduced)
+        if (opacity > 0.15) {
           ctx.shadowColor = color;
-          ctx.shadowBlur = size * 2;
+          ctx.shadowBlur = size * 1;
           ctx.beginPath();
-          ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+          ctx.arc(x, y, size * 0.3, 0, Math.PI * 2);
           ctx.fill();
           ctx.shadowBlur = 0;
         }
@@ -81,7 +84,12 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
 
       // Add Milky Way dust lanes if enabled
       if (showMilkyWay) {
-        const gradient = ctx.createLinearGradient(0, height * 0.3, width, height * 0.7);
+        const gradient = ctx.createLinearGradient(
+          0,
+          height * 0.3,
+          width,
+          height * 0.7
+        );
         gradient.addColorStop(0, `rgba(139, 69, 19, ${0.1 * intensity})`);
         gradient.addColorStop(0.3, `rgba(160, 82, 45, ${0.15 * intensity})`);
         gradient.addColorStop(0.5, `rgba(205, 133, 63, ${0.2 * intensity})`);
@@ -98,22 +106,31 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
           const nebulaSize = 50 + Math.random() * 100;
 
           const nebulaGradient = ctx.createRadialGradient(
-            nebulaX, nebulaY, 0,
-            nebulaX, nebulaY, nebulaSize
+            nebulaX,
+            nebulaY,
+            0,
+            nebulaX,
+            nebulaY,
+            nebulaSize
           );
 
           const colors = [
             `rgba(255, 20, 147, ${0.1 * intensity})`, // Deep pink
             `rgba(138, 43, 226, ${0.08 * intensity})`, // Blue violet
-            `rgba(75, 0, 130, ${0.05 * intensity})`    // Indigo
+            `rgba(75, 0, 130, ${0.05 * intensity})`, // Indigo
           ];
 
           const color = colors[Math.floor(Math.random() * colors.length)];
           nebulaGradient.addColorStop(0, color);
-          nebulaGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          nebulaGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
           ctx.fillStyle = nebulaGradient;
-          ctx.fillRect(nebulaX - nebulaSize, nebulaY - nebulaSize, nebulaSize * 2, nebulaSize * 2);
+          ctx.fillRect(
+            nebulaX - nebulaSize,
+            nebulaY - nebulaSize,
+            nebulaSize * 2,
+            nebulaSize * 2
+          );
         }
       }
     };
@@ -122,25 +139,25 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     const resizeCanvas = () => {
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      
+
       // Set the actual canvas size in memory
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      
+
       // Scale the canvas back down using CSS
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
-      
+
       // Scale the drawing context so everything draws at the correct size
       ctx.scale(dpr, dpr);
-      
+
       // Force regeneration after resize
       generateStars();
     };
 
     // Initialize canvas
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     // Animation loop for twinkling effect
     let animationId: number;
@@ -158,12 +175,12 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     }
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [intensity, showMilkyWay, animated]);
+  }, [intensity, showMilkyWay, animated, starCount]);
 
   return (
     <div className={`${styles.galaxyContainer} ${className}`}>
@@ -186,19 +203,19 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
             : `radial-gradient(ellipse at center, 
                 rgba(25, 25, 112, 0.6) 0%, 
                 rgba(0, 0, 0, 0.8) 70%, 
-                rgba(0, 0, 0, 1) 100%)`
+                rgba(0, 0, 0, 1) 100%)`,
         }}
       />
 
       {/* Canvas for detailed stars */}
-      <canvas
-        ref={canvasRef}
-        className={styles.galaxyCanvas}
-      />
+      <canvas ref={canvasRef} className={styles.galaxyCanvas} />
 
       {/* Animated cosmic dust overlay */}
       {animated && (
-        <div className={styles.cosmicDust} style={{ opacity: intensity * 0.3 }} />
+        <div
+          className={styles.cosmicDust}
+          style={{ opacity: intensity * 0.3 }}
+        />
       )}
     </div>
   );

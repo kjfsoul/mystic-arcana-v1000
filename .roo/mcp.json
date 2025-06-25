@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "supabase-mystic": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=pqfsbxcbsxuyfgqrxdob"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_020fbae65d5e3eb2f67e40d1c81a20a08dfee231"
+      }
+    },
+    "tarot-engine-mystic": {
+      "command": "node",
+      "args": ["mcp-servers/custom/tarot/server.js"]
+    },
+    "astrology-engine-mystic": {
+      "command": "node",
+      "args": ["mcp-servers/custom/astrology/server.js"]
+    },
+    "agent-orchestrator-mystic": {
+      "command": "node",
+      "args": ["mcp-servers/custom/agent-orchestrator/server.js"]
+    },
+    "claude-mystic": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/claude-code", "mcp", "serve"],
+      "env": {
+        "ANTHROPIC_API_KEY": "YOUR_ANTHROPIC_API_KEY"
+      }
+    }
+  }
+}

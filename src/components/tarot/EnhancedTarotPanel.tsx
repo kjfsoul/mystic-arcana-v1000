@@ -9,6 +9,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { AuthModal } from '../auth/AuthModal';
 import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
 import { useCosmicWeather } from '../../utils/cosmic-weather/useCosmicWeather';
+import { MobileTarotReading } from './MobileTarotReading';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import styles from './EnhancedTarotPanel.module.css';
 
 interface EnhancedTarotPanelProps {
@@ -23,6 +25,7 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
 }) => {
   const { user, isGuest } = useAuth();
   const { cosmicInfluence } = useCosmicWeather();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   
   const [currentReading, setCurrentReading] = useState<TarotReading | null>(null);
   const [isPerformingReading, setIsPerformingReading] = useState(false);
@@ -89,6 +92,22 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
   const handleCloseUnlockModal = useCallback(() => {
     setShowUnlockModal(false);
   }, []);
+
+  // Use mobile-optimized component for mobile devices
+  if (isMobile) {
+    return (
+      <>
+        <MobileTarotReading />
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+          mode="signin"
+          title="Sign in to unlock full readings"
+          subtitle="Guest users can only access single card readings"
+        />
+      </>
+    );
+  }
 
   return (
     <div className={`${styles.panel} ${isActive ? styles.active : ''} ${className}`}>

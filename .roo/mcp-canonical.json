@@ -1,0 +1,124 @@
+{
+  "mcpServers": {
+    "// Core MCP Servers": "Official servers from @modelcontextprotocol",
+    
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/kfitz/mystic-arcana-v1000"
+      ],
+      "description": "File system operations within project directory"
+    },
+    
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_STORAGE_PATH": "/Users/kfitz/mystic-arcana-v1000/.cursor/mcp-memory"
+      },
+      "description": "Knowledge graph for agent memory"
+    },
+    
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Web and local search capabilities"
+    },
+    
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "description": "GitHub repository operations"
+    },
+    
+    "// Third-party MCP Servers": "External integrations",
+    
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "env": {
+        "UPSTASH_CONTEXT7_API_KEY": "${UPSTASH_CONTEXT7_API_KEY}"
+      },
+      "description": "Library documentation lookup"
+    },
+    
+    "@21st-dev/magic": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "${TWENTY_FIRST_API_KEY}"
+      },
+      "autoApprove": ["21st_magic_component_builder"],
+      "description": "UI component generation and refinement"
+    },
+    
+    "// Custom Mystic Arcana Servers": "Project-specific functionality",
+    
+    "tarot-engine": {
+      "command": "node",
+      "args": ["./mcp-servers/custom/tarot/server.js"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}"
+      },
+      "description": "Tarot reading engine with deck management"
+    },
+    
+    "astrology-engine": {
+      "command": "node",
+      "args": ["./mcp-servers/custom/astrology/server.js"],
+      "env": {
+        "EPHEMERIS_PATH": "./data/ephemeris"
+      },
+      "description": "Astronomical calculations and birth charts"
+    },
+    
+    "agent-orchestrator": {
+      "command": "node",
+      "args": ["./mcp-servers/custom/agent-orchestrator/server.js"],
+      "env": {
+        "AGENT_REGISTRY_PATH": "./agents/registry.json"
+      },
+      "description": "Multi-agent coordination and task distribution"
+    },
+    
+    "// Optional/Future Servers": "Not currently active",
+    
+    "_supabase-direct": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=${SUPABASE_PROJECT_REF}"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      },
+      "enabled": false,
+      "description": "Direct Supabase database access (when needed)"
+    }
+  },
+  
+  "configuration": {
+    "envFile": ".env.mcp.local",
+    "logLevel": "info",
+    "timeout": 30000,
+    "autoStart": true
+  },
+  
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2025-01-31",
+    "description": "Canonical MCP configuration for Mystic Arcana",
+    "maintainer": "kjfsoul@gmail.com"
+  }
+}

@@ -1,12 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { AuthModal } from '../auth/AuthModal';
 import styles from './Header.module.css';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onHomeClick?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
   const { user, isGuest, signOut, loading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
@@ -39,9 +44,19 @@ export const Header: React.FC = () => {
       >
         <div className={styles.headerContent}>
           {/* Logo/Title */}
-          <div className={styles.logo}>
-            <span className={styles.logoText}>✨ Mystic Arcana</span>
-          </div>
+          {onHomeClick ? (
+            <button onClick={onHomeClick} className={styles.logoLink}>
+              <div className={styles.logo}>
+                <span className={styles.logoText}>✨ Mystic Arcana</span>
+              </div>
+            </button>
+          ) : (
+            <Link href="/" className={styles.logoLink}>
+              <div className={styles.logo}>
+                <span className={styles.logoText}>✨ Mystic Arcana</span>
+              </div>
+            </Link>
+          )}
 
           {/* Authentication Section */}
           <div className={styles.authSection}>

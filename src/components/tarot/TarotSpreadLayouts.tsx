@@ -1,17 +1,11 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import styles from './TarotSpreadLayouts.module.css';
 import { SpreadType } from './MobileTarotSpreadSelector';
-
-interface TarotCard {
-  id: string;
-  name: string;
-  imageUrl: string;
-  position: string;
-  meaning?: string;
-}
+import { TarotCard } from '@/services/tarot/TarotReadingEngine';
 
 interface TarotSpreadLayoutsProps {
   spreadType: SpreadType;
@@ -66,7 +60,7 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
       transition: {
         delay: custom * 0.3,
         duration: 0.6,
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 100
       }
     })
@@ -104,9 +98,11 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
               <div className={styles.card}>
                 {isRevealing ? (
                   <>
-                    <img 
+                    <Image 
                       src={card.imageUrl} 
                       alt={card.name}
+                      width={120}
+                      height={180}
                       className={styles.cardImage}
                     />
                     <div className={styles.cardName}>

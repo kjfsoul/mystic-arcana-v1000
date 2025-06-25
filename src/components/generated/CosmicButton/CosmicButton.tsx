@@ -12,7 +12,14 @@ const CosmicButton: React.FC<CosmicButtonProps> = ({
   onClick,
   variant,
 }) => {
-  return <div className={styles.cosmicbutton}>{/* Component content */}</div>;
+  return (
+    <div 
+      className={`${styles.cosmicbutton} ${styles[variant] || ''}`}
+      onClick={() => onClick}
+    >
+      {text}
+    </div>
+  );
 };
 
 export default CosmicButton;

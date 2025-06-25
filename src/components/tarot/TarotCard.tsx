@@ -14,6 +14,7 @@ interface TarotCardProps {
   onFlip?: () => void;
   disabled?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const TarotCard: React.FC<TarotCardProps> = ({
@@ -24,7 +25,8 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   isFlipped = false,
   onFlip,
   disabled = false,
-  className = ''
+  className = '',
+  style
 }) => {
   const [isFlippedState, setIsFlippedState] = useState(isFlipped);
 
@@ -40,7 +42,7 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   };
 
   return (
-    <div className={`${styles.cardContainer} ${className}`}>
+    <div className={`${styles.cardContainer} ${className}`} style={style}>
       <motion.div
         className={styles.card}
         onClick={handleCardClick}

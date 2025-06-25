@@ -165,6 +165,10 @@ export class TarotEngine {
     positions: string[]
   ): string {
     const baseInterpretations = MOCK_INTERPRETATIONS[spreadType];
+    if (!baseInterpretations || baseInterpretations.length === 0) {
+      console.error("No interpretations found for spread type:", spreadType);
+      return "The cards speak of transformation and new beginnings. Trust in the journey ahead.";
+    }
     const baseInterpretation = baseInterpretations[Math.floor(Math.random() * baseInterpretations.length)];
     
     // Add specific card insights

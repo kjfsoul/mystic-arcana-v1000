@@ -1,0 +1,62 @@
+{
+  "mcpServers": 
+  {
+    "filesystem": 
+    {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/kfitz/Documents/Mystic_Arcana_WebApp/mystic-arcana-v1000"
+      ]
+    },
+    "memory": 
+    {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "brave-search": 
+    {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": 
+      {
+        "BRAVE_API_KEY": "BSA7N3mbuH1WLUgTE-C7wvOS5SR7Srl"
+      }
+    },
+    "context7": 
+    {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ],
+      "env": 
+      {
+        "UPSTASH_CONTEXT7_API_KEY": "upstash-context7-mcp-default-key"
+      }
+    },
+    "@21st-dev/magic": 
+    {
+      "command": "/Users/kfitz/.nvm/versions/node/v23.1.0/bin/npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest"
+      ],
+      "env": 
+      {
+        "API_KEY": "c4437adf873bae7b5f6ff0641fb7bcccf25b4d8b20ceb00f6eb87c131ee51a05"
+      },
+      "autoApprove": [
+        "21st_magic_component_builder"
+      ]
+    }
+   }
+}
+

@@ -39,7 +39,7 @@ export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
           {readings.map(reading => (
             <button
               key={reading.id}
-              className="bg-indigo-900/10 border border-indigo-700/30 rounded-lg p-4 lg:p-5 text-left transition-all duration-300 hover:bg-indigo-900/20 hover:border-indigo-700/50 hover:translate-x-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-transparent"
+              className="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4 lg:p-5 text-left transition-all duration-300 hover:bg-indigo-900/40 hover:border-indigo-700/70 hover:translate-x-1 hover:shadow-lg hover:shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
               onClick={() => onSelectReading?.(reading.id)}
               aria-label={`Select ${reading.name} reading`}
             >
