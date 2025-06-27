@@ -1,0 +1,330 @@
+.cosmicHub {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+}
+
+.galaxyLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contentArea {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  padding-top: 80px; /* Account for header */
+}
+
+.returnButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 20;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(255, 107, 107, 0.9) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(138, 43, 226, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.returnButton:hover {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
+  box-shadow: 
+    0 12px 48px rgba(138, 43, 226, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Hub Styles */
+.hubContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
+}
+
+.hubContent {
+  text-align: center;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.hubTitle {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffd700 0%, #ff6b6b 50%, #4ecdc4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.hubSubtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4rem;
+  font-weight: 300;
+}
+
+.realmCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.realmCard {
+  position: relative;
+  height: 600px;
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  perspective: 1000px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+.tarotCard {
+  background: linear-gradient(135deg, 
+    rgba(138, 43, 226, 0.2) 0%, 
+    rgba(255, 107, 107, 0.2) 50%, 
+    rgba(25, 25, 112, 0.2) 100%);
+  border-color: rgba(138, 43, 226, 0.3);
+  animation: tarotGlow 4s ease-in-out infinite alternate;
+}
+
+.astrologyCard {
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.2) 0%, 
+    rgba(75, 0, 130, 0.2) 50%, 
+    rgba(25, 25, 112, 0.2) 100%);
+  border-color: rgba(255, 215, 0, 0.3);
+  animation: astrologyGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes tarotGlow {
+  0% { 
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(138, 43, 226, 0.2);
+  }
+  100% { 
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(138, 43, 226, 0.4);
+  }
+}
+
+@keyframes astrologyGlow {
+  0% { 
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(255, 215, 0, 0.2);
+  }
+  100% { 
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(255, 215, 0, 0.4);
+  }
+}
+
+.tarotSymbols, .astrologySymbols {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.symbol {
+  font-size: 4rem;
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+.symbol:nth-child(1) { animation-delay: 0s; }
+.symbol:nth-child(2) { animation-delay: 1.5s; }
+.symbol:nth-child(3) { animation-delay: 3s; }
+.symbol:nth-child(4) { animation-delay: 4.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(5deg); }
+  50% { transform: translateY(-5px) rotate(-3deg); }
+  75% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cardDescription {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 300px;
+}
+
+.cardFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardFeatures span {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Room Container */
+.roomContainer {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+.roomHeader {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 15;
+}
+
+.backButton {
+  background: rgba(138, 43, 226, 0.2);
+  border: 1px solid rgba(138, 43, 226, 0.4);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.backButton:hover {
+  background: rgba(138, 43, 226, 0.3);
+  border-color: rgba(138, 43, 226, 0.6);
+  transform: translateY(-2px);
+}
+
+.tarotPanel {
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hubTitle {
+    font-size: 2.5rem;
+  }
+  
+  .hubSubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .realmCards {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .realmCard {
+    height: 400px;
+  }
+  
+  .cardTitle {
+    font-size: 1.8rem;
+  }
+  
+  .cardDescription {
+    font-size: 1rem;
+  }
+  
+  .returnButton {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hubContainer {
+    padding: 1rem;
+  }
+  
+  .hubTitle {
+    font-size: 2rem;
+  }
+  
+  .cardContent {
+    padding: 2rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+}

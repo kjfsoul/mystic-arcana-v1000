@@ -31,5 +31,10 @@
         "ANTHROPIC_API_KEY": "YOUR_ANTHROPIC_API_KEY"
       }
     }
+  },
+  "HackerNews": {
+    "type": "STDIO",
+    "command": "uvx",
+    "args": ["mcp-hn"]
   }
 }

@@ -34,23 +34,27 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
     name: '',
     date: '1990-06-15',
     time: '14:30',
-    latitude: '40.7128',
-    longitude: '-74.0060',
     timezone: 'America/New_York'
   });
+  const [partnerLocation, setPartnerLocation] = useState<LocationResult | null>(null);
 
   const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsCalculating(true);
     
+    if (!partnerLocation) {
+      alert('Please select a birth location for your partner.');
+      return;
+    }
+
     try {
       const combinedDateTime = new Date(`${partnerData.date}T${partnerData.time}:00`);
       
       const partnerBirthData: BirthData = {
         date: combinedDateTime,
-        latitude: parseFloat(partnerData.latitude),
-        longitude: parseFloat(partnerData.longitude),
-        timezone: partnerData.timezone
+        latitude: partnerLocation.latitude,
+        longitude: partnerLocation.longitude,
+        timezone: partnerLocation.timezone || partnerData.timezone
       };
 
       // Calculate compatibility
@@ -111,27 +115,12 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             />
           </div>
           
-          <div className={styles.formField}>
-            <label>Latitude:</label>
-            <input
-              type="number"
-              step="0.0001"
-              value={partnerData.latitude}
-              onChange={(e) => setPartnerData({ ...partnerData, latitude: e.target.value })}
-              placeholder="40.7128 (NYC)"
-              required
-            />
-          </div>
-          
-          <div className={styles.formField}>
-            <label>Longitude:</label>
-            <input
-              type="number"
-              step="0.0001"
-              value={partnerData.longitude}
-              onChange={(e) => setPartnerData({ ...partnerData, longitude: e.target.value })}
-              placeholder="-74.0060 (NYC)"
-              required
+          <div className={styles.locationField}>
+            <LocationSearch
+              value={partnerLocation}
+              onChange={setPartnerLocation}
+              placeholder="Enter partner's birth city"
+              label="Partner's Birth Location"
             />
           </div>
         </div>

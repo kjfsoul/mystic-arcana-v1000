@@ -1,7 +1,7 @@
 'use client';
 
-import { UnifiedResponsiveLayout } from '../components/layout/UnifiedResponsiveLayout';
+import { CosmicHub } from '../components/layout/CosmicHub';
 
 export default function Home() {
-  return <UnifiedResponsiveLayout />;
+  return <CosmicHub />;
 }

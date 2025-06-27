@@ -41,17 +41,22 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
 
   // Get suggestions when query changes
   useEffect(() => {
-    if (query.length >= 2) {
-      const newSuggestions = getSuggestions(query);
-      setSuggestions(newSuggestions);
-      setShowSuggestions(true);
-    } else if (query.length === 0) {
-      setSuggestions(getPopularLocations());
-      setShowSuggestions(false);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
+    const fetchSuggestions = async () => {
+      if (query.length >= 2) {
+        const newSuggestions = await getSuggestions(query);
+        setSuggestions(newSuggestions);
+        setShowSuggestions(true);
+      } else {
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(() => {
+      fetchSuggestions();
+    }, 300); // Debounce API calls
+
+    return () => clearTimeout(debounceTimer);
   }, [query]);
 
   // Close suggestions when clicking outside
