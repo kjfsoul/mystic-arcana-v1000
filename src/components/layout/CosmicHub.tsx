@@ -6,6 +6,7 @@ import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
 import { UnifiedTarotPanel } from '../tarot/UnifiedTarotPanel';
 import { Header } from './Header';
+import { DailyHoroscopeWidget } from '../horoscope/DailyHoroscopeWidget';
 import styles from './CosmicHub.module.css';
 
 export type ViewMode = 'hub' | 'tarot' | 'astrology';
@@ -122,6 +123,16 @@ export const CosmicHub: React.FC = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Daily Horoscope Widget */}
+        <motion.div
+          className={styles.horoscopeSection}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <DailyHoroscopeWidget className={styles.horoscopeWidget} />
+        </motion.div>
       </div>
     </motion.div>
   );

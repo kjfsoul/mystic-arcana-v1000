@@ -311,6 +311,18 @@
   }
 }
 
+/* Horoscope Section */
+.horoscopeSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.horoscopeWidget {
+  max-width: 600px;
+}
+
 @media (max-width: 480px) {
   .hubContainer {
     padding: 1rem;

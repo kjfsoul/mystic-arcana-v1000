@@ -69,7 +69,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string) => {
-    return await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`
+      }
+    });
+    
+    // If signup is successful but email confirmation is required
+    if (data?.user && !data.session) {
+      console.log('📧 Email confirmation required for:', email);
+    }
+    
+    return { data, error };
   };
 
   const signIn = async (email: string, password: string) => {

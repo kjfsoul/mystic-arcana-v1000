@@ -1,0 +1,224 @@
+.container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.phaseContainer {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.phaseTitle {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.phaseDescription {
+  font-size: 1.1rem;
+  color: #b19cd9;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.loading {
+  text-align: center;
+}
+
+.loadingIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 2rem;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.deckContainer {
+  margin: 3rem 0;
+  perspective: 1000px;
+}
+
+.deck {
+  position: relative;
+  margin: 0 auto;
+  width: 120px;
+  height: 180px;
+}
+
+.deckCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a4e 0%, #1a1a2e 100%);
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deckCard::before {
+  content: '✨';
+  font-size: 2rem;
+  color: #9370db;
+}
+
+.cutDeckContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.deckHalf {
+  width: 80px;
+  height: 120px;
+  background: linear-gradient(135deg, #2a2a4e 0%, #1a1a2e 100%);
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.drawPrompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.cardCount {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+}
+
+.cardsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.button {
+  padding: 1rem 2rem;
+  background: rgba(138, 43, 226, 0.2);
+  border: 2px solid rgba(138, 43, 226, 0.5);
+  border-radius: 25px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.button:hover {
+  background: rgba(138, 43, 226, 0.3);
+  border-color: rgba(138, 43, 226, 0.8);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+}
+
+.primaryButton:hover {
+  background: linear-gradient(135deg, #9370db 0%, #ba55d3 100%);
+  box-shadow: 0 6px 30px rgba(138, 43, 226, 0.5);
+}
+
+.glowButton {
+  position: relative;
+  overflow: hidden;
+}
+
+.glowButton::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+.error {
+  color: #ff6b6b;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .phaseTitle {
+    font-size: 1.5rem;
+  }
+  
+  .phaseDescription {
+    font-size: 1rem;
+  }
+  
+  .cardsGrid {
+    gap: 1rem;
+  }
+  
+  .cutDeckContainer {
+    gap: 1rem;
+  }
+  
+  .deckHalf {
+    width: 60px;
+    height: 90px;
+  }
+}

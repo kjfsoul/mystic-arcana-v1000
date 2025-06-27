@@ -118,6 +118,16 @@
   text-align: center;
 }
 
+.success {
+  color: #4ecdc4;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  border-radius: 6px;
+  text-align: center;
+}
+
 .submitButton {
   background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
   border: none;
@@ -221,6 +231,11 @@
 
 .linkButton:hover {
   color: #9370db;
+}
+
+.forgotPassword {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
 }
 
 /* Mobile responsiveness */

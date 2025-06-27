@@ -122,7 +122,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
         onChange(null);
       }
     } catch {
-      setSearchError('Unable to search for location. Please try again.');
+      setSearchError('Unable to find location. Please check your spelling or try a different search.');
       onChange(null);
     } finally {
       setIsLoading(false);
@@ -250,7 +250,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           <div className={styles.selectedContent}>
             <div className={styles.selectedName}>{value.name}</div>
             <div className={styles.selectedCoords}>
-              {value.latitude.toFixed(4)}°, {value.longitude.toFixed(4)}°
+              
             </div>
           </div>
         </motion.div>

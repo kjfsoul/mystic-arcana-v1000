@@ -10,8 +10,10 @@ export interface LocationResult {
 
 export interface GeocodingError {
   message: string;
-  code: 'NO_RESULTS' | 'NETWORK_ERROR' | 'INVALID_INPUT';
+  code: 'NO_RESULTS' | 'NETWORK_ERROR' | 'INVALID_INPUT' | 'API_ERROR';
 }
+
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export async function geocodeLocation(query: string): Promise<LocationResult | GeocodingError> {
   if (!query || query.trim().length < 2) {
@@ -21,28 +23,31 @@ export async function geocodeLocation(query: string): Promise<LocationResult | G
     };
   }
 
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=1`;
+  
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${GOOGLE_MAPS_API_KEY}`;
 
   try {
-    const response = await fetch(url, { headers: { 'User-Agent': 'MysticArcana/1.0' } });
+    const response = await fetch(url);
     if (!response.ok) {
       return { message: 'Network response was not ok.', code: 'NETWORK_ERROR' };
     }
     const data = await response.json();
 
-    if (data && data.length > 0) {
-      const result = data[0];
-      return {
-        name: result.display_name,
-        latitude: parseFloat(result.lat),
-        longitude: parseFloat(result.lon),
-        country: result.address.country,
-        state: result.address.state,
-        city: result.address.city || result.address.town || result.address.village,
-      };
+    if (data.status === 'OK' && data.results && data.results.length > 0) {
+      const result = data.results[0];
+      const location = parseGoogleMapsResult(result);
+      
+      // Get timezone
+      if (location) {
+        const timezone = await getTimezone(location.latitude, location.longitude);
+        location.timezone = timezone;
+      }
+      
+      return location || { message: `Location "${query}" not found.`, code: 'NO_RESULTS' };
+    } else {
+      return { message: `Location "${query}" not found. Please try a different search.`, code: 'NO_RESULTS' };
     }
-
-    return { message: `Location "${query}" not found. Please try a different search.`, code: 'NO_RESULTS' };
   } catch (error) {
     return { message: 'An error occurred while fetching location data.', code: 'NETWORK_ERROR' };
   }
@@ -51,30 +56,78 @@ export async function geocodeLocation(query: string): Promise<LocationResult | G
 export async function getSuggestions(query: string): Promise<LocationResult[]> {
   if (!query || query.length < 2) return [];
 
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5`;
+  
+
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&types=(cities)&key=${GOOGLE_MAPS_API_KEY}`;
 
   try {
-    const response = await fetch(url, { headers: { 'User-Agent': 'MysticArcana/1.0' } });
+    const response = await fetch(url);
     if (!response.ok) {
       return [];
     }
     const data = await response.json();
 
-    if (data && data.length > 0) {
-      return data.map((result: any) => ({
-        name: result.display_name,
-        latitude: parseFloat(result.lat),
-        longitude: parseFloat(result.lon),
-        country: result.address.country,
-        state: result.address.state,
-        city: result.address.city || result.address.town || result.address.village,
+    if (data.status === 'OK' && data.predictions && data.predictions.length > 0) {
+      const suggestions = await Promise.all(data.predictions.map(async (prediction: any) => {
+        const geocoded = await geocodeLocation(prediction.description);
+        if ('latitude' in geocoded) {
+          return geocoded;
+        }
+        return null;
       }));
+      return suggestions.filter((s): s is LocationResult => s !== null);
     }
 
     return [];
   } catch (error) {
     return [];
   }
+}
+
+async function getTimezone(lat: number, lng: number): Promise<string | undefined> {
+  
+  
+  const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${Math.floor(Date.now() / 1000)}&key=${GOOGLE_MAPS_API_KEY}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.status === 'OK') {
+      return data.timeZoneId;
+    }
+  } catch (error) {
+    console.error('Error fetching timezone:', error);
+  }
+  return undefined;
+}
+
+function parseGoogleMapsResult(result: any): LocationResult | null {
+  if (!result.geometry || !result.geometry.location) {
+    return null;
+  }
+
+  const location: Partial<LocationResult> = {
+    name: result.formatted_address,
+    latitude: result.geometry.location.lat,
+    longitude: result.geometry.location.lng,
+  };
+
+  result.address_components.forEach((component: any) => {
+    if (component.types.includes('country')) {
+      location.country = component.long_name;
+    }
+    if (component.types.includes('administrative_area_level_1')) {
+      location.state = component.long_name;
+    }
+    if (component.types.includes('locality')) {
+      location.city = component.long_name;
+    }
+  });
+
+  if (location.name && location.latitude && location.longitude && location.country) {
+    return location as LocationResult;
+  }
+
+  return null;
 }
 
 export function getPopularLocations(): LocationResult[] {

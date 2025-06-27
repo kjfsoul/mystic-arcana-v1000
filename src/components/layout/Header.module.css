@@ -128,6 +128,22 @@
   border-color: rgba(255, 107, 107, 0.7);
 }
 
+.readingsLink {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(138, 43, 226, 0.5);
+  background: rgba(138, 43, 226, 0.1);
+  color: #9370db;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.readingsLink:hover {
+  background: rgba(138, 43, 226, 0.2);
+  border-color: rgba(138, 43, 226, 0.7);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .headerContent {

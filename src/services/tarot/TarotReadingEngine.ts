@@ -1,11 +1,10 @@
 import { supabase } from '@/lib/supabase/client';
-import { RIDER_WAITE_DECK } from '@/lib/tarot/RiderWaiteDeck';
-import { TarotCardData } from '@/lib/tarot/TarotEngine';
+import { TarotDeckService } from './TarotDeckService';
+import { TarotCard as BaseTarotCard, SpreadType } from '@/types/tarot';
 
-export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
+export type { SpreadType };
 
-export interface TarotCard extends TarotCardData {
-  imageUrl: string;
+export interface TarotCard extends BaseTarotCard {
   isReversed?: boolean;
 }
 
@@ -33,23 +32,28 @@ export interface TarotReading {
 
 export class TarotReadingEngine {
   private deck: TarotCard[] = [];
+  private deckService: TarotDeckService;
+  private isInitialized = false;
   
   constructor() {
-    this.initializeDeck();
+    this.deckService = TarotDeckService.getInstance();
   }
 
-  private initializeDeck() {
-    // Initialize with Rider-Waite deck data
-    this.deck = RIDER_WAITE_DECK.map(card => ({
-      ...card,
-      imageUrl: this.getCardImageUrl(card),
-      isReversed: false
-    }));
-  }
-
-  private getCardImageUrl(card: TarotCardData): string {
-    // Use the frontImage from the card data, which is already properly formatted
-    return card.frontImage;
+  private async initializeDeck() {
+    if (this.isInitialized) return;
+    
+    try {
+      const deckData = await this.deckService.getDefaultDeck();
+      this.deck = deckData.cards.map(card => ({
+        ...card,
+        isReversed: false
+      }));
+      this.isInitialized = true;
+      console.log(`🎴 Initialized deck with ${this.deck.length} cards`);
+    } catch (error) {
+      console.error('❌ Failed to initialize deck:', error);
+      throw error;
+    }
   }
 
   private getRankName(number: number): string {
@@ -90,6 +94,9 @@ export class TarotReadingEngine {
    * Draw cards for a specific spread
    */
   public async drawCards(spreadType: SpreadType, question?: string): Promise<TarotReading> {
+    // Ensure deck is initialized
+    await this.initializeDeck();
+    
     const shuffledDeck = this.shuffleDeck();
     const cardCount = this.getCardCount(spreadType);
     const drawnCards = shuffledDeck.slice(0, cardCount);

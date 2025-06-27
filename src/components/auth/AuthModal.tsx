@@ -35,6 +35,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   
   const { signIn, signUp, signInWithGoogle } = useAuth();
 
@@ -42,16 +43,29 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSuccess(null);
 
     try {
-      const { error } = mode === 'signin' 
-        ? await signIn(email, password)
-        : await signUp(email, password);
-
-      if (error) {
-        setError(error.message);
+      if (mode === 'signin') {
+        const { error } = await signIn(email, password);
+        if (error) {
+          setError(error.message);
+        } else {
+          onClose();
+        }
       } else {
-        onClose();
+        const { data, error } = await signUp(email, password);
+        if (error) {
+          setError(error.message);
+        } else if (data?.user && !data.session) {
+          // Email confirmation required
+          setSuccess('Check your email to confirm your account!');
+          setEmail('');
+          setPassword('');
+        } else if (data?.session) {
+          // Auto-logged in after signup
+          onClose();
+        }
       }
     } catch {
       setError('An unexpected error occurred');
@@ -156,10 +170,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </div>
               )}
 
+              {success && (
+                <div className={styles.success} role="alert">
+                  {success}
+                </div>
+              )}
+
               <button
                 type="submit"
                 className={styles.submitButton}
-                disabled={loading}
+                disabled={loading || !!success}
               >
                 {loading ? 'Loading...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
               </button>
@@ -181,16 +201,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             <div className={styles.footer}>
               {mode === 'signin' ? (
-                <p>
-                  Don&apos;t have an account?{' '}
-                  <button
-                    type="button"
-                    onClick={toggleMode}
-                    className={styles.linkButton}
-                  >
-                    Sign up
-                  </button>
-                </p>
+                <>
+                  <p>
+                    Don&apos;t have an account?{' '}
+                    <button
+                      type="button"
+                      onClick={toggleMode}
+                      className={styles.linkButton}
+                    >
+                      Sign up
+                    </button>
+                  </p>
+                  <p className={styles.forgotPassword}>
+                    <a href="/auth/reset-password" className={styles.linkButton}>
+                      Forgot your password?
+                    </a>
+                  </p>
+                </>
               ) : (
                 <p>
                   Already have an account?{' '}
