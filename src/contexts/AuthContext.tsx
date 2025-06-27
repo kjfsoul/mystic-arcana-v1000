@@ -3,12 +3,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session, AuthError, AuthResponse } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase/client';
+import { profileService, UserProfile } from '../services/profileService';
 
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string) => Promise<AuthResponse>;
+  signUp: (email: string, password: string, profileData?: UserProfile) => Promise<AuthResponse>;
   signIn: (email: string, password: string) => Promise<AuthResponse>;
   signInWithGoogle: () => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<{ error: AuthError | null }>;
@@ -68,8 +69,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({ 
+  const signUp = async (email: string, password: string, profileData?: UserProfile): Promise<AuthResponse> => {
+    const authResponse = await supabase.auth.signUp({ 
       email, 
       password,
       options: {
@@ -77,12 +78,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
     
-    // If signup is successful but email confirmation is required
-    if (data?.user && !data.session) {
-      console.log('📧 Email confirmation required for:', email);
+    // If signup is successful and user is created
+    if (authResponse.data?.user && !authResponse.error) {
+      // Create profile if profile data is provided
+      if (profileData && Object.keys(profileData).length > 0) {
+        try {
+          await profileService.createProfile(authResponse.data.user.id, profileData);
+          console.log('✅ Profile created successfully');
+        } catch (profileError) {
+          console.error('❌ Error creating profile:', profileError);
+          // Don't return error here as auth was successful
+        }
+      }
+      
+      if (!authResponse.data.session) {
+        console.log('📧 Email confirmation required for:', email);
+      }
     }
     
-    return { data, error };
+    return authResponse;
   };
 
   const signIn = async (email: string, password: string) => {

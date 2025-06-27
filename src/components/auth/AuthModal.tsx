@@ -28,11 +28,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setMode(initialMode);
       setEmail('');
       setPassword('');
+      setBirthDate('');
+      setBirthTime('');
+      setBirthLocation('');
       setError(null);
     }
   }, [isOpen, initialMode]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [birthTime, setBirthTime] = useState('');
+  const [birthLocation, setBirthLocation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -54,7 +60,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           onClose();
         }
       } else {
-        const { data, error } = await signUp(email, password);
+        // Prepare profile data for signup
+        const profileData: Record<string, string> = {};
+        if (birthDate) profileData.birth_date = birthDate;
+        if (birthTime) profileData.birth_time = birthTime;
+        if (birthLocation) profileData.birth_location = birthLocation;
+        
+        const { data, error } = await signUp(email, password, profileData);
         if (error) {
           setError(error.message);
         } else if (data?.user && !data.session) {
@@ -62,6 +74,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           setSuccess('Check your email to confirm your account!');
           setEmail('');
           setPassword('');
+          setBirthDate('');
+          setBirthTime('');
+          setBirthLocation('');
         } else if (data?.session) {
           // Auto-logged in after signup
           onClose();
@@ -163,6 +178,51 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   minLength={6}
                 />
               </div>
+
+              {mode === 'signup' && (
+                <>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="birthDate" className={styles.label}>
+                      Birth Date
+                    </label>
+                    <input
+                      id="birthDate"
+                      type="date"
+                      value={birthDate}
+                      onChange={(e) => setBirthDate(e.target.value)}
+                      className={styles.input}
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="birthTime" className={styles.label}>
+                      Birth Time (Optional)
+                    </label>
+                    <input
+                      id="birthTime"
+                      type="time"
+                      value={birthTime}
+                      onChange={(e) => setBirthTime(e.target.value)}
+                      className={styles.input}
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="birthLocation" className={styles.label}>
+                      Birth Location (Optional)
+                    </label>
+                    <input
+                      id="birthLocation"
+                      type="text"
+                      value={birthLocation}
+                      onChange={(e) => setBirthLocation(e.target.value)}
+                      className={styles.input}
+                      placeholder="City, Country"
+                    />
+                  </div>
+                </>
+              )}
 
               {error && (
                 <div className={styles.error} role="alert">

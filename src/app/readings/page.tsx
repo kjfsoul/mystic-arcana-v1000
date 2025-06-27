@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -27,15 +27,7 @@ export default function ReadingsPage() {
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  useEffect(() => {
-    if (isGuest) {
-      setShowAuthModal(true);
-      return;
-    }
-    loadReadings();
-  }, [user, isGuest]);
-
-  const loadReadings = async () => {
+  const loadReadings = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -55,7 +47,15 @@ export default function ReadingsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (isGuest) {
+      setShowAuthModal(true);
+      return;
+    }
+    loadReadings();
+  }, [user, isGuest, loadReadings]);
 
   const formatSpreadType = (spreadType: string) => {
     const types = {

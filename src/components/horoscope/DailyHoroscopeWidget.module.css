@@ -219,3 +219,80 @@
     margin-bottom: 0.5rem;
   }
 }
+
+/* Personalized horoscope styles */
+.personalizedSection {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.1);
+  margin-bottom: 1rem;
+}
+
+.zodiacHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.zodiacSymbol {
+  font-size: 1.5rem;
+  color: #ffd700;
+}
+
+.signName {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.personalizedInsight {
+  margin-bottom: 1rem;
+}
+
+.insight {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e6e6fa;
+  font-style: italic;
+}
+
+.personalizedAdvice {
+  margin-bottom: 1rem;
+}
+
+.adviceLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #9370db;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.advice {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.focusArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.focusLabel {
+  font-size: 0.8rem;
+  color: #9370db;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.focusValue {
+  font-size: 0.9rem;
+  color: #ffd700;
+  font-weight: 500;
+}

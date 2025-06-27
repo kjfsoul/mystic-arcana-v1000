@@ -1,11 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
 // import { useAuth } from '../../contexts/AuthContext'; // For future user-specific features
-import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
-import { calculateCompatibility, CompatibilityResult } from '@/lib/astrology/SynastryCalculator';
-import styles from './CompatibilityInsights.module.css';
+import { LocationSearch } from "@/components/forms/LocationSearch";
+import { BirthData } from "@/lib/astrology/AstronomicalCalculator";
+import {
+  calculateCompatibility,
+  CompatibilityResult,
+} from "@/lib/astrology/SynastryCalculator";
+import styles from "./CompatibilityInsights.module.css";
 
 interface CompatibilityInsightsProps {
   userBirthData: BirthData;
@@ -21,55 +25,65 @@ interface PartnerFormData {
   timezone: string;
 }
 
-export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({ 
-  userBirthData, 
-  onBack 
+export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
+  userBirthData,
+  onBack,
 }) => {
   // const { user } = useAuth(); // For future user-specific features
   const [showPartnerForm, setShowPartnerForm] = useState(true);
-  const [compatibilityResult, setCompatibilityResult] = useState<CompatibilityResult | null>(null);
+  const [compatibilityResult, setCompatibilityResult] =
+    useState<CompatibilityResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-  
+
   const [partnerData, setPartnerData] = useState<PartnerFormData>({
-    name: '',
-    date: '1990-06-15',
-    time: '14:30',
-    timezone: 'America/New_York'
+    name: "",
+    date: "1990-06-15",
+    time: "14:30",
+    latitude: "",
+    longitude: "",
+    timezone: "America/New_York",
   });
-  const [partnerLocation, setPartnerLocation] = useState<LocationResult | null>(null);
+  const [partnerLocation, setPartnerLocation] = useState<
+    import("@/lib/location/GeocodingService").LocationResult | null
+  >(null);
 
   const handlePartnerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsCalculating(true);
-    
+
     if (!partnerLocation) {
-      alert('Please select a birth location for your partner.');
+      alert("Please select a birth location for your partner.");
       return;
     }
 
     try {
-      const combinedDateTime = new Date(`${partnerData.date}T${partnerData.time}:00`);
-      
+      const combinedDateTime = new Date(
+        `${partnerData.date}T${partnerData.time}:00`
+      );
+
       const partnerBirthData: BirthData = {
         date: combinedDateTime,
         latitude: partnerLocation.latitude,
         longitude: partnerLocation.longitude,
-        timezone: partnerLocation.timezone || partnerData.timezone
+        timezone: partnerLocation.timezone || partnerData.timezone,
       };
 
       // Calculate compatibility
-      const result = await calculateCompatibility(userBirthData, partnerBirthData);
+      const result = await calculateCompatibility(
+        userBirthData,
+        partnerBirthData
+      );
       setCompatibilityResult(result);
       setShowPartnerForm(false);
     } catch (error) {
-      console.error('Error calculating compatibility:', error);
+      console.error("Error calculating compatibility:", error);
     } finally {
       setIsCalculating(false);
     }
   };
 
   const renderPartnerForm = () => (
-    <motion.div 
+    <motion.div
       className={styles.formContainer}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -88,7 +102,9 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
           <input
             type="text"
             value={partnerData.name}
-            onChange={(e) => setPartnerData({ ...partnerData, name: e.target.value })}
+            onChange={(e) =>
+              setPartnerData({ ...partnerData, name: e.target.value })
+            }
             placeholder="Enter their name"
             required
           />
@@ -100,21 +116,25 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             <input
               type="date"
               value={partnerData.date}
-              onChange={(e) => setPartnerData({ ...partnerData, date: e.target.value })}
+              onChange={(e) =>
+                setPartnerData({ ...partnerData, date: e.target.value })
+              }
               required
             />
           </div>
-          
+
           <div className={styles.formField}>
             <label>Birth Time:</label>
             <input
               type="time"
               value={partnerData.time}
-              onChange={(e) => setPartnerData({ ...partnerData, time: e.target.value })}
+              onChange={(e) =>
+                setPartnerData({ ...partnerData, time: e.target.value })
+              }
               required
             />
           </div>
-          
+
           <div className={styles.locationField}>
             <LocationSearch
               value={partnerLocation}
@@ -124,17 +144,17 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             />
           </div>
         </div>
-        
+
         <div className={styles.formActions}>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={styles.calculateButton}
             disabled={isCalculating}
           >
-            {isCalculating ? '✨ Calculating...' : 'Analyze Compatibility ✨'}
+            {isCalculating ? "✨ Calculating..." : "Analyze Compatibility ✨"}
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={styles.cancelButton}
             onClick={onBack}
           >
@@ -149,7 +169,7 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
     if (!compatibilityResult) return null;
 
     return (
-      <motion.div 
+      <motion.div
         className={styles.resultsContainer}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -164,7 +184,7 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
 
         <div className={styles.compatibilityGrid}>
           {/* Love Compatibility */}
-          <motion.div 
+          <motion.div
             className={styles.compatibilityCard}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -177,21 +197,29 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             <div className={styles.rating}>
               <div className={styles.ratingStars}>
                 {[...Array(5)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={i < compatibilityResult.love.rating ? styles.starFilled : styles.starEmpty}
+                  <span
+                    key={i}
+                    className={
+                      i < compatibilityResult.love.rating
+                        ? styles.starFilled
+                        : styles.starEmpty
+                    }
                   >
                     ★
                   </span>
                 ))}
               </div>
-              <span className={styles.ratingText}>{compatibilityResult.love.rating}/5</span>
+              <span className={styles.ratingText}>
+                {compatibilityResult.love.rating}/5
+              </span>
             </div>
-            <p className={styles.cardDescription}>{compatibilityResult.love.description}</p>
+            <p className={styles.cardDescription}>
+              {compatibilityResult.love.description}
+            </p>
           </motion.div>
 
           {/* Friendship Compatibility */}
-          <motion.div 
+          <motion.div
             className={styles.compatibilityCard}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -204,21 +232,29 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             <div className={styles.rating}>
               <div className={styles.ratingStars}>
                 {[...Array(5)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={i < compatibilityResult.friendship.rating ? styles.starFilled : styles.starEmpty}
+                  <span
+                    key={i}
+                    className={
+                      i < compatibilityResult.friendship.rating
+                        ? styles.starFilled
+                        : styles.starEmpty
+                    }
                   >
                     ★
                   </span>
                 ))}
               </div>
-              <span className={styles.ratingText}>{compatibilityResult.friendship.rating}/5</span>
+              <span className={styles.ratingText}>
+                {compatibilityResult.friendship.rating}/5
+              </span>
             </div>
-            <p className={styles.cardDescription}>{compatibilityResult.friendship.description}</p>
+            <p className={styles.cardDescription}>
+              {compatibilityResult.friendship.description}
+            </p>
           </motion.div>
 
           {/* Teamwork Compatibility */}
-          <motion.div 
+          <motion.div
             className={styles.compatibilityCard}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -231,29 +267,39 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
             <div className={styles.rating}>
               <div className={styles.ratingStars}>
                 {[...Array(5)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={i < compatibilityResult.teamwork.rating ? styles.starFilled : styles.starEmpty}
+                  <span
+                    key={i}
+                    className={
+                      i < compatibilityResult.teamwork.rating
+                        ? styles.starFilled
+                        : styles.starEmpty
+                    }
                   >
                     ★
                   </span>
                 ))}
               </div>
-              <span className={styles.ratingText}>{compatibilityResult.teamwork.rating}/5</span>
+              <span className={styles.ratingText}>
+                {compatibilityResult.teamwork.rating}/5
+              </span>
             </div>
-            <p className={styles.cardDescription}>{compatibilityResult.teamwork.description}</p>
+            <p className={styles.cardDescription}>
+              {compatibilityResult.teamwork.description}
+            </p>
           </motion.div>
         </div>
 
         {/* Overall Summary */}
-        <motion.div 
+        <motion.div
           className={styles.overallSummary}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
           <h4>🌟 Overall Cosmic Connection</h4>
-          <p className={styles.summaryText}>{compatibilityResult.overall.summary}</p>
+          <p className={styles.summaryText}>
+            {compatibilityResult.overall.summary}
+          </p>
           <div className={styles.keyAspects}>
             <h5>Key Aspects:</h5>
             <ul>
@@ -265,7 +311,7 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
         </motion.div>
 
         <div className={styles.resultsActions}>
-          <button 
+          <button
             className={styles.newAnalysisButton}
             onClick={() => {
               setShowPartnerForm(true);
@@ -274,10 +320,7 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
           >
             Analyze Another Partner
           </button>
-          <button 
-            className={styles.backButton}
-            onClick={onBack}
-          >
+          <button className={styles.backButton} onClick={onBack}>
             Back to Astrology
           </button>
         </div>
@@ -314,9 +357,7 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
 
         <AnimatePresence mode="wait">
           {showPartnerForm ? (
-            <motion.div key="form">
-              {renderPartnerForm()}
-            </motion.div>
+            <motion.div key="form">{renderPartnerForm()}</motion.div>
           ) : (
             <motion.div key="results">
               {renderCompatibilityResults()}

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeService';
 import { DailyHoroscope } from '@/types/horoscope';
+import { useAuth } from '@/contexts/AuthContext';
+import { profileService } from '@/services/profileService';
 import styles from './DailyHoroscopeWidget.module.css';
 
 interface DailyHoroscopeWidgetProps {
@@ -15,13 +17,43 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
   const [moonPhase, setMoonPhase] = useState<string>('');
   const [cosmicEvent, setCosmicEvent] = useState<string>('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isPersonalized, setIsPersonalized] = useState(false);
+  
+  const { user } = useAuth();
 
   useEffect(() => {
-    const service = DailyHoroscopeService.getInstance();
-    setHoroscope(service.getGeneralDailyHoroscope());
-    setMoonPhase(service.getCurrentMoonPhase());
-    setCosmicEvent(service.getCosmicEvent());
-  }, []);
+    const loadHoroscope = async () => {
+      const service = DailyHoroscopeService.getInstance();
+      
+      // Set moon phase and cosmic event (same for all users)
+      setMoonPhase(service.getCurrentMoonPhase());
+      setCosmicEvent(service.getCosmicEvent());
+
+      // Try to get personalized horoscope for authenticated users
+      if (user) {
+        try {
+          const profile = await profileService.getProfile(user.id);
+          
+          if (profile?.birth_date) {
+            const personalizedHoroscope = service.getPersonalizedHoroscope(profile.birth_date);
+            if (personalizedHoroscope) {
+              setHoroscope(personalizedHoroscope);
+              setIsPersonalized(true);
+              return;
+            }
+          }
+        } catch (error) {
+          console.error('Error loading user profile for horoscope:', error);
+        }
+      }
+
+      // Fallback to general horoscope
+      setHoroscope(service.getGeneralDailyHoroscope());
+      setIsPersonalized(false);
+    };
+
+    loadHoroscope();
+  }, [user]);
 
   if (!horoscope) {
     return (
@@ -50,7 +82,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
       <div className={styles.header}>
         <h3 className={styles.title}>
           <span className={styles.titleIcon}>✨</span>
-          Daily Cosmic Insight
+          {isPersonalized ? `Your ${horoscope.personalized?.sign} Reading` : 'Daily Cosmic Insight'}
         </h3>
         <button 
           className={styles.expandButton}
@@ -84,6 +116,44 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
           animate={{ height: isExpanded ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
         >
+          {isPersonalized && horoscope.personalized && (
+            <div className={styles.personalizedSection}>
+              <div className={styles.zodiacHeader}>
+                <span className={styles.zodiacSymbol}>
+                  {horoscope.personalized.sign === 'aries' && '♈'}
+                  {horoscope.personalized.sign === 'taurus' && '♉'}
+                  {horoscope.personalized.sign === 'gemini' && '♊'}
+                  {horoscope.personalized.sign === 'cancer' && '♋'}
+                  {horoscope.personalized.sign === 'leo' && '♌'}
+                  {horoscope.personalized.sign === 'virgo' && '♍'}
+                  {horoscope.personalized.sign === 'libra' && '♎'}
+                  {horoscope.personalized.sign === 'scorpio' && '♏'}
+                  {horoscope.personalized.sign === 'sagittarius' && '♐'}
+                  {horoscope.personalized.sign === 'capricorn' && '♑'}
+                  {horoscope.personalized.sign === 'aquarius' && '♒'}
+                  {horoscope.personalized.sign === 'pisces' && '♓'}
+                </span>
+                <span className={styles.signName}>
+                  {horoscope.personalized.sign.charAt(0).toUpperCase() + horoscope.personalized.sign.slice(1)}
+                </span>
+              </div>
+              
+              <div className={styles.personalizedInsight}>
+                <p className={styles.insight}>{horoscope.personalized.insight}</p>
+              </div>
+              
+              <div className={styles.personalizedAdvice}>
+                <span className={styles.adviceLabel}>Your Focus Today:</span>
+                <p className={styles.advice}>{horoscope.personalized.advice}</p>
+              </div>
+              
+              <div className={styles.focusArea}>
+                <span className={styles.focusLabel}>Energy Focus:</span>
+                <span className={styles.focusValue}>{horoscope.personalized.focus}</span>
+              </div>
+            </div>
+          )}
+          
           <div className={styles.moonPhase}>
             <span className={styles.moonIcon}>🌙</span>
             <span>{moonPhase}</span>
