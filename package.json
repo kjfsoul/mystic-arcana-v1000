@@ -24,7 +24,11 @@
     "email:start": "npx tsx scripts/email-scheduler.ts start",
     "email:test": "npx tsx scripts/email-scheduler.ts test",
     "email:urgent": "npx tsx scripts/email-scheduler.ts urgent",
-    "email:send": "npx tsx src/agents/email-notifier/index.ts send"
+    "email:send": "npx tsx src/agents/email-notifier/index.ts send",
+    "astrology:setup": "./scripts/setup-astrology.sh",
+    "astrology:test": "source venv-astrology/bin/activate && python src/services/astrology-python/test_basic.py",
+    "astrology:test-chart": "source venv-astrology/bin/activate && python src/services/astrology-python/simple_astrology.py birth-chart '{\"name\":\"Test User\",\"birthDate\":\"1990-06-15T10:30:00\",\"city\":\"New York\",\"country\":\"USA\"}'",
+    "astrology:test-transits": "source venv-astrology/bin/activate && python src/services/astrology-python/simple_astrology.py transits"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -44,7 +48,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.1.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "swisseph-v2": "^1.0.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

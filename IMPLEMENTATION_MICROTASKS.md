@@ -186,7 +186,7 @@
 - [ ] Add voice input (optional)
 - [ ] Build interactive Q&A
 - [ ] Add reading timer
-- [ ] Implement session recording
+- [ ] Implement  session recording
 - [ ] Create transcript system
 **Time**: 12 hours
 

@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
 import { AuthModal } from '../auth/AuthModal';
+import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeService';
+import { profileService } from '@/services/profileService';
 import { InteractiveBirthChart } from './InteractiveBirthChart';
 import { CompatibilityInsights } from './CompatibilityInsights';
 import { CareerInsights } from './CareerInsights';
@@ -46,7 +48,34 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     timezone: 'America/New_York'
   });
   const [selectedLocation, setSelectedLocation] = useState<LocationResult | null>(null);
-  const [lifeEvents, setLifeEvents] = useState<LifeEvent[]>([]);
+  const [lifeEvents, setLifeEvents] = useState<LifeEvent[]>(() => {
+    // Load from localStorage on component mount
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mystic-arcana-life-events');
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
+  const [personalizedHoroscope, setPersonalizedHoroscope] = useState<{personalized?: {sign: string; insight: string; advice: string; focus: string}} | null>(null);
+  const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
+
+  const loadPersonalizedHoroscope = useCallback(async () => {
+    if (!user) return;
+    
+    setIsLoadingHoroscope(true);
+    try {
+      const profile = await profileService.getProfile(user.id);
+      if (profile?.birth_date) {
+        const service = DailyHoroscopeService.getInstance();
+        const horoscope = service.getPersonalizedHoroscope(profile.birth_date);
+        setPersonalizedHoroscope(horoscope);
+      }
+    } catch (error) {
+      console.error('Error loading personalized horoscope:', error);
+    } finally {
+      setIsLoadingHoroscope(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isGuest) {
@@ -55,8 +84,19 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       // For MVP, assume signed-up users are not subscribers yet
       // In production, check user subscription status
       setUserTier('signed-up');
+      
+      // Load personalized horoscope for authenticated users
+      loadPersonalizedHoroscope();
     }
-  }, [user, isGuest]);
+  }, [user, isGuest, loadPersonalizedHoroscope]);
+
+  const handleLifeEventsChange = (events: LifeEvent[]) => {
+    setLifeEvents(events);
+    // Persist to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mystic-arcana-life-events', JSON.stringify(events));
+    }
+  };
 
   const handleServiceSelection = (service: 'chart' | 'horoscope' | 'compatibility' | 'career' | 'advanced' | 'timeline') => {
     setSelectedService(service);
@@ -85,7 +125,9 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       return;
     }
     
-    const combinedDateTime = new Date(`${formData.date}T${formData.time}:00`);
+    // Handle optional birth time - use noon if not provided
+    const timeString = formData.time || '12:00';
+    const combinedDateTime = new Date(`${formData.date}T${timeString}:00`);
     
     setBirthData({
       date: combinedDateTime,
@@ -138,12 +180,12 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           </div>
           
           <div className={styles.formField}>
-            <label>Birth Time:</label>
+            <label>Birth Time (Optional):</label>
             <input
               type="time"
               value={formData.time}
               onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-              required
+              placeholder="Leave blank if unknown"
             />
           </div>
         </div>
@@ -276,21 +318,68 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           </ul>
         </div>
 
-        <div className={styles.premiumTeaser}>
-          <div className={styles.teaserContent}>
-            <h4>🎯 Want Your Personal Forecast?</h4>
-            <p>
-              For deeper, personalized insights based on your unique birth chart, 
-              <strong> sign up for free</strong> to unlock your cosmic blueprint.
-            </p>
-            <button 
-              className={styles.upgradeButton}
-              onClick={() => setShowAuthModal(true)}
-            >
-              Get My Personal Reading
-            </button>
+        {userTier === 'guest' ? (
+          <div className={styles.premiumTeaser}>
+            <div className={styles.teaserContent}>
+              <h4>🎯 Want Your Personal Forecast?</h4>
+              <p>
+                For deeper, personalized insights based on your unique birth chart, 
+                <strong> sign up for free</strong> to unlock your cosmic blueprint.
+              </p>
+              <button 
+                className={styles.upgradeButton}
+                onClick={() => setShowAuthModal(true)}
+              >
+                Get My Personal Reading
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={styles.personalizedSection}>
+            <div className={styles.personalizedContent}>
+              {isLoadingHoroscope ? (
+                <div className={styles.loadingPersonalized}>
+                  <h4>🔮 Loading Your Personal Reading...</h4>
+                  <p>Accessing your cosmic blueprint...</p>
+                </div>
+              ) : personalizedHoroscope?.personalized ? (
+                <div className={styles.realPersonalizedContent}>
+                  <h4>🌟 Your {personalizedHoroscope.personalized.sign.charAt(0).toUpperCase() + personalizedHoroscope.personalized.sign.slice(1)} Reading</h4>
+                  <div className={styles.personalizedInsight}>
+                    <p className={styles.mainInsight}>{personalizedHoroscope.personalized.insight}</p>
+                  </div>
+                  <div className={styles.personalizedAdvice}>
+                    <h5>Your Focus Today:</h5>
+                    <p>{personalizedHoroscope.personalized.advice}</p>
+                  </div>
+                  <div className={styles.energyFocus}>
+                    <h5>Energy Focus:</h5>
+                    <span className={styles.focusValue}>{personalizedHoroscope.personalized.focus}</span>
+                  </div>
+                  <button 
+                    className={styles.personalButton}
+                    onClick={() => handleServiceSelection('chart')}
+                  >
+                    View My Birth Chart
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.noPersonalizedData}>
+                  <h4>🎯 Complete Your Profile for Personal Readings</h4>
+                  <p>
+                    To receive personalized cosmic guidance, please add your birth date to your profile.
+                  </p>
+                  <button 
+                    className={styles.personalButton}
+                    onClick={() => handleServiceSelection('chart')}
+                  >
+                    Add Birth Information
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -449,7 +538,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             {selectedService === 'timeline' && (
               <UserTimeline 
                 events={lifeEvents}
-                onEventsChange={setLifeEvents}
+                onEventsChange={handleLifeEventsChange}
               />
             )}
             {selectedService === 'advanced' && (
