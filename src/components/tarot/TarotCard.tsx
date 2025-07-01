@@ -53,7 +53,9 @@ export const TarotCard: React.FC<TarotCardProps> = ({
         }}
         role="button"
         tabIndex={disabled ? -1 : 0}
-        aria-label={`${cardName} tarot card${isFlippedState ? ' - revealed' : ' - click to reveal'}`}
+        aria-label={`${cardName} tarot card${isFlippedState ? ` - revealed, meaning: ${cardMeaning}` : ' - press Enter or Space to reveal'}`}
+        aria-pressed={isFlippedState}
+        aria-describedby={`card-${cardName.replace(/\s+/g, '-').toLowerCase()}-description`}
         onKeyDown={(e) => {
           if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
@@ -107,27 +109,35 @@ export const TarotCard: React.FC<TarotCardProps> = ({
 
       {/* Floating particles effect when flipped */}
       {isFlippedState && (
-        <div className={styles.particleContainer}>
-          {[...Array(8)].map((_, i) => (
+        <div className={styles.particleContainer} aria-hidden="true">
+          {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
               className={styles.particle}
               initial={{ opacity: 0, scale: 0, y: 0 }}
               animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-                y: [-20, -80],
-                x: [0, (Math.random() - 0.5) * 60]
+                opacity: [0, 1, 0.5, 0],
+                scale: [0, 1.2, 0.8, 0],
+                y: [-20, -100],
+                x: [0, (Math.random() - 0.5) * 80]
               }}
               transition={{
-                duration: 2,
-                delay: i * 0.1,
+                duration: 2.5,
+                delay: i * 0.08,
                 ease: 'easeOut'
               }}
             />
           ))}
         </div>
       )}
+      
+      {/* Hidden description for screen readers */}
+      <div 
+        id={`card-${cardName.replace(/\s+/g, '-').toLowerCase()}-description`}
+        className="sr-only"
+      >
+        {isFlippedState && cardMeaning ? `Card meaning: ${cardMeaning}` : 'Click to reveal card meaning'}
+      </div>
     </div>
   );
 };

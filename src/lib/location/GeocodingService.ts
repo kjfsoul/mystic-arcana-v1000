@@ -56,9 +56,8 @@ export async function geocodeLocation(query: string): Promise<LocationResult | G
 export async function getSuggestions(query: string): Promise<LocationResult[]> {
   if (!query || query.length < 2) return [];
 
-  
-
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&types=(cities)&key=${GOOGLE_MAPS_API_KEY}`;
+  // Use our API proxy to avoid CORS issues
+  const url = `/api/geocode?input=${encodeURIComponent(query)}`;
 
   try {
     const response = await fetch(url);

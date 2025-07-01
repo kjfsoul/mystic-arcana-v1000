@@ -13,10 +13,13 @@ interface ReadingRecord {
   id: string;
   spread_type: string;
   cards_drawn: {
-    id: string;
-    name: string;
-    isReversed?: boolean;
-  }[];
+    cards?: Array<{
+      id: string;
+      name: string;
+      isReversed?: boolean;
+    }>;
+    positions?: string[];
+  };
   created_at: string;
 }
 
@@ -175,7 +178,7 @@ export default function ReadingsPage() {
               </div>
               
               <div className={styles.cardsPreview}>
-                {reading.cards_drawn.slice(0, 3).map((card, cardIndex) => (
+                {(reading.cards_drawn?.cards || []).slice(0, 3).map((card, cardIndex) => (
                   <div
                     key={cardIndex}
                     className={`${styles.cardPreview} ${card.isReversed ? styles.reversed : ''}`}
@@ -186,17 +189,17 @@ export default function ReadingsPage() {
                     )}
                   </div>
                 ))}
-                {reading.cards_drawn.length > 3 && (
+                {(reading.cards_drawn?.cards || []).length > 3 && (
                   <div className={styles.moreCards}>
-                    +{reading.cards_drawn.length - 3} more
+                    +{(reading.cards_drawn?.cards || []).length - 3} more
                   </div>
                 )}
               </div>
               
               <div className={styles.readingStats}>
-                <span>{reading.cards_drawn.length} cards drawn</span>
+                <span>{(reading.cards_drawn?.cards || []).length} cards drawn</span>
                 <span>•</span>
-                <span>{reading.cards_drawn.filter(c => c.isReversed).length} reversed</span>
+                <span>{(reading.cards_drawn?.cards || []).filter(c => c.isReversed).length} reversed</span>
               </div>
             </motion.div>
           ))}

@@ -1,0 +1,14 @@
+agents_to_register:
+  - id: "card_selector"
+    module: "agents.mystic_arcana_agents"
+    class: "MockCardSelectorAgent"
+    config: { type: "utility" }
+  - id: "tarot_reader_sage"
+    module: "agents.mystic_arcana_agents"
+    class: "MockTarotReaderAgent"
+    config: { persona: "wise_sage" }
+  - id: "astrology_data_agent"
+    module: "agents.mystic_arcana_agents"
+    class: "MockAstrologyDataAgent"
+    config: { type: "data_retrieval" }
+

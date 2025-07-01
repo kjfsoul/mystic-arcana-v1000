@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "../components/layout/Footer";
 import { AuthProvider } from "../contexts/AuthContext";
+import { TarotSessionProvider } from "../contexts/TarotSessionContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,10 +40,12 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <AuthProvider>
-          <div className="min-h-screen flex flex-col">
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <TarotSessionProvider>
+            <div className="min-h-screen flex flex-col">
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </TarotSessionProvider>
         </AuthProvider>
       </body>
     </html>

@@ -807,6 +807,14 @@ export class SwissEphemerisBridge {
       config: this.config
     };
   }
+
+  async getObliquity(date: Date): Promise<number> {
+    // Mock implementation for browser compatibility
+    // The true obliquity of the ecliptic changes very slowly.
+    // This is a standard value for the J2000.0 epoch.
+    console.log(`Calculating mock obliquity for ${date}`);
+    return Promise.resolve(23.439281);
+  }
 }
 
 // Singleton instance for application-wide use

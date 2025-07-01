@@ -1,5 +1,8 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
+import Logger from '@/utils/logger';
+
+const logger = new Logger('TarotDeckAPI');
 
 /**
  * GET /api/tarot/deck/[deckId]
@@ -30,7 +33,7 @@ export async function GET(
 
     // Validate deck ID format (basic UUID check)
     if (!deckId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(deckId)) {
-      console.warn(`[Tarot API] Invalid deck ID format: ${deckId}`);
+      logger.warn('invalid_deck_id_format', undefined, { deckId }, `Invalid deck ID format: ${deckId}`);
       return NextResponse.json(
         {
           error: 'Invalid deck ID format',
@@ -41,7 +44,7 @@ export async function GET(
       );
     }
 
-    console.log(`[Tarot API] Fetching deck: ${deckId}`);
+    logger.info('fetching_tarot_deck', undefined, { deckId }, `Fetching deck: ${deckId}`);
 
     const supabase = await createClient();
 
@@ -54,7 +57,7 @@ export async function GET(
       .single();
 
     if (deckError || !deck) {
-      console.error(`[Tarot API] Deck fetch error for ${deckId}:`, deckError);
+      logger.error('tarot_deck_fetch_error', undefined, deckError, `Deck fetch error for ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Deck not found or inactive',
@@ -85,7 +88,7 @@ export async function GET(
       .order('card_number', { ascending: true });
 
     if (cardsError) {
-      console.error(`[Tarot API] Cards fetch error for deck ${deckId}:`, cardsError);
+      logger.error('tarot_cards_fetch_error', undefined, cardsError, `Cards fetch error for deck ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Failed to fetch cards',
@@ -140,7 +143,16 @@ export async function GET(
     };
 
     const responseTime = Date.now() - startTime;
-    console.log(`[Tarot API] Successfully fetched deck ${deckId} with ${transformedCards.length} cards in ${responseTime}ms`);
+    logger.info(
+      'tarot_deck_fetched',
+      undefined,
+      {
+        deckId,
+        cardCount: transformedCards.length,
+        responseTime,
+      },
+      `Successfully fetched deck ${deckId} with ${transformedCards.length} cards.`
+    );
 
     return NextResponse.json(response, {
       headers: {
@@ -152,7 +164,13 @@ export async function GET(
 
   } catch (error) {
     const responseTime = Date.now() - startTime;
-    console.error(`[Tarot API] Unexpected error in deck API (${responseTime}ms):`, error);
+    logger.error(
+      'tarot_deck_api_internal_error',
+      undefined,
+      error as Error,
+      'An unexpected error occurred in the Tarot Deck API.',
+      { deckId: (await params).deckId, responseTime }
+    );
     return NextResponse.json(
       {
         error: 'Internal server error',

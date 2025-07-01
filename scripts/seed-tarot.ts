@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
+import { config } from "dotenv";
+
 // Load environment variables first
-require("dotenv").config({ path: ".env.local" });
+config({ path: ".env.local" });
 
 // Complete 78-card Rider-Waite Tarot Deck
 const COMPLETE_RIDER_WAITE_DECK = [
@@ -964,7 +966,7 @@ async function seedTarotCards() {
 }
 
 // Run the seeding if this file is executed directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   seedTarotCards()
     .then(() => {
       console.log("🎉 Seeding complete!");

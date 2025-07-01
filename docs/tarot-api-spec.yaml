@@ -1,0 +1,728 @@
+openapi: 3.0.3
+info:
+  title: Mystic Arcana Tarot API
+  description: |
+    Complete REST API for tarot card reading functionality, including deck management,
+    card drawing, reading persistence, and retrieval capabilities.
+    
+    Built with production-grade error handling, validation, and comprehensive logging.
+  version: 1.0.0
+  contact:
+    name: Mystic Arcana API Support
+    url: https://mysticarcana.dev/support
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+  - url: https://mysticarcana.vercel.app/api
+    description: Production server
+
+paths:
+  /tarot/draw:
+    post:
+      summary: Draw N cards from tarot deck
+      description: |
+        Draw a specified number of cards from a tarot deck with support for different
+        spread types, card reversal, and position mapping.
+      operationId: drawCards
+      tags:
+        - Tarot Cards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  minimum: 1
+                  maximum: 78
+                  default: 1
+                  description: Number of cards to draw
+                deckId:
+                  type: string
+                  format: uuid
+                  default: "00000000-0000-0000-0000-000000000001"
+                  description: Deck UUID (defaults to Rider-Waite)
+                spread:
+                  type: string
+                  enum: [single, three-card, celtic-cross]
+                  default: single
+                  description: Type of tarot spread
+                allowReversed:
+                  type: boolean
+                  default: true
+                  description: Allow cards to be drawn in reversed position
+                userId:
+                  type: string
+                  format: uuid
+                  description: User ID for authenticated requests
+              required:
+                - count
+            examples:
+              single-card:
+                summary: Single card draw
+                value:
+                  count: 1
+                  spread: "single"
+                  allowReversed: true
+              three-card-spread:
+                summary: Three card spread
+                value:
+                  count: 3
+                  spread: "three-card"
+                  allowReversed: true
+                  userId: "user-123"
+              celtic-cross:
+                summary: Celtic Cross spread
+                value:
+                  count: 10
+                  spread: "celtic-cross"
+                  allowReversed: true
+                  userId: "user-123"
+      responses:
+        '200':
+          description: Cards drawn successfully
+          headers:
+            X-Draw-Time:
+              description: Time taken to draw cards (ms)
+              schema:
+                type: string
+            X-Draw-ID:
+              description: Unique identifier for this draw
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Deck not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /tarot/shuffle:
+    post:
+      summary: Shuffle tarot deck
+      description: |
+        Shuffle a tarot deck using various algorithms and return shuffle state information.
+        Includes entropy calculation and optional deck preview.
+      operationId: shuffleDeck
+      tags:
+        - Tarot Cards
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deckId:
+                  type: string
+                  format: uuid
+                  default: "00000000-0000-0000-0000-000000000001"
+                  description: Deck UUID to shuffle
+                algorithm:
+                  type: string
+                  enum: [fisher-yates, riffle, overhand]
+                  default: fisher-yates
+                  description: Shuffle algorithm
+                includePreview:
+                  type: boolean
+                  default: false
+                  description: Include sample cards in response
+                userId:
+                  type: string
+                  format: uuid
+                  description: User ID for user-specific shuffles
+            examples:
+              basic-shuffle:
+                summary: Basic Fisher-Yates shuffle
+                value:
+                  algorithm: "fisher-yates"
+              riffle-shuffle-with-preview:
+                summary: Riffle shuffle with preview
+                value:
+                  algorithm: "riffle"
+                  includePreview: true
+      responses:
+        '200':
+          description: Deck shuffled successfully
+          headers:
+            X-Shuffle-Time:
+              description: Time taken to shuffle (ms)
+              schema:
+                type: string
+            X-Shuffle-ID:
+              description: Unique identifier for this shuffle
+              schema:
+                type: string
+            X-Entropy:
+              description: Calculated shuffle entropy
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShuffleResponse'
+        '404':
+          description: Deck not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /tarot/save-reading:
+    post:
+      summary: Save tarot reading
+      description: |
+        Persist a completed tarot reading to the database with full metadata,
+        interpretation, and optional user notes.
+      operationId: saveReading
+      tags:
+        - Tarot Readings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveReadingRequest'
+            examples:
+              three-card-reading:
+                summary: Three card reading save
+                value:
+                  userId: "user-123"
+                  spreadType: "three-card"
+                  cards:
+                    - id: "the-fool"
+                      name: "The Fool"
+                      position: "Past"
+                      isReversed: false
+                      meaning: "New beginnings, innocence, spontaneity"
+                    - id: "the-magician"
+                      name: "The Magician"
+                      position: "Present"
+                      isReversed: false
+                      meaning: "Manifestation, resourcefulness, power"
+                    - id: "the-world"
+                      name: "The World"
+                      position: "Future"
+                      isReversed: true
+                      meaning: "Seeking personal closure, incomplete goals"
+                  interpretation: "Your journey shows a progression from new beginnings to mastery, with final completion requiring inner work."
+                  question: "What does my career path look like?"
+                  tags: ["career", "guidance"]
+      responses:
+        '201':
+          description: Reading saved successfully
+          headers:
+            X-Save-Time:
+              description: Time taken to save reading (ms)
+              schema:
+                type: string
+            X-Reading-ID:
+              description: ID of the saved reading
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveReadingResponse'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: Get reading save statistics
+      description: Get user reading statistics and save limits
+      operationId: getReadingStats
+      tags:
+        - Tarot Readings
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          description: User ID to get statistics for
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadingStatsResponse'
+
+  /tarot/get-reading:
+    get:
+      summary: Retrieve tarot readings
+      description: |
+        Retrieve tarot readings by various filters including user, date range,
+        spread type, and tags. Supports pagination and sorting.
+      operationId: getReadings
+      tags:
+        - Tarot Readings
+      parameters:
+        - name: id
+          in: query
+          description: Specific reading ID
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          description: Get all readings for user
+          schema:
+            type: string
+            format: uuid
+        - name: date
+          in: query
+          description: Filter by specific date (ISO format)
+          schema:
+            type: string
+            format: date
+        - name: dateFrom
+          in: query
+          description: Start date for range filter
+          schema:
+            type: string
+            format: date
+        - name: dateTo
+          in: query
+          description: End date for range filter
+          schema:
+            type: string
+            format: date
+        - name: spreadType
+          in: query
+          description: Filter by spread type
+          schema:
+            type: string
+            enum: [single, three-card, celtic-cross]
+        - name: tags
+          in: query
+          description: Comma-separated tags to filter by
+          schema:
+            type: string
+        - name: isPublic
+          in: query
+          description: Filter by public/private readings
+          schema:
+            type: boolean
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page (max 100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: sort
+          in: query
+          description: Sort field
+          schema:
+            type: string
+            enum: [created_at, spread_type]
+            default: created_at
+        - name: order
+          in: query
+          description: Sort order
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+      responses:
+        '200':
+          description: Readings retrieved successfully
+          headers:
+            X-Total-Count:
+              description: Total number of readings matching filters
+              schema:
+                type: string
+            X-Page:
+              description: Current page number
+              schema:
+                type: string
+            X-Has-More:
+              description: Whether more pages are available
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadingResponse'
+        '404':
+          description: Reading not found (when requesting specific ID)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete tarot reading
+      description: Delete a specific reading (only by owner)
+      operationId: deleteReading
+      tags:
+        - Tarot Readings
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Reading ID to delete
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          required: true
+          description: Owner user ID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Reading deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  deletedId:
+                    type: string
+                  deletedAt:
+                    type: string
+                    format: date-time
+        '404':
+          description: Reading not found or access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    TarotCard:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique card identifier
+        name:
+          type: string
+          description: Card name
+        card_number:
+          type: integer
+          description: Card number within its arcana
+        arcana_type:
+          type: string
+          enum: [major, minor]
+          description: Major or Minor Arcana
+        suit:
+          type: string
+          enum: [cups, pentacles, swords, wands]
+          nullable: true
+          description: Suit for Minor Arcana cards
+        meaning_upright:
+          type: string
+          description: Upright meaning
+        meaning_reversed:
+          type: string
+          description: Reversed meaning
+        image_url:
+          type: string
+          description: Card image URL
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Associated keywords
+
+    DrawnCard:
+      allOf:
+        - $ref: '#/components/schemas/TarotCard'
+        - type: object
+          properties:
+            position:
+              type: string
+              description: Position in spread
+            isReversed:
+              type: boolean
+              description: Whether card is reversed
+            drawnAt:
+              type: string
+              format: date-time
+              description: When card was drawn
+
+    SpreadInfo:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Spread type name
+        positions:
+          type: array
+          items:
+            type: string
+          description: Position names in order
+        description:
+          type: string
+          description: Spread description
+
+    DrawResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/DrawnCard'
+        spread:
+          $ref: '#/components/schemas/SpreadInfo'
+        drawId:
+          type: string
+          description: Unique draw identifier
+        deckId:
+          type: string
+          description: Deck used for draw
+
+    ShuffleResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        shuffleId:
+          type: string
+          description: Unique shuffle identifier
+        deckId:
+          type: string
+          description: Deck that was shuffled
+        cardCount:
+          type: integer
+          description: Number of cards in deck
+        shuffleState:
+          type: object
+          properties:
+            algorithm:
+              type: string
+              description: Algorithm used
+            timestamp:
+              type: string
+              format: date-time
+            entropy:
+              type: number
+              description: Calculated randomness measure
+        preview:
+          type: object
+          properties:
+            topCard:
+              type: object
+            middleCard:
+              type: object
+            bottomCard:
+              type: object
+          description: Optional card preview
+
+    SaveReadingRequest:
+      type: object
+      required:
+        - userId
+        - spreadType
+        - cards
+        - interpretation
+      properties:
+        userId:
+          type: string
+          format: uuid
+        spreadType:
+          type: string
+          enum: [single, three-card, celtic-cross]
+        cards:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              position:
+                type: string
+              isReversed:
+                type: boolean
+              meaning:
+                type: string
+              frontImage:
+                type: string
+              backImage:
+                type: string
+        interpretation:
+          type: string
+        question:
+          type: string
+        notes:
+          type: string
+        cosmicInfluence:
+          type: object
+        drawId:
+          type: string
+        isPublic:
+          type: boolean
+          default: false
+        tags:
+          type: array
+          items:
+            type: string
+
+    SaveReadingResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        readingId:
+          type: string
+          format: uuid
+        savedAt:
+          type: string
+          format: date-time
+
+    ReadingStatsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        userId:
+          type: string
+        statistics:
+          type: object
+          properties:
+            totalReadings:
+              type: integer
+            readingsByType:
+              type: object
+              properties:
+                single:
+                  type: integer
+                three-card:
+                  type: integer
+                celtic-cross:
+                  type: integer
+            lastReading:
+              type: string
+              format: date-time
+              nullable: true
+            limits:
+              type: object
+              properties:
+                maxReadingsPerDay:
+                  type: integer
+                maxReadingsPerMonth:
+                  type: integer
+                storageRetention:
+                  type: string
+
+    GetReadingResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        reading:
+          type: object
+          description: Single reading (when requesting by ID)
+        readings:
+          type: array
+          description: Multiple readings (when using filters)
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            hasMore:
+              type: boolean
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          description: Human-readable error message
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: string
+          description: Additional error details (optional)
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Tarot Cards
+    description: Card drawing and deck manipulation
+  - name: Tarot Readings
+    description: Reading persistence and retrieval

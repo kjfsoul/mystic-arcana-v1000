@@ -27,7 +27,18 @@ export async function GET(request: NextRequest) {
 
       if (error) {
         console.error('❌ OAuth code exchange error:', error);
-        return NextResponse.redirect(`${origin}/auth/auth-code-error?error=${encodeURIComponent(error.message)}`);
+        
+        // Provide user-friendly error messages
+        let userMessage = error.message;
+        if (error.message.includes('invalid request')) {
+          userMessage = 'Invalid authentication code. Please try signing in again.';
+        } else if (error.message.includes('expired')) {
+          userMessage = 'Authentication code expired. Please try signing in again.';
+        } else if (error.message.includes('already used')) {
+          userMessage = 'This authentication code has already been used. Please try signing in again.';
+        }
+        
+        return NextResponse.redirect(`${origin}/auth/auth-code-error?error=${encodeURIComponent(userMessage)}`);
       }
 
       if (data.session) {
@@ -39,7 +50,17 @@ export async function GET(request: NextRequest) {
       }
     } catch (error) {
       console.error('❌ Unexpected error in OAuth callback:', error);
-      return NextResponse.redirect(`${origin}/auth/auth-code-error?error=unexpected_error`);
+      
+      // Log detailed error for debugging
+      if (error instanceof Error) {
+        console.error('Error details:', {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        });
+      }
+      
+      return NextResponse.redirect(`${origin}/auth/auth-code-error?error=${encodeURIComponent('An unexpected error occurred. Please try again or contact support if the issue persists.')}`);
     }
   }
 

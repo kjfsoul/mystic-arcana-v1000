@@ -1,264 +1,497 @@
-# MYSTIC ARCANA - COMPLETE IMPLEMENTATION MICROTASKS
 
-## Phase 1: Fix Authentication (Week 1)
-**Goal**: Users can create accounts, login, and maintain sessions
+Mystic Arcana Master Task Breakdown – Microtasks, Model Assignments, and Considerations
 
-### 1.1 Fix Auth Callback Route
-- [ ] Debug why `/app/auth/callback/route.ts` returns 404
-- [ ] Test with actual Google OAuth flow
-- [ ] Verify redirect URLs in Supabase dashboard match app
-- [ ] Add error handling for failed OAuth
-- [ ] Test email/password signup flow
-- [ ] Verify email confirmation works
-- [ ] Test password reset flow
-**Time**: 4 hours
+⚡ General Model Guidance
+Claude: Best for code refactoring, context-heavy tasks, architecture, UI/UX, and agent orchestration. Can hold more context in a single session, logs better, and is more trustworthy for spec-adherence.
 
-### 1.2 Implement Session Management
-- [ ] Fix AuthContext to properly track user state
-- [ ] Add session persistence across page refreshes
-- [ ] Implement proper logout that clears all state
-- [ ] Add session expiry handling
-- [ ] Test guest vs authenticated user states
-- [ ] Add loading states during auth checks
-**Time**: 3 hours
 
-### 1.3 Create User Profile System
-- [ ] Add user_profiles table migration if missing
-- [ ] Create profile creation flow after signup
-- [ ] Add birth date/time/location capture
-- [ ] Implement timezone selection
-- [ ] Create profile edit page
-- [ ] Add profile completion tracking
-**Time**: 4 hours
+Gemini: Excellent for fast, parallelizable coding (scripts, tests, data entry), quick verifications, API/data plumbing, and compliance checks. Use for content overflow or when Claude is blocked.
 
-### 1.4 Test Authentication End-to-End
-- [ ] Manual test: Sign up with email
-- [ ] Manual test: Sign up with Google
-- [ ] Manual test: Login/logout cycle
-- [ ] Manual test: Password reset
-- [ ] Manual test: Profile creation
-- [ ] Fix any bugs found
-**Time**: 2 hours
 
-## Phase 2: Implement Tarot Reading Flow (Week 2)
-**Goal**: Users can get actual tarot readings that save to database
+Roo: Targeted at E2E testing, infrastructure checks, basic scripting, error logs, or agent “swarm” debugging. Best at following strict, actionable instructions, or automating repeated actions.
 
-### 2.1 Fix Frontend Card Selection
-- [ ] Connect shuffle animation to actual deck
-- [ ] Implement card selection for single spread
-- [ ] Implement 3-card spread selection
-- [ ] Implement Celtic Cross (10 cards) selection
-- [ ] Add card flip animations
-- [ ] Show actual card images from `/public/tarot/`
-**Time**: 5 hours
 
-### 2.2 Implement Reading Generation
-- [ ] Create proper TarotReading class
-- [ ] Add position-specific interpretations
-- [ ] Implement card reversal logic (50% chance)
-- [ ] Add spread-specific interpretation logic
-- [ ] Create reading summary generation
-- [ ] Add cosmic influence integration
-**Time**: 6 hours
+Swarming/Orchestration: Assign to Claude (for now), but consider letting Roo or Gemini spin up agent “child tasks” for high-volume repetitive subtasks.
 
-### 2.3 Save Readings to Database
-- [ ] Create saveReading API endpoint
-- [ ] Implement reading history retrieval
-- [ ] Add reading timestamp and metadata
-- [ ] Create reading detail page
-- [ ] Add reading sharing (public URL)
-- [ ] Implement reading deletion
-**Time**: 4 hours
 
-### 2.4 Create Reading UI Components
-- [ ] Build reading result display
-- [ ] Add interpretation panels
-- [ ] Create print-friendly view
-- [ ] Add save to favorites
-- [ ] Implement reading notes
-- [ ] Add social sharing buttons
-**Time**: 5 hours
 
-## Phase 3: Astrology Integration (Week 3)
-**Goal**: Real astronomical calculations and birth charts
+1. Tarot Readings
+A. Database & Deck Data
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Fix and test DB seeding script (ESM/CJS/import/export)
+Claude
+4-8K
+Needs codebase context, error logs, testing.
+Seed all 78 cards (full metadata, images, keywords)
+Gemini
+3-8K
+Use CSV upload/script. Swarm possible for rapid entry/validation.
+Confirm deck data integrity (spot-check, output log)
+Roo → Claude
+2-4K
+Roo runs checks, Claude reviews/finalizes.
+Add support for deck versions/custom decks (Phase 2)
+Claude
+4-6K
+Architecture/design, can split across sessions.
 
-### 3.1 Implement Ephemeris Integration
-- [ ] Install Swiss Ephemeris or AstrologyJS
-- [ ] Create planet position calculator
-- [ ] Add house system calculations
-- [ ] Implement aspect calculations
-- [ ] Create zodiac sign determiner
-- [ ] Add retrograde detection
-**Time**: 8 hours
+B. API & Backend
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Ensure /api/tarot/deck returns full/correct data
+Claude
+2-6K
+API+DB context.
+Add endpoints: draw, shuffle, save, get reading
+Gemini
+3-8K
+Batchable, can split by endpoint.
+Error handling & validation
+Gemini
+2-4K
+Can swarm.
+Logging: attempts/errors/analytics
+Claude
+2-4K
+Logging/analytics setup.
 
-### 3.2 Build Birth Chart Generator
-- [ ] Create chart data structure
-- [ ] Implement chart calculation engine
-- [ ] Add chart SVG renderer
-- [ ] Create aspect grid
-- [ ] Add planet glyph renderer
-- [ ] Implement chart interpretation
-**Time**: 10 hours
+C. UI/UX
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Wire frontend to backend
+Claude
+4-8K
+Full React context, keep in one session.
+Implement true shuffle animation
+Claude
+2-6K
+Visual/UX focus.
+Reading spreads (single/3/custom)
+Gemini
+2-4K
+Component logic.
+Modal: flip, meaning, reversed
+Claude
+2-4K
+UX & accessibility.
+Loading/success/error states
+Gemini
+2-4K
+Swarmable.
+Mobile-first grid, touch UI
+Claude
+2-4K
+Layout/UX.
+Journaling/notes per reading
+Gemini → Claude
+2-4K
+Backend (Gemini), UI (Claude).
 
-### 3.3 Create Astrology UI
-- [ ] Build birth chart display component
-- [ ] Add interactive chart features
-- [ ] Create daily horoscope panel
-- [ ] Add transit tracker
-- [ ] Implement synastry comparison
-- [ ] Add chart export (PNG/PDF)
-**Time**: 8 hours
+D. Testing
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+E2E tests for full reading
+Roo
+2-4K
+Can be automated and validated by Claude.
+API tests for deck endpoints
+Gemini
+2-3K
+Batchable.
+Manual test log/screenshots
+Roo
+1-2K
+Scripted/manual output.
 
-## Phase 4: Personalization Layer (Week 4)
-**Goal**: Unified user truth that continuously develops
 
-### 4.1 Create User Data Schema
-- [ ] Design comprehensive user_data table
-- [ ] Add reading history tracking
-- [ ] Implement preference learning
-- [ ] Create behavior pattern storage
-- [ ] Add milestone tracking
-- [ ] Design growth metrics
-**Time**: 4 hours
+2. Astrology
+A. Birth Chart
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Location input (lookup/maps, TZ auto)
+Gemini
+4-8K
+Needs city DB, API config.
+Date/time input, DST, TZ history
+Gemini
+2-6K
+Swarm for edge cases.
+Ephemeris integration (Swiss Ephemeris/API)
+Claude
+6-12K
+Heavy context, reliable code.
+Planet/body calculation
+Claude
+2-8K
+Detail, accuracy required.
+House system selection
+Claude
+1-2K
 
-### 4.2 Implement Learning System
-- [ ] Track card frequency in readings
-- [ ] Analyze reading themes
-- [ ] Build preference engine
-- [ ] Create recommendation system
-- [ ] Add pattern recognition
-- [ ] Implement insight generation
-**Time**: 8 hours
 
-### 4.3 Build User Journal
-- [ ] Create journal entry schema
-- [ ] Build journal UI
-- [ ] Add reading reflections
-- [ ] Implement mood tracking
-- [ ] Create search functionality
-- [ ] Add entry encryption
-**Time**: 6 hours
+Wheel/aspect grid visualization
+Claude
+4-8K
+Needs design + code.
+Export/share chart
+Gemini
+2-4K
+Simple export logic.
+Accessibility for visuals
+Claude
+1-2K
 
-## Phase 5: Virtual Readers (Week 5-6)
-**Goal**: 4 unique AI personalities for readings
 
-### 5.1 Design Reader Personalities
-- [ ] Create Mystic Sage personality (wise, traditional)
-- [ ] Create Cosmic Dreamer personality (intuitive, poetic)
-- [ ] Create Modern Oracle personality (practical, direct)
-- [ ] Create Shadow Walker personality (deep, psychological)
-- [ ] Write personality prompt templates
-- [ ] Define unique interpretation styles
-**Time**: 6 hours
 
-### 5.2 Implement Reader System
-- [ ] Create reader selection UI
-- [ ] Build personality engine
-- [ ] Add reader memory system
-- [ ] Implement conversation history
-- [ ] Create reader preferences
-- [ ] Add reader avatars/visuals
-**Time**: 10 hours
+B. Transits/Progressions/Solar Returns
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Current/future transits calculation
+Claude
+2-6K
 
-### 5.3 Integrate with LLM
-- [ ] Set up OpenAI/Anthropic API
-- [ ] Create prompt engineering system
-- [ ] Add response formatting
-- [ ] Implement streaming responses
-- [ ] Add fallback for API failures
-- [ ] Create response caching
-**Time**: 8 hours
 
-### 5.4 Add Reader Development
-- [ ] Track user-reader interactions
-- [ ] Build relationship scoring
-- [ ] Add personality evolution
-- [ ] Create milestone system
-- [ ] Implement special unlocks
-- [ ] Add reader backstories
-**Time**: 8 hours
+Overlay transits on natal chart
+Claude
+2-4K
 
-## Phase 6: Advanced Features (Week 7-8)
-**Goal**: Full platform functionality
 
-### 6.1 Implement Live Readings
-- [ ] Create real-time reading mode
-- [ ] Add voice input (optional)
-- [ ] Build interactive Q&A
-- [ ] Add reading timer
-- [ ] Implement  session recording
-- [ ] Create transcript system
-**Time**: 12 hours
+Progressions/solar return computation
+Claude
+2-4K
 
-### 6.2 Add Social Features
-- [ ] Create reading sharing
-- [ ] Build community feed
-- [ ] Add friend system
-- [ ] Implement reading circles
-- [ ] Create public profiles
-- [ ] Add privacy controls
-**Time**: 10 hours
 
-### 6.3 Build Notification System
-- [ ] Add email notifications
-- [ ] Create in-app alerts
-- [ ] Build daily reminders
-- [ ] Add cosmic event alerts
-- [ ] Implement push notifications
-- [ ] Create preference center
-**Time**: 8 hours
+Daily/weekly forecast module
+Gemini
+2-4K
+Text gen, summary.
 
-## Phase 7: Testing & Polish (Week 9)
-**Goal**: Production-ready application
+C. Compatibility/Synastry
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Dual chart input UI/backend
+Claude
+2-6K
+Session together.
+Inter-chart aspects/synastry grid
+Claude
+4-8K
+Complex math, needs context.
+Composite chart calculation
+Claude
+2-4K
 
-### 7.1 Comprehensive Testing
-- [ ] Unit tests for all utilities
-- [ ] Integration tests for API
-- [ ] E2E tests for user flows
-- [ ] Performance testing
-- [ ] Security audit
-- [ ] Accessibility audit
-**Time**: 15 hours
 
-### 7.2 UI/UX Polish
-- [ ] Fix all responsive issues
-- [ ] Add loading states everywhere
-- [ ] Implement error boundaries
-- [ ] Create 404/error pages
-- [ ] Add animations/transitions
-- [ ] Optimize images/assets
-**Time**: 10 hours
+Compatibility summary/score
+Gemini
+2-3K
+Text gen, batchable.
 
-### 7.3 Production Preparation
-- [ ] Set up error monitoring (Sentry)
-- [ ] Add analytics (GA/Mixpanel)
-- [ ] Configure CDN
-- [ ] Set up backups
-- [ ] Create deployment pipeline
-- [ ] Write documentation
-**Time**: 10 hours
+D. Advanced Astro
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Astrocartography/relocation
+Claude
+6-12K
+Advanced, heavy context.
+Electional astrology UI/logic
+Claude
+6-8K
 
-## Total Timeline: 9 Weeks
-**Total Hours**: ~200 hours of focused development
 
-## Critical Path (Must Have for MVP)
-1. **Week 1**: Authentication (13 hours)
-2. **Week 2**: Basic Tarot Readings (20 hours)
-3. **Week 3**: Save/Retrieve Readings (10 hours)
-4. **Week 4**: Basic Personalization (10 hours)
-5. **Week 5**: One Virtual Reader (10 hours)
+Moon phase, retro, V/C tracking
+Gemini
+2-4K
+API lookup.
 
-**MVP Total**: ~63 hours (2-3 weeks full-time)
+E. Testing & Logging
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Validate output with reference charts
+Roo
+2-4K
+Automate/screenshot.
+Edge cases: leap years, rare locations
+Roo
+2-4K
+Automated run, log.
+Log every reading/request
+Gemini
+1-2K
+Batchable.
 
-## What NOT to Build Yet
-- Agent orchestration system
-- Email automation beyond basic notifications
-- Payment processing
-- Mobile apps
-- Advanced AI features
-- Community marketplace
-- API for third parties
 
----
+3. UI/UX & Galaxy/Starfield
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Review CLAUDE_UI_UX.md, document reqs
+Claude
+2-4K
+Internal design session.
+Audit/fix 3-panel & mobile layouts
+Claude
+4-8K
+Visual/React context.
+Galaxy/starfield animated BG
+Claude
+4-8K
+WebGL/CSS expertise.
+Mobile performance tests
+Roo
+2-4K
+Automated scripts.
+Add aria/accessibility tags
+Claude
+2-3K
+Audit+fix.
+Modal/page/card/chart animations
+Claude
+2-6K
 
-**Remember**: Each task must be FULLY TESTED before marking complete. No placeholder implementations allowed.
+
+WCAG compliance audit
+Gemini
+2-4K
+Batchable, checklist.
+Dark/light mode toggle
+Gemini
+2-3K
+Simple logic.
+Document all gaps/schedule fixes
+Claude
+2-3K
+Output log.
+
+
+4. Auth & User Management
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Fix/test signup/login/OAuth (Supabase/Next.js)
+Gemini
+2-4K
+Parallelizable.
+Session persistence/logout
+Gemini
+1-2K
+
+
+User profile fields
+Gemini
+1-2K
+
+
+RLS (Supabase)
+Gemini
+1-2K
+
+
+Password reset/email confirm
+Gemini
+1-2K
+
+
+Manual/E2E auth tests
+Roo
+2-4K
+Scripting.
+
+
+5. Journaling, History, Personalization
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Save readings (tarot/astro, dt)
+Gemini
+2-3K
+
+
+Tag readings w/ moods, notes
+Gemini
+2-3K
+
+
+Reading history/search/filter UI
+Claude
+2-6K
+Session with UI work.
+User dashboard: stats, streaks, recs
+Claude
+2-4K
+
+
+Save last location/TZ for quick reads
+Gemini
+1-2K
+
+
+Prep for adaptive reader/agent
+Claude
+2-6K
+Early agent framework.
+
+
+6. Notifications, Sharing, Social
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Enable reminders (email/SMS/push)
+Gemini
+2-4K
+API setup.
+Shareable reading links/images
+Gemini
+2-4K
+
+
+Community opt-in sharing
+Claude
+2-4K
+
+
+Referral system
+Gemini
+2-3K
+
+
+
+
+7. Infra, DevOps, Admin
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Build/test/deploy pipeline
+Roo → Gemini
+2-4K
+Roo scripts, Gemini fixes.
+Logs/alerts for critical errors
+Gemini
+2-3K
+
+
+Automated DB/media backup
+Gemini
+1-2K
+
+
+Admin dashboard (content, users)
+Claude
+2-6K
+
+
+Legal: privacy, terms, disclaimer
+Gemini
+1-2K
+
+
+
+
+8. Docs & Compliance
+Microtask
+Model
+Context/Tokens
+Notes/Factors
+Update agent logs (CLAUDE.md etc)
+Claude
+1-2K
+Session-end routine.
+Code comments/dev onboarding guide
+Gemini
+2-4K
+
+
+Complete README/setup docs
+Gemini
+2-4K
+
+
+Accessibility & GDPR/CCPA checks
+Gemini
+1-2K
+Checklist.
+
+
+⚡ Session Grouping/Context
+Group all UI/UX microtasks (per feature) into single Claude sessions to maximize continuity.
+
+
+Assign backend/API microtasks in parallel sessions to Gemini for throughput.
+
+
+Give all E2E/integration/manual validation to Roo, orchestrated by Claude (or Gemini if swarming).
+
+
+Keep related subtasks (e.g., tarot deck seeding, deck API, deck UI wiring) in the same session if under 16K context.
+
+
+When hitting token/context limits, checkpoint (log) and open a new, linked session—always outputting a summary.
+
+
+
+⚡ Swarming/Agent Orchestration
+Claude should define agent registry, roles, escalation rules, and swarming triggers (e.g., deck data entry, E2E batch tests).
+
+
+Gemini is best for rapid, repeated content/code/script generation (swarm for CSV, batch endpoints).
+
+
+Roo can swarm for multiple E2E/browser/device configs or for repeated logging and output checking.
+
+
+All agents should log their actions and escalate blockers (e.g., Claude to Gemini/Roo or vice versa).
+
+
+
+Summary Table (Sample, Tarot Only)
+Microtask
+Est. Time
+Model
+Session Strategy
+DB Seed Fix
+20m
+Claude
+Full code context
+Seed Deck
+30-60m
+Gemini
+CSV/script swarm
+API Deck
+20m
+Claude
+API + DB session
+UI/UX Wire
+45m
+Claude
+Single UI session
+E2E Test
+30m
+Roo
+Scripted/batch
+
+
+This system lets you assign and track microtasks per tool, escalate blockers, and keep all work visible and auditable for handoff or swarm agent expansion.

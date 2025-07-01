@@ -15,7 +15,9 @@ export const profileService = {
       .insert([{
         user_id: userId,
         ...profileData
-      }]);
+      }])
+      .select()
+      .single();
     
     if (error) {
       console.error('Error creating profile:', error);
@@ -40,17 +42,28 @@ export const profileService = {
   },
 
   async getProfile(userId: string) {
-    const { data, error } = await supabase
-      .from('user_profiles')
-      .select('*')
-      .eq('user_id', userId)
-      .single();
-    
-    if (error && error.code !== 'PGRST116') { // Ignore "not found" error
-      console.error('Error fetching profile:', error);
+    try {
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle(); // Use maybeSingle() instead of single() to handle missing records gracefully
+      
+      if (error) {
+        console.error('Error fetching profile:', error);
+        throw error;
+      }
+      
+      // If no profile exists, create one
+      if (!data) {
+        console.log(`Creating profile for user ${userId}`);
+        return await this.createProfile(userId, {});
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Profile service error:', error);
       throw error;
     }
-    
-    return data;
   }
 };

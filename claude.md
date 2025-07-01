@@ -17,6 +17,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run supabase:stop` - Stop local Supabase instance
 - `npx supabase db reset` - Reset database to initial state
 
+### Tarot System Commands
+- `npm run seed:tarot` - Seed tarot card data into database
+- `npm run test:tarot` - Test tarot API endpoints
+- `npm run setup:tarot` - Initialize tarot engine
+- `npm run setup:local` - Setup local tarot environment
+
+### Astrology Commands (Python-based)
+- `npm run astrology:setup` - Setup Python virtual environment and dependencies
+- `npm run astrology:test` - Run basic astrology tests
+- `npm run astrology:test-chart` - Test birth chart generation with sample data
+- `npm run astrology:test-transits` - Test current planetary transits
+
+### Email System Commands
+- `npm run email:setup` - Configure email notification system
+- `npm run email:start` - Start email scheduler service
+- `npm run email:test` - Test email sending functionality
+- `npm run email:urgent` - Send urgent notification test
+- `npm run email:send` - Manually trigger email notifications
+
+### Validation Commands
+- `npm run validate:astro` - Validate astronomical ephemeris calculations
+- `npm run validate:spiritual` - Validate spiritual content references
+
 ### Supabase Vector Extension Requirements
 ⚠️ **CRITICAL**: The database requires the `vector` extension for AI/ML embeddings:
 
@@ -38,10 +61,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Local development: Enable via `CREATE EXTENSION IF NOT EXISTS vector;`
 - **See SUPABASE_VECTOR_SETUP.md for detailed troubleshooting guide**
 
-### Testing Commands
-- `npm run validate:astro` - Validate astronomical ephemeris calculations
-- `npm run validate:spiritual` - Validate spiritual content references
-
 ## Project Architecture
 
 ### Core Technology Stack
@@ -49,8 +68,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **UI**: Tailwind CSS v4, Framer Motion for animations
 - **Database**: Supabase (PostgreSQL) with Row Level Security
 - **WebGL**: Custom WebGL2 renderer for astronomical visualizations
+- **Astrology**: swisseph-v2 for astronomical calculations (partially integrated)
 - **Analytics**: Vercel Analytics
-- **Deployment**: Vercel (primary)
+- **Deployment**: Vercel (primary), Netlify (alternative)
+- **AI/LLM**: Claude, ChatGPT, Gemini (via MCP integration)
+- **Automation**: n8n workflows, GitHub Actions
+
+### Performance Requirements
+- **Galaxy/starfield UI**: Must maintain 60fps with WebGL/Three.js
+- **Astronomical calculations**: Under 200ms response time
+- **Page load**: <3 second load times, <100KB initial bundle
+- **Mobile-first PWA**: Offline spiritual practice capabilities
+- **CDN optimization**: Required for tarot deck images and celestial charts
 
 ### Directory Structure
 ```
@@ -69,7 +98,10 @@ src/
 │   └── tarot/            # Tarot deck data
 ├── hooks/                # Custom React hooks
 ├── contexts/             # React contexts (Auth)
-└── services/             # Business logic and integrations
+├── services/             # Business logic and integrations
+│   ├── astrology/        # Astronomical calculations (TypeScript)
+│   └── astrology-python/ # Python-based astrology engine
+└── agents/               # MCP agents and virtual readers
 ```
 
 ### Database Schema
@@ -168,7 +200,7 @@ src/
    - Required for ALL real astrological features
    - Cannot provide authentic astrology without this
 
-3. **Agent System** (20% real)
+4. **Agent System** (20% real)
    - Scripts exist but don't spawn real processes
    - Registry tracks non-existent services
    - Most agents are dormant/conceptual
@@ -203,11 +235,28 @@ src/
 3. **TEST EVERYTHING** - Run code before claiming completion
 4. **ADMIT LIMITATIONS** - If something needs human intervention, say so
 
+### Spiritual Technology Ethics (from Cursor rules)
+1. **Human augmentation over replacement** - AI enhances human spiritual advisors
+2. **All AI-generated content must feel genuinely helpful**, not mechanically produced
+3. **Treat user spiritual data with same reverence as medical records**
+4. **Always indicate when content is AI-generated vs human-created**
+5. **Acknowledge diverse spiritual traditions respectfully**
+6. **Ensure platform serves users of all abilities** - WCAG 2.1 AA compliance minimum
+
+### API Architecture Standards
+- **API-first development** - every feature must expose clean, documented APIs
+- **Use RESTful conventions** with clear resource naming
+- **Implement rate limiting and authentication** on all endpoints
+- **Separate services** for astronomical calculations, user management, and content generation
+- **Cache astronomical data intelligently** but never compromise accuracy for performance
+
 ### Code Style
 - Use existing patterns and libraries
 - Maintain TypeScript strict mode
 - Follow component organization by feature
 - Use CSS Modules for styling
+- **Mobile-first progressive enhancement** approach
+- **Progressive disclosure** - reveal complexity gradually to users
 
 ### Testing Requirements
 Before claiming ANY feature works:
@@ -216,6 +265,17 @@ Before claiming ANY feature works:
 3. Verify data persistence
 4. Test error cases
 5. Confirm user can actually use the feature
+6. **Astronomical calculations verified against known historical events**
+7. **Cultural sensitivity testing** with practitioners from relevant traditions
+8. **Accessibility testing** with real users who have disabilities
+9. **Privacy testing** including penetration testing for spiritual data
+10. **Performance testing** for peak usage (new moons, major astrological events)
+
+## Multi-Brand Architecture
+The codebase supports multiple brands:
+- **Mystic Arcana** - Primary spiritual technology platform
+- **BirthdayGen** - Birthday-focused astrology application
+- **EDM Shuffle** - Music festival astrology integration
 
 ## Next Steps - CRITICAL PRIORITIES
 
@@ -256,6 +316,9 @@ Before claiming ANY feature works:
 2. **Vector Extension** - Enable in Supabase for AI features  
 3. **Email Provider** - Configure SMTP for notifications
 4. **Ephemeris Data Source** - Acquire astronomical calculation library
+5. **MCP server connections** for Claude Code and virtual reader agents
+6. **Swiss Ephemeris and NASA/JPL API** configurations
+7. **n8n workflow automation** endpoints
 
 ### FORBIDDEN Until Integrity Issues Fixed
 - ❌ Production deployment

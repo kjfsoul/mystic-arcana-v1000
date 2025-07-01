@@ -4,10 +4,10 @@ test.describe('Location Search', () => {
   test('should allow a user to search for and select a location', async ({ page }) => {
     await page.goto('/');
 
-    // Click the "Enter Astrology Cosmos" heading to navigate to the astrology room
-    const astrologyCosmosHeading = page.locator('h2:has-text("Enter the Astrology Cosmos")');
-    await expect(astrologyCosmosHeading).toBeVisible();
-    await astrologyCosmosHeading.click();
+    // Click the "Birth Chart Reading" heading to reveal the location search
+    const birthChartHeading = page.locator('h3:has-text("Birth Chart Reading")');
+    await expect(birthChartHeading).toBeVisible();
+    await birthChartHeading.click();
 
     // Wait for the location search input to be visible before interacting with it
     const locationSearchInput = page.locator('input[placeholder="Enter city, state, country, or ZIP code"]');
