@@ -8,8 +8,7 @@ class MockCardSelectorAgent(Agent):
         return ["card_selection"]
 
     def execute(self, task: dict, context: dict) -> dict:
-        print(f"MockCardSelectorAgent: Executing task {task.get('action')}")
-        spread_type = task.get("spread", "three_card")
+        print(f"MockCardSelectorAgent: Executing task {task.get('action')}")        spread_type = task.get("spread", "three_card")
         if spread_type == "three_card":
             return {"cards": ["The Fool", "The Magician", "The High Priestess"]}
         elif spread_type == "celtic_cross":

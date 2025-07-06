@@ -57,7 +57,7 @@ export async function GET(
       .single();
 
     if (deckError || !deck) {
-      logger.error('tarot_deck_fetch_error', undefined, deckError, `Deck fetch error for ${deckId}.`);
+      logger.error('tarot_deck_fetch_error', undefined, new Error(deckError), `Deck fetch error for ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Deck not found or inactive',
@@ -88,7 +88,7 @@ export async function GET(
       .order('card_number', { ascending: true });
 
     if (cardsError) {
-      logger.error('tarot_cards_fetch_error', undefined, cardsError, `Cards fetch error for deck ${deckId}.`);
+      logger.error('tarot_cards_fetch_error', undefined, new Error(cardsError), `Cards fetch error for deck ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Failed to fetch cards',

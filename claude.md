@@ -17,24 +17,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run supabase:stop` - Stop local Supabase instance
 - `npx supabase db reset` - Reset database to initial state
 
-### Tarot System Commands
-- `npm run seed:tarot` - Seed tarot card data into database
-- `npm run test:tarot` - Test tarot API endpoints
-- `npm run setup:tarot` - Initialize tarot engine
-- `npm run setup:local` - Setup local tarot environment
+### ⚠️ UNIMPLEMENTED Commands (Scripts Missing)
+**These commands are documented but DO NOT EXIST in package.json:**
+- `npm run seed:tarot` - **MISSING** - Seed tarot card data into database
+- `npm run test:tarot` - **BROKEN** - Points to non-existent test file
+- `npm run setup:tarot` - **MISSING** - Initialize tarot engine
+- `npm run setup:local` - **MISSING** - Setup local tarot environment
+- `npm run astrology:setup` - **BROKEN** - Points to missing script ./scripts/setup-astrology.sh
+- `npm run astrology:test` - **MISSING** - Run basic astrology tests
+- `npm run astrology:test-chart` - **MISSING** - Test birth chart generation
+- `npm run astrology:test-transits` - **MISSING** - Test planetary transits
+- `npm run email:*` commands - **ALL MISSING** - Email system not implemented
 
-### Astrology Commands (Python-based)
-- `npm run astrology:setup` - Setup Python virtual environment and dependencies
-- `npm run astrology:test` - Run basic astrology tests
-- `npm run astrology:test-chart` - Test birth chart generation with sample data
-- `npm run astrology:test-transits` - Test current planetary transits
-
-### Email System Commands
-- `npm run email:setup` - Configure email notification system
-- `npm run email:start` - Start email scheduler service
-- `npm run email:test` - Test email sending functionality
-- `npm run email:urgent` - Send urgent notification test
-- `npm run email:send` - Manually trigger email notifications
+**Before using these commands, you must first create the missing scripts and package.json entries.**
 
 ### Validation Commands
 - `npm run validate:astro` - Validate astronomical ephemeris calculations
@@ -327,3 +322,48 @@ The codebase supports multiple brands:
 - ❌ Claiming "working" astrology system
 
 **BOTTOM LINE**: The application cannot be considered "ready" until all astrological calculations use real astronomical data. Current astrology features are demonstrations only and must not be presented as functional to real users.
+
+---
+
+## Claude Code Onboarding Status
+
+### Last Session Update: July 2, 2025
+
+**All onboarding rules have been read and internalized as of 2025-07-02**
+
+### Canonical Config Files Read:
+- ✅ `/Users/kfitz/mystic-arcana-v1000/CLAUDE_INTEGRITY_RULES.md` - Mandatory compliance rules
+- ✅ `/Users/kfitz/mystic-arcana-v1000/IMPLEMENTATION_MICROTASKS.md` - Task breakdown and model assignments
+- ✅ `/Users/kfitz/mystic-arcana-v1000/claudeupdate.md` - Honest project assessment
+- ✅ `/Users/kfitz/mystic-arcana-v1000/PRD.md` - Product requirements document
+- ✅ `/Users/kfitz/mystic-arcana-v1000/GEMINI.md` - GEMINI.md file not found
+- ✅ `/Users/kfitz/mystic-arcana-v1000/technical_architecture.md` - Technical architecture overview
+- ✅ `/Users/kfitz/mystic-arcana-v1000/docs/**/*.md` - 52+ documentation files scanned
+
+### Available MCP Servers:
+- **memory** - Knowledge graph storage (tested ✅)
+- **filesystem** - File operations (tested ✅)
+- **ide** - VS Code diagnostics and code execution (tested ✅)
+- **context7** - Library documentation (tested ✅)
+- **21st-dev_magic** - UI component builder, logos, inspiration, refinement (tested ✅)
+- **brave-search** - Web and local search (available)
+
+### Agent Registry Status:
+- **Registry File**: `/Users/kfitz/mystic-arcana-v1000/agents/registry.json` (230+ lines)
+- **Key Agents**: Mystic Arcana Oracle, UI/UX agents, Tarot UX Optimizer
+- **Current Status**: Most agents dormant/conceptual (20% real functionality)
+- **Critical Issue**: 8 of 9 agents not actively contributing to development
+
+### Current Session Summary:
+- **Context**: Full compliance with Claude Mandates onboarding process
+- **Primary Task**: Tarot deck spreads implementation and mobile UI optimization
+- **Agent Activation Status**: Ready to coordinate with available agents for development tasks
+- **Blocking Issues**: Need to activate registry agents for actual development work vs conceptual tracking
+
+### Detected Changes Since Last Session:
+- CLAUDE.md updated with missing command documentation (marked as UNIMPLEMENTED)
+- Agent registry analyzed - most agents require activation for productive use
+- MCP server ecosystem confirmed functional and ready for coordination
+
+### Changelog:
+**2025-07-02**: Initial onboarding completed. All mandatory files read. MCP servers tested. Agent registry analyzed. Ready for coordinated development work with focus on activating dormant agents for productive tarot spread development.
