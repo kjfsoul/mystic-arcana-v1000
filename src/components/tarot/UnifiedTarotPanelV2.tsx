@@ -1,14 +1,19 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  AlertCircle,
+  CheckCircle,
+  Loader2,
+  RefreshCw,
+  Save,
+} from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTarotReading } from "../../hooks/useTarotAPI";
-import { useCosmicWeather } from "../../utils/cosmic-weather/useCosmicWeather";
 import { AuthModal } from "../auth/AuthModal";
 import { UnlockJourneyModal } from "../modals/UnlockJourneyModal";
 import { TarotCard } from "./TarotCard";
-import { Loader2, AlertCircle, CheckCircle, Save, RefreshCw } from "lucide-react";
 
 interface UnifiedTarotPanelV2Props {
   onActivate?: () => void;
@@ -462,12 +467,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
 
       {/* Unlock Journey Modal */}
       <UnlockJourneyModal
-        isOpen={showUnlockModal}
+        isVisible={showUnlockModal}
         onClose={() => setShowUnlockModal(false)}
-        onUnlock={() => {
-          setShowUnlockModal(false);
-          setShowAuthModal(true);
-        }}
       />
     </div>
   );

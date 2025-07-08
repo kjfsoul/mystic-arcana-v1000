@@ -57,7 +57,7 @@ export async function GET(
       .single();
 
     if (deckError || !deck) {
-      logger.error('tarot_deck_fetch_error', undefined, new Error(deckError), `Deck fetch error for ${deckId}.`);
+      logger.error('tarot_deck_fetch_error', undefined, {}, new Error(deckError?.message || 'Unknown error'), `Deck fetch error for ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Deck not found or inactive',
@@ -88,7 +88,7 @@ export async function GET(
       .order('card_number', { ascending: true });
 
     if (cardsError) {
-      logger.error('tarot_cards_fetch_error', undefined, new Error(cardsError), `Cards fetch error for deck ${deckId}.`);
+      logger.error('tarot_cards_fetch_error', undefined, {}, new Error(cardsError?.message || 'Unknown error'), `Cards fetch error for deck ${deckId}.`);
       return NextResponse.json(
         {
           error: 'Failed to fetch cards',
@@ -167,9 +167,9 @@ export async function GET(
     logger.error(
       'tarot_deck_api_internal_error',
       undefined,
+      { deckId: (await params).deckId, responseTime },
       error as Error,
-      'An unexpected error occurred in the Tarot Deck API.',
-      { deckId: (await params).deckId, responseTime }
+      'An unexpected error occurred in the Tarot Deck API.'
     );
     return NextResponse.json(
       {

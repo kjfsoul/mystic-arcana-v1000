@@ -1,7 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { DrawnCard } from '@/services/tarot/TarotAPIClient';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface SessionReading {
   id: string;
@@ -124,9 +130,12 @@ export const TarotSessionProvider: React.FC<{ children: React.ReactNode }> = ({ 
     ));
   }, []);
 
-  const markReadingAsSaved = useCallback((sessionId: string, _savedId: string) => {
-    updateSessionReading(sessionId, { isSaved: true });
-  }, [updateSessionReading]);
+  const markReadingAsSaved = useCallback(
+    (sessionId: string) => {
+      updateSessionReading(sessionId, { isSaved: true });
+    },
+    [updateSessionReading]
+  );
 
   const removeSessionReading = useCallback((id: string) => {
     setSessionReadings(prev => prev.filter(reading => reading.id !== id));

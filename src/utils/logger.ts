@@ -13,7 +13,7 @@ export interface LogEntry {
   service: string;
   action: string;
   userId?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   message?: string;
   error?: {
     name: string;
@@ -29,7 +29,14 @@ class Logger {
     this.serviceName = serviceName;
   }
 
-  private log(level: LogLevel, action: string, userId?: string, metadata?: Record<string, any>, message?: string, error?: Error) {
+  private log(
+    level: LogLevel,
+    action: string,
+    userId?: string,
+    metadata?: Record<string, unknown>,
+    message?: string,
+    error?: Error
+  ) {
     const entry: LogEntry = {
       timestamp: new Date().toISOString(),
       level,
@@ -53,19 +60,40 @@ class Logger {
     console.log(JSON.stringify(entry));
   }
 
-  debug(action: string, userId?: string, metadata?: Record<string, any>, message?: string) {
+  debug(
+    action: string,
+    userId?: string,
+    metadata?: Record<string, unknown>,
+    message?: string
+  ) {
     this.log(LogLevel.DEBUG, action, userId, metadata, message);
   }
 
-  info(action: string, userId?: string, metadata?: Record<string, any>, message?: string) {
+  info(
+    action: string,
+    userId?: string,
+    metadata?: Record<string, unknown>,
+    message?: string
+  ) {
     this.log(LogLevel.INFO, action, userId, metadata, message);
   }
 
-  warn(action: string, userId?: string, metadata?: Record<string, any>, message?: string) {
+  warn(
+    action: string,
+    userId?: string,
+    metadata?: Record<string, unknown>,
+    message?: string
+  ) {
     this.log(LogLevel.WARN, action, userId, metadata, message);
   }
 
-  error(action: string, userId?: string, metadata?: Record<string, any>, error?: Error, message?: string) {
+  error(
+    action: string,
+    userId?: string,
+    metadata?: Record<string, unknown>,
+    error?: Error,
+    message?: string
+  ) {
     this.log(LogLevel.ERROR, action, userId, metadata, message, error);
   }
 }

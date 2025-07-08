@@ -784,12 +784,8 @@ export const TarotReadingPanelDemo: React.FC<TarotReadingPanelDemoProps> = ({
 
       {/* Unlock Journey Modal */}
       <UnlockJourneyModal
-        isOpen={showUnlockModal}
+        isVisible={showUnlockModal}
         onClose={() => setShowUnlockModal(false)}
-        onUnlock={() => {
-          setShowUnlockModal(false);
-          setShowAuthModal(true);
-        }}
       />
     </div>
   );

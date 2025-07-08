@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (deckError || !deckData) {
-      logger.error('deck_fetch_error', userId, deckError, 'Failed to fetch deck data');
+      logger.error('deck_fetch_error', userId, { deckId }, deckError || undefined, 'Failed to fetch deck data');
       return NextResponse.json(
         { 
           success: false, 
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       .order('card_number');
 
     if (cardError || !cardData || cardData.length === 0) {
-      logger.error('cards_fetch_error', userId, cardError, 'Failed to fetch cards');
+      logger.error('cards_fetch_error', userId, { deckId }, cardError || undefined, 'Failed to fetch cards');
       return NextResponse.json(
         { 
           success: false, 
@@ -181,11 +181,11 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    logger.info('tarot_draw_success', userId, `Drew ${drawnCards.length} cards`, {
+    logger.info('tarot_draw_success', userId, {
       spread,
       deckId,
       drawId
-    });
+    }, `Drew ${drawnCards.length} cards`);
 
     return NextResponse.json(response, {
       headers: {
@@ -198,7 +198,8 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     logger.error(
       'tarot_draw_error',
-      null,
+      undefined,
+      {},
       error as Error,
       'Failed to draw tarot cards.'
     );

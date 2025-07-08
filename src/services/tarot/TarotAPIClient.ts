@@ -59,16 +59,16 @@ export interface ShuffleResponse {
     entropy: number;
   };
   preview?: {
-    topCard: any;
-    middleCard: any;
-    bottomCard: any;
+    topCard: DrawnCard;
+    middleCard: DrawnCard;
+    bottomCard: DrawnCard;
   };
   error?: string;
 }
 
 export interface SaveReadingRequest {
   userId: string;
-  spreadType: 'single' | 'three-card' | 'celtic-cross';
+  spreadType: "single" | "three-card" | "celtic-cross";
   cards: Array<{
     id: string;
     name: string;
@@ -81,7 +81,7 @@ export interface SaveReadingRequest {
   interpretation: string;
   question?: string;
   notes?: string;
-  cosmicInfluence?: any;
+  cosmicInfluence?: Record<string, unknown>;
   drawId?: string;
   isPublic?: boolean;
   tags?: string[];
@@ -100,13 +100,13 @@ export interface GetReadingsRequest {
   date?: string;
   dateFrom?: string;
   dateTo?: string;
-  spreadType?: 'single' | 'three-card' | 'celtic-cross';
+  spreadType?: "single" | "three-card" | "celtic-cross";
   tags?: string;
   isPublic?: boolean;
   page?: number;
   limit?: number;
-  sort?: 'created_at' | 'spread_type';
-  order?: 'asc' | 'desc';
+  sort?: "created_at" | "spread_type";
+  order?: "asc" | "desc";
 }
 
 export interface GetReadingsResponse {
@@ -126,12 +126,12 @@ export interface TarotReading {
   id: string;
   userId: string;
   spreadType: string;
-  cards: any[];
+  cards: DrawnCard[];
   positions: string[];
   interpretation: string;
   question?: string;
   notes?: string;
-  cosmicInfluence?: any;
+  cosmicInfluence?: Record<string, unknown>;
   isPublic: boolean;
   tags: string[];
   createdAt: string;
@@ -145,14 +145,27 @@ export interface APIError {
   details?: string;
 }
 
+export interface GetReadingStatsResponse {
+  success: boolean;
+  stats?: {
+    totalReadings: number;
+    publicReadings: number;
+    privateReadings: number;
+    mostCommonSpread?: string;
+    mostCommonTag?: string;
+    [key: string]: unknown;
+  };
+  error?: string;
+}
+
 class TarotAPIClient {
   private baseUrl: string;
   private defaultHeaders: HeadersInit;
 
-  constructor(baseUrl: string = '') {
-    this.baseUrl = baseUrl || '';
+  constructor(baseUrl: string = "") {
+    this.baseUrl = baseUrl || "";
     this.defaultHeaders = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
   }
 
@@ -162,7 +175,7 @@ class TarotAPIClient {
   async drawCards(request: DrawCardsRequest): Promise<DrawCardsResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/tarot/draw`, {
-        method: 'POST',
+        method: "POST",
         headers: this.defaultHeaders,
         body: JSON.stringify(request),
       });
@@ -175,13 +188,13 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Draw cards error:', error);
+      console.error("Draw cards error:", error);
       return {
         success: false,
         cards: [],
-        drawId: '',
-        deckId: '',
-        error: error instanceof Error ? error.message : 'Failed to draw cards',
+        drawId: "",
+        deckId: "",
+        error: error instanceof Error ? error.message : "Failed to draw cards",
       };
     }
   }
@@ -192,7 +205,7 @@ class TarotAPIClient {
   async shuffleDeck(request: ShuffleRequest = {}): Promise<ShuffleResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/tarot/shuffle`, {
-        method: 'POST',
+        method: "POST",
         headers: this.defaultHeaders,
         body: JSON.stringify(request),
       });
@@ -205,18 +218,19 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Shuffle deck error:', error);
+      console.error("Shuffle deck error:", error);
       return {
         success: false,
-        shuffleId: '',
-        deckId: '',
+        shuffleId: "",
+        deckId: "",
         cardCount: 0,
         shuffleState: {
-          algorithm: '',
+          algorithm: "",
           timestamp: new Date().toISOString(),
           entropy: 0,
         },
-        error: error instanceof Error ? error.message : 'Failed to shuffle deck',
+        error:
+          error instanceof Error ? error.message : "Failed to shuffle deck",
       };
     }
   }
@@ -227,7 +241,7 @@ class TarotAPIClient {
   async saveReading(request: SaveReadingRequest): Promise<SaveReadingResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api/tarot/save-reading`, {
-        method: 'POST',
+        method: "POST",
         headers: this.defaultHeaders,
         body: JSON.stringify(request),
       });
@@ -240,12 +254,13 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Save reading error:', error);
+      console.error("Save reading error:", error);
       return {
         success: false,
-        readingId: '',
-        savedAt: '',
-        error: error instanceof Error ? error.message : 'Failed to save reading',
+        readingId: "",
+        savedAt: "",
+        error:
+          error instanceof Error ? error.message : "Failed to save reading",
       };
     }
   }
@@ -253,19 +268,23 @@ class TarotAPIClient {
   /**
    * Get tarot readings
    */
-  async getReadings(params: GetReadingsRequest = {}): Promise<GetReadingsResponse> {
+  async getReadings(
+    params: GetReadingsRequest = {}
+  ): Promise<GetReadingsResponse> {
     try {
       const queryParams = new URLSearchParams();
-      
+
       Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== '') {
+        if (value !== undefined && value !== null && value !== "") {
           queryParams.append(key, String(value));
         }
       });
 
-      const url = `${this.baseUrl}/api/tarot/get-reading${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
+      const url = `${this.baseUrl}/api/tarot/get-reading${
+        queryParams.toString() ? "?" + queryParams.toString() : ""
+      }`;
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: this.defaultHeaders,
       });
 
@@ -277,10 +296,11 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Get readings error:', error);
+      console.error("Get readings error:", error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to get readings',
+        error:
+          error instanceof Error ? error.message : "Failed to get readings",
       };
     }
   }
@@ -288,13 +308,19 @@ class TarotAPIClient {
   /**
    * Delete a reading
    */
-  async deleteReading(id: string, userId: string): Promise<{ success: boolean; error?: string }> {
+  async deleteReading(
+    id: string,
+    userId: string
+  ): Promise<{ success: boolean; error?: string }> {
     try {
       const queryParams = new URLSearchParams({ id, userId });
-      const response = await fetch(`${this.baseUrl}/api/tarot/get-reading?${queryParams}`, {
-        method: 'DELETE',
-        headers: this.defaultHeaders,
-      });
+      const response = await fetch(
+        `${this.baseUrl}/api/tarot/get-reading?${queryParams}`,
+        {
+          method: "DELETE",
+          headers: this.defaultHeaders,
+        }
+      );
 
       const data = await response.json();
 
@@ -304,10 +330,11 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Delete reading error:', error);
+      console.error("Delete reading error:", error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to delete reading',
+        error:
+          error instanceof Error ? error.message : "Failed to delete reading",
       };
     }
   }
@@ -315,14 +342,17 @@ class TarotAPIClient {
   /**
    * Get reading statistics for a user
    */
-  async getReadingStats(userId: string): Promise<any> {
+  async getReadingStats(userId: string): Promise<GetReadingStatsResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/tarot/save-reading?userId=${userId}`, {
-        method: 'GET',
-        headers: this.defaultHeaders,
-      });
+      const response = await fetch(
+        `${this.baseUrl}/api/tarot/save-reading?userId=${userId}`,
+        {
+          method: "GET",
+          headers: this.defaultHeaders,
+        }
+      );
 
-      const data = await response.json();
+      const data: GetReadingStatsResponse = await response.json();
 
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
@@ -330,10 +360,12 @@ class TarotAPIClient {
 
       return data;
     } catch (error) {
-      console.error('Get reading stats error:', error);
+      console.error("Get reading stats error:", error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to get statistics',
+        stats: undefined,
+        error:
+          error instanceof Error ? error.message : "Failed to get statistics",
       };
     }
   }

@@ -1,0 +1,13 @@
+Component,Technology,Purpose
+Frontend Framework,React.js with TypeScript,Responsive web application with modern UI components
+Mobile Framework,React Native,Cross-platform mobile app with native performance
+Backend Services,Node.js/Express microservices,"Scalable backend services for user, content, and community management"
+Database,PostgreSQL + Redis,Primary data storage with caching for performance
+Analytics,Apache Kafka + ClickHouse,Real-time analytics pipeline for user behavior and engagement tracking
+Machine Learning,TensorFlow/PyTorch,Recommendation engine and personalization algorithms
+Authentication,Auth0 + JWT,Secure user authentication and authorization
+File Storage,AWS S3 + CloudFront,"Content delivery network for books, images, and user uploads"
+Real-time Features,Socket.io + Redis pub/sub,"Real-time chat, notifications, and collaborative features"
+API Gateway,Kong/AWS API Gateway,"API management, rate limiting, and request routing"
+Monitoring,Prometheus + Grafana,"System monitoring, alerting, and performance metrics"
+Deployment,Docker + Kubernetes,Containerized deployment with orchestration and scaling

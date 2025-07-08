@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-import Logger from '@/utils/logger';
+import Logger from "@/utils/logger";
+import { createClient } from "@supabase/supabase-js";
+import { NextRequest, NextResponse } from "next/server";
 
-const logger = new Logger('TarotSaveReadingAPI');
+const logger = new Logger("TarotSaveReadingAPI");
 
 interface SaveReadingRequest {
   userId: string;
-  spreadType: 'single' | 'three-card' | 'celtic-cross';
+  spreadType: "single" | "three-card" | "celtic-cross";
   cards: Array<{
     id: string;
     name: string;
@@ -19,7 +19,7 @@ interface SaveReadingRequest {
   interpretation: string;
   question?: string;
   notes?: string;
-  cosmicInfluence?: any;
+  cosmicInfluence?: unknown;
   drawId?: string;
   isPublic?: boolean;
   tags?: string[];
@@ -34,9 +34,9 @@ interface SaveReadingResponse {
 
 /**
  * POST /api/tarot/save-reading
- * 
+ *
  * Save a tarot reading to the database for future reference
- * 
+ *
  * Request Body:
  * {
  *   "userId": string (required),
@@ -52,22 +52,43 @@ interface SaveReadingResponse {
  * }
  */
 export async function POST(request: NextRequest) {
+  let body: SaveReadingRequest | undefined;
   try {
-    const body: SaveReadingRequest = await request.json();
-    
+    body = await request.json();
+
     // Validation
+    if (!body) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid request body",
+          code: "INVALID_BODY",
+        },
+        { status: 400 }
+      );
+    }
+    
     const { spreadType, cards, interpretation } = body;
 
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     if (!user) {
-      logger.warn('tarot_save_reading_unauthenticated', undefined, undefined, 'Attempted to save reading without authentication.');
+      logger.warn(
+        "tarot_save_reading_unauthenticated",
+        undefined,
+        {},
+        "Attempted to save reading without authentication."
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Authentication required',
-          code: 'UNAUTHENTICATED' 
+        {
+          success: false,
+          error: "Authentication required",
+          code: "UNAUTHENTICATED",
         },
         { status: 401 }
       );
@@ -75,12 +96,16 @@ export async function POST(request: NextRequest) {
 
     const userId = user.id;
 
-    if (!spreadType || !['single', 'three-card', 'celtic-cross'].includes(spreadType)) {
+    if (
+      !spreadType ||
+      !["single", "three-card", "celtic-cross"].includes(spreadType)
+    ) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Valid spread type is required (single, three-card, celtic-cross)',
-          code: 'INVALID_SPREAD_TYPE' 
+        {
+          success: false,
+          error:
+            "Valid spread type is required (single, three-card, celtic-cross)",
+          code: "INVALID_SPREAD_TYPE",
         },
         { status: 400 }
       );
@@ -88,10 +113,10 @@ export async function POST(request: NextRequest) {
 
     if (!cards || !Array.isArray(cards) || cards.length === 0) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Cards array is required and cannot be empty',
-          code: 'INVALID_CARDS' 
+        {
+          success: false,
+          error: "Cards array is required and cannot be empty",
+          code: "INVALID_CARDS",
         },
         { status: 400 }
       );
@@ -99,10 +124,10 @@ export async function POST(request: NextRequest) {
 
     if (!interpretation || interpretation.trim().length === 0) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Interpretation is required',
-          code: 'MISSING_INTERPRETATION' 
+        {
+          success: false,
+          error: "Interpretation is required",
+          code: "MISSING_INTERPRETATION",
         },
         { status: 400 }
       );
@@ -110,42 +135,40 @@ export async function POST(request: NextRequest) {
 
     // Validate card count matches spread type
     const expectedCardCounts = {
-      'single': 1,
-      'three-card': 3,
-      'celtic-cross': 10
+      single: 1,
+      "three-card": 3,
+      "celtic-cross": 10,
     };
 
     if (cards.length !== expectedCardCounts[spreadType]) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: `${spreadType} spread requires exactly ${expectedCardCounts[spreadType]} cards, got ${cards.length}`,
-          code: 'CARD_COUNT_MISMATCH' 
+          code: "CARD_COUNT_MISMATCH",
         },
         { status: 400 }
       );
     }
-
-    
 
     // Prepare reading data for database
     const readingData = {
       user_id: userId,
       spread_type: spreadType,
       cards_drawn: {
-        cards: cards.map(card => ({
+        cards: cards.map((card) => ({
           id: card.id,
           name: card.name,
           position: card.position,
           isReversed: card.isReversed,
           meaning: card.meaning,
           frontImage: card.frontImage,
-          backImage: card.backImage
+          backImage: card.backImage,
         })),
-        positions: cards.map(card => card.position),
+        positions: cards.map((card) => card.position),
         drawId: body.drawId,
         question: body.question,
-        tags: body.tags || []
+        tags: body.tags || [],
       },
       interpretation_text: interpretation,
       cosmic_influence: body.cosmicInfluence || null,
@@ -153,43 +176,43 @@ export async function POST(request: NextRequest) {
         isPublic: body.isPublic || false,
         notes: body.notes,
         savedAt: new Date().toISOString(),
-        version: '1.0'
-      }
+        version: "1.0",
+      },
     };
 
     // Save reading to database
     const startTime = Date.now();
     const { data: savedReading, error: saveError } = await supabase
-      .from('tarot_readings')
+      .from("tarot_readings")
       .insert([readingData])
-      .select('id, created_at')
+      .select("id, created_at")
       .single();
 
     if (saveError) {
-      console.error('Database save error:', saveError);
+      console.error("Database save error:", saveError);
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Failed to save reading',
-          code: 'SAVE_ERROR',
-          details: saveError.message 
+        {
+          success: false,
+          error: "Failed to save reading",
+          code: "SAVE_ERROR",
+          details: saveError.message,
         },
         { status: 500 }
       );
     }
 
     const saveTime = Date.now() - startTime;
-    
+
     const response: SaveReadingResponse = {
       success: true,
       readingId: savedReading.id,
-      savedAt: savedReading.created_at
+      savedAt: savedReading.created_at,
     };
 
     // Log the save for monitoring
     logger.info(
-      'tarot_reading_saved',
-      userId,
+      "tarot_reading_saved",
+      userId || undefined,
       {
         readingId: savedReading.id,
         spreadType,
@@ -203,26 +226,25 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response, {
       headers: {
-        'X-Save-Time': saveTime.toString(),
-        'X-Reading-ID': savedReading.id,
+        "X-Save-Time": saveTime.toString(),
+        "X-Reading-ID": savedReading.id,
       },
-      status: 201
+      status: 201,
     });
-
   } catch (error) {
     logger.error(
-      'tarot_save_reading_error',
+      "tarot_save_reading_error",
       body?.userId,
+      { spreadType: body?.spreadType, cardsCount: body?.cards?.length },
       error as Error,
-      'Failed to save tarot reading.',
-      { spreadType: body?.spreadType, cardsCount: body?.cards?.length }
+      "Failed to save tarot reading."
     );
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Internal server error',
-        code: 'INTERNAL_ERROR',
-        details: error instanceof Error ? error.message : 'Unknown error'
+      {
+        success: false,
+        error: "Internal server error",
+        code: "INTERNAL_ERROR",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );
@@ -231,21 +253,26 @@ export async function POST(request: NextRequest) {
 
 /**
  * GET /api/tarot/save-reading
- * 
+ *
  * Get reading save statistics and limits for a user
  */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const userId = searchParams.get('userId');
+  const userId = searchParams.get("userId");
 
   try {
     if (!userId) {
-      logger.warn('tarot_get_save_stats_missing_user_id', undefined, undefined, 'Attempted to get save statistics without a user ID.');
+      logger.warn(
+        "tarot_get_save_stats_missing_user_id",
+        undefined,
+        {},
+        "Attempted to get save statistics without a user ID."
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'User ID is required',
-          code: 'MISSING_USER_ID' 
+        {
+          success: false,
+          error: "User ID is required",
+          code: "MISSING_USER_ID",
         },
         { status: 400 }
       );
@@ -256,12 +283,18 @@ export async function GET(request: NextRequest) {
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !supabaseServiceKey) {
-      logger.error('tarot_get_save_stats_config_error', userId, undefined, 'Database configuration error for save statistics.');
+      logger.error(
+        "tarot_get_save_stats_config_error",
+        userId || undefined,
+        {},
+        undefined,
+        "Database configuration error for save statistics."
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Database configuration error',
-          code: 'CONFIG_ERROR' 
+        {
+          success: false,
+          error: "Database configuration error",
+          code: "CONFIG_ERROR",
         },
         { status: 500 }
       );
@@ -273,18 +306,24 @@ export async function GET(request: NextRequest) {
 
     // Get user reading statistics
     const { data: readings, error } = await supabase
-      .from('tarot_readings')
-      .select('id, spread_type, created_at')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
+      .from("tarot_readings")
+      .select("id, spread_type, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
 
     if (error) {
-      logger.error('tarot_get_save_stats_fetch_error', userId, error, 'Failed to fetch reading statistics from database.');
+      logger.error(
+        "tarot_get_save_stats_fetch_error",
+        userId || undefined,
+        {},
+        error,
+        "Failed to fetch reading statistics from database."
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Failed to fetch reading statistics',
-          code: 'FETCH_ERROR' 
+        {
+          success: false,
+          error: "Failed to fetch reading statistics",
+          code: "FETCH_ERROR",
         },
         { status: 500 }
       );
@@ -293,43 +332,48 @@ export async function GET(request: NextRequest) {
     const stats = {
       totalReadings: readings?.length || 0,
       readingsByType: {
-        single: readings?.filter(r => r.spread_type === 'single').length || 0,
-        'three-card': readings?.filter(r => r.spread_type === 'three-card').length || 0,
-        'celtic-cross': readings?.filter(r => r.spread_type === 'celtic-cross').length || 0
+        single: readings?.filter((r) => r.spread_type === "single").length || 0,
+        "three-card":
+          readings?.filter((r) => r.spread_type === "three-card").length || 0,
+        "celtic-cross":
+          readings?.filter((r) => r.spread_type === "celtic-cross").length || 0,
       },
       lastReading: readings?.[0]?.created_at || null,
       limits: {
         maxReadingsPerDay: 50,
         maxReadingsPerMonth: 500,
-        storageRetention: '1 year'
-      }
+        storageRetention: "1 year",
+      },
     };
 
     logger.info(
-      'tarot_get_save_stats_success',
-      userId,
-      { totalReadings: stats.totalReadings, readingsByType: stats.readingsByType },
-      'Successfully retrieved tarot save statistics.'
+      "tarot_get_save_stats_success",
+      userId || undefined,
+      {
+        totalReadings: stats.totalReadings,
+        readingsByType: stats.readingsByType,
+      },
+      "Successfully retrieved tarot save statistics."
     );
 
     return NextResponse.json({
       success: true,
       userId,
-      statistics: stats
+      statistics: stats,
     });
-
   } catch (error) {
     logger.error(
-      'tarot_get_save_stats_internal_error',
-      userId,
+      "tarot_get_save_stats_internal_error",
+      userId || undefined,
+      {},
       error as Error,
-      'Internal server error while getting tarot save statistics.'
+      "Internal server error while getting tarot save statistics."
     );
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Internal server error',
-        code: 'INTERNAL_ERROR' 
+      {
+        success: false,
+        error: "Internal server error",
+        code: "INTERNAL_ERROR",
       },
       { status: 500 }
     );

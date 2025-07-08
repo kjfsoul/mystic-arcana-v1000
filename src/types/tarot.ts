@@ -16,6 +16,16 @@ export interface TarotCard {
 }
 
 export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
+
+export interface TarotDeck {
+  id: string;
+  name: string;
+  description: string;
+  image_url?: string;
+  is_active: boolean;
+  cards?: TarotCard[];
+}
+
 export interface TarotDeckFilter {
   id?: string;
   type?: 'core' | 'seasonal';
