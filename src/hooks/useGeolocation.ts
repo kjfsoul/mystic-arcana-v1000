@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { GeoLocation } from '../types/astronomical';
 
 interface GeolocationState {
@@ -33,6 +33,17 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       timezone: 'America/New_York'
     }
   } = options;
+
+  // Memoize fallback location to prevent infinite loops
+  const memoizedFallbackLocation = useMemo(() => fallbackLocation, [
+    fallbackLocation?.latitude,
+    fallbackLocation?.longitude,
+    fallbackLocation?.elevation,
+    fallbackLocation?.timezone
+  ]);
+
+  // Prevent multiple simultaneous requests
+  const isRequestingRef = useRef(false);
 
   const [state, setState] = useState<GeolocationState>({
     location: null,
@@ -71,16 +82,22 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
 
   // Request geolocation permission and get position
   const requestLocation = useCallback(async () => {
+    // Prevent multiple simultaneous requests
+    if (isRequestingRef.current) {
+      return;
+    }
+    
     if (!navigator.geolocation) {
       setState(prev => ({
         ...prev,
         error: 'Geolocation is not supported by this browser',
         permission: 'denied',
-        location: fallbackLocation
+        location: memoizedFallbackLocation
       }));
       return;
     }
 
+    isRequestingRef.current = true;
     setState(prev => ({ ...prev, loading: true, error: null }));
 
     try {
@@ -94,8 +111,9 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
             ...prev,
             loading: false,
             error: 'Geolocation permission denied',
-            location: fallbackLocation
+            location: memoizedFallbackLocation
           }));
+          isRequestingRef.current = false;
           return;
         }
       }
@@ -123,13 +141,14 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               error: null,
               permission: 'granted'
             }));
+            isRequestingRef.current = false;
           } catch {
             // Use coordinates even if timezone detection fails
             const location: GeoLocation = {
               latitude,
               longitude,
               elevation: altitude || 0,
-              timezone: fallbackLocation.timezone
+              timezone: memoizedFallbackLocation.timezone
             };
 
             setState(prev => ({
@@ -139,6 +158,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               error: null,
               permission: 'granted'
             }));
+            isRequestingRef.current = false;
           }
         },
         (error) => {
@@ -161,8 +181,9 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
             loading: false,
             error: errorMessage,
             permission: error.code === error.PERMISSION_DENIED ? 'denied' : prev.permission,
-            location: fallbackLocation
+            location: memoizedFallbackLocation
           }));
+          isRequestingRef.current = false;
         },
         {
           enableHighAccuracy,
@@ -175,10 +196,11 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
         ...prev,
         loading: false,
         error: error instanceof Error ? error.message : 'Unknown error',
-        location: fallbackLocation
+        location: memoizedFallbackLocation
       }));
+      isRequestingRef.current = false;
     }
-  }, [enableHighAccuracy, maximumAge, timeout, fallbackLocation]);
+  }, [enableHighAccuracy, maximumAge, timeout, memoizedFallbackLocation]);
 
   // Watch position for continuous updates
   const watchLocation = () => {
@@ -227,16 +249,16 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   const useFallback = () => {
     setState(prev => ({
       ...prev,
-      location: fallbackLocation,
+      location: memoizedFallbackLocation,
       error: null,
       loading: false
     }));
   };
 
-  // Auto-request location on mount
+  // Auto-request location on mount (only once)
   useEffect(() => {
     requestLocation();
-  }, [requestLocation]);
+  }, []); // Empty dependency array to run only once
 
   return {
     ...state,
