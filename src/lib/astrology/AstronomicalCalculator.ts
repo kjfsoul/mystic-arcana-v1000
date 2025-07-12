@@ -2,10 +2,15 @@
 // This uses simplified astronomical formulas - for production, integrate Swiss Ephemeris
 
 export interface BirthData {
+  name?: string;
   date: Date;
   latitude: number;
   longitude: number;
   timezone: string;
+  city: string;
+  country?: string;
+  lat?: number;  // alias for latitude
+  lng?: number;  // alias for longitude
 }
 
 export interface PlanetPosition {

@@ -2,6 +2,26 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Session Management & Onboarding
+
+### Onboarding Status
+- All onboarding rules have been read and internalized, as of 2025-07-10
+- Files read and validated:
+  - CLAUDE_INTEGRITY_RULES.md ✅
+  - IMPLEMENTATION_MICROTASKS.md ✅
+  - claudeupdate.md ✅
+  - PRD.md ✅
+  - GEMINI.md ✅
+  - technical_architecture.md ✅
+  - Multiple docs/ files reviewed ✅
+
+### Session Changelog
+#### 2025-07-10 - Initial Onboarding Session
+- Read all mandated onboarding files
+- Analyzed codebase structure comprehensively
+- Identified existing configurations and patterns
+- Current state: MVP with working tarot backend (90%), visual design (95%), but broken authentication (0%) and missing core features per claudeupdate.md
+
 ## Development Commands
 
 ### Essential Commands

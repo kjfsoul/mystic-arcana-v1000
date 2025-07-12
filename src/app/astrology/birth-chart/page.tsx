@@ -9,7 +9,9 @@ export default function BirthChartPage() {
     date: new Date('1990-06-15T14:30:00Z'), // Example birth date
     latitude: 40.7128, // New York City
     longitude: -74.0060,
-    timezone: 'America/New_York'
+    timezone: 'America/New_York',
+    city: 'New York',
+    country: 'United States'
   });
 
   const [formData, setFormData] = useState({
@@ -29,7 +31,9 @@ export default function BirthChartPage() {
       date: combinedDateTime,
       latitude: parseFloat(formData.latitude),
       longitude: parseFloat(formData.longitude),
-      timezone: formData.timezone
+      timezone: formData.timezone,
+      city: 'Unknown', // Would need to be geocoded
+      country: 'Unknown'
     });
   };
 

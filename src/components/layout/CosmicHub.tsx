@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
-import { TarotReadingPanelDemo } from '../tarot/TarotReadingPanelDemo';
+import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
 import { Header } from './Header';
 import { DailyHoroscopeWidget } from '../horoscope/DailyHoroscopeWidget';
 import styles from './CosmicHub.module.css';
@@ -164,7 +164,7 @@ export const CosmicHub: React.FC = () => {
                 ← Back to Hub
               </motion.button>
             </div>
-            <TarotReadingPanelDemo 
+            <UnifiedTarotPanelV2 
               className={styles.tarotPanel}
             />
           </motion.div>

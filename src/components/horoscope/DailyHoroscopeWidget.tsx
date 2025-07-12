@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeService';
 import { DailyHoroscope } from '@/types/horoscope';
+import { getPersonalizedHoroscope, HoroscopeData, isHoroscopeAvailable, formatZodiacSign, getZodiacEmoji } from '@/lib/astrology/HoroscopeService';
 import { useAuth } from '@/contexts/AuthContext';
 import { profileService } from '@/services/profileService';
 import styles from './DailyHoroscopeWidget.module.css';
@@ -14,10 +15,13 @@ interface DailyHoroscopeWidgetProps {
 
 export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ className }) => {
   const [horoscope, setHoroscope] = useState<DailyHoroscope | null>(null);
+  const [realHoroscope, setRealHoroscope] = useState<HoroscopeData | null>(null);
   const [moonPhase, setMoonPhase] = useState<string>('');
   const [cosmicEvent, setCosmicEvent] = useState<string>('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPersonalized, setIsPersonalized] = useState(false);
+  const [isLoadingReal, setIsLoadingReal] = useState(false);
+  const [hasRealData, setHasRealData] = useState(false);
   
   const { user } = useAuth();
 
@@ -34,11 +38,40 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
         try {
           const profile = await profileService.getProfile(user.id);
           
-          if (profile?.birth_date) {
+          if (profile?.birth_date && profile?.birth_city) {
+            // Try to get real horoscope data using Python backend
+            setIsLoadingReal(true);
+            try {
+              const birthData = {
+                name: profile.full_name || 'User',
+                date: new Date(profile.birth_date),
+                city: profile.birth_city,
+                country: profile.birth_country || 'United States',
+                latitude: 40.7128, // Default to NYC coordinates if not available
+                longitude: -74.0060,
+                timezone: 'America/New_York'
+              };
+
+              const realHoroscopeData = await getPersonalizedHoroscope(birthData);
+              setRealHoroscope(realHoroscopeData);
+              
+              if (isHoroscopeAvailable(realHoroscopeData)) {
+                setHasRealData(true);
+                setIsPersonalized(true);
+              }
+            } catch (error) {
+              console.error('Error loading real horoscope:', error);
+            } finally {
+              setIsLoadingReal(false);
+            }
+
+            // Also load fallback horoscope for comparison
             const personalizedHoroscope = service.getPersonalizedHoroscope(profile.birth_date);
             if (personalizedHoroscope) {
               setHoroscope(personalizedHoroscope);
-              setIsPersonalized(true);
+              if (!hasRealData) {
+                setIsPersonalized(true);
+              }
               return;
             }
           }
@@ -53,9 +86,29 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
     };
 
     loadHoroscope();
-  }, [user]);
+  }, [user, hasRealData]);
 
-  if (!horoscope) {
+  // Shimmer loading component
+  const ShimmerContent = () => (
+    <motion.div 
+      className={`${styles.widget} ${className} ${styles.shimmer}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className={styles.header}>
+        <div className={styles.shimmerLine} style={{ width: '60%', height: '20px' }}></div>
+        <div className={styles.shimmerCircle}></div>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.shimmerLine} style={{ width: '100%', height: '16px', marginBottom: '12px' }}></div>
+        <div className={styles.shimmerLine} style={{ width: '80%', height: '16px', marginBottom: '12px' }}></div>
+        <div className={styles.shimmerLine} style={{ width: '90%', height: '16px' }}></div>
+      </div>
+    </motion.div>
+  );
+
+  if (!horoscope && !isLoadingReal) {
     return (
       <div className={`${styles.widget} ${className}`}>
         <div className={styles.loading}>
@@ -64,6 +117,10 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
         </div>
       </div>
     );
+  }
+
+  if (isLoadingReal && !realHoroscope) {
+    return <ShimmerContent />;
   }
 
   const energyIcons = {
@@ -81,8 +138,14 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
     >
       <div className={styles.header}>
         <h3 className={styles.title}>
-          <span className={styles.titleIcon}>✨</span>
-          {isPersonalized ? `Your ${horoscope.personalized?.sign} Reading` : 'Daily Cosmic Insight'}
+          <span className={styles.titleIcon}>
+            {hasRealData && realHoroscope ? getZodiacEmoji(realHoroscope.sign) : '✨'}
+          </span>
+          {hasRealData && realHoroscope && isHoroscopeAvailable(realHoroscope) 
+            ? `Your ${formatZodiacSign(realHoroscope.sign)} Reading` 
+            : isPersonalized 
+              ? `Your ${horoscope?.personalized?.sign} Reading` 
+              : 'Daily Cosmic Insight'}
         </h3>
         <button 
           className={styles.expandButton}
@@ -94,19 +157,33 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
       </div>
 
       <div className={styles.content}>
-        <p className={styles.overview}>{horoscope.general.overview}</p>
+        <p className={styles.overview}>
+          {hasRealData && realHoroscope && isHoroscopeAvailable(realHoroscope) 
+            ? realHoroscope.daily 
+            : horoscope?.general.overview}
+        </p>
+        
+        {/* Show unavailable message if real horoscope failed */}
+        {realHoroscope && !isHoroscopeAvailable(realHoroscope) && (
+          <div className={styles.unavailableNotice}>
+            <span className={styles.unavailableIcon}>⚠️</span>
+            <p className={styles.unavailableText}>
+              {realHoroscope.daily}
+            </p>
+          </div>
+        )}
         
         <div className={styles.details}>
           <div className={styles.detailItem}>
             <span className={styles.detailLabel}>Energy Level:</span>
             <span className={styles.detailValue}>
-              {energyIcons[horoscope.general.energy]} {horoscope.general.energy}
+              {horoscope && energyIcons[horoscope.general.energy]} {horoscope?.general.energy}
             </span>
           </div>
           
           <div className={styles.detailItem}>
             <span className={styles.detailLabel}>Cosmic Mood:</span>
-            <span className={styles.detailValue}>{horoscope.general.mood}</span>
+            <span className={styles.detailValue}>{horoscope?.general.mood}</span>
           </div>
         </div>
 
@@ -116,7 +193,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
           animate={{ height: isExpanded ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
         >
-          {isPersonalized && horoscope.personalized && (
+          {isPersonalized && horoscope?.personalized && (
             <div className={styles.personalizedSection}>
               <div className={styles.zodiacHeader}>
                 <span className={styles.zodiacSymbol}>
@@ -168,7 +245,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
             <div className={styles.luckyNumbers}>
               <span className={styles.luckyLabel}>Lucky Numbers:</span>
               <div className={styles.numbersList}>
-                {horoscope.general.luckyNumbers.map((num, index) => (
+                {horoscope?.general.luckyNumbers.map((num, index) => (
                   <span key={index} className={styles.luckyNumber}>
                     {num}
                   </span>
@@ -180,9 +257,9 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
               <span className={styles.luckyLabel}>Lucky Color:</span>
               <span 
                 className={styles.colorSwatch}
-                style={{ backgroundColor: horoscope.general.luckyColor }}
+                style={{ backgroundColor: horoscope?.general.luckyColor }}
               />
-              <span className={styles.colorName}>{horoscope.general.luckyColor}</span>
+              <span className={styles.colorName}>{horoscope?.general.luckyColor}</span>
             </div>
           </div>
         </motion.div>

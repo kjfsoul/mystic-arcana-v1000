@@ -32,6 +32,60 @@
   50% { opacity: 1; }
 }
 
+/* Shimmer loading styles */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmerLine, .shimmerCircle {
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.shimmerCircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-bottom: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Unavailable notice styles */
+.unavailableNotice {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.unavailableIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.unavailableText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

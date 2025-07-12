@@ -6,7 +6,7 @@ import { GalaxyBackground } from '../components/effects/GalaxyBackground/GalaxyB
 import { TarotZonePreview } from '../components/panels/TarotZonePreview';
 import { AstrologyZonePreview } from '../components/panels/AstrologyZonePreview';
 import { CelestialEventsCarousel } from '../components/cosmic/CelestialEventsCarousel';
-import { EnhancedTarotPanel } from '../components/tarot/EnhancedTarotPanel';
+import { UnifiedTarotPanelV2 } from '../components/tarot/UnifiedTarotPanelV2';
 import { AstrologyReadingRoom } from '../components/astrology/AstrologyReadingRoom';
 import { Header } from '../components/layout/Header';
 import { AuthDebug } from '../components/debug/AuthDebug';
@@ -197,7 +197,7 @@ const TarotReadingRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         transition={{ delay: 0.4 }}
       >
         <div className="w-full bg-black/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 lg:p-12 shadow-2xl">
-          <EnhancedTarotPanel />
+          <UnifiedTarotPanelV2 />
         </div>
       </motion.div>
     </motion.div>

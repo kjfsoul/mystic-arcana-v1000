@@ -40,7 +40,9 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     date: new Date('1990-06-15T14:30:00Z'),
     latitude: 40.7128, // New York City default
     longitude: -74.0060,
-    timezone: 'America/New_York'
+    timezone: 'America/New_York',
+    city: 'New York',
+    country: 'United States'
   });
   const [formData, setFormData] = useState({
     date: '1990-06-15',
@@ -133,7 +135,9 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       date: combinedDateTime,
       latitude: selectedLocation.latitude,
       longitude: selectedLocation.longitude,
-      timezone: selectedLocation.timezone || formData.timezone
+      timezone: selectedLocation.timezone || formData.timezone,
+      city: selectedLocation.city || 'Unknown',
+      country: selectedLocation.country || 'Unknown'
     });
     
     setShowBirthForm(false);

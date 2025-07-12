@@ -291,8 +291,22 @@ export function useTarotReading() {
         });
 
         if (drawResult.success) {
-          setCurrentDrawId(drawResult.drawId);
-          setDrawnCards(drawResult.cards);
+          // Handle the actual API response structure
+          const apiResponse = drawResult as unknown as {
+            success: boolean;
+            data?: {
+              cards: typeof drawResult.cards;
+              metadata: { drawId: string };
+            };
+          };
+          if (apiResponse.data?.cards) {
+            setCurrentDrawId(apiResponse.data.metadata.drawId);
+            setDrawnCards(apiResponse.data.cards);
+          } else {
+            // Fallback to the expected interface structure
+            setCurrentDrawId(drawResult.drawId);
+            setDrawnCards(drawResult.cards);
+          }
         }
 
         return drawResult;

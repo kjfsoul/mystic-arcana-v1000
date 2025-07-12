@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { TarotPanel } from '../panels/TarotPanel';
-import { EnhancedTarotPanel } from '../tarot/EnhancedTarotPanel';
+import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
 import { AstrologyPanel } from '../panels/AstrologyPanel';
 import { CelestialEventsCarousel } from '../astronomical/CelestialEventsCarousel';
 import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
@@ -173,7 +173,7 @@ const ReadingRoom: React.FC<ReadingRoomProps> = ({ mode, onBack }) => {
         {mode === 'tarot-room' && (
           <div className={styles.tarotRoom}>
             <div className={styles.immersiveContent}>
-              <EnhancedTarotPanel />
+              <UnifiedTarotPanelV2 />
             </div>
           </div>
         )}

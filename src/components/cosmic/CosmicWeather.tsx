@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// import { useCosmicWeather } from '../../utils/cosmic-weather/useCosmicWeather';
+import { getMoonPhase, MoonPhaseData, isFullMoon, formatNextPhaseDate } from '@/lib/astrology/MoonPhase';
 import styles from './CosmicWeather.module.css';
 
 interface CosmicWeatherProps {
@@ -14,9 +14,10 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
   onClick, 
   className = '' 
 }) => {
-  // const { cosmicInfluence } = useCosmicWeather(); // For future use with real data
   const [loading, setLoading] = useState(true);
   const [activeOrb, setActiveOrb] = useState(0);
+  const [moonPhase, setMoonPhase] = useState<MoonPhaseData | null>(null);
+  const [moonError, setMoonError] = useState(false);
 
   // Rotate through different cosmic elements
   useEffect(() => {
@@ -26,36 +27,57 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  // Simulate loading state
+  // Load real moon phase data
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    async function loadMoonPhase() {
+      try {
+        setLoading(true);
+        setMoonError(false);
+        const moonData = await getMoonPhase();
+        setMoonPhase(moonData);
+        
+        if (moonData.isUnavailable) {
+          setMoonError(true);
+        }
+      } catch (error) {
+        console.error('Error loading moon phase:', error);
+        setMoonError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadMoonPhase();
   }, []);
 
   const cosmicOrbs = [
     { 
-      emoji: '🌙', 
+      emoji: moonPhase?.emoji || '🌙', 
       label: 'Moon Phase',
-      value: 'Waxing Crescent',
-      color: '#E6E6FA'
+      value: moonError ? 'Data Unavailable' : moonPhase ? `${moonPhase.phase} (${moonPhase.illumination}%)` : 'Loading...',
+      color: '#E6E6FA',
+      isFullMoon: moonPhase ? isFullMoon(moonPhase) : false
     },
     { 
       emoji: '☿', 
       label: 'Mercury',
       value: 'Direct',
-      color: '#FFD700'
+      color: '#FFD700',
+      isFullMoon: false
     },
     { 
       emoji: '♀', 
       label: 'Venus',
       value: 'Harmonious',
-      color: '#FF69B4'
+      color: '#FF69B4',
+      isFullMoon: false
     },
     { 
       emoji: '♂', 
       label: 'Mars',
       value: 'Energetic',
-      color: '#FF4500'
+      color: '#FF4500',
+      isFullMoon: false
     }
   ];
 
@@ -113,7 +135,26 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
               transition={{ duration: 0.5 }}
               style={{ color: cosmicOrbs[activeOrb].color }}
             >
-              <div className={styles.orbEmoji}>{cosmicOrbs[activeOrb].emoji}</div>
+              <motion.div 
+                className={styles.orbEmoji}
+                animate={cosmicOrbs[activeOrb].isFullMoon ? {
+                  textShadow: [
+                    '0 0 10px #ffffff',
+                    '0 0 20px #e6e6fa',
+                    '0 0 30px #e6e6fa',
+                    '0 0 20px #e6e6fa',
+                    '0 0 10px #ffffff'
+                  ],
+                  scale: [1, 1.1, 1]
+                } : {}}
+                transition={cosmicOrbs[activeOrb].isFullMoon ? {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                } : {}}
+              >
+                {cosmicOrbs[activeOrb].emoji}
+              </motion.div>
               <div className={styles.orbLabel}>{cosmicOrbs[activeOrb].label}</div>
               <div className={styles.orbValue}>{cosmicOrbs[activeOrb].value}</div>
             </motion.div>
@@ -154,22 +195,45 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
 
         {/* Cosmic Weather Indicators */}
         <div className={styles.weatherIndicators}>
-          <motion.div
-            className={styles.aspectIndicator}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0 }}
-          >
-            ☽ ☌ ☉ Harmonious Energy
-          </motion.div>
-          <motion.div
-            className={styles.aspectIndicator}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            ♀ △ ♃ Creative Flow
-          </motion.div>
+          {activeOrb === 0 && moonPhase && !moonError ? (
+            <>
+              <motion.div
+                className={styles.aspectIndicator}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0 }}
+              >
+                🌕 Next Full Moon: {formatNextPhaseDate(moonPhase.nextFullMoon)}
+              </motion.div>
+              <motion.div
+                className={styles.aspectIndicator}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                🌑 Next New Moon: {formatNextPhaseDate(moonPhase.nextNewMoon)}
+              </motion.div>
+            </>
+          ) : (
+            <>
+              <motion.div
+                className={styles.aspectIndicator}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0 }}
+              >
+                ☽ ☌ ☉ Harmonious Energy
+              </motion.div>
+              <motion.div
+                className={styles.aspectIndicator}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                ♀ △ ♃ Creative Flow
+              </motion.div>
+            </>
+          )}
         </div>
       </div>
 
