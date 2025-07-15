@@ -70,12 +70,53 @@ export async function POST(request: NextRequest) {
     
     const { spreadType, cards, interpretation } = body;
 
+    // Get the authorization header from the request
+    const authorization = request.headers.get('authorization');
+    
+    if (!authorization || !authorization.startsWith('Bearer ')) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Authentication required",
+          code: "UNAUTHENTICATED",
+        },
+        { status: 401 }
+      );
+    }
+
+    const token = authorization.split(' ')[1];
+    
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    });
+    
     const {
       data: { user },
-    } = await supabase.auth.getUser();
+      error: authError
+    } = await supabase.auth.getUser(token);
+    
+    if (authError) {
+      logger.warn(
+        "tarot_save_reading_auth_error",
+        undefined,
+        { error: authError.message },
+        "Authentication error while saving reading."
+      );
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Authentication failed",
+          code: "AUTH_ERROR",
+        },
+        { status: 401 }
+      );
+    }
 
     if (!user) {
       logger.warn(

@@ -2,7 +2,7 @@
   position: relative;
   perspective: 1200px;
   width: 200px;
-  height: 300px;
+  height: 320px; /* Increased height to prevent cutoff */
   margin: 0 auto;
   transition: all 0.3s ease;
 }

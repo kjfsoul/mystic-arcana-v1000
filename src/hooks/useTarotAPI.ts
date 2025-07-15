@@ -369,6 +369,11 @@ export function useTarotReading() {
     [drawnCards, currentDrawId, save]
   );
 
+  const clearCurrentReading = useCallback(() => {
+    setDrawnCards(null);
+    setCurrentDrawId(null);
+  }, []);
+
   return {
     // States
     isLoading:
@@ -380,6 +385,7 @@ export function useTarotReading() {
     // Actions
     performReading,
     saveCurrentReading,
+    clearCurrentReading,
     getReadingHistory: readings.getReadings,
     deleteReading: readings.deleteReading,
 

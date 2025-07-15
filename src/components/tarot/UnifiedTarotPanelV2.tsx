@@ -28,6 +28,107 @@ interface UnifiedTarotPanelV2Props {
   className?: string;
 }
 
+// Generate automatic interpretation based on spread type
+/* function generateSpreadInterpretation(
+  cards: DrawnCard[], 
+  spreadType: "single" | "three-card" | "celtic-cross",
+  positions: string[]
+): string {
+  let interpretation = "🔮 **Your Reading Reveals:**\n\n";
+  
+  switch (spreadType) {
+    case "single":
+      const card = cards[0];
+      interpretation += `The **${card.name}** appears before you, ${card.isReversed ? 'reversed, ' : ''}offering profound insight into your current situation.\n\n`;
+      interpretation += `**Message**: ${card.isReversed ? card.meaning_reversed : card.meaning_upright}\n\n`;
+      interpretation += `This card suggests that you ${getCardAdvice(card)}. `;
+      interpretation += `Trust your intuition as you navigate this energy.`;
+      break;
+      
+    case "three-card":
+      interpretation += "Your past, present, and future unfold before you:\n\n";
+      cards.forEach((card, index) => {
+        const position = positions[index];
+        interpretation += `**${position}** - ${card.name}${card.isReversed ? ' (Reversed)' : ''}\n`;
+        interpretation += `${card.isReversed ? card.meaning_reversed : card.meaning_upright}\n\n`;
+      });
+      interpretation += `**Synthesis**: The journey from ${cards[0].name} through ${cards[1].name} to ${cards[2].name} `;
+      interpretation += `reveals a path of transformation. ${getThreeCardSynthesis(cards)}`;
+      break;
+      
+    case "celtic-cross":
+      interpretation += "The Celtic Cross reveals the deeper patterns at play:\n\n";
+      const keyPositions = [0, 1, 4, 9]; // Present, Challenge, Possible Outcome, Final Outcome
+      keyPositions.forEach(index => {
+        if (cards[index]) {
+          interpretation += `**${positions[index]}** - ${cards[index].name}${cards[index].isReversed ? ' (Reversed)' : ''}\n`;
+          interpretation += `${cards[index].isReversed ? cards[index].meaning_reversed : cards[index].meaning_upright}\n\n`;
+        }
+      });
+      interpretation += `**Overall Guidance**: Your current situation (${cards[0].name}) is challenged by ${cards[1].name}. `;
+      interpretation += `The path ahead suggests ${cards[4].name}, ultimately leading to ${cards[9].name}. `;
+      interpretation += `Pay special attention to ${cards[7].name} as external influences shape your journey.`;
+      break;
+  }
+  
+  return interpretation;
+}
+
+// Helper function to provide card-specific advice
+function getCardAdvice(card: DrawnCard): string {
+  const adviceMap: Record<string, string> = {
+    "The Fool": "embrace new beginnings with childlike wonder",
+    "The Magician": "harness your personal power to manifest your desires",
+    "The High Priestess": "trust your intuition and inner wisdom",
+    "The Empress": "nurture yourself and others with abundance",
+    "The Emperor": "take charge with authority and structure",
+    "The Hierophant": "seek wisdom from tradition or mentors",
+    "The Lovers": "make choices aligned with your values",
+    "The Chariot": "move forward with determination and control",
+    "Strength": "approach challenges with inner courage and compassion",
+    "The Hermit": "seek answers through introspection",
+    "Wheel of Fortune": "embrace the cycles of change",
+    "Justice": "seek balance and fairness in all dealings",
+    "The Hanged Man": "see things from a new perspective",
+    "Death": "release what no longer serves you",
+    "Temperance": "find balance and moderation",
+    "The Devil": "examine what binds or limits you",
+    "The Tower": "prepare for sudden transformation",
+    "The Star": "have faith in renewal and hope",
+    "The Moon": "navigate through illusion to truth",
+    "The Sun": "celebrate joy and success",
+    "Judgement": "embrace rebirth and awakening",
+    "The World": "recognize completion and achievement"
+  };
+  
+  const baseAdvice = adviceMap[card.name] || "trust the wisdom this card brings";
+  return card.isReversed ? `reconsider how to ${baseAdvice}` : baseAdvice;
+}
+
+// Generate synthesis for three-card spread
+function getThreeCardSynthesis(cards: DrawnCard[]): string {
+  const past = cards[0];
+  const present = cards[1];
+  const future = cards[2];
+  
+  let synthesis = "";
+  
+  // Check for patterns
+  if (past.arcana_type === present.arcana_type && present.arcana_type === future.arcana_type) {
+    synthesis += `All three cards share the ${past.arcana_type} arcana, indicating a focused journey. `;
+  }
+  
+  // Major Arcana emphasis
+  const majorCount = cards.filter(c => c.arcana_type === 'major').length;
+  if (majorCount >= 2) {
+    synthesis += `The presence of ${majorCount} Major Arcana cards suggests significant life themes at play. `;
+  }
+  
+  synthesis += `Move forward with the wisdom gained from your past experiences.`;
+  
+  return synthesis;
+} */
+
 export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
   className = "",
   onInterpret,
@@ -79,6 +180,19 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
 
     return spreads;
   }, [isGuest]);
+
+  // Generate interpretation when cards are drawn
+  useEffect(() => {
+    if (tarotReading.drawnCards && tarotReading.drawnCards.length > 0) {
+      console.log('🔮 useEffect: Generating interpretation for', tarotReading.drawnCards.length, 'cards');
+      
+      // Generate interpretation
+      const spreadInterpretation = `🔮 **Your ${selectedSpread} Reading**\n\nYou drew ${tarotReading.drawnCards.length} card(s):\n\n${tarotReading.drawnCards.map((card) => `**${card.name}** ${card.isReversed ? '(Reversed)' : ''}\n${card.isReversed ? card.meaning_reversed : card.meaning_upright}`).join('\n\n')}\n\nThis is a test interpretation to verify the system is working.`;
+      
+      console.log('🔮 Setting interpretation:', spreadInterpretation);
+      setInterpretation(spreadInterpretation);
+    }
+  }, [tarotReading.drawnCards, selectedSpread]);
 
   // Responsive breakpoint detection with touch optimization
   useEffect(() => {
@@ -168,13 +282,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       // Cards remain face-down until manually clicked by user
       // User must click each card to reveal it
 
-      // Call onInterpret if provided
-      if (onInterpret && tarotReading.drawnCards) {
-        const cardInterpretation = tarotReading.drawnCards
-          .map((card, index) => `${cardPositions[index] || 'Card'}: ${card.name} - ${card.isReversed ? card.meaning_reversed : card.meaning_upright}`)
-          .join('\n\n');
-        onInterpret(tarotReading.drawnCards, cardInterpretation);
-      }
+      // Interpretation will be generated by useEffect when cards are available
 
       // Show unlock modal for guests after experience (disabled for better UX)
       // if (isGuest && selectedSpread === "single") {
@@ -236,7 +344,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         containerClass: "p-4 space-y-6 min-h-screen",
         headerClass: "text-2xl sm:text-3xl",
         buttonClass: "px-6 py-4 text-base min-h-[56px]", // Increased for accessibility
-        cardSize: "w-20 h-30",
+        cardSize: "w-20 h-32",
         gridClass: {
           single: "flex justify-center py-8",
           "three-card": "grid grid-cols-3 gap-3 max-w-xs mx-auto py-6",
@@ -249,7 +357,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         containerClass: "p-6 space-y-8 min-h-screen",
         headerClass: "text-3xl sm:text-4xl",
         buttonClass: "px-8 py-4 text-lg min-h-[48px]",
-        cardSize: "w-24 h-36",
+        cardSize: "w-32 h-48",
         gridClass: {
           single: "flex justify-center py-10",
           "three-card": "grid grid-cols-3 gap-6 max-w-2xl mx-auto py-8",
@@ -262,7 +370,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         containerClass: "p-8 space-y-10 min-h-screen",
         headerClass: "text-4xl sm:text-5xl",
         buttonClass: "px-10 py-5 text-xl min-h-[48px]",
-        cardSize: "w-28 h-42",
+        cardSize: "w-40 h-60",
         gridClass: {
           single: "flex justify-center py-12",
           "three-card": "grid grid-cols-3 gap-8 max-w-4xl mx-auto py-10",
@@ -390,7 +498,18 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     ? "border-purple-500/30 bg-purple-900/20 text-purple-100 hover:bg-purple-800/30 hover:border-purple-400/50"
                     : "border-purple-600/20 bg-purple-900/10 text-purple-300/50 cursor-not-allowed"
                 }`}
-                onClick={() => spread.available && setSelectedSpread(spread.id)}
+                onClick={() => {
+                  if (spread.available) {
+                    setSelectedSpread(spread.id);
+                    setCardPositions(getCardPositions(spread.id));
+                    // Clear previous reading when switching spreads
+                    setFlippedCards(new Set());
+                    setInterpretation("");
+                    setSaveSuccess(false);
+                    setSaveError(null);
+                    tarotReading.clearCurrentReading();
+                  }
+                }}
                 disabled={!spread.available || tarotReading.isLoading}
                 whileHover={spread.available ? { scale: 1.02, y: -2 } : undefined}
                 whileTap={spread.available ? { scale: 0.98 } : undefined}
@@ -534,7 +653,13 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
             transition={{ duration: 0.6 }}
           >
             {/* Cards Grid */}
-            <div className={layout.gridClass[selectedSpread]}>
+            <div 
+              className={layout.gridClass[selectedSpread]}
+              style={{
+                minHeight: '400px', // Ensure grid has height
+                padding: '20px' // Add padding to prevent cutoff
+              }}
+            >
               {tarotReading.drawnCards.map((card, index) => {
                 const position = cardPositions[index] || "Card";
                 
@@ -566,14 +691,15 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     <motion.div
                       whileHover={{ scale: 1.05, rotateY: 5 }}
                       style={{
-                        filter: flippedCards.has(index) ? "drop-shadow(0 0 20px rgba(139, 92, 246, 0.6))" : "none"
+                        filter: flippedCards.has(index) ? "drop-shadow(0 0 20px rgba(139, 92, 246, 0.6))" : "none",
+                        zIndex: 50, // Ensure card is above other elements
+                        position: 'relative' // Ensure positioning context
                       }}
                     >
                       <TarotCard
                         frontImage={card.image_url}
                         backImage="/images/tarot/card-back.svg"
                         cardName={card.name}
-                        cardMeaning={card.isReversed ? card.meaning_reversed : card.meaning_upright}
                         isFlipped={flippedCards.has(index)}
                         onFlip={() => handleCardFlip(index)}
                         className={`${layout.cardSize} transition-all duration-300`}
@@ -583,6 +709,31 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                 );
               })}
             </div>
+
+
+            {/* Interpretation Display */}
+            {tarotReading.drawnCards && interpretation && (
+              <motion.div
+                className="mt-8 max-w-4xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="bg-purple-900/30 backdrop-blur-md rounded-2xl p-6 border border-purple-400/30">
+                  <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    <Sparkles className="w-6 h-6 text-yellow-400" />
+                    Your Reading Interpretation
+                  </h3>
+                  <div className="text-white/90 leading-relaxed space-y-4">
+                    {interpretation.split('\n\n').map((paragraph, index) => (
+                      <p key={index} className="text-white/90">
+                        {paragraph.replace(/\*\*(.*?)\*\*/g, '$1')}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
             {/* Action buttons for completed reading */}
             {flippedCards.size > 0 && (

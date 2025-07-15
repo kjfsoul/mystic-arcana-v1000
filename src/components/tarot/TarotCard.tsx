@@ -31,7 +31,9 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   const [isFlippedState, setIsFlippedState] = useState(isFlipped);
 
   const handleCardClick = () => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
     
     const newFlippedState = !isFlippedState;
     setIsFlippedState(newFlippedState);
@@ -42,14 +44,25 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   };
 
   return (
-    <div className={`${styles.cardContainer} ${className}`} style={style}>
+    <div 
+      className={`${styles.cardContainer} ${className}`} 
+      style={{
+        ...style,
+        minHeight: '320px', // Ensure minimum height to prevent cutoff
+        height: '320px', // Fixed height instead of auto
+        display: 'block', // Ensure visibility
+        visibility: 'visible', // Force visibility
+        overflow: 'visible' // Prevent clipping
+      }}
+    >
       <motion.div
         className={styles.card}
         onClick={handleCardClick}
         whileHover={disabled ? {} : { scale: 1.05, y: -10 }}
         whileTap={disabled ? {} : { scale: 0.95 }}
         style={{
-          cursor: disabled ? 'default' : 'pointer'
+          cursor: disabled ? 'default' : 'pointer',
+          zIndex: 10 // Ensure card is clickable
         }}
         role="button"
         tabIndex={disabled ? -1 : 0}
@@ -98,9 +111,6 @@ export const TarotCard: React.FC<TarotCardProps> = ({
             />
             <div className={styles.cardInfo}>
               <h3 className={styles.cardName}>{cardName}</h3>
-              {cardMeaning && (
-                <p className={styles.cardMeaning}>{cardMeaning}</p>
-              )}
             </div>
             <div className={styles.revealGlow} />
           </div>
