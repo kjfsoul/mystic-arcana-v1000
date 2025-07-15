@@ -495,3 +495,8 @@ Scripted/batch
 
 
 This system lets you assign and track microtasks per tool, escalate blockers, and keep all work visible and auditable for handoff or swarm agent expansion.
+
+- [ ] Refactor Tarot Save Reading to use `run_agent()` from Python registry
+- [ ] Use Supabase deck system via `MockCardSelectorAgent` upgrade
+- [ ] Implement `AstrologyDataAgent` using real Swiss Ephemeris
+- [ ] Enable virtual reader framework from `tarot_personas_dashboard.jpeg` flow

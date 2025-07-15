@@ -79,4 +79,14 @@ Mystic Arcana will deliver a deeply personalized, "humanlike" spiritual experien
 
 *This design enables Mystic Arcana to deliver personalized, evolving, and “humanlike” guidance while staying transparent, scalable, and explainable—even with zero direct human intervention.*
 
+##  Persistent Personalization Expansion
+
+Future enhancements must:
+- Adapt card text overlays by cosmic season
+- Use journaling input and planetary weather to influence reader style
+- Persist memory across reader sessions
+- Enable rotating archetypes (e.g., High Priestess in Gemini season vs. Virgo)
+
+→ Based on mysticconvo.md + Perplexity virtual reader research
+
 

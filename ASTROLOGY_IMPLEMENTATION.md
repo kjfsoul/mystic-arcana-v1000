@@ -140,3 +140,12 @@ This implementation provides:
    - Show actual transits
 
 This is the REAL implementation using professional-grade astronomical calculations, not placeholders!
+
+## ✅ Implementation Plan (Updated via astrologycalcs.md)
+
+- Implement real chart generation using Swiss Ephemeris or Skyfield
+- Support house systems, planetary aspects, and retrograde flags
+- Use `chart_script.py` and `astrologycalcs.md` as foundations
+- API Targets:
+  - `/api/astrology/chart`
+  - `/api/astrology/transits`

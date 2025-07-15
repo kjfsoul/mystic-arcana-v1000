@@ -22,6 +22,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Identified existing configurations and patterns
 - Current state: MVP with working tarot backend (90%), visual design (95%), but broken authentication (0%) and missing core features per claudeupdate.md
 
+#### 2025-07-15 - Integration Log
+- Integrated `personalizedtarot.md` models for adaptive reader logic.
+- Integrated `communityengage.md` mechanics for user interaction loops.
+- Integrated virtual reader mini-app frontend logic (from legacy `app.js`, `index.html`).
+- Integrated `astrologycalcs.md` specifications into the backend astrology service.
+
 ## Development Commands
 
 ### Essential Commands

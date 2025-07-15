@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystical Tarot - Adaptive Readings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <section id="landing" class="screen active">
+        <div class="mystical-background">
+            <div class="stars"></div>
+            <div class="container">
+                <div class="landing-content">
+                    <h1 class="mystical-title">Mystical Tarot</h1>
+                    <p class="mystical-subtitle">Adaptive readings tailored to your journey</p>
+                    <div class="mystical-description">
+                        <p>Experience personalized tarot readings that adapt to your experience level, mood, and spiritual journey. Our intelligent system learns from your interactions to provide increasingly meaningful guidance.</p>
+                    </div>
+                    <button class="btn btn--primary btn--lg mystical-btn" onclick="showScreen('profile-creation')">
+                        Begin Your Journey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Creation -->
+    <section id="profile-creation" class="screen">
+        <div class="container">
+            <div class="profile-wizard">
+                <h2>Create Your Mystical Profile</h2>
+                <div class="wizard-steps">
+                    <div class="step active" data-step="1">Experience</div>
+                    <div class="step" data-step="2">Preferences</div>
+                    <div class="step" data-step="3">Mood</div>
+                </div>
+
+                <!-- Step 1: Experience Level -->
+                <div class="wizard-content" id="step-1">
+                    <h3>What's your experience with tarot?</h3>
+                    <div class="experience-cards">
+                        <div class="experience-card" data-level="Beginner">
+                            <h4>Beginner</h4>
+                            <p>New to tarot, seeking guidance and detailed explanations</p>
+                        </div>
+                        <div class="experience-card" data-level="Intermediate">
+                            <h4>Intermediate</h4>
+                            <p>Some experience, ready for deeper insights</p>
+                        </div>
+                        <div class="experience-card" data-level="Advanced">
+                            <h4>Advanced</h4>
+                            <p>Experienced reader, prefer concise interpretations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Preferences -->
+                <div class="wizard-content hidden" id="step-2">
+                    <h3>What draws you to tarot?</h3>
+                    <div class="preferences-grid">
+                        <label class="preference-item">
+                            <input type="checkbox" value="love">
+                            <span>Love & Relationships</span>
+                        </label>
+                        <label class="preference-item">
+                            <input type="checkbox" value="career">
+                            <span>Career & Success</span>
+                        </label>
+                        <label class="preference-item">
+                            <input type="checkbox" value="spiritual">
+                            <span>Spiritual Growth</span>
+                        </label>
+                        <label class="preference-item">
+                            <input type="checkbox" value="guidance">
+                            <span>Daily Guidance</span>
+                        </label>
+                        <label class="preference-item">
+                            <input type="checkbox" value="insight">
+                            <span>Personal Insight</span>
+                        </label>
+                        <label class="preference-item">
+                            <input type="checkbox" value="decisions">
+                            <span>Decision Making</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 3: Mood Assessment -->
+                <div class="wizard-content hidden" id="step-3">
+                    <h3>How are you feeling today?</h3>
+                    <div class="mood-selector">
+                        <div class="mood-card" data-mood="Contemplative">
+                            <div class="mood-icon">🌙</div>
+                            <span>Contemplative</span>
+                        </div>
+                        <div class="mood-card" data-mood="Anxious">
+                            <div class="mood-icon">⚡</div>
+                            <span>Anxious</span>
+                        </div>
+                        <div class="mood-card" data-mood="Curious">
+                            <div class="mood-icon">✨</div>
+                            <span>Curious</span>
+                        </div>
+                        <div class="mood-card" data-mood="Focused">
+                            <div class="mood-icon">🎯</div>
+                            <span>Focused</span>
+                        </div>
+                        <div class="mood-card" data-mood="Romantic">
+                            <div class="mood-icon">💕</div>
+                            <span>Romantic</span>
+                        </div>
+                        <div class="mood-card" data-mood="Uncertain">
+                            <div class="mood-icon">🌪️</div>
+                            <span>Uncertain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-navigation">
+                    <button class="btn btn--secondary" id="prev-btn" onclick="previousStep()" disabled>Previous</button>
+                    <button class="btn btn--primary" id="next-btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="screen">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Your Mystical Dashboard</h2>
+                <p id="welcome-message">Welcome back, seeker</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <h3>Recommended Reading</h3>
+                        <div id="recommended-spread" class="recommended-spread">
+                            <!-- Dynamically populated -->
+                        </div>
+                        <button class="btn btn--primary" onclick="startRecommendedReading()">Start Reading</button>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <h3>Choose Your Spread</h3>
+                        <div id="spread-options" class="spread-options">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <h3>Reading History</h3>
+                        <div id="reading-history" class="reading-history">
+                            <p class="text-secondary">Your journey begins here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <h3>Insights & Progress</h3>
+                        <div class="insights-content">
+                            <div class="insight-item">
+                                <span class="insight-label">Readings Completed:</span>
+                                <span id="reading-count">0</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Favorite Spread:</span>
+                                <span id="favorite-spread">-</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Journey Stage:</span>
+                                <span id="journey-stage">Beginning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spread Selection -->
+    <section id="spread-selection" class="screen">
+        <div class="container">
+            <h2>Choose Your Spread</h2>
+            <div class="spreads-grid" id="spreads-grid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Selection -->
+    <section id="card-selection" class="screen">
+        <div class="container">
+            <div class="card-selection-header">
+                <h2>Select Your Cards</h2>
+                <p id="selection-instruction">Choose cards that call to you</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="card-progress"></div>
+                </div>
+            </div>
+
+            <div class="card-deck" id="card-deck">
+                <!-- Dynamically populated with card backs -->
+            </div>
+
+            <div class="selected-cards" id="selected-cards">
+                <!-- Shows selected cards -->
+            </div>
+
+            <button class="btn btn--primary btn--lg" id="reveal-btn" onclick="revealCards()" disabled>
+                Reveal Your Reading
+            </button>
+        </div>
+    </section>
+
+    <!-- Reading Display -->
+    <section id="reading-display" class="screen">
+        <div class="container">
+            <div class="reading-header">
+                <h2 id="reading-title">Your Reading</h2>
+                <p id="reading-subtitle">Interpretation based on your profile</p>
+            </div>
+
+            <div class="reading-content" id="reading-content">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="reading-actions">
+                <button class="btn btn--secondary" onclick="exploreDeeper()">Explore Deeper</button>
+                <button class="btn btn--primary" onclick="completeReading()">Complete Reading</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deeper Exploration -->
+    <section id="deeper-exploration" class="screen">
+        <div class="container">
+            <h2>Deeper Exploration</h2>
+            <div class="exploration-content" id="exploration-content">
+                <!-- Dynamically populated based on branching logic -->
+            </div>
+            <button class="btn btn--primary" onclick="returnToReading()">Return to Reading</button>
+        </div>
+    </section>
+
+    <!-- Feedback -->
+    <section id="feedback" class="screen">
+        <div class="container">
+            <div class="feedback-form">
+                <h2>How was your reading?</h2>
+                <p>Your feedback helps us provide better guidance</p>
+
+                <div class="rating-section">
+                    <h3>Overall Accuracy</h3>
+                    <div class="star-rating" id="accuracy-rating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                </div>
+
+                <div class="rating-section">
+                    <h3>Relevance to Your Situation</h3>
+                    <div class="star-rating" id="relevance-rating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Additional Comments (Optional)</label>
+                    <textarea class="form-control" id="feedback-comments" rows="3" placeholder="Share your thoughts..."></textarea>
+                </div>
+
+                <button class="btn btn--primary" onclick="submitFeedback()">Submit Feedback</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Dashboard -->
+    <section id="results" class="screen">
+        <div class="container">
+            <h2>Reading Complete</h2>
+            <div class="results-content">
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Your Reading Summary</h3>
+                        <div id="reading-summary">
+                            <!-- Populated after feedback -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Personalized Recommendations</h3>
+                        <div id="recommendations">
+                            <!-- Generated based on reading and feedback -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-actions">
+                <button class="btn btn--primary" onclick="showScreen('dashboard')">Return to Dashboard</button>
+                <button class="btn btn--secondary" onclick="startNewReading()">New Reading</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
