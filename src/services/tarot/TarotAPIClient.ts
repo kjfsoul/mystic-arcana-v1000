@@ -246,10 +246,10 @@ class TarotAPIClient {
       // Get the current session
       const { data: { session } } = await supabase.auth.getSession();
       
-      let headers = { ...this.defaultHeaders };
+      const headers = new Headers(this.defaultHeaders);
       
       if (session?.access_token) {
-        headers['Authorization'] = `Bearer ${session.access_token}`;
+        headers.set('Authorization', `Bearer ${session.access_token}`);
       }
       
       const response = await fetch(`${this.baseUrl}/api/tarot/save-reading`, {

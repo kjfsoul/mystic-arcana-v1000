@@ -191,8 +191,12 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       
       console.log('🔮 Setting interpretation:', spreadInterpretation);
       setInterpretation(spreadInterpretation);
+
+      if (onInterpret) {
+        onInterpret(tarotReading.drawnCards, spreadInterpretation);
+      }
     }
-  }, [tarotReading.drawnCards, selectedSpread]);
+  }, [tarotReading.drawnCards, selectedSpread, onInterpret]);
 
   // Responsive breakpoint detection with touch optimization
   useEffect(() => {
@@ -292,7 +296,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       console.error("Error performing reading:", error);
       setSaveError(error instanceof Error ? error.message : "Failed to perform reading");
     }
-  }, [selectedSpread, isGuest, tarotReading, user, onInterpret, cardPositions, performShuffle]);
+  }, [selectedSpread, isGuest, tarotReading, user, performShuffle]);
 
   // Save current reading
   const handleSaveReading = useCallback(async () => {

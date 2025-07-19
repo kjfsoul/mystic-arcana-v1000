@@ -35,12 +35,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   } = options;
 
   // Memoize fallback location to prevent infinite loops
-  const memoizedFallbackLocation = useMemo(() => fallbackLocation, [
-    fallbackLocation?.latitude,
-    fallbackLocation?.longitude,
-    fallbackLocation?.elevation,
-    fallbackLocation?.timezone
-  ]);
+  const memoizedFallbackLocation = useMemo(() => fallbackLocation, [fallbackLocation]);
 
   // Prevent multiple simultaneous requests
   const isRequestingRef = useRef(false);
@@ -258,7 +253,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   // Auto-request location on mount (only once)
   useEffect(() => {
     requestLocation();
-  }, []); // Empty dependency array to run only once
+  }, [requestLocation]); // Empty dependency array to run only once
 
   return {
     ...state,

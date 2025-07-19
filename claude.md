@@ -5,28 +5,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Session Management & Onboarding
 
 ### Onboarding Status
-- All onboarding rules have been read and internalized, as of 2025-07-10
+
+- All onboarding rules have been read and internalized, as of 2025-07-19
 - Files read and validated:
-  - CLAUDE_INTEGRITY_RULES.md ✅
-  - IMPLEMENTATION_MICROTASKS.md ✅
-  - claudeupdate.md ✅
-  - PRD.md ✅
-  - GEMINI.md ✅
-  - technical_architecture.md ✅
-  - Multiple docs/ files reviewed ✅
+  - CLAUDE_INTEGRITY_RULES.md ✅ (Re-read 2025-07-19)
+  - IMPLEMENTATION_MICROTASKS.md ✅ (Re-read 2025-07-19)
+  - claudeupdate.md ✅ (Re-read 2025-07-19)
+  - PRD.md ✅ (Re-read 2025-07-19)
+  - GEMINI.md ✅ (Re-read 2025-07-19)
+  - technical_architecture.md ✅ (Re-read 2025-07-19)
+  - Multiple docs/ files reviewed ✅ (Re-read 2025-07-19)
+- Fully synced with Roo Code and Gemini CLI agent workflow
+- Committed to brutal honesty and no fabrication per integrity rules
+- Acknowledged mandatory a_mem logging for all development actions
 
 ### Session Changelog
+
 #### 2025-07-10 - Initial Onboarding Session
+
 - Read all mandated onboarding files
 - Analyzed codebase structure comprehensively
 - Identified existing configurations and patterns
 - Current state: MVP with working tarot backend (90%), visual design (95%), but broken authentication (0%) and missing core features per claudeupdate.md
 
 #### 2025-07-15 - Integration Log
+
 - Integrated `personalizedtarot.md` models for adaptive reader logic.
 - Integrated `communityengage.md` mechanics for user interaction loops.
 - Integrated virtual reader mini-app frontend logic (from legacy `app.js`, `index.html`).
 - Integrated `astrologycalcs.md` specifications into the backend astrology service.
+
+#### 2025-07-19 - Full Claude Mandates Compliance Session
+
+- Re-read ALL onboarding files with integrity rules enforcement:
+  - CLAUDE_INTEGRITY_RULES.md: Brutal honesty requirements, no fabrication policy
+  - IMPLEMENTATION_MICROTASKS.md: Model assignments, microtask breakdown, swarming guidance
+  - claudeupdate.md: Honest project assessment showing 0% functional features despite good infrastructure
+  - PRD.md: Product vision with multi-reader tarot, live astrology, personalization focus
+  - GEMINI.md: Tarot audit revealing critical deck data disconnect (16/78 cards only)
+  - technical_architecture.md: Complete stack overview with MCP agents, WebGL, Supabase
+  - All docs/ files: Comprehensive documentation review
+- Confirmed current project state:
+  - Infrastructure: 85-95% complete (Next.js, Supabase, WebGL working)
+  - Authentication: Actually functional per claudeupdate.md updates
+  - Tarot System: Critical data issue - only 21% of cards in RiderWaiteDeck.ts
+  - Astrology: Using mock data, no real calculations
+  - Agent System: Registry exists but agents not actively working
+- Key gaps identified:
+  - Missing 62 tarot cards in deck data
+  - Broken database seeding script (ES module syntax error)
+  - Agents in registry but not performing actual work
+- Acknowledged mandatory a_mem logging requirement:
+  - All shell commands must use memlog-ma prefix
+  - Python functions must use @log_invocation decorator
+  - Development process logging separate from production Loki logging
 
 ## Development Commands
 
@@ -102,6 +134,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - See `SUPABASE_VECTOR_SETUP.md` for troubleshooting
 
 2. **Environment Variables** (see `.env.example`):
+
    ```
    NEXT_PUBLIC_SUPABASE_URL
    NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -128,6 +161,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - Chromium browser only
 
 - **Run Specific Tests**:
+
   ```bash
   npm run test -- tests/specific-test.test.ts
   npm run test:e2e -- tests/e2e/specific.spec.ts
@@ -135,7 +169,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Development Workflow
 
-1. **Authentication Flow**: 
+1. **Authentication Flow**:
    - Email/password fully functional
    - Google OAuth requires Supabase dashboard config
    - Session persists across page reloads
@@ -152,10 +186,54 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - Compatibility/career features disabled
    - Requires Swiss Ephemeris integration for real data
 
+---
+
+## Agentic Memory & Development Logging (`a_mem`)
+
+**Core Directive:** As an AI developer on this project, your secondary but critical function is to ensure every action is logged to the `a_mem` store. This system is for tracking the development process and is separate from the application's production logging (Grafana Loki).
+
+### 1. Shell Command Logging (Mandatory)
+
+All terminal commands you issue (`npm`, `git`, `npx`, etc.) **MUST** be prefixed with the `memlog-ma` alias. This is non-negotiable.
+
+- **Correct Usage:**
+  - `memlog-ma npm run dev`
+  - `memlog-ma npm run seed:tarot`
+  - `memlog-ma git commit -m "feat: your message"`
+
+- **Incorrect Usage:**
+  - `npm run dev`
+
+### 2. Python Instrumentation (When Applicable)
+
+When generating or modifying Python code (e.g., for astrology services), all key functions **MUST** be instrumented with the `@log_invocation` decorator from `utils.a_mem_logger.py`.
+
+- **Purpose:** Logs the execution of the function to the `a_mem` store, capturing internal actions during development and testing.
+- **Example:**
+
+    ```python
+    from utils.a_mem_logger import log_invocation
+
+    @log_invocation(event_type="astrology_chart_generated", user_id="dev_test")
+    def calculate_birth_chart(birth_data):
+        # ... function logic ...
+        return {"status": "success"}
+    ```
+
+### 3. `a_mem` vs. Loki: The Distinction
+
+- **`a_mem` (This System):** Logs the **development process**. You use it via `memlog-ma` and `@log_invocation`. It creates a historical record of how the app was built, tested, and modified.
+- **Grafana Loki:** Logs the **live production application's behavior**. It is used by the `Logger` utility inside the Next.js code and is for monitoring, alerting, and debugging the deployed app.
+
+Your responsibility is to ensure the `a_mem` system is used for all development actions.
+
+---
+
 ### Code Organization Patterns
 
 1. **Import Aliases**: Use `@/*` for imports from `src/*`
-2. **Component Structure**: 
+2. **Component Structure**:
+
    ```
    components/
    ├── feature-name/
@@ -163,6 +241,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    │   ├── FeatureComponent.module.css
    │   └── index.ts
    ```
+
 3. **API Routes**: Follow Next.js 15 App Router conventions
 4. **Service Layer**: Separate business logic from UI components
 5. **Type Safety**: Maintain strict TypeScript throughout

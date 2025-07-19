@@ -43,5 +43,3 @@ class Agent(ABC):
             dict: A dictionary containing the result of the agent's execution.
         """
         raise NotImplementedError
-
-

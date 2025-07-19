@@ -1,14 +1,25 @@
-agents_to_register:
-  - id: "card_selector"
-    module: "agents.mystic_arcana_agents"
-    class: "MockCardSelectorAgent"
-    config: { type: "utility" }
-  - id: "tarot_reader_sage"
-    module: "agents.mystic_arcana_agents"
-    class: "MockTarotReaderAgent"
-    config: { persona: "wise_sage" }
-  - id: "astrology_data_agent"
-    module: "agents.mystic_arcana_agents"
-    class: "MockAstrologyDataAgent"
-    config: { type: "data_retrieval" }
+# ✅ config.yaml — Full Virtual Reader Agent Registration for Mystic Arcana
 
+agents:
+  virtual_reader_nova:
+    class: virtual_agent_readers.NovaReaderAgent
+    enabled: true
+
+  virtual_reader_luna:
+    class: virtual_agent_readers.LunaReaderAgent
+    enabled: true
+
+  virtual_reader_sage:
+    class: virtual_agent_readers.SageReaderAgent
+    enabled: true
+
+  virtual_reader_sol:
+    class: virtual_agent_readers.SolReaderAgent
+    enabled: true
+
+# Notes:
+# - Each agent is defined under the `agents:` key
+# - The `class` field specifies the fully qualified Python path to the agent class
+# - `enabled: true` ensures it is activated for orchestration
+# - These agents must be imported and registered via registry.py and used via orchestrator.py
+# - config.yaml is used by the registry loader to declare active agents

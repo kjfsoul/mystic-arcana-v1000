@@ -223,6 +223,40 @@
 **BOTTOM LINE**: The tarot system is 80% complete but 0% functional due to missing data. Fix the seeding script and the entire system will work.
 
 ---
+---
+
+## Agentic Memory & Development Logging (`a_mem`)
+
+**Core Directive:** Before reviewing the production logging system, it is critical to understand the primary logging system used for the **development process**. All development actions you perform must be logged to the `a_mem` store to build a historical record of how the application is built and tested. This is separate from and precedes the production logging system (Loki).
+
+### 1. Shell Command Logging (Mandatory)
+
+All terminal commands you issue (`git`, `npm`, `npx`, etc.) **MUST** be prefixed with the `memlog-ma` alias. This is a non-negotiable rule for all development work.
+
+* **Example:** `memlog-ma npm run seed:tarot`
+
+### 2. Python Instrumentation (When Applicable)
+
+When generating or modifying Python code, all key functions **MUST** be instrumented with the `@log_invocation` decorator from `utils/a_mem_logger.py`.
+
+* **Example:**
+    ```python
+    from utils.a_mem_logger import log_invocation
+
+    @log_invocation(event_type="tarot_deck_validated", user_id="dev_test")
+    def validate_deck_data(deck_id):
+        # ... logic to validate deck data ...
+        return True
+    ```
+
+### 3. Critical Distinction: `a_mem` vs. Loki
+
+* **`a_mem` (This System):** Logs the **development process**. It is your primary tool for recording actions via `memlog-ma` and `@log_invocation`.
+* **Grafana Loki (System Described Below):** Logs the **live production application's behavior**. This system is used by the application code itself and is for monitoring the deployed app, not for logging your development actions.
+
+Your immediate responsibility is to use the `a_mem` system for all your tasks.
+
+---
 
 ## LOGGING INTEGRATION WITH GRAFANA LOKI
 
