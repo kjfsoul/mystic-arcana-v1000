@@ -206,3 +206,16 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 venv-astrology/
+# Build output
+.next/
+dist/
+
+# Dependencies
+node_modules/
+
+# Binary blobs
+*.node
+snyk-*
+
+# Logs
+*.log
