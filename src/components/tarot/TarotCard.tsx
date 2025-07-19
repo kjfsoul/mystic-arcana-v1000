@@ -11,6 +11,7 @@ interface TarotCardProps {
   cardName: string;
   cardMeaning?: string;
   isFlipped?: boolean;
+  isReversed?: boolean;
   onFlip?: () => void;
   disabled?: boolean;
   className?: string;
@@ -23,6 +24,7 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   cardName,
   cardMeaning,
   isFlipped = false,
+  isReversed = false,
   onFlip,
   disabled = false,
   className = '',
@@ -102,15 +104,46 @@ export const TarotCard: React.FC<TarotCardProps> = ({
 
           {/* Card Front */}
           <div className={`${styles.cardFace} ${styles.cardFront}`}>
-            <Image
-              src={frontImage}
-              alt={cardName}
-              fill
-              sizes="(max-width: 768px) 200px, 250px"
-              className={styles.cardImage}
-            />
+            <div 
+              style={{ 
+                transform: isReversed ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.3s ease-in-out',
+                height: '100%',
+                width: '100%',
+                position: 'relative'
+              }}
+            >
+              <Image
+                src={frontImage}
+                alt={`${cardName}${isReversed ? ' (Reversed)' : ''}`}
+                fill
+                sizes="(max-width: 768px) 200px, 250px"
+                className={styles.cardImage}
+              />
+              {isReversed && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '8px',
+                    right: '8px',
+                    background: 'rgba(139, 69, 19, 0.9)',
+                    color: 'white',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    fontSize: '10px',
+                    fontWeight: 'bold',
+                    zIndex: 10,
+                    transform: 'rotate(180deg)' // Counter-rotate the text
+                  }}
+                >
+                  REVERSED
+                </div>
+              )}
+            </div>
             <div className={styles.cardInfo}>
-              <h3 className={styles.cardName}>{cardName}</h3>
+              <h3 className={styles.cardName}>
+                {cardName} {isReversed && '(Reversed)'}
+              </h3>
             </div>
             <div className={styles.revealGlow} />
           </div>

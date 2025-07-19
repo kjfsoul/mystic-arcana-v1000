@@ -181,22 +181,45 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     return spreads;
   }, [isGuest]);
 
-  // Generate interpretation when cards are drawn
-  useEffect(() => {
-    if (tarotReading.drawnCards && tarotReading.drawnCards.length > 0) {
-      console.log('🔮 useEffect: Generating interpretation for', tarotReading.drawnCards.length, 'cards');
-      
-      // Generate interpretation
-      const spreadInterpretation = `🔮 **Your ${selectedSpread} Reading**\n\nYou drew ${tarotReading.drawnCards.length} card(s):\n\n${tarotReading.drawnCards.map((card) => `**${card.name}** ${card.isReversed ? '(Reversed)' : ''}\n${card.isReversed ? card.meaning_reversed : card.meaning_upright}`).join('\n\n')}\n\nThis is a test interpretation to verify the system is working.`;
-      
-      console.log('🔮 Setting interpretation:', spreadInterpretation);
-      setInterpretation(spreadInterpretation);
-
-      if (onInterpret) {
-        onInterpret(tarotReading.drawnCards, spreadInterpretation);
-      }
+  // Generate interpretation only when cards are flipped
+  const generateInterpretationForFlippedCards = useCallback(() => {
+    if (!tarotReading.drawnCards || tarotReading.drawnCards.length === 0) return;
+    
+    const flippedCardsList = tarotReading.drawnCards.filter((_, index) => flippedCards.has(index));
+    if (flippedCardsList.length === 0) return;
+    
+    console.log('🔮 Generating interpretation for', flippedCardsList.length, 'flipped cards');
+    
+    // Generate interpretation only for flipped cards
+    let spreadInterpretation = `🔮 **Your ${selectedSpread} Reading**\n\n`;
+    
+    if (selectedSpread === "three-card" && flippedCardsList.length > 0 && tarotReading.drawnCards) {
+      const positions = ["Past Influences", "Present Situation", "Future Potential"];
+      flippedCardsList.forEach((card) => {
+        const actualIndex = tarotReading.drawnCards!.findIndex(c => c.id === card.id);
+        if (actualIndex !== -1 && actualIndex < positions.length) {
+          spreadInterpretation += `**${positions[actualIndex]}:** ${card.name} ${card.isReversed ? '(Reversed)' : ''}\n`;
+          spreadInterpretation += `${card.isReversed ? card.meaning_reversed : card.meaning_upright}\n\n`;
+        }
+      });
+    } else {
+      spreadInterpretation += flippedCardsList.map((card) => 
+        `**${card.name}** ${card.isReversed ? '(Reversed)' : ''}\n${card.isReversed ? card.meaning_reversed : card.meaning_upright}`
+      ).join('\n\n');
     }
-  }, [tarotReading.drawnCards, selectedSpread, onInterpret]);
+    
+    console.log('🔮 Setting interpretation:', spreadInterpretation);
+    setInterpretation(spreadInterpretation);
+
+    if (onInterpret) {
+      onInterpret(flippedCardsList, spreadInterpretation);
+    }
+  }, [tarotReading.drawnCards, selectedSpread, flippedCards, onInterpret]);
+
+  // Generate interpretation when cards are flipped
+  useEffect(() => {
+    generateInterpretationForFlippedCards();
+  }, [generateInterpretationForFlippedCards]);
 
   // Responsive breakpoint detection with touch optimization
   useEffect(() => {
@@ -240,9 +263,23 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     }
   };
 
-  // Perform shuffle animation
+  // Perform shuffle animation with enhanced effects
   const performShuffle = useCallback(async () => {
     setIsShuffling(true);
+    
+    // Clear any existing interpretation during shuffle
+    setInterpretation("");
+    setFlippedCards(new Set());
+    
+    // Play shuffle sound effect (if available)
+    try {
+      const audio = new Audio('/sounds/card-shuffle.mp3');
+      audio.volume = 0.3;
+      audio.play().catch(e => console.log('Audio not available:', e));
+    } catch (e) {
+      console.log('Audio not supported:', e);
+    }
+    
     try {
       const result = await tarotReading.shuffle?.shuffleDeck?.({ algorithm: "fisher-yates" });
       if (result && !result.success) {
@@ -251,7 +288,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     } catch (error) {
       console.error("Shuffle error:", error);
     } finally {
-      setTimeout(() => setIsShuffling(false), 1500);
+      // Enhanced shuffle duration for better effect
+      setTimeout(() => setIsShuffling(false), 2500);
     }
   }, [tarotReading.shuffle]);
 
@@ -267,12 +305,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       setFlippedCards(new Set());
       setSaveSuccess(false);
       setSaveError(null);
-
-      // Shuffle first for dramatic effect
-      await performShuffle();
-      
-      // Small delay for shuffle animation
-      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const result = await tarotReading.performReading(
         selectedSpread,
@@ -296,7 +328,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       console.error("Error performing reading:", error);
       setSaveError(error instanceof Error ? error.message : "Failed to perform reading");
     }
-  }, [selectedSpread, isGuest, tarotReading, user, performShuffle]);
+  }, [selectedSpread, isGuest, tarotReading, user]);
 
   // Save current reading
   const handleSaveReading = useCallback(async () => {
@@ -475,33 +507,50 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h2 className={`text-purple-100 font-semibold text-center ${isMobile ? "text-xl" : "text-2xl"}`}>
-          Choose Your Cosmic Path
-        </h2>
+        {/* Casino-Style Title */}
+        <motion.div 
+          className="text-center mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <h2 className={`font-bold text-center mb-4 ${isMobile ? "text-3xl" : "text-5xl"} 
+            bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent
+            tracking-wider font-black uppercase`}>
+            CHOOSE YOUR DESTINY
+          </h2>
+          <div className="flex justify-center items-center gap-4 mb-2">
+            <div className="h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-20" />
+            <Star className="w-6 h-6 text-yellow-400 animate-pulse" />
+            <div className="h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-20" />
+          </div>
+        </motion.div>
         
-        <div className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"}`}>
+        {/* Casino-Style Spread Selection */}
+        <div className={`grid gap-6 ${isMobile ? "grid-cols-1" : "grid-cols-3"}`}>
           {availableSpreads.map((spread, index) => {
             const icons = {
-              single: <Star className="w-6 h-6" />,
-              "three-card": <Moon className="w-6 h-6" />,
-              "celtic-cross": <Sparkles className="w-6 h-6" />
+              single: <Star className="w-8 h-8" />,
+              "three-card": <Moon className="w-8 h-8" />,
+              "celtic-cross": <Sparkles className="w-8 h-8" />
             };
-            const gradients = {
-              single: "from-blue-500 via-purple-500 to-pink-500",
-              "three-card": "from-indigo-500 via-purple-600 to-blue-600",
-              "celtic-cross": "from-purple-600 via-pink-600 to-orange-500"
+            const casinoColors = {
+              single: "from-red-600 to-red-800",
+              "three-card": "from-green-600 to-green-800", 
+              "celtic-cross": "from-blue-600 to-blue-800"
             };
             
             return (
               <motion.button
                 key={spread.id}
-                className={`${layout.buttonClass} rounded-2xl border-2 transition-all duration-300 relative overflow-hidden group ${
+                className={`relative overflow-hidden group min-h-[120px] ${
                   selectedSpread === spread.id
-                    ? `border-purple-400/60 bg-gradient-to-br ${gradients[spread.id]} text-white shadow-lg shadow-purple-500/30`
+                    ? `bg-gradient-to-br ${casinoColors[spread.id]} border-4 border-yellow-400 shadow-2xl shadow-yellow-400/50`
                     : spread.available
-                    ? "border-purple-500/30 bg-purple-900/20 text-purple-100 hover:bg-purple-800/30 hover:border-purple-400/50"
-                    : "border-purple-600/20 bg-purple-900/10 text-purple-300/50 cursor-not-allowed"
-                }`}
+                    ? `bg-gradient-to-br from-gray-800 to-gray-900 border-4 border-gray-600 hover:border-yellow-400/50 hover:shadow-xl hover:shadow-yellow-400/20`
+                    : "bg-gradient-to-br from-gray-900 to-black border-4 border-gray-700 cursor-not-allowed opacity-50"
+                }
+                rounded-3xl transition-all duration-500 transform hover:scale-105`}
                 onClick={() => {
                   if (spread.available) {
                     setSelectedSpread(spread.id);
@@ -524,21 +573,55 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                 role="radio"
                 aria-checked={selectedSpread === spread.id}
               >
-                {/* Background glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Casino neon glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                <div className="relative z-10 flex flex-col items-center gap-3">
-                  <div className="flex items-center gap-2">
+                {/* Selected state glow */}
+                {selectedSpread === spread.id && (
+                  <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-yellow-400/20 to-transparent" />
+                )}
+                
+                {/* Casino-style content */}
+                <div className="relative z-10 flex flex-col items-center justify-center h-full p-4">
+                  {/* Large casino icon */}
+                  <motion.div 
+                    className={`mb-3 ${selectedSpread === spread.id ? 'text-yellow-300' : 'text-white'}`}
+                    animate={selectedSpread === spread.id ? { rotate: [0, 5, -5, 0] } : {}}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
                     {icons[spread.id]}
-                    <span className="font-bold">{spread.name}</span>
+                  </motion.div>
+                  
+                  {/* Casino-style title */}
+                  <h3 className={`font-black uppercase tracking-wider text-center leading-tight mb-2
+                    ${isMobile ? "text-lg" : "text-xl"} 
+                    ${selectedSpread === spread.id ? 'text-yellow-200' : 'text-white'}`}>
+                    {spread.name.replace(' ', '\n')}
+                  </h3>
+                  
+                  {/* Card count badge */}
+                  <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
+                    ${selectedSpread === spread.id 
+                      ? 'bg-yellow-400 text-black' 
+                      : 'bg-white/20 text-white'}`}>
+                    {spread.cardCount} CARD{spread.cardCount !== 1 ? 'S' : ''}
                   </div>
-                  <p className={`opacity-90 ${isMobile ? "text-sm" : "text-base"}`}>
-                    {spread.description}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs opacity-75">
-                    <span>{spread.cardCount} card{spread.cardCount !== 1 ? 's' : ''}</span>
-                    {!spread.available && <span>🔒 Sign in required</span>}
-                  </div>
+                  
+                  {/* Lock indicator for unavailable spreads */}
+                  {!spread.available && (
+                    <div className="absolute top-2 right-2 text-gray-400">
+                      <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center">
+                        🔒
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Casino chips decoration */}
+                  {selectedSpread === spread.id && (
+                    <div className="absolute top-2 left-2 text-yellow-400 text-xs">
+                      💰
+                    </div>
+                  )}
                 </div>
               </motion.button>
             );
@@ -705,6 +788,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                         backImage="/images/tarot/card-back.svg"
                         cardName={card.name}
                         isFlipped={flippedCards.has(index)}
+                        isReversed={card.isReversed}
                         onFlip={() => handleCardFlip(index)}
                         className={`${layout.cardSize} transition-all duration-300`}
                       />
@@ -715,24 +799,112 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
             </div>
 
 
-            {/* Interpretation Display */}
+            {/* Dramatic Star Wars-Style Reading Presentation */}
             {tarotReading.drawnCards && interpretation && (
               <motion.div
-                className="mt-8 max-w-4xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                className="mt-12 relative overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
               >
-                <div className="bg-purple-900/30 backdrop-blur-md rounded-2xl p-6 border border-purple-400/30">
-                  <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                    <Sparkles className="w-6 h-6 text-yellow-400" />
-                    Your Reading Interpretation
-                  </h3>
-                  <div className="text-white/90 leading-relaxed space-y-4">
-                    {interpretation.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="text-white/90">
-                        {paragraph.replace(/\*\*(.*?)\*\*/g, '$1')}
-                      </p>
+                {/* Cosmic Background */}
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-indigo-900/30 to-black/50 rounded-3xl" />
+                
+                {/* Spotlight Effect */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-radial from-yellow-400/20 via-purple-400/10 to-transparent rounded-full blur-3xl" />
+                
+                {/* Main Reading Container */}
+                <div className="relative max-w-5xl mx-auto p-8">
+                  {/* Dramatic Title */}
+                  <motion.div
+                    className="text-center mb-8"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.8, type: "spring" }}
+                  >
+                    <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent mb-4 tracking-wider">
+                      THE COSMIC REVELATION
+                    </h2>
+                    <div className="flex justify-center items-center gap-4">
+                      <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
+                      <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32" />
+                      <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
+                    </div>
+                  </motion.div>
+
+                  {/* Rolling Text Container */}
+                  <motion.div
+                    className="relative h-96 overflow-hidden rounded-2xl bg-black/60 backdrop-blur-sm border border-yellow-400/30"
+                    initial={{ opacity: 0, rotateX: 20 }}
+                    animate={{ opacity: 1, rotateX: 0 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                  >
+                    {/* Scrolling Text */}
+                    <motion.div
+                      className="absolute w-full px-8 py-6"
+                      initial={{ y: "100%" }}
+                      animate={{ y: "-100%" }}
+                      transition={{
+                        delay: 2,
+                        duration: 15,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: 3
+                      }}
+                    >
+                      <div className="text-center space-y-8">
+                        {interpretation.split('\n\n').map((paragraph, index) => (
+                          <motion.div
+                            key={index}
+                            className="text-lg md:text-xl text-yellow-100 leading-relaxed font-light tracking-wide"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 2.5 + index * 0.5 }}
+                          >
+                            <p className="mb-6 text-shadow-lg">
+                              {paragraph.replace(/\*\*(.*?)\*\*/g, '$1').replace(/🔮/g, '✨')}
+                            </p>
+                          </motion.div>
+                        ))}
+                        
+                        {/* Mystical Closing */}
+                        <motion.div
+                          className="text-2xl text-yellow-400 font-bold tracking-widest mt-12"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 8, duration: 1 }}
+                        >
+                          ✨ THE STARS HAVE SPOKEN ✨
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Fade Gradient Overlays */}
+                    <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/80 to-transparent z-10" />
+                    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/80 to-transparent z-10" />
+                  </motion.div>
+
+                  {/* Mystical Particles */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(20)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                        style={{
+                          left: `${Math.random() * 100}%`,
+                          top: `${Math.random() * 100}%`,
+                        }}
+                        animate={{
+                          opacity: [0, 1, 0],
+                          scale: [0, 1.5, 0],
+                          rotate: [0, 180, 360],
+                        }}
+                        transition={{
+                          duration: 3 + Math.random() * 2,
+                          repeat: Infinity,
+                          delay: Math.random() * 5,
+                        }}
+                      />
                     ))}
                   </div>
                 </div>

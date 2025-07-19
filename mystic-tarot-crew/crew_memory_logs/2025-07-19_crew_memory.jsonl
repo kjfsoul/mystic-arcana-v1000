@@ -1,0 +1,195 @@
+{"timestamp": "2025-07-19T15:21:38.286683", "event_type": "test_event", "user_id": "test", "payload": {"test": true}}
+{"timestamp": "2025-07-19T15:21:38.309021", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.869654", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:22:41.871880", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:22:41.872178", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.876236", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.878661", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.880561", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.885662", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.891017", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.893575", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.896321", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.902819", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.905445", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.907476", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.909881", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:22:41.911873", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:22:41.912031", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:25:09.985802", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:25:09.988148", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:25:09.988467", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:09.992410", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:09.994762", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:09.996164", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.004207", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.008704", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.015300", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.025418", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.027431", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.030335", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.035507", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.041877", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:25:10.045846", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:25:10.046123", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:25:10.046948", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:25:10.047354", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:25:10.048036", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:25:10.049204", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:26:15.779506", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:26:15.781283", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:26:15.781520", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.786588", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.789736", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.803299", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.807283", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.809018", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.810468", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.811917", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.814074", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.822627", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.838872", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.842207", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:26:15.844798", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:26:15.845147", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:26:15.846961", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:26:15.850910", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:26:15.851851", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:26:15.855130", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:33:41.490066", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:33:41.492567", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:33:41.493739", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.500338", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.508166", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.510119", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.517718", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.524734", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.527272", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.529764", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.533120", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.539453", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.542072", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.546494", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:33:41.549159", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:33:41.549368", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:33:41.549956", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:33:41.550742", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:33:41.552307", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:33:41.553560", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:33:43.406284", "event_type": "crew_execution", "user_id": "crew_system", "function": "execute_crew", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:38:13.113827", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:38:13.116507", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:38:13.116811", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.124463", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.126534", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.128303", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.130744", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.133395", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.135295", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.138495", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.143358", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.146820", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.148856", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.152712", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:38:13.155824", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:38:13.156124", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:38:13.159568", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:38:13.160361", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:38:13.162213", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:38:13.166626", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:38:15.594349", "event_type": "crew_execution", "user_id": "crew_system", "function": "execute_crew", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:39:26.333780", "event_type": "main_execution", "user_id": "crew_system", "function": "main", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:39:26.365243", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:39:26.365642", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.373993", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.400725", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.402934", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.405432", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.407199", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.635776", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.729069", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.731314", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.732951", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.734683", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.744542", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:39:26.768214", "event_type": "mystic_tasks_creation", "user_id": "crew_system", "function": "create_demonstration_tasks", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:39:26.768447", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:39:26.781370", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:39:26.783982", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:39:26.784760", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:39:26.788366", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:39:29.775154", "event_type": "crew_execution", "user_id": "crew_system", "function": "execute_crew", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:42:52.382369", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:42:52.382940", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.386348", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.390208", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.392314", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.395236", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.404729", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.409639", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.411565", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.414384", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.426111", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.432801", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.445672", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T15:42:52.447681", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.449724", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.450873", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.451526", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.451952", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.452377", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.452798", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.453324", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T15:42:52.453734", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T15:42:55.117215", "event_type": "crew_execution", "user_id": "crew_system", "function": "execute_crew", "args_count": 1, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:02.344094", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:02.771618", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:02.982240", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:03.201743", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:03.468958", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:03.944562", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:07.620358", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:08.007754", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:08.280469", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:08.651389", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:08.954167", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:09.222558", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:55.529132", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:55.779602", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:56.117729", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:56.309177", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:56.585708", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:43:56.867835", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:00.899712", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:01.100773", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:01.324530", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:01.550597", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:01.803840", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:01.994430", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:03.851126", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:04.105529", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:04.417166", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:04.677631", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:04.992021", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T15:44:05.264701", "event_type": "perplexity_api_call", "user_id": "crew_system", "function": "<lambda>", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T21:11:27.649081", "event_type": "mystic_agents_creation", "user_id": "crew_system", "function": "create_mystic_arcana_agents", "args_count": 0, "kwargs_keys": []}
+{"timestamp": "2025-07-19T21:11:27.649566", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.651604", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.652823", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.654274", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.655483", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.656527", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.657475", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.659057", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.660337", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.662025", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.663200", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.664733", "event_type": "crew_agent_created", "user_id": "crew_system", "function": "create_base_agent", "args_count": 0, "kwargs_keys": ["role", "goal", "backstory"]}
+{"timestamp": "2025-07-19T21:11:27.665904", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.666298", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.666811", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.667128", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.667384", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.667774", "event_type": "crew_task_created", "user_id": "crew_system", "function": "create_base_task", "args_count": 0, "kwargs_keys": ["description", "agent", "expected_output"]}
+{"timestamp": "2025-07-19T21:11:27.668179", "event_type": "crew_initialization", "user_id": "crew_system", "function": "initialize_crew", "args_count": 0, "kwargs_keys": ["agents", "tasks", "process", "verbose", "memory"]}
+{"timestamp": "2025-07-19T21:11:27.678227", "event_type": "crew_execution", "user_id": "crew_system", "function": "execute_crew", "args_count": 1, "kwargs_keys": []}
