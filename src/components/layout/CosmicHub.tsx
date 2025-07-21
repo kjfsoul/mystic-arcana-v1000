@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
 import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
+import { MercuryRetrogradeBanner } from '../astrology/MercuryRetrogradeBanner';
 import { Header } from './Header';
+import { useRouter } from 'next/navigation';
 import styles from './CosmicHub.module.css';
 
 // Lazy load the horoscope widget to prevent blocking main page load
@@ -15,6 +17,7 @@ export type ViewMode = 'hub' | 'tarot' | 'astrology';
 
 export const CosmicHub: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewMode>('hub');
+  const router = useRouter();
 
   const handleReturnToHub = () => {
     setCurrentView('hub');
@@ -55,6 +58,16 @@ export const CosmicHub: React.FC = () => {
         >
           Choose your path to cosmic wisdom
         </motion.p>
+
+        {/* Mercury Retrograde Banner */}
+        <motion.div
+          className="w-full max-w-4xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <MercuryRetrogradeBanner onMarketplaceClick={() => router.push('/marketplace')} />
+        </motion.div>
 
         <div className={styles.realmCards}>
           {/* Tarot Realm Card */}

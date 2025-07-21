@@ -196,4 +196,3 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
     </div>
   );
 };
-}

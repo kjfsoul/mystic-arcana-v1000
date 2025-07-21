@@ -10,7 +10,7 @@ import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeServic
 import { profileService } from '@/services/profileService';
 import { InteractiveBirthChart } from './InteractiveBirthChart';
 import { CompatibilityInsights } from './CompatibilityInsights';
-import { CareerInsights } from './CareerInsights';
+import { InteractiveCareerInsights } from './InteractiveCareerInsights';
 import { AdvancedChartPreview } from './AdvancedChartPreview';
 import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
 import { LocationSearch } from '../forms/LocationSearch';
@@ -537,8 +537,8 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
               <>
                 {showBirthForm && renderBirthDataForm()}
                 {!showBirthForm && (
-                  <CareerInsights 
-                    userBirthData={birthData}
+                  <InteractiveCareerInsights 
+                    birthData={birthData}
                     onBack={() => setSelectedService(null)}
                   />
                 )}

@@ -2,7 +2,6 @@
 // Now using Swiss Ephemeris shim for real astronomical calculations
 
 import * as Astronomy from 'astronomy-engine';
-import { SwissEphemerisShim } from './SwissEphemerisShim';
 
 export interface BirthData {
   name?: string;
@@ -104,12 +103,38 @@ export class AstronomicalCalculator {
     ascendant: number;
     midheaven: number;
   }> {
+    // If we're in the browser, use the API route
+    if (typeof window !== 'undefined') {
+      try {
+        const response = await fetch('/api/astrology/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(birthData),
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.chart) {
+            console.log('Using server-side Swiss Ephemeris calculations');
+            return result.chart;
+          }
+        }
+      } catch (error) {
+        console.warn('Server-side calculation failed, using client fallback:', error);
+      }
+    }
+
     try {
-      // First try Swiss Ephemeris shim
-      const shimResult = await SwissEphemerisShim.calculateFullChart(birthData);
-      if (shimResult.planets.length > 0) {
-        console.log('Using Swiss Ephemeris shim for calculations');
-        return shimResult;
+      // Server-side: Try Swiss Ephemeris shim via dynamic import
+      if (typeof window === 'undefined') {
+        const { SwissEphemerisShim } = await import('./SwissEphemerisShim');
+        const shimResult = await SwissEphemerisShim.calculateFullChart(birthData);
+        if (shimResult.planets.length > 0) {
+          console.log('Using Swiss Ephemeris shim for calculations');
+          return shimResult;
+        }
       }
     } catch (error) {
       console.warn('Swiss Ephemeris shim failed:', error);

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CareerInsights } from '@/components/astrology/CareerInsights';
+import { InteractiveCareerInsights } from '@/components/astrology/InteractiveCareerInsights';
 import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
 import { createClient } from '@/lib/supabase/client';
 import { motion } from 'framer-motion';
@@ -167,9 +167,8 @@ export default function CareerPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-      <CareerInsights 
-        userBirthData={birthData}
-        onBack={handleBack}
+      <InteractiveCareerInsights 
+        birthData={birthData}
       />
     </div>
   );

@@ -1,56 +1,109 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 /**
- * Google Places API Proxy
- * Proxies requests to Google Places API to avoid CORS issues
+ * Geocoding API
+ * Supports both location search and reverse geocoding
  */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const input = searchParams.get('input');
-    
-    if (!input) {
-      return NextResponse.json(
-        { error: 'Input parameter is required' }, 
-        { status: 400 }
-      );
+    const query = searchParams.get('q');
+    const lat = searchParams.get('lat');
+    const lon = searchParams.get('lon');
+
+    // If lat/lon provided, do reverse geocoding
+    if (lat && lon) {
+      return await reverseGeocode(parseFloat(lat), parseFloat(lon));
     }
 
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-    if (!apiKey) {
-      console.error('Google Maps API key not configured');
-      return NextResponse.json(
-        { error: 'API key not configured' }, 
-        { status: 500 }
-      );
+    // If query provided, do forward geocoding
+    if (query) {
+      return await forwardGeocode(query);
     }
 
-    const googleUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&types=(cities)&key=${apiKey}`;
-    
-    const response = await fetch(googleUrl);
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error('Google API error:', data);
-      return NextResponse.json(
-        { error: 'Google API request failed' }, 
-        { status: response.status }
-      );
-    }
-
-    // Return the data with CORS headers
-    return NextResponse.json(data, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    });
+    return NextResponse.json(
+      { error: 'Either q (query) or lat/lon parameters are required' },
+      { status: 400 }
+    );
 
   } catch (error) {
     console.error('Geocode API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' }, 
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+async function forwardGeocode(query: string) {
+  try {
+    // Use OpenStreetMap Nominatim as a free alternative
+    const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1`;
+    
+    const response = await fetch(nominatimUrl, {
+      headers: {
+        'User-Agent': 'MysticArcana/1.0'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Nominatim API request failed');
+    }
+
+    const data = await response.json();
+    
+    // Transform to our format
+    const results = data.map((item: any) => ({
+      name: item.display_name.split(',')[0].trim(),
+      country: item.address?.country || 'Unknown',
+      state: item.address?.state || item.address?.region,
+      lat: parseFloat(item.lat),
+      lon: parseFloat(item.lon),
+      display_name: item.display_name
+    }));
+
+    return NextResponse.json(results);
+
+  } catch (error) {
+    console.error('Forward geocoding error:', error);
+    return NextResponse.json(
+      { error: 'Geocoding failed' },
+      { status: 500 }
+    );
+  }
+}
+
+async function reverseGeocode(lat: number, lon: number) {
+  try {
+    const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`;
+    
+    const response = await fetch(nominatimUrl, {
+      headers: {
+        'User-Agent': 'MysticArcana/1.0'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Reverse geocoding request failed');
+    }
+
+    const data = await response.json();
+    
+    const result = {
+      name: data.address?.city || data.address?.town || data.address?.village || 'Unknown',
+      country: data.address?.country || 'Unknown',
+      state: data.address?.state || data.address?.region,
+      lat: parseFloat(data.lat),
+      lon: parseFloat(data.lon),
+      display_name: data.display_name
+    };
+
+    return NextResponse.json(result);
+
+  } catch (error) {
+    console.error('Reverse geocoding error:', error);
+    return NextResponse.json(
+      { error: 'Reverse geocoding failed' },
       { status: 500 }
     );
   }

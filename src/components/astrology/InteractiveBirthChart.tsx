@@ -73,19 +73,36 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   }, []);
 
   // Calculate real astronomical positions
-  const chartData = useMemo(() => {
-    try {
-      return AstronomicalCalculator.calculateChart(birthData);
-    } catch (error) {
-      console.error('Error calculating chart:', error);
-      // Fallback to example data if calculation fails
-      return {
-        planets: [],
-        houses: [],
-        ascendant: 0,
-        midheaven: 0
-      };
-    }
+  const [chartData, setChartData] = useState<{
+    planets: PlanetPosition[];
+    houses: HousePosition[];
+    ascendant: number;
+    midheaven: number;
+  }>({
+    planets: [],
+    houses: [],
+    ascendant: 0,
+    midheaven: 0
+  });
+
+  useEffect(() => {
+    const calculateChart = async () => {
+      try {
+        const result = await AstronomicalCalculator.calculateChart(birthData);
+        setChartData(result);
+      } catch (error) {
+        console.error('Error calculating chart:', error);
+        // Keep fallback data
+        setChartData({
+          planets: [],
+          houses: [],
+          ascendant: 0,
+          midheaven: 0
+        });
+      }
+    };
+    
+    calculateChart();
   }, [birthData]);
 
   const { planets: planetPositions, houses: housePositions } = chartData;

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { BirthData } from "@/lib/astrology/AstronomicalCalculator";
 import { CompatibilityReport } from "./CompatibilityReport";
+import { LocationInput } from "@/components/forms/LocationInput";
 
 interface CompatibilityInsightsProps {
   userBirthData: BirthData;
@@ -15,6 +16,8 @@ interface Person2Data {
   date: string;
   city: string;
   country: string;
+  latitude: number;
+  longitude: number;
 }
 
 export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
@@ -26,18 +29,30 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
     name: '',
     date: '',
     city: '',
-    country: ''
+    country: '',
+    latitude: 0,
+    longitude: 0
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (person2Data.name && person2Data.date && person2Data.city) {
+    if (person2Data.name && person2Data.date && person2Data.city && person2Data.latitude && person2Data.longitude) {
       setShowForm(false);
     }
   };
 
   const handleFormChange = (field: keyof Person2Data, value: string) => {
     setPerson2Data(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleLocationSelect = (location: { city: string; country: string; latitude: number; longitude: number }) => {
+    setPerson2Data(prev => ({
+      ...prev,
+      city: location.city,
+      country: location.country,
+      latitude: location.latitude,
+      longitude: location.longitude
+    }));
   };
 
   const handleBackToForm = () => {
@@ -51,8 +66,8 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
       date: new Date(person2Data.date),
       city: person2Data.city,
       country: person2Data.country,
-      latitude: 0, // Will be geocoded by the API
-      longitude: 0, // Will be geocoded by the API
+      latitude: person2Data.latitude,
+      longitude: person2Data.longitude,
       timezone: 'UTC'
     };
 
@@ -125,34 +140,21 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
-                  Birth City
-                </label>
-                <input
-                  type="text"
-                  value={person2Data.city}
-                  onChange={(e) => handleFormChange('city', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 text-white rounded-xl border border-white/20 focus:border-purple-400 focus:outline-none"
-                  placeholder="City of birth"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
-                  Country
-                </label>
-                <input
-                  type="text"
-                  value={person2Data.country}
-                  onChange={(e) => handleFormChange('country', e.target.value)}
-                  className="w-full px-4 py-3 bg-white/10 text-white rounded-xl border border-white/20 focus:border-purple-400 focus:outline-none"
-                  placeholder="Country"
-                  required
-                />
-              </div>
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                Birth Location
+              </label>
+              <LocationInput
+                onLocationSelect={handleLocationSelect}
+                initialValue={person2Data.city ? `${person2Data.city}, ${person2Data.country}` : ''}
+                placeholder="Enter birth city, country"
+                className="w-full"
+              />
+              {person2Data.city && (
+                <p className="text-white/60 text-sm mt-2">
+                  Selected: {person2Data.city}, {person2Data.country}
+                </p>
+              )}
             </div>
 
             <motion.button
