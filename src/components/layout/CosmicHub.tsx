@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
 import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
 import { Header } from './Header';
-import { DailyHoroscopeWidget } from '../horoscope/DailyHoroscopeWidget';
 import styles from './CosmicHub.module.css';
+
+// Lazy load the horoscope widget to prevent blocking main page load
+const DailyHoroscopeWidget = lazy(() => import('../horoscope/DailyHoroscopeWidget').then(m => ({ default: m.DailyHoroscopeWidget })));
 
 export type ViewMode = 'hub' | 'tarot' | 'astrology';
 
@@ -124,14 +126,20 @@ export const CosmicHub: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Daily Horoscope Widget */}
+        {/* Daily Horoscope Widget - Lazy Loaded */}
         <motion.div
           className={styles.horoscopeSection}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: 2, duration: 0.8 }}
         >
-          <DailyHoroscopeWidget className={styles.horoscopeWidget} />
+          <Suspense fallback={
+            <div className="text-center text-purple-300 p-4">
+              <div className="animate-pulse">Loading cosmic insights...</div>
+            </div>
+          }>
+            <DailyHoroscopeWidget />
+          </Suspense>
         </motion.div>
       </div>
     </motion.div>

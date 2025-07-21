@@ -27,16 +27,24 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
 
   useEffect(() => {
     const loadHoroscope = async () => {
-      const service = DailyHoroscopeService.getInstance();
-      
-      // Set moon phase and cosmic event (same for all users)
-      setMoonPhase(service.getCurrentMoonPhase());
-      setCosmicEvent(service.getCosmicEvent());
+      try {
+        const service = DailyHoroscopeService.getInstance();
+        
+        // Set moon phase and cosmic event (same for all users) - these are fast
+        setMoonPhase(service.getCurrentMoonPhase());
+        setCosmicEvent(service.getCosmicEvent());
 
-      // Try to get personalized horoscope for authenticated users
-      if (user) {
-        try {
-          const profile = await profileService.getProfile(user.id);
+        // For guest users, just get basic horoscope
+        if (!user) {
+          const basicHoroscope = service.getGeneralDailyHoroscope(); // Default general horoscope
+          setHoroscope(basicHoroscope);
+          return;
+        }
+
+        // For authenticated users, load profile in background (non-blocking)
+        setTimeout(async () => {
+          try {
+            const profile = await profileService.getProfile(user.id);
           
           if (profile?.birth_date && profile?.birth_city) {
             // Try to get real horoscope data using Python backend
@@ -78,11 +86,14 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
         } catch (error) {
           console.error('Error loading user profile for horoscope:', error);
         }
+        }, 100); // Non-blocking delay
+      } catch (error) {
+        console.error('Error in loadHoroscope:', error);
+        // Fallback to general horoscope
+        const service = DailyHoroscopeService.getInstance();
+        setHoroscope(service.getGeneralDailyHoroscope());
+        setIsPersonalized(false);
       }
-
-      // Fallback to general horoscope
-      setHoroscope(service.getGeneralDailyHoroscope());
-      setIsPersonalized(false);
     };
 
     loadHoroscope();

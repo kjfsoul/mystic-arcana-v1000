@@ -86,6 +86,9 @@ export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
                 <span className={styles.welcomeText}>
                   Welcome, {user?.email?.split('@')[0] || 'Cosmic Traveler'}! ✨
                 </span>
+                <Link href="/profile" className={styles.profileLink}>
+                  Profile
+                </Link>
                 <Link href="/readings" className={styles.readingsLink}>
                   My Readings
                 </Link>

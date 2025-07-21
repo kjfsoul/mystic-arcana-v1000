@@ -5,7 +5,6 @@ import {
   AlertCircle,
   CheckCircle,
   Loader2,
-  RefreshCw,
   Save,
   Sparkles,
   Moon,
@@ -21,6 +20,7 @@ import { DrawnCard } from "../../services/tarot/TarotAPIClient";
 import { AuthModal } from "../auth/AuthModal";
 import { UnlockJourneyModal } from "../modals/UnlockJourneyModal";
 import { TarotCard } from "./TarotCard";
+import { MysticalShuffleAnimation } from "./MysticalShuffleAnimation";
 
 interface UnifiedTarotPanelV2Props {
   onActivate?: () => void;
@@ -332,7 +332,14 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
 
   // Save current reading
   const handleSaveReading = useCallback(async () => {
-    if (!user || isGuest) {
+    if (!user) {
+      setSaveError("Please sign in to save your reading");
+      setShowAuthModal(true);
+      return;
+    }
+
+    if (isGuest) {
+      setSaveError("Guest users cannot save readings. Please create an account to save your cosmic insights.");
       setShowAuthModal(true);
       return;
     }
@@ -629,30 +636,26 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         </div>
       </motion.section>
 
-      {/* Action Buttons */}
+      {/* Mystical Shuffle Animation and Draw Button */}
       <motion.div
-        className="flex justify-center gap-4 relative z-10"
+        className="flex flex-col items-center gap-8 relative z-10"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        {/* Shuffle Button */}
-        <motion.button
-          className={`${layout.buttonClass} rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 border-2 border-indigo-400/30`}
-          onClick={performShuffle}
-          disabled={isShuffling || tarotReading.isLoading}
-          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(99, 102, 241, 0.4)" }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Shuffle the tarot deck"
-        >
-          <motion.div
-            animate={isShuffling ? { rotate: 360 } : { rotate: 0 }}
-            transition={{ duration: 1, repeat: isShuffling ? Infinity : 0, ease: "linear" }}
-          >
-            <RefreshCw className="w-5 h-5" />
-          </motion.div>
-          <span>{isShuffling ? "Shuffling..." : "Shuffle Deck"}</span>
-        </motion.button>
+        {/* Mystical Shuffle Animation */}
+        <MysticalShuffleAnimation
+          isShuffling={isShuffling}
+          onTriggerShuffle={performShuffle}
+          onShuffleStart={() => {
+            console.log("Shuffle animation started");
+          }}
+          onShuffleComplete={() => {
+            console.log("Shuffle animation completed");
+          }}
+          size={isMobile ? "small" : isTablet ? "medium" : "large"}
+          className="mb-4"
+        />
 
         {/* Draw Cards Button */}
         <motion.button
@@ -677,56 +680,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
             </>
           )}
         </motion.button>
-      </motion.div>
-
-      {/* Tarot Deck Visualization - Always visible */}
-      <motion.div
-        className="flex justify-center mb-8 relative z-10"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      >
-        <div className="relative">
-          {/* Deck of cards stacked */}
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-32 h-48 rounded-2xl border-2 border-purple-400/30"
-              style={{
-                transform: `translateX(${i * 2}px) translateY(${i * -2}px) rotateZ(${i * 1}deg)`,
-                zIndex: 5 - i,
-                background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
-              }}
-              animate={isShuffling ? {
-                rotateZ: [i * 1, (i * 1) + Math.random() * 10 - 5, i * 1],
-                x: [i * 2, i * 2 + Math.random() * 20 - 10, i * 2],
-                y: [i * -2, i * -2 + Math.random() * 10 - 5, i * -2]
-              } : {}}
-              transition={{ duration: 0.5, repeat: isShuffling ? 3 : 0 }}
-            >
-              {/* Card back design */}
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-4xl text-purple-300/70">🔮</div>
-              </div>
-            </motion.div>
-          ))}
-          
-          {/* Mystical glow effect */}
-          <motion.div
-            className="absolute inset-0 w-32 h-48 rounded-2xl"
-            style={{
-              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
-              filter: 'blur(8px)',
-              zIndex: -1
-            }}
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: [0.5, 0.8, 0.5] 
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
       </motion.div>
 
       {/* Card Display Area with enhanced presentation */}
@@ -799,10 +752,10 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
             </div>
 
 
-            {/* Dramatic Star Wars-Style Reading Presentation */}
+            {/* Enhanced Reading Presentation with Right-Side Scrollable Credits */}
             {tarotReading.drawnCards && interpretation && (
               <motion.div
-                className="mt-12 relative overflow-hidden"
+                className="mt-12 relative"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 1 }}
@@ -810,11 +763,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                 {/* Cosmic Background */}
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-indigo-900/30 to-black/50 rounded-3xl" />
                 
-                {/* Spotlight Effect */}
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-radial from-yellow-400/20 via-purple-400/10 to-transparent rounded-full blur-3xl" />
-                
-                {/* Main Reading Container */}
-                <div className="relative max-w-5xl mx-auto p-8">
+                {/* Main Reading Container - Grid Layout */}
+                <div className="relative max-w-7xl mx-auto p-8">
                   {/* Dramatic Title */}
                   <motion.div
                     className="text-center mb-8"
@@ -825,68 +775,131 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent mb-4 tracking-wider">
                       THE COSMIC REVELATION
                     </h2>
-                    <div className="flex justify-center items-center gap-4">
+                    <div className="flex justify-center items-center gap-4 mb-6">
                       <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
                       <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32" />
                       <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
                     </div>
+
+                    {/* Premium Enhancement Button */}
+                    <motion.div
+                      className="flex justify-center gap-4 mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.5 }}
+                    >
+                      <motion.button
+                        className="px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Sparkles className="w-5 h-5" />
+                        Animate & Discuss Reading ($2)
+                      </motion.button>
+                      <motion.button
+                        className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Star className="w-5 h-5" />
+                        Premium Readings ($9.99/mo)
+                      </motion.button>
+                    </motion.div>
                   </motion.div>
 
-                  {/* Rolling Text Container */}
-                  <motion.div
-                    className="relative h-96 overflow-hidden rounded-2xl bg-black/60 backdrop-blur-sm border border-yellow-400/30"
-                    initial={{ opacity: 0, rotateX: 20 }}
-                    animate={{ opacity: 1, rotateX: 0 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                  >
-                    {/* Scrolling Text */}
+                  {/* Two-Column Layout */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left Side - Card Summary */}
                     <motion.div
-                      className="absolute w-full px-8 py-6"
-                      initial={{ y: "100%" }}
-                      animate={{ y: "-100%" }}
-                      transition={{
-                        delay: 2,
-                        duration: 15,
-                        ease: "linear",
-                        repeat: Infinity,
-                        repeatDelay: 3
-                      }}
+                      className="space-y-6"
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.2 }}
                     >
-                      <div className="text-center space-y-8">
-                        {interpretation.split('\n\n').map((paragraph, index) => (
-                          <motion.div
-                            key={index}
-                            className="text-lg md:text-xl text-yellow-100 leading-relaxed font-light tracking-wide"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 2.5 + index * 0.5 }}
-                          >
-                            <p className="mb-6 text-shadow-lg">
-                              {paragraph.replace(/\*\*(.*?)\*\*/g, '$1').replace(/🔮/g, '✨')}
-                            </p>
-                          </motion.div>
-                        ))}
-                        
-                        {/* Mystical Closing */}
+                      <h3 className="text-2xl font-bold text-yellow-400 mb-4">Your Cards Revealed</h3>
+                      {tarotReading.drawnCards.filter((_, index) => flippedCards.has(index)).map((card, index) => (
                         <motion.div
-                          className="text-2xl text-yellow-400 font-bold tracking-widest mt-12"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 8, duration: 1 }}
+                          key={card.id}
+                          className="bg-purple-900/30 rounded-xl p-4 border border-purple-400/30"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.5 + index * 0.2 }}
                         >
-                          ✨ THE STARS HAVE SPOKEN ✨
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold text-sm">
+                              {index + 1}
+                            </div>
+                            <h4 className="font-bold text-white">
+                              {card.name} {card.isReversed && '(Reversed)'}
+                            </h4>
+                          </div>
+                          <p className="text-purple-100 text-sm leading-relaxed">
+                            {card.isReversed ? card.meaning_reversed : card.meaning_upright}
+                          </p>
                         </motion.div>
+                      ))}
+                    </motion.div>
+
+                    {/* Right Side - Scrollable Reading Credits */}
+                    <motion.div
+                      className="relative"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.5 }}
+                    >
+                      <h3 className="text-2xl font-bold text-yellow-400 mb-4">Cosmic Interpretation</h3>
+                      
+                      {/* Scrollable Container */}
+                      <div className="relative h-96 overflow-hidden rounded-2xl bg-black/60 backdrop-blur-sm border border-yellow-400/30">
+                        {/* Manual Scroll Controls */}
+                        <div className="absolute top-4 right-4 z-20 flex gap-2">
+                          <button className="w-8 h-8 bg-yellow-400/20 rounded-full flex items-center justify-center text-yellow-400 hover:bg-yellow-400/30 transition-colors">
+                            ↑
+                          </button>
+                          <button className="w-8 h-8 bg-yellow-400/20 rounded-full flex items-center justify-center text-yellow-400 hover:bg-yellow-400/30 transition-colors">
+                            ↓
+                          </button>
+                        </div>
+
+                        {/* Scrollable Content */}
+                        <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-400/30 scrollbar-track-transparent p-6">
+                          <div className="space-y-6">
+                            {interpretation.split('\n\n').map((paragraph, index) => (
+                              <motion.div
+                                key={index}
+                                className="text-yellow-100 leading-relaxed"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 2 + index * 0.3 }}
+                              >
+                                <p className="text-shadow-lg">
+                                  {paragraph.replace(/\*\*(.*?)\*\*/g, '$1').replace(/🔮/g, '✨')}
+                                </p>
+                              </motion.div>
+                            ))}
+                            
+                            {/* Mystical Closing */}
+                            <motion.div
+                              className="text-xl text-yellow-400 font-bold tracking-wider text-center mt-8 p-4 border-t border-yellow-400/30"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 4 }}
+                            >
+                              ✨ THE STARS HAVE SPOKEN ✨
+                            </motion.div>
+                          </div>
+                        </div>
+                        
+                        {/* Gradient Overlays for Scroll Effect */}
+                        <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none" />
                       </div>
                     </motion.div>
-                    
-                    {/* Fade Gradient Overlays */}
-                    <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/80 to-transparent z-10" />
-                    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/80 to-transparent z-10" />
-                  </motion.div>
+                  </div>
 
                   {/* Mystical Particles */}
                   <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(20)].map((_, i) => (
+                    {[...Array(15)].map((_, i) => (
                       <motion.div
                         key={i}
                         className="absolute w-1 h-1 bg-yellow-400 rounded-full"
@@ -900,9 +913,9 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                           rotate: [0, 180, 360],
                         }}
                         transition={{
-                          duration: 3 + Math.random() * 2,
+                          duration: 4 + Math.random() * 2,
                           repeat: Infinity,
-                          delay: Math.random() * 5,
+                          delay: Math.random() * 3,
                         }}
                       />
                     ))}
@@ -936,113 +949,171 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         )}
       </AnimatePresence>
 
-      {/* Enhanced Save Reading Modal */}
+      {/* Scroll & Quill Style Save Reading Modal */}
       <AnimatePresence>
         {showSaveModal && (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowSaveModal(false)}
           >
             <motion.div
-              className={`bg-gradient-to-br from-purple-900/95 to-blue-900/95 rounded-3xl p-6 max-w-lg w-full border border-purple-400/30 shadow-2xl ${layout.modalClass}`}
-              initial={{ scale: 0.9, opacity: 0, y: 50 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 50 }}
+              className={`relative max-w-2xl w-full max-h-[90vh] overflow-hidden ${layout.modalClass}`}
+              initial={{ scale: 0.8, opacity: 0, rotateY: 15 }}
+              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+              exit={{ scale: 0.8, opacity: 0, rotateY: -15 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
-                  <Save className="w-6 h-6 text-purple-300" />
-                  Save Your Cosmic Reading
-                </h3>
-                <p className="text-purple-200/80">Preserve this moment of insight</p>
-              </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-purple-200 mb-2">
-                    <Eye className="w-4 h-4 inline mr-2" />
-                    What question did you ask? (optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    placeholder="What guidance were you seeking?"
-                    className="w-full px-4 py-3 bg-purple-800/30 text-white rounded-xl border border-purple-500/30 focus:border-purple-400 focus:outline-none backdrop-blur-sm min-h-[44px]"
-                  />
+              {/* Parchment Scroll Background */}
+              <div className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-t-3xl rounded-b-lg shadow-2xl border-4 border-amber-800/30">
+                {/* Scroll Top Decoration */}
+                <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-amber-600 to-amber-700 rounded-t-3xl border-b-2 border-amber-800/50">
+                  <div className="flex justify-center items-center h-full">
+                    <div className="text-amber-100 text-xs font-bold tracking-wider">✦ COSMIC JOURNAL ENTRY ✦</div>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-purple-200 mb-2">
-                    <Heart className="w-4 h-4 inline mr-2" />
-                    Your interpretation *
-                  </label>
-                  <textarea
-                    value={interpretation}
-                    onChange={(e) => setInterpretation(e.target.value)}
-                    placeholder="What does this reading mean to you? What insights did you gain?"
-                    rows={4}
-                    className="w-full px-4 py-3 bg-purple-800/30 text-white rounded-xl border border-purple-500/30 focus:border-purple-400 focus:outline-none resize-none backdrop-blur-sm"
-                    required
-                  />
-                </div>
+                {/* Scrollable Content Area */}
+                <div className="pt-12 pb-6 px-8 max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-amber-600/30 scrollbar-track-transparent">
+                  {/* Quill Header */}
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="relative">
+                      <div className="text-6xl text-amber-800/80 transform rotate-12">🪶</div>
+                      <div className="absolute -top-2 -right-2 text-2xl text-amber-600">✨</div>
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-3xl font-serif text-amber-900 mb-1">Sacred Reading Chronicle</h3>
+                      <p className="text-amber-700 italic">Preserve this moment of divine insight</p>
+                    </div>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-purple-200 mb-2">
-                    <Book className="w-4 h-4 inline mr-2" />
-                    Additional notes (optional)
-                  </label>
-                  <textarea
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Any other thoughts, feelings, or observations?"
-                    rows={2}
-                    className="w-full px-4 py-3 bg-purple-800/30 text-white rounded-xl border border-purple-500/30 focus:border-purple-400 focus:outline-none resize-none backdrop-blur-sm"
-                  />
-                </div>
+                  {/* Quill Selector */}
+                  <div className="mb-6 p-4 bg-amber-200/50 rounded-xl border border-amber-300/50">
+                    <label className="block text-sm font-serif text-amber-800 mb-2">
+                      Choose Your Writing Quill:
+                    </label>
+                    <div className="flex gap-2">
+                      {['🪶 Phoenix Feather', '🦢 Swan Quill', '🦅 Eagle Plume', '✒️ Mystic Ink'].map((quill, index) => (
+                        <button
+                          key={index}
+                          className="px-3 py-1 text-xs bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-full border border-amber-300 transition-colors"
+                        >
+                          {quill}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-                {saveError && (
-                  <motion.div 
-                    className="bg-red-500/20 border border-red-400/30 rounded-xl p-3"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                  >
-                    <p className="text-red-200 text-sm flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4" />
-                      {saveError}
-                    </p>
-                  </motion.div>
-                )}
+                  <div className="space-y-6">
+                    {/* Question Field */}
+                    <div className="relative">
+                      <label className="block text-sm font-serif text-amber-800 mb-2 flex items-center gap-2">
+                        <Eye className="w-4 h-4" />
+                        What question did you seek to answer?
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={question}
+                          onChange={(e) => setQuestion(e.target.value)}
+                          placeholder="Write your sacred question here..."
+                          className="w-full px-4 py-3 bg-white/70 text-amber-900 rounded-lg border-2 border-amber-300/50 focus:border-amber-500 focus:outline-none font-serif placeholder-amber-600/60"
+                          style={{ fontFamily: 'serif' }}
+                        />
+                        <div className="absolute right-3 top-3 text-amber-600/50 text-lg">📜</div>
+                      </div>
+                    </div>
 
-                <div className="flex gap-3 pt-4">
-                  <button
-                    className="flex-1 px-4 py-3 bg-purple-700/50 hover:bg-purple-600/50 text-white rounded-xl font-semibold transition-colors border border-purple-500/30 min-h-[44px]"
-                    onClick={() => setShowSaveModal(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[44px]"
-                    onClick={handleSaveReading}
-                    disabled={tarotReading.save.loading || !interpretation.trim()}
-                  >
-                    {tarotReading.save.loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Saving...
-                      </>
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4" />
-                        Save to Journal
-                      </>
+                    {/* Interpretation Field */}
+                    <div className="relative">
+                      <label className="block text-sm font-serif text-amber-800 mb-2 flex items-center gap-2">
+                        <Heart className="w-4 h-4" />
+                        Your Sacred Interpretation *
+                      </label>
+                      <div className="relative">
+                        <textarea
+                          value={interpretation}
+                          onChange={(e) => setInterpretation(e.target.value)}
+                          placeholder="Pour your soul's understanding onto this sacred parchment... What wisdom have the cards revealed to you?"
+                          rows={6}
+                          className="w-full px-4 py-3 bg-white/70 text-amber-900 rounded-lg border-2 border-amber-300/50 focus:border-amber-500 focus:outline-none resize-none font-serif placeholder-amber-600/60 leading-relaxed"
+                          style={{ fontFamily: 'serif' }}
+                          required
+                        />
+                        <div className="absolute bottom-3 right-3 text-amber-600/50 text-lg">🖋️</div>
+                      </div>
+                    </div>
+
+                    {/* Notes Field */}
+                    <div className="relative">
+                      <label className="block text-sm font-serif text-amber-800 mb-2 flex items-center gap-2">
+                        <Book className="w-4 h-4" />
+                        Additional Sacred Notes
+                      </label>
+                      <div className="relative">
+                        <textarea
+                          value={notes}
+                          onChange={(e) => setNotes(e.target.value)}
+                          placeholder="Any additional thoughts, emotions, or mystical observations..."
+                          rows={3}
+                          className="w-full px-4 py-3 bg-white/70 text-amber-900 rounded-lg border-2 border-amber-300/50 focus:border-amber-500 focus:outline-none resize-none font-serif placeholder-amber-600/60"
+                          style={{ fontFamily: 'serif' }}
+                        />
+                        <div className="absolute bottom-3 right-3 text-amber-600/50 text-lg">📖</div>
+                      </div>
+                    </div>
+
+                    {saveError && (
+                      <motion.div 
+                        className="bg-red-100 border-2 border-red-300 rounded-xl p-4"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                      >
+                        <p className="text-red-700 text-sm flex items-center gap-2 font-serif">
+                          <AlertCircle className="w-4 h-4" />
+                          {saveError}
+                        </p>
+                      </motion.div>
                     )}
-                  </button>
+                  </div>
                 </div>
+
+                {/* Scroll Bottom Action Bar */}
+                <div className="bg-gradient-to-r from-amber-600 to-amber-700 px-8 py-4 border-t-2 border-amber-800/50 rounded-b-lg">
+                  <div className="flex gap-4">
+                    <button
+                      className="flex-1 px-4 py-3 bg-amber-200/80 hover:bg-amber-200 text-amber-800 rounded-lg font-serif font-semibold transition-colors border border-amber-400/50"
+                      onClick={() => setShowSaveModal(false)}
+                    >
+                      Abandon Scroll
+                    </button>
+                    <button
+                      className="flex-1 px-4 py-3 bg-gradient-to-r from-amber-800 to-amber-900 hover:from-amber-700 hover:to-amber-800 text-amber-100 rounded-lg font-serif font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      onClick={handleSaveReading}
+                      disabled={tarotReading.save.loading || !interpretation.trim()}
+                    >
+                      {tarotReading.save.loading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sealing Scroll...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4" />
+                          Seal & Preserve
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Decorative Corner Scrollwork */}
+                <div className="absolute top-8 left-4 text-amber-600/30 text-2xl transform -rotate-12">✦</div>
+                <div className="absolute top-8 right-4 text-amber-600/30 text-2xl transform rotate-12">✦</div>
+                <div className="absolute bottom-20 left-4 text-amber-600/30 text-2xl transform rotate-12">✧</div>
+                <div className="absolute bottom-20 right-4 text-amber-600/30 text-2xl transform -rotate-12">✧</div>
               </div>
             </motion.div>
           </motion.div>

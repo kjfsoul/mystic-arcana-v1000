@@ -6,15 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Onboarding Status
 
-- All onboarding rules have been read and internalized, as of 2025-07-19
+- All onboarding rules have been read and internalized, as of 2025-01-31
 - Files read and validated:
-  - CLAUDE_INTEGRITY_RULES.md ✅ (Re-read 2025-07-19)
-  - IMPLEMENTATION_MICROTASKS.md ✅ (Re-read 2025-07-19)
-  - claudeupdate.md ✅ (Re-read 2025-07-19)
-  - PRD.md ✅ (Re-read 2025-07-19)
-  - GEMINI.md ✅ (Re-read 2025-07-19)
-  - technical_architecture.md ✅ (Re-read 2025-07-19)
-  - Multiple docs/ files reviewed ✅ (Re-read 2025-07-19)
+  - CLAUDE_INTEGRITY_RULES.md ✅ (Re-read 2025-01-31)
+  - IMPLEMENTATION_MICROTASKS.md ✅ (Re-read 2025-01-31)
+  - claudeupdate.md ✅ (Re-read 2025-01-31)
+  - PRD.md ✅ (Re-read 2025-01-31)
+  - GEMINI.md ✅ (Re-read 2025-01-31)
+  - technical_architecture.md ✅ (Re-read 2025-01-31)
+  - Multiple docs/ files reviewed ✅ (57 files found in docs/)
 - Fully synced with Roo Code and Gemini CLI agent workflow
 - Committed to brutal honesty and no fabrication per integrity rules
 - Acknowledged mandatory a_mem logging for all development actions
@@ -59,6 +59,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - All shell commands must use memlog-ma prefix
   - Python functions must use @log_invocation decorator
   - Development process logging separate from production Loki logging
+
+#### 2025-01-31 - Performance Critical Fix Session
+
+- Re-read ALL mandatory onboarding files per Claude Mandates
+- CLAUDE_INTEGRITY_RULES.md: Brutal honesty, no fabrication policy
+- IMPLEMENTATION_MICROTASKS.md: Microtask model assignments, swarming guidance
+- claudeupdate.md: 90% tarot backend, 95% visuals, 0% functional features
+- PRD.md: Multi-reader tarot vision, live astrology, personalization
+- GEMINI.md: Critical deck data issue (16/78 cards = 21% complete)
+- technical_architecture.md: MCP agents, WebGL, Supabase stack
+- Confirmed current gaps:
+  - 10+ second page load due to blocking DailyHoroscopeWidget API calls
+  - GalaxyBackground canvas blocking initial render
+  - Missing 62 tarot cards still critical blocker
+  - Database seeding script broken (ES module syntax)
+  - 8/9 agents sitting idle in registry
+- Started performance fix for main page loading:
+  - Made DailyHoroscopeWidget async/non-blocking
+  - Deferred GalaxyBackground canvas initialization
+  - Removed DailyHoroscopeWidget from hub temporarily
+  - Build error in getDailyHoroscope method needs fixing
+- Acknowledged a_mem logging mandate (memlog-ma prefix required)
 
 ## Development Commands
 

@@ -8,10 +8,14 @@ import os
 import sys
 import json
 import logging
+import asyncio
+import schedule
+import time
 from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
+import threading
 
 # CrewAI imports
 from crewai import Agent, Task, Crew, Process
@@ -579,63 +583,338 @@ def create_demonstration_tasks(agents: Dict[str, Agent]) -> List[Task]:
         logger.error(f"Failed to create tasks: {str(e)}")
         raise CrewAISetupError(f"Task creation failed: {str(e)}")
 
+class AutonomousCrewManager:
+    """
+    Manages autonomous execution of the Mystic Arcana Crew
+    """
+    
+    def __init__(self):
+        self.agents = {}
+        self.crew = None
+        self.is_running = False
+        self.execution_history = []
+        self.health_check_interval = 300  # 5 minutes
+        self.task_execution_interval = 3600  # 1 hour
+        
+    @log_invocation(event_type="autonomous_startup", user_id="crew_system")
+    def initialize_autonomous_mode(self) -> bool:
+        """Initialize the crew for autonomous operations"""
+        try:
+            logger.info("Initializing autonomous mode...")
+            
+            # Validate environment
+            if not validate_environment():
+                raise CrewAISetupError("Environment validation failed")
+            
+            # Create all agents
+            self.agents = create_mystic_arcana_agents()
+            
+            # Create core crew for autonomous operation
+            core_agents = [
+                self.agents['sophia'],
+                self.agents['orion'], 
+                self.agents['luna'],
+                self.agents['content_alchemist']
+            ]
+            
+            self.crew = initialize_crew(
+                agents=core_agents,
+                tasks=[],  # Tasks will be created dynamically
+                process=Process.sequential,
+                verbose=True
+            )
+            
+            logger.info("Autonomous mode initialized successfully")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize autonomous mode: {str(e)}")
+            return False
+    
+    @log_invocation(event_type="autonomous_health_check", user_id="crew_system")
+    def health_check(self):
+        """Perform system health check"""
+        try:
+            health_status = {
+                'timestamp': datetime.now().isoformat(),
+                'agents_available': len(self.agents),
+                'crew_initialized': self.crew is not None,
+                'environment_valid': validate_environment(),
+                'recent_executions': len([e for e in self.execution_history if 
+                                        datetime.fromisoformat(e['timestamp']) > datetime.now() - timedelta(hours=24)])
+            }
+            
+            logger.info(f"Health check: {health_status}")
+            
+            # Log health status to memory
+            log_event(
+                user_id="crew_system",
+                event_type="crew_health_check",
+                payload=health_status
+            )
+            
+            return health_status
+            
+        except Exception as e:
+            logger.error(f"Health check failed: {str(e)}")
+            return {'error': str(e), 'healthy': False}
+    
+    @log_invocation(event_type="autonomous_task_creation", user_id="crew_system")
+    def create_autonomous_tasks(self) -> List[Task]:
+        """Create tasks for autonomous execution based on current needs"""
+        tasks = []
+        current_time = datetime.now()
+        
+        try:
+            # Daily content generation task
+            if current_time.hour >= 6:  # Morning content
+                content_task = create_base_task(
+                    description=f"""
+                    Generate daily astrological content for {current_time.strftime('%B %d, %Y')}.
+                    
+                    Create:
+                    1. Daily cosmic overview with current planetary aspects
+                    2. Personalized guidance for each zodiac sign
+                    3. Manifestation focus for the day
+                    4. Crystal and color recommendations
+                    5. Affirmation or intention setting prompt
+                    
+                    Make content engaging, mystical, and actionable.
+                    """,
+                    agent=self.agents['content_alchemist'],
+                    expected_output="Complete daily astrological content package with cosmic overview, sign-specific guidance, and practical spiritual recommendations.",
+                    output_file=f"daily_content_{current_time.strftime('%Y%m%d')}.json"
+                )
+                tasks.append(content_task)
+            
+            # Weekly spiritual insight task (Sundays)
+            if current_time.weekday() == 6:  # Sunday
+                sophia_task = create_base_task(
+                    description="""
+                    Channel a profound spiritual message for the upcoming week.
+                    
+                    Provide:
+                    1. Overarching spiritual theme for the week
+                    2. Key lessons and growth opportunities
+                    3. Challenges to embrace for transformation
+                    4. Practices for spiritual alignment
+                    5. Message of hope and empowerment
+                    
+                    Draw from ancient wisdom and current cosmic energies.
+                    """,
+                    agent=self.agents['sophia'],
+                    expected_output="Deep spiritual guidance and wisdom for the upcoming week with practical applications and inspirational messaging.",
+                    output_file=f"weekly_wisdom_{current_time.strftime('%Y_W%U')}.json"
+                )
+                tasks.append(sophia_task)
+            
+            # Astrological timing analysis (3x per week)
+            if current_time.weekday() in [0, 2, 4]:  # Monday, Wednesday, Friday
+                orion_task = create_base_task(
+                    description="""
+                    Analyze current astrological timing for strategic life decisions.
+                    
+                    Research and provide:
+                    1. Most significant current planetary transits
+                    2. Optimal timing for major decisions this week
+                    3. Areas to avoid or approach with caution
+                    4. Manifestation windows and power days
+                    5. Relationship and career timing guidance
+                    """,
+                    agent=self.agents['orion'],
+                    expected_output="Strategic astrological timing report with specific recommendations for the current week.",
+                    output_file=f"timing_analysis_{current_time.strftime('%Y%m%d')}.json"
+                )
+                tasks.append(orion_task)
+            
+            # Emotional healing focus (Fridays)
+            if current_time.weekday() == 4:  # Friday
+                luna_task = create_base_task(
+                    description="""
+                    Create healing content for weekend emotional processing and self-care.
+                    
+                    Develop:
+                    1. Guided practice for releasing the week's stress
+                    2. Self-compassion exercises
+                    3. Relationship pattern awareness check-in
+                    4. Inner child healing visualization
+                    5. Boundary setting reminders for the weekend
+                    """,
+                    agent=self.agents['luna'],
+                    expected_output="Complete emotional healing and self-care package for weekend practice with gentle, therapeutic guidance.",
+                    output_file=f"healing_focus_{current_time.strftime('%Y%m%d')}.json"
+                )
+                tasks.append(luna_task)
+            
+            logger.info(f"Created {len(tasks)} autonomous tasks for execution")
+            return tasks
+            
+        except Exception as e:
+            logger.error(f"Failed to create autonomous tasks: {str(e)}")
+            return []
+    
+    @log_invocation(event_type="autonomous_execution", user_id="crew_system")
+    def execute_autonomous_cycle(self):
+        """Execute one autonomous work cycle"""
+        try:
+            logger.info("Starting autonomous execution cycle...")
+            
+            # Create tasks for current time/context
+            tasks = self.create_autonomous_tasks()
+            
+            if not tasks:
+                logger.info("No tasks to execute for current time/context")
+                return
+            
+            # Update crew with new tasks
+            self.crew.tasks = tasks
+            
+            # Execute the crew
+            results = execute_crew(self.crew)
+            
+            # Store execution history
+            execution_record = {
+                'timestamp': datetime.now().isoformat(),
+                'tasks_executed': len(tasks),
+                'success': results['success'],
+                'execution_time': results.get('execution_time_seconds', 0),
+                'outputs': results.get('result', 'No output')
+            }
+            
+            self.execution_history.append(execution_record)
+            
+            # Keep only last 100 executions
+            if len(self.execution_history) > 100:
+                self.execution_history = self.execution_history[-100:]
+            
+            logger.info(f"Autonomous cycle completed: {execution_record}")
+            
+            return execution_record
+            
+        except Exception as e:
+            logger.error(f"Autonomous execution cycle failed: {str(e)}")
+            return {'error': str(e), 'success': False}
+    
+    def start_autonomous_mode(self):
+        """Start continuous autonomous operation"""
+        if not self.initialize_autonomous_mode():
+            logger.error("Failed to initialize autonomous mode")
+            return False
+        
+        self.is_running = True
+        logger.info("Starting autonomous operation...")
+        
+        # Schedule regular tasks
+        schedule.every(5).minutes.do(self.health_check)
+        schedule.every().hour.do(self.execute_autonomous_cycle)
+        
+        # Run initial cycle
+        self.execute_autonomous_cycle()
+        
+        # Continuous execution loop
+        while self.is_running:
+            try:
+                schedule.run_pending()
+                time.sleep(60)  # Check every minute
+                
+            except KeyboardInterrupt:
+                logger.info("Autonomous mode interrupted by user")
+                self.stop_autonomous_mode()
+                break
+            except Exception as e:
+                logger.error(f"Error in autonomous loop: {str(e)}")
+                time.sleep(300)  # Wait 5 minutes before retrying
+        
+        return True
+    
+    def stop_autonomous_mode(self):
+        """Stop autonomous operation"""
+        self.is_running = False
+        logger.info("Autonomous mode stopped")
+
+# Global crew manager instance
+crew_manager = AutonomousCrewManager()
+
 @log_invocation(event_type="main_execution", user_id="crew_system")
 def main():
     """
-    Main execution function with comprehensive setup and error handling
+    Main execution function with autonomous and manual modes
     """
     try:
-        logger.info("Starting Mystic Arcana Crew initialization...")
+        logger.info("Starting Mystic Arcana Crew...")
         
-        # Validate environment
-        if not validate_environment():
-            raise CrewAISetupError("Environment validation failed")
-        
-        logger.info("Environment validation successful")
-        
-        # Create all Mystic Arcana agents
-        logger.info("Creating Mystic Arcana agents...")
-        agents = create_mystic_arcana_agents()
-        
-        # Create demonstration tasks
-        logger.info("Creating demonstration tasks...")
-        tasks = create_demonstration_tasks(agents)
-        
-        # Initialize crew with core agents and tasks
-        core_agents = [agents['sophia'], agents['orion'], agents['luna'], agents['sol']]
-        crew = initialize_crew(
-            agents=core_agents,
-            tasks=tasks,
-            process=Process.sequential,
-            verbose=True,
-            memory=True
-        )
-        
-        logger.info("Mystic Arcana Crew initialized successfully")
-        
-        # Optional: Execute demonstration if requested
+        # Check execution mode
+        autonomous_mode = os.getenv('AUTONOMOUS_MODE', 'false').lower() == 'true'
         demonstration_mode = os.getenv('RUN_DEMONSTRATION', 'false').lower() == 'true'
         
-        if demonstration_mode:
-            logger.info("Running demonstration tasks...")
-            results = execute_crew(crew)
+        if autonomous_mode:
+            logger.info("🤖 Starting AUTONOMOUS MODE")
+            print("🔮✨ MYSTIC ARCANA AUTONOMOUS CREW ✨🔮")
+            print("=" * 50)
+            print("🤖 Initializing autonomous spiritual guidance system...")
+            print("⏰ Continuous operation with scheduled tasks")
+            print("🔍 Health monitoring every 5 minutes")
+            print("📅 Content generation and insights on schedule")
+            print("🛑 Press Ctrl+C to stop")
+            print("=" * 50)
             
-            if results['success']:
-                logger.info("Demonstration completed successfully")
-                print("\n🔮 MYSTIC ARCANA DEMONSTRATION RESULTS 🔮")
-                print("=" * 50)
-                print(results['result'])
-            else:
-                logger.error(f"Demonstration failed: {results.get('error', 'Unknown error')}")
-        
+            # Start autonomous operation
+            return crew_manager.start_autonomous_mode()
+            
         else:
-            logger.info("Crew ready for task assignment. Set RUN_DEMONSTRATION=true to run demo.")
-        
-        return {
-            'agents': agents,
-            'crew': crew,
-            'success': True
-        }
+            # Traditional manual/demonstration mode
+            logger.info("Starting manual/demonstration mode...")
+            
+            # Validate environment
+            if not validate_environment():
+                raise CrewAISetupError("Environment validation failed")
+            
+            # Create all Mystic Arcana agents
+            logger.info("Creating Mystic Arcana agents...")
+            agents = create_mystic_arcana_agents()
+            
+            # Create demonstration tasks
+            logger.info("Creating demonstration tasks...")
+            tasks = create_demonstration_tasks(agents)
+            
+            # Initialize crew with core agents and tasks
+            core_agents = [agents['sophia'], agents['orion'], agents['luna'], agents['sol']]
+            crew = initialize_crew(
+                agents=core_agents,
+                tasks=tasks,
+                process=Process.sequential,
+                verbose=True
+            )
+            
+            logger.info("Mystic Arcana Crew initialized successfully")
+            
+            # Optional: Execute demonstration if requested
+            if demonstration_mode:
+                logger.info("Running demonstration tasks...")
+                results = execute_crew(crew)
+                
+                if results['success']:
+                    logger.info("Demonstration completed successfully")
+                    print("\n🔮 MYSTIC ARCANA DEMONSTRATION RESULTS 🔮")
+                    print("=" * 50)
+                    print(results['result'])
+                else:
+                    logger.error(f"Demonstration failed: {results.get('error', 'Unknown error')}")
+            
+            else:
+                logger.info("Crew ready for task assignment.")
+                print("\n🔮 MYSTIC ARCANA CREW READY 🔮")
+                print("=" * 40)
+                print("🎯 Set AUTONOMOUS_MODE=true for continuous operation")
+                print("🎭 Set RUN_DEMONSTRATION=true to run demo tasks")
+                print("🔧 Agents available:", len(agents))
+                print("📋 Ready for manual task execution")
+            
+            return {
+                'agents': agents,
+                'crew': crew,
+                'success': True
+            }
         
     except Exception as e:
         logger.error(f"Main execution failed: {str(e)}")

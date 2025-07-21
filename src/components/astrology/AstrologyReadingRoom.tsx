@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
 import { AuthModal } from '../auth/AuthModal';
@@ -373,9 +374,13 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                   <p>
                     To receive personalized cosmic guidance, please add your birth date to your profile.
                   </p>
+                  <Link href="/profile" className={styles.personalButton}>
+                    Complete Your Profile ✨
+                  </Link>
                   <button 
                     className={styles.personalButton}
                     onClick={() => handleServiceSelection('chart')}
+                    style={{ marginTop: '0.5rem' }}
                   >
                     Add Birth Information
                   </button>

@@ -1,4 +1,4 @@
-import * as Swisseph from 'swisseph-v2';
+import Swisseph from 'swisseph-v2';
 
 // Planet constants from Swiss Ephemeris
 export const PLANETS = {

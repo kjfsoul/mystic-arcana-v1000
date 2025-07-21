@@ -1,0 +1,212 @@
+{
+  "tasks": {
+    "995aecf5-8f98-45c1-a3cc-1fcd95c158dd": {
+      "id": "995aecf5-8f98-45c1-a3cc-1fcd95c158dd",
+      "description": "Scan all astrological calculation modules and validate they use Swiss Ephemeris or comparable astronomical APIs. Replace any mock/placeholder data with real calculations.",
+      "agent": "AstroCalculus",
+      "status": "pending",
+      "priority": 5,
+      "created_at": "2025-07-20T16:06:12.780642",
+      "updated_at": "2025-07-20T16:06:12.780642",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "target_files": [
+          "/src/lib/astro-calc/planetaryPositions.ts"
+        ],
+        "validation_required": true
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "QualityGuardian",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "critical",
+        "accuracy_enforcement"
+      ],
+      "estimated_duration": null
+    },
+    "f7ef4115-d91a-4bfc-8145-273313d81382": {
+      "id": "f7ef4115-d91a-4bfc-8145-273313d81382",
+      "description": "Fix any placeholder logic in astrology components (e.g. mock planets, dummy signs). Ensure all calculations use real astronomical data from Swiss Ephemeris.",
+      "agent": "AstroCalculus",
+      "status": "pending",
+      "priority": 5,
+      "created_at": "2025-07-20T16:06:12.780953",
+      "updated_at": "2025-07-20T16:06:12.780953",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "target_files": [
+          "/src/components/astrology/BirthChart.tsx",
+          "/src/components/astrology/InsightPanel.tsx"
+        ],
+        "placeholder_patterns": [
+          "mock",
+          "dummy",
+          "placeholder",
+          "fake",
+          "test_data"
+        ]
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "UIEnchanter",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "critical",
+        "fix_placeholders"
+      ],
+      "estimated_duration": null
+    },
+    "967cfb3b-1439-47b2-9536-682db80fc280": {
+      "id": "967cfb3b-1439-47b2-9536-682db80fc280",
+      "description": "Replace all \"Coming Soon\" labels in /career page with full renderable career insights using real chart data and astrological timing.",
+      "agent": "ContentAlchemist",
+      "status": "pending",
+      "priority": 5,
+      "created_at": "2025-07-20T16:06:12.781304",
+      "updated_at": "2025-07-20T16:06:12.781304",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "target_file": "/src/app/astrology/career/page.tsx",
+        "requirement": "full_career_insights_with_real_data"
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "Orion",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "critical",
+        "career_completion"
+      ],
+      "estimated_duration": null
+    },
+    "e3810ba4-053e-4467-bd99-6aabc664c5f5": {
+      "id": "e3810ba4-053e-4467-bd99-6aabc664c5f5",
+      "description": "Replace all \"Coming Soon\" labels in /compatibility page with full renderable compatibility insights using real synastry calculations.",
+      "agent": "Luna",
+      "status": "pending",
+      "priority": 5,
+      "created_at": "2025-07-20T16:06:12.781621",
+      "updated_at": "2025-07-20T16:06:12.781621",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "target_file": "/src/app/astrology/compatibility/page.tsx",
+        "requirement": "full_compatibility_insights_with_synastry"
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "Orion",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "critical",
+        "compatibility_completion"
+      ],
+      "estimated_duration": null
+    },
+    "774aa5b9-5373-4350-9ccb-787e0b9bc932": {
+      "id": "774aa5b9-5373-4350-9ccb-787e0b9bc932",
+      "description": "Use test birthdate (1987-03-14 16:30:00 EST, New York) to verify accurate output of all signs, houses, aspects, and retrogrades across all astrology modules.",
+      "agent": "QualityGuardian",
+      "status": "pending",
+      "priority": 5,
+      "created_at": "2025-07-20T16:06:12.781977",
+      "updated_at": "2025-07-20T16:06:12.781977",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "test_birth_data": {
+          "date": "1987-03-14",
+          "time": "16:30:00",
+          "timezone": "EST",
+          "location": "New York, NY",
+          "latitude": 40.7128,
+          "longitude": -74.006
+        },
+        "validation_scope": [
+          "signs",
+          "houses",
+          "aspects",
+          "retrogrades",
+          "transits"
+        ],
+        "accuracy_requirements": "swiss_ephemeris_precision"
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "AstroCalculus",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "critical",
+        "validation"
+      ],
+      "estimated_duration": null
+    },
+    "c6eca610-56f2-4840-94cd-bc68f6f2646f": {
+      "id": "c6eca610-56f2-4840-94cd-bc68f6f2646f",
+      "description": "Add memory trigger to agentic logs: 'AstrologyGuru confirmed real-time planetary calculations for all modules.' Document all changes in session history.",
+      "agent": "QualityGuardian",
+      "status": "pending",
+      "priority": 4,
+      "created_at": "2025-07-20T16:06:12.782806",
+      "updated_at": "2025-07-20T16:06:12.782806",
+      "expected_output": "Task completed successfully",
+      "context": {
+        "astrology_guru_mission": true,
+        "memory_trigger": "AstrologyGuru confirmed real-time planetary calculations for all modules",
+        "documentation_required": true
+      },
+      "dependencies": [],
+      "assigned_to": null,
+      "started_at": null,
+      "completed_at": null,
+      "failure_count": 0,
+      "max_retries": 3,
+      "escalation_agent": "PersonaLearner",
+      "output_file": null,
+      "tags": [
+        "astrology_guru",
+        "memory_logging",
+        "documentation"
+      ],
+      "estimated_duration": null
+    }
+  },
+  "metadata": {
+    "created_at": "2025-07-20T16:06:12.779835",
+    "version": "1.0",
+    "total_tasks_created": 6,
+    "total_tasks_completed": 0,
+    "last_cleanup": "2025-07-20T16:06:12.779843"
+  },
+  "agent_stats": {},
+  "collaboration_history": []
+}

@@ -1,0 +1,29 @@
+[Unit]
+Description=Mystic Arcana Autonomous Crew
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=mystic-arcana
+Group=mystic-arcana
+WorkingDirectory=/opt/mystic-arcana/mystic-tarot-crew
+Environment=AUTONOMOUS_MODE=true
+Environment=ANTHROPIC_API_KEY=your-anthropic-api-key-here
+Environment=PERPLEXITY_API_KEY=your-perplexity-api-key-here
+ExecStart=/opt/mystic-arcana/mystic-tarot-crew/venv/bin/python main.py
+Restart=always
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mystic-arcana-crew
+
+# Security settings
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/mystic-arcana/mystic-tarot-crew
+
+[Install]
+WantedBy=multi-user.target

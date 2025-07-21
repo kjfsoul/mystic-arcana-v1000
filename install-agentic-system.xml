@@ -1,0 +1,22 @@
+<init>
+  <goal>Install and activate autonomous multi-agent system</goal>
+  <includes>
+    <library>crewAI</library>
+    <library>a_mem</library>
+    <env-file>.env.local</env-file>
+  </includes>
+  <contextFiles>
+    <preserve>claude.md</preserve>
+    <preserve>gemini.md</preserve>
+    <preserve>README.md</preserve>
+    <preserve>FRD.md</preserve>
+    <preserve>FRS.md</preserve>
+  </contextFiles>
+  <instructions>
+    1. Check for existing memory or agent logs
+    2. Only create files if missing
+    3. Setup agents using `create_base_agent()` with role-specific backstories
+    4. Log all actions to `a_mem`
+    5. Add onboarding completion summary to `claude.md`
+  </instructions>
+</init>

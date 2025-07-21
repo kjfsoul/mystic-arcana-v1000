@@ -1,4 +1,4 @@
-import { BirthData } from './AstronomicalCalculator';
+import { BirthData, AstronomicalCalculator } from './AstronomicalCalculator';
 
 export interface CareerStrength {
   title: string;
@@ -34,21 +34,30 @@ export interface CareerAnalysis {
   };
 }
 
-// Mock planetary positions for demo purposes
-function getMockCareerPlacements(birthData: BirthData): Record<string, number> {
-  const seed = birthData.date.getTime();
-  const random = (multiplier: number) => ((seed * multiplier) % 360);
+// Real planetary positions using Swiss Ephemeris calculations
+export async function getRealCareerPlacements(birthData: BirthData): Promise<Record<string, number>> {
+  const chart = await AstronomicalCalculator.calculateChart(birthData);
   
-  return {
-    midheaven: random(1.7) % 360,
-    saturn: random(2.9) % 360,
-    mars: random(3.4) % 360,
-    sun: random(1.1) % 360,
-    moon: random(2.3) % 360,
-    mercury: random(3.7) % 360,
-    venus: random(4.1) % 360,
-    jupiter: random(6.7) % 360,
+  const placements: Record<string, number> = {
+    midheaven: chart.midheaven,
+    sun: 0,
+    moon: 0,
+    mercury: 0,
+    venus: 0,
+    mars: 0,
+    jupiter: 0,
+    saturn: 0,
   };
+  
+  // Extract real planetary positions from the calculated chart
+  chart.planets.forEach(planet => {
+    const planetName = planet.name.toLowerCase();
+    if (placements.hasOwnProperty(planetName)) {
+      placements[planetName] = planet.longitude;
+    }
+  });
+  
+  return placements;
 }
 
 function getZodiacSign(degrees: number): string {
@@ -60,10 +69,16 @@ function getZodiacSign(degrees: number): string {
   return signs[Math.floor(degrees / 30)];
 }
 
-// Simplified house calculation for demo (unused in current implementation)
-// function getHousePosition(degrees: number): number {
-//   return Math.floor(degrees / 30) + 1;
-// }
+// House position calculation using real chart data
+async function getHousePositions(birthData: BirthData): Promise<Record<string, string>> {
+  const chart = await AstronomicalCalculator.calculateChart(birthData);
+  
+  return {
+    secondHouse: `House ${chart.houses[1]?.number || 2}: ${chart.houses[1]?.sign || 'Unknown'} - Your relationship with money and values`,
+    sixthHouse: `House ${chart.houses[5]?.number || 6}: ${chart.houses[5]?.sign || 'Unknown'} - Your daily work and health approach`,
+    tenthHouse: `House ${chart.houses[9]?.number || 10}: ${chart.houses[9]?.sign || 'Unknown'} - Your public reputation and achievement`
+  };
+}
 
 function analyzeStrengths(placements: Record<string, number>): CareerStrength[] {
   const strengths: CareerStrength[] = [];
@@ -356,7 +371,7 @@ function analyzeCareerPaths(placements: Record<string, number>): CareerPath[] {
 }
 
 export async function analyzeCareer(birthData: BirthData): Promise<CareerAnalysis> {
-  const placements = getMockCareerPlacements(birthData);
+  const placements = await getRealCareerPlacements(birthData);
   
   const midheavenSign = getZodiacSign(placements.midheaven);
   const saturnSign = getZodiacSign(placements.saturn);
@@ -371,9 +386,7 @@ export async function analyzeCareer(birthData: BirthData): Promise<CareerAnalysi
       midheaven: `${midheavenSign} - Your public image and career direction`,
       saturn: `${saturnSign} - Your discipline, structure, and karmic lessons`,
       mars: `${marsSign} - Your drive, energy, and action style`,
-      secondHouse: `House of Resources - Your relationship with money and values`,
-      sixthHouse: `House of Service - Your daily work and health approach`,
-      tenthHouse: `House of Career - Your public reputation and achievement`
+      ...(await getHousePositions(birthData))
     }
   };
 }

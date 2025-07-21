@@ -33,17 +33,22 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Variables for animation handling
+
     // Generate background stars
     const generateStars = () => {
       const rect = canvas.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
+      const width = rect.width || window.innerWidth;
+      const height = rect.height || window.innerHeight;
+
+      // Set canvas size
+      canvas.width = width;
+      canvas.height = height;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Create starry background with optional override - reduced for better readability
-      const finalStarCount =
-        starCount || Math.min(75, Math.floor((width * height) / 16000)); // Significantly reduced density
+      // Drastically reduce star count for faster initial render
+      const finalStarCount = starCount || Math.min(25, Math.floor((width * height) / 32000));
 
       for (let i = 0; i < finalStarCount; i++) {
         const x = Math.random() * width;
@@ -155,8 +160,10 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
       generateStars();
     };
 
-    // Initialize canvas
-    resizeCanvas();
+    // Initialize canvas with defer to avoid blocking render
+    setTimeout(() => {
+      resizeCanvas();
+    }, 50);
     window.addEventListener("resize", resizeCanvas);
 
     // Animation loop for twinkling effect
