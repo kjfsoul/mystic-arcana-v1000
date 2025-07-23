@@ -1,16 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
-
-interface BirthData {
-  name: string;
-  date: Date;
-  city: string;
-  country?: string;
-  lat?: number;
-  lng?: number;
-  timezone?: string;
-}
+import { BirthData } from "@/types/astrology";
 
 interface CompatibilityRequest {
   person1: BirthData;

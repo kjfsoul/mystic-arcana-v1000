@@ -41,6 +41,86 @@
       "class": "SolReaderAgent",
       "module": "virtual_agent_readers",
       "active": true
+    },
+    {
+      "id": "sophia",
+      "class": "SophiaAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Mystic Oracle and Primary Tarot Interpreter",
+      "capabilities": ["tarot_interpretation", "akashic_records", "mystical_guidance"]
+    },
+    {
+      "id": "orion",
+      "class": "OrionAgent", 
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Cosmic Strategist and Astrological Life Coach",
+      "capabilities": ["astronomical_calculations", "strategic_timing", "cosmic_guidance"]
+    },
+    {
+      "id": "astro_calculus",
+      "class": "AstroCalculusAgent",
+      "module": "mystic_crew_agents", 
+      "active": true,
+      "role": "Astronomical Calculation Specialist",
+      "capabilities": ["swiss_ephemeris", "birth_charts", "celestial_calculations"]
+    },
+    {
+      "id": "card_weaver",
+      "class": "CardWeaverAgent",
+      "module": "mystic_crew_agents",
+      "active": true, 
+      "role": "Adaptive Tarot Logic and Card Selection Engine",
+      "capabilities": ["card_selection", "synchronicity_algorithms", "tarot_logic"]
+    },
+    {
+      "id": "persona_learner",
+      "class": "PersonaLearnerAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "User Personalization and Continuous Learning Specialist", 
+      "capabilities": ["user_profiling", "behavioral_analysis", "personalization"]
+    },
+    {
+      "id": "data_oracle",
+      "class": "DataOracleAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Spiritual Data Architecture and Knowledge Management Specialist",
+      "capabilities": ["database_management", "spiritual_data", "privacy_protection"]
+    },
+    {
+      "id": "content_alchemist", 
+      "class": "ContentAlchemistAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Astrological Content Generation and Curation Specialist",
+      "capabilities": ["content_generation", "astrological_writing", "mystical_communication"]
+    },
+    {
+      "id": "community_shaman",
+      "class": "CommunityShamanAgent",
+      "module": "mystic_crew_agents", 
+      "active": true,
+      "role": "Community Building and Social Engagement Specialist",
+      "capabilities": ["community_moderation", "spiritual_guidance", "social_integration"]
+    },
+    {
+      "id": "ui_enchanter",
+      "class": "UIEnchanterAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Mystical User Interface and Experience Designer",
+      "capabilities": ["ui_design", "sacred_geometry", "accessibility"]
+    },
+    {
+      "id": "quality_guardian",
+      "class": "QualityGuardianAgent",
+      "module": "mystic_crew_agents",
+      "active": true,
+      "role": "Quality Assurance and Spiritual Ethics Guardian", 
+      "capabilities": ["quality_assurance", "spiritual_ethics", "user_safety"]
     }
   ]
 }

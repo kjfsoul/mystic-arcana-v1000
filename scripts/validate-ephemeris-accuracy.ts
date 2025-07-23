@@ -6,7 +6,8 @@
  */
 
 import { SwissEphemerisShim } from '../src/lib/astrology/SwissEphemerisShim';
-import { AstronomicalCalculator, BirthData } from '../src/lib/astrology/AstronomicalCalculator';
+import { AstronomicalCalculator } from '../src/lib/astrology/AstronomicalCalculator';
+import { BirthData } from '../src/types/astrology';
 
 // Reference data from professional ephemeris for March 14, 1987, 16:30 UTC
 const REFERENCE_POSITIONS = {

@@ -1,0 +1,645 @@
+.
+├── a_mem_swiss_ephemeris_update.log
+├── A-mem
+│   ├── agentic_memory
+│   │   ├── __init__.py
+│   │   ├── llm_controller.py
+│   │   ├── memory_system.py
+│   │   └── retrievers.py
+│   ├── agentic_memory.egg-info
+│   │   ├── dependency_links.txt
+│   │   ├── PKG-INFO
+│   │   ├── requires.txt
+│   │   ├── SOURCES.txt
+│   │   └── top_level.txt
+│   ├── cli
+│   ├── decorators
+│   ├── Figure
+│   │   ├── framework.jpg
+│   │   ├── intro-a.jpg
+│   │   └── intro-b.jpg
+│   ├── LICENSE
+│   ├── pyproject.toml
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── scripts
+│   └── tests
+│       ├── __init__.py
+│       ├── test_memory_system.py
+│       └── test_utils.py
+├── adaptive_personalization.md
+├── agents
+│   ├── design-agent.js
+│   ├── reader
+│   └── registry.json
+├── API-specifications.md
+├── architecture_diagram.md
+├── ASTROLOGY_IMPLEMENTATION.md
+├── ASTROLOGY_TESTING_CHECKLIST.md
+├── AUTH_TEST_RESULTS.md
+├── backend
+│   ├── __pycache__
+│   │   ├── api.cpython-311.pyc
+│   │   ├── api.cpython-312.pyc
+│   │   ├── api.cpython-39.pyc
+│   │   └── main.cpython-312.pyc
+│   ├── agents
+│   │   ├── __pycache__
+│   │   ├── mystic_arcana_agents.py
+│   │   └── virtual_agent_readers.py
+│   ├── api.py
+│   ├── config.yaml
+│   ├── framework
+│   │   ├── __pycache__
+│   │   ├── interfaces.py
+│   │   ├── orchestrator.py
+│   │   ├── registry.py
+│   │   └── tools.py
+│   ├── requirements.txt
+│   └── services
+│       ├── astrology
+│       └── tarot
+├── cache
+│   └── kerykeion_geonames_cache.sqlite
+├── check_a_mem.py
+├── CLAUDE_INTEGRITY_RULES.md
+├── CLAUDE_SESSION_COMMANDS.md
+├── CLAUDE_SESSION_INIT.md
+├── CLAUDE_UI_UX.md
+├── claude-mysic-prep-summary.md
+├── claude.md
+├── claudeupdate.md
+├── COMPREHENSIVE_IMPLEMENTATION_PLAN.md
+├── CRITICAL_SESSION_NOTES.md
+├── debug.log
+├── docker-compose.fixed.yml
+├── docker-compose.mcp.yml
+├── Dockerfile
+├── docs
+│   ├── 2025-05-29_19-15-13_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md
+│   ├── 2025-05-31_02-39-41_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md
+│   ├── agent-discovery.md
+│   ├── agent-operating-guide.md
+│   ├── astrology
+│   │   └── astrologycalcs.md
+│   ├── auth-testing-guide.md
+│   ├── claude updates.md
+│   ├── Claude-init-prompts.md
+│   ├── claude-mystic-prep.md
+│   ├── claude-opus-astronomical-prompt.md
+│   ├── claude-type-resolution-prompt.md
+│   ├── claudeinstrucitonmystic.docx
+│   ├── claudestate6.24.25.docx
+│   ├── Claudeupdate061925.docx
+│   ├── claudeupdate6.24.25a.docx
+│   ├── community
+│   │   └── communityengage.md
+│   ├── exported-assets
+│   │   ├── architecture_diagram.png
+│   │   ├── chart_script.py
+│   │   ├── gamification_flow.png
+│   │   ├── gamification_system.csv
+│   │   ├── reading_platform_features.csv
+│   │   ├── script_1.py
+│   │   ├── script_2.py
+│   │   ├── script.py
+│   │   ├── system_architecture.png
+│   │   └── technical_architecture.csv
+│   ├── FRONTEND_INTEGRATION_COMPLETE.md
+│   ├── infrastructure-changes.md
+│   ├── legal
+│   │   ├── 03a-tarot-ethics-code-of-conduct.docx
+│   │   ├── 03d-sample-reading-template-three-cards1.docx
+│   │   ├── 03e-sample-schedule-of-fees-and-business-policy.docx
+│   │   ├── 03f-sample-privacy-terms-for-tarot-reading-websites.docx
+│   │   ├── 03g-sample-services-agreement-for-events-and-parties.docx
+│   │   ├── 03h-log-of-professional-readings.docx
+│   │   ├── 03i-detailed-summary-of-readings-log.docx
+│   │   ├── benebell-wen-handbook-how-to-earn-50k-from-a-27-hour-work-week.doc
+│   │   ├── benebell-wen-social-inductive-reasoning-and-tarot.docx
+│   │   ├── benebell-wen-tarot-business-plan-template-2-december-2015.doc
+│   │   ├── boilerplate-contract-collaboration-and-joint-works-agreement.docx
+│   │   ├── boilerplate-contract-non-disclosure-agreement-nda-for-a-company.docx
+│   │   ├── boilerplate-contract-non-disclosure-agreement-nda-for-an-individual.docx
+│   │   ├── boilerplate-contract-work-for-hire-independent-contractor-agreement.docx
+│   │   ├── consent-form-for-minor-to-receive-card-reading-with-liability-waiver.docx
+│   │   ├── consent-form-for-minor-to-receive-card-reading.docx
+│   │   ├── contract-templates.zip
+│   │   ├── deck-licensing-agreement-template-v1.docx
+│   │   ├── for-tarot-professionals-premises-insurance-waiver.docx
+│   │   ├── Mystic Arcana
+│   │   ├── Mystic Arcana-20250529T205431Z-1-001.zip
+│   │   ├── MysticArcana_PrivacyPolicy.md
+│   │   ├── podcast-guest-appearance-release-boilerplate-template.docx
+│   │   ├── professional-tarot-templates-reading-sign-up-sheet-for-public-events.docx
+│   │   ├── terrifictarot_sampletemplate_bulletinboardflyer.docx
+│   │   ├── terrifictarot_sampletemplate_corporatepromoflyer.docx
+│   │   ├── terrifictarot_sampletemplate_mediapressrelease1.docx
+│   │   └── terrifictarot_sampletemplate_trifoldbrochure.docx
+│   ├── mcp-agent-recommendations.md
+│   ├── Mystic_NotebookLM.md
+│   ├── mystic-tarot-readers
+│   │   ├── app.js
+│   │   ├── index.html
+│   │   └── style.css
+│   ├── personalizedtarot.md
+│   ├── research
+│   │   ├── 03c-interpreting-tarot-through-astrology.md
+│   │   ├── ARABIC_PARTS.md
+│   │   ├── astronomical-visualization-system.md
+│   │   ├── benebell-wen-astrology-quick-reference-sheets.md
+│   │   ├── holistic-tarot-supplement-study-guide-01-beginner3.md
+│   │   ├── Introduction_to_Past_Life.md
+│   │   ├── Is_AI_Validating_Psychic.md
+│   │   ├── learning-the-thirty-six-decans-2016-09-16.md
+│   │   ├── learning-the-twelve-astrological-signs-2016-09-16.md
+│   │   ├── natal-astrology-learning-about-your-moon-sign-by-benebell-wen.md
+│   │   ├── Past_Life_Astrology.md
+│   │   ├── perplexityvirtualreaders.md
+│   │   ├── sun-sign-horoscopes-step-by-step-checklist.md
+│   │   ├── TAROT_UI_DEMO_READINESS.md
+│   │   ├── The_Celestial_Bodies.md
+│   │   ├── The_Twelve_Houses.md
+│   │   └── The_Twelve_Signs.md
+│   ├── session-fixes-summary.md
+│   ├── session-persistence-fix.md
+│   ├── SUPABASE_OAUTH_SETUP.md
+│   ├── supabase-oauth-setup.md
+│   ├── tarot-api-spec.yaml
+│   ├── tarot-data-engine.md
+│   ├── technical-architecture.md
+│   └── type-system-analysis.md
+├── DOCUMENTATION_INDEX.md
+├── eslint.config.mjs
+├── frontend
+│   └── components
+│       └── virtual-reader
+├── Frontend_kickoff_prompt.md
+├── FRONTEND-ENHANCEMENT-SUMMARY.md
+├── FRS.md
+├── gemini-cli-init-prompt.md
+├── gemini.md
+├── get-deck-id.cjs
+├── human_oversight_model.md
+├── IMPLEMENTATION_MICROTASKS.md
+├── IMPLEMENTATION_ROADMAP.md
+├── init-agentic-stack.sh
+├── install-agentic-system.xml
+├── jest.config.ts
+├── jest.setup.ts
+├── LOCAL-AUTH-SOLUTION.md
+├── logs
+│   ├── activity-logger.js
+│   ├── agent-activity
+│   │   ├── 2025-01-18.log
+│   │   ├── 2025-06-19.log
+│   │   ├── 2025-06-22.log
+│   │   ├── tarot-audit-2025-01-30.md
+│   │   ├── tarot-mvp-delivery-2025-01-30.md
+│   │   └── tarot-ui-polish-2025-01-02.md
+│   ├── agent-tasks.jsonl
+│   ├── backups
+│   │   ├── mcp-agent-status-2025-06-18T18-19-00-590Z.json
+│   │   ├── mcp-agent-status-2025-06-18T18-22-09-666Z.json
+│   │   ├── mcp-agent-status-2025-06-18T18-25-56-259Z.json
+│   │   ├── mcp-agent-status-2025-06-18T19-19-39-481Z.json
+│   │   ├── mcp-agent-status-2025-06-18T19-19-46-278Z.json
+│   │   ├── mcp-agent-status-2025-06-18T19-19-52-351Z.json
+│   │   ├── mcp-agent-status-2025-06-18T19-21-01-226Z.json
+│   │   ├── mcp-agent-status-2025-06-19T00-20-36-703Z.json
+│   │   ├── mcp-agent-status-2025-06-19T00-21-56-325Z.json
+│   │   └── mcp-agent-status-2025-06-19T00-35-49-595Z.json
+│   ├── design-agent.log
+│   ├── errors
+│   │   └── dom-errors-2025-01-08.json
+│   ├── mcp-agent-status.json
+│   ├── mcp-server.log
+│   ├── orchestrator.log
+│   ├── progress-update-2024-12.md
+│   ├── README.md
+│   ├── reports
+│   │   └── daily-summary.log
+│   ├── session-handoff-2025-06-18.md
+│   ├── session-management-lessons.md
+│   └── tarot-engine-completion-2025-06-15.md
+├── MAIN_PAGE_LAYOUT_CLARITY_PROMPT.md
+├── mcp_install_log.txt
+├── MCP_MEMORY_SETUP_GUIDE.md
+├── mcp_scaffold.md
+├── mcp-cleanup-plan.md
+├── mcp-migration.sh
+├── mcp-servers
+│   └── custom
+│       ├── agent-orchestrator
+│       ├── astrology
+│       └── tarot
+├── mcp.json
+├── mcp.json.backup.20250625_174724
+├── memlog-session-2025-07-21.txt
+├── MOBILE_RESPONSIVENESS_REPORT.md
+├── MOBILE_RESPONSIVENESS_SUMMARY.md
+├── Mystic Arcana Tasks.xlsx
+├── MYSTIC_ARCANA_BREAKTHROUGH_PLAN.md
+├── mystic_arcana_tree.txt
+├── mystic-tarot-crew
+│   ├── __pycache__
+│   │   ├── dashboard.cpython-312.pyc
+│   │   ├── main.cpython-312.pyc
+│   │   ├── memory_logger.cpython-312.pyc
+│   │   ├── memory_watcher.cpython-312.pyc
+│   │   ├── strategic_agent_loop.cpython-312.pyc
+│   │   └── task_pool.cpython-312.pyc
+│   ├── astrology_guru_agent.py
+│   ├── AUTONOMOUS_README.md
+│   ├── crew_memory_logs
+│   │   ├── 2025-07-19_crew_memory.jsonl
+│   │   └── 2025-07-20_crew_memory.jsonl
+│   ├── crew_operations.log
+│   ├── dashboard.py
+│   ├── main.py
+│   ├── memory_logger.py
+│   ├── memory_watcher.py
+│   ├── mystic-arcana-crew.service
+│   ├── README_AUTONOMOUS.md
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── simple_test.py
+│   ├── start_autonomous.sh
+│   ├── start_demo.sh
+│   ├── start_strategic_loop.sh
+│   ├── strategic_agent_loop.py
+│   ├── strategic_tasks.py
+│   ├── tarot_ux_overhaul.py
+│   ├── task_pool.json
+│   ├── task_pool.py
+│   ├── test_autonomous_system.py
+│   ├── test_setup.py
+│   └── test_simple.py
+├── next-env.d.ts
+├── next.config.ts
+├── onboarding_status.md
+├── package-lock.json
+├── package.json
+├── playwright-report
+│   └── index.html
+├── playwright.config.ts
+├── postcss.config.mjs
+├── PRD.md
+├── products
+│   └── idea-board.json
+├── project_overview.md
+├── public
+│   ├── data
+│   │   └── catalogs
+│   ├── icons
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── next.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── images
+│   │   └── tarot
+│   ├── sounds
+│   └── tarot
+│       └── deck-rider-waite
+├── README-TAROT-ENGINE.md
+├── README.md
+├── requirements-astro.txt
+├── RESPONSIVE_LAYOUT_REFACTOR_PROMPT.md
+├── scripts
+│   ├── __pycache__
+│   │   └── log_invocation.cpython-312.pyc
+│   ├── agent-message-bus.ts
+│   ├── agent-orchestrator.ts
+│   ├── backup-mcp.sh
+│   ├── clean-mcp.sh
+│   ├── content_generation_monitor.js
+│   ├── debug-swisseph-positions.ts
+│   ├── demo-agent-coordination.ts
+│   ├── diagnose-tarot.js
+│   ├── email-scheduler.ts
+│   ├── enhanced-deck-manager.ts
+│   ├── ephemeris
+│   │   ├── aspect_calculator.py
+│   │   ├── cosmic_weather.py
+│   │   ├── moon_calculator.py
+│   │   ├── planetary_positions.py
+│   │   ├── requirements.txt
+│   │   └── retrograde_detector.py
+│   ├── generate-docs.sh
+│   ├── init_claude.sh
+│   ├── install-all-mcp-servers.sh
+│   ├── install-essential-mcp-servers.sh
+│   ├── log_invocation.py
+│   ├── log-agent-task.ts
+│   ├── mcp-tester.js
+│   ├── memlog.py
+│   ├── monitor-mcp.sh
+│   ├── notify-mcp.sh
+│   ├── query_memory.py
+│   ├── register_claude_and_agents.sh
+│   ├── run-analysis.sh
+│   ├── schedule-mcp.sh
+│   ├── seed-tarot.ts
+│   ├── setup-astrology.sh
+│   ├── setup-email.ts
+│   ├── setup-git.sh
+│   ├── setup-local-tarot.ts
+│   ├── setup-mcp.sh
+│   ├── setup-tarot-engine.ts
+│   ├── start-mcp-docker.sh
+│   ├── test-astrology-api.ts
+│   ├── test-astrology-calculations.ts
+│   ├── test-ephemeris.ts.disabled
+│   ├── test-fallback-calculations.ts
+│   ├── test-horoscope-engine.ts
+│   ├── test-marketplace-features.ts
+│   ├── test-mcp-connectivity.ts
+│   ├── test-swiss-ephemeris-shim.ts
+│   ├── test-swisseph-direct.ts
+│   ├── test-tarot-api.ts
+│   ├── test-tarot-endpoints.ts
+│   ├── test-tarot-fix.js
+│   ├── update-agent-log.js
+│   ├── validate_ephemeris.py
+│   ├── validate_spiritual_references.js
+│   ├── validate-deck.ts
+│   ├── validate-ephemeris-accuracy.ts
+│   ├── validate-mcp-servers.sh
+│   ├── validate-mcp.sh
+│   └── validate-tarot-data.cjs
+├── setup-agentic-core.py
+├── setup-mcp-memory.sh
+├── SETUP.md
+├── site-map-ui.md
+├── SPIRITUAL_VOICE_CHECKLIST.md
+├── src
+│   ├── agents
+│   │   ├── claude-init
+│   │   ├── email-notifier
+│   │   └── tarot-engine-mystic
+│   ├── app
+│   │   ├── api
+│   │   ├── astrology
+│   │   ├── astronomical-demo
+│   │   ├── auth
+│   │   ├── components
+│   │   ├── context
+│   │   ├── debug-stars
+│   │   ├── favicon.ico
+│   │   ├── galaxy-test
+│   │   ├── galaxy-view
+│   │   ├── globals.css
+│   │   ├── high-performance-stars
+│   │   ├── hooks
+│   │   ├── horoscope
+│   │   ├── layout.tsx
+│   │   ├── legal
+│   │   ├── lib
+│   │   ├── marketplace
+│   │   ├── page-legacy.tsx
+│   │   ├── page-unified.tsx
+│   │   ├── page.module.css
+│   │   ├── page.tsx
+│   │   ├── profile
+│   │   ├── readings
+│   │   ├── simple-stars
+│   │   ├── test
+│   │   ├── test-auth
+│   │   ├── test-oauth
+│   │   ├── test-save-reading
+│   │   └── types
+│   ├── components
+│   │   ├── accessibility
+│   │   ├── animations
+│   │   ├── astrology
+│   │   ├── astronomical
+│   │   ├── auth
+│   │   ├── cosmic
+│   │   ├── debug
+│   │   ├── effects
+│   │   ├── forms
+│   │   ├── generated
+│   │   ├── horoscope
+│   │   ├── index.ts
+│   │   ├── layout
+│   │   ├── legal
+│   │   ├── marketplace
+│   │   ├── modals
+│   │   ├── panels
+│   │   ├── readers
+│   │   ├── settings
+│   │   ├── tarot
+│   │   ├── timeline
+│   │   └── ui
+│   ├── content
+│   │   └── legal
+│   ├── contexts
+│   │   ├── AuthContext.tsx
+│   │   └── TarotSessionContext.tsx
+│   ├── data
+│   │   ├── mockTarotData.ts
+│   │   └── zodiacSigns.ts
+│   ├── design
+│   │   ├── index.ts
+│   │   ├── themes
+│   │   └── tokens
+│   ├── hooks
+│   │   ├── useGeolocation.ts
+│   │   ├── useMediaQuery.ts
+│   │   ├── useTarotAPI.ts
+│   │   └── useTarotDeck.ts
+│   ├── lib
+│   │   ├── astrology
+│   │   ├── astronomy
+│   │   ├── ephemeris
+│   │   ├── location
+│   │   ├── marketplace
+│   │   ├── stripe
+│   │   ├── supabase
+│   │   ├── supabase-server.ts
+│   │   ├── supabase.ts
+│   │   └── tarot
+│   ├── services
+│   │   ├── astrology
+│   │   ├── astrology-python
+│   │   ├── astronomical
+│   │   ├── horoscope
+│   │   ├── profileService.ts
+│   │   ├── tarot
+│   │   ├── TarotService.ts
+│   │   └── zodiacService.ts
+│   ├── types
+│   │   ├── astronomical.ts
+│   │   ├── database.ts
+│   │   ├── horoscope.ts
+│   │   ├── tarot.ts
+│   │   └── user.types.ts
+│   └── utils
+│       ├── accessibility
+│       ├── cosmic-weather
+│       ├── index.ts
+│       └── logger.ts
+├── start-mcp.sh
+├── supabase
+│   └── migrations
+│       ├── 001_initial_schema.sql
+│       ├── 002_tarot_schema.sql
+│       ├── 20250121_create_wishlist_table.sql
+│       ├── 20250628_ephemeris_cache.sql
+│       └── 20250701005216_create_event_logs_table.sql
+├── SUPABASE_VECTOR_SETUP.md
+├── TAROT_DECK_SYSTEM_COMPLETE.md
+├── TAROT_IMPLEMENTATION_RESULTS.md
+├── TAROT_MVP_PROOF.md
+├── tarot_personas_dashboard.jpg
+├── TAROT-ENGINE-DELIVERY.md
+├── technical_architecture.md
+├── temp
+│   ├── agent-coordination.json
+│   ├── agent-messages.json
+│   ├── astronomicalVisualization-runtime.ts
+│   ├── birthdayGen-runtime.ts
+│   ├── CLAUDE_SESSION_INIT.md
+│   ├── claude-session-briefing.json
+│   ├── edmShuffle-runtime.ts
+│   ├── email-report-1750311048236.html
+│   ├── email-report-1750318562892.html
+│   ├── email-report-1750318635226.html
+│   ├── email-report-1750318753890.html
+│   ├── email-report-1750592033238.html
+│   ├── legalComplianceAgent-runtime.ts
+│   ├── mysticArcana-runtime.ts
+│   └── tarotDataEngine-runtime.ts
+├── test-auth-api.cjs
+├── test-auth.html
+├── test-auth.js
+├── test-ephemeris-accuracy.js
+├── test-horoscope-widget.cjs
+├── test-mcp-servers.sh
+├── test-tarot-flow.cjs
+├── test-zodiac-types.cjs
+├── tests
+│   ├── astrology
+│   │   ├── birth-chart.test.ts
+│   │   ├── compatibility.test.ts
+│   │   ├── horoscope.test.ts
+│   │   └── moon-phase.test.ts
+│   └── e2e
+│       └── location-search.spec.ts
+├── tools_services_overview.md
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+├── UI_UX_STRUCTURE.md
+├── utils
+│   ├── __pycache__
+│   │   ├── a_mem_logger.cpython-312.pyc
+│   │   └── a_mem_logger.cpython-39.pyc
+│   └── a_mem_logger.py
+├── venv-astrology
+│   ├── __pycache__
+│   │   └── setup.cpython-312.pyc
+│   ├── bin
+│   │   ├── __pycache__
+│   │   ├── activate
+│   │   ├── activate.csh
+│   │   ├── activate.fish
+│   │   ├── Activate.ps1
+│   │   ├── alembic
+│   │   ├── chroma
+│   │   ├── coloredlogs
+│   │   ├── create-docs
+│   │   ├── crewai
+│   │   ├── distro
+│   │   ├── dotenv
+│   │   ├── dumppdf.py
+│   │   ├── ec
+│   │   ├── f2py
+│   │   ├── fastapi
+│   │   ├── fastavro
+│   │   ├── git-filter-repo
+│   │   ├── gptcache_server
+│   │   ├── httpx
+│   │   ├── huggingface-cli
+│   │   ├── humanfriendly
+│   │   ├── instructor
+│   │   ├── ipython
+│   │   ├── ipython3
+│   │   ├── isympy
+│   │   ├── jsondiff
+│   │   ├── jsonpatch
+│   │   ├── jsonpointer
+│   │   ├── jsonschema
+│   │   ├── litellm
+│   │   ├── litellm-proxy
+│   │   ├── mako-render
+│   │   ├── markdown-it
+│   │   ├── nltk
+│   │   ├── nodeenv
+│   │   ├── normalizer
+│   │   ├── onnxruntime_test
+│   │   ├── openai
+│   │   ├── opentelemetry-bootstrap
+│   │   ├── opentelemetry-instrument
+│   │   ├── pdf2txt.py
+│   │   ├── pdfplumber
+│   │   ├── pip
+│   │   ├── pip3
+│   │   ├── pip3.12
+│   │   ├── pybase64
+│   │   ├── pygmentize
+│   │   ├── pyjson5
+│   │   ├── pypdfium2
+│   │   ├── pyproject-build
+│   │   ├── pyright
+│   │   ├── pyright-langserver
+│   │   ├── pyright-python
+│   │   ├── pyright-python-langserver
+│   │   ├── pyrsa-decrypt
+│   │   ├── pyrsa-encrypt
+│   │   ├── pyrsa-keygen
+│   │   ├── pyrsa-priv2pub
+│   │   ├── pyrsa-sign
+│   │   ├── pyrsa-verify
+│   │   ├── python -> python3.12
+│   │   ├── python3 -> python3.12
+│   │   ├── python3.12 -> /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12
+│   │   ├── pytube
+│   │   ├── tabulate
+│   │   ├── tests
+│   │   ├── timezonefinder
+│   │   ├── tiny-agents
+│   │   ├── torchfrtrace
+│   │   ├── torchrun
+│   │   ├── tqdm
+│   │   ├── transformers
+│   │   ├── transformers-cli
+│   │   ├── typer
+│   │   ├── url-normalize
+│   │   ├── uv
+│   │   ├── uvicorn
+│   │   ├── uvx
+│   │   ├── watchfiles
+│   │   └── wsdump
+│   ├── CHANGELOG.md
+│   ├── CMakeLists.txt
+│   ├── include
+│   │   └── h3
+│   ├── lib
+│   │   ├── cmake
+│   │   ├── libh3.a
+│   │   └── python3.12
+│   ├── LICENSE
+│   ├── makefile
+│   ├── pyproject.toml
+│   ├── pyvenv.cfg
+│   ├── README.md
+│   ├── requirements.in
+│   ├── setup.py
+│   ├── share
+│   │   └── man
+│   └── src
+│       └── h3lib
+└── verify-ui.md
+
+158 directories, 485 files

@@ -3,18 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, RefreshCw, Info, Star } from 'lucide-react';
-
-interface BirthData {
-  name?: string;
-  date: Date;
-  city: string;
-  country?: string;
-  lat?: number;
-  lng?: number;
-  latitude?: number;
-  longitude?: number;
-  timezone?: string;
-}
+import { BirthData } from '@/types/astrology';
 
 interface BirthChartData {
   svg: string;

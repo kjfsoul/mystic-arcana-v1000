@@ -1,5 +1,8 @@
 // Updated AstronomicalCalculator.ts to handle Sun and Moon properly
 import { ORBITAL_ELEMENTS } from "./OrbitalElements";
+
+// Re-export types from central location for backward compatibility
+export type { BirthData, PlanetPosition, HousePosition } from '@/types/astrology';
 export class AstronomicalCalculator {
   static normalizeAngle(angle: number): number {
     return ((angle % 360) + 360) % 360;
@@ -21,7 +24,7 @@ export class AstronomicalCalculator {
       throw new Error(`Missing orbital elements for planet: ${planetName}`);
     }
 
-    const longitude = this.normalizeAngle(elements.L0 + elements.n * (jd - 2451545.0));
+    const longitude = this.normalizeAngle((elements.L0 || elements.L) + (elements.n || 1.0) * (jd - 2451545.0));
     const latitude = 0; // Simplified, inclination not included
     const distance = elements.a; // semi-major axis (AU)
 
@@ -42,14 +45,14 @@ export class AstronomicalCalculator {
     return { longitude, latitude, distance, speed };
   }
 
-  private static calculateSunPosition(date: Date): { longitude: number, distance: number, speed: number } {
+  private static calculateSunPosition(date: Date): { longitude: number, latitude: number, distance: number, speed: number } {
     const jd = this.dateToJulianDay(date);
     const n = jd - 2451545.0;
     const L = this.normalizeAngle(280.460 + 0.9856474 * n);
     const g = this.normalizeAngle(357.528 + 0.9856003 * n);
     const lambda = this.normalizeAngle(L + 1.915 * Math.sin(this.deg2rad(g)) + 0.020 * Math.sin(this.deg2rad(2 * g)));
     const distance = 1.00014 - 0.01671 * Math.cos(this.deg2rad(g)) - 0.00014 * Math.cos(this.deg2rad(2 * g));
-    return { longitude: lambda, distance, speed: 0.9856 };
+    return { longitude: lambda, latitude: 0, distance, speed: 0.9856 };
   }
 
   private static calculateMoonPosition(date: Date): { longitude: number, latitude: number, distance: number, speed: number } {

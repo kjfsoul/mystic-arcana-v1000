@@ -5,7 +5,8 @@
  * Tests the AstronomicalCalculator with real birth data
  */
 
-import { AstronomicalCalculator, BirthData } from '../src/lib/astrology/AstronomicalCalculator';
+import { AstronomicalCalculator } from '../src/lib/astrology/AstronomicalCalculator';
+import { BirthData } from '../src/types/astrology';
 import { getRealCareerPlacements } from '../src/lib/astrology/CareerAnalyzer';
 
 const testBirthData: BirthData = {

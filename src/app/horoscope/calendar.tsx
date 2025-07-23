@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, Star, Moon, Sun, Zap, Eye, Heart } from 'lucide-react';
-import { TransitEngine, DailyTransit, PersonalizedHoroscope, PlanetaryPosition, TransitAspect } from '@/lib/ephemeris/transitEngine';
+import { Calendar, Star, Zap, Eye, Heart } from 'lucide-react';
+import { TransitEngine, DailyTransit, PersonalizedHoroscope } from '@/lib/ephemeris/transitEngine';
 import { BirthData } from '@/types/astrology';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -22,7 +22,7 @@ interface CalendarDay {
 }
 
 export default function CosmicCalendar({ birthData, className = '' }: CosmicCalendarProps) {
-  const { user } = useAuth();
+  const {} = useAuth();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dailyTransit, setDailyTransit] = useState<DailyTransit | null>(null);
@@ -32,17 +32,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
   const [view, setView] = useState<'calendar' | 'today' | 'week'>('today');
   const [transitEngine] = useState(() => new TransitEngine());
 
-  useEffect(() => {
-    loadDailyData(selectedDate);
-  }, [selectedDate, birthData]);
-
-  useEffect(() => {
-    if (view === 'calendar') {
-      generateCalendarDays(currentDate);
-    }
-  }, [currentDate, view]);
-
-  const loadDailyData = async (date: Date) => {
+  const loadDailyData = useCallback(async (date: Date) => {
     setLoading(true);
     try {
       // Load daily transit data
@@ -63,13 +53,22 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
     } finally {
       setLoading(false);
     }
-  };
+  }, [birthData, transitEngine]);
+
+  useEffect(() => {
+    loadDailyData(selectedDate);
+  }, [selectedDate, loadDailyData]);
+
+  useEffect(() => {
+    if (view === 'calendar') {
+      generateCalendarDays(currentDate);
+    }
+  }, [currentDate, view]);
 
   const generateCalendarDays = async (baseDate: Date) => {
     const year = baseDate.getFullYear();
     const month = baseDate.getMonth();
     const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
     const startDate = new Date(firstDayOfMonth);
     startDate.setDate(startDate.getDate() - firstDayOfMonth.getDay());
     
@@ -81,7 +80,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       date.setDate(startDate.getDate() + i);
       
       // Generate cosmic data for each day (simplified for performance)
-      const cosmicEnergy: 'high' | 'medium' | 'low' = ['high', 'medium', 'low'][Math.floor(Math.random() * 3)] as any;
+      const cosmicEnergy: 'high' | 'medium' | 'low' = ['high', 'medium', 'low'][Math.floor(Math.random() * 3)] as 'high' | 'medium' | 'low';
       const majorTransits = Math.floor(Math.random() * 5);
       const lunarPhases = ['new', 'waxing_crescent', 'first_quarter', 'waxing_gibbous', 'full', 'waning_gibbous', 'last_quarter', 'waning_crescent'];
       const lunarPhase = lunarPhases[Math.floor(Math.random() * lunarPhases.length)];
@@ -180,7 +179,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h3 className="text-xl font-semibold text-purple-300 mb-3">Today's Theme</h3>
+          <h3 className="text-xl font-semibold text-purple-300 mb-3">Today&apos;s Theme</h3>
           <p className="text-gray-300 leading-relaxed">{personalHoroscope.overallTheme}</p>
         </motion.div>
 
@@ -216,7 +215,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
                 </div>
                 <div className="text-sm text-gray-400">
                   Orb: {transit.orb.toFixed(1)}° • 
-                  {transit.applying ? ' Applying' : ' Separating'}
+                  {transit.applying ? " Applying" : " Separating"}
                 </div>
               </motion.div>
             ))}
@@ -257,7 +256,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
               <div className="bg-gray-800/30 rounded-lg p-3">
                 <div className="text-sm font-medium text-purple-300 mb-1">Affirmation</div>
                 <div className="text-sm text-gray-300 italic">
-                  "{personalHoroscope.affirmation}"
+                  &quot;{personalHoroscope.affirmation}&quot;
                 </div>
               </div>
             </div>
@@ -288,7 +287,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             <div className="flex items-center gap-2">
               <span className="text-2xl">{getLunarPhaseIcon(dailyTransit.lunarPhase.phase)}</span>
               <div>
-                <div className="text-sm capitalize">{dailyTransit.lunarPhase.phase.replace('_', ' ')}</div>
+                <div className="text-sm capitalize">{dailyTransit.lunarPhase.phase.replace(/_/g, ' ')}</div>
                 <div className="text-xs text-gray-400">
                   {Math.round(dailyTransit.lunarPhase.illumination * 100)}% illuminated
                 </div>
@@ -410,7 +409,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
           {['today', 'calendar', 'week'].map((viewOption) => (
             <button
               key={viewOption}
-              onClick={() => setView(viewOption as any)}
+              onClick={() => setView(viewOption as 'today' | 'calendar' | 'week')}
               className={`px-3 py-1 rounded-lg text-sm transition-colors capitalize ${
                 view === viewOption 
                   ? 'bg-purple-600 text-white' 

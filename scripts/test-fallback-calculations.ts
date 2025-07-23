@@ -5,7 +5,8 @@
  * This tests the enhanced calculation system that provides real astronomical data
  */
 
-import { AstronomicalCalculator, BirthData } from '../src/lib/astrology/AstronomicalCalculator';
+import { AstronomicalCalculator } from '../src/lib/astrology/AstronomicalCalculator';
+import { BirthData } from '../src/types/astrology';
 
 const testBirthData: BirthData = {
   name: 'Test User',
