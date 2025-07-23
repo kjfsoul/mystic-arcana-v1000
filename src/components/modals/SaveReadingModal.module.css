@@ -1,0 +1,73 @@
+/* SaveReadingModal.module.css */
+
+/* Ensure minimum sizes for interactive elements */
+.saveButton {
+  min-width: 200px;
+  min-height: 56px;
+  font-size: 1.125rem; /* 18px */
+  padding: 1rem 2rem;
+}
+
+.quillOption,
+.scrollOption {
+  min-width: 120px;
+  min-height: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quillOption:hover,
+.scrollOption:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+}
+
+.quillOption:active,
+.scrollOption:active {
+  transform: translateY(0);
+}
+
+/* Make icons larger and more visible */
+.optionIcon {
+  font-size: 2.5rem; /* 40px */
+  line-height: 1;
+}
+
+.optionLabel {
+  font-size: 0.875rem; /* 14px */
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Ensure the modal is properly sized on mobile */
+@media (max-width: 640px) {
+  .modalContent {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .quillOption,
+  .scrollOption {
+    min-width: 80px;
+    min-height: 100px;
+  }
+  
+  .optionIcon {
+    font-size: 2rem;
+  }
+}
+
+/* Improve textarea visibility */
+.notesTextarea {
+  min-height: 150px;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 1rem;
+}
+
+/* Make error messages more prominent */
+.errorMessage {
+  font-size: 1rem;
+  padding: 1rem;
+  border-width: 2px;
+}

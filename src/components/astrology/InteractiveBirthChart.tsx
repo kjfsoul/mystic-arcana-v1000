@@ -2,12 +2,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AstronomicalCalculator, BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
+import { TransitEngine, PlanetaryPosition, TransitAspect } from '@/lib/ephemeris/transitEngine';
 import styles from './InteractiveBirthChart.module.css';
 
 interface ChartProps {
   birthData: BirthData;
   onPlanetClick?: (planet: PlanetPosition) => void;
   onHouseClick?: (house: HousePosition) => void;
+  showTransits?: boolean;
+  transitDate?: Date;
   className?: string;
 }
 
@@ -45,16 +48,23 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   birthData,
   onPlanetClick,
   onHouseClick,
+  showTransits = false,
+  transitDate = new Date(),
   className
 }) => {
   const [selectedObject, setSelectedObject] = useState<{
-    type: 'planet' | 'house' | 'sign';
-    data: PlanetPosition | HousePosition | typeof ZODIAC_SIGNS[0];
+    type: 'planet' | 'house' | 'sign' | 'transit';
+    data: PlanetPosition | HousePosition | typeof ZODIAC_SIGNS[0] | PlanetaryPosition;
   } | null>(null);
   
   const [showModal, setShowModal] = useState(false);
   const [chartSize, setChartSize] = useState(400);
   const [isAnimating, setIsAnimating] = useState(true);
+  const [transitEngine] = useState(() => new TransitEngine());
+  const [transitData, setTransitData] = useState<{
+    positions: PlanetaryPosition[];
+    aspects: TransitAspect[];
+  }>({ positions: [], aspects: [] });
 
   // Calculate responsive chart size
   useEffect(() => {
@@ -105,6 +115,24 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     calculateChart();
   }, [birthData]);
 
+  // Load transit data when transits are enabled
+  useEffect(() => {
+    if (showTransits) {
+      const loadTransits = async () => {
+        try {
+          const positions = await transitEngine.getCurrentPlanetaryPositions();
+          const aspects = await transitEngine.calculateTransits(birthData, transitDate);
+          setTransitData({ positions, aspects });
+        } catch (error) {
+          console.error('Error loading transits:', error);
+          setTransitData({ positions: [], aspects: [] });
+        }
+      };
+      
+      loadTransits();
+    }
+  }, [showTransits, transitDate, birthData, transitEngine]);
+
   const { planets: planetPositions, houses: housePositions } = chartData;
 
   // Convert degree to SVG coordinates
@@ -116,7 +144,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     };
   };
 
-  const handleObjectClick = (type: 'planet' | 'house' | 'sign', data: PlanetPosition | HousePosition | typeof ZODIAC_SIGNS[0]) => {
+  const handleObjectClick = (type: 'planet' | 'house' | 'sign' | 'transit', data: PlanetPosition | HousePosition | typeof ZODIAC_SIGNS[0] | PlanetaryPosition) => {
     setSelectedObject({ type, data });
     setShowModal(true);
     
@@ -136,6 +164,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   const outerRadius = chartSize * 0.45;
   const zodiacRadius = chartSize * 0.42;
   const planetRadius = chartSize * 0.35;
+  const transitRadius = chartSize * 0.32; // Outer ring for transits
   const houseRadius = chartSize * 0.25;
 
   return (
@@ -253,14 +282,14 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
             );
           })}
 
-          {/* Planets */}
+          {/* Natal Planets */}
           {planetPositions.map((planet, index) => {
             const coords = degreeToCoords(planet.longitude, planetRadius, center, center);
             const planetInfo = PLANETS[planet.name.toLowerCase() as keyof typeof PLANETS];
             
             return (
               <motion.g
-                key={planet.name}
+                key={`natal-${planet.name}`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
@@ -327,6 +356,104 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               </motion.g>
             );
           })}
+
+          {/* Transit Planets */}
+          {showTransits && transitData.positions.map((transit, index) => {
+            const coords = degreeToCoords(transit.longitude, transitRadius, center, center);
+            const planetInfo = PLANETS[transit.planet as keyof typeof PLANETS];
+            
+            return (
+              <motion.g
+                key={`transit-${transit.planet}`}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 0.8, scale: 1 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+              >
+                {/* Transit planet ring */}
+                <circle
+                  cx={coords.x}
+                  cy={coords.y}
+                  r="8"
+                  fill="none"
+                  stroke={planetInfo?.color || '#fff'}
+                  strokeWidth="2"
+                  opacity="0.6"
+                />
+                
+                {/* Transit planet symbol */}
+                <motion.text
+                  x={coords.x}
+                  y={coords.y}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className={styles.transitSymbol}
+                  fill={planetInfo?.color || '#fff'}
+                  fontSize="12"
+                  opacity="0.9"
+                  onClick={() => handleObjectClick('transit', transit)}
+                  whileHover={{ scale: 1.3, opacity: 1 }}
+                  whileTap={{ scale: 0.9 }}
+                  animate={isAnimating ? {
+                    rotate: transit.retrograde ? [0, -360] : [0, 360]
+                  } : {}}
+                  transition={isAnimating ? {
+                    duration: Math.abs(1 / (transit.speed || 0.1)) * 10,
+                    repeat: Infinity,
+                    ease: "linear"
+                  } : {}}
+                >
+                  {planetInfo?.symbol || '●'}
+                  {transit.retrograde && (
+                    <motion.tspan 
+                      className={styles.retrograde}
+                      dx="2"
+                      fontSize="8"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    >
+                      ℞
+                    </motion.tspan>
+                  )}
+                </motion.text>
+              </motion.g>
+            );
+          })}
+
+          {/* Transit Aspect Lines */}
+          {showTransits && transitData.aspects.map((aspect, index) => {
+            const natalPlanet = planetPositions.find(p => p.name.toLowerCase() === aspect.natalPlanet);
+            const transitPlanet = transitData.positions.find(p => p.planet === aspect.transitPlanet);
+            
+            if (!natalPlanet || !transitPlanet) return null;
+            
+            const natalCoords = degreeToCoords(natalPlanet.longitude, planetRadius, center, center);
+            const transitCoords = degreeToCoords(transitPlanet.longitude, transitRadius, center, center);
+            
+            const aspectColors = {
+              conjunction: '#FFD700',
+              sextile: '#00CED1', 
+              square: '#FF4500',
+              trine: '#32CD32',
+              opposition: '#FF1493'
+            };
+            
+            return (
+              <motion.line
+                key={`aspect-${index}`}
+                x1={natalCoords.x}
+                y1={natalCoords.y}
+                x2={transitCoords.x}
+                y2={transitCoords.y}
+                stroke={aspectColors[aspect.aspect] || '#fff'}
+                strokeWidth={aspect.strength === 'strong' ? 3 : aspect.strength === 'moderate' ? 2 : 1}
+                opacity={aspect.strength === 'strong' ? 0.8 : aspect.strength === 'moderate' ? 0.6 : 0.4}
+                strokeDasharray={aspect.applying ? "5,5" : "none"}
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{ opacity: aspect.strength === 'strong' ? 0.8 : aspect.strength === 'moderate' ? 0.6 : 0.4, pathLength: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              />
+            );
+          })}
         </svg>
         
         {/* Animation control */}
@@ -371,6 +498,14 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                     <h3>{(selectedObject.data as PlanetPosition).name}</h3>
                   </>
                 )}
+                {selectedObject.type === 'transit' && (
+                  <>
+                    <span className={styles.modalSymbol}>
+                      {PLANETS[(selectedObject.data as PlanetaryPosition).planet as keyof typeof PLANETS]?.symbol || '●'}
+                    </span>
+                    <h3>Transit {(selectedObject.data as PlanetaryPosition).planet}</h3>
+                  </>
+                )}
                 {selectedObject.type === 'house' && (
                   <>
                     <span className={styles.modalSymbol}>🏠</span>
@@ -398,6 +533,33 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                     <p className={styles.interpretation}>
                       {getPlantInterpretation(selectedObject.data as PlanetPosition)}
                     </p>
+                  </div>
+                )}
+                {selectedObject.type === 'transit' && (
+                  <div>
+                    <p><strong>Current Position:</strong> {Math.floor((selectedObject.data as PlanetaryPosition).longitude)}° {(selectedObject.data as PlanetaryPosition).sign}</p>
+                    <p><strong>Daily Motion:</strong> {Math.abs((selectedObject.data as PlanetaryPosition).speed).toFixed(2)}° per day</p>
+                    {(selectedObject.data as PlanetaryPosition).retrograde && (
+                      <p className={styles.retrogradeText}><strong>Retrograde:</strong> This planet is currently moving backward, creating reflective energy.</p>
+                    )}
+                    <p className={styles.interpretation}>
+                      This transit planet is currently influencing your natal chart. Its position relative to your birth planets creates specific energetic patterns and opportunities for growth.
+                    </p>
+                    {transitData.aspects.length > 0 && (
+                      <div className="mt-4">
+                        <strong>Active Aspects:</strong>
+                        <ul className="mt-2 space-y-1">
+                          {transitData.aspects
+                            .filter(aspect => aspect.transitPlanet === (selectedObject.data as PlanetaryPosition).planet)
+                            .slice(0, 3)
+                            .map((aspect, idx) => (
+                            <li key={idx} className="text-sm">
+                              {aspect.aspect} {aspect.natalPlanet} (orb: {aspect.orb.toFixed(1)}°)
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 )}
                 {selectedObject.type === 'house' && (

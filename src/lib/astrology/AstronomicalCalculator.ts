@@ -94,6 +94,29 @@ const ORBITAL_ELEMENTS = {
 export class AstronomicalCalculator {
   
   /**
+   * Calculate single planetary position for a given date
+   */
+  async calculatePlanetaryPosition(planet: string, date: Date): Promise<{ longitude: number; latitude: number; distance: number }> {
+    try {
+      // Convert date to Julian Day
+      const jd = AstronomicalCalculator.dateToJulianDay(date);
+      
+      // Try Swiss Ephemeris shim first
+      if (typeof window === 'undefined') {
+        const { SwissEphemerisShim } = await import('./SwissEphemerisShim');
+        return SwissEphemerisShim.calculatePlanetPosition(planet, jd);
+      }
+      
+      // Client-side fallback
+      return AstronomicalCalculator.calculatePlanetPosition(planet, jd);
+    } catch (error) {
+      console.warn(`Failed to calculate ${planet} position:`, error);
+      // Return fallback position
+      return AstronomicalCalculator.calculatePlanetPosition(planet, AstronomicalCalculator.dateToJulianDay(date));
+    }
+  }
+
+  /**
    * Calculate all planetary positions for a given birth date and location
    * Now using Swiss Ephemeris shim for real astronomical calculations
    */

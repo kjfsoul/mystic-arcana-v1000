@@ -13,32 +13,63 @@ export interface DatabaseTarotReading {
 
 export class TarotService {
   /**
-   * Save a tarot reading to the database
+   * Save a tarot reading to the database using the API route
    */
   static async saveReading(reading: TarotReading, userId: string): Promise<{ data: DatabaseTarotReading | null; error: unknown }> {
     try {
-      const { data, error } = await supabase
-        .from('tarot_readings')
-        .insert({
-          user_id: userId,
-          spread_type: reading.spreadType,
-          cards_drawn: {
-            cards: reading.cards.map(card => ({
-              id: card.id,
-              name: card.name,
-              frontImage: card.frontImage,
-              backImage: card.backImage,
-              meaning: card.meaning
-            })),
-            positions: reading.positions
-          },
-          interpretation_text: reading.interpretation,
-          cosmic_influence: reading.cosmicInfluence
-        })
-        .select()
-        .single();
+      // Get the current session token
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        return { data: null, error: 'No authentication token available' };
+      }
 
-      return { data, error };
+      // Use the API route instead of direct database access
+      const response = await fetch('/api/tarot/save-reading', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({
+          userId,
+          spreadType: reading.spreadType,
+          cards: reading.cards.map(card => ({
+            id: card.id,
+            name: card.name,
+            position: card.position || '',
+            isReversed: false, // Add this if your cards have reversal state
+            meaning: card.meaning,
+            frontImage: card.frontImage,
+            backImage: card.backImage
+          })),
+          interpretation: reading.interpretation,
+          cosmicInfluence: reading.cosmicInfluence
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return { data: null, error: errorData.error || 'Failed to save reading' };
+      }
+
+      const result = await response.json();
+      
+      // Convert API response to match expected format
+      const savedReading: DatabaseTarotReading = {
+        id: result.readingId,
+        user_id: userId,
+        spread_type: reading.spreadType,
+        cards_drawn: {
+          cards: reading.cards,
+          positions: reading.positions
+        },
+        interpretation_text: reading.interpretation,
+        cosmic_influence: reading.cosmicInfluence,
+        created_at: result.savedAt
+      };
+
+      return { data: savedReading, error: null };
     } catch (error) {
       console.error('Error saving tarot reading:', error);
       return { data: null, error };

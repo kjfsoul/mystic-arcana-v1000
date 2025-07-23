@@ -1,0 +1,187 @@
+{
+  "productIdeas": [
+    {
+      "id": "mercury-rx-protection-kit",
+      "name": "Mercury Retrograde Protection & Clarity Kit",
+      "description": "Complete survival kit for Mercury retrograde periods featuring communication enhancement tools, protective crystals, and reflection journal. Everything you need to navigate planetary confusion with grace and wisdom.",
+      "category": "Spiritual Tools",
+      "targetPrice": 6800,
+      "estimatedCost": 2800,
+      "profitMargin": "59%",
+      "timeline": "2-3 weeks to launch",
+      "components": [
+        {
+          "item": "Custom Retrograde Journal",
+          "description": "80-page guided journal with retrograde-specific prompts, reflection exercises, and communication tracking pages",
+          "supplier": "Printify Custom Notebooks",
+          "cost": 1200,
+          "retail": 2500
+        },
+        {
+          "item": "Communication Crystal Set",
+          "description": "Blue Lace Agate, Sodalite, and Clear Quartz crystals for enhanced communication and mental clarity",
+          "supplier": "Wholesale Crystal Supplier",
+          "cost": 800,
+          "retail": 2000
+        },
+        {
+          "item": "Mercury Retrograde Candle",
+          "description": "Lavender and rosemary scented candle for calming retrograde anxiety, burn time 40+ hours",
+          "supplier": "Private Label Candle Maker",
+          "cost": 600,
+          "retail": 1500
+        },
+        {
+          "item": "Retrograde Reminder Cards",
+          "description": "Set of 21 cards with daily affirmations and Mercury retrograde navigation tips",
+          "supplier": "Printify Card Sets",
+          "cost": 200,
+          "retail": 800
+        }
+      ],
+      "marketingAngles": [
+        "Limited availability during retrograde periods only",
+        "Designed by professional astrologers",
+        "Helps prevent Mercury retrograde mishaps",
+        "Complete protection system in one kit"
+      ],
+      "launchTiming": "2 weeks before July 18, 2025 retrograde begins",
+      "competitiveAdvantage": "Only complete kit addressing all retrograde challenges"
+    },
+    {
+      "id": "retrograde-reflection-jewelry",
+      "name": "Mercury Retrograde Reflection Jewelry Collection",
+      "description": "Elegant jewelry pieces designed with retrograde symbolism, featuring backward-facing Mercury glyphs and calming blue topaz stones. Wearable reminders to embrace reflection and inner wisdom.",
+      "category": "Jewelry",
+      "targetPrice": 8900,
+      "estimatedCost": 3200,
+      "profitMargin": "64%",
+      "timeline": "3-4 weeks to launch",
+      "components": [
+        {
+          "item": "Mercury Retrograde Pendant Necklace",
+          "description": "Sterling silver pendant with reversed Mercury glyph and blue topaz stone, 18-inch chain",
+          "supplier": "Printify Premium Jewelry",
+          "cost": 2200,
+          "retail": 5500
+        },
+        {
+          "item": "Retrograde Phase Earrings",
+          "description": "Small stud earrings showing Mercury's orbital phases, hypoallergenic posts",
+          "supplier": "Printify Premium Jewelry",
+          "cost": 800,
+          "retail": 2400
+        },
+        {
+          "item": "Mindful Communication Ring",
+          "description": "Adjustable ring with 'Think Before You Speak' engraving in cosmic font",
+          "supplier": "Printify Premium Jewelry",
+          "cost": 200,
+          "retail": 1000
+        }
+      ],
+      "marketingAngles": [
+        "Wear your cosmic awareness",
+        "Conversation starter about astrology",
+        "Daily reminder to slow down and reflect",
+        "Made with genuine gemstones"
+      ],
+      "launchTiming": "1 month before next retrograde period",
+      "competitiveAdvantage": "First jewelry line specifically for Mercury retrograde"
+    },
+    {
+      "id": "digital-retrograde-planner",
+      "name": "Mercury Retrograde Digital Planning System",
+      "description": "Comprehensive digital product including PDF planners, meditation tracks, and video tutorials for mastering retrograde periods. High-margin digital product with instant delivery.",
+      "category": "Digital Products",
+      "targetPrice": 4700,
+      "estimatedCost": 500,
+      "profitMargin": "89%",
+      "timeline": "1-2 weeks to launch",
+      "components": [
+        {
+          "item": "Retrograde Planning PDF Bundle",
+          "description": "50-page digital planner with calendars, checklists, and reflection prompts for all 2025 retrograde periods",
+          "supplier": "In-house design",
+          "cost": 200,
+          "retail": 1800
+        },
+        {
+          "item": "Guided Meditation Audio Series",
+          "description": "7 guided meditations (5-15 minutes each) for retrograde anxiety, clarity, and protection",
+          "supplier": "Professional voice actor + music licensing",
+          "cost": 250,
+          "retail": 1500
+        },
+        {
+          "item": "Retrograde Masterclass Video",
+          "description": "45-minute video tutorial on retrograde survival strategies by certified astrologer",
+          "supplier": "Professional astrologer fee",
+          "cost": 50,
+          "retail": 1200
+        },
+        {
+          "item": "Email Support Series",
+          "description": "12-week automated email sequence with tips, reminders, and encouragement",
+          "supplier": "Content creation time",
+          "cost": 0,
+          "retail": 200
+        }
+      ],
+      "marketingAngles": [
+        "Instant download - be prepared today",
+        "Works for all future retrograde periods",
+        "Created by certified astrologers",
+        "Zero shipping costs or delays"
+      ],
+      "launchTiming": "Immediately - evergreen product",
+      "competitiveAdvantage": "Highest margin product with instant delivery and repeat value"
+    }
+  ],
+  "marketAnalysis": {
+    "upcomingRetrogrades": [
+      {
+        "period": "July 18 - August 11, 2025",
+        "peak_demand": "July 1-18, 2025",
+        "marketing_window": "June 15 - July 25, 2025"
+      },
+      {
+        "period": "November 9 - November 29, 2025", 
+        "peak_demand": "October 20 - November 15, 2025",
+        "marketing_window": "October 1 - November 20, 2025"
+      }
+    ],
+    "competitorGaps": [
+      "No comprehensive retrograde protection kits available",
+      "Limited jewelry options with retrograde symbolism",
+      "Digital products mostly basic - opportunity for premium offering"
+    ],
+    "pricingStrategy": {
+      "physicalProducts": "Premium pricing 50-70% margins to match spiritual market expectations",
+      "digitalProducts": "High-margin 80%+ due to zero fulfillment costs",
+      "bundleStrategy": "Create urgency with limited-time retrograde-only availability"
+    }
+  },
+  "implementationPriority": [
+    {
+      "rank": 1,
+      "product": "digital-retrograde-planner",
+      "reasoning": "Highest margin, fastest to market, evergreen sales potential"
+    },
+    {
+      "rank": 2,
+      "product": "mercury-rx-protection-kit",
+      "reasoning": "Unique market positioning, seasonal urgency, multiple touchpoints"
+    },
+    {
+      "rank": 3,
+      "product": "retrograde-reflection-jewelry",
+      "reasoning": "Highest price point, strong brand building, longer development time"
+    }
+  ],
+  "revenuePotential": {
+    "conservativeEstimate": "$15,000 per retrograde period",
+    "optimisticEstimate": "$45,000 per retrograde period",
+    "annualPotential": "$120,000 with 3 retrograde periods in 2025"
+  }
+}
