@@ -1,675 +1,76 @@
-// Astronomical Calculator for accurate planetary positions
-// Now using Swiss Ephemeris shim for real astronomical calculations
-
-import * as Astronomy from 'astronomy-engine';
-
-export interface BirthData {
-  name?: string;
-  date: Date;
-  latitude: number;
-  longitude: number;
-  timezone: string;
-  city: string;
-  country?: string;
-  lat?: number;  // alias for latitude
-  lng?: number;  // alias for longitude
-}
-
-export interface PlanetPosition {
-  name: string;
-  symbol: string;
-  longitude: number; // 0-360 degrees in zodiac
-  latitude: number;  // celestial latitude
-  distance: number;  // AU from Earth
-  house: number;     // 1-12
-  sign: string;
-  degree: number;
-  minute: number;
-  isRetrograde?: boolean;
-  speed: number;     // degrees per day
-}
-
-export interface HousePosition {
-  number: number;
-  cusp: number;      // degree where house begins
-  sign: string;
-  ruler: string;     // ruling planet
-}
-
-// Zodiac sign boundaries
-const ZODIAC_SIGNS = [
-  'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-  'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
-];
-
-const PLANET_SYMBOLS = {
-  'Sun': '☉',
-  'Moon': '☽', 
-  'Mercury': '☿',
-  'Venus': '♀',
-  'Mars': '♂',
-  'Jupiter': '♃',
-  'Saturn': '♄',
-  'Uranus': '♅',
-  'Neptune': '♆',
-  'Pluto': '♇'
-};
-
-// Orbital elements for planetary calculations (simplified J2000.0 epoch)
-const ORBITAL_ELEMENTS = {
-  Mercury: { 
-    L0: 252.25084, n: 4.092317, e: 0.205635, a: 0.387098, 
-    i: 7.004986, omega: 48.33167, w: 77.45645 
-  },
-  Venus: { 
-    L0: 181.97973, n: 1.602136, e: 0.006777, a: 0.723332,
-    i: 3.394662, omega: 76.68069, w: 131.53298
-  },
-  Mars: { 
-    L0: 355.45332, n: 0.524071, e: 0.093412, a: 1.523688,
-    i: 1.849726, omega: 49.55809, w: 336.04084
-  },
-  Jupiter: { 
-    L0: 34.40438, n: 0.083056, e: 0.048775, a: 5.202561,
-    i: 1.303270, omega: 100.46435, w: 14.75385
-  },
-  Saturn: { 
-    L0: 50.07571, n: 0.033371, e: 0.055723, a: 9.554747,
-    i: 2.488980, omega: 113.66424, w: 93.05723
-  },
-  Uranus: { 
-    L0: 314.05500, n: 0.011698, e: 0.046321, a: 19.218446,
-    i: 0.773196, omega: 74.00595, w: 173.00529
-  },
-  Neptune: { 
-    L0: 304.34866, n: 0.006020, e: 0.008606, a: 30.110387,
-    i: 1.769952, omega: 131.78406, w: 48.12370
-  },
-  Pluto: { 
-    L0: 238.92881, n: 0.003964, e: 0.248808, a: 39.482117,
-    i: 17.141175, omega: 110.30347, w: 224.06676
-  }
-};
-
+// Updated AstronomicalCalculator.ts to handle Sun and Moon properly
+import { ORBITAL_ELEMENTS } from "./OrbitalElements";
 export class AstronomicalCalculator {
-  
-  /**
-   * Calculate single planetary position for a given date
-   */
-  async calculatePlanetaryPosition(planet: string, date: Date): Promise<{ longitude: number; latitude: number; distance: number }> {
-    try {
-      // Convert date to Julian Day
-      const jd = AstronomicalCalculator.dateToJulianDay(date);
-      
-      // Try Swiss Ephemeris shim first
-      if (typeof window === 'undefined') {
-        const { SwissEphemerisShim } = await import('./SwissEphemerisShim');
-        return SwissEphemerisShim.calculatePlanetPosition(planet, jd);
-      }
-      
-      // Client-side fallback
-      return AstronomicalCalculator.calculatePlanetPosition(planet, jd);
-    } catch (error) {
-      console.warn(`Failed to calculate ${planet} position:`, error);
-      // Return fallback position
-      return AstronomicalCalculator.calculatePlanetPosition(planet, AstronomicalCalculator.dateToJulianDay(date));
-    }
+  static normalizeAngle(angle: number): number {
+    return ((angle % 360) + 360) % 360;
   }
 
-  /**
-   * Calculate all planetary positions for a given birth date and location
-   * Now using Swiss Ephemeris shim for real astronomical calculations
-   */
-  static async calculateChart(birthData: BirthData): Promise<{
-    planets: PlanetPosition[];
-    houses: HousePosition[];
-    ascendant: number;
-    midheaven: number;
-  }> {
-    // If we're in the browser, use the API route
-    if (typeof window !== 'undefined') {
-      try {
-        const response = await fetch('/api/astrology/calculate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(birthData),
-        });
-        
-        if (response.ok) {
-          const result = await response.json();
-          if (result.success && result.chart) {
-            console.log('Using server-side Swiss Ephemeris calculations');
-            return result.chart;
-          }
-        }
-      } catch (error) {
-        console.warn('Server-side calculation failed, using client fallback:', error);
-      }
+  public static async calculatePlanetaryPosition(planetName: string, date: Date): Promise<{ longitude: number, latitude: number, distance: number, speed: number }> {
+    if (planetName === "Sun") {
+      return this.calculateSunPosition(date);
     }
 
-    try {
-      // Server-side: Try Swiss Ephemeris shim via dynamic import
-      if (typeof window === 'undefined') {
-        const { SwissEphemerisShim } = await import('./SwissEphemerisShim');
-        const shimResult = await SwissEphemerisShim.calculateFullChart(birthData);
-        if (shimResult.planets.length > 0) {
-          console.log('Using Swiss Ephemeris shim for calculations');
-          return shimResult;
-        }
-      }
-    } catch (error) {
-      console.warn('Swiss Ephemeris shim failed:', error);
+    if (planetName === "Moon") {
+      return this.calculateMoonPosition(date);
     }
 
-    try {
-      // Fallback to Astronomy Engine
-      return this.calculateChartWithAstronomyEngine(birthData);
-    } catch (error) {
-      console.warn('Astronomy Engine calculation failed, falling back to enhanced calculations:', error);
-      return this.calculateChartFallback(birthData);
-    }
-  }
-
-  /**
-   * Calculate chart using Astronomy Engine (real astronomical calculations)
-   */
-  private static calculateChartWithAstronomyEngine(birthData: BirthData): {
-    planets: PlanetPosition[];
-    houses: HousePosition[];
-    ascendant: number;
-    midheaven: number;
-  } {
-    const date = birthData.date;
-    const observer = new Astronomy.Observer(birthData.latitude, birthData.longitude, 0);
-    
-    const planets: PlanetPosition[] = [];
-    
-    // Define the planetary bodies we want to calculate
-    const planetBodies = [
-      { name: 'Sun', body: Astronomy.Body.Sun },
-      { name: 'Moon', body: Astronomy.Body.Moon },
-      { name: 'Mercury', body: Astronomy.Body.Mercury },
-      { name: 'Venus', body: Astronomy.Body.Venus },
-      { name: 'Mars', body: Astronomy.Body.Mars },
-      { name: 'Jupiter', body: Astronomy.Body.Jupiter },
-      { name: 'Saturn', body: Astronomy.Body.Saturn },
-      { name: 'Uranus', body: Astronomy.Body.Uranus },
-      { name: 'Neptune', body: Astronomy.Body.Neptune },
-      { name: 'Pluto', body: Astronomy.Body.Pluto }
-    ];
-    
-    // Calculate positions for each planet - if any fail, throw error to trigger fallback
-    let failedPlanets = 0;
-    planetBodies.forEach(({ name, body }) => {
-      try {
-        const geoPosition = Astronomy.GeoVector(body, date, false);
-        const eclipticCoords = Astronomy.Ecliptic(geoPosition);
-        const longitude = this.normalizeAngle(eclipticCoords.elon);
-        
-        // Get horizontal coordinates for house calculation
-        const equatorial = Astronomy.Equator(body, date, observer, true, true);
-        const horizontal = Astronomy.Horizon(date, observer, equatorial.ra, equatorial.dec, 'normal');
-        
-        planets.push({
-          name,
-          symbol: PLANET_SYMBOLS[name as keyof typeof PLANET_SYMBOLS] || '☆',
-          longitude,
-          latitude: eclipticCoords.elat,
-          distance: geoPosition.vec.Length(),
-          house: this.calculateHouseFromHorizontal(horizontal.azimuth, horizontal.altitude, birthData.latitude, date),
-          sign: this.getZodiacSign(longitude),
-          degree: Math.floor(longitude % 30),
-          minute: Math.floor(((longitude % 30) % 1) * 60),
-          isRetrograde: this.isRetrogradeFromVelocity(body, date),
-          speed: this.calculateDailyMotion(body, date)
-        });
-      } catch (error) {
-        console.warn(`Failed to calculate position for ${name}:`, error);
-        failedPlanets++;
-      }
-    });
-    
-    // If most planets failed, throw error to trigger fallback
-    if (failedPlanets > planetBodies.length / 2) {
-      throw new Error(`Astronomy Engine failed for ${failedPlanets}/${planetBodies.length} planets`);
-    }
-    
-    // Calculate houses using real sidereal time
-    const lst = this.calculateLocalSiderealTimeFromAstronomy(date, birthData.longitude);
-    const houses = this.calculateHousesFromLST(birthData.latitude, lst);
-    
-    const ascendant = houses[0]?.cusp || 0;
-    const midheaven = houses[9]?.cusp || 0;
-    
-    return { planets, houses, ascendant, midheaven };
-  }
-  
-  /**
-   * Calculate local sidereal time using Astronomy Engine
-   */
-  private static calculateLocalSiderealTimeFromAstronomy(date: Date, longitude: number): number {
-    const siderealTime = Astronomy.SiderealTime(date);
-    return this.normalizeAngle(siderealTime * 15 + longitude); // Convert hours to degrees
-  }
-  
-  /**
-   * Check if planet is retrograde by calculating velocity
-   */
-  private static isRetrogradeFromVelocity(body: Astronomy.Body, date: Date): boolean {
-    try {
-      // Calculate position 1 day later
-      const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
-      const currentPos = Astronomy.GeoVector(body, date, false);
-      const nextPos = Astronomy.GeoVector(body, nextDay, false);
-      
-      const currentEcliptic = Astronomy.Ecliptic(currentPos);
-      const nextEcliptic = Astronomy.Ecliptic(nextPos);
-      
-      // Calculate daily motion in longitude
-      let dailyMotion = nextEcliptic.elon - currentEcliptic.elon;
-      
-      // Handle wraparound
-      if (dailyMotion > 180) dailyMotion -= 360;
-      if (dailyMotion < -180) dailyMotion += 360;
-      
-      return dailyMotion < 0;
-    } catch {
-      return false;
-    }
-  }
-  
-  /**
-   * Calculate daily motion for a planet
-   */
-  private static calculateDailyMotion(body: Astronomy.Body, date: Date): number {
-    try {
-      const nextDay = new Date(date.getTime() + 24 * 60 * 60 * 1000);
-      const currentPos = Astronomy.GeoVector(body, date, false);
-      const nextPos = Astronomy.GeoVector(body, nextDay, false);
-      
-      const currentEcliptic = Astronomy.Ecliptic(currentPos);
-      const nextEcliptic = Astronomy.Ecliptic(nextPos);
-      
-      let dailyMotion = nextEcliptic.elon - currentEcliptic.elon;
-      if (dailyMotion > 180) dailyMotion -= 360;
-      if (dailyMotion < -180) dailyMotion += 360;
-      
-      return dailyMotion;
-    } catch {
-      return 1.0; // Default reasonable motion
-    }
-  }
-  
-  /**
-   * Calculate house from horizontal coordinates
-   */
-  private static calculateHouseFromHorizontal(azimuth: number, altitude: number, latitude: number, date: Date): number {
-    // Simplified house calculation - in production would use proper house system
-    const lst = this.calculateLocalSiderealTimeFromAstronomy(date, 0);
-    const ascendant = this.normalizeAngle(lst);
-    
-    // Convert azimuth to house position (simplified)
-    const housePosition = this.normalizeAngle(azimuth - ascendant);
-    return Math.floor(housePosition / 30) + 1;
-  }
-  
-  /**
-   * Calculate houses from Local Sidereal Time
-   */
-  private static calculateHousesFromLST(latitude: number, lst: number): HousePosition[] {
-    const houses: HousePosition[] = [];
-    const ascendant = this.normalizeAngle(lst);
-    
-    // Use Placidus house system approximation
-    for (let i = 0; i < 12; i++) {
-      let cusp;
-      
-      if (i === 0) {
-        cusp = ascendant; // 1st house = Ascendant
-      } else if (i === 9) {
-        cusp = this.normalizeAngle(ascendant + 90); // 10th house = MC approximation
-      } else {
-        // Simplified equal house system for other houses
-        cusp = this.normalizeAngle(ascendant + i * 30);
-      }
-      
-      houses.push({
-        number: i + 1,
-        cusp,
-        sign: this.getZodiacSign(cusp),
-        ruler: this.getHouseRuler(this.getZodiacSign(cusp))
-      });
-    }
-    
-    return houses;
-  }
-
-  /**
-   * Fallback calculation method using simplified formulas
-   * Only used if Astronomy Engine fails
-   */
-  private static calculateChartFallback(birthData: BirthData): {
-    planets: PlanetPosition[];
-    houses: HousePosition[];
-    ascendant: number;
-    midheaven: number;
-  } {
-    const jd = this.dateToJulianDay(birthData.date);
-    const lst = this.calculateLocalSiderealTime(jd, birthData.longitude);
-    
-    // Calculate planetary positions using simplified formulas
-    const planets: PlanetPosition[] = [];
-    
-    // Sun position
-    const sunPosition = this.calculateSunPosition(jd);
-    planets.push({
-      name: 'Sun',
-      symbol: PLANET_SYMBOLS.Sun,
-      longitude: sunPosition.longitude,
-      latitude: 0,
-      distance: sunPosition.distance,
-      house: this.getHouseNumber(sunPosition.longitude, birthData.latitude, lst),
-      sign: this.getZodiacSign(sunPosition.longitude),
-      degree: Math.floor(sunPosition.longitude % 30),
-      minute: Math.floor(((sunPosition.longitude % 30) % 1) * 60),
-      speed: 0.985647 // degrees per day
-    });
-    
-    // Moon position
-    const moonPosition = this.calculateMoonPosition(jd);
-    planets.push({
-      name: 'Moon',
-      symbol: PLANET_SYMBOLS.Moon,
-      longitude: moonPosition.longitude,
-      latitude: moonPosition.latitude,
-      distance: moonPosition.distance,
-      house: this.getHouseNumber(moonPosition.longitude, birthData.latitude, lst),
-      sign: this.getZodiacSign(moonPosition.longitude),
-      degree: Math.floor(moonPosition.longitude % 30),
-      minute: Math.floor(((moonPosition.longitude % 30) % 1) * 60),
-      speed: 13.176358 // degrees per day
-    });
-    
-    // Calculate other planets
-    Object.keys(ORBITAL_ELEMENTS).forEach(planetName => {
-      const position = this.calculatePlanetPosition(planetName, jd);
-      const speed = ORBITAL_ELEMENTS[planetName as keyof typeof ORBITAL_ELEMENTS].n;
-      
-      planets.push({
-        name: planetName,
-        symbol: PLANET_SYMBOLS[planetName as keyof typeof PLANET_SYMBOLS],
-        longitude: position.longitude,
-        latitude: position.latitude,
-        distance: position.distance,
-        house: this.getHouseNumber(position.longitude, birthData.latitude, lst),
-        sign: this.getZodiacSign(position.longitude),
-        degree: Math.floor(position.longitude % 30),
-        minute: Math.floor(((position.longitude % 30) % 1) * 60),
-        isRetrograde: this.isRetrograde(planetName, jd),
-        speed: speed
-      });
-    });
-    
-    // Calculate house system (Placidus)
-    const houses = this.calculateHouses(birthData.latitude, lst);
-    const ascendant = houses[0].cusp;
-    const midheaven = houses[9].cusp;
-    
-    return { planets, houses, ascendant, midheaven };
-  }
-  
-  /**
-   * Convert date to Julian Day Number
-   */
-  private static dateToJulianDay(date: Date): number {
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-    const hour = date.getUTCHours();
-    const minute = date.getUTCMinutes();
-    const second = date.getUTCSeconds();
-    
-    const a = Math.floor((14 - month) / 12);
-    const y = year + 4800 - a;
-    const m = month + 12 * a - 3;
-    
-    const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-    
-    const jd = jdn + (hour - 12) / 24 + minute / 1440 + second / 86400;
-    
-    return jd;
-  }
-  
-  /**
-   * Calculate Local Sidereal Time
-   */
-  private static calculateLocalSiderealTime(jd: number, longitude: number): number {
-    const t = (jd - 2451545.0) / 36525;
-    let lst = 280.46061837 + 360.98564736629 * (jd - 2451545) + 0.000387933 * t * t - t * t * t / 38710000;
-    lst = lst + longitude;
-    return ((lst % 360) + 360) % 360;
-  }
-  
-  /**
-   * Calculate Sun position using VSOP87 simplified
-   */
-  private static calculateSunPosition(jd: number): { longitude: number; distance: number } {
-    const t = (jd - 2451545.0) / 36525;
-    
-    // Mean longitude of the Sun
-    const L = 280.4664567 + 36000.76982779 * t + 0.0003032028 * t * t;
-    
-    // Mean anomaly of the Sun
-    let M = 357.5291092 + 35999.0502909 * t - 0.0001536667 * t * t;
-    M = this.normalizeAngle(M);
-    
-    // Equation of center
-    let C = (1.9146 - 0.004817 * t - 0.000014 * t * t) * Math.sin(this.deg2rad(M));
-    C += (0.019993 - 0.000101 * t) * Math.sin(this.deg2rad(2 * M));
-    C += 0.000289 * Math.sin(this.deg2rad(3 * M));
-    
-    // True longitude
-    let trueLongitude = L + C;
-    trueLongitude = this.normalizeAngle(trueLongitude);
-    
-    // Distance (AU)
-    const distance = 1.000001018 * (1 - 0.01671123 * Math.cos(this.deg2rad(M)) - 0.00014 * Math.cos(this.deg2rad(2 * M)));
-    
-    return { longitude: trueLongitude, distance };
-  }
-  
-  /**
-   * Calculate Moon position using simplified lunar theory
-   */
-  private static calculateMoonPosition(jd: number): { longitude: number; latitude: number; distance: number } {
-    const t = (jd - 2451545.0) / 36525;
-    
-    // Mean longitude of the Moon
-    const L = 218.3164477 + 481267.88123421 * t - 0.0015786 * t * t;
-    
-    // Mean elongation of the Moon from the Sun
-    const D = 297.8501921 + 445267.1114034 * t - 0.0018819 * t * t;
-    
-    // Mean anomaly of the Sun
-    const M = 357.5291092 + 35999.0502909 * t - 0.0001536667 * t * t;
-    
-    // Mean anomaly of the Moon
-    const M1 = 134.9633964 + 477198.8675055 * t + 0.0087414 * t * t;
-    
-    // Longitude corrections (major terms only)
-    let longitude = L;
-    longitude += 6.288774 * Math.sin(this.deg2rad(M1));
-    longitude += 1.274027 * Math.sin(this.deg2rad(2 * D - M1));
-    longitude += 0.658314 * Math.sin(this.deg2rad(2 * D));
-    longitude += 0.213618 * Math.sin(this.deg2rad(2 * M1));
-    longitude -= 0.185116 * Math.sin(this.deg2rad(M));
-    longitude -= 0.114332 * Math.sin(this.deg2rad(2 * (D - M1)));
-    
-    longitude = this.normalizeAngle(longitude);
-    
-    // Latitude calculation (simplified)
-    const F = 93.2720950 + 483202.0175233 * t - 0.0036539 * t * t;
-    let latitude = 5.128122 * Math.sin(this.deg2rad(F));
-    latitude += 0.280602 * Math.sin(this.deg2rad(M1 + F));
-    latitude += 0.277693 * Math.sin(this.deg2rad(M1 - F));
-    
-    // Distance in Earth radii (convert to AU)
-    let distance = 385000.56 + 20905.355 * Math.cos(this.deg2rad(M1));
-    distance = distance / 149597870.7; // Convert km to AU
-    
-    return { longitude, latitude, distance };
-  }
-  
-  /**
-   * Calculate planet position using simplified orbital mechanics
-   */
-  private static calculatePlanetPosition(planetName: string, jd: number): { longitude: number; latitude: number; distance: number } {
+    const jd = this.dateToJulianDay(date);
     const elements = ORBITAL_ELEMENTS[planetName as keyof typeof ORBITAL_ELEMENTS];
-    
-    // Mean longitude
-    let L = elements.L0 + elements.n * (jd - 2451545.0);
-    L = this.normalizeAngle(L);
-    
-    // Mean anomaly
-    let M = L - elements.w;
-    M = this.normalizeAngle(M);
-    
-    // Eccentric anomaly (simplified)
-    const E = M + elements.e * Math.sin(this.deg2rad(M)) * (180 / Math.PI);
-    
-    // True anomaly
-    const nu = 2 * Math.atan2(
-      Math.sqrt(1 + elements.e) * Math.sin(this.deg2rad(E / 2)),
-      Math.sqrt(1 - elements.e) * Math.cos(this.deg2rad(E / 2))
-    ) * (180 / Math.PI);
-    
-    // Heliocentric longitude
-    let longitude = nu + elements.w;
-    longitude = this.normalizeAngle(longitude);
-    
-    // Convert to geocentric longitude (simplified)
-    const earthLongitude = this.calculateSunPosition(jd).longitude;
-    longitude = longitude - earthLongitude + 180;
-    longitude = this.normalizeAngle(longitude);
-    
-    return {
-      longitude,
-      latitude: 0, // Simplified - actual calculation requires orbital inclination
-      distance: elements.a
+
+    if (!elements) {
+      throw new Error(`Missing orbital elements for planet: ${planetName}`);
+    }
+
+    const longitude = this.normalizeAngle(elements.L0 + elements.n * (jd - 2451545.0));
+    const latitude = 0; // Simplified, inclination not included
+    const distance = elements.a; // semi-major axis (AU)
+
+    const averageSpeeds: Record<string, number> = {
+      Mercury: 4.0923,
+      Venus: 1.6021,
+      Earth: 0.9856,
+      Mars: 0.5241,
+      Jupiter: 0.0831,
+      Saturn: 0.0334,
+      Uranus: 0.0117,
+      Neptune: 0.0060,
+      Pluto: 0.0040
     };
-  }
-  
-  /**
-   * Calculate house cusps using Placidus system (simplified)
-   */
-  private static calculateHouses(latitude: number, lst: number): HousePosition[] {
-    const houses: HousePosition[] = [];
-    
-    // Ascendant (1st house cusp)
-    const ascendant = this.normalizeAngle(lst);
-    
-    // Simple house division (equal houses for demonstration)
-    // In production, use proper Placidus calculations
-    for (let i = 0; i < 12; i++) {
-      const cusp = this.normalizeAngle(ascendant + i * 30);
-      houses.push({
-        number: i + 1,
-        cusp,
-        sign: this.getZodiacSign(cusp),
-        ruler: this.getHouseRuler(this.getZodiacSign(cusp))
-      });
-    }
-    
-    return houses;
-  }
-  
-  /**
-   * Determine which house a longitude falls into using Swiss Ephemeris house cusps
-   */
-  private static getHouseFromLongitude(longitude: number, houseCusps: number[]): number {
-    for (let i = 0; i < 12; i++) {
-      const currentCusp = houseCusps[i];
-      const nextCusp = houseCusps[(i + 1) % 12];
-      
-      // Handle wrap-around at 360/0 degrees
-      if (nextCusp < currentCusp) {
-        if (longitude >= currentCusp || longitude < nextCusp) {
-          return i + 1;
-        }
-      } else {
-        if (longitude >= currentCusp && longitude < nextCusp) {
-          return i + 1;
-        }
-      }
-    }
-    return 1; // Default to first house
+
+    const speed = averageSpeeds[planetName] || 1.0;
+
+    return { longitude, latitude, distance, speed };
   }
 
-  /**
-   * Determine which house a longitude falls into (fallback method)
-   */
-  private static getHouseNumber(longitude: number, latitude: number, lst: number): number {
-    const ascendant = this.normalizeAngle(lst);
-    const houseCusp = this.normalizeAngle(longitude - ascendant);
-    return Math.floor(houseCusp / 30) + 1;
+  private static calculateSunPosition(date: Date): { longitude: number, distance: number, speed: number } {
+    const jd = this.dateToJulianDay(date);
+    const n = jd - 2451545.0;
+    const L = this.normalizeAngle(280.460 + 0.9856474 * n);
+    const g = this.normalizeAngle(357.528 + 0.9856003 * n);
+    const lambda = this.normalizeAngle(L + 1.915 * Math.sin(this.deg2rad(g)) + 0.020 * Math.sin(this.deg2rad(2 * g)));
+    const distance = 1.00014 - 0.01671 * Math.cos(this.deg2rad(g)) - 0.00014 * Math.cos(this.deg2rad(2 * g));
+    return { longitude: lambda, distance, speed: 0.9856 };
   }
-  
-  /**
-   * Get zodiac sign for a given longitude
-   */
-  private static getZodiacSign(longitude: number): string {
-    const signIndex = Math.floor(longitude / 30);
-    return ZODIAC_SIGNS[signIndex];
+
+  private static calculateMoonPosition(date: Date): { longitude: number, latitude: number, distance: number, speed: number } {
+    const jd = this.dateToJulianDay(date);
+    const n = jd - 2451545.0;
+    const L = this.normalizeAngle(218.316 + 13.176396 * n);
+    const M = this.normalizeAngle(134.963 + 13.064993 * n);
+    const F = this.normalizeAngle(93.272 + 13.229350 * n);
+    const longitude = this.normalizeAngle(L + 6.289 * Math.sin(this.deg2rad(M)));
+    const latitude = 5.128 * Math.sin(this.deg2rad(F));
+    const distance = 385000.56 + 20905.355 * Math.cos(this.deg2rad(M)); // in km
+    const distanceAU = distance / 149597870.7;
+    return { longitude, latitude, distance: distanceAU, speed: 13.1764 };
   }
-  
-  /**
-   * Get ruling planet for a zodiac sign
-   */
-  private static getHouseRuler(sign: string): string {
-    const rulers: Record<string, string> = {
-      'Aries': 'Mars', 'Taurus': 'Venus', 'Gemini': 'Mercury',
-      'Cancer': 'Moon', 'Leo': 'Sun', 'Virgo': 'Mercury',
-      'Libra': 'Venus', 'Scorpio': 'Pluto', 'Sagittarius': 'Jupiter',
-      'Capricorn': 'Saturn', 'Aquarius': 'Uranus', 'Pisces': 'Neptune'
-    };
-    return rulers[sign] || 'Unknown';
+
+  static dateToJulianDay(date: Date): number {
+    const time = date.getTime() / 86400000.0 + 2440587.5;
+    return time;
   }
-  
-  /**
-   * Check if planet is retrograde (simplified)
-   */
-  private static isRetrograde(planetName: string, jd: number): boolean {
-    // Simple approximation - check if planet is slower than normal
-    const elements = ORBITAL_ELEMENTS[planetName as keyof typeof ORBITAL_ELEMENTS];
-    if (!elements) return false;
-    
-    // Planets are more likely to be retrograde when at opposition
-    const sunLongitude = this.calculateSunPosition(jd).longitude;
-    const planetPosition = this.calculatePlanetPosition(planetName, jd);
-    const elongation = Math.abs(planetPosition.longitude - sunLongitude);
-    
-    // Simplified: retrograde when near opposition (within 60 degrees)
-    return elongation > 120 && elongation < 240;
-  }
-  
-  /**
-   * Utility functions
-   */
-  private static normalizeAngle(angle: number): number {
-    while (angle < 0) angle += 360;
-    while (angle >= 360) angle -= 360;
-    return angle;
-  }
-  
-  private static deg2rad(degrees: number): number {
-    return degrees * Math.PI / 180;
-  }
-  
-  private static rad2deg(radians: number): number {
-    return radians * 180 / Math.PI;
+
+  static deg2rad(deg: number): number {
+    return (deg * Math.PI) / 180;
   }
 }
-
-export default AstronomicalCalculator;
