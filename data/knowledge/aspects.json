@@ -1,0 +1,87 @@
+{
+  "conjunction": {
+    "name": "Conjunction",
+    "degrees": 0,
+    "orb": 8,
+    "nature": "Neutral",
+    "keywords": [
+      "unity",
+      "intensity",
+      "fusion",
+      "focus"
+    ],
+    "basicMeaning": "Planetary energies blend and intensify",
+    "interpretation": "Powerful combination of planetary forces, can be harmonious or challenging depending on planets involved",
+    "inNatalChart": "Represents core personality themes and intense focus areas",
+    "inTransits": "New beginnings and intensified energy in life areas",
+    "inSynastry": "Strong attraction and connection between people"
+  },
+  "sextile": {
+    "name": "Sextile",
+    "degrees": 60,
+    "orb": 6,
+    "nature": "Harmonious",
+    "keywords": [
+      "opportunity",
+      "harmony",
+      "cooperation",
+      "talent"
+    ],
+    "basicMeaning": "Harmonious energy that requires effort to activate",
+    "interpretation": "Opportunities for growth and positive expression with conscious effort",
+    "inNatalChart": "Natural talents that can be developed with effort",
+    "inTransits": "Opportunities for positive change and growth",
+    "inSynastry": "Easy cooperation and mutual support"
+  },
+  "square": {
+    "name": "Square",
+    "degrees": 90,
+    "orb": 8,
+    "nature": "Challenging",
+    "keywords": [
+      "tension",
+      "conflict",
+      "growth",
+      "motivation"
+    ],
+    "basicMeaning": "Dynamic tension that motivates action and growth",
+    "interpretation": "Challenges that lead to strength and character development",
+    "inNatalChart": "Internal tensions that drive personal growth",
+    "inTransits": "Challenges and obstacles that promote development",
+    "inSynastry": "Tension that can be stimulating or problematic"
+  },
+  "trine": {
+    "name": "Trine",
+    "degrees": 120,
+    "orb": 8,
+    "nature": "Harmonious",
+    "keywords": [
+      "harmony",
+      "flow",
+      "ease",
+      "talent"
+    ],
+    "basicMeaning": "Harmonious and flowing energy exchange",
+    "interpretation": "Natural talents and easy energy flow between planets",
+    "inNatalChart": "Natural gifts and areas of ease in life",
+    "inTransits": "Periods of harmony and positive flow",
+    "inSynastry": "Natural harmony and understanding between people"
+  },
+  "opposition": {
+    "name": "Opposition",
+    "degrees": 180,
+    "orb": 8,
+    "nature": "Challenging",
+    "keywords": [
+      "polarity",
+      "balance",
+      "awareness",
+      "projection"
+    ],
+    "basicMeaning": "Polarity that seeks balance and integration",
+    "interpretation": "Opposite energies that need to be balanced and integrated",
+    "inNatalChart": "Areas where balance and integration are needed",
+    "inTransits": "Culmination points and awareness of opposing forces",
+    "inSynastry": "Attraction of opposites, can be balancing or polarizing"
+  }
+}

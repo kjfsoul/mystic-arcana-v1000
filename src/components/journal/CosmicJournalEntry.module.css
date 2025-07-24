@@ -1,0 +1,357 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 50%,
+    rgba(16, 16, 24, 0.95) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 1.5rem;
+  box-shadow: 
+    0 20px 60px rgba(139, 92, 246, 0.3),
+    inset 0 0 30px rgba(139, 92, 246, 0.1);
+}
+
+.header {
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, #d97706 0%, #dc2626 100%);
+  border-radius: 1.5rem 1.5rem 0 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.content {
+  padding: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #e9d5ff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quillGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .quillGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.quillOption {
+  position: relative;
+  padding: 1rem;
+  background: rgba(55, 65, 81, 0.5);
+  border: 2px solid rgba(107, 114, 128, 0.5);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quillOption:hover {
+  background: rgba(55, 65, 81, 0.8);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateY(-2px);
+}
+
+.quillSelected {
+  background: rgba(139, 92, 246, 0.2) !important;
+  border-color: rgba(139, 92, 246, 0.8) !important;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.quillIcon {
+  font-size: 2rem;
+}
+
+.quillName {
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.checkIcon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  color: #10b981;
+}
+
+.questionSection {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.questionLabel {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.questionText {
+  color: #ddd6fe;
+  line-height: 1.5;
+}
+
+.textareaWrapper {
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid rgba(107, 114, 128, 0.5);
+  border-radius: 0.75rem;
+  color: #e5e7eb;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.3s;
+}
+
+.textarea::placeholder {
+  color: rgba(156, 163, 175, 0.7);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.8);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.quillWatermark {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 3rem;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.singleReadingInfo {
+  background: rgba(236, 72, 153, 0.1);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.readingLabel {
+  color: #fbbf24;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cardInfo {
+  color: #e5e7eb;
+}
+
+.cardInfo strong {
+  display: block;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: #f9fafb;
+}
+
+.cardMeaning {
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.authWarning,
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: 0.75rem;
+  color: #fca5a5;
+  margin-bottom: 1.5rem;
+}
+
+.successMessage {
+  padding: 1rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 0.75rem;
+  color: #6ee7b7;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.abandonButton,
+.saveButton {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.abandonButton {
+  background: rgba(107, 114, 128, 0.3);
+  color: #d1d5db;
+}
+
+.abandonButton:hover:not(:disabled) {
+  background: rgba(107, 114, 128, 0.5);
+}
+
+.saveButton {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  color: white;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+}
+
+.abandonButton:disabled,
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Quill-specific text colors */
+.text-orange-500 {
+  color: #f97316 !important;
+}
+
+.text-blue-400 {
+  color: #60a5fa !important;
+}
+
+.text-yellow-500 {
+  color: #eab308 !important;
+}
+
+.text-purple-500 {
+  color: #a855f7 !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .modalContent {
+    max-width: 100%;
+    margin: 0.5rem;
+  }
+  
+  .header {
+    padding: 1.5rem;
+  }
+  
+  .content {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+}

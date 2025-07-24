@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AstronomicalCalculator, BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
+import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
+import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
 import { TransitEngine, PlanetaryPosition, TransitAspect } from '@/lib/ephemeris/transitEngine';
 import styles from './InteractiveBirthChart.module.css';
 
@@ -98,7 +99,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   useEffect(() => {
     const calculateChart = async () => {
       try {
-        const result = await AstronomicalCalculator.calculateChart(birthData);
+        const result = await SwissEphemerisShim.calculateFullChart(birthData);
         setChartData(result);
       } catch (error) {
         console.error('Error calculating chart:', error);

@@ -1,4 +1,5 @@
-import { BirthData, AstronomicalCalculator } from './AstronomicalCalculator';
+import { BirthData } from './AstronomicalCalculator';
+import { SwissEphemerisShim } from './SwissEphemerisShim';
 
 export interface CareerStrength {
   title: string;
@@ -36,7 +37,7 @@ export interface CareerAnalysis {
 
 // Real planetary positions using Swiss Ephemeris calculations
 export async function getRealCareerPlacements(birthData: BirthData): Promise<Record<string, number>> {
-  const chart = await AstronomicalCalculator.calculateChart(birthData);
+  const chart = await SwissEphemerisShim.calculateFullChart(birthData);
   
   const placements: Record<string, number> = {
     midheaven: chart.midheaven,
@@ -71,7 +72,7 @@ function getZodiacSign(degrees: number): string {
 
 // House position calculation using real chart data
 async function getHousePositions(birthData: BirthData): Promise<Record<string, string>> {
-  const chart = await AstronomicalCalculator.calculateChart(birthData);
+  const chart = await SwissEphemerisShim.calculateFullChart(birthData);
   
   return {
     secondHouse: `House ${chart.houses[1]?.number || 2}: ${chart.houses[1]?.sign || 'Unknown'} - Your relationship with money and values`,

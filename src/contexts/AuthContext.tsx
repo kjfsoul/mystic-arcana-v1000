@@ -113,7 +113,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    return await supabase.auth.signOut();
+    const result = await supabase.auth.signOut();
+    
+    // Clear API auth cache on logout
+    try {
+      const { APIAuthHelper } = await import('../utils/apiAuth');
+      APIAuthHelper.clearCache();
+    } catch (error) {
+      console.warn('Failed to clear API auth cache:', error);
+    }
+    
+    return result;
   };
 
   const value = {

@@ -1,0 +1,703 @@
+{
+  "aries": {
+    "name": "Aries",
+    "symbol": "♈",
+    "element": "Fire",
+    "modality": "Cardinal",
+    "rulingPlanet": "Mars",
+    "keywords": [
+      "initiative",
+      "courage",
+      "leadership",
+      "pioneering",
+      "action"
+    ],
+    "basicMeaning": "The pioneer and initiator of the zodiac",
+    "positiveTraits": [
+      "courageous",
+      "confident",
+      "energetic",
+      "pioneering",
+      "independent"
+    ],
+    "challengingTraits": [
+      "impatient",
+      "aggressive",
+      "selfish",
+      "impulsive",
+      "hot-tempered"
+    ],
+    "bodyParts": [
+      "head",
+      "brain",
+      "eyes"
+    ],
+    "colors": [
+      "red",
+      "orange"
+    ],
+    "stones": [
+      "diamond",
+      "ruby"
+    ],
+    "dates": "March 21 - April 19",
+    "degree": "0° - 29°",
+    "mythology": "The Ram, associated with the Golden Fleece",
+    "compatibility": {
+      "bestMatches": [
+        "Leo",
+        "Sagittarius",
+        "Gemini",
+        "Aquarius"
+      ],
+      "challenges": [
+        "Cancer",
+        "Capricorn"
+      ]
+    }
+  },
+  "taurus": {
+    "name": "Taurus",
+    "symbol": "♉",
+    "element": "Earth",
+    "modality": "Fixed",
+    "rulingPlanet": "Venus",
+    "keywords": [
+      "stability",
+      "sensuality",
+      "persistence",
+      "material",
+      "beauty"
+    ],
+    "basicMeaning": "The builder and maintainer of material security",
+    "positiveTraits": [
+      "reliable",
+      "patient",
+      "practical",
+      "devoted",
+      "stable"
+    ],
+    "challengingTraits": [
+      "stubborn",
+      "possessive",
+      "materialistic",
+      "lazy",
+      "indulgent"
+    ],
+    "bodyParts": [
+      "neck",
+      "throat",
+      "thyroid"
+    ],
+    "colors": [
+      "green",
+      "pink"
+    ],
+    "stones": [
+      "emerald",
+      "rose quartz"
+    ],
+    "dates": "April 20 - May 20",
+    "degree": "30° - 59°",
+    "mythology": "The Bull, Zeus in disguise when he abducted Europa",
+    "compatibility": {
+      "bestMatches": [
+        "Virgo",
+        "Capricorn",
+        "Cancer",
+        "Pisces"
+      ],
+      "challenges": [
+        "Leo",
+        "Aquarius"
+      ]
+    }
+  },
+  "gemini": {
+    "name": "Gemini",
+    "symbol": "♊",
+    "element": "Air",
+    "modality": "Mutable",
+    "rulingPlanet": "Mercury",
+    "keywords": [
+      "communication",
+      "versatility",
+      "curiosity",
+      "duality",
+      "learning"
+    ],
+    "basicMeaning": "The communicator and information gatherer",
+    "positiveTraits": [
+      "intelligent",
+      "adaptable",
+      "curious",
+      "witty",
+      "social"
+    ],
+    "challengingTraits": [
+      "superficial",
+      "inconsistent",
+      "nervous",
+      "scattered",
+      "gossipy"
+    ],
+    "bodyParts": [
+      "hands",
+      "arms",
+      "lungs",
+      "nervous system"
+    ],
+    "colors": [
+      "yellow",
+      "silver"
+    ],
+    "stones": [
+      "agate",
+      "citrine"
+    ],
+    "dates": "May 21 - June 20",
+    "degree": "60° - 89°",
+    "mythology": "The Twins, Castor and Pollux",
+    "compatibility": {
+      "bestMatches": [
+        "Libra",
+        "Aquarius",
+        "Aries",
+        "Leo"
+      ],
+      "challenges": [
+        "Virgo",
+        "Pisces"
+      ]
+    }
+  },
+  "cancer": {
+    "name": "Cancer",
+    "symbol": "♋",
+    "element": "Water",
+    "modality": "Cardinal",
+    "rulingPlanet": "Moon",
+    "keywords": [
+      "nurturing",
+      "emotions",
+      "home",
+      "family",
+      "protection",
+      "intuition"
+    ],
+    "basicMeaning": "The nurturer and protector of emotional security",
+    "positiveTraits": [
+      "nurturing",
+      "protective",
+      "intuitive",
+      "loyal",
+      "empathetic"
+    ],
+    "challengingTraits": [
+      "moody",
+      "clingy",
+      "oversensitive",
+      "pessimistic",
+      "manipulative"
+    ],
+    "bodyParts": [
+      "chest",
+      "breasts",
+      "stomach"
+    ],
+    "colors": [
+      "white",
+      "silver",
+      "sea green"
+    ],
+    "stones": [
+      "moonstone",
+      "pearl"
+    ],
+    "dates": "June 21 - July 22",
+    "degree": "90° - 119°",
+    "mythology": "The Crab, sent by Hera to distract Hercules",
+    "compatibility": {
+      "bestMatches": [
+        "Scorpio",
+        "Pisces",
+        "Taurus",
+        "Virgo"
+      ],
+      "challenges": [
+        "Aries",
+        "Libra"
+      ]
+    }
+  },
+  "leo": {
+    "name": "Leo",
+    "symbol": "♌",
+    "element": "Fire",
+    "modality": "Fixed",
+    "rulingPlanet": "Sun",
+    "keywords": [
+      "creativity",
+      "confidence",
+      "leadership",
+      "drama",
+      "generosity",
+      "pride"
+    ],
+    "basicMeaning": "The performer and leader seeking recognition",
+    "positiveTraits": [
+      "confident",
+      "generous",
+      "creative",
+      "warm-hearted",
+      "entertaining"
+    ],
+    "challengingTraits": [
+      "arrogant",
+      "stubborn",
+      "self-centered",
+      "domineering",
+      "vain"
+    ],
+    "bodyParts": [
+      "heart",
+      "spine",
+      "back"
+    ],
+    "colors": [
+      "gold",
+      "orange",
+      "yellow"
+    ],
+    "stones": [
+      "ruby",
+      "peridot"
+    ],
+    "dates": "July 23 - August 22",
+    "degree": "120° - 149°",
+    "mythology": "The Lion, the Nemean Lion slain by Hercules",
+    "compatibility": {
+      "bestMatches": [
+        "Aries",
+        "Sagittarius",
+        "Gemini",
+        "Libra"
+      ],
+      "challenges": [
+        "Taurus",
+        "Scorpio"
+      ]
+    }
+  },
+  "virgo": {
+    "name": "Virgo",
+    "symbol": "♍",
+    "element": "Earth",
+    "modality": "Mutable",
+    "rulingPlanet": "Mercury",
+    "keywords": [
+      "service",
+      "perfection",
+      "analysis",
+      "health",
+      "work",
+      "detail"
+    ],
+    "basicMeaning": "The perfectionist and servant focused on improvement",
+    "positiveTraits": [
+      "analytical",
+      "helpful",
+      "practical",
+      "reliable",
+      "hardworking"
+    ],
+    "challengingTraits": [
+      "critical",
+      "perfectionist",
+      "worrying",
+      "shy",
+      "overly cautious"
+    ],
+    "bodyParts": [
+      "digestive system",
+      "intestines",
+      "spleen"
+    ],
+    "colors": [
+      "navy blue",
+      "grey",
+      "brown"
+    ],
+    "stones": [
+      "sapphire",
+      "carnelian"
+    ],
+    "dates": "August 23 - September 22",
+    "degree": "150° - 179°",
+    "mythology": "The Virgin, associated with harvest goddess",
+    "compatibility": {
+      "bestMatches": [
+        "Taurus",
+        "Capricorn",
+        "Cancer",
+        "Scorpio"
+      ],
+      "challenges": [
+        "Gemini",
+        "Sagittarius"
+      ]
+    }
+  },
+  "libra": {
+    "name": "Libra",
+    "symbol": "♎",
+    "element": "Air",
+    "modality": "Cardinal",
+    "rulingPlanet": "Venus",
+    "keywords": [
+      "balance",
+      "harmony",
+      "justice",
+      "partnership",
+      "beauty",
+      "diplomacy"
+    ],
+    "basicMeaning": "The diplomat seeking balance and harmony",
+    "positiveTraits": [
+      "diplomatic",
+      "fair-minded",
+      "social",
+      "cooperative",
+      "gracious"
+    ],
+    "challengingTraits": [
+      "indecisive",
+      "avoids confrontation",
+      "carries grudges",
+      "self-pity"
+    ],
+    "bodyParts": [
+      "kidneys",
+      "lower back",
+      "buttocks"
+    ],
+    "colors": [
+      "blue",
+      "pastel shades"
+    ],
+    "stones": [
+      "opal",
+      "lapis lazuli"
+    ],
+    "dates": "September 23 - October 22",
+    "degree": "180° - 209°",
+    "mythology": "The Scales, representing justice and balance",
+    "compatibility": {
+      "bestMatches": [
+        "Gemini",
+        "Aquarius",
+        "Leo",
+        "Sagittarius"
+      ],
+      "challenges": [
+        "Cancer",
+        "Capricorn"
+      ]
+    }
+  },
+  "scorpio": {
+    "name": "Scorpio",
+    "symbol": "♏",
+    "element": "Water",
+    "modality": "Fixed",
+    "rulingPlanet": "Pluto",
+    "traditionalRuler": "Mars",
+    "keywords": [
+      "transformation",
+      "intensity",
+      "passion",
+      "mystery",
+      "power",
+      "depth"
+    ],
+    "basicMeaning": "The transformer and investigator of hidden truths",
+    "positiveTraits": [
+      "passionate",
+      "resourceful",
+      "brave",
+      "determined",
+      "magnetic"
+    ],
+    "challengingTraits": [
+      "jealous",
+      "secretive",
+      "resentful",
+      "obsessive",
+      "suspicious"
+    ],
+    "bodyParts": [
+      "reproductive organs",
+      "pelvis",
+      "urinary system"
+    ],
+    "colors": [
+      "deep red",
+      "black",
+      "maroon"
+    ],
+    "stones": [
+      "topaz",
+      "obsidian"
+    ],
+    "dates": "October 23 - November 21",
+    "degree": "210° - 239°",
+    "mythology": "The Scorpion, sent to kill Orion",
+    "compatibility": {
+      "bestMatches": [
+        "Cancer",
+        "Pisces",
+        "Virgo",
+        "Capricorn"
+      ],
+      "challenges": [
+        "Leo",
+        "Aquarius"
+      ]
+    }
+  },
+  "sagittarius": {
+    "name": "Sagittarius",
+    "symbol": "♐",
+    "element": "Fire",
+    "modality": "Mutable",
+    "rulingPlanet": "Jupiter",
+    "keywords": [
+      "adventure",
+      "philosophy",
+      "freedom",
+      "truth",
+      "optimism",
+      "expansion"
+    ],
+    "basicMeaning": "The philosopher and adventurer seeking truth and meaning",
+    "positiveTraits": [
+      "optimistic",
+      "freedom-loving",
+      "jovial",
+      "good-humored",
+      "honest"
+    ],
+    "challengingTraits": [
+      "impatient",
+      "promises more than can deliver",
+      "very direct",
+      "careless"
+    ],
+    "bodyParts": [
+      "hips",
+      "thighs",
+      "liver"
+    ],
+    "colors": [
+      "purple",
+      "turquoise"
+    ],
+    "stones": [
+      "turquoise",
+      "amethyst"
+    ],
+    "dates": "November 22 - December 21",
+    "degree": "240° - 269°",
+    "mythology": "The Archer, Centaur with bow and arrow",
+    "compatibility": {
+      "bestMatches": [
+        "Aries",
+        "Leo",
+        "Libra",
+        "Aquarius"
+      ],
+      "challenges": [
+        "Virgo",
+        "Pisces"
+      ]
+    }
+  },
+  "capricorn": {
+    "name": "Capricorn",
+    "symbol": "♑",
+    "element": "Earth",
+    "modality": "Cardinal",
+    "rulingPlanet": "Saturn",
+    "keywords": [
+      "ambition",
+      "discipline",
+      "responsibility",
+      "structure",
+      "achievement",
+      "authority"
+    ],
+    "basicMeaning": "The achiever and builder of lasting structures",
+    "positiveTraits": [
+      "responsible",
+      "disciplined",
+      "self-control",
+      "good managers",
+      "practical"
+    ],
+    "challengingTraits": [
+      "know-it-all",
+      "unforgiving",
+      "condescending",
+      "expecting the worst"
+    ],
+    "bodyParts": [
+      "bones",
+      "joints",
+      "knees"
+    ],
+    "colors": [
+      "brown",
+      "black",
+      "dark green"
+    ],
+    "stones": [
+      "garnet",
+      "onyx"
+    ],
+    "dates": "December 22 - January 19",
+    "degree": "270° - 299°",
+    "mythology": "The Sea-Goat, half goat half fish",
+    "compatibility": {
+      "bestMatches": [
+        "Taurus",
+        "Virgo",
+        "Scorpio",
+        "Pisces"
+      ],
+      "challenges": [
+        "Aries",
+        "Libra"
+      ]
+    }
+  },
+  "aquarius": {
+    "name": "Aquarius",
+    "symbol": "♒",
+    "element": "Air",
+    "modality": "Fixed",
+    "rulingPlanet": "Uranus",
+    "traditionalRuler": "Saturn",
+    "keywords": [
+      "innovation",
+      "independence",
+      "humanitarian",
+      "progressive",
+      "original",
+      "detached"
+    ],
+    "basicMeaning": "The innovator and humanitarian working for collective progress",
+    "positiveTraits": [
+      "progressive",
+      "original",
+      "independent",
+      "humanitarian",
+      "inventive"
+    ],
+    "challengingTraits": [
+      "runs from emotional expression",
+      "temperamental",
+      "uncompromising",
+      "aloof"
+    ],
+    "bodyParts": [
+      "circulatory system",
+      "ankles",
+      "shins"
+    ],
+    "colors": [
+      "blue",
+      "silver",
+      "aqua"
+    ],
+    "stones": [
+      "amethyst",
+      "garnet"
+    ],
+    "dates": "January 20 - February 18",
+    "degree": "300° - 329°",
+    "mythology": "The Water Bearer, Ganymede serving the gods",
+    "compatibility": {
+      "bestMatches": [
+        "Gemini",
+        "Libra",
+        "Aries",
+        "Sagittarius"
+      ],
+      "challenges": [
+        "Taurus",
+        "Scorpio"
+      ]
+    }
+  },
+  "pisces": {
+    "name": "Pisces",
+    "symbol": "♓",
+    "element": "Water",
+    "modality": "Mutable",
+    "rulingPlanet": "Neptune",
+    "traditionalRuler": "Jupiter",
+    "keywords": [
+      "compassion",
+      "intuition",
+      "imagination",
+      "spirituality",
+      "sacrifice",
+      "empathy"
+    ],
+    "basicMeaning": "The mystic and dreamer connecting to universal consciousness",
+    "positiveTraits": [
+      "compassionate",
+      "artistic",
+      "intuitive",
+      "gentle",
+      "wise",
+      "musical"
+    ],
+    "challengingTraits": [
+      "fearful",
+      "overly trusting",
+      "sad",
+      "desire to escape reality",
+      "victim"
+    ],
+    "bodyParts": [
+      "feet",
+      "toes",
+      "lymphatic system"
+    ],
+    "colors": [
+      "sea green",
+      "lavender",
+      "purple"
+    ],
+    "stones": [
+      "aquamarine",
+      "bloodstone"
+    ],
+    "dates": "February 19 - March 20",
+    "degree": "330° - 359°",
+    "mythology": "The Fish, Aphrodite and Eros escaping Typhon",
+    "compatibility": {
+      "bestMatches": [
+        "Cancer",
+        "Scorpio",
+        "Taurus",
+        "Capricorn"
+      ],
+      "challenges": [
+        "Gemini",
+        "Sagittarius"
+      ]
+    }
+  }
+}

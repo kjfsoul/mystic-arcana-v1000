@@ -240,27 +240,28 @@ class TarotAPIClient {
    */
   async saveReading(request: SaveReadingRequest): Promise<SaveReadingResponse> {
     try {
-      // Import supabase client dynamically to avoid circular dependencies
-      const { supabase } = await import('@/lib/supabase');
+      // Import authentication helper
+      const { APIAuthHelper } = await import('@/utils/apiAuth');
       
-      // Get the current session
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      const headers = new Headers(this.defaultHeaders);
-      
-      if (session?.access_token) {
-        headers.set('Authorization', `Bearer ${session.access_token}`);
+      // Check authentication first
+      const isAuth = await APIAuthHelper.isAuthenticated();
+      if (!isAuth) {
+        throw new Error('Authentication required - please sign in');
       }
-      
-      const response = await fetch(`${this.baseUrl}/api/tarot/save-reading`, {
+
+      // Make authenticated request
+      const response = await APIAuthHelper.authenticatedFetch(`${this.baseUrl}/api/tarot/save-reading`, {
         method: "POST",
-        headers,
         body: JSON.stringify(request),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
+        // Handle specific authentication errors
+        if (response.status === 401) {
+          throw new Error('Authentication failed - please sign in again');
+        }
         throw new Error(data.error || `API error: ${response.status}`);
       }
 

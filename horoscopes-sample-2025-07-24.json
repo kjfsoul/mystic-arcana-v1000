@@ -1,0 +1,251 @@
+{
+  "date": "2025-07-24",
+  "horoscopes": [
+    {
+      "sign": "Aries",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Aries qualities of action and leadership. The cosmic energy flows harmoniously in your favor today, bringing opportunities for courage and meaningful connections. Focus on your natural ability to lead and stay true to your values. Embrace the cosmic flow and stay open to new possibilities.",
+      "keywords": ["action", "leadership", "courage"],
+      "luckyNumbers": [1, 15, 23, 31, 42],
+      "colors": ["Red", "Orange", "Gold"],
+      "careerInsight": "Professional opportunities align with your natural strengths. Consider taking initiative on projects that showcase your Aries leadership qualities.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Aries charm is particularly magnetic today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Mars trine Jupiter", "Sun sextile Mercury", "Venus conjunction Moon"],
+      "advice": "Embrace opportunities that align with your natural Aries gifts. Trust your instincts and take confident action.",
+      "rating": {
+        "overall": 4.2,
+        "love": 4.0,
+        "career": 4.5,
+        "health": 3.8
+      }
+    },
+    {
+      "sign": "Taurus",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Taurus qualities of stability and beauty. The cosmic balance encourages steady progress in your Taurus journey. Trust your instincts and take measured steps forward. Embrace the cosmic flow and stay open to new possibilities.",
+      "keywords": ["stability", "beauty", "persistence"],
+      "luckyNumbers": [2, 14, 26, 38, 45],
+      "colors": ["Green", "Pink", "Earth tones"],
+      "careerInsight": "Steady professional progress is favored. Focus on collaboration and let your unique perspective contribute to team success.",
+      "loveInsight": "Love flows naturally when you embrace your true Taurus nature. Be authentic in all romantic interactions.",
+      "energy": "Moderate",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Venus trine Saturn", "Moon opposition Mars", "Mercury square Pluto"],
+      "advice": "Balance is key today. Honor your Taurus nature while remaining flexible to cosmic currents and new possibilities.",
+      "rating": {
+        "overall": 3.7,
+        "love": 3.9,
+        "career": 3.6,
+        "health": 3.5
+      }
+    },
+    {
+      "sign": "Gemini",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Gemini qualities of communication and curiosity. Mercury empowers your natural Gemini qualities through harmonious cosmic flow. The cosmic energy flows harmoniously in your favor today, bringing opportunities for adaptability and meaningful connections.",
+      "keywords": ["communication", "curiosity", "adaptability"],
+      "luckyNumbers": [3, 12, 21, 33, 48],
+      "colors": ["Yellow", "Silver", "Light blue"],
+      "careerInsight": "Professional opportunities align with your communication strengths. Consider taking initiative on projects that showcase your Gemini versatility.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Gemini wit is particularly charming today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Mercury conjunction Sun", "Jupiter trine Neptune", "Mars sextile Venus"],
+      "advice": "Embrace opportunities that align with your natural Gemini gifts. Trust your instincts and communicate with confidence.",
+      "rating": {
+        "overall": 4.1,
+        "love": 4.3,
+        "career": 4.0,
+        "health": 3.9
+      }
+    },
+    {
+      "sign": "Cancer",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Cancer qualities of emotion and nurturing. Moon empowers your natural Cancer qualities through deep emotional resonance. Emotional intensity is heightened today. Express your authentic feelings and be open to deeper connections with loved ones.",
+      "keywords": ["emotion", "nurturing", "intuition"],
+      "luckyNumbers": [4, 13, 22, 29, 44],
+      "colors": ["White", "Silver", "Sea blue"],
+      "careerInsight": "Professional matters benefit from your intuitive Cancer approach. Focus on collaboration and steady progress.",
+      "loveInsight": "Emotional intensity is heightened today. Express your authentic feelings and be open to deeper connections with loved ones.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Moon trine Neptune", "Cancer Sun opposition Capricorn", "Venus square Mars"],
+      "advice": "Embrace your Cancer strengths while remaining flexible to new opportunities and growth.",
+      "rating": {
+        "overall": 4.0,
+        "love": 4.6,
+        "career": 3.7,
+        "health": 4.1
+      }
+    },
+    {
+      "sign": "Leo",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Leo qualities of creativity and confidence. Sun empowers your natural Leo qualities through radiant self-expression. The cosmic energy flows harmoniously in your favor today, bringing opportunities for leadership and meaningful connections.",
+      "keywords": ["creativity", "confidence", "leadership"],
+      "luckyNumbers": [5, 17, 28, 35, 41],
+      "colors": ["Gold", "Orange", "Royal purple"],
+      "careerInsight": "Professional opportunities align with your creative strengths. Consider taking initiative on projects that showcase your Leo charisma.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Leo magnetism is particularly powerful today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Sun conjunction Venus", "Leo Moon trine Sagittarius", "Jupiter sextile Mars"],
+      "advice": "Embrace opportunities that align with your natural Leo gifts. Trust your instincts and shine with confidence.",
+      "rating": {
+        "overall": 4.4,
+        "love": 4.2,
+        "career": 4.6,
+        "health": 4.0
+      }
+    },
+    {
+      "sign": "Virgo",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Virgo qualities of service and analysis. Mercury empowers your natural Virgo qualities through practical wisdom. The cosmic balance encourages steady progress in your Virgo journey. Trust your analytical instincts and take measured steps forward.",
+      "keywords": ["service", "analysis", "perfection"],
+      "luckyNumbers": [6, 18, 24, 36, 47],
+      "colors": ["Navy blue", "Gray", "Forest green"],
+      "careerInsight": "Steady professional progress is favored. Focus on detail-oriented tasks and let your analytical perspective contribute to success.",
+      "loveInsight": "Love flows naturally when you embrace your true Virgo nature. Be authentic and practical in all romantic interactions.",
+      "energy": "Moderate",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Mercury trine Saturn", "Virgo aspects Earth signs", "Moon square Mercury"],
+      "advice": "Balance is key today. Honor your Virgo nature while remaining flexible to cosmic currents and new possibilities.",
+      "rating": {
+        "overall": 3.8,
+        "love": 3.5,
+        "career": 4.2,
+        "health": 3.7
+      }
+    },
+    {
+      "sign": "Libra",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Libra qualities of balance and harmony. Venus empowers your natural Libra qualities through graceful relationship dynamics. The cosmic energy flows harmoniously in your favor today, bringing opportunities for diplomacy and meaningful connections.",
+      "keywords": ["balance", "harmony", "relationships"],
+      "luckyNumbers": [7, 16, 25, 34, 43],
+      "colors": ["Pink", "Light blue", "Lavender"],
+      "careerInsight": "Professional opportunities align with your diplomatic strengths. Consider taking initiative on projects that showcase your Libra collaboration skills.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Libra charm is particularly harmonious today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Venus trine Jupiter", "Libra Moon aspects Air signs", "Mercury sextile Venus"],
+      "advice": "Embrace opportunities that align with your natural Libra gifts. Trust your instincts and create harmony with confidence.",
+      "rating": {
+        "overall": 4.3,
+        "love": 4.7,
+        "career": 4.0,
+        "health": 4.1
+      }
+    },
+    {
+      "sign": "Scorpio",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Scorpio qualities of transformation and intensity. Mars and Pluto empower your natural Scorpio qualities through deep transformative energy. While cosmic energies present some challenges, your Scorpio strength will guide you through.",
+      "keywords": ["transformation", "intensity", "mystery"],
+      "luckyNumbers": [8, 19, 27, 32, 49],
+      "colors": ["Deep red", "Black", "Maroon"],
+      "careerInsight": "Career matters may require extra patience today. Use your determination to navigate workplace dynamics with diplomacy.",
+      "loveInsight": "Relationship reflection brings clarity. Use your wisdom to heal past wounds and create space for renewed love.",
+      "energy": "Moderate",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Mars square Pluto", "Scorpio depth aspects", "Moon opposition Sun"],
+      "advice": "Navigate challenges with your characteristic Scorpio strength. Patience and persistence will lead to breakthrough moments.",
+      "rating": {
+        "overall": 3.6,
+        "love": 3.8,
+        "career": 3.4,
+        "health": 3.7
+      }
+    },
+    {
+      "sign": "Sagittarius",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Sagittarius qualities of adventure and philosophy. Jupiter empowers your natural Sagittarius qualities through expansive wisdom. The cosmic energy flows harmoniously in your favor today, bringing opportunities for exploration and meaningful connections.",
+      "keywords": ["adventure", "philosophy", "freedom"],
+      "luckyNumbers": [9, 20, 31, 37, 46],
+      "colors": ["Purple", "Turquoise", "Orange"],
+      "careerInsight": "Professional opportunities align with your adventurous strengths. Consider taking initiative on projects that showcase your Sagittarius vision.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Sagittarius optimism is particularly inspiring today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Jupiter trine Sun", "Sagittarius Moon aspects Fire signs", "Venus sextile Jupiter"],
+      "advice": "Embrace opportunities that align with your natural Sagittarius gifts. Trust your instincts and explore with confidence.",
+      "rating": {
+        "overall": 4.5,
+        "love": 4.1,
+        "career": 4.7,
+        "health": 4.2
+      }
+    },
+    {
+      "sign": "Capricorn",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Capricorn qualities of ambition and structure. Saturn empowers your natural Capricorn qualities through disciplined achievement. The cosmic balance encourages steady progress in your Capricorn journey. Trust your practical instincts and build methodically.",
+      "keywords": ["ambition", "structure", "responsibility"],
+      "luckyNumbers": [10, 21, 30, 39, 50],
+      "colors": ["Brown", "Black", "Dark green"],
+      "careerInsight": "Steady professional progress is favored. Focus on long-term goals and let your structured approach contribute to lasting success.",
+      "loveInsight": "Love flows naturally when you embrace your true Capricorn nature. Be authentic and committed in all romantic interactions.",
+      "energy": "Moderate",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Saturn trine Mercury", "Capricorn aspects Earth signs", "Moon conjunction Saturn"],
+      "advice": "Balance is key today. Honor your Capricorn nature while remaining flexible to cosmic currents and new opportunities.",
+      "rating": {
+        "overall": 3.9,
+        "love": 3.6,
+        "career": 4.3,
+        "health": 3.8
+      }
+    },
+    {
+      "sign": "Aquarius",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Aquarius qualities of innovation and humanity. Uranus empowers your natural Aquarius qualities through revolutionary insight. The cosmic energy flows harmoniously in your favor today, bringing opportunities for independence and meaningful connections.",
+      "keywords": ["innovation", "humanity", "independence"],
+      "luckyNumbers": [11, 22, 33, 40, 51],
+      "colors": ["Electric blue", "Silver", "Turquoise"],
+      "careerInsight": "Professional opportunities align with your innovative strengths. Consider taking initiative on projects that showcase your Aquarius originality.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Aquarius uniqueness is particularly attractive today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Uranus trine Moon", "Aquarius aspects Air signs", "Mercury conjunction Uranus"],
+      "advice": "Embrace opportunities that align with your natural Aquarius gifts. Trust your instincts and innovate with confidence.",
+      "rating": {
+        "overall": 4.2,
+        "love": 4.0,
+        "career": 4.4,
+        "health": 4.0
+      }
+    },
+    {
+      "sign": "Pisces",
+      "date": "2025-07-24",
+      "horoscope": "Today's waxing gibbous moon phase enhances your natural Pisces qualities of spirituality and compassion. Neptune empowers your natural Pisces qualities through intuitive wisdom. The cosmic energy flows harmoniously in your favor today, bringing opportunities for imagination and meaningful connections.",
+      "keywords": ["spirituality", "compassion", "imagination"],
+      "luckyNumbers": [12, 24, 36, 41, 48],
+      "colors": ["Sea green", "Lavender", "Silver"],
+      "careerInsight": "Professional opportunities align with your compassionate strengths. Consider taking initiative on projects that showcase your Pisces empathy.",
+      "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Pisces sensitivity is particularly healing today.",
+      "energy": "High",
+      "moonPhase": "waxing_gibbous",
+      "keyTransits": ["Neptune trine Venus", "Pisces Moon aspects Water signs", "Jupiter sextile Neptune"],
+      "advice": "Embrace opportunities that align with your natural Pisces gifts. Trust your instincts and flow with compassionate confidence.",
+      "rating": {
+        "overall": 4.1,
+        "love": 4.5,
+        "career": 3.8,
+        "health": 4.2
+      }
+    }
+  ],
+  "metadata": {
+    "moonPhase": "waxing_gibbous",
+    "moonSign": "Aquarius",
+    "keyTransits": ["Mars trine Jupiter", "Venus conjunction Moon", "Mercury sextile Neptune", "Sun square Saturn", "Jupiter trine Neptune"],
+    "generatedAt": "2025-07-24T12:00:00.000Z"
+  }
+}

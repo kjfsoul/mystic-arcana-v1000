@@ -1,0 +1,92 @@
+{
+  "natal_chart_reading": {
+    "name": "Natal Chart Reading",
+    "category": "Traditional",
+    "description": "Interpretation of birth chart planetary positions and aspects",
+    "howToUse": "Analyze planetary positions, signs, houses, and aspects to understand personality and life themes",
+    "accuracy": "High for personality traits, moderate for specific events",
+    "difficulty": "Intermediate",
+    "timeRequired": "1-2 hours",
+    "applications": [
+      "personality analysis",
+      "life path guidance",
+      "talent identification"
+    ],
+    "limitations": [
+      "requires accurate birth time",
+      "interpretive skill needed"
+    ]
+  },
+  "transit_analysis": {
+    "name": "Transit Analysis",
+    "category": "Predictive",
+    "description": "Analysis of current planetary movements and their effects on natal chart",
+    "howToUse": "Compare current planetary positions to natal chart positions",
+    "accuracy": "Moderate to high for timing general themes",
+    "difficulty": "Intermediate",
+    "timeRequired": "30-60 minutes",
+    "applications": [
+      "timing guidance",
+      "understanding current influences",
+      "planning decisions"
+    ],
+    "limitations": [
+      "general themes rather than specific events",
+      "requires natal chart"
+    ]
+  },
+  "synastry_comparison": {
+    "name": "Synastry Comparison",
+    "category": "Modern",
+    "description": "Comparison of two birth charts to assess relationship compatibility",
+    "howToUse": "Compare planetary positions and aspects between two charts",
+    "accuracy": "Moderate for relationship dynamics",
+    "difficulty": "Advanced",
+    "timeRequired": "2-3 hours",
+    "applications": [
+      "relationship compatibility",
+      "understanding dynamics",
+      "working through challenges"
+    ],
+    "limitations": [
+      "both birth times needed",
+      "complex interpretation"
+    ]
+  },
+  "solar_return": {
+    "name": "Solar Return Charts",
+    "category": "Predictive",
+    "description": "Annual chart cast for the moment the Sun returns to its natal position",
+    "howToUse": "Cast chart for Sun return each year, interpret themes for the coming year",
+    "accuracy": "Moderate for annual themes",
+    "difficulty": "Advanced",
+    "timeRequired": "1-2 hours",
+    "applications": [
+      "annual planning",
+      "understanding yearly themes",
+      "birthday guidance"
+    ],
+    "limitations": [
+      "one-year timeframe",
+      "general themes only"
+    ]
+  },
+  "horary_astrology": {
+    "name": "Horary Astrology",
+    "category": "Traditional",
+    "description": "Answering specific questions by casting a chart for the moment the question is asked",
+    "howToUse": "Cast chart for moment of question, apply specific horary rules for interpretation",
+    "accuracy": "High for well-formed questions",
+    "difficulty": "Advanced",
+    "timeRequired": "1-2 hours",
+    "applications": [
+      "answering specific questions",
+      "finding lost objects",
+      "decision making"
+    ],
+    "limitations": [
+      "requires specific question format",
+      "complex rules"
+    ]
+  }
+}

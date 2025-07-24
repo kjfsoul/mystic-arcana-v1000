@@ -1,0 +1,442 @@
+{
+  "sun": {
+    "name": "Sun",
+    "symbol": "☉",
+    "keywords": [
+      "identity",
+      "ego",
+      "vitality",
+      "consciousness",
+      "life force",
+      "father"
+    ],
+    "basicMeaning": "Core identity, ego, vitality, and conscious will",
+    "positiveTraits": [
+      "confident",
+      "generous",
+      "creative",
+      "noble",
+      "warm-hearted"
+    ],
+    "challengingTraits": [
+      "egotistical",
+      "domineering",
+      "arrogant",
+      "prideful",
+      "dramatic"
+    ],
+    "rulerOf": [
+      "Leo"
+    ],
+    "exaltedIn": "Aries",
+    "detrimentIn": "Aquarius",
+    "fallIn": "Libra",
+    "averageSpeed": "1° per day",
+    "orbitalPeriod": "1 year",
+    "mythology": "Apollo, god of light, music, and prophecy",
+    "modernInterpretation": "Core self, individuality, creative expression, leadership",
+    "retrograde": {
+      "meaning": "Not applicable",
+      "frequency": "Never retrograde",
+      "interpretation": "The Sun never goes retrograde from Earth's perspective"
+    }
+  },
+  "moon": {
+    "name": "Moon",
+    "symbol": "☽",
+    "keywords": [
+      "emotions",
+      "intuition",
+      "mother",
+      "home",
+      "past",
+      "subconscious"
+    ],
+    "basicMeaning": "Emotional nature, instincts, and subconscious patterns",
+    "positiveTraits": [
+      "nurturing",
+      "intuitive",
+      "compassionate",
+      "protective",
+      "empathetic"
+    ],
+    "challengingTraits": [
+      "moody",
+      "clingy",
+      "oversensitive",
+      "reactive",
+      "insecure"
+    ],
+    "rulerOf": [
+      "Cancer"
+    ],
+    "exaltedIn": "Taurus",
+    "detrimentIn": "Capricorn",
+    "fallIn": "Scorpio",
+    "averageSpeed": "13° per day",
+    "orbitalPeriod": "28 days",
+    "mythology": "Diana/Artemis, goddess of the hunt and moon",
+    "modernInterpretation": "Emotional intelligence, intuition, memory, nurturing instinct",
+    "retrograde": {
+      "meaning": "Not applicable",
+      "frequency": "Never retrograde",
+      "interpretation": "The Moon never goes retrograde from Earth's perspective"
+    }
+  },
+  "mercury": {
+    "name": "Mercury",
+    "symbol": "☿",
+    "keywords": [
+      "communication",
+      "mind",
+      "learning",
+      "travel",
+      "siblings",
+      "information"
+    ],
+    "basicMeaning": "Communication, thinking, and information processing",
+    "positiveTraits": [
+      "intelligent",
+      "articulate",
+      "adaptable",
+      "curious",
+      "witty"
+    ],
+    "challengingTraits": [
+      "scattered",
+      "superficial",
+      "gossipy",
+      "restless",
+      "indecisive"
+    ],
+    "rulerOf": [
+      "Gemini",
+      "Virgo"
+    ],
+    "exaltedIn": "Virgo",
+    "detrimentIn": [
+      "Sagittarius",
+      "Pisces"
+    ],
+    "fallIn": "Pisces",
+    "averageSpeed": "1.5° per day",
+    "orbitalPeriod": "88 days",
+    "mythology": "Hermes, messenger of the gods",
+    "modernInterpretation": "Cognitive function, communication style, learning process",
+    "retrograde": {
+      "meaning": "Communication and thinking processes turn inward",
+      "frequency": "3-4 times per year for 3 weeks",
+      "interpretation": "Review, revise, and reconsider communication matters"
+    }
+  },
+  "venus": {
+    "name": "Venus",
+    "symbol": "♀",
+    "keywords": [
+      "love",
+      "beauty",
+      "harmony",
+      "values",
+      "relationships",
+      "pleasure"
+    ],
+    "basicMeaning": "Love, beauty, values, and relationship harmony",
+    "positiveTraits": [
+      "loving",
+      "artistic",
+      "harmonious",
+      "diplomatic",
+      "charming"
+    ],
+    "challengingTraits": [
+      "vain",
+      "lazy",
+      "indulgent",
+      "possessive",
+      "superficial"
+    ],
+    "rulerOf": [
+      "Taurus",
+      "Libra"
+    ],
+    "exaltedIn": "Pisces",
+    "detrimentIn": [
+      "Scorpio",
+      "Aries"
+    ],
+    "fallIn": "Virgo",
+    "averageSpeed": "1.2° per day",
+    "orbitalPeriod": "225 days",
+    "mythology": "Aphrodite, goddess of love and beauty",
+    "modernInterpretation": "Aesthetic sense, relationship patterns, personal values",
+    "retrograde": {
+      "meaning": "Relationship and value reassessment period",
+      "frequency": "Every 18 months for 6 weeks",
+      "interpretation": "Reevaluate relationships and personal values"
+    }
+  },
+  "mars": {
+    "name": "Mars",
+    "symbol": "♂",
+    "keywords": [
+      "action",
+      "energy",
+      "courage",
+      "desire",
+      "anger",
+      "passion"
+    ],
+    "basicMeaning": "Drive, energy, assertion, and desire",
+    "positiveTraits": [
+      "courageous",
+      "passionate",
+      "determined",
+      "pioneering",
+      "athletic"
+    ],
+    "challengingTraits": [
+      "aggressive",
+      "impatient",
+      "impulsive",
+      "violent",
+      "reckless"
+    ],
+    "rulerOf": [
+      "Aries",
+      "Scorpio"
+    ],
+    "exaltedIn": "Capricorn",
+    "detrimentIn": [
+      "Libra",
+      "Taurus"
+    ],
+    "fallIn": "Cancer",
+    "averageSpeed": "0.5° per day",
+    "orbitalPeriod": "2 years",
+    "mythology": "Ares, god of war",
+    "modernInterpretation": "Motivation, sexual energy, assertiveness, competitive drive",
+    "retrograde": {
+      "meaning": "Energy and action turn inward, passion redirected",
+      "frequency": "Every 2 years for 2-3 months",
+      "interpretation": "Reassess goals, redirect energy, avoid major initiatives"
+    }
+  },
+  "jupiter": {
+    "name": "Jupiter",
+    "symbol": "♃",
+    "keywords": [
+      "expansion",
+      "wisdom",
+      "optimism",
+      "growth",
+      "abundance",
+      "philosophy"
+    ],
+    "basicMeaning": "Growth, expansion, wisdom, and good fortune",
+    "positiveTraits": [
+      "optimistic",
+      "generous",
+      "wise",
+      "philosophical",
+      "jovial"
+    ],
+    "challengingTraits": [
+      "excessive",
+      "overconfident",
+      "wasteful",
+      "preachy",
+      "lazy"
+    ],
+    "rulerOf": [
+      "Sagittarius",
+      "Pisces"
+    ],
+    "exaltedIn": "Cancer",
+    "detrimentIn": [
+      "Gemini",
+      "Virgo"
+    ],
+    "fallIn": "Capricorn",
+    "averageSpeed": "0.08° per day",
+    "orbitalPeriod": "12 years",
+    "mythology": "Zeus, king of the gods",
+    "modernInterpretation": "Personal growth, higher learning, spiritual expansion",
+    "retrograde": {
+      "meaning": "Internal growth and philosophical reflection",
+      "frequency": "Once per year for 4 months",
+      "interpretation": "Focus on inner wisdom and spiritual development"
+    }
+  },
+  "saturn": {
+    "name": "Saturn",
+    "symbol": "♄",
+    "keywords": [
+      "discipline",
+      "responsibility",
+      "limitation",
+      "structure",
+      "karma",
+      "time"
+    ],
+    "basicMeaning": "Structure, discipline, responsibility, and life lessons",
+    "positiveTraits": [
+      "disciplined",
+      "responsible",
+      "practical",
+      "persistent",
+      "wise"
+    ],
+    "challengingTraits": [
+      "rigid",
+      "pessimistic",
+      "cold",
+      "restrictive",
+      "fearful"
+    ],
+    "rulerOf": [
+      "Capricorn",
+      "Aquarius"
+    ],
+    "exaltedIn": "Libra",
+    "detrimentIn": [
+      "Cancer",
+      "Leo"
+    ],
+    "fallIn": "Aries",
+    "averageSpeed": "0.03° per day",
+    "orbitalPeriod": "29 years",
+    "mythology": "Kronos, god of time",
+    "modernInterpretation": "Life structure, career achievement, personal boundaries",
+    "retrograde": {
+      "meaning": "Internal restructuring and karmic review",
+      "frequency": "Once per year for 4.5 months",
+      "interpretation": "Reassess commitments, restructure life foundations"
+    }
+  },
+  "uranus": {
+    "name": "Uranus",
+    "symbol": "♅",
+    "keywords": [
+      "innovation",
+      "rebellion",
+      "freedom",
+      "change",
+      "technology",
+      "revolution"
+    ],
+    "basicMeaning": "Innovation, rebellion, sudden change, and freedom",
+    "positiveTraits": [
+      "innovative",
+      "independent",
+      "progressive",
+      "original",
+      "humanitarian"
+    ],
+    "challengingTraits": [
+      "rebellious",
+      "erratic",
+      "unstable",
+      "detached",
+      "revolutionary"
+    ],
+    "rulerOf": [
+      "Aquarius"
+    ],
+    "exaltedIn": "Scorpio",
+    "detrimentIn": "Leo",
+    "fallIn": "Taurus",
+    "averageSpeed": "0.01° per day",
+    "orbitalPeriod": "84 years",
+    "mythology": "Ouranos, primordial sky god",
+    "modernInterpretation": "Technological innovation, social progress, personal freedom",
+    "retrograde": {
+      "meaning": "Internal revolution and awakening",
+      "frequency": "Once per year for 5 months",
+      "interpretation": "Inner transformation, breakthrough insights"
+    }
+  },
+  "neptune": {
+    "name": "Neptune",
+    "symbol": "♆",
+    "keywords": [
+      "spirituality",
+      "illusion",
+      "dreams",
+      "compassion",
+      "sacrifice",
+      "transcendence"
+    ],
+    "basicMeaning": "Spirituality, imagination, dreams, and transcendence",
+    "positiveTraits": [
+      "spiritual",
+      "compassionate",
+      "imaginative",
+      "artistic",
+      "empathetic"
+    ],
+    "challengingTraits": [
+      "deceptive",
+      "confused",
+      "escapist",
+      "addictive",
+      "victim-like"
+    ],
+    "rulerOf": [
+      "Pisces"
+    ],
+    "exaltedIn": "Leo",
+    "detrimentIn": "Virgo",
+    "fallIn": "Aquarius",
+    "averageSpeed": "0.006° per day",
+    "orbitalPeriod": "165 years",
+    "mythology": "Poseidon, god of the sea",
+    "modernInterpretation": "Spiritual awakening, artistic inspiration, collective unconscious",
+    "retrograde": {
+      "meaning": "Spiritual introspection and disillusionment",
+      "frequency": "Once per year for 5-6 months",
+      "interpretation": "Clear illusions, deepen spiritual practice"
+    }
+  },
+  "pluto": {
+    "name": "Pluto",
+    "symbol": "♇",
+    "keywords": [
+      "transformation",
+      "power",
+      "death",
+      "rebirth",
+      "intensity",
+      "regeneration"
+    ],
+    "basicMeaning": "Transformation, power, death and rebirth cycles",
+    "positiveTraits": [
+      "transformative",
+      "powerful",
+      "regenerative",
+      "profound",
+      "healing"
+    ],
+    "challengingTraits": [
+      "obsessive",
+      "destructive",
+      "manipulative",
+      "controlling",
+      "vengeful"
+    ],
+    "rulerOf": [
+      "Scorpio"
+    ],
+    "exaltedIn": "Aries",
+    "detrimentIn": "Taurus",
+    "fallIn": "Libra",
+    "averageSpeed": "0.003° per day",
+    "orbitalPeriod": "248 years",
+    "mythology": "Hades, god of the underworld",
+    "modernInterpretation": "Psychological transformation, collective evolution, hidden power",
+    "retrograde": {
+      "meaning": "Deep psychological transformation",
+      "frequency": "Once per year for 5-6 months",
+      "interpretation": "Confront shadow self, deep healing work"
+    }
+  }
+}
