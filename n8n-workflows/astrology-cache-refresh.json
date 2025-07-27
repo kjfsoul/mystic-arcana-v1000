@@ -1,0 +1,394 @@
+{
+  "name": "Astrology Cache Refresh & Maintenance",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "ca6d7d6d-8e4a-4ac6-9a3e-1234567890ab",
+      "name": "Hourly Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.MYSTIC_ARCANA_API_URL }}/api/astrology/cache/clean",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "b1c2d3e4-5f6a-7b8c-9d0e-abcdefghijkl",
+      "name": "Clean Expired Cache",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.success }}",
+            "operation": "equal",
+            "rightValue": true
+          }
+        }
+      },
+      "id": "c2d3e4f5-6a7b-8c9d-0e1f-bcdefghijklm",
+      "name": "Cache Clean Success?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.MYSTIC_ARCANA_API_URL }}/api/astrology/transits",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "d3e4f5g6-7b8c-9d0e-1f2a-cdefghijklmn",
+      "name": "Refresh Current Transits",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MYSTIC_ARCANA_API_URL }}/api/astrology/cache/warm",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "popular_charts",
+              "value": "={{ $json.popular_birth_data || [] }}"
+            },
+            {
+              "name": "priority_locations",
+              "value": "[{\"city\": \"New York\", \"country\": \"USA\"}, {\"city\": \"London\", \"country\": \"UK\"}, {\"city\": \"Tokyo\", \"country\": \"Japan\"}, {\"city\": \"Sydney\", \"country\": \"Australia\"}]"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "e4f5g6h7-8c9d-0e1f-2a3b-defghijklmno",
+      "name": "Warm Popular Charts Cache",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.MYSTIC_ARCANA_API_URL }}/api/astrology/cache/stats",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "f5g6h7i8-9d0e-1f2a-3b4c-efghijklmnop",
+      "name": "Get Cache Statistics",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "={{ $json.data.cache_efficiency }}",
+            "operation": "smaller",
+            "rightValue": 70
+          }
+        }
+      },
+      "id": "g6h7i8j9-0e1f-2a3b-4c5d-fghijklmnopq",
+      "name": "Cache Efficiency Low?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SLACK_WEBHOOK_URL || $env.DISCORD_WEBHOOK_URL }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "🚨 Mystic Arcana Cache Alert: Cache efficiency is {{ $json.data.cache_efficiency }}% - below 70% threshold. Consider warming cache or checking system performance."
+            },
+            {
+              "name": "username",
+              "value": "Mystic Arcana Cache Monitor"
+            },
+            {
+              "name": "icon_emoji",
+              "value": ":crystal_ball:"
+            }
+          ]
+        }
+      },
+      "id": "h7i8j9k0-1f2a-3b4c-5d6e-ghijklmnopqr",
+      "name": "Alert Low Cache Performance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1340,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "task_completed",
+              "value": "cache_maintenance"
+            },
+            {
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}"
+            },
+            {
+              "name": "cache_efficiency",
+              "value": "={{ $('Get Cache Statistics').first().json.data.cache_efficiency }}%"
+            },
+            {
+              "name": "total_requests",
+              "value": "={{ $('Get Cache Statistics').first().json.data.total_requests }}"
+            },
+            {
+              "name": "birth_charts_cleaned",
+              "value": "={{ $('Clean Expired Cache').first().json.birth_charts_cleaned || 0 }}"
+            },
+            {
+              "name": "transits_cleaned",
+              "value": "={{ $('Clean Expired Cache').first().json.transits_cleaned || 0 }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "i8j9k0l1-2a3b-4c5d-6e7f-hijklmnopqrs",
+      "name": "Format Completion Report",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1120,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MYSTIC_ARCANA_API_URL }}/api/system/log",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "event_type",
+              "value": "cache_maintenance_completed"
+            },
+            {
+              "name": "details",
+              "value": "={{ $json }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n_scheduled_task"
+            }
+          ]
+        }
+      },
+      "id": "j9k0l1m2-3b4c-5d6e-7f8a-ijklmnopqrst",
+      "name": "Log Maintenance Activity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "message": "=Cache maintenance task failed at {{ new Date().toISOString() }}. Error: {{ $json.error || 'Unknown error' }}",
+        "options": {}
+      },
+      "id": "k0l1m2n3-4c5d-6e7f-8a9b-jklmnopqrstu",
+      "name": "Log Cache Failure",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        680,
+        450
+      ]
+    }
+  ],
+  "connections": {
+    "Hourly Trigger": {
+      "main": [
+        [
+          {
+            "node": "Clean Expired Cache",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Expired Cache": {
+      "main": [
+        [
+          {
+            "node": "Cache Clean Success?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cache Clean Success?": {
+      "main": [
+        [
+          {
+            "node": "Refresh Current Transits",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Warm Popular Charts Cache",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Cache Statistics",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Cache Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Cache Statistics": {
+      "main": [
+        [
+          {
+            "node": "Cache Efficiency Low?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format Completion Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cache Efficiency Low?": {
+      "main": [
+        [
+          {
+            "node": "Alert Low Cache Performance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Completion Report": {
+      "main": [
+        [
+          {
+            "node": "Log Maintenance Activity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": {
+      "errorWorkflow": "",
+      "continueOnFail": false
+    }
+  },
+  "staticData": {},
+  "tags": [
+    {
+      "createdAt": "2025-01-26T09:30:00.000Z",
+      "updatedAt": "2025-01-26T09:30:00.000Z",
+      "id": "cache-maintenance",
+      "name": "Cache Maintenance"
+    },
+    {
+      "createdAt": "2025-01-26T09:30:00.000Z", 
+      "updatedAt": "2025-01-26T09:30:00.000Z",
+      "id": "astrology-automation",
+      "name": "Astrology Automation"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-01-26T09:30:00.000Z",
+  "versionId": "1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Automated cache maintenance for Mystic Arcana astrology calculations. Runs hourly to clean expired cache entries, warm popular charts, monitor performance, and alert on low cache efficiency.",
+    "categories": ["Automation", "Monitoring", "Performance"],
+    "variables": {
+      "required": [
+        "MYSTIC_ARCANA_API_URL"
+      ],
+      "optional": [
+        "SLACK_WEBHOOK_URL",
+        "DISCORD_WEBHOOK_URL"
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "testSubject": "Albert Einstein",
+  "totalRequests": 5,
+  "cacheHits": 0,
+  "cacheMisses": 5,
+  "cacheEfficiency": 0,
+  "averageResponseTime": 954,
+  "fastestResponse": 859,
+  "slowestResponse": 1107,
+  "totalTimeSaved": 0,
+  "results": [
+    {
+      "requestNumber": 1,
+      "responseTime": 1107,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T06:44:07.878Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 2,
+      "responseTime": 1020,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T06:44:09.398Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 3,
+      "responseTime": 859,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T06:44:10.758Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 4,
+      "responseTime": 892,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T06:44:12.151Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 5,
+      "responseTime": 891,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T06:44:13.543Z",
+      "responseSize": 760
+    }
+  ],
+  "testStartTime": "2025-07-26T06:44:05.309Z",
+  "testEndTime": "2025-07-26T06:44:13.544Z",
+  "apiEndpoint": "http://localhost:3000/api/astrology/birth-chart"
+}

@@ -31,7 +31,13 @@
     "astrology:setup": "./scripts/setup-astrology.sh",
     "astrology:test": "source venv-astrology/bin/activate && python src/services/astrology-python/test_basic.py",
     "astrology:test-chart": "source venv-astrology/bin/activate && python src/services/astrology-python/simple_astrology.py birth-chart '{\"name\":\"Test User\",\"birthDate\":\"1990-06-15T10:30:00\",\"city\":\"New York\",\"country\":\"USA\"}'",
-    "astrology:test-transits": "source venv-astrology/bin/activate && python src/services/astrology-python/simple_astrology.py transits"
+    "astrology:test-transits": "source venv-astrology/bin/activate && python src/services/astrology-python/simple_astrology.py transits",
+    "test:crew": "npx tsx scripts/test-crew-system.ts",
+    "crew:generate": "curl -X POST http://localhost:3000/api/crew -H 'Content-Type: application/json' -d '{\"task\": \"generateCrewTarotDeck\"}'",
+    "validate:einstein": "npx tsx scripts/validate-einstein-chart.ts",
+    "astrology:validate": "npx tsx scripts/astrology-validation-summary.ts",
+    "test:chart-component": "npx tsx scripts/test-interactive-chart.ts",
+    "test:caching-einstein": "npx tsx scripts/test-caching-einstein.ts"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -56,7 +62,8 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^9.1.0",
     "remark-gfm": "^4.0.1",
-    "stripe": "^18.3.0"
+    "stripe": "^18.3.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

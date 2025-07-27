@@ -1,0 +1,2281 @@
+{
+  "operationId": "crew_1753504388497",
+  "taskName": "generateCrewTarotDeck",
+  "results": [
+    {
+      "taskId": "blueprint_generation",
+      "success": true,
+      "data": {
+        "deckId": "00000000-0000-0000-0000-000000000002",
+        "name": "Crew Tarot",
+        "theme": "cyberpunk-spiritual",
+        "description": "AI and technology themed tarot deck for modern digital workers",
+        "visualStyle": {
+          "colorPalette": {
+            "primary": [
+              "#00FFFF",
+              "#8A2BE2",
+              "#00FF00"
+            ],
+            "secondary": [
+              "#C0C0C0",
+              "#0A0A0A",
+              "#FFFFFF"
+            ]
+          },
+          "aesthetic": "cyberpunk-mysticism",
+          "effects": [
+            "bioluminescent-glow",
+            "circuit-patterns",
+            "holographic-effects"
+          ],
+          "background": "dark-void-with-data-particles"
+        },
+        "suits": {
+          "servers": {
+            "originalSuit": "wands",
+            "theme": "Infrastructure and deployment",
+            "element": "fire",
+            "color": "#FF4500",
+            "symbolism": "Power, scaling, performance, infrastructure"
+          },
+          "networks": {
+            "originalSuit": "cups",
+            "theme": "Communication and APIs",
+            "element": "water",
+            "color": "#00BFFF",
+            "symbolism": "Flow, connection, collaboration, data streams"
+          },
+          "code": {
+            "originalSuit": "swords",
+            "theme": "Logic and algorithms",
+            "element": "air",
+            "color": "#FFD700",
+            "symbolism": "Intelligence, cutting through problems, logic"
+          },
+          "data": {
+            "originalSuit": "pentacles",
+            "theme": "Databases and storage",
+            "element": "earth",
+            "color": "#32CD32",
+            "symbolism": "Foundation, material resources, information"
+          }
+        },
+        "majorArcana": {
+          "10": {
+            "name": "The Release Cycle",
+            "concept": "Development cycles",
+            "elements": [
+              "spinning-wheel",
+              "version-numbers",
+              "ci-integration"
+            ]
+          },
+          "11": {
+            "name": "The Code Review",
+            "concept": "Quality balance",
+            "elements": [
+              "quality-scales",
+              "testing-shields",
+              "fairness-algorithms"
+            ]
+          },
+          "12": {
+            "name": "The Debugging Session",
+            "concept": "New perspective",
+            "elements": [
+              "inverted-code-trees",
+              "breakpoints",
+              "revelation-logs"
+            ]
+          },
+          "13": {
+            "name": "The Legacy Migration",
+            "concept": "System transformation",
+            "elements": [
+              "decomissioned-servers",
+              "phoenix-deployment",
+              "architecture-evolution"
+            ]
+          },
+          "14": {
+            "name": "The A/B Test",
+            "concept": "Balanced experimentation",
+            "elements": [
+              "split-traffic",
+              "balanced-metrics",
+              "gradual-rollouts"
+            ]
+          },
+          "15": {
+            "name": "The Technical Debt",
+            "concept": "Accumulated shortcuts",
+            "elements": [
+              "code-chains",
+              "debt-metrics",
+              "refactoring-light"
+            ]
+          },
+          "16": {
+            "name": "The Production Incident",
+            "concept": "System failure response",
+            "elements": [
+              "alert-storms",
+              "cascading-failures",
+              "response-teams"
+            ]
+          },
+          "17": {
+            "name": "The Open Source Project",
+            "concept": "Community brilliance",
+            "elements": [
+              "github-stars",
+              "contributor-networks",
+              "collaborative-light"
+            ]
+          },
+          "18": {
+            "name": "The Staging Environment",
+            "concept": "Mysterious reflection",
+            "elements": [
+              "mirrored-data",
+              "test-doubles",
+              "phantom-bugs"
+            ]
+          },
+          "19": {
+            "name": "The Production Release",
+            "concept": "Successful deployment",
+            "elements": [
+              "green-lights",
+              "satisfaction-rays",
+              "success-metrics"
+            ]
+          },
+          "20": {
+            "name": "The Retrospective",
+            "concept": "Team reflection",
+            "elements": [
+              "feedback-loops",
+              "learning-spirals",
+              "team-evolution"
+            ]
+          },
+          "21": {
+            "name": "The Complete Product",
+            "concept": "Fully realized system",
+            "elements": [
+              "global-users",
+              "complete-features",
+              "seamless-integration"
+            ]
+          },
+          "00": {
+            "name": "The New Developer",
+            "concept": "Beginning journey in tech",
+            "elements": [
+              "laptop",
+              "holographic-backpack",
+              "binary-streams"
+            ]
+          },
+          "01": {
+            "name": "The AI Orchestrator",
+            "concept": "Manifesting through AI",
+            "elements": [
+              "neural-networks",
+              "data-streams",
+              "orchestration-dashboard"
+            ]
+          },
+          "02": {
+            "name": "The Data Oracle",
+            "concept": "Keeper of knowledge",
+            "elements": [
+              "data-crystals",
+              "encrypted-locks",
+              "neural-crown"
+            ]
+          },
+          "03": {
+            "name": "The Creative Generator",
+            "concept": "AI creativity",
+            "elements": [
+              "generative-flowers",
+              "algorithmic-vines",
+              "creative-sparks"
+            ]
+          },
+          "04": {
+            "name": "The System Administrator",
+            "concept": "Infrastructure control",
+            "elements": [
+              "server-throne",
+              "network-topology",
+              "security-shields"
+            ]
+          },
+          "05": {
+            "name": "The Lead Architect",
+            "concept": "Teaching patterns",
+            "elements": [
+              "design-mandalas",
+              "code-tablets",
+              "architectural-blueprints"
+            ]
+          },
+          "06": {
+            "name": "The API Connection",
+            "concept": "Perfect integration",
+            "elements": [
+              "data-handshakes",
+              "synchronized-protocols",
+              "heart-packets"
+            ]
+          },
+          "07": {
+            "name": "The Deployment Pipeline",
+            "concept": "Automated delivery",
+            "elements": [
+              "pipeline-tracks",
+              "testing-gates",
+              "deployment-banners"
+            ]
+          },
+          "08": {
+            "name": "The Load Balancer",
+            "concept": "Gentle system management",
+            "elements": [
+              "traffic-streams",
+              "server-clusters",
+              "balancing-scales"
+            ]
+          },
+          "09": {
+            "name": "The Solo Contributor",
+            "concept": "Deep work focus",
+            "elements": [
+              "noise-canceling-glow",
+              "focus-cone",
+              "problem-solving-aura"
+            ]
+          }
+        }
+      },
+      "duration": 0,
+      "timestamp": "2025-07-26T04:33:08.497Z"
+    },
+    {
+      "taskId": "store_metadata",
+      "success": false,
+      "error": "DataOracle deck storage failed: [object Object]",
+      "duration": 229,
+      "timestamp": "2025-07-26T04:33:08.497Z"
+    },
+    {
+      "taskId": "generate_prompts",
+      "success": true,
+      "data": {
+        "baseStyle": "Digital tarot card in cyberpunk mysticism style, cyberpunk-mysticism, featuring bioluminescent-glow, circuit-patterns, holographic-effects, color palette #00FFFF, #8A2BE2, #00FF00, dark-void-with-data-particles, high contrast, bioluminescent glow, sacred geometry, 4K resolution, mystical technology fusion",
+        "majorArcana": [
+          {
+            "cardId": "10-the-release-cycle",
+            "name": "The Release Cycle",
+            "prompt": "The Release Cycle tarot card, Development cycles, featuring spinning-wheel, version-numbers, ci-integration, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "11-the-code-review",
+            "name": "The Code Review",
+            "prompt": "The Code Review tarot card, Quality balance, featuring quality-scales, testing-shields, fairness-algorithms, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "12-the-debugging-session",
+            "name": "The Debugging Session",
+            "prompt": "The Debugging Session tarot card, New perspective, featuring inverted-code-trees, breakpoints, revelation-logs, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "13-the-legacy-migration",
+            "name": "The Legacy Migration",
+            "prompt": "The Legacy Migration tarot card, System transformation, featuring decomissioned-servers, phoenix-deployment, architecture-evolution, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "14-the-a/b-test",
+            "name": "The A/B Test",
+            "prompt": "The A/B Test tarot card, Balanced experimentation, featuring split-traffic, balanced-metrics, gradual-rollouts, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "15-the-technical-debt",
+            "name": "The Technical Debt",
+            "prompt": "The Technical Debt tarot card, Accumulated shortcuts, featuring code-chains, debt-metrics, refactoring-light, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "16-the-production-incident",
+            "name": "The Production Incident",
+            "prompt": "The Production Incident tarot card, System failure response, featuring alert-storms, cascading-failures, response-teams, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "17-the-open-source-project",
+            "name": "The Open Source Project",
+            "prompt": "The Open Source Project tarot card, Community brilliance, featuring github-stars, contributor-networks, collaborative-light, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "18-the-staging-environment",
+            "name": "The Staging Environment",
+            "prompt": "The Staging Environment tarot card, Mysterious reflection, featuring mirrored-data, test-doubles, phantom-bugs, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "19-the-production-release",
+            "name": "The Production Release",
+            "prompt": "The Production Release tarot card, Successful deployment, featuring green-lights, satisfaction-rays, success-metrics, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "20-the-retrospective",
+            "name": "The Retrospective",
+            "prompt": "The Retrospective tarot card, Team reflection, featuring feedback-loops, learning-spirals, team-evolution, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "21-the-complete-product",
+            "name": "The Complete Product",
+            "prompt": "The Complete Product tarot card, Fully realized system, featuring global-users, complete-features, seamless-integration, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "00-the-new-developer",
+            "name": "The New Developer",
+            "prompt": "The New Developer tarot card, Beginning journey in tech, featuring laptop, holographic-backpack, binary-streams, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "01-the-ai-orchestrator",
+            "name": "The AI Orchestrator",
+            "prompt": "The AI Orchestrator tarot card, Manifesting through AI, featuring neural-networks, data-streams, orchestration-dashboard, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "02-the-data-oracle",
+            "name": "The Data Oracle",
+            "prompt": "The Data Oracle tarot card, Keeper of knowledge, featuring data-crystals, encrypted-locks, neural-crown, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "03-the-creative-generator",
+            "name": "The Creative Generator",
+            "prompt": "The Creative Generator tarot card, AI creativity, featuring generative-flowers, algorithmic-vines, creative-sparks, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "04-the-system-administrator",
+            "name": "The System Administrator",
+            "prompt": "The System Administrator tarot card, Infrastructure control, featuring server-throne, network-topology, security-shields, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "05-the-lead-architect",
+            "name": "The Lead Architect",
+            "prompt": "The Lead Architect tarot card, Teaching patterns, featuring design-mandalas, code-tablets, architectural-blueprints, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "06-the-api-connection",
+            "name": "The API Connection",
+            "prompt": "The API Connection tarot card, Perfect integration, featuring data-handshakes, synchronized-protocols, heart-packets, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "07-the-deployment-pipeline",
+            "name": "The Deployment Pipeline",
+            "prompt": "The Deployment Pipeline tarot card, Automated delivery, featuring pipeline-tracks, testing-gates, deployment-banners, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "08-the-load-balancer",
+            "name": "The Load Balancer",
+            "prompt": "The Load Balancer tarot card, Gentle system management, featuring traffic-streams, server-clusters, balancing-scales, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          },
+          {
+            "cardId": "09-the-solo-contributor",
+            "name": "The Solo Contributor",
+            "prompt": "The Solo Contributor tarot card, Deep work focus, featuring noise-canceling-glow, focus-cone, problem-solving-aura, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+          }
+        ],
+        "minorArcana": [
+          {
+            "suit": "servers",
+            "cards": [
+              {
+                "cardId": "ace-of-wands",
+                "name": "Ace of Wands",
+                "suit": "servers",
+                "prompt": "Ace of Wands tarot card, Pure essence of infrastructure and deployment, single server glowing with fire energy, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "2-of-wands",
+                "name": "2 of Wands",
+                "suit": "servers",
+                "prompt": "2 of Wands tarot card, 2 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "3-of-wands",
+                "name": "3 of Wands",
+                "suit": "servers",
+                "prompt": "3 of Wands tarot card, 3 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "4-of-wands",
+                "name": "4 of Wands",
+                "suit": "servers",
+                "prompt": "4 of Wands tarot card, 4 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "5-of-wands",
+                "name": "5 of Wands",
+                "suit": "servers",
+                "prompt": "5 of Wands tarot card, 5 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "6-of-wands",
+                "name": "6 of Wands",
+                "suit": "servers",
+                "prompt": "6 of Wands tarot card, 6 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "7-of-wands",
+                "name": "7 of Wands",
+                "suit": "servers",
+                "prompt": "7 of Wands tarot card, 7 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "8-of-wands",
+                "name": "8 of Wands",
+                "suit": "servers",
+                "prompt": "8 of Wands tarot card, 8 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "9-of-wands",
+                "name": "9 of Wands",
+                "suit": "servers",
+                "prompt": "9 of Wands tarot card, 9 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "10-of-wands",
+                "name": "10 of Wands",
+                "suit": "servers",
+                "prompt": "10 of Wands tarot card, 10 servers arranged in infrastructure and deployment pattern, Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "page-of-wands",
+                "name": "Page of Wands",
+                "suit": "servers",
+                "prompt": "Page of Wands tarot card, Page figure mastering infrastructure and deployment, embodying Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "knight-of-wands",
+                "name": "Knight of Wands",
+                "suit": "servers",
+                "prompt": "Knight of Wands tarot card, Knight figure mastering infrastructure and deployment, embodying Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "queen-of-wands",
+                "name": "Queen of Wands",
+                "suit": "servers",
+                "prompt": "Queen of Wands tarot card, Queen figure mastering infrastructure and deployment, embodying Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "king-of-wands",
+                "name": "King of Wands",
+                "suit": "servers",
+                "prompt": "King of Wands tarot card, King figure mastering infrastructure and deployment, embodying Power, scaling, performance, infrastructure, cyberpunk tarot style, #FF4500 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              }
+            ]
+          },
+          {
+            "suit": "networks",
+            "cards": [
+              {
+                "cardId": "ace-of-cups",
+                "name": "Ace of Cups",
+                "suit": "networks",
+                "prompt": "Ace of Cups tarot card, Pure essence of communication and apis, single network glowing with water energy, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "2-of-cups",
+                "name": "2 of Cups",
+                "suit": "networks",
+                "prompt": "2 of Cups tarot card, 2 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "3-of-cups",
+                "name": "3 of Cups",
+                "suit": "networks",
+                "prompt": "3 of Cups tarot card, 3 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "4-of-cups",
+                "name": "4 of Cups",
+                "suit": "networks",
+                "prompt": "4 of Cups tarot card, 4 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "5-of-cups",
+                "name": "5 of Cups",
+                "suit": "networks",
+                "prompt": "5 of Cups tarot card, 5 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "6-of-cups",
+                "name": "6 of Cups",
+                "suit": "networks",
+                "prompt": "6 of Cups tarot card, 6 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "7-of-cups",
+                "name": "7 of Cups",
+                "suit": "networks",
+                "prompt": "7 of Cups tarot card, 7 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "8-of-cups",
+                "name": "8 of Cups",
+                "suit": "networks",
+                "prompt": "8 of Cups tarot card, 8 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "9-of-cups",
+                "name": "9 of Cups",
+                "suit": "networks",
+                "prompt": "9 of Cups tarot card, 9 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "10-of-cups",
+                "name": "10 of Cups",
+                "suit": "networks",
+                "prompt": "10 of Cups tarot card, 10 networks arranged in communication and apis pattern, Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "page-of-cups",
+                "name": "Page of Cups",
+                "suit": "networks",
+                "prompt": "Page of Cups tarot card, Page figure mastering communication and apis, embodying Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "knight-of-cups",
+                "name": "Knight of Cups",
+                "suit": "networks",
+                "prompt": "Knight of Cups tarot card, Knight figure mastering communication and apis, embodying Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "queen-of-cups",
+                "name": "Queen of Cups",
+                "suit": "networks",
+                "prompt": "Queen of Cups tarot card, Queen figure mastering communication and apis, embodying Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "king-of-cups",
+                "name": "King of Cups",
+                "suit": "networks",
+                "prompt": "King of Cups tarot card, King figure mastering communication and apis, embodying Flow, connection, collaboration, data streams, cyberpunk tarot style, #00BFFF dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              }
+            ]
+          },
+          {
+            "suit": "code",
+            "cards": [
+              {
+                "cardId": "ace-of-swords",
+                "name": "Ace of Swords",
+                "suit": "code",
+                "prompt": "Ace of Swords tarot card, Pure essence of logic and algorithms, single cod glowing with air energy, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "2-of-swords",
+                "name": "2 of Swords",
+                "suit": "code",
+                "prompt": "2 of Swords tarot card, 2 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "3-of-swords",
+                "name": "3 of Swords",
+                "suit": "code",
+                "prompt": "3 of Swords tarot card, 3 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "4-of-swords",
+                "name": "4 of Swords",
+                "suit": "code",
+                "prompt": "4 of Swords tarot card, 4 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "5-of-swords",
+                "name": "5 of Swords",
+                "suit": "code",
+                "prompt": "5 of Swords tarot card, 5 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "6-of-swords",
+                "name": "6 of Swords",
+                "suit": "code",
+                "prompt": "6 of Swords tarot card, 6 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "7-of-swords",
+                "name": "7 of Swords",
+                "suit": "code",
+                "prompt": "7 of Swords tarot card, 7 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "8-of-swords",
+                "name": "8 of Swords",
+                "suit": "code",
+                "prompt": "8 of Swords tarot card, 8 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "9-of-swords",
+                "name": "9 of Swords",
+                "suit": "code",
+                "prompt": "9 of Swords tarot card, 9 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "10-of-swords",
+                "name": "10 of Swords",
+                "suit": "code",
+                "prompt": "10 of Swords tarot card, 10 code arranged in logic and algorithms pattern, Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "page-of-swords",
+                "name": "Page of Swords",
+                "suit": "code",
+                "prompt": "Page of Swords tarot card, Page figure mastering logic and algorithms, embodying Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "knight-of-swords",
+                "name": "Knight of Swords",
+                "suit": "code",
+                "prompt": "Knight of Swords tarot card, Knight figure mastering logic and algorithms, embodying Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "queen-of-swords",
+                "name": "Queen of Swords",
+                "suit": "code",
+                "prompt": "Queen of Swords tarot card, Queen figure mastering logic and algorithms, embodying Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "king-of-swords",
+                "name": "King of Swords",
+                "suit": "code",
+                "prompt": "King of Swords tarot card, King figure mastering logic and algorithms, embodying Intelligence, cutting through problems, logic, cyberpunk tarot style, #FFD700 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              }
+            ]
+          },
+          {
+            "suit": "data",
+            "cards": [
+              {
+                "cardId": "ace-of-pentacles",
+                "name": "Ace of Pentacles",
+                "suit": "data",
+                "prompt": "Ace of Pentacles tarot card, Pure essence of databases and storage, single dat glowing with earth energy, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "2-of-pentacles",
+                "name": "2 of Pentacles",
+                "suit": "data",
+                "prompt": "2 of Pentacles tarot card, 2 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "3-of-pentacles",
+                "name": "3 of Pentacles",
+                "suit": "data",
+                "prompt": "3 of Pentacles tarot card, 3 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "4-of-pentacles",
+                "name": "4 of Pentacles",
+                "suit": "data",
+                "prompt": "4 of Pentacles tarot card, 4 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "5-of-pentacles",
+                "name": "5 of Pentacles",
+                "suit": "data",
+                "prompt": "5 of Pentacles tarot card, 5 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "6-of-pentacles",
+                "name": "6 of Pentacles",
+                "suit": "data",
+                "prompt": "6 of Pentacles tarot card, 6 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "7-of-pentacles",
+                "name": "7 of Pentacles",
+                "suit": "data",
+                "prompt": "7 of Pentacles tarot card, 7 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "8-of-pentacles",
+                "name": "8 of Pentacles",
+                "suit": "data",
+                "prompt": "8 of Pentacles tarot card, 8 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "9-of-pentacles",
+                "name": "9 of Pentacles",
+                "suit": "data",
+                "prompt": "9 of Pentacles tarot card, 9 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "10-of-pentacles",
+                "name": "10 of Pentacles",
+                "suit": "data",
+                "prompt": "10 of Pentacles tarot card, 10 data arranged in databases and storage pattern, Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "page-of-pentacles",
+                "name": "Page of Pentacles",
+                "suit": "data",
+                "prompt": "Page of Pentacles tarot card, Page figure mastering databases and storage, embodying Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "knight-of-pentacles",
+                "name": "Knight of Pentacles",
+                "suit": "data",
+                "prompt": "Knight of Pentacles tarot card, Knight figure mastering databases and storage, embodying Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "queen-of-pentacles",
+                "name": "Queen of Pentacles",
+                "suit": "data",
+                "prompt": "Queen of Pentacles tarot card, Queen figure mastering databases and storage, embodying Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              },
+              {
+                "cardId": "king-of-pentacles",
+                "name": "King of Pentacles",
+                "suit": "data",
+                "prompt": "King of Pentacles tarot card, King figure mastering databases and storage, embodying Foundation, material resources, information, cyberpunk tarot style, #32CD32 dominant color, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art"
+              }
+            ]
+          }
+        ]
+      },
+      "duration": 0,
+      "timestamp": "2025-07-26T04:33:08.726Z"
+    },
+    {
+      "taskId": "generate_cards",
+      "success": true,
+      "data": {
+        "cards": [
+          {
+            "id": "10-the-release-cycle",
+            "name": "The Release Cycle",
+            "arcana": "major",
+            "number": 0,
+            "frontImage": "/tarot/deck-crew/major/10-the-release-cycle.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Release Cycle represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "11-the-code-review",
+            "name": "The Code Review",
+            "arcana": "major",
+            "number": 1,
+            "frontImage": "/tarot/deck-crew/major/11-the-code-review.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Code Review represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "12-the-debugging-session",
+            "name": "The Debugging Session",
+            "arcana": "major",
+            "number": 2,
+            "frontImage": "/tarot/deck-crew/major/12-the-debugging-session.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Debugging Session represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "13-the-legacy-migration",
+            "name": "The Legacy Migration",
+            "arcana": "major",
+            "number": 3,
+            "frontImage": "/tarot/deck-crew/major/13-the-legacy-migration.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Legacy Migration represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "14-the-a/b-test",
+            "name": "The A/B Test",
+            "arcana": "major",
+            "number": 4,
+            "frontImage": "/tarot/deck-crew/major/14-the-a/b-test.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The A/B Test represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "15-the-technical-debt",
+            "name": "The Technical Debt",
+            "arcana": "major",
+            "number": 5,
+            "frontImage": "/tarot/deck-crew/major/15-the-technical-debt.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Technical Debt represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "16-the-production-incident",
+            "name": "The Production Incident",
+            "arcana": "major",
+            "number": 6,
+            "frontImage": "/tarot/deck-crew/major/16-the-production-incident.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Production Incident represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "17-the-open-source-project",
+            "name": "The Open Source Project",
+            "arcana": "major",
+            "number": 7,
+            "frontImage": "/tarot/deck-crew/major/17-the-open-source-project.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Open Source Project represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "18-the-staging-environment",
+            "name": "The Staging Environment",
+            "arcana": "major",
+            "number": 8,
+            "frontImage": "/tarot/deck-crew/major/18-the-staging-environment.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Staging Environment represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "19-the-production-release",
+            "name": "The Production Release",
+            "arcana": "major",
+            "number": 9,
+            "frontImage": "/tarot/deck-crew/major/19-the-production-release.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Production Release represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "20-the-retrospective",
+            "name": "The Retrospective",
+            "arcana": "major",
+            "number": 10,
+            "frontImage": "/tarot/deck-crew/major/20-the-retrospective.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Retrospective represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "21-the-complete-product",
+            "name": "The Complete Product",
+            "arcana": "major",
+            "number": 11,
+            "frontImage": "/tarot/deck-crew/major/21-the-complete-product.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Complete Product represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "00-the-new-developer",
+            "name": "The New Developer",
+            "arcana": "major",
+            "number": 12,
+            "frontImage": "/tarot/deck-crew/major/00-the-new-developer.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Beginning your tech journey, embracing new technologies, taking calculated risks in coding",
+              "reversed": "Imposter syndrome, fear of new frameworks, reckless deployment",
+              "keywords": [
+                "new beginnings",
+                "learning",
+                "curiosity",
+                "digital faith"
+              ]
+            },
+            "description": "The New Developer represents the beginning of your technological journey, embracing curiosity and the courage to learn new systems."
+          },
+          {
+            "id": "01-the-ai-orchestrator",
+            "name": "The AI Orchestrator",
+            "arcana": "major",
+            "number": 13,
+            "frontImage": "/tarot/deck-crew/major/01-the-ai-orchestrator.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Harnessing AI tools effectively, manifesting through automation, skillful prompt engineering",
+              "reversed": "Over-reliance on AI, poor tool integration, untapped AI potential",
+              "keywords": [
+                "AI mastery",
+                "automation",
+                "efficiency",
+                "digital manifestation"
+              ]
+            },
+            "description": "The AI Orchestrator embodies the power to manifest your goals through intelligent automation and AI collaboration."
+          },
+          {
+            "id": "02-the-data-oracle",
+            "name": "The Data Oracle",
+            "arcana": "major",
+            "number": 14,
+            "frontImage": "/tarot/deck-crew/major/02-the-data-oracle.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Data Oracle represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "03-the-creative-generator",
+            "name": "The Creative Generator",
+            "arcana": "major",
+            "number": 15,
+            "frontImage": "/tarot/deck-crew/major/03-the-creative-generator.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Creative Generator represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "04-the-system-administrator",
+            "name": "The System Administrator",
+            "arcana": "major",
+            "number": 16,
+            "frontImage": "/tarot/deck-crew/major/04-the-system-administrator.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The System Administrator represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "05-the-lead-architect",
+            "name": "The Lead Architect",
+            "arcana": "major",
+            "number": 17,
+            "frontImage": "/tarot/deck-crew/major/05-the-lead-architect.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Lead Architect represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "06-the-api-connection",
+            "name": "The API Connection",
+            "arcana": "major",
+            "number": 18,
+            "frontImage": "/tarot/deck-crew/major/06-the-api-connection.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The API Connection represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "07-the-deployment-pipeline",
+            "name": "The Deployment Pipeline",
+            "arcana": "major",
+            "number": 19,
+            "frontImage": "/tarot/deck-crew/major/07-the-deployment-pipeline.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Deployment Pipeline represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "08-the-load-balancer",
+            "name": "The Load Balancer",
+            "arcana": "major",
+            "number": 20,
+            "frontImage": "/tarot/deck-crew/major/08-the-load-balancer.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Load Balancer represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "09-the-solo-contributor",
+            "name": "The Solo Contributor",
+            "arcana": "major",
+            "number": 21,
+            "frontImage": "/tarot/deck-crew/major/09-the-solo-contributor.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Positive technological progress, system harmony, digital growth",
+              "reversed": "Technical challenges, system conflicts, digital obstacles",
+              "keywords": [
+                "technology",
+                "progress",
+                "systems",
+                "digital"
+              ]
+            },
+            "description": "The Solo Contributor represents transformation and growth in the digital realm."
+          },
+          {
+            "id": "ace-of-wands",
+            "name": "Ace of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/ace-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "2-of-wands",
+            "name": "2 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/2-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "3-of-wands",
+            "name": "3 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/3-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "4-of-wands",
+            "name": "4 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/4-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "5-of-wands",
+            "name": "5 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/5-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "6-of-wands",
+            "name": "6 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/6-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "7-of-wands",
+            "name": "7 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/7-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "8-of-wands",
+            "name": "8 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/8-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "9-of-wands",
+            "name": "9 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/9-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "10-of-wands",
+            "name": "10 of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/10-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "page-of-wands",
+            "name": "Page of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/page-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "knight-of-wands",
+            "name": "Knight of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/knight-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "queen-of-wands",
+            "name": "Queen of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/queen-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "king-of-wands",
+            "name": "King of Wands",
+            "arcana": "minor",
+            "suit": "wands",
+            "frontImage": "/tarot/deck-crew/servers/king-of-wands.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Infrastructure growth, scaling systems, reliable deployments, team leadership",
+              "reversed": "System failures, poor architecture, deployment issues, infrastructure debt",
+              "keywords": [
+                "infrastructure",
+                "scaling",
+                "reliability",
+                "architecture"
+              ]
+            },
+            "description": "This card speaks to infrastructure, scaling, and the foundation of reliable systems."
+          },
+          {
+            "id": "ace-of-cups",
+            "name": "Ace of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/ace-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "2-of-cups",
+            "name": "2 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/2-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "3-of-cups",
+            "name": "3 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/3-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "4-of-cups",
+            "name": "4 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/4-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "5-of-cups",
+            "name": "5 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/5-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "6-of-cups",
+            "name": "6 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/6-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "7-of-cups",
+            "name": "7 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/7-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "8-of-cups",
+            "name": "8 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/8-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "9-of-cups",
+            "name": "9 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/9-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "10-of-cups",
+            "name": "10 of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/10-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "page-of-cups",
+            "name": "Page of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/page-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "knight-of-cups",
+            "name": "Knight of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/knight-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "queen-of-cups",
+            "name": "Queen of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/queen-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "king-of-cups",
+            "name": "King of Cups",
+            "arcana": "minor",
+            "suit": "cups",
+            "frontImage": "/tarot/deck-crew/networks/king-of-cups.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Smooth communication, API harmony, data flow, collaborative success",
+              "reversed": "Communication breakdown, API conflicts, data silos, integration issues",
+              "keywords": [
+                "communication",
+                "integration",
+                "flow",
+                "collaboration"
+              ]
+            },
+            "description": "This card represents communication, data flow, and the connections that bind our digital world."
+          },
+          {
+            "id": "ace-of-swords",
+            "name": "Ace of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/ace-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "2-of-swords",
+            "name": "2 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/2-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "3-of-swords",
+            "name": "3 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/3-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "4-of-swords",
+            "name": "4 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/4-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "5-of-swords",
+            "name": "5 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/5-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "6-of-swords",
+            "name": "6 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/6-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "7-of-swords",
+            "name": "7 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/7-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "8-of-swords",
+            "name": "8 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/8-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "9-of-swords",
+            "name": "9 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/9-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "10-of-swords",
+            "name": "10 of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/10-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "page-of-swords",
+            "name": "Page of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/page-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "knight-of-swords",
+            "name": "Knight of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/knight-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "queen-of-swords",
+            "name": "Queen of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/queen-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "king-of-swords",
+            "name": "King of Swords",
+            "arcana": "minor",
+            "suit": "swords",
+            "frontImage": "/tarot/deck-crew/code/king-of-swords.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
+              "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
+              "keywords": [
+                "logic",
+                "algorithms",
+                "problem-solving",
+                "clarity"
+              ]
+            },
+            "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
+          },
+          {
+            "id": "ace-of-pentacles",
+            "name": "Ace of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/ace-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "2-of-pentacles",
+            "name": "2 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/2-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "3-of-pentacles",
+            "name": "3 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/3-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "4-of-pentacles",
+            "name": "4 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/4-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "5-of-pentacles",
+            "name": "5 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/5-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "6-of-pentacles",
+            "name": "6 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/6-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "7-of-pentacles",
+            "name": "7 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/7-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "8-of-pentacles",
+            "name": "8 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/8-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "9-of-pentacles",
+            "name": "9 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/9-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "10-of-pentacles",
+            "name": "10 of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/10-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "page-of-pentacles",
+            "name": "Page of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/page-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "knight-of-pentacles",
+            "name": "Knight of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/knight-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "queen-of-pentacles",
+            "name": "Queen of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/queen-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          },
+          {
+            "id": "king-of-pentacles",
+            "name": "King of Pentacles",
+            "arcana": "minor",
+            "suit": "pentacles",
+            "frontImage": "/tarot/deck-crew/data/king-of-pentacles.jpg",
+            "backImage": "/tarot/deck-crew/card-back.jpg",
+            "meaning": {
+              "upright": "Data insights, information security, storage optimization, knowledge management",
+              "reversed": "Data loss, security breaches, poor organization, information overload",
+              "keywords": [
+                "data",
+                "insights",
+                "security",
+                "foundation"
+              ]
+            },
+            "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
+          }
+        ],
+        "totalCards": 78
+      },
+      "duration": 0,
+      "timestamp": "2025-07-26T04:33:08.727Z"
+    },
+    {
+      "taskId": "validate_deck",
+      "success": true,
+      "data": {
+        "isValid": true,
+        "validationResults": {
+          "totalCards": 78,
+          "expectedCards": 78,
+          "majorArcana": 22,
+          "minorArcana": 56,
+          "suits": {
+            "wands": 14,
+            "cups": 14,
+            "swords": 14,
+            "pentacles": 14
+          },
+          "issues": []
+        },
+        "summary": "Deck validation passed"
+      },
+      "duration": 0,
+      "timestamp": "2025-07-26T04:33:08.727Z"
+    },
+    {
+      "taskId": "store_deck",
+      "success": false,
+      "error": "QualityGuardian deck storage failed: [object Object]",
+      "duration": 206,
+      "timestamp": "2025-07-26T04:33:08.727Z"
+    }
+  ],
+  "totalDuration": 436,
+  "success": false,
+  "timestamp": "2025-07-26T04:33:08.497Z"
+}

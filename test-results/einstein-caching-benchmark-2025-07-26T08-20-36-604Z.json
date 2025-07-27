@@ -1,0 +1,96 @@
+{
+  "testSubject": "Albert Einstein",
+  "totalRequests": 10,
+  "cacheHits": 0,
+  "cacheMisses": 10,
+  "cacheEfficiency": 0,
+  "averageResponseTime": 894,
+  "fastestResponse": 801,
+  "slowestResponse": 1061,
+  "totalTimeSaved": 0,
+  "results": [
+    {
+      "requestNumber": 1,
+      "responseTime": 1061,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:24.217Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 2,
+      "responseTime": 832,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:25.551Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 3,
+      "responseTime": 902,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:26.953Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 4,
+      "responseTime": 910,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:28.364Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 5,
+      "responseTime": 886,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:29.751Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 6,
+      "responseTime": 867,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:31.120Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 7,
+      "responseTime": 938,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:32.558Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 8,
+      "responseTime": 862,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:33.921Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 9,
+      "responseTime": 801,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:35.223Z",
+      "responseSize": 760
+    },
+    {
+      "requestNumber": 10,
+      "responseTime": 879,
+      "cacheStatus": "MISS",
+      "success": true,
+      "timestamp": "2025-07-26T08:20:36.603Z",
+      "responseSize": 760
+    }
+  ],
+  "testStartTime": "2025-07-26T08:20:17.612Z",
+  "testEndTime": "2025-07-26T08:20:36.604Z",
+  "apiEndpoint": "http://localhost:3000/api/astrology/birth-chart"
+}
