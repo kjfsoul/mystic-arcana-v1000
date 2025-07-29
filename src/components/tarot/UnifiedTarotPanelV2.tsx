@@ -275,7 +275,62 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     try {
       const audio = new Audio('/sounds/card-shuffle.mp3');
       audio.volume = 0.3;
-      audio.play().catch(e => console.log('Audio not available:', e));
+      audio.play().catch(() => {
+        // Fallback: Generate shuffle sound using Web Audio API
+        try {
+          const audioContext = new AudioContext();
+          
+          // Create a complex shuffle sound with multiple components
+          const shuffleSound = () => {
+            // Paper rustling sound
+            const noise = audioContext.createBufferSource();
+            const buffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.5, audioContext.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < data.length; i++) {
+              data[i] = (Math.random() * 2 - 1) * 0.1;
+            }
+            noise.buffer = buffer;
+            
+            const filter = audioContext.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 800;
+            filter.Q.value = 5;
+            
+            const gain = audioContext.createGain();
+            gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            noise.start();
+            noise.stop(audioContext.currentTime + 0.5);
+            
+            // Add card flicking sounds
+            for (let i = 0; i < 3; i++) {
+              setTimeout(() => {
+                const oscillator = audioContext.createOscillator();
+                const clickGain = audioContext.createGain();
+                
+                oscillator.frequency.setValueAtTime(1200 + Math.random() * 200, audioContext.currentTime);
+                clickGain.gain.setValueAtTime(0.05, audioContext.currentTime);
+                clickGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                
+                oscillator.connect(clickGain);
+                clickGain.connect(audioContext.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+              }, i * 100);
+            }
+          };
+          
+          shuffleSound();
+        } catch (fallbackError) {
+          console.log('Web Audio API fallback not available:', fallbackError);
+        }
+      });
     } catch (e) {
       console.log('Audio not supported:', e);
     }

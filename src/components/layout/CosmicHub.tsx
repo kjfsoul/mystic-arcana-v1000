@@ -2,7 +2,8 @@
 
 import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
+// Lazy load the heavy GalaxyBackground component to prevent blocking main page load
+const GalaxyBackground = lazy(() => import('../effects/GalaxyBackground/GalaxyBackground').then(m => ({ default: m.GalaxyBackground })));
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
 import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
 import { MercuryRetrogradeBanner } from '../astrology/MercuryRetrogradeBanner';
@@ -232,14 +233,18 @@ export const CosmicHub: React.FC = () => {
       {/* Header with Return to Hub functionality */}
       <Header onHomeClick={currentView !== 'hub' ? handleReturnToHub : undefined} />
       
-      {/* Galaxy Background */}
+      {/* Galaxy Background - Lazy Loaded */}
       <div className={styles.galaxyLayer}>
-        <GalaxyBackground
-          intensity={currentView === 'hub' ? 0.8 : 0.4}
-          showMilkyWay={currentView === 'hub'}
-          animated={true}
-          starCount={currentView === 'hub' ? 2000 : 1000}
-        />
+        <Suspense fallback={
+          <div className="fixed inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black opacity-80" />
+        }>
+          <GalaxyBackground
+            intensity={currentView === 'hub' ? 0.8 : 0.4}
+            showMilkyWay={currentView === 'hub'}
+            animated={true}
+            starCount={currentView === 'hub' ? 1000 : 500}
+          />
+        </Suspense>
       </div>
 
       {/* Return to Main Menu Button (visible on non-hub views) */}

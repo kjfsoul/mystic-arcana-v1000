@@ -1,0 +1,25 @@
+{
+  "type": "shuffle",
+  "duration": 2,
+  "components": [
+    {
+      "type": "rustling",
+      "frequency": 200,
+      "duration": 0.5,
+      "volume": 0.3
+    },
+    {
+      "type": "card_flip",
+      "frequency": 800,
+      "duration": 0.2,
+      "volume": 0.4
+    },
+    {
+      "type": "rustle_end",
+      "frequency": 150,
+      "duration": 0.3,
+      "volume": 0.2
+    }
+  ],
+  "fallback": "Web Audio API generated sound"
+}

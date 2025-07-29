@@ -7,7 +7,14 @@ import { EnhancedTarotSpreadLayouts, SpreadType } from './EnhancedTarotSpreadLay
 import { EnhancedShuffleAnimation } from './EnhancedShuffleAnimation';
 import { TarotCard } from '@/types/tarot';
 import { useAuth } from '@/contexts/AuthContext';
-import { SophiaAgent, SophiaReading } from '@/agents/sophia';
+import { 
+  SophiaAgent, 
+  SophiaReading, 
+  ConversationState, 
+  ConversationTurn, 
+  ConversationOption,
+  InteractiveQuestion 
+} from '@/agents/sophia';
 import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
 
 interface ReadingSession {
@@ -34,18 +41,21 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   onBackToSelection,
   className = ''
 }) => {
-  // State management
-  const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'revealing' | 'interpreting'>('preparation');
+  // State management - Enhanced for conversational flow
+  const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'conversation' | 'complete'>('preparation');
   const [drawnCards, setDrawnCards] = useState<TarotCard[]>([]);
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [currentSession, setCurrentSession] = useState<ReadingSession | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [cardInterpretations, setCardInterpretations] = useState<Record<number, string>>({});
-  const [showAllMeanings, setShowAllMeanings] = useState(false);
-  const [sophiaReading, setSophiaReading] = useState<SophiaReading | null>(null);
-  const [isGeneratingReading, setIsGeneratingReading] = useState(false);
+  
+  // Conversational state
+  const [conversationState, setConversationState] = useState<ConversationState>(ConversationState.AWAITING_DRAW);
+  const [conversationHistory, setConversationHistory] = useState<ConversationTurn[]>([]);
+  const [currentTurn, setCurrentTurn] = useState<ConversationTurn | null>(null);
+  const [isProcessingTurn, setIsProcessingTurn] = useState(false);
+  const [finalReading, setFinalReading] = useState<SophiaReading | null>(null);
   
   // Agent instances
   const sophiaAgent = new SophiaAgent();
@@ -188,6 +198,143 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     
     return `${positionContext} ${meaning}`;
   };
+
+  // Conversational Flow Methods
+  
+  /**
+   * Start the conversational reading flow
+   */
+  const startConversation = useCallback(async () => {
+    if (!currentSession || drawnCards.length === 0) return;
+    
+    try {
+      setIsProcessingTurn(true);
+      setPhase('conversation');
+      
+      const context = {
+        userId: user?.id,
+        spreadType: selectedSpread,
+        sessionId: currentSession.id,
+        timestamp: new Date()
+      };
+
+      const turn = await sophiaAgent.processReadingTurn(
+        currentSession.id,
+        ConversationState.AWAITING_DRAW,
+        undefined,
+        drawnCards,
+        context
+      );
+
+      setCurrentTurn(turn);
+      setConversationState(turn.newState);
+      setConversationHistory([turn]);
+      
+    } catch (error) {
+      console.error('Failed to start conversation:', error);
+      setError('Unable to begin the reading conversation. Please try again.');
+    } finally {
+      setIsProcessingTurn(false);
+    }
+  }, [currentSession, drawnCards, selectedSpread, user?.id, sophiaAgent]);
+
+  /**
+   * Process user input and advance conversation
+   */
+  const handleUserInput = useCallback(async (userInput: string) => {
+    if (!currentSession || isProcessingTurn) return;
+    
+    try {
+      setIsProcessingTurn(true);
+      
+      const turn = await sophiaAgent.processReadingTurn(
+        currentSession.id,
+        conversationState,
+        userInput
+      );
+
+      setCurrentTurn(turn);
+      setConversationState(turn.newState);
+      setConversationHistory(prev => [...prev, turn]);
+      
+      // If we have a final reading, update phase
+      if (turn.finalReading) {
+        setFinalReading(turn.finalReading);
+        setPhase('complete');
+      }
+      
+      // Update revealed cards if a card was revealed in this turn
+      if (turn.revealedCard) {
+        const cardIndex = drawnCards.findIndex(card => card.name === turn.revealedCard!.card.name);
+        if (cardIndex !== -1) {
+          setRevealedCards(prev => new Set([...prev, cardIndex]));
+        }
+      }
+      
+    } catch (error) {
+      console.error('Failed to process conversation turn:', error);
+      setError('Unable to process your response. Please try again.');
+    } finally {
+      setIsProcessingTurn(false);
+    }
+  }, [currentSession, conversationState, isProcessingTurn, sophiaAgent, drawnCards]);
+
+  /**
+   * Handle saving the conversational reading
+   */
+  const handleSaveConversationalReading = useCallback(async () => {
+    if (!finalReading || !user?.id) return;
+
+    try {
+      const response = await fetch('/api/tarot/save-reading', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${await user.getAccessToken()}`
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          spreadType: selectedSpread,
+          cards: drawnCards.map(card => ({
+            id: card.id,
+            name: card.name,
+            position: drawnCards.indexOf(card).toString(),
+            isReversed: card.isReversed,
+            meaning: card.isReversed ? card.meaning_reversed : card.meaning_upright
+          })),
+          interpretation: finalReading.overall_guidance,
+          question: '',
+          notes: 'Conversational reading with Sophia',
+          cosmicInfluence: finalReading.spiritual_insight,
+          drawId: currentSession?.id,
+          isPublic: false,
+          tags: ['sophia', 'conversational', selectedSpread]
+        })
+      });
+
+      if (response.ok) {
+        setShowSaveModal(false);
+        // Optionally show success message
+      } else {
+        throw new Error('Failed to save reading');
+      }
+    } catch (error) {
+      console.error('Failed to save conversational reading:', error);
+      setError('Unable to save your reading. Please try again.');
+    }
+  }, [finalReading, user, selectedSpread, drawnCards, currentSession]);
+
+  // Auto-start conversation when cards are drawn
+  useEffect(() => {
+    if (phase === 'drawing' && drawnCards.length === spreadRequirements[selectedSpread]) {
+      // Wait a moment for cards to be displayed, then start conversation
+      const timer = setTimeout(() => {
+        startConversation();
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [phase, drawnCards.length, selectedSpread, startConversation]);
 
   // Handle save reading with PersonaLearner integration
   const handleSaveReading = useCallback(async (journalEntry?: string, userFeedback?: any) => {
@@ -403,9 +550,140 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           Your {selectedSpread.replace('-', ' ')} Reading
         </h2>
         <p className="text-purple-300">
-          {revealedCards.size} of {drawnCards.length} cards revealed
+          {phase === 'conversation' ? 'In conversation with Sophia' : `${revealedCards.size} of ${drawnCards.length} cards revealed`}
         </p>
       </motion.div>
+
+      {/* Conversational Reading Display */}
+      {phase === 'conversation' && currentTurn && (
+        <motion.div
+          className="mb-8 bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-purple-300 font-semibold">Sophia</h3>
+              <p className="text-purple-400 text-sm">
+                {conversationState === ConversationState.AWAITING_DRAW ? 'Drawing cards...' : 
+                 conversationState === ConversationState.REVEALING_CARD_1 ? 'Revealing first card...' :
+                 conversationState === ConversationState.REVEALING_CARD_2 ? 'Revealing second card...' :
+                 conversationState === ConversationState.REVEALING_CARD_3 ? 'Revealing third card...' :
+                 conversationState === ConversationState.CARD_INTERPRETATION ? 'Interpreting your cards...' :
+                 conversationState === ConversationState.ASKING_QUESTION ? 'Learning about you...' :
+                 conversationState === ConversationState.AWAITING_USER_RESPONSE ? 'Waiting for your response...' :
+                 conversationState === ConversationState.PROVIDING_GUIDANCE ? 'Sharing guidance...' :
+                 conversationState === ConversationState.FINAL_SYNTHESIS ? 'Weaving your reading together...' :
+                 'In conversation with you'}
+              </p>
+            </div>
+          </div>
+          
+          {/* Sophia's Dialogue */}
+          <div className="space-y-4 text-purple-200">
+            <div className="bg-purple-800/20 rounded-lg p-4">
+              <p className="leading-relaxed">{currentTurn.sophiaDialogue}</p>
+            </div>
+            
+            {/* Show revealed card info if present */}
+            {currentTurn.revealedCard && (
+              <motion.div
+                className="bg-gradient-to-r from-purple-800/30 to-pink-800/30 rounded-lg p-4 border border-purple-500/30"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="w-6 h-6 bg-gradient-to-br from-gold-400 to-yellow-500 rounded-full flex items-center justify-center">
+                    <Sparkles className="w-3 h-3 text-black" />
+                  </div>
+                  <h4 className="text-purple-300 font-medium">
+                    {currentTurn.revealedCard.card.name}
+                  </h4>
+                </div>
+                <p className="text-purple-200 text-sm leading-relaxed">
+                  {currentTurn.revealedCard.interpretation}
+                </p>
+              </motion.div>
+            )}
+            
+            {/* Interactive Question Display */}
+            {currentTurn.interactiveQuestion && (
+              <motion.div
+                className="bg-cyan-900/20 rounded-lg p-4 border border-cyan-500/30"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <h4 className="text-cyan-300 font-medium mb-2">
+                  {currentTurn.interactiveQuestion.question}
+                </h4>
+                <p className="text-cyan-200 text-sm">
+                  {currentTurn.interactiveQuestion.context}
+                </p>
+              </motion.div>
+            )}
+          </div>
+          
+          {/* Interactive Options */}
+          {currentTurn.options && currentTurn.options.length > 0 && !isProcessingTurn && (
+            <motion.div
+              className="mt-6 space-y-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+            >
+              <h4 className="text-purple-300 font-medium">Choose your response:</h4>
+              <div className="grid gap-3">
+                {currentTurn.options.map((option, index) => (
+                  <motion.button
+                    key={index}
+                    className="bg-purple-700/30 hover:bg-purple-600/40 border border-purple-500/50 text-purple-200 p-4 rounded-lg text-left transition-all duration-200 group"
+                    onClick={() => handleUserInput(option.text)}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1 + (index * 0.1) }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="leading-relaxed">{option.text}</span>
+                      <div className="text-purple-400 group-hover:text-purple-300 transition-colors">
+                        →
+                      </div>
+                    </div>
+                    {option.hint && (
+                      <p className="text-purple-400 text-sm mt-2 opacity-75">
+                        {option.hint}
+                      </p>
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+          
+          {/* Processing State */}
+          {isProcessingTurn && (
+            <motion.div
+              className="mt-6 flex items-center justify-center space-x-3 p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <motion.div
+                className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              />
+              <p className="text-purple-300 text-sm">Sophia is reflecting on your response...</p>
+            </motion.div>
+          )}
+        </motion.div>
+      )}
 
       {/* Sophia Reading Display */}
       {sophiaReading && phase === 'interpreting' && (

@@ -513,6 +513,175 @@ except Exception as e:
   }
 
   /**
+   * Retrieve user memories from a-mem system for personalization
+   */
+  async retrieveUserMemories(userId: string): Promise<MemoryNote[]> {
+    try {
+      console.log(`PersonaLearner: Retrieving memories for user ${userId}`);
+      
+      // Create a Python script to query user-specific memories
+      const pythonScript = `
+import sys
+import json
+import os
+from pathlib import Path
+
+# Add a-mem to Python path
+amem_path = Path.cwd() / 'a_mem'
+sys.path.insert(0, str(amem_path))
+
+try:
+    from store import MemoryStore
+    
+    # Initialize memory store
+    store = MemoryStore(namespace="mystic_arcana")
+    
+    # Query events for specific user
+    user_id = "${userId}"
+    events = store.query_events(limit=50)  # Get recent events
+    
+    # Filter and format for this user
+    user_memories = []
+    for event in events:
+        event_dict = event.to_dict()
+        
+        # Check if event is related to this user
+        if (user_id in str(event_dict.get('content', '')) or 
+            user_id in str(event_dict.get('metadata', {}))):
+            
+            # Convert to MemoryNote format
+            memory_note = {
+                'content': event_dict.get('content', ''),
+                'id': event_dict.get('id', ''),
+                'keywords': event_dict.get('metadata', {}).get('keywords', []),
+                'context': event_dict.get('metadata', {}).get('context', ''),
+                'category': event_dict.get('metadata', {}).get('category', ''),
+                'tags': event_dict.get('metadata', {}).get('tags', []),
+                'timestamp': event_dict.get('timestamp', ''),
+                'retrieval_count': event_dict.get('retrieval_count', 0),
+                'last_accessed': event_dict.get('last_accessed', '')
+            }
+            user_memories.append(memory_note)
+    
+    # Output results as JSON
+    print(json.dumps({
+        'success': True,
+        'user_id': user_id,
+        'memories_found': len(user_memories),
+        'memories': user_memories
+    }))
+    
+except Exception as e:
+    print(json.dumps({
+        'success': False,
+        'error': str(e),
+        'user_id': "${userId}",
+        'memories': []
+    }))
+    sys.exit(1)
+`;
+
+      // Create temporary Python script
+      const pythonScriptPath = path.join('/tmp', `query_user_memories_${Date.now()}.py`);
+      await fs.writeFile(pythonScriptPath, pythonScript);
+
+      try {
+        // Execute Python script
+        const result = execSync(`python3 ${pythonScriptPath}`, { 
+          encoding: 'utf-8',
+          timeout: 30000,
+          cwd: process.cwd()
+        });
+        
+        // Parse JSON result
+        const queryResult = JSON.parse(result.trim());
+        
+        if (!queryResult.success) {
+          throw new Error(`Memory query failed: ${queryResult.error}`);
+        }
+        
+        console.log(`PersonaLearner: Retrieved ${queryResult.memories_found} memories for user ${userId}`);
+        
+        // Cleanup temp file
+        await fs.unlink(pythonScriptPath).catch(() => {});
+        
+        return queryResult.memories as MemoryNote[];
+        
+      } catch (execError) {
+        console.warn(`PersonaLearner: a-mem query failed, falling back to local memories:`, execError);
+        
+        // Fallback to local memory files
+        const memories = await this.retrieveFromLocalMemory(userId);
+        await fs.unlink(pythonScriptPath).catch(() => {});
+        
+        return memories;
+      }
+      
+    } catch (error) {
+      console.error('PersonaLearner: Failed to retrieve user memories:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Fallback method to retrieve memories from local files
+   */
+  private async retrieveFromLocalMemory(userId: string): Promise<MemoryNote[]> {
+    try {
+      const logDir = path.join(process.cwd(), 'logs', 'persona-learning');
+      const memories: MemoryNote[] = [];
+      
+      try {
+        const files = await fs.readdir(logDir);
+        const jsonlFiles = files.filter(f => f.endsWith('.jsonl'));
+        
+        for (const file of jsonlFiles) {
+          const filePath = path.join(logDir, file);
+          const content = await fs.readFile(filePath, 'utf-8');
+          const lines = content.split('\n').filter(line => line.trim());
+          
+          for (const line of lines) {
+            try {
+              const entry = JSON.parse(line);
+              
+              // Check if this entry relates to our user
+              if (entry.content && typeof entry.content === 'string') {
+                const contentData = JSON.parse(entry.content);
+                if (contentData.interaction_data?.user_id === userId) {
+                  memories.push({
+                    content: entry.content,
+                    id: entry.id || `local_${Date.now()}`,
+                    keywords: entry.keywords || [],
+                    context: entry.context || '',
+                    category: entry.category || '',
+                    tags: entry.tags || [],
+                    timestamp: entry.timestamp || entry.logged_at,
+                    retrieval_count: entry.retrieval_count || 0
+                  });
+                }
+              }
+            } catch (parseError) {
+              // Skip malformed entries
+              continue;
+            }
+          }
+        }
+        
+        console.log(`PersonaLearner: Retrieved ${memories.length} memories from local storage for user ${userId}`);
+        return memories;
+        
+      } catch (dirError) {
+        console.log('PersonaLearner: No local memory files found');
+        return [];
+      }
+      
+    } catch (error) {
+      console.error('PersonaLearner: Local memory retrieval failed:', error);
+      return [];
+    }
+  }
+
+  /**
    * Health check method
    */
   async healthCheck(): Promise<boolean> {
