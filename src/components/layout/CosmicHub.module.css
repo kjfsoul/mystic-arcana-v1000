@@ -323,6 +323,15 @@
   max-width: 600px;
 }
 
+/* Oracle Section */
+.oracleSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 @media (max-width: 480px) {
   .hubContainer {
     padding: 1rem;

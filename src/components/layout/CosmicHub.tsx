@@ -13,6 +13,9 @@ import styles from './CosmicHub.module.css';
 // Lazy load the horoscope widget to prevent blocking main page load
 const DailyHoroscopeWidget = lazy(() => import('../horoscope/DailyHoroscopeWidget').then(m => ({ default: m.DailyHoroscopeWidget })));
 
+// Lazy load the Daily Oracle Display component
+const DailyOracleDisplay = lazy(() => import('../oracle/DailyOracleDisplay').then(m => ({ default: m.DailyOracleDisplay })));
+
 export type ViewMode = 'hub' | 'tarot' | 'astrology';
 
 export const CosmicHub: React.FC = () => {
@@ -152,6 +155,22 @@ export const CosmicHub: React.FC = () => {
             </div>
           }>
             <DailyHoroscopeWidget />
+          </Suspense>
+        </motion.div>
+
+        {/* Daily Oracle Display - Comprehensive Reading */}
+        <motion.div
+          className={styles.oracleSection}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.5, duration: 0.8 }}
+        >
+          <Suspense fallback={
+            <div className="text-center text-purple-300 p-4">
+              <div className="animate-pulse">Consulting the cosmic oracle...</div>
+            </div>
+          }>
+            <DailyOracleDisplay />
           </Suspense>
         </motion.div>
       </div>

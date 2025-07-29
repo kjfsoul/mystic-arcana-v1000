@@ -1,0 +1,35 @@
+# Blacklight Tarot Asset Pipeline - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core image processing
+Pillow>=10.0.0
+numpy>=1.24.0
+
+# Computer vision and object detection
+opencv-python>=4.8.0
+ultralytics>=8.0.0
+
+# Perceptual hashing for duplicate detection
+ImageHash>=4.3.1
+
+# Additional utilities
+pathlib2>=2.3.7; python_version<"3.4"
+
+# Optional dependencies for enhanced functionality
+# Uncomment if needed:
+
+# Deep learning frameworks (if YOLO requires specific versions)
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# Advanced image analysis
+# scikit-image>=0.21.0
+# matplotlib>=3.7.0
+
+# Progress bars and CLI enhancements
+# tqdm>=4.65.0
+# click>=8.1.0
+
+# Development and testing (optional)
+# pytest>=7.4.0
+# pytest-cov>=4.1.0

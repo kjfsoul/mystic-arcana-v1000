@@ -1,0 +1,808 @@
+/* Daily Oracle Display Component Styles */
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, 
+    rgba(138, 43, 226, 0.15) 0%, 
+    rgba(75, 0, 130, 0.15) 50%, 
+    rgba(25, 25, 112, 0.15) 100%);
+  border: 2px solid rgba(138, 43, 226, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(138, 43, 226, 0.2);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: oracleGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes oracleGlow {
+  0% { 
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(138, 43, 226, 0.2);
+  }
+  100% { 
+    box-shadow: 
+      0 15px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 30px rgba(138, 43, 226, 0.4);
+  }
+}
+
+.container.expanded {
+  max-width: 1400px;
+  background: linear-gradient(135deg, 
+    rgba(138, 43, 226, 0.2) 0%, 
+    rgba(75, 0, 130, 0.2) 50%, 
+    rgba(25, 25, 112, 0.2) 100%);
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.titleSection {
+  flex: 1;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.titleIcon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.6));
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.5rem 0;
+  font-weight: 400;
+}
+
+.theme {
+  font-size: 1.1rem;
+  color: rgba(255, 215, 0, 0.9);
+  font-weight: 500;
+  margin: 0;
+  font-style: italic;
+}
+
+.expandButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(255, 107, 107, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.expandButton:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+}
+
+/* Compact Preview Styles */
+.compactPreview {
+  padding: 1rem 2rem 1.5rem;
+}
+
+.previewText {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.previewHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hintText {
+  font-style: italic;
+}
+
+.hintArrow {
+  font-size: 1.1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  60% { transform: translateY(-3px); }
+}
+
+/* Expanded Content Styles */
+.expandedContent {
+  overflow: hidden;
+}
+
+/* Tabs Styles */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.tab:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.activeTab {
+  color: white;
+  background: linear-gradient(135deg, 
+    rgba(138, 43, 226, 0.3) 0%, 
+    rgba(255, 107, 107, 0.3) 100%);
+}
+
+.tab.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(138, 43, 226, 1) 0%, 
+    rgba(255, 107, 107, 1) 100%);
+}
+
+.tabIcon {
+  font-size: 1.2rem;
+}
+
+.tabLabel {
+  font-weight: 600;
+}
+
+/* Tab Content Styles */
+.tabContent {
+  padding: 2rem;
+  min-height: 400px;
+}
+
+/* Overview Tab Styles */
+.overviewTab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.keyMessage {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.messageTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 215, 0, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.messageText {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.affirmation {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 107, 0.1) 0%, 
+    rgba(138, 43, 226, 0.1) 100%);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.affirmationTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(255, 107, 107, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.affirmationText {
+  font-size: 1.2rem;
+  color: white;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.actionAdvice {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.adviceTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(76, 175, 80, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.adviceList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adviceItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.adviceBullet {
+  color: rgba(76, 175, 80, 0.8);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 0.1rem;
+}
+
+/* Tarot Tab Styles */
+.tarotTab {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.spreadHeader {
+  text-align: center;
+  padding: 1rem;
+}
+
+.spreadTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgba(255, 215, 0, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.spreadDescription {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tarotCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.tarotCard {
+  background: linear-gradient(135deg, 
+    rgba(138, 43, 226, 0.1) 0%, 
+    rgba(75, 0, 130, 0.1) 100%);
+  border: 2px solid rgba(138, 43, 226, 0.3);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  perspective: 1000px;
+}
+
+.tarotCard:hover {
+  transform: translateY(-5px) rotateY(5deg);
+  box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+}
+
+.cardTime {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 215, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.cardContent {
+  text-align: center;
+}
+
+.cardName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+}
+
+.reversed {
+  color: rgba(255, 107, 107, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cardInterpretation {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+.personalMessage {
+  font-size: 1rem;
+  color: rgba(255, 215, 0, 0.9);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.practicalAdvice {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.practicalTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(76, 175, 80, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.practicalText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Cosmic Tab Styles */
+.cosmicTab {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.horoscopeSection {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.1) 0%, 
+    rgba(75, 0, 130, 0.1) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.horoscopeTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 215, 0, 0.9);
+  margin: 0 0 1rem 0;
+}
+
+.horoscopeText {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cosmicFocus {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cosmicTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(100, 200, 255, 0.9);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.cosmicDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cosmicItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cosmicLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cosmicValue {
+  font-size: 1rem;
+  color: white;
+  font-weight: 600;
+}
+
+.keyAspects {
+  margin-bottom: 1.5rem;
+}
+
+.aspectsLabel {
+  display: block;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.aspectsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.aspect {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, 
+    rgba(100, 200, 255, 0.2) 0%, 
+    rgba(138, 43, 226, 0.2) 100%);
+  border: 1px solid rgba(100, 200, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: rgba(100, 200, 255, 0.9);
+  font-weight: 500;
+}
+
+.cosmicRecommendation {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(100, 200, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(100, 200, 255, 0.2);
+}
+
+.recommendationTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(100, 200, 255, 0.9);
+  margin: 0 0 0.75rem 0;
+}
+
+.recommendationText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Compatibility Tab Styles */
+.compatibilityTab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.compatibilityContent {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 107, 0.1) 0%, 
+    rgba(255, 20, 147, 0.1) 100%);
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  border-radius: 15px;
+}
+
+.compatibilityTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255, 107, 107, 0.9);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.compatibilityDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.matchSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.bestMatch, .challengingMatch {
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.bestMatch {
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.challengingMatch {
+  background: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.matchLabel {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.matchSign {
+  font-size: 1.2rem;
+  color: rgba(76, 175, 80, 0.9);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.challengeSign {
+  font-size: 1.2rem;
+  color: rgba(255, 152, 0, 0.9);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.relationshipAdvice, .communicationTips {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.relationshipTitle, .communicationTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 107, 107, 0.9);
+  margin: 0 0 0.75rem 0;
+}
+
+.relationshipText, .communicationText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Loading and Error States */
+.loading {
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.shimmerLine, .shimmerCircle, .shimmerCard {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  border-radius: 8px;
+  animation: shimmer 2s infinite linear;
+}
+
+.shimmerCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.shimmerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.shimmerCard {
+  padding: 1rem;
+  height: 120px;
+  border-radius: 15px;
+}
+
+.error {
+  background: linear-gradient(135deg, 
+    rgba(244, 67, 54, 0.1) 0%, 
+    rgba(156, 39, 176, 0.1) 100%);
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+.errorContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.errorIcon {
+  font-size: 3rem;
+  opacity: 0.6;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(244, 67, 54, 0.9);
+  margin: 0;
+}
+
+.errorMessage {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 400px;
+}
+
+.signInButton {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(255, 107, 107, 0.8) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.signInButton:hover {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .tabs {
+    flex-direction: column;
+  }
+  
+  .tab {
+    padding: 0.75rem;
+  }
+  
+  .tabContent {
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+  
+  .tarotCards {
+    grid-template-columns: 1fr;
+  }
+  
+  .matchSection {
+    grid-template-columns: 1fr;
+  }
+  
+  .cosmicDetails {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0 1rem;
+  }
+  
+  .header {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .tabContent {
+    padding: 1rem;
+  }
+  
+  .compactPreview {
+    padding: 1rem;
+  }
+  
+  .previewText {
+    font-size: 1rem;
+  }
+}

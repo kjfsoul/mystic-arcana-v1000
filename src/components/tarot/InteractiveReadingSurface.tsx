@@ -1,0 +1,700 @@
+'use client';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import { Shuffle, Save, Share, RefreshCw, BookOpen, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { EnhancedTarotSpreadLayouts, SpreadType } from './EnhancedTarotSpreadLayouts';
+import { EnhancedShuffleAnimation } from './EnhancedShuffleAnimation';
+import { TarotCard } from '@/types/tarot';
+import { useAuth } from '@/contexts/AuthContext';
+import { SophiaAgent, SophiaReading } from '@/agents/sophia';
+import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
+
+interface ReadingSession {
+  id: string;
+  spreadType: SpreadType;
+  cards: TarotCard[];
+  timestamp: Date;
+  interpretation?: string;
+  journalEntry?: string;
+  isGuest: boolean;
+  sophiaReading?: SophiaReading;
+}
+
+interface InteractiveReadingSurfaceProps {
+  selectedSpread: SpreadType;
+  onReadingComplete?: (session: ReadingSession) => void;
+  onBackToSelection?: () => void;
+  className?: string;
+}
+
+export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps> = ({
+  selectedSpread,
+  onReadingComplete,
+  onBackToSelection,
+  className = ''
+}) => {
+  // State management
+  const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'revealing' | 'interpreting'>('preparation');
+  const [drawnCards, setDrawnCards] = useState<TarotCard[]>([]);
+  const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
+  const [currentSession, setCurrentSession] = useState<ReadingSession | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [cardInterpretations, setCardInterpretations] = useState<Record<number, string>>({});
+  const [showAllMeanings, setShowAllMeanings] = useState(false);
+  const [sophiaReading, setSophiaReading] = useState<SophiaReading | null>(null);
+  const [isGeneratingReading, setIsGeneratingReading] = useState(false);
+  
+  // Agent instances
+  const sophiaAgent = new SophiaAgent();
+  const personaLearner = new PersonaLearnerAgent();
+  
+  // Refs and animations
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  const shuffleControls = useAnimation();
+  
+  // Auth context
+  const { user, isAuthenticated } = useAuth();
+
+  // Spread configuration mapping
+  const spreadRequirements = {
+    'single': 1,
+    'three-card': 3,
+    'celtic-cross': 10,
+    'horseshoe': 5,
+    'relationship': 5,
+    'custom': 7
+  };
+
+  // Initialize reading session
+  useEffect(() => {
+    const sessionId = `reading_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const newSession: ReadingSession = {
+      id: sessionId,
+      spreadType: selectedSpread,
+      cards: [],
+      timestamp: new Date(),
+      isGuest: !isAuthenticated
+    };
+    setCurrentSession(newSession);
+  }, [selectedSpread, isAuthenticated]);
+
+  // API call to draw cards
+  const drawCardsFromAPI = useCallback(async (spreadType: SpreadType) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('/api/tarot/draw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          spread: spreadType,
+          count: spreadRequirements[spreadType],
+          allowReversed: true,
+          userId: user?.id || null
+        })
+      });
+
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to draw cards');
+      }
+
+      return data.data.cards;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to connect to cosmic energies';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  }, [user?.id]);
+
+  // Handle shuffle completion and card drawing
+  const handleShuffleComplete = useCallback(async () => {
+    try {
+      setPhase('drawing');
+      const cards = await drawCardsFromAPI(selectedSpread);
+      
+      setDrawnCards(cards);
+      setPhase('revealing');
+      
+      // Update session
+      if (currentSession) {
+        const updatedSession = { ...currentSession, cards };
+        setCurrentSession(updatedSession);
+      }
+      
+      // Auto-start revealing after a brief pause
+      setTimeout(() => {
+        setRevealedCards(new Set([0])); // Reveal first card
+      }, 800);
+      
+    } catch (err) {
+      setPhase('preparation');
+      console.error('Failed to draw cards:', err);
+    }
+  }, [selectedSpread, drawCardsFromAPI, currentSession]);
+
+  // Handle individual card reveal
+  const handleCardReveal = useCallback((card: TarotCard, index: number) => {
+    setRevealedCards(prev => new Set([...prev, index]));
+    
+    // Generate basic interpretation for the card
+    const interpretation = generateCardInterpretation(card, index, selectedSpread);
+    setCardInterpretations(prev => ({ ...prev, [index]: interpretation }));
+    
+    // Haptic feedback on mobile
+    if ('vibrate' in navigator) {
+      navigator.vibrate(75);
+    }
+    
+    // Check if all cards are revealed
+    const totalCards = spreadRequirements[selectedSpread];
+    if (revealedCards.size + 1 >= totalCards) {
+      setTimeout(() => setPhase('interpreting'), 1000);
+    }
+  }, [revealedCards.size, selectedSpread]);
+
+  // Generate contextual card interpretation
+  const generateCardInterpretation = (card: TarotCard, position: number, spread: SpreadType): string => {
+    const positionMeanings = {
+      'single': ['This card represents the universe\'s guidance for you right now.'],
+      'three-card': [
+        'This card reveals the foundations and influences from your past.',
+        'This card illuminates your current situation and energy.',
+        'This card shows the potential path ahead and future possibilities.'
+      ],
+      'celtic-cross': [
+        'Your present situation and current focus.',
+        'The challenge or opportunity crossing your path.',
+        'Distant past influences and foundations.',
+        'Recent past events affecting you now.',
+        'Possible outcomes if current path continues.',
+        'Immediate future and next steps.',
+        'Your approach and inner resources.',
+        'External influences and environment.',
+        'Your hopes, fears, and subconscious.',
+        'The ultimate outcome and resolution.'
+      ]
+    };
+
+    const positionContext = positionMeanings[spread]?.[position] || `Position ${position + 1} guidance:`;
+    const meaning = card.isReversed ? card.meaning_reversed : card.meaning_upright;
+    
+    return `${positionContext} ${meaning}`;
+  };
+
+  // Handle save reading with PersonaLearner integration
+  const handleSaveReading = useCallback(async (journalEntry?: string, userFeedback?: any) => {
+    if (!currentSession) return;
+    
+    const sessionWithJournal = {
+      ...currentSession,
+      journalEntry,
+      interpretation: sophiaReading ? 
+        `${sophiaReading.narrative}\n\n${sophiaReading.overall_guidance}\n\n${sophiaReading.spiritual_insight}` :
+        Object.values(cardInterpretations).join('\n\n'),
+      cards: drawnCards,
+      sophiaReading
+    };
+    
+    // Log interaction with PersonaLearner for learning (authenticated users only)
+    if (sophiaReading && user?.id) {
+      try {
+        await personaLearner.logInteraction(
+          user.id,
+          sophiaReading,
+          userFeedback
+        );
+        console.log('PersonaLearner: Interaction logged successfully');
+      } catch (error) {
+        console.warn('PersonaLearner: Failed to log interaction:', error);
+        // Continue with save even if logging fails
+      }
+    } else if (!user?.id) {
+      console.log('PersonaLearner: Skipping interaction logging for guest user');
+    }
+    
+    // Save to localStorage for guest users or API for authenticated users
+    if (isAuthenticated && user) {
+      try {
+        // TODO: Implement API call to save reading
+        console.log('Saving to user account:', sessionWithJournal);
+      } catch (err) {
+        console.error('Failed to save reading:', err);
+      }
+    } else {
+      // Save to localStorage for guest users
+      const guestReadings = JSON.parse(localStorage.getItem('guestReadings') || '[]');
+      guestReadings.push(sessionWithJournal);
+      localStorage.setItem('guestReadings', JSON.stringify(guestReadings.slice(-10))); // Keep last 10
+    }
+    
+    onReadingComplete?.(sessionWithJournal);
+    setShowSaveModal(false);
+  }, [currentSession, cardInterpretations, drawnCards, isAuthenticated, user, onReadingComplete, sophiaReading, personaLearner]);
+
+  // Auto-reveal cards in sequence and generate Sophia reading
+  useEffect(() => {
+    if (phase === 'revealing' && drawnCards.length > 0) {
+      const totalCards = drawnCards.length;
+      let currentCard = 0;
+      
+      const revealInterval = setInterval(() => {
+        if (currentCard < totalCards) {
+          setRevealedCards(prev => new Set([...prev, currentCard]));
+          currentCard++;
+        } else {
+          clearInterval(revealInterval);
+          setTimeout(async () => {
+            setPhase('interpreting');
+            await generateSophiaReading();
+          }, 1000);
+        }
+      }, 1200);
+      
+      return () => clearInterval(revealInterval);
+    }
+  }, [phase, drawnCards.length]);
+
+  // Generate Sophia reading from Knowledge Pool
+  const generateSophiaReading = async () => {
+    if (!drawnCards.length || !currentSession) return;
+    
+    setIsGeneratingReading(true);
+    
+    try {
+      const readingContext = {
+        userId: user?.id,
+        spreadType: selectedSpread,
+        sessionId: currentSession.id,
+        timestamp: new Date(),
+        astrological_context: {
+          // TODO: Add astrological context if available
+        }
+      };
+      
+      const reading = await sophiaAgent.getReading(
+        drawnCards,
+        selectedSpread,
+        readingContext
+      );
+      
+      setSophiaReading(reading);
+      
+      // Update session with Sophia reading
+      if (currentSession) {
+        const updatedSession = {
+          ...currentSession,
+          sophiaReading: reading,
+          interpretation: reading.narrative + '\n\n' + reading.overall_guidance
+        };
+        setCurrentSession(updatedSession);
+      }
+      
+    } catch (error) {
+      console.error('Failed to generate Sophia reading:', error);
+      // Fallback to basic interpretations if Sophia reading fails
+      const fallbackInterpretations: Record<number, string> = {};
+      drawnCards.forEach((card, index) => {
+        fallbackInterpretations[index] = generateCardInterpretation(card, index, selectedSpread);
+      });
+      setCardInterpretations(fallbackInterpretations);
+    } finally {
+      setIsGeneratingReading(false);
+    }
+  };
+
+  // Phase-specific renders
+  const renderPreparation = () => (
+    <motion.div
+      className="text-center space-y-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+    >
+      <div className="space-y-4">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent"
+          animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
+          Prepare Your Mind
+        </motion.h2>
+        <p className="text-purple-300 text-lg max-w-2xl mx-auto">
+          Take a moment to center yourself and focus on your question. 
+          The cards will reveal what you need to know.
+        </p>
+      </div>
+      
+      {/* Meditation Timer */}
+      <motion.div
+        className="bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6 max-w-md mx-auto"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <h3 className="text-purple-300 font-semibold mb-4">
+          {selectedSpread.replace('-', ' ').toUpperCase()} SPREAD
+        </h3>
+        <p className="text-purple-400 text-sm mb-6">
+          {spreadRequirements[selectedSpread]} cards will be drawn to guide your path
+        </p>
+        
+        <motion.button
+          className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold shadow-2xl shadow-purple-500/30 w-full flex items-center justify-center space-x-3"
+          onClick={() => setPhase('shuffling')}
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <Shuffle className="w-5 h-5" />
+          <span>Begin Shuffling</span>
+          <Sparkles className="w-5 h-5" />
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  );
+
+  const renderShuffling = () => (
+    <motion.div
+      className="text-center space-y-8"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+    >
+      <div className="space-y-4">
+        <motion.h2 
+          className="text-2xl md:text-3xl font-semibold text-purple-300"
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          Shuffling Cosmic Energies...
+        </motion.h2>
+        <p className="text-purple-400">
+          The universe is aligning the perfect cards for your reading
+        </p>
+      </div>
+      
+      <EnhancedShuffleAnimation
+        isShuffling={true}
+        onShuffleStart={() => {}}
+        onShuffleComplete={handleShuffleComplete}
+        size="large"
+        cardCount={78}
+        showCardPreview={true}
+      />
+    </motion.div>
+  );
+
+  const renderReading = () => (
+    <div className="w-full">
+      {/* Header */}
+      <motion.div
+        className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+          Your {selectedSpread.replace('-', ' ')} Reading
+        </h2>
+        <p className="text-purple-300">
+          {revealedCards.size} of {drawnCards.length} cards revealed
+        </p>
+      </motion.div>
+
+      {/* Sophia Reading Display */}
+      {sophiaReading && phase === 'interpreting' && (
+        <motion.div
+          className="mb-8 bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-purple-300 font-semibold">Sophia's Wisdom</h3>
+              <p className="text-purple-400 text-sm">Reading from the Knowledge Pool</p>
+            </div>
+          </div>
+          
+          <div className="space-y-4 text-purple-200">
+            <div className="bg-purple-800/20 rounded-lg p-4">
+              <h4 className="text-purple-300 font-medium mb-2">Your Reading</h4>
+              <p className="leading-relaxed">{sophiaReading.narrative}</p>
+            </div>
+            
+            {showAllMeanings && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="space-y-3"
+              >
+                <div className="bg-purple-800/20 rounded-lg p-4">
+                  <h4 className="text-purple-300 font-medium mb-2">Guidance</h4>
+                  <p className="leading-relaxed">{sophiaReading.overall_guidance}</p>
+                </div>
+                
+                <div className="bg-purple-800/20 rounded-lg p-4">
+                  <h4 className="text-purple-300 font-medium mb-2">Spiritual Insight</h4>
+                  <p className="leading-relaxed">{sophiaReading.spiritual_insight}</p>
+                </div>
+                
+                {sophiaReading.card_interpretations.length > 0 && (
+                  <div className="bg-purple-800/20 rounded-lg p-4">
+                    <h4 className="text-purple-300 font-medium mb-3">Individual Card Meanings</h4>
+                    <div className="space-y-3">
+                      {sophiaReading.card_interpretations.map((interp, index) => (
+                        <div key={index} className="border-l-2 border-purple-500 pl-3">
+                          <p className="text-sm text-purple-400 mb-1">
+                            {drawnCards[index]?.name} - {interp.confidence_score > 0.8 ? 'High' : 'Standard'} Confidence
+                          </p>
+                          <p className="text-purple-200 text-sm leading-relaxed">
+                            {interp.personalized_guidance}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            )}
+            
+            <div className="text-right">
+              <p className="text-purple-400 text-sm italic">
+                {sophiaReading.reader_signature}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+      
+      {/* Loading state for Sophia reading */}
+      {isGeneratingReading && (
+        <motion.div
+          className="mb-8 bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <motion.div
+              className="w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            />
+            <p className="text-purple-300">Sophia is channeling wisdom from the Knowledge Pool...</p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Spread Layout */}
+      <EnhancedTarotSpreadLayouts
+        spreadType={selectedSpread}
+        cards={drawnCards}
+        onCardClick={handleCardReveal}
+        isRevealing={phase === 'revealing' || phase === 'interpreting'}
+        showBioluminescence={true}
+        isMobile={false}
+      />
+
+      {/* Controls */}
+      {phase === 'interpreting' && (
+        <motion.div
+          className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+        >
+          <div className="bg-black/80 backdrop-blur-lg rounded-2xl p-4 flex items-center space-x-4 shadow-2xl">
+            <motion.button
+              className="flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              onClick={() => setShowAllMeanings(!showAllMeanings)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {showAllMeanings ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              <span>{showAllMeanings ? 'Hide' : 'Show'} Meanings</span>
+            </motion.button>
+            
+            <motion.button
+              className="flex items-center space-x-2 px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition-colors"
+              onClick={() => setShowSaveModal(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Save className="w-4 h-4" />
+              <span>Save Reading</span>
+            </motion.button>
+            
+            <motion.button
+              className="flex items-center space-x-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors"
+              onClick={onBackToSelection}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span>New Reading</span>
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+
+  // Error state
+  if (error) {
+    return (
+      <div className="text-center space-y-6 py-12">
+        <motion.div
+          className="text-6xl mb-4"
+          animate={{ rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          🔮
+        </motion.div>
+        <h3 className="text-xl font-semibold text-red-300">
+          Cosmic Connection Disrupted
+        </h3>
+        <p className="text-purple-400 max-w-md mx-auto">
+          {error}
+        </p>
+        <motion.button
+          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+          onClick={() => {
+            setError(null);
+            setPhase('preparation');
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Try Again
+        </motion.button>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={surfaceRef} className={`relative w-full min-h-screen ${className}`}>
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+          }}
+          animate={{
+            background: [
+              'radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
+              'radial-gradient(circle at 60% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 60%), radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.15) 0%, transparent 60%)'
+            ]
+          }}
+          transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
+        />
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center p-6">
+        <AnimatePresence mode="wait">
+          {phase === 'preparation' && (
+            <motion.div key="preparation">
+              {renderPreparation()}
+            </motion.div>
+          )}
+          {phase === 'shuffling' && (
+            <motion.div key="shuffling">
+              {renderShuffling()}
+            </motion.div>
+          )}
+          {(phase === 'revealing' || phase === 'interpreting') && drawnCards.length > 0 && (
+            <motion.div key="reading" className="w-full">
+              {renderReading()}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Loading Overlay */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-purple-900/80 backdrop-blur-lg rounded-2xl p-8 text-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <motion.div
+                className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              />
+              <p className="text-purple-300 font-medium">
+                Drawing cards from the cosmic deck...
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Save Modal - Placeholder for now */}
+      <AnimatePresence>
+        {showSaveModal && (
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowSaveModal(false)}
+          >
+            <motion.div
+              className="bg-purple-900/90 backdrop-blur-lg rounded-2xl p-6 max-w-md w-full"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-xl font-bold text-white mb-4">Save Your Reading</h3>
+              <p className="text-purple-300 mb-6">
+                {isAuthenticated 
+                  ? 'This reading will be saved to your account.'
+                  : 'As a guest, your reading will be saved locally.'
+                }
+              </p>
+              <div className="flex space-x-4">
+                <motion.button
+                  className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors"
+                  onClick={() => handleSaveReading()}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Save Reading
+                </motion.button>
+                <motion.button
+                  className="px-6 py-3 border border-purple-500 text-purple-300 rounded-lg hover:bg-purple-500/20 transition-colors"
+                  onClick={() => setShowSaveModal(false)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Cancel
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};

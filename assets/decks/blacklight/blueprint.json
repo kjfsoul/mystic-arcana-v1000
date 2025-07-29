@@ -1,0 +1,234 @@
+{
+  "deck_name": "Blacklight Tarot",
+  "theme": "Blacklight and bioluminescent cosmic spirituality",
+  "visual_style": {
+    "background": "Deep cosmic black with subtle nebula textures",
+    "lighting": "Blacklight UV reactive colors with bioluminescent glows",
+    "color_palette": {
+      "primary": ["Electric violet", "Neon cyan", "Plasma pink", "Nuclear green"],
+      "secondary": ["Deep indigo", "Midnight purple", "Ocean teal", "Forest emerald"],
+      "accent": ["Pure white", "Silver", "Gold highlights"]
+    },
+    "effects": ["Cosmic particle effects", "Bioluminescent auras", "Energy wisps", "Stellar sparkles"],
+    "dimensions": "512x768 pixels (portrait)",
+    "transparency": "Suit items on transparent backgrounds for compositing"
+  },
+  "major_arcana": {
+    "00_the_fool": {
+      "archetype": "Cosmic wanderer stepping into the unknown",
+      "visual_elements": ["Glowing figure in stellar robes", "Cosmic cliff edge", "Bioluminescent bag", "Ethereal companion creature"],
+      "colors": ["Electric violet robes", "Cyan energy aura", "Pink cosmic background"],
+      "symbolism": "New beginnings illuminated by cosmic consciousness"
+    },
+    "01_the_magician": {
+      "archetype": "Master of cosmic energies and elemental forces",
+      "visual_elements": ["Figure with raised hands channeling energy", "Glowing infinity symbol overhead", "Four elemental objects floating", "Energy streams connecting all elements"],
+      "colors": ["Nuclear green energy", "Pure white robes", "Gold infinity symbol"],
+      "symbolism": "Manifestation through universal connection"
+    },
+    "02_the_high_priestess": {
+      "archetype": "Guardian of cosmic mysteries and intuitive wisdom",
+      "visual_elements": ["Seated figure between glowing pillars", "Crescent moon crown", "Flowing cosmic veil", "Sacred scroll with luminous symbols"],
+      "colors": ["Deep indigo robes", "Silver moon symbols", "Cyan pillar glow"],
+      "symbolism": "Hidden knowledge illuminated by inner light"
+    },
+    "03_the_empress": {
+      "archetype": "Mother of cosmic creation and abundant life",
+      "visual_elements": ["Crowned figure in nature setting", "Bioluminescent plants", "Glowing pregnancy belly", "Cosmic river flowing nearby"],
+      "colors": ["Forest emerald gown", "Gold crown", "Pink life energy"],
+      "symbolism": "Creative force nurturing universal growth"
+    },
+    "04_the_emperor": {
+      "archetype": "Cosmic ruler with structured authority",
+      "visual_elements": ["Throne made of crystalline formations", "Glowing ram head symbols", "Cosmic scepter", "Mountainous backdrop with aurora"],
+      "colors": ["Midnight purple robes", "Gold throne details", "Electric violet aurora"],
+      "symbolism": "Divine order governing cosmic structure"
+    },
+    "05_the_hierophant": {
+      "archetype": "Spiritual teacher bridging earth and cosmos",
+      "visual_elements": ["Figure with cosmic keys", "Glowing disciples", "Sacred geometry patterns", "Celestial temple backdrop"],
+      "colors": ["Ocean teal robes", "Silver keys", "Pure white light beams"],
+      "symbolism": "Sacred wisdom transmitted through cosmic channels"
+    },
+    "06_the_lovers": {
+      "archetype": "Divine union under cosmic blessing",
+      "visual_elements": ["Two figures with intertwining energy", "Angelic figure overhead", "Garden of glowing flowers", "Cosmic tree of knowledge"],
+      "colors": ["Plasma pink energy bonds", "Electric violet angel", "Nuclear green foliage"],
+      "symbolism": "Soul connection blessed by universal love"
+    },
+    "07_the_chariot": {
+      "archetype": "Cosmic warrior controlling opposing forces",
+      "visual_elements": ["Armored figure in stellar chariot", "Two cosmic beasts pulling", "Glowing wheel symbols", "Aurora-filled sky"],
+      "colors": ["Cyan armor glow", "Midnight purple chariot", "Gold wheel symbols"],
+      "symbolism": "Willpower directing universal energies"
+    },
+    "08_strength": {
+      "archetype": "Gentle power taming cosmic forces",
+      "visual_elements": ["Figure gently holding glowing lion", "Infinity symbol crown", "Bioluminescent flowers", "Peaceful energy aura"],
+      "colors": ["Pure white robes", "Gold infinity symbol", "Nuclear green lion mane"],
+      "symbolism": "Inner strength harmonizing with universal power"
+    },
+    "09_the_hermit": {
+      "archetype": "Cosmic seeker illuminating the path",
+      "visual_elements": ["Cloaked figure with glowing lantern", "Star-filled staff", "Mountain path", "Cosmic spiral in sky"],
+      "colors": ["Deep indigo cloak", "Electric violet lantern light", "Silver star patterns"],
+      "symbolism": "Inner wisdom guiding through cosmic darkness"
+    },
+    "10_wheel_of_fortune": {
+      "archetype": "Cosmic cycles of fate and change",
+      "visual_elements": ["Large glowing wheel with symbols", "Four cosmic creatures in corners", "Central hub with divine eye", "Energy spirals"],
+      "colors": ["Gold wheel rim", "Plasma pink energy", "Cyan creature glows"],
+      "symbolism": "Universal laws governing cycles of existence"
+    },
+    "11_justice": {
+      "archetype": "Cosmic balance and divine law",
+      "visual_elements": ["Crowned figure with glowing scales", "Sword of light", "Cosmic pillars", "Balanced energy fields"],
+      "colors": ["Ocean teal robes", "Silver scales", "Pure white sword light"],
+      "symbolism": "Divine justice maintaining cosmic equilibrium"
+    },
+    "12_the_hanged_man": {
+      "archetype": "Willing sacrifice for cosmic enlightenment",
+      "visual_elements": ["Inverted figure on glowing tree", "Halo of light", "Peaceful expression", "Cosmic void background"],
+      "colors": ["Nuclear green tree glow", "Gold halo", "Deep indigo void"],
+      "symbolism": "Surrender leading to universal understanding"
+    },
+    "13_death": {
+      "archetype": "Cosmic transformation and renewal",
+      "visual_elements": ["Skeletal figure on pale horse", "Glowing scythe", "Transforming landscape", "Rising sun on horizon"],
+      "colors": ["Midnight purple cloak", "Silver scythe blade", "Plasma pink sunrise"],
+      "symbolism": "Inevitable change renewing cosmic order"
+    },
+    "14_temperance": {
+      "archetype": "Cosmic alchemy and divine balance",
+      "visual_elements": ["Angelic figure pouring glowing liquid", "One foot in cosmic stream", "Solar disk on forehead", "Mountain path ahead"],
+      "colors": ["Pure white robes", "Cyan liquid flow", "Gold solar symbol"],
+      "symbolism": "Divine moderation creating cosmic harmony"
+    },
+    "15_the_devil": {
+      "archetype": "Cosmic shadow and material bondage",
+      "visual_elements": ["Horned figure with glowing chains", "Two chained figures below", "Inverted pentagram", "Dark energy emanations"],
+      "colors": ["Deep indigo shadows", "Electric violet chains", "Forest emerald pentagram"],
+      "symbolism": "Material illusions binding cosmic potential"
+    },
+    "16_the_tower": {
+      "archetype": "Cosmic upheaval and sudden revelation",
+      "visual_elements": ["Crumbling tower struck by lightning", "Falling figures", "Crown toppling", "Divine eye in storm"],
+      "colors": ["Nuclear green lightning", "Plasma pink energy bolts", "Midnight purple tower"],
+      "symbolism": "False structures destroyed by cosmic truth"
+    },
+    "17_the_star": {
+      "archetype": "Cosmic hope and divine inspiration",
+      "visual_elements": ["Kneeling figure pouring water", "Large star overhead", "Seven smaller stars", "Pool of cosmic water"],
+      "colors": ["Electric violet stars", "Cyan water flow", "Silver figure glow"],
+      "symbolism": "Divine guidance illuminating cosmic path"
+    },
+    "18_the_moon": {
+      "archetype": "Cosmic illusion and subconscious depths",
+      "visual_elements": ["Glowing moon with face", "Two pillars", "Pool with cosmic crab", "Howling wolf and dog"],
+      "colors": ["Deep indigo sky", "Silver moon glow", "Ocean teal water"],
+      "symbolism": "Intuitive navigation through cosmic mystery"
+    },
+    "19_the_sun": {
+      "archetype": "Cosmic joy and enlightened consciousness",
+      "visual_elements": ["Radiant sun with face", "Child on white horse", "Sunflower garden", "Brick wall background"],
+      "colors": ["Gold sun rays", "Pure white horse", "Nuclear green sunflowers"],
+      "symbolism": "Achieved enlightenment radiating cosmic joy"
+    },
+    "20_judgement": {
+      "archetype": "Cosmic awakening and spiritual rebirth",
+      "visual_elements": ["Angel with glowing trumpet", "Rising figures", "Cross banner", "Cosmic trumpet call"],
+      "colors": ["Electric violet angel wings", "Silver trumpet", "Plasma pink energy"],
+      "symbolism": "Divine call to cosmic consciousness"
+    },
+    "21_the_world": {
+      "archetype": "Cosmic completion and universal harmony",
+      "visual_elements": ["Dancing figure in cosmic oval", "Four corner creatures", "Laurel wreath border", "Infinite energy flow"],
+      "colors": ["All spectrum colors", "Gold wreath", "Pure white central figure"],
+      "symbolism": "Perfect cosmic integration and completion"
+    }
+  },
+  "minor_arcana": {
+    "wands": {
+      "element": "Fire",
+      "master_item": {
+        "description": "Crystalline staff with bioluminescent flames",
+        "visual": "Translucent crystal shaft with nuclear green flame crown",
+        "glow_effect": "Pulsing fire energy with particle trails",
+        "transparency": "Crystal body transparent, flames semi-transparent"
+      },
+      "background_theme": "Volcanic landscapes with aurora skies",
+      "colors": ["Nuclear green", "Plasma pink", "Gold highlights"],
+      "energy_type": "Creative fire energy with cosmic sparks"
+    },
+    "cups": {
+      "element": "Water",
+      "master_item": {
+        "description": "Ethereal chalice with flowing cosmic water",
+        "visual": "Translucent blue crystal cup with cyan liquid energy",
+        "glow_effect": "Rippling water energy with healing aura",
+        "transparency": "Cup translucent, water energy semi-transparent"
+      },
+      "background_theme": "Cosmic oceans with nebula reflections",
+      "colors": ["Cyan", "Ocean teal", "Silver highlights"],
+      "energy_type": "Emotional water energy with healing streams"
+    },
+    "swords": {
+      "element": "Air",
+      "master_item": {
+        "description": "Blade of pure light energy",
+        "visual": "Silver handle with electric violet energy blade",
+        "glow_effect": "Crackling lightning energy with wind wisps",
+        "transparency": "Handle solid, blade pure energy"
+      },
+      "background_theme": "Storm clouds with cosmic lightning",
+      "colors": ["Electric violet", "Silver", "Pure white"],
+      "energy_type": "Mental air energy with thought streams"
+    },
+    "pentacles": {
+      "element": "Earth",
+      "master_item": {
+        "description": "Crystalline coin with sacred geometry",
+        "visual": "Transparent crystal disc with gold pentagram center",
+        "glow_effect": "Stable earth energy with geometric patterns",
+        "transparency": "Crystal disc transparent, pentagram solid gold"
+      },
+      "background_theme": "Crystal caves with bioluminescent minerals",
+      "colors": ["Forest emerald", "Gold", "Deep indigo"],
+      "energy_type": "Material earth energy with prosperity glow"
+    }
+  },
+  "composition_rules": {
+    "ace": "Single large centered master item with maximum glow",
+    "two": "Two items positioned diagonally with energy connection",
+    "three": "Triangle formation with central energy nexus",
+    "four": "Square formation with stable energy foundation",
+    "five": "Pentagram points with chaotic energy disruption",
+    "six": "Hexagonal harmony with balanced energy flow",
+    "seven": "Mystical arrangement with one elevated item",
+    "eight": "Infinity symbol formation with continuous energy",
+    "nine": "Three rows of three with completion energy",
+    "ten": "Tree of life formation with overflow energy",
+    "page": "Young figure learning to handle master item",
+    "knight": "Dynamic figure wielding master item in motion",
+    "queen": "Seated figure mastering master item's energy",
+    "king": "Enthroned figure commanding master item's power"
+  },
+  "technical_specifications": {
+    "image_format": "PNG with alpha channel",
+    "resolution": "512x768 pixels",
+    "color_depth": "32-bit RGBA",
+    "background": "Transparent for master items, cosmic black for full cards",
+    "lighting_model": "Blacklight UV simulation with bioluminescent effects",
+    "glow_parameters": {
+      "intensity": "High contrast against dark backgrounds",
+      "falloff": "Soft gradient to transparent edges",
+      "color_bleeding": "Minimal to preserve item distinction",
+      "particle_density": "Medium for magical atmosphere"
+    }
+  },
+  "rider_waite_fidelity": {
+    "structure": "Maintain traditional card meanings and symbolism",
+    "innovation": "Enhance with cosmic blacklight aesthetic while preserving archetypal essence",
+    "accessibility": "Ensure traditional readers can recognize card identities despite stylistic transformation"
+  }
+}
