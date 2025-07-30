@@ -42,7 +42,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   className = ''
 }) => {
   // State management - Enhanced for conversational flow
-  const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'conversation' | 'complete'>('preparation');
+  const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'revealing' | 'conversation' | 'interpreting' | 'complete'>('preparation');
   const [drawnCards, setDrawnCards] = useState<TarotCard[]>([]);
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [currentSession, setCurrentSession] = useState<ReadingSession | null>(null);
@@ -50,12 +50,25 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   const [error, setError] = useState<string | null>(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   
+  // Additional state for legacy Sophia reading display
+  const [sophiaReading, setSophiaReading] = useState<SophiaReading | null>(null);
+  const [isGeneratingReading, setIsGeneratingReading] = useState(false);
+  const [showAllMeanings, setShowAllMeanings] = useState(false);
+  const [cardInterpretations, setCardInterpretations] = useState<Record<number, string>>({});
+  
   // Conversational state
   const [conversationState, setConversationState] = useState<ConversationState>(ConversationState.AWAITING_DRAW);
   const [conversationHistory, setConversationHistory] = useState<ConversationTurn[]>([]);
   const [currentTurn, setCurrentTurn] = useState<ConversationTurn | null>(null);
   const [isProcessingTurn, setIsProcessingTurn] = useState(false);
   const [finalReading, setFinalReading] = useState<SophiaReading | null>(null);
+  
+  // Progressive Reveal System state
+  const [engagementLevelUp, setEngagementLevelUp] = useState<{
+    show: boolean;
+    newLevel: number;
+    thresholdMet: string;
+  } | null>(null);
   
   // Agent instances
   const sophiaAgent = new SophiaAgent();
@@ -244,8 +257,24 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   const handleUserInput = useCallback(async (userInput: string) => {
     if (!currentSession || isProcessingTurn) return;
     
+    const responseStartTime = Date.now();
+    
     try {
       setIsProcessingTurn(true);
+      
+      // Log user response for learning (authenticated users only)
+      if (user?.id && currentTurn?.options) {
+        await personaLearner.logUserResponse(
+          user.id,
+          currentSession.id,
+          userInput,
+          {
+            options_presented: currentTurn.options.map(opt => opt.text),
+            response_time_ms: Date.now() - responseStartTime,
+            conversation_state: conversationState
+          }
+        );
+      }
       
       const turn = await sophiaAgent.processReadingTurn(
         currentSession.id,
@@ -256,6 +285,19 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setCurrentTurn(turn);
       setConversationState(turn.newState);
       setConversationHistory(prev => [...prev, turn]);
+      
+      // Log conversation turn for learning (authenticated users only)
+      if (user?.id) {
+        await personaLearner.logConversationTurn(
+          user.id,
+          currentSession.id,
+          turn.newState,
+          conversationHistory.length + 1,
+          turn.sophiaDialogue,
+          userInput,
+          turn.revealedCard
+        );
+      }
       
       // If we have a final reading, update phase
       if (turn.finalReading) {
@@ -268,6 +310,20 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         const cardIndex = drawnCards.findIndex(card => card.name === turn.revealedCard!.card.name);
         if (cardIndex !== -1) {
           setRevealedCards(prev => new Set([...prev, cardIndex]));
+          
+          // Log card reveal engagement (authenticated users only)
+          if (user?.id) {
+            await personaLearner.logCardReveal(
+              user.id,
+              currentSession.id,
+              turn.revealedCard.card.name,
+              cardIndex,
+              {
+                clicked: true,
+                interpretation_read: true
+              }
+            );
+          }
         }
       }
       
@@ -277,10 +333,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsProcessingTurn(false);
     }
-  }, [currentSession, conversationState, isProcessingTurn, sophiaAgent, drawnCards]);
+  }, [currentSession, conversationState, isProcessingTurn, sophiaAgent, drawnCards, user, currentTurn, personaLearner, conversationHistory.length]);
 
   /**
-   * Handle saving the conversational reading
+   * Handle saving the conversational reading with engagement level check
    */
   const handleSaveConversationalReading = useCallback(async () => {
     if (!finalReading || !user?.id) return;
@@ -314,6 +370,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
 
       if (response.ok) {
         setShowSaveModal(false);
+        
+        // Check and increment engagement level after successful save
+        await checkEngagementLevel();
+        
         // Optionally show success message
       } else {
         throw new Error('Failed to save reading');
@@ -323,6 +383,39 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setError('Unable to save your reading. Please try again.');
     }
   }, [finalReading, user, selectedSpread, drawnCards, currentSession]);
+
+  /**
+   * Check and increment user engagement level (Progressive Reveal System)
+   */
+  const checkEngagementLevel = useCallback(async () => {
+    if (!user?.id) return; // Skip for guest users
+    
+    try {
+      console.log('InteractiveReadingSurface: Checking engagement level after reading completion');
+      
+      const result = await personaLearner.checkAndIncrementEngagementLevel(user.id);
+      
+      if (result.levelIncreased) {
+        console.log(`InteractiveReadingSurface: User leveled up! ${result.previousLevel} → ${result.newLevel} (${result.thresholdMet})`);
+        
+        // Show level up notification
+        setEngagementLevelUp({
+          show: true,
+          newLevel: result.newLevel,
+          thresholdMet: result.thresholdMet || 'Level Up!'
+        });
+        
+        // Auto-hide notification after 5 seconds
+        setTimeout(() => {
+          setEngagementLevelUp(null);
+        }, 5000);
+      } else {
+        console.log(`InteractiveReadingSurface: No level increase. Current level: ${result.newLevel}`);
+      }
+    } catch (error) {
+      console.error('InteractiveReadingSurface: Failed to check engagement level:', error);
+    }
+  }, [personaLearner, user?.id]);
 
   // Auto-start conversation when cards are drawn
   useEffect(() => {
@@ -372,6 +465,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       try {
         // TODO: Implement API call to save reading
         console.log('Saving to user account:', sessionWithJournal);
+        
+        // Check engagement level after successful save
+        await checkEngagementLevel();
+        
       } catch (err) {
         console.error('Failed to save reading:', err);
       }
@@ -558,6 +655,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       {phase === 'conversation' && currentTurn && (
         <motion.div
           className="mb-8 bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6"
+          data-testid="conversation-phase"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -773,18 +871,69 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         </motion.div>
       )}
 
-      {/* Spread Layout */}
-      <EnhancedTarotSpreadLayouts
-        spreadType={selectedSpread}
-        cards={drawnCards}
-        onCardClick={handleCardReveal}
-        isRevealing={phase === 'revealing' || phase === 'interpreting'}
-        showBioluminescence={true}
-        isMobile={false}
-      />
+      {/* Spread Layout - Show during revealing/interpreting phases, hide during conversation */}
+      {phase !== 'conversation' && (
+        <EnhancedTarotSpreadLayouts
+          spreadType={selectedSpread}
+          cards={drawnCards}
+          onCardClick={handleCardReveal}
+          isRevealing={phase === 'revealing' || phase === 'interpreting'}
+          showBioluminescence={true}
+          isMobile={false}
+        />
+      )}
+      
+      {/* Conversation Phase Card Display */}
+      {phase === 'conversation' && drawnCards.length > 0 && (
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
+            {drawnCards.map((card, index) => (
+              <motion.div
+                key={`conversation-card-${index}`}
+                className={`relative aspect-[2/3] rounded-lg overflow-hidden ${
+                  revealedCards.has(index) 
+                    ? 'bg-gradient-to-br from-purple-800 to-pink-800' 
+                    : 'bg-purple-900/50'
+                }`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ 
+                  opacity: revealedCards.has(index) ? 1 : 0.3, 
+                  scale: revealedCards.has(index) ? 1 : 0.9 
+                }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {revealedCards.has(index) ? (
+                  <div className="p-3 h-full flex flex-col">
+                    <h4 className="text-purple-200 font-medium text-sm mb-2 text-center">
+                      {card.name}
+                    </h4>
+                    <div className="flex-1 flex items-center justify-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-yellow-500 rounded-full flex items-center justify-center">
+                        <Sparkles className="w-8 h-8 text-black" />
+                      </div>
+                    </div>
+                    <p className="text-purple-300 text-xs text-center mt-2">
+                      {card.arcana_type === 'major' ? 'Major Arcana' : `${card.suit} - Minor`}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="h-full flex items-center justify-center">
+                    <div className="w-12 h-12 border-2 border-purple-400/30 rounded-lg"></div>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Controls */}
-      {phase === 'interpreting' && (
+      {(phase === 'interpreting' || phase === 'complete') && (
         <motion.div
           className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50"
           initial={{ opacity: 0, y: 20 }}
@@ -792,19 +941,27 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           transition={{ delay: 1 }}
         >
           <div className="bg-black/80 backdrop-blur-lg rounded-2xl p-4 flex items-center space-x-4 shadow-2xl">
-            <motion.button
-              className="flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
-              onClick={() => setShowAllMeanings(!showAllMeanings)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {showAllMeanings ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              <span>{showAllMeanings ? 'Hide' : 'Show'} Meanings</span>
-            </motion.button>
+            {phase === 'interpreting' && (
+              <motion.button
+                className="flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                onClick={() => setShowAllMeanings(!showAllMeanings)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {showAllMeanings ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                <span>{showAllMeanings ? 'Hide' : 'Show'} Meanings</span>
+              </motion.button>
+            )}
             
             <motion.button
               className="flex items-center space-x-2 px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition-colors"
-              onClick={() => setShowSaveModal(true)}
+              onClick={() => {
+                if (phase === 'complete' && finalReading) {
+                  handleSaveConversationalReading();
+                } else {
+                  setShowSaveModal(true);
+                }
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -825,6 +982,168 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         </motion.div>
       )}
     </div>
+  );
+
+  const renderCompleteReading = () => (
+    <motion.div
+      className="w-full max-w-4xl mx-auto"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+    >
+      {/* Header */}
+      <motion.div
+        className="text-center mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+          Your Complete Reading
+        </h2>
+        <p className="text-purple-300">
+          Sophia's personalized guidance for your {selectedSpread.replace('-', ' ')} spread
+        </p>
+      </motion.div>
+
+      {/* Final Reading Display */}
+      {finalReading && (
+        <motion.div
+          className="mb-8 bg-purple-900/30 backdrop-blur-sm rounded-2xl p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="flex items-center space-x-3 mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-purple-300 font-semibold text-lg">Your Personalized Reading</h3>
+              <p className="text-purple-400 text-sm">Guided by {finalReading.reader_signature}</p>
+            </div>
+          </div>
+          
+          <div className="space-y-6 text-purple-200">
+            {/* Reading Narrative */}
+            <div className="bg-purple-800/20 rounded-lg p-5">
+              <h4 className="text-purple-300 font-medium mb-3 flex items-center">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Your Reading
+              </h4>
+              <p className="leading-relaxed text-lg">{finalReading.narrative}</p>
+            </div>
+            
+            {/* Overall Guidance */}
+            <div className="bg-pink-800/20 rounded-lg p-5">
+              <h4 className="text-pink-300 font-medium mb-3">Guidance & Wisdom</h4>
+              <p className="leading-relaxed">{finalReading.overall_guidance}</p>
+            </div>
+            
+            {/* Spiritual Insight */}
+            <div className="bg-cyan-800/20 rounded-lg p-5">
+              <h4 className="text-cyan-300 font-medium mb-3">Spiritual Insight</h4>
+              <p className="leading-relaxed">{finalReading.spiritual_insight}</p>
+            </div>
+            
+            {/* Individual Card Interpretations */}
+            {finalReading.card_interpretations.length > 0 && (
+              <div className="bg-purple-800/20 rounded-lg p-5">
+                <h4 className="text-purple-300 font-medium mb-4">Individual Card Wisdom</h4>
+                <div className="space-y-4">
+                  {finalReading.card_interpretations.map((interp, index) => (
+                    <motion.div
+                      key={index}
+                      className="border-l-3 border-purple-500 pl-4 py-2"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <h5 className="text-purple-300 font-medium">
+                          {drawnCards[index]?.name}
+                        </h5>
+                        <span className="text-xs text-purple-400 bg-purple-800/30 px-2 py-1 rounded">
+                          {interp.confidence_score > 0.8 ? 'High Confidence' : 'Standard'}
+                        </span>
+                      </div>
+                      <p className="text-purple-200 text-sm leading-relaxed mb-2">
+                        {interp.personalized_guidance}
+                      </p>
+                      {interp.practical_advice && (
+                        <p className="text-purple-300 text-xs italic">
+                          💫 {interp.practical_advice}
+                        </p>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Conversation History Summary */}
+            {conversationHistory.length > 0 && (
+              <motion.div
+                className="bg-indigo-800/20 rounded-lg p-5"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <h4 className="text-indigo-300 font-medium mb-3">Your Journey with Sophia</h4>
+                <p className="text-indigo-200 text-sm mb-3">
+                  This reading evolved through {conversationHistory.length} meaningful exchanges
+                </p>
+                <div className="max-h-40 overflow-y-auto space-y-2">
+                  {conversationHistory.slice(-3).map((turn, index) => (
+                    <div key={index} className="text-indigo-200 text-xs p-2 bg-indigo-900/20 rounded">
+                      <p className="opacity-75">"{turn.sophiaDialogue.substring(0, 100)}..."</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Cards Display */}
+      <motion.div
+        className="mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <h4 className="text-purple-300 font-medium mb-4 text-center">Your Cards</h4>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
+          {drawnCards.map((card, index) => (
+            <motion.div
+              key={`final-card-${index}`}
+              className="relative aspect-[2/3] rounded-lg overflow-hidden bg-gradient-to-br from-purple-800 to-pink-800 p-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 + (index * 0.1) }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
+              <div className="h-full flex flex-col">
+                <h5 className="text-purple-200 font-medium text-sm mb-2 text-center">
+                  {card.name}
+                </h5>
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-yellow-500 rounded-full flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-black" />
+                  </div>
+                </div>
+                <p className="text-purple-300 text-xs text-center mt-2">
+                  {card.arcana_type === 'major' ? 'Major Arcana' : `${card.suit} - Minor`}
+                </p>
+                {card.isReversed && (
+                  <p className="text-pink-300 text-xs text-center mt-1">Reversed</p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
   );
 
   // Error state
@@ -891,9 +1210,14 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
               {renderShuffling()}
             </motion.div>
           )}
-          {(phase === 'revealing' || phase === 'interpreting') && drawnCards.length > 0 && (
+          {(phase === 'revealing' || phase === 'interpreting' || phase === 'conversation') && drawnCards.length > 0 && (
             <motion.div key="reading" className="w-full">
               {renderReading()}
+            </motion.div>
+          )}
+          {phase === 'complete' && (
+            <motion.div key="complete">
+              {renderCompleteReading()}
             </motion.div>
           )}
         </AnimatePresence>
@@ -970,6 +1294,48 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
                 </motion.button>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Progressive Reveal Level Up Notification */}
+      <AnimatePresence>
+        {engagementLevelUp && engagementLevelUp.show && (
+          <motion.div
+            className="fixed top-6 right-6 z-50 max-w-sm"
+            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 100, scale: 0.8 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          >
+            <div className="bg-gradient-to-r from-purple-800 to-pink-800 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/30 shadow-2xl">
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-yellow-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-black" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-lg">Sophia Reveals Herself!</h4>
+                  <p className="text-purple-200 text-sm">Level {engagementLevelUp.newLevel}</p>
+                </div>
+              </div>
+              <p className="text-purple-200 text-sm mb-3">
+                You've become a <span className="font-semibold text-gold-300">{engagementLevelUp.thresholdMet}</span>! 
+                Sophia trusts you more and reveals more of herself.
+              </p>
+              <div className="flex justify-between items-center">
+                <p className="text-purple-300 text-xs">
+                  Continue your journey to see her fully revealed form
+                </p>
+                <motion.button
+                  className="text-purple-300 hover:text-white text-xs"
+                  onClick={() => setEngagementLevelUp(null)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ×
+                </motion.button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
