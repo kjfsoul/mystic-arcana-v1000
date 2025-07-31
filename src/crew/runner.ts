@@ -187,7 +187,7 @@ class CrewRunner {
 
     try {
       const results: CrewResult[] = [];
-      let operationData: any = { ...params };
+      const operationData: any = { ...params };
 
       switch (taskName) {
         case 'generateCrewTarotDeck':

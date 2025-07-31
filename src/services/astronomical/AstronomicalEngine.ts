@@ -271,31 +271,31 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return [];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async detectRetrogrades(_planet: Planet, _timeRange: { start: Date; end: Date }): Promise<RetrogradeData[]> {
     // Placeholder - will analyze planetary motion
     return [];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   calculateHouses(_time: Date, _location: GeoLocation, _system: 'placidus' | 'equal' | 'whole'): number[] {
     // Placeholder - will implement house system calculations
     return Array(12).fill(0);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async getMoonPhase(_time: Date): Promise<MoonPhaseData> {
     // Placeholder - will calculate accurate moon phase
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async getMoonPosition(_time: Date, _location: GeoLocation): Promise<PlanetaryData> {
     // Placeholder - will calculate moon position
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   calculatePrecession(_epoch: Date, _targetDate: Date): { deltaRA: number; deltaDec: number } {
     // Placeholder - will implement precession correction
     return { deltaRA: 0, deltaDec: 0 };
@@ -340,7 +340,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return Math.max(0, Math.min(1, extinction));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async getVisibleSky(_location: GeoLocation, _time: Date): Promise<{
     stars: Star[];
     planets: PlanetaryData[];
@@ -350,13 +350,13 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async calculateCosmicWeather(_time: Date): Promise<CosmicInfluenceData> {
     // Placeholder - will analyze cosmic influences
     throw new Error('Not implemented - awaiting Claude Opus 4 algorithms');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   getPlanetaryHour(_time: Date, _location: GeoLocation): Planet {
     // Placeholder - will calculate current planetary hour
     return Planet.SUN;
@@ -388,7 +388,7 @@ export class ProductionAstronomicalEngine implements AstronomicalEngine {
     return new Date(year, month - 1, day);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   getSiderealTime(_time: Date, _longitude: number): number {
     // Placeholder - will implement accurate sidereal time calculation
     return 0;

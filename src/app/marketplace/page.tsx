@@ -46,7 +46,7 @@ export default function MarketplacePage() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = allProducts.filter(product => {
+    const filtered = allProducts.filter(product => {
       // Price range filter
       if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
         return false;

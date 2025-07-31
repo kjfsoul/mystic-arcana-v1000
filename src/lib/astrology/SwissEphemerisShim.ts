@@ -259,7 +259,7 @@ export class SwissEphemerisShim {
     omega: number, w: number, L0: number, n: number
   ): { longitude: number; latitude: number; distance: number; speed: number; } {
     // Mean longitude
-    let L = (L0 + n * t * 36525) % 360;
+    const L = (L0 + n * t * 36525) % 360;
     
     // Mean anomaly
     const M = ((L - w) % 360) * Math.PI / 180;
@@ -326,7 +326,7 @@ export class SwissEphemerisShim {
     omega: number, w: number, L0: number, n: number
   ): { longitude: number; latitude: number; distance: number; speed: number; } {
     // Mean longitude
-    let L = (L0 + n * t * 36525) % 360;
+    const L = (L0 + n * t * 36525) % 360;
     
     // Mean anomaly
     const M = ((L - w) % 360) * Math.PI / 180;
@@ -351,7 +351,7 @@ export class SwissEphemerisShim {
     const nextDay = t + 1/36525;
     const nextL = (L0 + n * nextDay * 36525) % 360;
     const nextM = ((nextL - w) % 360) * Math.PI / 180;
-    let nextE = nextM + e * Math.sin(nextM);
+    const nextE = nextM + e * Math.sin(nextM);
     const nextNu = 2 * Math.atan2(Math.sqrt(1 + e) * Math.sin(nextE / 2), Math.sqrt(1 - e) * Math.cos(nextE / 2));
     const nextLonHelio = (nextNu * 180 / Math.PI + w) % 360;
     const nextEarthPos = this.calculateSunPosition(nextDay);
@@ -417,7 +417,7 @@ export class SwissEphemerisShim {
     const lstRad = lst * Math.PI / 180;
     
     const ascRad = Math.atan2(Math.cos(lstRad), -Math.sin(lstRad) * Math.cos(latRad));
-    let asc = ascRad * 180 / Math.PI;
+    const asc = ascRad * 180 / Math.PI;
     
     return asc < 0 ? asc + 360 : asc;
   }

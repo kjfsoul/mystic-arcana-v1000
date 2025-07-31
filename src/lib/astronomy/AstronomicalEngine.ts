@@ -221,7 +221,7 @@ export class AstronomicalEngine {
   /**
    * Calculate aspects between planetary bodies
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async calculateAspects(_planets: PlanetaryData[]): Promise<AspectData[]> {
     // Use Swiss Ephemeris bridge for high-precision aspect calculations
     const { swissEphemeris } = await import('./SwissEphemerisBridge');
@@ -365,7 +365,7 @@ export class AstronomicalEngine {
   /**
    * Calculate cosmic weather based on current celestial configuration
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   async calculateCosmicWeather(_time: Date, _location: GeoLocation): Promise<CosmicInfluenceData> {
     // TODO: Fix cosmic weather data conversion - for now return placeholder
     return {

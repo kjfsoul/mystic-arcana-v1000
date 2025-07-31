@@ -57,7 +57,7 @@ export class CosmicWeatherAPI {
           heliocentric: false
         }
       };
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+       
       const planets = await this.ephemerisBridge.calculatePlanetaryPositions(request);
 
       // Calculate aspects
@@ -128,7 +128,7 @@ export class CosmicWeatherAPI {
   /**
    * Detect currently retrograde planets
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   private async detectCurrentRetrogrades(_planets: PlanetaryData[]): Promise<Planet[]> {
     // TODO: Fix retrograde detection - for now return empty array
     return [];

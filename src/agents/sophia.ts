@@ -413,7 +413,7 @@ export class SophiaAgent {
 
     session.cardInterpretations[cardIndex] = interpretation;
 
-    let dialogue = interpretation.personalized_guidance;
+    const dialogue = interpretation.personalized_guidance;
     let nextState: ConversationState;
 
     // Determine next state based on current card

@@ -15,7 +15,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Performance & Stability Audit', () => {
   let performanceEntries: any[] = [];
   let layoutShifts: any[] = [];
-  let renderCounts: Map<string, number> = new Map();
+  const renderCounts: Map<string, number> = new Map();
 
   test.beforeEach(async ({ page }) => {
     // Reset tracking data

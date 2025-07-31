@@ -1010,7 +1010,7 @@ except Exception as e:
   }
 
   private async updateResponsePatterns(userId: string, event: LearningEvent): Promise<void> {
-    let profile = this.userProfiles.get(userId);
+    const profile = this.userProfiles.get(userId);
     if (!profile) return;
 
     // Track response patterns

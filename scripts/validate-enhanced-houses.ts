@@ -174,7 +174,7 @@ async function runEnhancedHouseValidation(): Promise<void> {
     
     // Run validation tests
     let testsPassed = 0;
-    let totalTests = 4;
+    const totalTests = 4;
     
     // Test 1: SVG Chart validation
     console.log('\n🎨 SVG CHART VALIDATION:');

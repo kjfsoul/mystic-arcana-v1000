@@ -1,12 +1,12 @@
 'use client';
 
-import React, { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { MobileTarotReader } from '@/components/tarot/MobileTarotReader';
 import { SpreadType } from '@/components/tarot/EnhancedTarotSpreadLayouts';
+import { MobileTarotReader } from "@/components/tarot/MobileTarotReader";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 interface EmbedPageProps {
-  params: {};
+  params: { object: any };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 

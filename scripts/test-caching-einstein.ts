@@ -325,7 +325,7 @@ class EinsteinCachingBenchmark {
         `${API_BASE_URL}` // Root endpoint
       ];
       
-      let attempts = 0;
+      const attempts = 0;
       const tryEndpoint = (index: number) => {
         if (index >= endpoints.length) {
           console.log('❌ All curl attempts failed - server appears to be down');

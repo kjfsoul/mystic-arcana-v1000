@@ -84,7 +84,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [location, finalRenderConfig, time]);
 
   // Convert star coordinates to screen positions
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   const getStarScreenPosition = useCallback((_star: Star): ScreenCoordinates => {
     return astronomicalEngine.transformCoordinates();
   }, []);
