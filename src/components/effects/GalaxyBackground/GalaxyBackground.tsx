@@ -166,26 +166,11 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
     }, 50);
     window.addEventListener("resize", resizeCanvas);
 
-    // Animation loop for twinkling effect
-    let animationId: number;
-    let lastTwinkle = 0;
-    if (animated) {
-      const animate = (currentTime: number) => {
-        // Regenerate occasionally for twinkling effect (every 5 seconds)
-        if (currentTime - lastTwinkle > 5000) {
-          generateStars();
-          lastTwinkle = currentTime;
-        }
-        animationId = requestAnimationFrame(animate);
-      };
-      animationId = requestAnimationFrame(animate);
-    }
+    // REMOVED: Animation loop causing constant wobbling
+    // Animation disabled to fix performance and wobbling issues
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
     };
   }, [intensity, showMilkyWay, animated, starCount]);
 

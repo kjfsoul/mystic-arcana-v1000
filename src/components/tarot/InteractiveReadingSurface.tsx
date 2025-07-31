@@ -16,6 +16,7 @@ import {
   InteractiveQuestion 
 } from '@/agents/sophia';
 import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
+import { VirtualReaderDisplay } from '@/components/readers/VirtualReaderDisplay';
 
 interface ReadingSession {
   id: string;
@@ -1196,6 +1197,25 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
         />
       </div>
+
+      {/* Sophia Virtual Reader Display - Fixed Position */}
+      {(phase === 'revealing' || phase === 'interpreting' || phase === 'conversation' || phase === 'complete') && (
+        <motion.div 
+          className="fixed top-20 left-6 z-20"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.8 }}
+        >
+          <VirtualReaderDisplay
+            readerId="sophia"
+            size="medium"
+            showLevel={true}
+            showProgress={false}
+            className="shadow-2xl"
+          />
+        </motion.div>
+      )}
 
       {/* Main Content */}
       <div className="relative z-10 w-full min-h-screen flex items-center justify-center p-6">

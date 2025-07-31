@@ -35,8 +35,9 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
 
         // Get user profile for birth data
         const profile = await profileService.getProfile(user.id);
+        console.log('Profile data for Oracle:', profile);
         
-        if (!profile?.birth_date || !profile?.birth_city) {
+        if (!profile?.birth_date) {
           setError('Complete your birth profile to receive your Daily Oracle reading');
           setIsLoading(false);
           return;
@@ -46,7 +47,7 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
         const birthData = {
           name: profile.full_name || 'User',
           date: new Date(profile.birth_date),
-          city: profile.birth_city,
+          city: profile.birth_city || 'New York',
           country: profile.birth_country || 'United States',
           latitude: 40.7128, // Default coordinates
           longitude: -74.0060,

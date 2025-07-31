@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { profileService } from '../../services/profileService';
 import { GalaxyBackground } from '../../components/effects/GalaxyBackground/GalaxyBackground';
 import { Header } from '../../components/layout/Header';
+import { LocationAutocomplete } from '../../components/common/LocationAutocomplete';
 import styles from './page.module.css';
 
 interface UserProfile {
@@ -180,13 +181,15 @@ export default function ProfilePage() {
                   <label htmlFor="birthLocation" className={styles.label}>
                     Birth Location (Optional)
                   </label>
-                  <input
-                    type="text"
-                    id="birthLocation"
+                  <LocationAutocomplete
                     value={birthLocation}
-                    onChange={(e) => setBirthLocation(e.target.value)}
-                    placeholder="City, State/Country"
-                    className={styles.input}
+                    onChange={setBirthLocation}
+                    placeholder="Start typing your birth city..."
+                    className="w-full"
+                    onLocationSelect={(location) => {
+                      console.log('Selected location:', location);
+                      setBirthLocation(location.name);
+                    }}
                   />
                   <small className={styles.hint}>
                     Helps calculate precise planetary positions for your birth chart
@@ -208,9 +211,10 @@ export default function ProfilePage() {
                     className={styles.select}
                   >
                     <option value="">Select a reader...</option>
+                    <option value="sophia">Sophia - The Wisdom Keeper</option>
                     <option value="luna">Luna - The Intuitive Guide</option>
-                    <option value="sage">Sage - The Wisdom Keeper</option>
-                    <option value="phoenix">Phoenix - The Transformative Oracle</option>
+                    <option value="sage">Sage - The Ancient Oracle</option>
+                    <option value="phoenix">Phoenix - The Transformative Guide</option>
                     <option value="cosmic">Cosmic - The Universal Reader</option>
                   </select>
                   <small className={styles.hint}>

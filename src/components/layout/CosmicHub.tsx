@@ -239,10 +239,10 @@ export const CosmicHub: React.FC = () => {
           <div className="fixed inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black opacity-80" />
         }>
           <GalaxyBackground
-            intensity={currentView === 'hub' ? 0.8 : 0.4}
+            intensity={currentView === 'hub' ? 0.6 : 0.3}
             showMilkyWay={currentView === 'hub'}
-            animated={true}
-            starCount={currentView === 'hub' ? 1000 : 500}
+            animated={false}
+            starCount={currentView === 'hub' ? 50 : 25}
           />
         </Suspense>
       </div>
