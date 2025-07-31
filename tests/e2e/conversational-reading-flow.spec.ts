@@ -137,7 +137,7 @@ test.describe('Conversational Reading Flow', () => {
       
       if (await completeHeader.isVisible()) {
         // Verify complete reading display
-        await expect(page.locator('text=Sophia\\'s personalized guidance')).toBeVisible();
+        await expect(page.locator('text=Sophia\'s personalized guidance')).toBeVisible();
         
         // Check for final reading sections
         await expect(page.locator('h4:has-text("Your Reading")')).toBeVisible();

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
-import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
+import { PersonaLearnerAgentClient } from '@/agents/PersonaLearner-client';
 import { Sparkles, Eye, Lock, Unlock } from 'lucide-react';
 
 interface VirtualReaderDisplayProps {
@@ -45,7 +45,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   const [imageError, setImageError] = useState(false);
   const [previousLevel, setPreviousLevel] = useState<number | null>(null);
   
-  const personaLearner = new PersonaLearnerAgent();
+  const personaLearner = new PersonaLearnerAgentClient();
 
   // Size configurations
   const sizeConfig = {

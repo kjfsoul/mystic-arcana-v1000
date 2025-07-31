@@ -105,14 +105,15 @@ export async function POST(request: NextRequest) {
       logger.warn(
         "tarot_save_reading_auth_error",
         undefined,
-        { error: authError.message },
+        { error: authError.message, details: authError },
         "Authentication error while saving reading."
       );
       return NextResponse.json(
         {
           success: false,
-          error: "Authentication failed",
+          error: "Authentication failed - " + authError.message,
           code: "AUTH_ERROR",
+          details: authError.message
         },
         { status: 401 }
       );
@@ -231,10 +232,26 @@ export async function POST(request: NextRequest) {
 
     if (saveError) {
       console.error("Database save error:", saveError);
+      logger.error(
+        "tarot_save_reading_db_error",
+        userId,
+        { 
+          error: saveError.message, 
+          code: saveError.code,
+          details: saveError,
+          readingData: {
+            spread_type: spreadType,
+            cardsCount: cards.length,
+            hasInterpretation: !!interpretation
+          }
+        },
+        saveError,
+        "Database error while saving reading."
+      );
       return NextResponse.json(
         {
           success: false,
-          error: "Failed to save reading",
+          error: "Failed to save reading: " + saveError.message,
           code: "SAVE_ERROR",
           details: saveError.message,
         },

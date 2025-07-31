@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const query = searchParams.get('q');
+    const input = searchParams.get('input'); // Support both 'q' and 'input' parameters
     const lat = searchParams.get('lat');
     const lon = searchParams.get('lon');
 
@@ -16,13 +17,14 @@ export async function GET(request: NextRequest) {
       return await reverseGeocode(parseFloat(lat), parseFloat(lon));
     }
 
-    // If query provided, do forward geocoding
-    if (query) {
-      return await forwardGeocode(query);
+    // If query or input provided, do forward geocoding
+    const searchQuery = query || input;
+    if (searchQuery) {
+      return await forwardGeocode(searchQuery);
     }
 
     return NextResponse.json(
-      { error: 'Either q (query) or lat/lon parameters are required' },
+      { error: 'Either q/input (query) or lat/lon parameters are required' },
       { status: 400 }
     );
 

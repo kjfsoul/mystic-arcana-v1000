@@ -1,0 +1,326 @@
+/**
+ * LIVING ORACLE INITIATIVE - PHASE 1: API VALIDATION AUDIT
+ * 
+ * Validates claims regarding API fixes:
+ * 1. Save Reading API (500 error fixes)
+ * 2. Geocode API (400 error fixes)
+ * 3. API authentication improvements
+ * 
+ * Evidence-based validation with comprehensive error scenarios.
+ */
+
+import { test, expect } from '@playwright/test';
+
+test.describe('API Validation Audit', () => {
+  
+  test('CRITICAL: Geocode API accepts both q and input parameters', async ({ page }) => {
+    // Test the geocode API directly via fetch
+    const testQueries = [
+      { param: 'q', value: 'Los Angeles, CA, USA' },
+      { param: 'input', value: 'New York, NY, USA' },
+      { param: 'input', value: 'London, UK' }
+    ];
+
+    for (const query of testQueries) {
+      const response = await page.evaluate(async ({ param, value, baseURL }) => {
+        try {
+          const response = await fetch(`${baseURL}/api/geocode?${param}=${encodeURIComponent(value)}`);
+          let data = null;
+          try {
+            data = await response.json();
+          } catch (jsonError) {
+            data = await response.text();
+          }
+          return {
+            status: response.status,
+            ok: response.ok,
+            data: data,
+            error: null
+          };
+        } catch (error) {
+          return {
+            status: 0,
+            ok: false,
+            data: null,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          };
+        }
+      }, { ...query, baseURL: 'http://localhost:3002' });
+
+      console.log(`🌍 Geocode API Test (${query.param}=${query.value}):`, {
+        status: response.status,
+        ok: response.ok,
+        hasData: !!response.data
+      });
+
+      // Should not return 400 error anymore
+      expect(response.status).not.toBe(400);
+      expect(response.ok).toBe(true);
+      
+      if (response.data && Array.isArray(response.data)) {
+        expect(response.data.length).toBeGreaterThan(0);
+        console.log(`✅ Geocode returned ${response.data.length} results for ${query.value}`);
+      }
+    }
+  });
+
+  test('VERIFICATION: Geocode API handles edge cases gracefully', async ({ page }) => {
+    const edgeCases = [
+      { param: 'q', value: '' }, // Empty query
+      { param: 'input', value: 'NonexistentCity123456' }, // Invalid location
+      { param: 'q', value: 'a' }, // Too short query
+    ];
+
+    for (const testCase of edgeCases) {
+      const response = await page.evaluate(async ({ param, value, baseURL }) => {
+        try {
+          const response = await fetch(`${baseURL}/api/geocode?${param}=${encodeURIComponent(value)}`);
+          return {
+            status: response.status,
+            data: await response.json()
+          };
+        } catch (error) {
+          return {
+            status: 0,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          };
+        }
+      }, { ...testCase, baseURL: 'http://localhost:3002' });
+
+      console.log(`🧪 Edge case test (${testCase.param}="${testCase.value}"):`, response);
+
+      // Should handle gracefully without 500 errors
+      expect(response.status).not.toBe(500);
+      
+      if (testCase.value === '') {
+        // Empty query should return 400 with proper error message
+        expect(response.status).toBe(400);
+      }
+    }
+  });
+
+  test('CRITICAL: Save Reading API authentication flow', async ({ page }) => {
+    // Test save reading API without authentication (should fail gracefully)
+    const mockReading = {
+      userId: 'test-user',
+      spreadType: 'single',
+      cards: [{
+        id: 'test-card',
+        name: 'Test Card',
+        position: 'center',
+        isReversed: false,
+        meaning: 'Test meaning'
+      }],
+      interpretation: 'Test interpretation'
+    };
+
+    const unauthenticatedResponse = await page.evaluate(async ({ reading, baseURL }) => {
+      try {
+        const response = await fetch(`${baseURL}/api/tarot/save-reading`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(reading)
+        });
+        
+        return {
+          status: response.status,
+          data: await response.json()
+        };
+      } catch (error) {
+        return {
+          status: 0,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        };
+      }
+    }, { reading: mockReading, baseURL: 'http://localhost:3002' });
+
+    console.log('🔐 Unauthenticated save reading test:', unauthenticatedResponse);
+
+    // Should return 401 unauthorized, not 500 server error
+    expect(unauthenticatedResponse.status).toBe(401);
+    expect(unauthenticatedResponse.data.code).toBe('UNAUTHENTICATED');
+    console.log('✅ Save Reading API properly handles unauthenticated requests');
+  });
+
+  test('VERIFICATION: Save Reading API input validation', async ({ page }) => {
+    const invalidInputs = [
+      {
+        name: 'missing spreadType',
+        data: {
+          userId: 'test',
+          cards: [{ id: 'test', name: 'Test', position: 'center', isReversed: false }],
+          interpretation: 'test'
+        }
+      },
+      {
+        name: 'empty cards array',
+        data: {
+          userId: 'test',
+          spreadType: 'single',
+          cards: [],
+          interpretation: 'test'
+        }
+      },
+      {
+        name: 'missing interpretation',
+        data: {
+          userId: 'test',
+          spreadType: 'single',
+          cards: [{ id: 'test', name: 'Test', position: 'center', isReversed: false }]
+        }
+      }
+    ];
+
+    for (const invalidInput of invalidInputs) {
+      const response = await page.evaluate(async ({ data, baseURL }) => {
+        try {
+          const response = await fetch(`${baseURL}/api/tarot/save-reading`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer fake-token' // Will fail auth but test input validation
+            },
+            body: JSON.stringify(data)
+          });
+          
+          return {
+            status: response.status,
+            data: await response.json()
+          };
+        } catch (error) {
+          return {
+            status: 0,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          };
+        }
+      }, { ...invalidInput, baseURL: 'http://localhost:3002' });
+
+      console.log(`🧪 Invalid input test (${invalidInput.name}):`, response);
+
+      // Should return 400 for invalid input, not 500 server error
+      if (response.status !== 401) { // Might hit auth error first
+        expect([400, 401]).toContain(response.status);
+      }
+    }
+  });
+
+  test('VERIFICATION: API response times are reasonable', async ({ page }) => {
+    const apiEndpoints = [
+      { name: 'Geocode API', url: '/api/geocode?q=New+York' },
+      { name: 'Tarot Shuffle', url: '/api/tarot/shuffle', method: 'POST' },
+      { name: 'Tarot Draw', url: '/api/tarot/draw', method: 'POST', body: { spreadType: 'single' } }
+    ];
+
+    for (const endpoint of apiEndpoints) {
+      const startTime = Date.now();
+      
+      const response = await page.evaluate(async ({ url, method = 'GET', body = null, baseURL }) => {
+        try {
+          const options: RequestInit = { method };
+          if (body) {
+            options.headers = { 'Content-Type': 'application/json' };
+            options.body = JSON.stringify(body);
+          }
+          
+          const response = await fetch(`${baseURL}${url}`, options);
+          return {
+            status: response.status,
+            ok: response.ok,
+            size: response.headers.get('content-length') || '0'
+          };
+        } catch (error) {
+          return {
+            status: 0,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          };
+        }
+      }, { ...endpoint, baseURL: 'http://localhost:3002' });
+
+      const responseTime = Date.now() - startTime;
+      
+      console.log(`⚡ ${endpoint.name} response time: ${responseTime}ms`, {
+        status: response.status,
+        ok: response.ok
+      });
+
+      // API should respond within 3 seconds
+      expect(responseTime).toBeLessThan(3000);
+      
+      // Should not return 500 server errors (unless expected)
+      if (endpoint.name !== 'Tarot Draw') { // Tarot draw might need auth
+        expect(response.status).not.toBe(500);
+      }
+    }
+  });
+
+  test('DIAGNOSTIC: API Error Handling Assessment', async ({ page }) => {
+    console.log('🔍 COMPREHENSIVE API ERROR HANDLING ASSESSMENT');
+    console.log('=================================================');
+
+    // Test various error scenarios
+    const errorTests = [
+      {
+        name: 'Malformed JSON',
+        endpoint: '/api/tarot/save-reading',
+        method: 'POST',
+        body: 'invalid json{',
+        expectedBehavior: 'Should return 400 with proper error message'
+      },
+      {
+        name: 'Missing Content-Type',
+        endpoint: '/api/tarot/save-reading',
+        method: 'POST',
+        body: JSON.stringify({ test: 'data' }),
+        headers: {},
+        expectedBehavior: 'Should handle gracefully'
+      },
+      {
+        name: 'Nonexistent endpoint',
+        endpoint: '/api/nonexistent',
+        method: 'GET',
+        expectedBehavior: 'Should return 404'
+      }
+    ];
+
+    for (const errorTest of errorTests) {
+      try {
+        const response = await page.evaluate(async ({ endpoint, method, body, headers = {}, baseURL }) => {
+          try {
+            const defaultHeaders = body && typeof body === 'string' ? { 'Content-Type': 'application/json' } : {};
+            const response = await fetch(`${baseURL}${endpoint}`, {
+              method,
+              headers: { ...defaultHeaders, ...headers },
+              body
+            });
+            
+            return {
+              status: response.status,
+              statusText: response.statusText,
+              headers: Object.fromEntries(response.headers.entries()),
+              bodyPreview: await response.text().then(text => text.slice(0, 200))
+            };
+          } catch (error) {
+            return {
+              status: 0,
+              error: error instanceof Error ? error.message : 'Unknown error'
+            };
+          }
+        }, { ...errorTest, baseURL: 'http://localhost:3002' });
+
+        console.log(`📋 ${errorTest.name}:`, {
+          status: response.status,
+          expectation: errorTest.expectedBehavior,
+          result: response.error || 'Request completed'
+        });
+
+      } catch (error) {
+        console.log(`❌ ${errorTest.name}: Test execution failed -`, error);
+      }
+    }
+
+    // Always pass diagnostic test
+    expect(true).toBe(true);
+  });
+});

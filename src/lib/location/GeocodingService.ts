@@ -66,6 +66,19 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
     }
     const data = await response.json();
 
+    // Handle OpenStreetMap Nominatim response format
+    if (Array.isArray(data)) {
+      return data.slice(0, 5).map((item: any) => ({
+        name: item.display_name || item.name,
+        latitude: item.lat,
+        longitude: item.lon,
+        country: item.country,
+        state: item.state,
+        city: item.city || item.name
+      }));
+    }
+
+    // Handle Google Places API format if using it
     if (
       data.status === "OK" &&
       data.predictions &&
