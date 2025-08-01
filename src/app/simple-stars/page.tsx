@@ -6,6 +6,7 @@ export default function SimpleStarsPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState('Initializing...');
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

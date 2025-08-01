@@ -41,9 +41,10 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const [gpsLoading, setGpsLoading] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   // Debounced search
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (query.length < 2) {
       setSuggestions([]);
@@ -90,30 +91,14 @@ export const LocationInput: React.FC<LocationInputProps> = ({
 
     setGpsLoading(true);
     navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const { latitude, longitude } = position.coords;
-          const response = await fetch(`/api/geocode?lat=${latitude}&lon=${longitude}`);
-          if (response.ok) {
-            const location = await response.json();
-            if (location) {
-              setQuery(`${location.name}, ${location.country}`);
-              onLocationSelect({
-                city: location.name,
-                country: location.country,
-                latitude: location.lat,
-                longitude: location.lon,
-                timezone: location.timezone
-              });
-              setShowSuggestions(false);
-            }
-          }
-        } catch (error) {
-          console.error('Error getting location details:', error);
-          alert('Could not get location details. Please try again.');
-        } finally {
-          setGpsLoading(false);
-        }
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        onLocationSelect({
+          city: '',
+          country: '',
+          latitude: latitude,
+          longitude: longitude,
+        });
       },
       (error) => {
         setGpsLoading(false);

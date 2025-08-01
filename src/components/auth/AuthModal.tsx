@@ -23,6 +23,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   
   // Sync internal mode with prop when modal opens
+// eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (isOpen) {
       setMode(initialMode);

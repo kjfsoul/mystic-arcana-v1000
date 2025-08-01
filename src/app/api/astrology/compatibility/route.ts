@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
-import { BirthData } from "@/types/astrology";
+import { BirthData } from '@/types/astrology';
 
 interface CompatibilityRequest {
   person1: BirthData;
@@ -243,24 +243,27 @@ export async function POST(request: NextRequest) {
     }
 
     // Convert dates to proper format for Python script
+    const person1Date = new Date(body.person1.date || body.person1.birthDate);
+    const person2Date = new Date(body.person2.date || body.person2.birthDate);
+    
     const person1Data = {
       name: body.person1.name,
-      year: new Date(body.person1.date).getFullYear(),
-      month: new Date(body.person1.date).getMonth() + 1,
-      day: new Date(body.person1.date).getDate(),
-      hour: new Date(body.person1.date).getHours(),
-      minute: new Date(body.person1.date).getMinutes(),
+      year: person1Date.getFullYear(),
+      month: person1Date.getMonth() + 1,
+      day: person1Date.getDate(),
+      hour: person1Date.getHours(),
+      minute: person1Date.getMinutes(),
       city: body.person1.city,
       country: body.person1.country || ""
     };
 
     const person2Data = {
       name: body.person2.name,
-      year: new Date(body.person2.date).getFullYear(),
-      month: new Date(body.person2.date).getMonth() + 1,
-      day: new Date(body.person2.date).getDate(),
-      hour: new Date(body.person2.date).getHours(),
-      minute: new Date(body.person2.date).getMinutes(),
+      year: person2Date.getFullYear(),
+      month: person2Date.getMonth() + 1,
+      day: person2Date.getDate(),
+      hour: person2Date.getHours(),
+      minute: person2Date.getMinutes(),
       city: body.person2.city,
       country: body.person2.country || ""
     };

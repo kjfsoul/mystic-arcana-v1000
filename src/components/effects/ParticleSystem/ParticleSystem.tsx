@@ -22,6 +22,7 @@ export const ParticleSystem: React.FC<ParticleSystemProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

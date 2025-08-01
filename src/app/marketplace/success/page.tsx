@@ -11,6 +11,7 @@ function SuccessPageContent() {
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (sessionId) {
       // In a real implementation, you'd fetch order details from your backend

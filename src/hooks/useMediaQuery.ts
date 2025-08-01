@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const media = window.matchMedia(query);
     

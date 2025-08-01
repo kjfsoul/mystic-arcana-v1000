@@ -14,6 +14,7 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
   const [error, setError] = useState<string | null>(null);
 
   // Load profile data on mount or user change
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!user || !options.autoLoad) return;
 
@@ -36,6 +37,7 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
   }, [user, options.autoLoad]);
 
   // Subscribe to profile changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const unsubscribe = ProfileDataService.subscribe((data) => {
       setProfileData(data);

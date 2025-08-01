@@ -17,6 +17,7 @@ export default function Home() {
   const [viewMode, setViewMode] = useState<ViewMode>('lobby');
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.7);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Adjust galaxy intensity based on view mode
     switch (viewMode) {

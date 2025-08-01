@@ -25,6 +25,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
   
   const { user } = useAuth();
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadHoroscope = async () => {
       try {

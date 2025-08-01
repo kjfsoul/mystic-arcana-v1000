@@ -60,6 +60,7 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
   ]);
 
   // Auto-rotate carousel
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % events.length);

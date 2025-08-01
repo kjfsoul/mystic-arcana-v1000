@@ -379,9 +379,10 @@ function generateAffirmation(horoscope: HoroscopeOracleData, cosmic: CosmicFocus
  */
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
+  let body: DailyOracleRequest | undefined;
   
   try {
-    const body: DailyOracleRequest = await request.json();
+    body = await request.json();
     
     if (!body.birthData) {
       return NextResponse.json(
@@ -484,12 +485,12 @@ export async function POST(request: NextRequest) {
     });
     
   } catch (error) {
-    logger.error('oracle_generation_error', body.userId, {}, error as Error, 'Failed to generate daily oracle');
+    logger.error('oracle_generation_error', body?.userId, {}, error as Error, 'Failed to generate daily oracle');
     
     // Fallback oracle data
     const fallbackData: DailyOracleData = {
       id: `oracle_fallback_${Date.now()}`,
-      userId: body.userId,
+      userId: body?.userId || 'unknown',
       date: new Date().toISOString().split('T')[0],
       timestamp: new Date().toISOString(),
       

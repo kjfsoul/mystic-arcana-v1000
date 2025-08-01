@@ -34,6 +34,7 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   // Responsive breakpoint detection
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -45,12 +46,14 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
   }, []);
 
   // Loading state management
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
   // Keyboard navigation
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.altKey) {

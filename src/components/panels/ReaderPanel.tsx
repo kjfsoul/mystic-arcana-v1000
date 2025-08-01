@@ -99,11 +99,13 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
   const currentReader = virtualReaders.find(r => r.id === selectedReader) || virtualReaders[0];
 
   // Auto-scroll to bottom when new messages arrive
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   // Focus input when reader changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();

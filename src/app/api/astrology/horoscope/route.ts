@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
-import { BirthData } from "@/types/astrology";
+import { BirthData } from '@/types/astrology';
 
 interface HoroscopeRequest {
   birthData: BirthData;
@@ -168,13 +168,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Convert birth data to proper format for Python script
+    const birthDate = new Date(body.birthData.date || body.birthData.birthDate);
     const birthData = {
       name: body.birthData.name || 'User',
-      year: new Date(body.birthData.date).getFullYear(),
-      month: new Date(body.birthData.date).getMonth() + 1,
-      day: new Date(body.birthData.date).getDate(),
-      hour: new Date(body.birthData.date).getHours(),
-      minute: new Date(body.birthData.date).getMinutes(),
+      year: birthDate.getFullYear(),
+      month: birthDate.getMonth() + 1,
+      day: birthDate.getDate(),
+      hour: birthDate.getHours(),
+      minute: birthDate.getMinutes(),
       city: body.birthData.city,
       country: body.birthData.country || ""
     };

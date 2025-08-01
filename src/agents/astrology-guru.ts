@@ -195,7 +195,7 @@ export class AstrologyGuruAgent extends Agent {
    */
   private interpretAspects(planets: any[]): Array<{ aspect: string; interpretation: string; strength: number; }> {
     const aspectData = this.knowledgeBase.get('aspects') || {};
-    const aspects = [];
+    const aspects: { aspect: string; interpretation: string; strength: number }[] = [];
 
     // Calculate major aspects between planets
     for (let i = 0; i < planets.length; i++) {

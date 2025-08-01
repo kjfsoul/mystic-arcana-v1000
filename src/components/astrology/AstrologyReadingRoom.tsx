@@ -1,32 +1,38 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useAuth } from '../../contexts/AuthContext';
-import { UnlockJourneyModal } from '../modals/UnlockJourneyModal';
-import { AuthModal } from '../auth/AuthModal';
-import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeService';
-import { profileService } from '@/services/profileService';
-import { InteractiveBirthChart } from './InteractiveBirthChart';
-import { CompatibilityInsights } from './CompatibilityInsights';
-import { InteractiveCareerInsights } from './InteractiveCareerInsights';
-import { AdvancedChartPreview } from './AdvancedChartPreview';
-import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
-import { LocationSearch } from '../forms/LocationSearch';
-import { LocationResult } from '@/lib/location/GeocodingService';
-import { UserTimeline, LifeEvent } from '../timeline';
-import styles from './AstrologyReadingRoom.module.css';
+import {
+  BirthData,
+  HousePosition,
+  PlanetPosition,
+} from "@/lib/astrology/AstronomicalCalculator";
+import { LocationResult } from "@/lib/location/GeocodingService";
+import { DailyHoroscopeService } from "@/services/horoscope/DailyHoroscopeService";
+import { profileService } from "@/services/profileService";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import React, { useCallback, useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { AuthModal } from "../auth/AuthModal";
+import { LocationSearch } from "../forms/LocationSearch";
+import { UnlockJourneyModal } from "../modals/UnlockJourneyModal";
+import { LifeEvent, UserTimeline } from "../timeline";
+import { AdvancedChartPreview } from "./AdvancedChartPreview";
+import styles from "./AstrologyReadingRoom.module.css";
+import { CompatibilityInsights } from "./CompatibilityInsights";
+import { InteractiveBirthChart } from "./InteractiveBirthChart";
+import { InteractiveCareerInsights } from "./InteractiveCareerInsights";
 
 interface AstrologyReadingRoomProps {
   onBack: () => void;
 }
 
 // interface BirthData {
+
 //   date: string;
 //   time: string;
 //   location: string;
-// }
+//   birthDate?: string;
+//}
 
 type UserTier = 'guest' | 'signed-up' | 'subscriber';
 
@@ -38,33 +44,48 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showBirthForm, setShowBirthForm] = useState(false);
   const [birthData, setBirthData] = useState<BirthData>({
-    date: new Date('1990-06-15T14:30:00Z'),
+    name: "Sample Person",
+    birthDate: "1990-06-15T14:30:00Z",
+    birthTime: "14:30",
+    birthLocation: "New York, NY, USA",
+    date: new Date("1990-06-15T14:30:00Z"),
     latitude: 40.7128, // New York City default
-    longitude: -74.0060,
-    timezone: 'America/New_York',
-    city: 'New York',
-    country: 'United States'
+    longitude: -74.006,
+    timezone: "America/New_York",
+    city: "New York",
+    country: "United States",
   });
   const [formData, setFormData] = useState({
-    date: '1990-06-15',
-    time: '14:30',
-    timezone: 'America/New_York'
+    date: "1990-06-15",
+    time: "14:30",
+    timezone: "America/New_York",
   });
-  const [selectedLocation, setSelectedLocation] = useState<LocationResult | null>(null);
+  const [selectedLocation, setSelectedLocation] =
+    useState<LocationResult | null>(null);
   const [lifeEvents, setLifeEvents] = useState<LifeEvent[]>(() => {
     // Load from localStorage on component mount
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('mystic-arcana-life-events');
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("mystic-arcana-life-events");
       return saved ? JSON.parse(saved) : [];
     }
     return [];
   });
-  const [personalizedHoroscope, setPersonalizedHoroscope] = useState<{personalized?: {sign: string; insight: string; advice: string; focus: string}} | null>(null);
+  const [personalizedHoroscope, setPersonalizedHoroscope] = useState<{
+    personalized?: {
+      sign: string;
+      insight: string;
+      advice: string;
+      focus: string;
+    };
+  } | null>(null);
   const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
 
+ 
+ 
+ 
   const loadPersonalizedHoroscope = useCallback(async () => {
     if (!user) return;
-    
+
     setIsLoadingHoroscope(true);
     try {
       const profile = await profileService.getProfile(user.id);
@@ -74,20 +95,22 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
         setPersonalizedHoroscope(horoscope);
       }
     } catch (error) {
-      console.error('Error loading personalized horoscope:', error);
+      console.error("Error loading personalized horoscope:", error);
     } finally {
       setIsLoadingHoroscope(false);
     }
   }, [user]);
 
+ 
+ 
   useEffect(() => {
     if (isGuest) {
-      setUserTier('guest');
+      setUserTier("guest");
     } else if (user) {
       // For MVP, assume signed-up users are not subscribers yet
       // In production, check user subscription status
-      setUserTier('signed-up');
-      
+      setUserTier("signed-up");
+
       // Load personalized horoscope for authenticated users
       loadPersonalizedHoroscope();
     }
@@ -96,21 +119,33 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
   const handleLifeEventsChange = (events: LifeEvent[]) => {
     setLifeEvents(events);
     // Persist to localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('mystic-arcana-life-events', JSON.stringify(events));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("mystic-arcana-life-events", JSON.stringify(events));
     }
   };
 
-  const handleServiceSelection = (service: 'chart' | 'horoscope' | 'compatibility' | 'career' | 'advanced' | 'timeline') => {
+  const handleServiceSelection = (
+    service:
+      | "chart"
+      | "horoscope"
+      | "compatibility"
+      | "career"
+      | "advanced"
+      | "timeline"
+  ) => {
     setSelectedService(service);
-    
-    if (service === 'chart') {
+
+    if (service === "chart") {
       // Chart always needs birth form
       setShowBirthForm(true);
-    } else if (service === 'compatibility' || service === 'career') {
+    } else if (service === "compatibility" || service === "career") {
       // For compatibility and career, only show form if no birth data exists
       // Otherwise, show the component directly with current birth data
-      const hasValidBirthData = birthData && birthData.date && birthData.latitude && birthData.longitude;
+      const hasValidBirthData =
+        birthData &&
+        birthData.date &&
+        birthData.latitude &&
+        birthData.longitude;
       if (!hasValidBirthData) {
         setShowBirthForm(true);
       } else {
@@ -122,29 +157,35 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedLocation) {
-      alert('Please select a birth location');
+      alert("Please select a birth location");
       return;
     }
-    
+
     // Handle optional birth time - use noon if not provided
-    const timeString = formData.time || '12:00';
+    const timeString = formData.time || "12:00";
     const combinedDateTime = new Date(`${formData.date}T${timeString}:00`);
-    
+
     setBirthData({
+      name: "Form Input",
+      birthDate: combinedDateTime.toISOString(),
+      birthTime: formData.time,
+      birthLocation: `${selectedLocation.city || "Unknown"}, ${
+        selectedLocation.country || "Unknown"
+      }`,
       date: combinedDateTime,
       latitude: selectedLocation.latitude,
       longitude: selectedLocation.longitude,
       timezone: selectedLocation.timezone || formData.timezone,
-      city: selectedLocation.city || 'Unknown',
-      country: selectedLocation.country || 'Unknown'
+      city: selectedLocation.city || "Unknown",
+      country: selectedLocation.country || "Unknown",
     });
-    
+
     setShowBirthForm(false);
-    
+
     // Show unlock modal for guests after they see the chart
-    if (userTier === 'guest') {
+    if (userTier === "guest") {
       setTimeout(() => setShowUnlockModal(true), 5000);
     }
   };

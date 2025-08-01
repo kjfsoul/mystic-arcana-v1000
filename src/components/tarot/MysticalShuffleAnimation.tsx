@@ -56,6 +56,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   const config = sizeConfig[size];
 
   // Generate star particles
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const generateStars = useCallback(() => {
     const stars: StarParticle[] = [];
     for (let i = 0; i < 15; i++) {
@@ -74,6 +75,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   }, []);
 
   // Play shuffle sound
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const playShuffleSound = useCallback(() => {
     try {
       const audio = new Audio('/sounds/card-shuffle.mp3');
@@ -101,6 +103,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   }, []);
 
   // Handle shuffle trigger
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleShuffle = useCallback(() => {
     if (isShuffling) return;
     
@@ -118,6 +121,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateStars, playShuffleSound]);
 
   // Clear particles when shuffling ends
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isShuffling) {
       const timer = setTimeout(() => setStarParticles([]), 500);

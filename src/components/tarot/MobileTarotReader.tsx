@@ -29,6 +29,7 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
   const [isPortrait, setIsPortrait] = useState(true);
 
   // Detect orientation changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkOrientation = () => {
       setIsPortrait(window.innerHeight > window.innerWidth);

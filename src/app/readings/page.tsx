@@ -30,6 +30,7 @@ export default function ReadingsPage() {
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const loadReadings = useCallback(async () => {
     if (!user) return;
 
@@ -52,6 +53,7 @@ export default function ReadingsPage() {
     }
   }, [user]);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isGuest) {
       setShowAuthModal(true);

@@ -6,7 +6,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { TarotDeckService } from '@/services/tarot/TarotDeckService';
 import { TarotCard, SpreadType } from '@/types/tarot';
 import { TarotCardDisplay } from './TarotCardDisplay';
-import { supabase } from '@/lib/supabase/client';
+import { useSaveReading } from '@/hooks/useTarotAPI';
 import styles from './TarotReadingFlow.module.css';
 
 interface TarotReadingFlowProps {
@@ -15,7 +15,7 @@ interface TarotReadingFlowProps {
   onCancel?: () => void;
 }
 
-type Phase = 'loading' | 'shuffle' | 'cut' | 'draw' | 'reveal';
+type Phase = 'loading' | 'shuffle' | 'cut' | 'draw' | 'reveal' | 'save';
 
 export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
   spreadType,
@@ -23,14 +23,17 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
   onCancel
 }) => {
   const { user } = useAuth();
+  const { saveReading, loading: saveLoading, error: saveError } = useSaveReading();
   const [phase, setPhase] = useState<Phase>('loading');
   const [deck, setDeck] = useState<TarotCard[]>([]);
   const [selectedCards, setSelectedCards] = useState<TarotCard[]>([]);
   const [isShuffling, setIsShuffling] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   const cardCount = spreadType === 'single' ? 1 : spreadType === 'three-card' ? 3 : 10;
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadDeck();
   }, []);
@@ -76,31 +79,43 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
     }));
     setSelectedCards(drawnCards);
     setPhase('reveal');
-    saveReading(drawnCards);
   };
 
-  const saveReading = async (cards: TarotCard[]) => {
-    if (!user) return;
+  const handleSaveReading = async () => {
+    if (!user || !selectedCards.length) return;
 
     try {
-      const { error } = await supabase
-        .from('tarot_readings')
-        .insert({
-          user_id: user.id,
-          spread_type: spreadType,
-          cards_drawn: cards.map(c => ({
-            id: c.id,
-            name: c.name,
-            isReversed: c.isReversed
-          })),
-          created_at: new Date().toISOString()
-        });
+      setPhase('save');
+      
+      const response = await saveReading({
+        userId: user.id,
+        spreadType,
+        cards: selectedCards.map(card => ({
+          id: card.id,
+          name: card.name,
+          position: card.position || `Position ${selectedCards.indexOf(card) + 1}`,
+          isReversed: card.isReversed || false,
+          meaning: card.isReversed ? (card.meaning_reversed || card.meaning?.reversed) : (card.meaning_upright || card.meaning?.upright),
+          frontImage: card.image_url || card.frontImage
+        })),
+        interpretation: `${spreadType} reading with ${selectedCards.length} cards`,
+        question: `Tarot reading completed on ${new Date().toLocaleDateString()}`,
+        isPublic: false
+      });
 
-      if (error) {
-        console.error('Failed to save reading:', error);
+      if (response.success) {
+        setIsSaved(true);
+        setTimeout(() => {
+          onComplete?.(selectedCards);
+        }, 2000);
+      } else {
+        setError(response.error || 'Failed to save reading');
+        setPhase('reveal');
       }
     } catch (err) {
       console.error('Error saving reading:', err);
+      setError(err instanceof Error ? err.message : 'Failed to save reading');
+      setPhase('reveal');
     }
   };
 
@@ -108,10 +123,10 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
     onComplete?.(selectedCards);
   };
 
-  if (error) {
+  if (error || saveError) {
     return (
       <div className={styles.errorContainer}>
-        <p className={styles.error}>{error}</p>
+        <p className={styles.error}>{error || saveError}</p>
         <button onClick={onCancel} className={styles.button}>
           Go Back
         </button>
@@ -276,15 +291,65 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
               ))}
             </div>
 
-            <motion.button
-              onClick={handleRevealComplete}
-              className={`${styles.button} ${styles.primaryButton}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: selectedCards.length * 0.3 + 0.5 }}
-            >
-              View Full Interpretation
-            </motion.button>
+            <div className={styles.actionButtons}>
+              <motion.button
+                onClick={handleSaveReading}
+                className={`${styles.button} ${styles.primaryButton} ${styles.saveButton}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: selectedCards.length * 0.3 + 0.5 }}
+                disabled={saveLoading || isSaved}
+                data-testid="save-reading-button"
+              >
+                {saveLoading ? 'Saving...' : isSaved ? 'Saved ✓' : 'Save Reading'}
+              </motion.button>
+
+              <motion.button
+                onClick={handleRevealComplete}
+                className={`${styles.button} ${styles.secondaryButton}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: selectedCards.length * 0.3 + 0.7 }}
+              >
+                View Full Interpretation
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+
+        {phase === 'save' && (
+          <motion.div
+            key="save"
+            className={styles.phaseContainer}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <h2 className={styles.phaseTitle}>Saving Your Reading</h2>
+            
+            <div className={styles.savingContainer}>
+              <motion.div
+                className={styles.savingSpinner}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                🔮
+              </motion.div>
+              <p className={styles.savingText}>
+                {isSaved ? 'Reading saved successfully!' : 'Preserving your cosmic insights...'}
+              </p>
+            </div>
+
+            {isSaved && (
+              <motion.div
+                className={styles.successMessage}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                ✨ Your reading has been safely stored in your cosmic library ✨
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

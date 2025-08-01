@@ -42,6 +42,7 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   const config = sizeConfig[size];
 
   // Generate bioluminescent particles
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (showBioluminescence && (isHovered || isFlipped)) {
       const newParticles = Array.from({ length: 8 }, (_, i) => ({
@@ -57,6 +58,7 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   }, [isHovered, isFlipped, showBioluminescence, config.width, config.height]);
 
   // Dynamic glow effect
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isHovered || isFlipped) {
       const interval = setInterval(() => {

@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
-import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
+import { BirthData } from '@/types/astrology';
+import { PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
 
 export default function BirthChartPage() {
   const [birthData, setBirthData] = useState<BirthData>({
-    date: new Date('1990-06-15T14:30:00Z'), // Example birth date
+    name: 'Sample Person',
+    birthDate: '1990-06-15T14:30:00Z', // Required string field
+    birthTime: '14:30',
+    birthLocation: 'New York, NY, USA',
+    date: new Date('1990-06-15T14:30:00Z'), // For backward compatibility
     latitude: 40.7128, // New York City
     longitude: -74.0060,
     timezone: 'America/New_York',
@@ -28,6 +33,10 @@ export default function BirthChartPage() {
     const combinedDateTime = new Date(`${formData.date}T${formData.time}:00`);
     
     setBirthData({
+      name: 'Form Input',
+      birthDate: combinedDateTime.toISOString(),
+      birthTime: formData.time,
+      birthLocation: 'Unknown Location',
       date: combinedDateTime,
       latitude: parseFloat(formData.latitude),
       longitude: parseFloat(formData.longitude),

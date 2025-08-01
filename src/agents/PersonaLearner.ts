@@ -7,7 +7,7 @@
 import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs/promises';
-import { SophiaReading } from './sophia';
+import { SophiaReading, ConversationSession, ReadingContext } from './sophia';
 
 interface UserProfile {
   userId: string;
@@ -63,6 +63,8 @@ interface LearningEvent {
   };
 }
 
+
+
 /**
  * PersonaLearner - The Adaptive Intelligence
  * 
@@ -84,7 +86,7 @@ export class PersonaLearnerAgent {
    */
   async logInteraction(
     userId: string,
-    reading: SophiaReading,
+    session: ConversationSession,
     userFeedback?: {
       rating?: number;
       helpful_cards?: string[];
@@ -96,26 +98,38 @@ export class PersonaLearnerAgent {
       const learningEvent: LearningEvent = {
         eventType: 'reading_completed',
         userId,
-        sessionId: reading.session_context.sessionId,
+        sessionId: session.sessionId,
         data: {
-          reading_id: reading.id,
-          cards: reading.session_context.cards?.map(c => c.name) || [],
-          spread_type: reading.session_context.spreadType,
-          narrative_length: reading.narrative.length,
-          interpretation_count: reading.card_interpretations.length,
+          reading_id: session.sessionId, // Use session ID as reading ID
+          cards: session.cards.map(c => c.name),
+          spread_type: session.spreadType,
+          narrative_length: 0, // No narrative in ConversationSession
+          interpretation_count: session.cardInterpretations.length,
           feedback: userFeedback
         },
         timestamp: new Date(),
         context: {
-          spread_type: reading.session_context.spreadType,
-          cards_drawn: reading.session_context.cards?.map(c => c.name) || [],
-          interpretation_quality: this.calculateReadingQuality(reading),
+          spread_type: session.spreadType,
+          cards_drawn: session.cards.map(c => c.name),
+          interpretation_quality: 0, // No quality in ConversationSession
           user_satisfaction: userFeedback?.rating || undefined
         }
       };
 
       // Add to learning queue
       this.learningQueue.push(learningEvent);
+
+      // Create a SophiaReading object for the memory note
+      const reading: SophiaReading = {
+        id: session.sessionId,
+        narrative: '', // No narrative in ConversationSession
+        card_interpretations: session.cardInterpretations,
+        overall_guidance: '', // No overall guidance in ConversationSession
+        spiritual_insight: '', // No spiritual insight in ConversationSession
+        reader_signature: 'Sophia ✨',
+        session_context: session.context,
+        created_at: session.startTime
+      };
 
       // Create memory note for a-mem system
       const memoryNote = await this.createMemoryNote(reading, userFeedback);
@@ -144,7 +158,7 @@ export class PersonaLearnerAgent {
     reading: SophiaReading, 
     userFeedback?: any
   ): Promise<MemoryNote> {
-    const cardNames = reading.session_context.cards?.map(c => c.name) || [];
+    const cardNames = reading.session_context.cards?.map((c: { name: string }) => c.name) || [];
     const spreadType = reading.session_context.spreadType;
     
     // Extract key themes and insights
@@ -177,7 +191,7 @@ export class PersonaLearnerAgent {
         learning_insights: {
           themes_identified: themes,
           card_combinations: this.generateCardCombinations(cardNames),
-          interpretation_quality: this.calculateReadingQuality(reading),
+          interpretation_quality: 0, // No quality in ConversationSession
           personalization_applied: reading.card_interpretations.some(interp => 
             interp.confidence_score > 0.8
           )
@@ -395,7 +409,7 @@ except Exception as e:
     console.log(`PersonaLearner: User ${userId} patterns:`, {
       spread_preferences: spreadPreferences,
       card_affinities: cardAffinities,
-      engagement_level: engagementPatterns.average_satisfaction
+      engagementLevel: engagementPatterns.average_satisfaction
     });
   }
 
@@ -406,7 +420,7 @@ except Exception as e:
     recommended_spreads: string[];
     card_preferences: string[];
     personalized_themes: string[];
-    engagement_level: 'low' | 'medium' | 'high';
+    engagementLevel: 'low' | 'medium' | 'high';
   }> {
     const profile = this.userProfiles.get(userId);
     
@@ -415,7 +429,7 @@ except Exception as e:
         recommended_spreads: ['three-card'],
         card_preferences: [],
         personalized_themes: [],
-        engagement_level: 'medium'
+        engagementLevel: 'medium'
       };
     }
 
@@ -426,7 +440,7 @@ except Exception as e:
       recommended_spreads: profile.preferences.preferred_spreads.slice(0, 3),
       card_preferences: profile.preferences.favorite_cards.slice(0, 5),
       personalized_themes: profile.personalization_data.growth_areas,
-      engagement_level
+      engagementLevel
     };
   }
 
@@ -829,7 +843,7 @@ except Exception as e:
         data: {
           card_name: cardName,
           card_index: cardIndex,
-          engagement_level: this.calculateEngagementLevel(engagementMetrics),
+          engagementLevel: this.calculateEngagementLevel(engagementMetrics),
           interaction_metrics: engagementMetrics
         },
         timestamp: new Date(),
@@ -1095,7 +1109,7 @@ except Exception as e:
   private async getCurrentEngagementLevel(userId: string): Promise<number> {
     try {
       // This would normally query Supabase, but for testing we'll use localStorage
-      const storedLevel = localStorage?.getItem(`engagement_level_${userId}`);
+      const storedLevel = localStorage?.getItem(`engagementLevel_${userId}`);
       return storedLevel ? parseInt(storedLevel) : 1;
     } catch (error) {
       console.warn('PersonaLearner: Could not retrieve current engagement level:', error);
@@ -1216,11 +1230,11 @@ except Exception as e:
     try {
       // For testing, store in localStorage
       if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(`engagement_level_${userId}`, newLevel.toString());
+        localStorage.setItem(`engagementLevel_${userId}`, newLevel.toString());
       }
       
       // In production, this would call the Supabase function
-      // const { error } = await supabase.rpc('increment_reader_engagement_level', {
+      // const { error } = await supabase.rpc('increment_reader_engagementLevel', {
       //   user_id: userId,
       //   new_level: newLevel
       // });

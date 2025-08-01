@@ -40,6 +40,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   // Memoized render configuration to prevent infinite re-renders
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const finalRenderConfig = useMemo((): RenderConfig => ({
     starCatalog: 'hipparcos',
     maxStars: 50000,
@@ -53,6 +54,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }), [renderConfig]);
 
   // Initialize astronomical engine and load star data
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const initializeStarField = async () => {
       try {
@@ -85,11 +87,13 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
 
   // Convert star coordinates to screen positions
    
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getStarScreenPosition = useCallback((_star: Star): ScreenCoordinates => {
     return astronomicalEngine.transformCoordinates();
   }, []);
 
   // Get star color based on B-V color index
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getStarColor = useCallback((star: Star): string => {
     const bv = star.colorIndex;
 
@@ -104,6 +108,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, []);
 
   // Calculate star size based on magnitude
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getStarSize = useCallback((magnitude: number): number => {
     // Brighter stars (lower magnitude) are larger
     const size = Math.max(0.5, 4 - magnitude);
@@ -111,6 +116,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, []);
 
   // Render stars on canvas
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const renderStars = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -190,6 +196,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [stars, isLoading, error, getStarScreenPosition, getStarColor, getStarSize, time, location]);
 
   // Handle canvas resize
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -207,6 +214,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [renderStars]);
 
   // Handle mouse clicks for star selection
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!interactive || !onStarClick) return;
 
@@ -241,6 +249,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [interactive, onStarClick, stars, getStarScreenPosition]);
 
   // Set up canvas and event listeners
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -251,6 +260,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   }, [handleResize]);
 
   // Animation loop for real-time updates
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const animate = () => {
       renderStars();

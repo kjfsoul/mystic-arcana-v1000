@@ -5,7 +5,7 @@
 
 import { AstronomicalCalculator } from '@/lib/astrology/AstronomicalCalculator';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
-import { BirthData, Planet, AspectType, HouseSystem } from '@/types/astrology';
+import { BirthData, Planet, AspectType, HouseSystem } from '../../types/astrology';
 
 export interface PlanetaryPosition {
   planet: Planet;

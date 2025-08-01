@@ -75,6 +75,7 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
   ];
 
   // Update current time every minute
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());

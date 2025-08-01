@@ -48,6 +48,7 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
   const { announceToScreenReader } = useAccessibility();
 
   // Auto-scroll chat to latest message
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;

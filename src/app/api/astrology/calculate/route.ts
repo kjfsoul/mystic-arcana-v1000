@@ -73,7 +73,10 @@ export async function POST(request: NextRequest) {
     // Convert to internal BirthData format
     const birthData: ValidatedBirthData = {
       name: payload.name || 'User',
-      date: new Date(payload.birthDate),
+      birthDate: payload.birthDate, // Required string field
+      birthTime: payload.birthTime,
+      birthLocation: `${payload.location.city}, ${payload.location.country}`,
+      date: new Date(payload.birthDate), // For backward compatibility
       city: payload.location.city,
       country: payload.location.country,
       latitude: payload.location.lat,
@@ -114,7 +117,7 @@ export async function POST(request: NextRequest) {
         chart = {
           planets: shimChart.planets,
           houses: shimChart.houses.map(h => ({
-            number: h.number,
+            house: h.house,
             cusp: h.cusp,
             sign: h.sign,
             ruler: h.ruler

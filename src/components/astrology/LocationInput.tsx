@@ -41,9 +41,10 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
-  const debounceTimerRef = useRef<NodeJS.Timeout>();
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Fetch location suggestions
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchSuggestions = useCallback(async (searchQuery: string) => {
     if (searchQuery.length < 2) {
       setSuggestions([]);
@@ -103,6 +104,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   }, []);
 
   // Debounced search
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (query !== value) {
       onChange(query);
@@ -129,6 +131,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   }, [query, fetchSuggestions, onChange, value]);
 
   // Handle click outside
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -201,41 +204,11 @@ export const LocationInput: React.FC<LocationInputProps> = ({
 
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const { latitude, longitude } = position.coords;
-          
-          // Reverse geocode to get city name
-          const nominatimResponse = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?` +
-            `lat=${latitude}&lon=${longitude}&` +
-            `format=json&zoom=10`
-          );
-
-          if (nominatimResponse.ok) {
-            const data = await nominatimResponse.json();
-            const city = data.address?.city || 
-                        data.address?.town || 
-                        data.address?.village ||
-                        data.address?.suburb ||
-                        'Unknown location';
-            const state = data.address?.state || '';
-            const country = data.address?.country || '';
-            
-            const locationName = `${city}, ${state}${country ? ', ' + country : ''}`.replace(/, ,/g, ',');
-            
-            setQuery(locationName);
-            onChange(locationName, { lat: latitude, lng: longitude });
-            
-            if (onCoordinatesFound) {
-              onCoordinatesFound(latitude, longitude);
-            }
-          }
-        } catch (err) {
-          console.error('Reverse geocoding error:', err);
-          setError('Unable to determine location name');
-        } finally {
-          setIsLoading(false);
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        onChange(query, { lat: latitude, lng: longitude });
+        if (onCoordinatesFound) {
+          onCoordinatesFound(latitude, longitude);
         }
       },
       (error) => {

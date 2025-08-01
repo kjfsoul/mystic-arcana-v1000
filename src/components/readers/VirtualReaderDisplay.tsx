@@ -39,7 +39,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   showProgress = false,
   className = ''
 }) => {
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
   const [engagementData, setEngagementData] = useState<EngagementData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -72,9 +72,10 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   const config = sizeConfig[size];
 
   // Load engagement data
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadEngagementData = async () => {
-      if (!isAuthenticated || !user?.id) {
+      if (!!user) {
         // Guest users see level 1
         setEngagementData({
           currentLevel: 1,
@@ -125,9 +126,10 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
     };
 
     loadEngagementData();
-  }, [isAuthenticated, user?.id, personaLearner]);
+  }, [user, personaLearner]);
 
   // Clear level up indicator after animation
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (previousLevel !== null) {
       const timer = setTimeout(() => {

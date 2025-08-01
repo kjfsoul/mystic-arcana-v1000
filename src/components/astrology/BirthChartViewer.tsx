@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, RefreshCw, Info, Star } from 'lucide-react';
-import { BirthData } from '@/types/astrology';
+import { BirthData } from '../../types/astrology';
 
 interface BirthChartData {
   svg: string;
@@ -84,6 +84,7 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function fetchBirthChart() {
       try {

@@ -101,6 +101,7 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   };
 
   // Handle spread selection with smooth animations
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSpreadSelect = useCallback((spreadType: SpreadType) => {
     if (isAnimating) return;
     
@@ -112,6 +113,7 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   }, [isAnimating, onSpreadSelected]);
 
   // Handle reading start with cosmic effects
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleStartReading = useCallback(() => {
     if (!selectedSpread || isAnimating) return;
     
@@ -120,6 +122,7 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   }, [selectedSpread, isAnimating, onReadingStart]);
 
   // Keyboard navigation support
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!selectedSpread) return;

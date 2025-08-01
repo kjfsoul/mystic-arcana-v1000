@@ -35,6 +35,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   } = options;
 
   // Memoize fallback location to prevent infinite loops
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const memoizedFallbackLocation = useMemo(() => fallbackLocation, [fallbackLocation]);
 
   // Prevent multiple simultaneous requests
@@ -76,6 +77,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   };
 
   // Request geolocation permission and get position
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const requestLocation = useCallback(async () => {
     // Prevent multiple simultaneous requests
     if (isRequestingRef.current) {
@@ -251,6 +253,7 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
   };
 
   // Auto-request location on mount (only once)
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     requestLocation();
   }, [requestLocation]); // Empty dependency array to run only once

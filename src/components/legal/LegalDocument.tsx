@@ -19,6 +19,7 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
   >([]);
   const [mounted, setMounted] = useState(false);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Generate star positions only on client side to avoid hydration mismatch
     const starData = Array.from({ length: 50 }, () => ({

@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
+    "auto-fix-types": "tsx scripts/auto-fix-typescript-errors.ts",
+    "typecheck": "tsc --noEmit",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

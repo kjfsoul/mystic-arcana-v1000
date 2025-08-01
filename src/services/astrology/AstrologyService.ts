@@ -4,6 +4,7 @@
  */
 
 export interface PlanetPosition {
+
   planet: string;
   zodiacSign: string;
   zodiacDegree: number;
@@ -15,7 +16,10 @@ export interface PlanetPosition {
     longitude: number;
     latitude: number;
     distance: number;
-  };
+    sign?: string;
+  house?: number;
+  symbol?: string;
+};
 }
 
 export interface BirthChart {

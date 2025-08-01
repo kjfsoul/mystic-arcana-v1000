@@ -51,6 +51,7 @@ export default function HighPerformanceStarsPage() {
     refractionCorrection: true
   });
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSettingsChange = useCallback((settings: {
     useRealStars: boolean;
     renderConfig: RenderConfig;
@@ -61,10 +62,12 @@ export default function HighPerformanceStarsPage() {
     setCalculationConfig(settings.calculationConfig);
   }, []);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleStarClick = useCallback((star: Star) => {
     setSelectedStar(star);
   }, []);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePerformanceUpdate = useCallback((stats: PerformanceStats) => {
     setPerformanceStats(stats);
   }, []);

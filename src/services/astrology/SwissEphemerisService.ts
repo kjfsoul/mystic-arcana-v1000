@@ -20,6 +20,7 @@ export const PLANETS = {
 };
 
 export interface PlanetPosition {
+
   planet: string;
   longitude: number;
   latitude: number;
@@ -28,6 +29,9 @@ export interface PlanetPosition {
   zodiacSign: string;
   zodiacDegree: number;
   retrograde: boolean;
+  sign?: string;
+  house?: number;
+  symbol?: string;
 }
 
 export interface BirthChart {

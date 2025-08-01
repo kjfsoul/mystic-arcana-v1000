@@ -7,14 +7,18 @@
  */
 export interface BirthData {
   name?: string;
-  date: Date;
-  city: string;
+  birthDate: string; // Changed from Date to string to match usage
+  birthTime?: string; // Added missing property
+  birthLocation?: string; // Added missing property
+  city?: string;
   country?: string;
-  lat?: number;
-  lng?: number;
-  latitude?: number;  // Alternative property name used in some places
-  longitude?: number; // Alternative property name used in some places
+  latitude?: number; // Standardized coordinate property
+  longitude?: number; // Standardized coordinate property
   timezone?: string;
+  // For backward compatibility
+  date?: Date; // Keep if needed elsewhere
+  lat?: number; // Deprecated in favor of latitude
+  lng?: number; // Deprecated in favor of longitude
 }
 
 /**
@@ -26,19 +30,26 @@ export interface PlanetPosition {
   latitude: number;
   distance: number;
   speed: number;
-  zodiacSign?: string;
-  zodiacDegree?: number;
+  sign: string; // Standardized property name
+  house?: number;
+  symbol?: string;
   isRetrograde?: boolean;
+  // For backward compatibility
+  zodiacSign?: string; // Deprecated in favor of sign
+  zodiacDegree?: number; // Deprecated in favor of longitude
 }
 
 /**
  * House position data
  */
 export interface HousePosition {
-  house: number;
-  longitude: number;
-  zodiacSign: string;
-  zodiacDegree: number;
+  number: number; // Changed from 'house' to match usage
+  cusp: number; // Made required as it's used in calculations
+  sign: string; // Standardized property name
+  ruler?: string;
+  longitude: number; // Added for consistency
+  zodiacSign: string; // Kept for compatibility
+  zodiacDegree: number; // Kept for compatibility
 }
 
 /**
@@ -57,8 +68,51 @@ export interface BirthChart {
 export interface AspectData {
   planet1: string;
   planet2: string;
-  aspect: string;
+  aspect: AspectType; // Changed from string to specific type
   angle: number;
   orb: number;
   isApplying: boolean;
+}
+
+/**
+ * Aspect types used in astrological calculations
+ */
+export type AspectType =
+  | "conjunction"
+  | "sextile"
+  | "square"
+  | "trine"
+  | "opposition";
+
+/**
+ * House systems used in astrological calculations
+ */
+export type HouseSystem = "Placidus" | "Koch" | "Equal" | "WholeSign";
+
+/**
+ * Planet type for transit calculations
+ */
+export type Planet = PlanetPosition;
+
+/**
+ * Additional utility types for compatibility
+ */
+export interface BirthCoordinates {
+  lat: number;
+  lng: number;
+}
+
+export interface PlanetInHouse {
+  planet: string;
+  house: number;
+  sign: string;
+  degree: number;
+}
+
+export interface TransitData {
+  planet: Planet;
+  position: number;
+  sign: string;
+  house?: number;
+  aspects?: AspectData[];
 }

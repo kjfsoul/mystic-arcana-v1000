@@ -4,7 +4,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { BirthData } from '@/types/astrology';
+import { BirthData } from '../../types/astrology';
 
 export interface CachedBirthChart {
   id: string;

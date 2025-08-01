@@ -20,32 +20,50 @@ export default function TestSaveReadingPage() {
       {
         id: 'fool',
         name: 'The Fool',
-        meaning: 'New beginnings, innocence, spontaneity',
+        arcana: 'major' as const,
+        meaning: {
+          upright: 'New beginnings, innocence, spontaneity',
+          reversed: 'Recklessness, naivity, foolishness',
+          keywords: ['new beginnings', 'innocence', 'spontaneity']
+        },
         frontImage: '/tarot/deck-rider-waite/0-the-fool.jpg',
         backImage: '/tarot/card-back.jpg',
+        description: 'The card of new beginnings and infinite potential',
         position: 'Past'
       },
       {
         id: 'magician',
         name: 'The Magician',
-        meaning: 'Manifestation, resourcefulness, power',
+        arcana: 'major' as const,
+        meaning: {
+          upright: 'Manifestation, resourcefulness, power',
+          reversed: 'Manipulation, poor planning, untapped talents',
+          keywords: ['manifestation', 'resourcefulness', 'power']
+        },
         frontImage: '/tarot/deck-rider-waite/1-the-magician.jpg',
         backImage: '/tarot/card-back.jpg',
+        description: 'The card of manifestation and willpower',
         position: 'Present'
       },
       {
         id: 'high-priestess',
         name: 'The High Priestess',
-        meaning: 'Intuition, sacred knowledge, divine feminine',
+        arcana: 'major' as const,
+        meaning: {
+          upright: 'Intuition, sacred knowledge, divine feminine',
+          reversed: 'Secrets, disconnected from intuition',
+          keywords: ['intuition', 'sacred knowledge', 'divine feminine']
+        },
         frontImage: '/tarot/deck-rider-waite/2-the-high-priestess.jpg',
         backImage: '/tarot/card-back.jpg',
+        description: 'The card of intuition and hidden knowledge',
         position: 'Future'
       }
     ],
     positions: ['Past', 'Present', 'Future'],
     interpretation: 'This reading suggests a journey from innocence to mastery, guided by intuition. The Fool represents your past state of openness and new beginnings. The Magician in the present position shows you are now harnessing your power and manifesting your desires. The High Priestess in the future indicates that deeper spiritual wisdom and intuitive understanding await you.',
     question: 'What does my spiritual journey look like?',
-    timestamp: new Date().toISOString(),
+    timestamp: new Date(),
     cosmicInfluence: {
       moonPhase: 'Waxing Crescent',
       planetaryHour: 'Venus'
@@ -111,7 +129,7 @@ export default function TestSaveReadingPage() {
               <ul className="mt-2 space-y-1">
                 {mockReading.cards.map((card, index) => (
                   <li key={card.id} className="text-gray-400 ml-4">
-                    {card.position}: {card.name}
+                    {mockReading.positions[index]}: {card.name}
                   </li>
                 ))}
               </ul>

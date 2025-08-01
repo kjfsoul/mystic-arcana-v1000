@@ -2,15 +2,23 @@ export interface TarotCard {
   id: string;
   name: string;
   arcana: 'major' | 'minor';
+  arcana_type?: 'major' | 'minor'; // Compatibility alias
   suit?: 'cups' | 'pentacles' | 'swords' | 'wands';
   number?: number;
+  card_number?: number; // Compatibility alias
   frontImage: string;
-  backImage: string;
+  backImage?: string;
+  image_url?: string; // Compatibility alias
+  position?: string; // For positioned readings
+  keywords?: string[]; // Direct keywords property
   meaning: {
     upright: string;
     reversed: string;
     keywords: string[];
   };
+  // Compatibility properties for legacy code
+  meaning_upright?: string;
+  meaning_reversed?: string;
   description: string;
   isReversed?: boolean;
 }
@@ -40,4 +48,6 @@ export interface TarotReading {
   timestamp: Date;
   cosmicInfluence?: string;
   interpretation?: string;
+  question?: string; // User's question for the reading
+  positions?: string[]; // Position names in spread
 }

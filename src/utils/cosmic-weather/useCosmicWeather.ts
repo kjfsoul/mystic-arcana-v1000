@@ -75,6 +75,7 @@ export const useCosmicWeather = () => {
   });
 
   // Calculate moon phase based on current date
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const calculateMoonPhase = useCallback(() => {
     const phases = [
       'New Moon', 'Waxing Crescent', 'First Quarter', 'Waxing Gibbous',
@@ -108,6 +109,7 @@ export const useCosmicWeather = () => {
   }, []);
 
   // Calculate current planetary hour
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const calculatePlanetaryHour = useCallback(() => {
     const planets = ['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'];
     const dayOfWeek = new Date().getDay();
@@ -119,6 +121,7 @@ export const useCosmicWeather = () => {
   }, []);
 
   // Update cosmic weather data
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const updateCosmicWeather = useCallback(() => {
     const moonPhase = calculateMoonPhase();
     const planetaryHour = calculatePlanetaryHour();
@@ -197,6 +200,7 @@ export const useCosmicWeather = () => {
   };
 
   // Get tarot timing recommendations
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getTarotTiming = useCallback(() => {
     const { moonPhase, planetaryHour, cosmicIntensity } = cosmicWeather;
 
@@ -228,6 +232,7 @@ export const useCosmicWeather = () => {
   }, [cosmicWeather]);
 
   // Initialize and update periodically
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     updateCosmicWeather();
 

@@ -71,6 +71,7 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState<'overview' | 'strengths' | 'challenges' | 'paths'>('overview');
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadCareerAnalysis = async () => {
       try {

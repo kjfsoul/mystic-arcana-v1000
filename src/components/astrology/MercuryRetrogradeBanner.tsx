@@ -21,7 +21,7 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
   const [currentPeriod, setCurrentPeriod] = useState<RetrogradePeriod | null>(null);
   const [loading, setLoading] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   // Mercury Retrograde periods for 2025
   const retrogradePeriods: RetrogradePeriod[] = [
@@ -42,6 +42,7 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
     }
   ];
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkMercuryRetrograde = async () => {
       try {
@@ -92,6 +93,7 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
     checkMercuryRetrograde();
   }, []);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isRetrograde || !canvasRef.current) return;
 

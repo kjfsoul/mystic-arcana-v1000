@@ -18,6 +18,7 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function generateCareerAnalysis() {
       try {

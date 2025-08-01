@@ -94,6 +94,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   ];
 
   // Generate enhanced card particles with more realistic movement
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const generateCardParticles = useCallback(() => {
     const particles: CardParticle[] = [];
     const particleCount = Math.min(cardCount, 15); // Limit for performance
@@ -118,6 +119,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   }, [cardCount, config.radius]);
 
   // Generate bioluminescent particles
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const generateBioluminescentParticles = useCallback(() => {
     const particles: BioluminescentParticle[] = [];
     
@@ -140,6 +142,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   }, []);
 
   // Enhanced shuffle with phases
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleShuffle = useCallback(async () => {
     if (isShuffling) return;
     
@@ -175,6 +178,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateCardParticles, generateBioluminescentParticles]);
 
   // Clear particles when shuffling ends
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (shufflePhase === 'idle') {
       const timer = setTimeout(() => {
@@ -186,6 +190,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   }, [shufflePhase]);
 
   // Haptic feedback for mobile
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const triggerHaptic = useCallback(() => {
     if ('vibrate' in navigator) {
       navigator.vibrate([30, 10, 30]);

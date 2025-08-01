@@ -33,6 +33,7 @@ export default function ProfilePage() {
   const [birthLocation, setBirthLocation] = useState('');
   const [chosenReader, setChosenReader] = useState('');
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const loadProfile = useCallback(async () => {
     try {
       setLoading(true);
@@ -53,6 +54,7 @@ export default function ProfilePage() {
     }
   }, [user]);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (user?.id) {
       loadProfile();

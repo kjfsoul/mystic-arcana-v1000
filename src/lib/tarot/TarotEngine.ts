@@ -2,6 +2,7 @@
 // import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
 
 export interface TarotCardData {
+
   id: string;
   name: string;
   arcana: 'major' | 'minor';
@@ -13,7 +14,8 @@ export interface TarotCardData {
     upright: string;
     reversed: string;
     keywords: string[];
-  };
+    position?: string;
+};
   description: string;
 }
 

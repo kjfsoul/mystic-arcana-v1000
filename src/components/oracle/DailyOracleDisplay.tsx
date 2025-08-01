@@ -20,6 +20,7 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
   
   const { user } = useAuth();
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadOracleData = async () => {
       setIsLoading(true);

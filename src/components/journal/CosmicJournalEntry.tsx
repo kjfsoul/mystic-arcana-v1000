@@ -43,6 +43,7 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Check authentication status on mount and when user changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkAuth = async () => {
       try {

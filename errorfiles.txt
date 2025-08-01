@@ -1,0 +1,14 @@
+src/app/embed/tarot/page.tsx
+src/components/astrology/MercuryRetrogradeBanner.tsx
+src/components/astronomical/RealStarField/RealStarField.tsx
+src/components/profile/EnhancedProfileForm.tsx
+src/components/readers/VirtualReaderDisplay.tsx
+src/components/tarot/CardSelectionSpreadUI.tsx
+src/components/tarot/DynamicInterpretationPanel.tsx
+src/components/tarot/EnhancedShuffleAnimation.tsx
+src/components/tarot/EnhancedTarotPanel.tsx
+src/components/tarot/InteractiveReadingSurface.tsx
+src/components/tarot/UnifiedTarotPanelV2.tsx
+src/lib/astronomy/AstronomicalEngine.ts
+src/lib/astronomy/CosmicWeatherAPI.ts
+src/services/astronomical/AstronomicalEngine.ts

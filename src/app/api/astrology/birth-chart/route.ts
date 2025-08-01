@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
-import { BirthData } from "@/types/astrology";
+import { BirthData } from '@/types/astrology';
 import { AstrologyCache } from "@/lib/cache/AstrologyCache";
 import { z } from "zod";
 
@@ -246,7 +246,10 @@ export async function POST(request: NextRequest) {
     // Convert to internal BirthData format
     const birthData: BirthData = {
       name: payload.name || 'User',
-      date: new Date(payload.birthDate),
+      birthDate: payload.birthDate, // Required string field
+      birthTime: payload.birthTime,
+      birthLocation: `${payload.location.city}, ${payload.location.country}`,
+      date: new Date(payload.birthDate), // For backward compatibility
       city: payload.location.city,
       country: payload.location.country,
       latitude: payload.location.lat,

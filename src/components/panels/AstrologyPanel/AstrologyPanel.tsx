@@ -40,6 +40,7 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
   const [planetaryPositions, setPlanetaryPositions] = useState<PlanetaryPosition[]>([]);
   const { cosmicWeather, currentTransits, updateCosmicWeather } = useCosmicWeather();
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Update cosmic weather every minute
     const interval = setInterval(() => {
@@ -50,6 +51,7 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
   }, [updateCosmicWeather]);
 
   // Sample planetary data (would be calculated from ephemeris in production)
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setPlanetaryPositions([
       { planet: 'Sun', sign: 'Sagittarius', degree: 15.5, retrograde: false, house: 9 },

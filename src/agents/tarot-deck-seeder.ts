@@ -11,6 +11,7 @@ import { createClient } from '@/lib/supabase/client';
 // import { log_invocation } from '@/utils/a_mem_logger';
 
 export interface TarotCardData {
+
   id: string;
   name: string;
   suit?: 'cups' | 'pentacles' | 'swords' | 'wands' | null;
@@ -24,6 +25,7 @@ export interface TarotCardData {
   symbolism?: string[];
   element?: 'fire' | 'water' | 'earth' | 'air' | null;
   astrological_association?: string;
+  position?: string;
 }
 
 export interface DeckSeedingResult {

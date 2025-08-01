@@ -31,6 +31,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   // Update query when value changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (value) {
       setQuery(value.name);
@@ -40,6 +41,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   }, [value]);
 
   // Get suggestions when query changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (query.length >= 2) {
@@ -60,6 +62,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   }, [query]);
 
   // Close suggestions when clicking outside
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

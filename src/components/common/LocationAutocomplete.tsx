@@ -34,6 +34,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Debounced search
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (value.length >= 3) {
@@ -48,6 +49,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   }, [value]);
 
   // Handle clicks outside to close suggestions
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {

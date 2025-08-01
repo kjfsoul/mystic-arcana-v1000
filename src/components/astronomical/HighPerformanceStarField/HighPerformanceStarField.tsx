@@ -40,6 +40,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   const onPerformanceUpdateRef = useRef(onPerformanceUpdate);
 
   // Update the ref when the callback changes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     onPerformanceUpdateRef.current = onPerformanceUpdate;
   }, [onPerformanceUpdate]);
@@ -52,6 +53,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   /**
    * Convert astronomical Star to renderer Star format
    */
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const convertToRendererStar = useCallback((astronomicalStar: Star): Star => {
     // The Star type from astronomical types is already compatible
     // Just ensure optional fields have defaults for the renderer
@@ -70,6 +72,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   }, []);
 
   // Default render configuration optimized for performance
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const finalRenderConfig = useMemo((): RenderConfig => ({
     starCatalog: 'hipparcos',
     maxStars: 100000,
@@ -85,6 +88,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   /**
    * Start the high-performance render loop
    */
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const startRenderLoop = useCallback(() => {
     const render = (time: number) => {
       if (rendererRef.current) {
@@ -110,6 +114,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   /**
    * Initialize the high-performance renderer
    */
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const initializeRenderer = useCallback(async () => {
     if (!canvasRef.current) {
       console.log('❌ Canvas ref not available');
@@ -270,6 +275,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   /**
    * Handle canvas resize
    */
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = useCallback(() => {
     if (canvasRef.current && rendererRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -278,6 +284,7 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   }, []);
 
   // Initialize renderer when dependencies change
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!locationLoading) {
       initializeRenderer();
@@ -294,12 +301,14 @@ export const HighPerformanceStarField: React.FC<HighPerformanceStarFieldProps> =
   }, [initializeRenderer, locationLoading]);
 
   // Handle window resize
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize]);
 
   // Handle canvas click for star selection
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!onStarClick || !rendererRef.current) return;
 

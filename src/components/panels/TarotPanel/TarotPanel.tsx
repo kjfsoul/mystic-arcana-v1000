@@ -13,6 +13,7 @@ interface TarotPanelProps {
 }
 
 interface TarotCard {
+
   id: string;
   name: string;
   arcana: 'major' | 'minor';
@@ -22,7 +23,12 @@ interface TarotCard {
   meaning: {
     upright: string;
     reversed: string;
-  };
+    keywords?: string[];
+  meaning_reversed?: string;
+  meaning_upright?: string;
+  arcana_type?: string;
+  card_number?: number;
+};
 }
 
 /**

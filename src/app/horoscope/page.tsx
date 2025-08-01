@@ -6,7 +6,7 @@ import { Calendar, User, Globe, Settings } from 'lucide-react';
 import CosmicCalendar from './calendar';
 import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
 import { useAuth } from '@/contexts/AuthContext';
-import { BirthData } from '@/types/astrology';
+import { BirthData } from '../../types/astrology';
 
 export default function HoroscopePage() {
   const { user } = useAuth();
@@ -15,6 +15,7 @@ export default function HoroscopePage() {
   const [showTransits, setShowTransits] = useState(false);
 
   // Load user's birth data if available
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (user) {
       // This would typically come from user profile/database

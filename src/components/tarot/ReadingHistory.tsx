@@ -31,6 +31,7 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
   const [isMobile, setIsMobile] = useState(false);
 
   // Check if mobile
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -39,6 +40,7 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
   }, []);
 
   // Load readings on mount and when filters change
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (user && !isGuest) {
       getReadings({

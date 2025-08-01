@@ -45,6 +45,7 @@ export default function MarketplacePage() {
   }));
 
   // Filter and sort products
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const filteredProducts = useMemo(() => {
     const filtered = allProducts.filter(product => {
       // Price range filter

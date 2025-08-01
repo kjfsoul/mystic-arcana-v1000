@@ -2,7 +2,7 @@
 import { ORBITAL_ELEMENTS } from "./OrbitalElements";
 
 // Re-export types from central location for backward compatibility
-export type { BirthData, PlanetPosition, HousePosition } from '@/types/astrology';
+export type { BirthData, PlanetPosition, HousePosition } from '../../types/astrology';
 export class AstronomicalCalculator {
   static normalizeAngle(angle: number): number {
     return ((angle % 360) + 360) % 360;

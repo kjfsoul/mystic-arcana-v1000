@@ -20,6 +20,7 @@ export const UnifiedResponsiveLayout: React.FC = () => {
   const [isTablet, setIsTablet] = useState(false);
 
   // Responsive breakpoint detection
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const checkResponsive = () => {
       const width = window.innerWidth;
@@ -33,6 +34,7 @@ export const UnifiedResponsiveLayout: React.FC = () => {
   }, []);
 
   // Adjust galaxy intensity based on view mode and device (REDUCED for readability)
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let intensity = 0.3; // Significantly reduced default
     

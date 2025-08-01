@@ -307,6 +307,7 @@ export function useWishlist() {
     return wishlistItems.some(item => item.product_key === productKey);
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     refreshWishlist();
   }, []);

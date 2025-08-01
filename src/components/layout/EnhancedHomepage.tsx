@@ -33,6 +33,7 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.8);
 
   // Adjust galaxy intensity based on reading mode
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     switch (readingMode) {
       case 'home':

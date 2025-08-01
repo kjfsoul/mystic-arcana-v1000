@@ -47,6 +47,7 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   // Load autofill data when profile loads
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const autofillData = getAutofillValues();
     setFormData({

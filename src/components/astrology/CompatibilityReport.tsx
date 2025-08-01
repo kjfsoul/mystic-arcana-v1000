@@ -30,6 +30,7 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function fetchCompatibility() {
       try {

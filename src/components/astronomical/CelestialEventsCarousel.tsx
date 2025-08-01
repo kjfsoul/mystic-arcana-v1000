@@ -84,6 +84,7 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Auto-advance carousel
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isAutoPlaying) return;
 

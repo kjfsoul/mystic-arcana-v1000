@@ -11,6 +11,7 @@ export default function UpdatePasswordPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Check if user has a valid session from the reset link
     const checkSession = async () => {

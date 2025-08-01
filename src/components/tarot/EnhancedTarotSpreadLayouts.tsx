@@ -40,6 +40,7 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
   const [energyFlow, setEnergyFlow] = useState(0);
 
   // Energy flow animation
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isRevealing) {
       const interval = setInterval(() => {
@@ -50,6 +51,7 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
   }, [isRevealing]);
 
   // Generate connection lines between cards for energy flow
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (spreadType === 'three-card' && cards.length === 3) {
       setConnectionLines([

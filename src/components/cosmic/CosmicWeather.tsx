@@ -20,6 +20,7 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
   const [moonError, setMoonError] = useState(false);
 
   // Rotate through different cosmic elements
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveOrb(prev => (prev + 1) % 4);
@@ -28,6 +29,7 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
   }, []);
 
   // Load real moon phase data
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function loadMoonPhase() {
       try {

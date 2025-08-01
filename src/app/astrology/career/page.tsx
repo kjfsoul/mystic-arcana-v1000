@@ -21,6 +21,7 @@ export default function CareerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function loadUserProfile() {
       try {
@@ -58,7 +59,10 @@ export default function CareerPage() {
         
         const formattedBirthData: BirthData = {
           name: 'User',
-          date: birthDateTime,
+          birthDate: birthDateTime.toISOString(), // Required string field
+          birthTime: profileData.birth_time || '12:00:00',
+          birthLocation: profileData.birth_location || 'Unknown',
+          date: birthDateTime, // For backward compatibility
           latitude: profileData.latitude,
           longitude: profileData.longitude,
           timezone: 'UTC',

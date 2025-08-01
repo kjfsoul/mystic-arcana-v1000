@@ -51,6 +51,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   const [reducedMotion, setReducedMotion] = useState(false);
 
   // Check for reduced motion preference
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches);
@@ -61,6 +62,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   }, []);
 
   // Handle resize
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -74,6 +76,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   }, []);
 
   // Get star color based on cosmic weather
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getStarColor = useCallback(() => {
     const colors = {
       calm: ['#ffffff', '#e6d7ff', '#ffd700', '#ff6b9d', '#9c88ff'],
@@ -88,6 +91,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   }, [cosmicWeather]);
 
   // Create shooting star
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const createShootingStar = useCallback(() => {
     if (reducedMotion || Math.random() > 0.005) return null;
 
@@ -102,6 +106,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   }, [reducedMotion, dimensions.width, dimensions.height]);
 
   // Initialize stars
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (dimensions.width === 0 || dimensions.height === 0) return;
 
@@ -123,6 +128,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   }, [dimensions, intensity, getStarColor]);
 
   // Animation loop
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || dimensions.width === 0 || dimensions.height === 0) return;

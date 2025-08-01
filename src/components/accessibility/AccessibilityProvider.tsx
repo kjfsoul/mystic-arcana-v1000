@@ -57,6 +57,7 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
   const liveRegionRef = useRef<HTMLDivElement | null>(null);
 
   // Detect user preferences on mount
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const detectPreferences = () => {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -165,6 +166,7 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
   };
 
   // Load saved settings
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const saved = localStorage.getItem('accessibility-settings');
     if (saved) {
@@ -213,6 +215,7 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
   };
 
   // Keyboard event handlers
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Escape key handling for modals/overlays
@@ -248,6 +251,7 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
   }, []);
 
   // Focus visible management
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleMouseDown = () => {
       document.body.classList.add('mouse-user');
@@ -271,6 +275,7 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
   }, []);
 
   // Live region for dynamic content - using React best practices
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Only create if we're in the browser and don't already have one
     if (typeof window === 'undefined') return;

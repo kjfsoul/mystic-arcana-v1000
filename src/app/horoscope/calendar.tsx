@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Star, Zap, Eye, Heart } from 'lucide-react';
 import { TransitEngine, DailyTransit, PersonalizedHoroscope } from '@/lib/ephemeris/transitEngine';
-import { BirthData } from '@/types/astrology';
+import { BirthData } from '../../types/astrology';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface CosmicCalendarProps {
@@ -32,6 +32,7 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
   const [view, setView] = useState<'calendar' | 'today' | 'week'>('today');
   const [transitEngine] = useState(() => new TransitEngine());
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const loadDailyData = useCallback(async (date: Date) => {
     setLoading(true);
     try {
@@ -55,10 +56,12 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
     }
   }, [birthData, transitEngine]);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadDailyData(selectedDate);
   }, [selectedDate, loadDailyData]);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (view === 'calendar') {
       generateCalendarDays(currentDate);

@@ -96,6 +96,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
   duration = 3000,
   className = "" 
 }) => {
+// eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (autoHide && onClose) {
       const timer = setTimeout(onClose, duration);

@@ -11,6 +11,7 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

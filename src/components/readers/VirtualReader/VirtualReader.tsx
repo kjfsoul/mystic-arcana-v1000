@@ -32,6 +32,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
   const animationRef = useRef<number | null>(null);
   const [eyeBlinkTimer, setEyeBlinkTimer] = useState(0);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

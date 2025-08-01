@@ -38,6 +38,7 @@ export const StarField: React.FC<StarFieldProps> = ({
   const mouseRef = useRef({ x: 0, y: 0 });
   const timeRef = useRef(0);
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

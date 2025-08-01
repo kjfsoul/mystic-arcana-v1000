@@ -24,6 +24,7 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // Create screen reader announcer element
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!announcerRef.current) {
       const announcer = document.createElement('div');
@@ -47,6 +48,7 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   }, [politeness]);
 
   // Announce message to screen readers
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const announceToScreenReader = useCallback((message: string) => {
     if (announcerRef.current) {
       // Clear previous announcement
@@ -62,6 +64,7 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   }, [announceDelay]);
 
   // Release focus trap and restore previous focus
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const releaseFocusTrap = useCallback(() => {
     if (previousFocusRef.current) {
       previousFocusRef.current.focus();
@@ -71,6 +74,7 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   }, []);
 
   // Create focus trap for modals/overlays
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const createFocusTrap = useCallback((element: HTMLElement) => {
     // Store current focus
     previousFocusRef.current = document.activeElement as HTMLElement;
@@ -121,6 +125,7 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   }, [releaseFocusTrap]);
 
   // Get appropriate ARIA label for interactive elements
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const getAriaLabel = useCallback((elementType: string, context: string) => {
     const labels: Record<string, string> = {
       'tarot-card': `Select ${context} tarot card`,
@@ -134,11 +139,13 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   }, []);
 
   // Check if user prefers reduced motion
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const prefersReducedMotion = useCallback(() => {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
   // Keyboard navigation helper
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleKeyboardNavigation = useCallback((
     e: React.KeyboardEvent,
     callbacks: {

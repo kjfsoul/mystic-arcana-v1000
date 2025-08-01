@@ -68,6 +68,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   }>({ positions: [], aspects: [] });
 
   // Calculate responsive chart size
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const updateSize = () => {
       const container = document.querySelector(`.${styles.chartContainer}`);
@@ -96,6 +97,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     midheaven: 0
   });
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const calculateChart = async () => {
       try {
@@ -117,6 +119,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
   }, [birthData]);
 
   // Load transit data when transits are enabled
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (showTransits) {
       const loadTransits = async () => {
@@ -277,7 +280,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  {house.number}
+                  {house.house}
                 </motion.text>
               </motion.g>
             );
@@ -526,7 +529,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               <div className={styles.modalBody}>
                 {selectedObject.type === 'planet' && (
                   <div>
-                    <p><strong>Position:</strong> {(selectedObject.data as PlanetPosition).degree}° {(selectedObject.data as PlanetPosition).minute}&apos; {(selectedObject.data as PlanetPosition).sign}</p>
+                    <p><strong>Position:</strong> {(selectedObject.data as PlanetPosition).longitude}° {(selectedObject.data as PlanetPosition).longitude}&apos; {(selectedObject.data as PlanetPosition).sign}</p>
                     <p><strong>House:</strong> {(selectedObject.data as PlanetPosition).house}</p>
                     {(selectedObject.data as PlanetPosition).isRetrograde && (
                       <p className={styles.retrogradeText}><strong>Retrograde:</strong> This planet appears to move backward, intensifying its introspective energy.</p>
@@ -568,7 +571,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                     <p><strong>Cusp:</strong> {Math.floor((selectedObject.data as HousePosition).cusp)}° {(selectedObject.data as HousePosition).sign}</p>
                     <p><strong>Ruling Planet:</strong> {(selectedObject.data as HousePosition).ruler}</p>
                     <p className={styles.interpretation}>
-                      {getHouseInterpretation((selectedObject.data as HousePosition).number)}
+                      {getHouseInterpretation((selectedObject.data as HousePosition).house)}
                     </p>
                   </div>
                 )}

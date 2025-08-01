@@ -90,7 +90,7 @@ export class ContentIngestorAgent extends Agent {
     this.sources = new Map();
     this.knowledgePool = new Map();
     this.ingestionHistory = [];
-    this.initializeCrawlConfig();
+    this.crawlConfig = {} as CrawlConfig;
     this.initializeContentSources();
   }
 
@@ -351,8 +351,8 @@ export class ContentIngestorAgent extends Agent {
         if (filters.sourceId) {
           results = results.filter(content => content.sourceId === filters.sourceId);
         }
-        if (filters.minCredibility) {
-          results = results.filter(content => content.credibilityScore >= filters.minCredibility);
+        if (filters.minCredibility !== undefined) {
+          results = results.filter(content => content.credibilityScore >= (filters.minCredibility || 0));
         }
       }
 
@@ -454,13 +454,13 @@ export class ContentIngestorAgent extends Agent {
     };
   }
 
-  private categorizeContent(title: string, text: string, url: string): string {
+  private categorizeContent(title: string, text: string, url: string): 'planets' | 'signs' | 'houses' | 'aspects' | 'techniques' | 'history' | 'modern' {
     // TODO: Implement content categorization logic
     const categories = ['planets', 'signs', 'houses', 'aspects', 'techniques', 'history', 'modern'];
     return 'planets'; // Simplified
   }
 
-  private determineContentType(text: string, url: string): string {
+  private determineContentType(text: string, url: string): 'article' | 'definition' | 'interpretation' | 'tutorial' | 'reference' {
     // TODO: Implement content type determination
     return 'article';
   }
