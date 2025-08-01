@@ -84,7 +84,7 @@ export class TransitEngine {
 
     for (const planet of planets) {
       try {
-        const position = await this.astroCalc.calculatePlanetaryPosition(planet, today);
+        const position = await AstronomicalCalculator.calculatePlanetaryPosition(planet, today);
         const speed = await this.calculatePlanetarySpeed(planet, today, position);
         const sign = this.getZodiacSign(position.longitude);
         
@@ -117,7 +117,7 @@ export class TransitEngine {
     }
     
     try {
-      const today = await this.astroCalc.calculatePlanetaryPosition(planet, date);
+      const today = await AstronomicalCalculator.calculatePlanetaryPosition(planet, date);
       // If the position includes speed, use it
       if (typeof today.speed === 'number') {
         return today.speed;
@@ -126,7 +126,7 @@ export class TransitEngine {
       // Otherwise calculate speed from positions
       const tomorrow = new Date(date);
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const nextDay = await this.astroCalc.calculatePlanetaryPosition(planet, tomorrow);
+      const nextDay = await AstronomicalCalculator.calculatePlanetaryPosition(planet, tomorrow);
       
       let speed = nextDay.longitude - today.longitude;
       
@@ -172,7 +172,7 @@ export class TransitEngine {
   async calculateTransits(birthData: BirthData, targetDate: Date = new Date()): Promise<TransitAspect[]> {
     try {
       const transitPositions = await this.getCurrentPlanetaryPositions();
-      const natalChart = await this.astroCalc.calculateBirthChart(birthData);
+      const natalChart = await AstronomicalCalculator.calculateBirthChart(birthData);
       const aspects: TransitAspect[] = [];
 
       for (const transitPos of transitPositions) {
@@ -313,8 +313,8 @@ export class TransitEngine {
    */
   private async calculateLunarPhase(date: Date) {
     try {
-      const sunPos = await this.astroCalc.calculatePlanetaryPosition('sun', date);
-      const moonPos = await this.astroCalc.calculatePlanetaryPosition('moon', date);
+      const sunPos = await AstronomicalCalculator.calculatePlanetaryPosition('sun', date);
+      const moonPos = await AstronomicalCalculator.calculatePlanetaryPosition('moon', date);
       
       let diff = moonPos.longitude - sunPos.longitude;
       if (diff < 0) diff += 360;

@@ -384,14 +384,14 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
     
-    if (!body.birthData) {
+    if (!body?.birthData) {
       return NextResponse.json(
         { success: false, error: 'Birth data is required for personalized oracle reading' },
         { status: 400 }
       );
     }
     
-    const cacheKey = getTodayKey(body.userId);
+    const cacheKey = getTodayKey(body?.userId);
     
     // Check cache first
     const cached = oracleCache.get(cacheKey);

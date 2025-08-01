@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     const birthData: ValidatedBirthData = {
       name: payload.name || 'User',
       birthDate: payload.birthDate, // Required string field
-      birthTime: payload.birthTime,
+      birthTime: (payload as any).birthTime,
       birthLocation: `${payload.location.city}, ${payload.location.country}`,
       date: new Date(payload.birthDate), // For backward compatibility
       city: payload.location.city,
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Check cache first for performance
-    const cacheKey = `calculate_${birthData.date.getTime()}_${birthData.latitude}_${birthData.longitude}`;
+    const cacheKey = `calculate_${(birthData.date || new Date(birthData.birthDate)).getTime()}_${birthData.latitude}_${birthData.longitude}`;
     
     // Try multiple calculation methods with fallbacks
     let chart: any = null;
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
         console.log('✅ Python calculation successful');
       }
     } catch (pythonError) {
-      console.log('⚠️ Python calculation failed, trying fallback methods:', pythonError.message);
+      console.log('⚠️ Python calculation failed, trying fallback methods:', (pythonError as Error).message);
     }
     
     // Method 2: Try SwissEphemerisShim fallback
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
         chart = {
           planets: shimChart.planets,
           houses: shimChart.houses.map(h => ({
-            house: h.house,
+            house: h.number,
             cusp: h.cusp,
             sign: h.sign,
             ruler: h.ruler
@@ -174,7 +174,7 @@ export async function POST(request: NextRequest) {
         calculationEngine: 'Mystic Arcana Astrology Engine v1.0',
         birthData: {
           name: birthData.name,
-          date: birthData.date.toISOString(),
+          date: (birthData.date || new Date(birthData.birthDate)).toISOString(),
           location: `${birthData.city || 'Unknown'}, ${birthData.country || 'Unknown'}`,
           coordinates: `${birthData.latitude}°N, ${birthData.longitude}°E`
         }
@@ -237,7 +237,7 @@ function callPythonCalculation(birthData: ValidatedBirthData): Promise<any> {
     
     const pythonData = {
       name: birthData.name,
-      birthDate: birthData.date.toISOString(),
+      birthDate: (birthData.date || new Date(birthData.birthDate)).toISOString(),
       city: birthData.city || 'Unknown',
       country: birthData.country || '',
       latitude: birthData.latitude,

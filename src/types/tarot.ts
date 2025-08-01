@@ -7,7 +7,7 @@ export interface TarotCard {
   number?: number;
   card_number?: number; // Compatibility alias
   frontImage: string;
-  backImage?: string;
+  backImage: string;
   image_url?: string; // Compatibility alias
   position?: string; // For positioned readings
   keywords?: string[]; // Direct keywords property

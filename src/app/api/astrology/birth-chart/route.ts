@@ -247,7 +247,7 @@ export async function POST(request: NextRequest) {
     const birthData: BirthData = {
       name: payload.name || 'User',
       birthDate: payload.birthDate, // Required string field
-      birthTime: payload.birthTime,
+      birthTime: (payload as any).birthTime,
       birthLocation: `${payload.location.city}, ${payload.location.country}`,
       date: new Date(payload.birthDate), // For backward compatibility
       city: payload.location.city,
@@ -286,11 +286,11 @@ export async function POST(request: NextRequest) {
     // Convert birth data to proper format for Python script
     const pythonBirthData = {
       name: birthData.name || 'User',
-      year: birthData.date.getFullYear(),
-      month: birthData.date.getMonth() + 1,
-      day: birthData.date.getDate(),
-      hour: birthData.date.getHours(),
-      minute: birthData.date.getMinutes(),
+      year: birthData.date?.getFullYear() || new Date(birthData.birthDate).getFullYear(),
+      month: (birthData.date?.getMonth() || new Date(birthData.birthDate).getMonth()) + 1,
+      day: birthData.date?.getDate() || new Date(birthData.birthDate).getDate(),
+      hour: birthData.date?.getHours() || new Date(birthData.birthDate).getHours(),
+      minute: birthData.date?.getMinutes() || new Date(birthData.birthDate).getMinutes(),
       city: birthData.city,
       country: birthData.country || ""
     };

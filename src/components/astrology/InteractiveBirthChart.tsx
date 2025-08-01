@@ -280,7 +280,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  {house.house}
+                  {house.number}
                 </motion.text>
               </motion.g>
             );
@@ -571,7 +571,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
                     <p><strong>Cusp:</strong> {Math.floor((selectedObject.data as HousePosition).cusp)}° {(selectedObject.data as HousePosition).sign}</p>
                     <p><strong>Ruling Planet:</strong> {(selectedObject.data as HousePosition).ruler}</p>
                     <p className={styles.interpretation}>
-                      {getHouseInterpretation((selectedObject.data as HousePosition).house)}
+                      {getHouseInterpretation((selectedObject.data as HousePosition).number)}
                     </p>
                   </div>
                 )}

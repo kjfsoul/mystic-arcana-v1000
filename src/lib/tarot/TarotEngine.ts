@@ -2,7 +2,6 @@
 // import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
 
 export interface TarotCardData {
-
   id: string;
   name: string;
   arcana: 'major' | 'minor';
@@ -15,8 +14,9 @@ export interface TarotCardData {
     reversed: string;
     keywords: string[];
     position?: string;
-};
+  };
   description: string;
+  position?: 'upright' | 'reversed'; // Add position property
 }
 
 export interface TarotReading {
@@ -28,6 +28,7 @@ export interface TarotReading {
   cosmicInfluence?: unknown;
   timestamp: Date;
   isGuest: boolean;
+  question?: string; // Add question property
 }
 
 export interface TarotEngineOptions {

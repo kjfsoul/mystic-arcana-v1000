@@ -348,6 +348,7 @@ export class LunarTransitNarratorAgent extends Agent {
     try {
       const birthData = {
         name: 'Daily Transit',
+        birthDate: date.toISOString(),
         date: date,
         city: 'GMT',
         country: 'Universal',

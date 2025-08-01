@@ -131,6 +131,7 @@ export class AstrologyGuruAgent extends Agent {
       
       const birthData = {
         name: 'Analysis Subject',
+        birthDate: request.birthData.datetime,
         date: new Date(request.birthData.datetime),
         city: 'Birth Location',
         country: 'Unknown',
@@ -370,6 +371,7 @@ export class AstrologyGuruAgent extends Agent {
       
       const person1 = {
         name: 'Person 1',
+        birthDate: chart1.birthData.datetime,
         date: new Date(chart1.birthData.datetime),
         city: 'Location 1',
         country: 'Unknown',
@@ -380,6 +382,7 @@ export class AstrologyGuruAgent extends Agent {
 
       const person2 = {
         name: 'Person 2',
+        birthDate: chart2.birthData.datetime,
         date: new Date(chart2.birthData.datetime),
         city: 'Location 2',
         country: 'Unknown',

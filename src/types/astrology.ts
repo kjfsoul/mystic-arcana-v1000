@@ -90,9 +90,9 @@ export type AspectType =
 export type HouseSystem = "Placidus" | "Koch" | "Equal" | "WholeSign";
 
 /**
- * Planet type for transit calculations
+ * Planet names for transit calculations
  */
-export type Planet = PlanetPosition;
+export type Planet = 'sun' | 'moon' | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune' | 'pluto';
 
 /**
  * Additional utility types for compatibility
