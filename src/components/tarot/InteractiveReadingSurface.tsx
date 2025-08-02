@@ -13,7 +13,8 @@ import {
   ConversationState, 
   ConversationTurn, 
   ConversationOption,
-  InteractiveQuestion 
+  InteractiveQuestion,
+  ConversationSession 
 } from '@/agents/sophia';
 import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
 import { VirtualReaderDisplay } from '@/components/readers/VirtualReaderDisplay';
@@ -42,6 +43,9 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   onBackToSelection,
   className = ''
 }) => {
+  const { user } = useAuth();
+  const isAuthenticated = !!user;
+
   // State management - Enhanced for conversational flow
   const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'revealing' | 'conversation' | 'interpreting' | 'complete'>('preparation');
   const [drawnCards, setDrawnCards] = useState<TarotCard[]>([]);
@@ -79,8 +83,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   const surfaceRef = useRef<HTMLDivElement>(null);
   const shuffleControls = useAnimation();
   
-  // Auth context
-  const { user } = useAuth();
+  // Auth context (already declared above)
 
   // Spread configuration mapping
   const spreadRequirements = {
@@ -190,7 +193,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
 
   // Generate contextual card interpretation
   const generateCardInterpretation = (card: TarotCard, position: number, spread: SpreadType): string => {
-    const positionMeanings = {
+    const positionMeanings: Record<SpreadType, string[]> = {
       'single': ['This card represents the universe\'s guidance for you right now.'],
       'three-card': [
         'This card reveals the foundations and influences from your past.',
@@ -208,7 +211,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         'External influences and environment.',
         'Your hopes, fears, and subconscious.',
         'The ultimate outcome and resolution.'
-      ]
+      ],
+      'horseshoe': ['Default horseshoe interpretation'],
+      'relationship': ['Default relationship interpretation'],
+      'custom': ['Custom spread interpretation']
     };
 
     const positionContext = positionMeanings[spread]?.[position] || `Position ${position + 1} guidance:`;
@@ -234,7 +240,8 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         userId: user?.id,
         spreadType: selectedSpread,
         sessionId: currentSession.id,
-        timestamp: new Date()
+        timestamp: new Date(),
+        cards: drawnCards
       };
 
       const turn = await sophiaAgent.processReadingTurn(
@@ -300,9 +307,14 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           currentSession.id,
           turn.newState,
           conversationHistory.length + 1,
-          turn.sophiaDialogue,
+          turn.sophiaDialogue || '',
           userInput,
-          turn.revealedCard
+          turn.revealedCard ? {
+            card: turn.revealedCard.card,
+            interpretation: typeof turn.revealedCard.interpretation === 'string' 
+              ? turn.revealedCard.interpretation 
+              : turn.revealedCard.interpretation?.base_interpretation || ''
+          } : undefined
         );
       }
       
@@ -353,8 +365,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       const response = await fetch('/api/tarot/save-reading', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${await user.getAccessToken()}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           userId: user.id,
@@ -451,15 +462,44 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         `${sophiaReading.narrative}\n\n${sophiaReading.overall_guidance}\n\n${sophiaReading.spiritual_insight}` :
         Object.values(cardInterpretations).join('\n\n'),
       cards: drawnCards,
-      sophiaReading
+      sophiaReading: sophiaReading || undefined
     };
     
     // Log interaction with PersonaLearner for learning (authenticated users only)
-    if (sophiaReading && user?.id) {
+    if (sophiaReading && user?.id && currentSession) {
       try {
+        const conversationSession: ConversationSession = {
+          sessionId: currentSession.id,
+          userId: user.id,
+          spreadType: selectedSpread,
+          cards: drawnCards,
+          currentState: ConversationState.READING_COMPLETE,
+          currentCardIndex: drawnCards.length - 1,
+          userResponses: [],
+          cardInterpretations: Object.values(cardInterpretations).map(interp => 
+            typeof interp === 'string' ? {
+              base_interpretation: interp,
+              personalized_guidance: '',
+              spiritual_wisdom: '',
+              practical_advice: '',
+              reader_notes: '',
+              confidence_score: 0.8,
+              source_references: []
+            } : interp
+          ),
+          startTime: new Date(),
+          context: {
+            userId: user.id,
+            spreadType: selectedSpread,
+            sessionId: currentSession.id,
+            timestamp: new Date(),
+            cards: drawnCards
+          }
+        };
+        
         await personaLearner.logInteraction(
           user.id,
-          sophiaReading,
+          conversationSession,
           userFeedback
         );
         console.log('PersonaLearner: Interaction logged successfully');
@@ -530,6 +570,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         spreadType: selectedSpread,
         sessionId: currentSession.id,
         timestamp: new Date(),
+        cards: drawnCards,
         astrological_context: {
           // TODO: Add astrological context if available
         }
@@ -716,7 +757,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
                   </h4>
                 </div>
                 <p className="text-purple-200 text-sm leading-relaxed">
-                  {currentTurn.revealedCard.interpretation}
+                  {typeof currentTurn.revealedCard.interpretation === 'string' 
+                    ? currentTurn.revealedCard.interpretation 
+                    : (currentTurn.revealedCard.interpretation?.base_interpretation || 
+                       currentTurn.revealedCard.interpretation?.personalized_guidance || '')}
                 </p>
               </motion.div>
             )}
@@ -1107,7 +1151,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
                 <div className="max-h-40 overflow-y-auto space-y-2">
                   {conversationHistory.slice(-3).map((turn, index) => (
                     <div key={index} className="text-indigo-200 text-xs p-2 bg-indigo-900/20 rounded">
-                      <p className="opacity-75">"{turn.sophiaDialogue.substring(0, 100)}..."</p>
+                      <p className="opacity-75">"{turn.sophiaDialogue?.substring(0, 100) || ''}..."</p>
                     </div>
                   ))}
                 </div>

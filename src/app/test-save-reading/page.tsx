@@ -16,6 +16,7 @@ export default function TestSaveReadingPage() {
   const mockReading: TarotReading = {
     id: 'test-reading-123',
     spreadType: 'three-card',
+    isGuest: false,
     cards: [
       {
         id: 'fool',
@@ -29,7 +30,7 @@ export default function TestSaveReadingPage() {
         frontImage: '/tarot/deck-rider-waite/0-the-fool.jpg',
         backImage: '/tarot/card-back.jpg',
         description: 'The card of new beginnings and infinite potential',
-        position: 'Past'
+        position: 'upright'
       },
       {
         id: 'magician',
@@ -43,7 +44,7 @@ export default function TestSaveReadingPage() {
         frontImage: '/tarot/deck-rider-waite/1-the-magician.jpg',
         backImage: '/tarot/card-back.jpg',
         description: 'The card of manifestation and willpower',
-        position: 'Present'
+        position: 'upright'
       },
       {
         id: 'high-priestess',
@@ -57,7 +58,7 @@ export default function TestSaveReadingPage() {
         frontImage: '/tarot/deck-rider-waite/2-the-high-priestess.jpg',
         backImage: '/tarot/card-back.jpg',
         description: 'The card of intuition and hidden knowledge',
-        position: 'Future'
+        position: 'reversed'
       }
     ],
     positions: ['Past', 'Present', 'Future'],

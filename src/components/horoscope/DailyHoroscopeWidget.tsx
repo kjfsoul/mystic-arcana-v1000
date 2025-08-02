@@ -53,6 +53,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
             try {
               const birthData = {
                 name: profile.full_name || 'User',
+                birthDate: profile.birth_date,
                 date: new Date(profile.birth_date),
                 city: profile.birth_city,
                 country: profile.birth_country || 'United States',

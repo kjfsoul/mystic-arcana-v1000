@@ -180,9 +180,9 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     
     if (majorArcanaCount / totalCards > 0.6) {
       return 'spiritual-transformation';
-    } else if (cards.some(card => card.suit === 'hearts' || card.suit === 'cups')) {
+    } else if (cards.some(card => card.suit === 'cups')) {
       return 'emotional-journey';
-    } else if (cards.some(card => card.suit === 'pentacles' || card.suit === 'coins')) {
+    } else if (cards.some(card => card.suit === 'pentacles')) {
       return 'material-focus';
     } else {
       return 'balanced-reading';

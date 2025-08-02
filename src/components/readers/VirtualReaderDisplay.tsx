@@ -92,10 +92,16 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
       }
 
       try {
-        const analysis = await personaLearner.getEngagementAnalysis(user.id);
+        const userId = (user as any)?.id;
+        if (!userId) {
+          setIsLoading(false);
+          return;
+        }
+        
+        const analysis = await personaLearner.getEngagementAnalysis(userId);
         
         // Check if level increased since last view
-        const lastKnownLevel = localStorage.getItem(`last_known_level_${user.id}`);
+        const lastKnownLevel = localStorage.getItem(`last_known_level_${userId}`);
         if (lastKnownLevel) {
           const lastLevel = parseInt(lastKnownLevel);
           if (analysis.currentLevel > lastLevel) {
@@ -104,7 +110,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
         }
         
         // Store current level
-        localStorage.setItem(`last_known_level_${user.id}`, analysis.currentLevel.toString());
+        localStorage.setItem(`last_known_level_${userId}`, analysis.currentLevel.toString());
         
         setEngagementData(analysis);
       } catch (error) {

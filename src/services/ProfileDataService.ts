@@ -154,6 +154,7 @@ class ProfileDataServiceClass {
     birthTime?: string;
     birthLocation?: string;
     birthCoordinates?: { lat: number; lng: number };
+    preferredTarotReader?: string;
   } {
     const profile = this.getProfile();
     
@@ -161,7 +162,8 @@ class ProfileDataServiceClass {
       birthDate: profile?.birthDate,
       birthTime: profile?.birthTime,
       birthLocation: profile?.birthLocation,
-      birthCoordinates: profile?.birthCoordinates
+      birthCoordinates: profile?.birthCoordinates,
+      preferredTarotReader: profile?.preferredTarotReader
     };
   }
 

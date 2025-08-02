@@ -9,7 +9,7 @@ export interface TarotCard {
   frontImage: string;
   backImage: string;
   image_url?: string; // Compatibility alias
-  position?: string; // For positioned readings
+  position?: 'upright' | 'reversed'; // For positioned readings
   keywords?: string[]; // Direct keywords property
   meaning: {
     upright: string;

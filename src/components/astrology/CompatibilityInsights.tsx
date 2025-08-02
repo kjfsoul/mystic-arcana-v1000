@@ -63,6 +63,14 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
     // Convert person2Data to BirthData format
     const person2BirthData: BirthData = {
       name: person2Data.name,
+      birthDate: (() => {
+        const date = person2Data.date;
+        if (typeof date === 'string') return date;
+        if (date && typeof date === 'object' && 'toISOString' in date) {
+          return (date as Date).toISOString();
+        }
+        return String(date);
+      })(),
       date: new Date(person2Data.date),
       city: person2Data.city,
       country: person2Data.country,

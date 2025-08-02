@@ -172,13 +172,18 @@ export class TransitEngine {
   async calculateTransits(birthData: BirthData, targetDate: Date = new Date()): Promise<TransitAspect[]> {
     try {
       const transitPositions = await this.getCurrentPlanetaryPositions();
-      const natalChart = await AstronomicalCalculator.calculateBirthChart(birthData);
+      // Use SwissEphemerisShim instead since AstronomicalCalculator doesn't have calculateBirthChart
+      const SwissEphemerisShim = (await import('@/lib/astrology/SwissEphemerisShim')).SwissEphemerisShim;
+      const natalChart = await SwissEphemerisShim.calculateFullChart(birthData);
       const aspects: TransitAspect[] = [];
 
       for (const transitPos of transitPositions) {
-        for (const natalPlanet of Object.keys(natalChart.planets) as Planet[]) {
-          const natalLongitude = natalChart.planets[natalPlanet]?.longitude;
+        // natalChart.planets is an array, not an object
+        for (const planetData of natalChart.planets) {
+          const natalLongitude = planetData?.longitude;
           if (natalLongitude === undefined) continue;
+          
+          const natalPlanet = planetData.name as Planet;
 
           const aspect = this.calculateAspect(transitPos.longitude, natalLongitude);
           if (aspect) {

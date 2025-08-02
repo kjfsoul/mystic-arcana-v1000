@@ -77,8 +77,8 @@ export class AstrologyCache {
    */
   private generateBirthDataHash(birthData: BirthData): string {
     const normalizedData = {
-      date: new Date(birthData.date).toISOString(),
-      city: birthData.city.toLowerCase().trim(),
+      date: new Date(birthData.date || birthData.birthDate).toISOString(),
+      city: (birthData.city || '').toLowerCase().trim(),
       country: (birthData.country || '').toLowerCase().trim(),
       // Round coordinates to 2 decimal places for caching
       lat: birthData.latitude ? Math.round(birthData.latitude * 100) / 100 : null,
@@ -159,7 +159,7 @@ export class AstrologyCache {
 
       const cacheEntry: Partial<CachedBirthChart> = {
         birth_data_hash: hash,
-        birth_date: new Date(birthData.date).toISOString(),
+        birth_date: new Date(birthData.date || birthData.birthDate).toISOString(),
         location: `${birthData.city}, ${birthData.country || ''}`,
         chart_data: chartData,
         svg_chart: svgChart,

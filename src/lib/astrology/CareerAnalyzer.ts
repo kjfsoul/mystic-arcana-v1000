@@ -387,6 +387,9 @@ export async function analyzeCareer(birthData: BirthData): Promise<CareerAnalysi
       midheaven: `${midheavenSign} - Your public image and career direction`,
       saturn: `${saturnSign} - Your discipline, structure, and karmic lessons`,
       mars: `${marsSign} - Your drive, energy, and action style`,
+      secondHouse: 'Financial values and earning style',
+      sixthHouse: 'Daily work and service to others',
+      tenthHouse: 'Career, reputation, and public image',
       ...(await getHousePositions(birthData))
     }
   };

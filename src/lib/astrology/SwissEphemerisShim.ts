@@ -75,9 +75,9 @@ export class SwissEphemerisShim {
     const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
 
     // If swisseph is available, try to use it
-    if (this.swisseph && this.swisseph.swe_utc_to_jd) {
+    if (this.swisseph && (this.swisseph as any).swe_utc_to_jd) {
       try {
-        const result = this.swisseph.swe_utc_to_jd(year, month, day, hour, 0, 0, 1);
+        const result = (this.swisseph as any).swe_utc_to_jd(year, month, day, hour, 0, 0, 1);
         if (result && typeof result.julianDayUT === 'number') {
           return result.julianDayUT;
         }
@@ -109,10 +109,10 @@ export class SwissEphemerisShim {
     if (planetNum === undefined) return null;
 
     // Try Swiss Ephemeris first
-    if (this.swisseph && this.swisseph.swe_calc_ut) {
+    if (this.swisseph && (this.swisseph as any).swe_calc_ut) {
       try {
         const flags = SEFLG_SWIEPH | SEFLG_SPEED;
-        const result = this.swisseph.swe_calc_ut(jd, planetNum, flags);
+        const result = (this.swisseph as any).swe_calc_ut(jd, planetNum, flags);
         
         if (result && !result.error) {
           // swisseph-v2 returns direct properties, not nested in data
@@ -374,9 +374,9 @@ export class SwissEphemerisShim {
    */
   static calculateHouses(jd: number, latitude: number, longitude: number): number[] {
     // Try Swiss Ephemeris first
-    if (this.swisseph && this.swisseph.swe_houses) {
+    if (this.swisseph && (this.swisseph as any).swe_houses) {
       try {
-        const result = this.swisseph.swe_houses(jd, latitude, longitude, 'P'.charCodeAt(0));
+        const result = (this.swisseph as any).swe_houses(jd, latitude, longitude, 'P'.charCodeAt(0));
         if (result && result.house && result.house.length >= 12) {
           return result.house.slice(0, 12);
         }
@@ -442,7 +442,7 @@ export class SwissEphemerisShim {
   }> {
     await this.initialize();
     
-    const jd = this.dateToJulianDay(birthData.date);
+    const jd = this.dateToJulianDay(birthData.date || new Date(birthData.birthDate));
     const planets: PlanetPosition[] = [];
     
     // Calculate all planetary positions
@@ -454,7 +454,7 @@ export class SwissEphemerisShim {
         const minute = Math.floor(((pos.longitude % 30) % 1) * 60);
         
         // Determine house (simplified)
-        const houses = this.calculateHouses(jd, birthData.latitude, birthData.longitude);
+        const houses = this.calculateHouses(jd, birthData.latitude || 0, birthData.longitude || 0);
         let house = 1;
         for (let i = 0; i < 12; i++) {
           const nextHouse = (i + 1) % 12;
@@ -482,8 +482,6 @@ export class SwissEphemerisShim {
           distance: pos.distance,
           house: house,
           sign: sign,
-          degree: degree,
-          minute: minute,
           isRetrograde: pos.speed < 0,
           speed: Math.abs(pos.speed)
         });
@@ -491,9 +489,12 @@ export class SwissEphemerisShim {
     }
     
     // Calculate houses
-    const houseCusps = this.calculateHouses(jd, birthData.latitude, birthData.longitude);
+    const houseCusps = this.calculateHouses(jd, birthData.latitude || 0, birthData.longitude || 0);
     const houses: HousePosition[] = houseCusps.map((cusp, i) => ({
       number: i + 1,
+      longitude: cusp,
+      zodiacSign: this.getZodiacSign(cusp),
+      zodiacDegree: cusp % 30,
       cusp: cusp,
       sign: this.getZodiacSign(cusp),
       ruler: this.getHouseRuler(this.getZodiacSign(cusp))
