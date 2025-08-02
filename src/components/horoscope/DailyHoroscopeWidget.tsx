@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DailyHoroscopeService } from '@/services/horoscope/DailyHoroscopeService';
@@ -8,11 +8,9 @@ import { getPersonalizedHoroscope, HoroscopeData, isHoroscopeAvailable, formatZo
 import { useAuth } from '@/contexts/AuthContext';
 import { profileService } from '@/services/profileService';
 import styles from './DailyHoroscopeWidget.module.css';
-
 interface DailyHoroscopeWidgetProps {
   className?: string;
 }
-
 export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ className }) => {
   const [horoscope, setHoroscope] = useState<DailyHoroscope | null>(null);
   const [realHoroscope, setRealHoroscope] = useState<HoroscopeData | null>(null);
@@ -24,8 +22,7 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
   const [hasRealData, setHasRealData] = useState(false);
   
   const { user } = useAuth();
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const loadHoroscope = async () => {
       try {
@@ -34,14 +31,12 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
         // Set moon phase and cosmic event (same for all users) - these are fast
         setMoonPhase(service.getCurrentMoonPhase());
         setCosmicEvent(service.getCosmicEvent());
-
         // For guest users, just get basic horoscope
         if (!user) {
           const basicHoroscope = service.getGeneralDailyHoroscope(); // Default general horoscope
           setHoroscope(basicHoroscope);
           return;
         }
-
         // For authenticated users, load profile in background (non-blocking)
         setTimeout(async () => {
           try {
@@ -61,7 +56,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
                 longitude: -74.0060,
                 timezone: 'America/New_York'
               };
-
               const realHoroscopeData = await getPersonalizedHoroscope(birthData);
               setRealHoroscope(realHoroscopeData);
               
@@ -74,7 +68,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
             } finally {
               setIsLoadingReal(false);
             }
-
             // Also load fallback horoscope for comparison
             const personalizedHoroscope = service.getPersonalizedHoroscope(profile.birth_date);
             if (personalizedHoroscope) {
@@ -97,10 +90,8 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
         setIsPersonalized(false);
       }
     };
-
     loadHoroscope();
   }, [user, hasRealData]);
-
   // Shimmer loading component
   const ShimmerContent = () => (
     <motion.div 
@@ -120,7 +111,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
       </div>
     </motion.div>
   );
-
   if (!horoscope && !isLoadingReal) {
     return (
       <div className={`${styles.widget} ${className}`}>
@@ -131,17 +121,14 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
       </div>
     );
   }
-
   if (isLoadingReal && !realHoroscope) {
     return <ShimmerContent />;
   }
-
   const energyIcons = {
     high: '⚡',
     medium: '🌟',
     low: '🌛'
   };
-
   return (
     <motion.div 
       className={`${styles.widget} ${className} ${isExpanded ? styles.expanded : ''}`}
@@ -168,7 +155,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
           {isExpanded ? '−' : '+'}
         </button>
       </div>
-
       <div className={styles.content}>
         <p className={styles.overview}>
           {hasRealData && realHoroscope && isHoroscopeAvailable(realHoroscope) 
@@ -199,7 +185,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
             <span className={styles.detailValue}>{horoscope?.general.mood}</span>
           </div>
         </div>
-
         <motion.div 
           className={styles.expandedContent}
           initial={false}
@@ -248,12 +233,10 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
             <span className={styles.moonIcon}>🌙</span>
             <span>{moonPhase}</span>
           </div>
-
           <div className={styles.cosmicEvent}>
             <span className={styles.eventIcon}>🔮</span>
             <span>{cosmicEvent}</span>
           </div>
-
           <div className={styles.luckySection}>
             <div className={styles.luckyNumbers}>
               <span className={styles.luckyLabel}>Lucky Numbers:</span>
@@ -277,7 +260,6 @@ export const DailyHoroscopeWidget: React.FC<DailyHoroscopeWidgetProps> = ({ clas
           </div>
         </motion.div>
       </div>
-
       <div className={styles.footer}>
         <span className={styles.date}>
           {new Date().toLocaleDateString('en-US', { 

@@ -1,9 +1,7 @@
 // CrewAI Agents for Tarot Deck Generation
 // Isolated from production agents in src/agents/
-
 import { supabase } from '@/lib/supabase';
 import { TarotCardData } from '@/lib/tarot/TarotEngine';
-
 // Base Agent Interface (simplified CrewAI-like structure)
 interface AgentConfig {
   name: string;
@@ -12,18 +10,15 @@ interface AgentConfig {
   backstory: string;
   tools?: string[];
 }
-
 interface TaskResult {
   success: boolean;
   data?: any;
   error?: string;
   metadata?: any;
 }
-
 // Agent implementations for Crew Tarot Deck generation
 export class DataOracle {
   private config: AgentConfig;
-
   constructor() {
     this.config = {
       name: 'DataOracle',
@@ -33,7 +28,6 @@ export class DataOracle {
       tools: ['supabase', 'json-schema', 'tarot-knowledge']
     };
   }
-
   async generateThematicBlueprint(): Promise<TaskResult> {
     try {
       const blueprint = {
@@ -105,7 +99,6 @@ export class DataOracle {
           '21': { name: 'The Complete Product', concept: 'Fully realized system', elements: ['global-users', 'complete-features', 'seamless-integration'] }
         }
       };
-
       return {
         success: true,
         data: blueprint,
@@ -119,7 +112,6 @@ export class DataOracle {
       };
     }
   }
-
   async storeDeckMetadata(blueprint: any): Promise<TaskResult> {
     try {
       // Store deck metadata in database
@@ -134,9 +126,7 @@ export class DataOracle {
           is_active: true,
           created_at: new Date().toISOString()
         });
-
       if (deckError) throw deckError;
-
       return {
         success: true,
         data: { deckStored: true, deckId: blueprint.deckId },
@@ -151,10 +141,8 @@ export class DataOracle {
     }
   }
 }
-
 export class UIEnchanter {
   private config: AgentConfig;
-
   constructor() {
     this.config = {
       name: 'UIEnchanter',
@@ -164,7 +152,6 @@ export class UIEnchanter {
       tools: ['prompt-engineering', 'image-generation', 'design-systems']
     };
   }
-
   async generateCardPrompts(blueprint: any): Promise<TaskResult> {
     try {
       const prompts = {
@@ -175,7 +162,6 @@ export class UIEnchanter {
           name: card.name,
           prompt: `${card.name} tarot card, ${card.concept}, featuring ${card.elements.join(', ')}, cyberpunk tarot style, holographic effects, bioluminescent glow, sacred digital geometry, dark void background with data particles, mystical technology fusion, 4K digital art`
         })),
-
         minorArcana: Object.entries(blueprint.suits).map(([suitName, suit]: [string, any]) => {
           const cards = [];
           
@@ -195,7 +181,6 @@ export class UIEnchanter {
               cardName = `${court} of ${suit.originalSuit.charAt(0).toUpperCase() + suit.originalSuit.slice(1)}`;
               cardConcept = `${court} figure mastering ${suit.theme.toLowerCase()}, embodying ${suit.symbolism}`;
             }
-
             cards.push({
               cardId: `${cardName.toLowerCase().replace(/\s+/g, '-')}`,
               name: cardName,
@@ -207,7 +192,6 @@ export class UIEnchanter {
           return { suit: suitName, cards };
         })
       };
-
       return {
         success: true,
         data: prompts,
@@ -222,10 +206,8 @@ export class UIEnchanter {
     }
   }
 }
-
 export class CardWeaver {
   private config: AgentConfig;
-
   constructor() {
     this.config = {
       name: 'CardWeaver',
@@ -235,11 +217,9 @@ export class CardWeaver {
       tools: ['image-composition', 'layout-algorithms', 'visual-harmony']
     };
   }
-
   async generateCardData(blueprint: any, prompts: any): Promise<TaskResult> {
     try {
       const cards: TarotCardData[] = [];
-
       // Generate Major Arcana cards
       prompts.majorArcana.forEach((cardPrompt: any, index: number) => {
         const card: TarotCardData = {
@@ -254,7 +234,6 @@ export class CardWeaver {
         };
         cards.push(card);
       });
-
       // Generate Minor Arcana cards
       prompts.minorArcana.forEach((suitData: any) => {
         suitData.cards.forEach((cardPrompt: any) => {
@@ -271,7 +250,6 @@ export class CardWeaver {
           cards.push(card);
         });
       });
-
       return {
         success: true,
         data: { cards, totalCards: cards.length },
@@ -285,7 +263,6 @@ export class CardWeaver {
       };
     }
   }
-
   private mapSuitName(crewSuit: string): 'wands' | 'cups' | 'swords' | 'pentacles' {
     const mapping: Record<string, 'wands' | 'cups' | 'swords' | 'pentacles'> = {
       'servers': 'wands',
@@ -295,7 +272,6 @@ export class CardWeaver {
     };
     return mapping[crewSuit] || 'wands';
   }
-
   private generateMeaning(cardName: string, arcana: string, suit?: string) {
     // Technology-themed interpretations
     const meanings = {
@@ -335,13 +311,11 @@ export class CardWeaver {
         }
       }
     };
-
     if (arcana === 'major' && meanings.major[cardName as keyof typeof meanings.major]) {
       return meanings.major[cardName as keyof typeof meanings.major];
     } else if (arcana === 'minor' && suit && meanings.minor[suit as keyof typeof meanings.minor]) {
       return meanings.minor[suit as keyof typeof meanings.minor];
     }
-
     // Fallback generic meaning
     return {
       upright: 'Positive technological progress, system harmony, digital growth',
@@ -349,7 +323,6 @@ export class CardWeaver {
       keywords: ['technology', 'progress', 'systems', 'digital']
     };
   }
-
   private generateDescription(cardName: string, arcana: string, suit?: string): string {
     if (arcana === 'major') {
       const descriptions: Record<string, string> = {
@@ -369,10 +342,8 @@ export class CardWeaver {
     }
   }
 }
-
 export class QualityGuardian {
   private config: AgentConfig;
-
   constructor() {
     this.config = {
       name: 'QualityGuardian',
@@ -382,7 +353,6 @@ export class QualityGuardian {
       tools: ['validation', 'quality-assurance', 'spiritual-ethics']
     };
   }
-
   async validateDeck(cards: TarotCardData[]): Promise<TaskResult> {
     try {
       const validationResults = {
@@ -398,29 +368,24 @@ export class QualityGuardian {
         },
         issues: [] as string[]
       };
-
       // Validate card count
       if (validationResults.totalCards !== 78) {
         validationResults.issues.push(`Expected 78 cards, got ${validationResults.totalCards}`);
       }
-
       // Validate major arcana
       if (validationResults.majorArcana !== 22) {
         validationResults.issues.push(`Expected 22 major arcana, got ${validationResults.majorArcana}`);
       }
-
       // Validate minor arcana
       if (validationResults.minorArcana !== 56) {
         validationResults.issues.push(`Expected 56 minor arcana, got ${validationResults.minorArcana}`);
       }
-
       // Validate suits
       Object.entries(validationResults.suits).forEach(([suit, count]) => {
         if (count !== 14) {
           validationResults.issues.push(`Expected 14 cards in ${suit}, got ${count}`);
         }
       });
-
       // Validate required fields
       cards.forEach((card, index) => {
         if (!card.id) validationResults.issues.push(`Card ${index} missing id`);
@@ -430,9 +395,7 @@ export class QualityGuardian {
         if (!card.meaning?.reversed) validationResults.issues.push(`Card ${index} missing reversed meaning`);
         if (!card.description) validationResults.issues.push(`Card ${index} missing description`);
       });
-
       const isValid = validationResults.issues.length === 0;
-
       return {
         success: true,
         data: { 
@@ -450,7 +413,6 @@ export class QualityGuardian {
       };
     }
   }
-
   async storeValidatedDeck(deckId: string, cards: TarotCardData[]): Promise<TaskResult> {
     try {
       // Store cards in database
@@ -469,13 +431,10 @@ export class QualityGuardian {
         description: card.description,
         created_at: new Date().toISOString()
       }));
-
       const { data, error } = await supabase
         .from('cards')
         .upsert(cardRecords, { onConflict: 'deck_id,card_id' });
-
       if (error) throw error;
-
       return {
         success: true,
         data: { cardsStored: cardRecords.length, deckId },
@@ -490,7 +449,6 @@ export class QualityGuardian {
     }
   }
 }
-
 // Export agent instances
 export const dataOracle = new DataOracle();
 export const uiEnchanter = new UIEnchanter();

@@ -8,7 +8,6 @@ interface OrbitalElement {
   w: number; // argument of perihelion
   W: number; // longitude of ascending node
 }
-
 export const ORBITAL_ELEMENTS: Record<string, OrbitalElement> = {
   Mercury: { a: 0.387, e: 0.2056, i: 7.005, L: 252.251, L0: 252.251, n: 4.0923, w: 77.456, W: 48.331 },
   Venus: { a: 0.723, e: 0.0067, i: 3.394, L: 181.979, L0: 181.979, n: 1.6021, w: 131.532, W: 76.68 },

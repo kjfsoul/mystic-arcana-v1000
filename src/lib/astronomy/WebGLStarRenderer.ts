@@ -5,11 +5,8 @@
  * 100,000+ stars at 60fps with realistic brightness, color,
  * and twinkling effects.
  */
-
 import { Star } from './types';
-
 // StarVertex interface removed - using direct Float32Array manipulation
-
 export class WebGLStarRenderer {
   private canvas: HTMLCanvasElement;
   private gl: WebGLRenderingContext;
@@ -21,46 +18,34 @@ export class WebGLStarRenderer {
   private indices: Uint16Array = new Uint16Array(0);
   private animationId: number = 0;
   private startTime: number = Date.now();
-
   // Uniform locations
   private uniforms: { [key: string]: WebGLUniformLocation | null } = {};
-
   // Attribute locations
   private attributes: { [key: string]: number } = {};
-
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
     if (!gl) {
       throw new Error('WebGL not supported');
     }
-
     this.gl = gl as WebGLRenderingContext;
     this.initializeWebGL();
   }
-
   private initializeWebGL(): void {
     const { gl } = this;
-
     // Enable blending for star glow effects
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
     // Enable depth testing
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
-
     // Set clear color to deep space black
     gl.clearColor(0.0, 0.0, 0.05, 1.0);
-
     this.createShaderProgram();
     this.setupBuffers();
   }
-
   private createShaderProgram(): void {
     const { gl } = this;
-
     const vertexShaderSource = `
       attribute vec3 a_position;
       attribute float a_magnitude;
@@ -96,7 +81,6 @@ export class WebGLStarRenderer {
         v_size = size;
       }
     `;
-
     const fragmentShaderSource = `
       precision mediump float;
       
@@ -146,170 +130,129 @@ export class WebGLStarRenderer {
         gl_FragColor = vec4(color, alpha);
       }
     `;
-
     const vertexShader = this.compileShader(vertexShaderSource, gl.VERTEX_SHADER);
     const fragmentShader = this.compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
-
     this.program = gl.createProgram();
     if (!this.program) {
       throw new Error('Failed to create shader program');
     }
-
     gl.attachShader(this.program, vertexShader);
     gl.attachShader(this.program, fragmentShader);
     gl.linkProgram(this.program);
-
     if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
       const error = gl.getProgramInfoLog(this.program);
       throw new Error(`Shader program linking failed: ${error}`);
     }
-
     // Get attribute and uniform locations
     this.attributes.position = gl.getAttribLocation(this.program, 'a_position');
     this.attributes.magnitude = gl.getAttribLocation(this.program, 'a_magnitude');
     this.attributes.colorIndex = gl.getAttribLocation(this.program, 'a_colorIndex');
     this.attributes.twinklePhase = gl.getAttribLocation(this.program, 'a_twinklePhase');
-
     this.uniforms.projectionMatrix = gl.getUniformLocation(this.program, 'u_projectionMatrix');
     this.uniforms.viewMatrix = gl.getUniformLocation(this.program, 'u_viewMatrix');
     this.uniforms.time = gl.getUniformLocation(this.program, 'u_time');
     this.uniforms.pixelRatio = gl.getUniformLocation(this.program, 'u_pixelRatio');
   }
-
   private compileShader(source: string, type: number): WebGLShader {
     const { gl } = this;
     const shader = gl.createShader(type);
-
     if (!shader) {
       throw new Error('Failed to create shader');
     }
-
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
-
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       const error = gl.getShaderInfoLog(shader);
       gl.deleteShader(shader);
       throw new Error(`Shader compilation failed: ${error}`);
     }
-
     return shader;
   }
-
   private setupBuffers(): void {
     const { gl } = this;
-
     this.vertexBuffer = gl.createBuffer();
     this.indexBuffer = gl.createBuffer();
-
     if (!this.vertexBuffer || !this.indexBuffer) {
       throw new Error('Failed to create buffers');
     }
   }
-
   public loadStars(stars: Star[]): void {
     this.stars = stars;
     this.updateVertexData();
   }
-
   private updateVertexData(): void {
     const { gl } = this;
     const starCount = this.stars.length;
-
     // Each vertex has: position(3) + magnitude(1) + colorIndex(1) + twinklePhase(1) = 6 floats
     this.vertices = new Float32Array(starCount * 6);
     this.indices = new Uint16Array(starCount);
-
     for (let i = 0; i < starCount; i++) {
       const star = this.stars[i];
       const baseIndex = i * 6;
-
       // Convert RA/Dec to 3D position on unit sphere
       const ra = (star.ra ?? 0) * Math.PI / 180; // Convert degrees to radians
       const dec = (star.dec ?? 0) * Math.PI / 180; // Convert degrees to radians
-
       const x = Math.cos(dec) * Math.cos(ra);
       const y = Math.cos(dec) * Math.sin(ra);
       const z = Math.sin(dec);
-
       // Position
       this.vertices[baseIndex] = x;
       this.vertices[baseIndex + 1] = y;
       this.vertices[baseIndex + 2] = z;
-
       // Magnitude
       this.vertices[baseIndex + 3] = star.magnitude;
-
       // Color index
       this.vertices[baseIndex + 4] = star.colorIndex || 0;
-
       // Random twinkle phase
       this.vertices[baseIndex + 5] = Math.random() * Math.PI * 2;
-
       // Index
       this.indices[i] = i;
     }
-
     // Upload to GPU
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
-
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.indices, gl.STATIC_DRAW);
   }
-
   public render(viewMatrix: Float32Array, projectionMatrix: Float32Array): void {
     const { gl } = this;
-
     if (!this.program || !this.vertexBuffer || !this.indexBuffer) {
       return;
     }
-
     // Clear the canvas
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
     // Use our shader program
     gl.useProgram(this.program);
-
     // Set up vertex attributes
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-
     // Position attribute
     gl.enableVertexAttribArray(this.attributes.position);
     gl.vertexAttribPointer(this.attributes.position, 3, gl.FLOAT, false, 24, 0);
-
     // Magnitude attribute
     gl.enableVertexAttribArray(this.attributes.magnitude);
     gl.vertexAttribPointer(this.attributes.magnitude, 1, gl.FLOAT, false, 24, 12);
-
     // Color index attribute
     gl.enableVertexAttribArray(this.attributes.colorIndex);
     gl.vertexAttribPointer(this.attributes.colorIndex, 1, gl.FLOAT, false, 24, 16);
-
     // Twinkle phase attribute
     gl.enableVertexAttribArray(this.attributes.twinklePhase);
     gl.vertexAttribPointer(this.attributes.twinklePhase, 1, gl.FLOAT, false, 24, 20);
-
     // Set uniforms
     gl.uniformMatrix4fv(this.uniforms.viewMatrix, false, viewMatrix);
     gl.uniformMatrix4fv(this.uniforms.projectionMatrix, false, projectionMatrix);
     gl.uniform1f(this.uniforms.time, Date.now() - this.startTime);
     gl.uniform1f(this.uniforms.pixelRatio, window.devicePixelRatio || 1.0);
-
     // Draw the stars
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     gl.drawElements(gl.POINTS, this.indices.length, gl.UNSIGNED_SHORT, 0);
   }
-
   public resize(width: number, height: number): void {
     this.canvas.width = width * (window.devicePixelRatio || 1);
     this.canvas.height = height * (window.devicePixelRatio || 1);
     this.canvas.style.width = `${width}px`;
     this.canvas.style.height = `${height}px`;
-
     this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
   }
-
   public startAnimation(): void {
     const animate = () => {
       // Animation logic will be handled by the parent component
@@ -317,17 +260,14 @@ export class WebGLStarRenderer {
     };
     animate();
   }
-
   public stopAnimation(): void {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
       this.animationId = 0;
     }
   }
-
   public dispose(): void {
     this.stopAnimation();
-
     const { gl } = this;
     if (this.program) {
       gl.deleteProgram(this.program);

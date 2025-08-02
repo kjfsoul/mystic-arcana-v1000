@@ -1,12 +1,10 @@
 import { BirthData } from './AstronomicalCalculator';
-
 export interface HoroscopeData {
   sign: string;
   degrees: number;
   daily: string;
   isUnavailable?: boolean;
 }
-
 interface HoroscopeAPIResponse {
   success: boolean;
   data?: HoroscopeData & {
@@ -15,7 +13,6 @@ interface HoroscopeAPIResponse {
   };
   error?: string;
 }
-
 async function callHoroscopeAPI(birthData: BirthData): Promise<HoroscopeAPIResponse> {
   try {
     const response = await fetch('/api/astrology/horoscope', {
@@ -35,11 +32,9 @@ async function callHoroscopeAPI(birthData: BirthData): Promise<HoroscopeAPIRespo
         }
       })
     });
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     return await response.json();
   } catch (error) {
     console.error('Failed to call horoscope API:', error);
@@ -49,7 +44,6 @@ async function callHoroscopeAPI(birthData: BirthData): Promise<HoroscopeAPIRespo
     };
   }
 }
-
 function getFallbackHoroscope(): HoroscopeData {
   return {
     sign: "Horoscope temporarily unavailable",
@@ -58,7 +52,6 @@ function getFallbackHoroscope(): HoroscopeData {
     isUnavailable: true
   };
 }
-
 export async function getPersonalizedHoroscope(birthData: BirthData): Promise<HoroscopeData> {
   try {
     // Call the Python backend for real horoscope calculations
@@ -68,12 +61,10 @@ export async function getPersonalizedHoroscope(birthData: BirthData): Promise<Ho
       console.warn('Horoscope API failed, using fallback:', apiResponse.error);
       return getFallbackHoroscope();
     }
-
     // Check if service is temporarily unavailable
     if (apiResponse.data.isUnavailable) {
       return getFallbackHoroscope();
     }
-
     // Return the real horoscope data from Python backend
     return {
       sign: apiResponse.data.sign,
@@ -85,7 +76,6 @@ export async function getPersonalizedHoroscope(birthData: BirthData): Promise<Ho
     return getFallbackHoroscope();
   }
 }
-
 // Helper function to get zodiac sign name in proper format
 export function formatZodiacSign(sign: string): string {
   if (sign === "Horoscope temporarily unavailable") {
@@ -93,7 +83,6 @@ export function formatZodiacSign(sign: string): string {
   }
   return sign.charAt(0).toUpperCase() + sign.slice(1).toLowerCase();
 }
-
 // Helper function to get zodiac emoji
 export function getZodiacEmoji(sign: string): string {
   const emojiMap: Record<string, string> = {
@@ -113,7 +102,6 @@ export function getZodiacEmoji(sign: string): string {
   
   return emojiMap[sign.toLowerCase()] || '✨';
 }
-
 // Helper function to check if horoscope is available
 export function isHoroscopeAvailable(horoscope: HoroscopeData): boolean {
   return !horoscope.isUnavailable && horoscope.sign !== "Horoscope temporarily unavailable";

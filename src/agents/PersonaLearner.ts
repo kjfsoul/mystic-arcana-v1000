@@ -3,12 +3,10 @@
  * Agent: PersonaImplementer (Persona Learner Activation Mission)
  * Purpose: Learn from user interactions and integrate with a-mem system for persistent memory
  */
-
 import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs/promises';
 import { SophiaReading, ConversationSession, ReadingContext } from './sophia';
-
 interface UserProfile {
   userId: string;
   name?: string;
@@ -32,7 +30,6 @@ interface UserProfile {
     growth_areas: string[];
   };
 }
-
 interface MemoryNote {
   content: string;
   id?: string;
@@ -46,7 +43,6 @@ interface MemoryNote {
   category?: string;
   tags?: string[];
 }
-
 interface LearningEvent {
   eventType: 'reading_completed' | 'card_feedback' | 'session_rating' | 'journal_entry' | 'preference_update' | 'conversation_turn' | 'user_response' | 'card_revealed' | 'question_answered';
   userId: string;
@@ -62,9 +58,6 @@ interface LearningEvent {
     turn_number?: number;
   };
 }
-
-
-
 /**
  * PersonaLearner - The Adaptive Intelligence
  * 
@@ -76,11 +69,9 @@ export class PersonaLearnerAgent {
   private memorySystemPath: string;
   private userProfiles: Map<string, UserProfile> = new Map();
   private learningQueue: LearningEvent[] = [];
-
   constructor() {
     this.memorySystemPath = path.join(process.cwd(), 'A-mem/agentic_memory');
   }
-
   /**
    * Log a completed reading interaction and learn from it
    */
@@ -115,10 +106,8 @@ export class PersonaLearnerAgent {
           user_satisfaction: userFeedback?.rating || undefined
         }
       };
-
       // Add to learning queue
       this.learningQueue.push(learningEvent);
-
       // Create a SophiaReading object for the memory note
       const reading: SophiaReading = {
         id: session.sessionId,
@@ -130,27 +119,21 @@ export class PersonaLearnerAgent {
         session_context: session.context,
         created_at: session.startTime
       };
-
       // Create memory note for a-mem system
       const memoryNote = await this.createMemoryNote(reading, userFeedback);
       
       // Log to a-mem system
       await this.logToAMem(memoryNote);
-
       // Update user profile
       await this.updateUserProfile(userId, learningEvent);
-
       // Process learning patterns
       await this.processLearningPatterns(userId);
-
       console.log(`PersonaLearner: Logged interaction for user ${userId}, reading ${reading.id}`);
-
     } catch (error) {
       console.error('PersonaLearner: Failed to log interaction:', error);
       throw error;
     }
   }
-
   /**
    * Create a structured memory note for the a-mem system
    */
@@ -170,7 +153,6 @@ export class PersonaLearnerAgent {
       'sophia_reading',
       'tarot_session'
     ];
-
     const memoryNote: MemoryNote = {
       content: JSON.stringify({
         reading_summary: {
@@ -209,10 +191,8 @@ export class PersonaLearnerAgent {
       ],
       timestamp: new Date().toISOString()
     };
-
     return memoryNote;
   }
-
   /**
    * Log memory note to the a-mem system via Python script
    */
@@ -221,14 +201,12 @@ export class PersonaLearnerAgent {
       // Create temporary file with memory note data
       const tempFilePath = path.join('/tmp', `memory_note_${Date.now()}.json`);
       await fs.writeFile(tempFilePath, JSON.stringify(memoryNote, null, 2));
-
       // Python script to interface with a-mem system
       const pythonScript = `
 import sys
 import json
 import os
 sys.path.append('${this.memorySystemPath}')
-
 try:
     from memory_system import MemoryNote
     
@@ -255,11 +233,9 @@ except Exception as e:
     print(f"ERROR: {str(e)}")
     sys.exit(1)
 `;
-
       // Create temporary Python script
       const pythonScriptPath = path.join('/tmp', `amem_logger_${Date.now()}.py`);
       await fs.writeFile(pythonScriptPath, pythonScript);
-
       // Execute Python script
       try {
         const result = execSync(`python3 ${pythonScriptPath}`, { 
@@ -280,7 +256,6 @@ except Exception as e:
         console.warn('a-mem system unavailable, logging locally:', execError);
         await this.logToLocalMemory(memoryNote);
       }
-
       // Cleanup temporary files
       try {
         await fs.unlink(tempFilePath);
@@ -288,14 +263,12 @@ except Exception as e:
       } catch (cleanupError) {
         console.warn('Failed to cleanup temp files:', cleanupError);
       }
-
     } catch (error) {
       console.error('PersonaLearner: a-mem logging failed:', error);
       // Fallback to local logging
       await this.logToLocalMemory(memoryNote);
     }
   }
-
   /**
    * Fallback method to log memory locally when a-mem is unavailable
    */
@@ -318,7 +291,6 @@ except Exception as e:
       console.error('PersonaLearner: Local memory logging failed:', error);
     }
   }
-
   /**
    * Update user profile based on learning event
    */
@@ -348,7 +320,6 @@ except Exception as e:
         }
       };
     }
-
     // Update based on the learning event
     if (event.eventType === 'reading_completed') {
       // Update preferred spreads
@@ -356,7 +327,6 @@ except Exception as e:
       if (!profile.preferences.preferred_spreads.includes(spreadType)) {
         profile.preferences.preferred_spreads.push(spreadType);
       }
-
       // Update favorite cards based on positive feedback
       if (event.data.feedback?.helpful_cards) {
         for (const card of event.data.feedback.helpful_cards) {
@@ -365,7 +335,6 @@ except Exception as e:
           }
         }
       }
-
       // Update learning patterns
       profile.learning_patterns.cards_drawn_total += event.data.cards.length;
       profile.learning_patterns.last_active = event.timestamp;
@@ -384,27 +353,22 @@ except Exception as e:
         }
       }
     }
-
     this.userProfiles.set(userId, profile);
   }
-
   /**
    * Process learning patterns to identify insights
    */
   private async processLearningPatterns(userId: string): Promise<void> {
     const profile = this.userProfiles.get(userId);
     if (!profile) return;
-
     const recentEvents = this.learningQueue.filter(
       event => event.userId === userId && 
       event.timestamp > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) // Last 30 days
     );
-
     // Identify patterns
     const spreadPreferences = this.analyzeSpreadPreferences(recentEvents);
     const cardAffinities = this.analyzeCardAffinities(recentEvents);
     const engagementPatterns = this.analyzeEngagementPatterns(recentEvents);
-
     // Log insights
     console.log(`PersonaLearner: User ${userId} patterns:`, {
       spread_preferences: spreadPreferences,
@@ -412,7 +376,6 @@ except Exception as e:
       engagementLevel: engagementPatterns.average_satisfaction
     });
   }
-
   /**
    * Get personalization recommendations for a user
    */
@@ -432,10 +395,8 @@ except Exception as e:
         engagementLevel: 'medium'
       };
     }
-
     const engagementLevel = profile.learning_patterns.engagement_score > 0.7 ? 'high' :
                            profile.learning_patterns.engagement_score > 0.4 ? 'medium' : 'low';
-
     return {
       recommended_spreads: profile.preferences.preferred_spreads.slice(0, 3),
       card_preferences: profile.preferences.favorite_cards.slice(0, 5),
@@ -443,7 +404,6 @@ except Exception as e:
       engagementLevel
     };
   }
-
   /**
    * Helper methods for analysis
    */
@@ -457,7 +417,6 @@ except Exception as e:
       text.toLowerCase().includes(theme)
     );
   }
-
   private generateCardCombinations(cardNames: string[]): string[] {
     const combinations = [];
     for (let i = 0; i < cardNames.length - 1; i++) {
@@ -465,7 +424,6 @@ except Exception as e:
     }
     return combinations;
   }
-
   private calculateReadingQuality(reading: SophiaReading): number {
     let quality = 0.5; // Base quality
     
@@ -484,7 +442,6 @@ except Exception as e:
     
     return Math.min(quality, 1.0);
   }
-
   private analyzeSpreadPreferences(events: LearningEvent[]): Record<string, number> {
     const spreadCounts: Record<string, number> = {};
     
@@ -495,7 +452,6 @@ except Exception as e:
     
     return spreadCounts;
   }
-
   private analyzeCardAffinities(events: LearningEvent[]): Record<string, number> {
     const cardCounts: Record<string, number> = {};
     
@@ -507,7 +463,6 @@ except Exception as e:
     
     return cardCounts;
   }
-
   private analyzeEngagementPatterns(events: LearningEvent[]): { 
     average_satisfaction: number;
     session_count: number;
@@ -520,14 +475,12 @@ except Exception as e:
     const averageSatisfaction = satisfactionScores.length > 0 
       ? satisfactionScores.reduce((sum, score) => sum + score, 0) / satisfactionScores.length
       : 0;
-
     return {
       average_satisfaction: averageSatisfaction,
       session_count: events.length,
       feedback_rate: satisfactionScores.length / events.length
     };
   }
-
   /**
    * Retrieve user memories from a-mem system for personalization
    */
@@ -541,11 +494,9 @@ import sys
 import json
 import os
 from pathlib import Path
-
 # Add a-mem to Python path
 amem_path = Path.cwd() / 'a_mem'
 sys.path.insert(0, str(amem_path))
-
 try:
     from store import MemoryStore
     
@@ -596,11 +547,9 @@ except Exception as e:
     }))
     sys.exit(1)
 `;
-
       // Create temporary Python script
       const pythonScriptPath = path.join('/tmp', `query_user_memories_${Date.now()}.py`);
       await fs.writeFile(pythonScriptPath, pythonScript);
-
       try {
         // Execute Python script
         const result = execSync(`python3 ${pythonScriptPath}`, { 
@@ -638,7 +587,6 @@ except Exception as e:
       return [];
     }
   }
-
   /**
    * Fallback method to retrieve memories from local files
    */
@@ -696,7 +644,6 @@ except Exception as e:
       return [];
     }
   }
-
   /**
    * Health check method
    */
@@ -716,11 +663,9 @@ except Exception as e:
       return false;
     }
   }
-
   /**
    * Interactive Learning Hooks for Real-time Events
    */
-
   /**
    * Log a conversation turn for learning
    */
@@ -757,20 +702,15 @@ except Exception as e:
           turn_number: turnNumber
         }
       };
-
       this.learningQueue.push(learningEvent);
-
       // Create focused memory note for this turn
       const memoryNote = await this.createConversationMemoryNote(learningEvent);
       await this.logToAMem(memoryNote);
-
       console.log(`PersonaLearner: Logged conversation turn ${turnNumber} for user ${userId}`);
-
     } catch (error) {
       console.error('PersonaLearner: Failed to log conversation turn:', error);
     }
   }
-
   /**
    * Log user response patterns for preference learning
    */
@@ -806,19 +746,14 @@ except Exception as e:
           conversation_state: responseContext.conversation_state
         }
       };
-
       this.learningQueue.push(learningEvent);
-
       // Update user profile with response patterns
       await this.updateResponsePatterns(userId, learningEvent);
-
       console.log(`PersonaLearner: Logged user response for user ${userId}`);
-
     } catch (error) {
       console.error('PersonaLearner: Failed to log user response:', error);
     }
   }
-
   /**
    * Log card reveal engagement for timing optimization
    */
@@ -852,15 +787,12 @@ except Exception as e:
           cards_drawn: [cardName]
         }
       };
-
       this.learningQueue.push(learningEvent);
       console.log(`PersonaLearner: Logged card reveal for ${cardName}`);
-
     } catch (error) {
       console.error('PersonaLearner: Failed to log card reveal:', error);
     }
   }
-
   /**
    * Log interactive question responses for personalization
    */
@@ -895,22 +827,17 @@ except Exception as e:
           cards_drawn: questionContext.related_card ? [questionContext.related_card] : []
         }
       };
-
       this.learningQueue.push(learningEvent);
-
       // Create memory note for valuable insights
       if (learningEvent.data.provides_new_insight) {
         const memoryNote = await this.createQuestionMemoryNote(learningEvent);
         await this.logToAMem(memoryNote);
       }
-
       console.log(`PersonaLearner: Logged question response for user ${userId}`);
-
     } catch (error) {
       console.error('PersonaLearner: Failed to log question response:', error);
     }
   }
-
   /**
    * Helper methods for interactive learning
    */
@@ -945,7 +872,6 @@ except Exception as e:
       timestamp: new Date().toISOString()
     };
   }
-
   private async createQuestionMemoryNote(event: LearningEvent): Promise<MemoryNote> {
     return {
       content: JSON.stringify({
@@ -975,7 +901,6 @@ except Exception as e:
       timestamp: new Date().toISOString()
     };
   }
-
   private analyzeResponseStyle(response: string): 'concise' | 'detailed' | 'emotional' | 'analytical' {
     const length = response.length;
     const emotionalWords = ['feel', 'heart', 'soul', 'love', 'fear', 'hope', 'dream'];
@@ -989,7 +914,6 @@ except Exception as e:
     if (hasAnalyticalWords) return 'analytical';
     return 'detailed';
   }
-
   private analyzeResponseSentiment(response: string): 'positive' | 'neutral' | 'negative' {
     const positiveWords = ['good', 'great', 'love', 'happy', 'excited', 'wonderful', 'amazing'];
     const negativeWords = ['bad', 'hate', 'sad', 'worried', 'terrible', 'awful', 'frustrated'];
@@ -1001,7 +925,6 @@ except Exception as e:
     if (negativeCount > positiveCount) return 'negative';
     return 'neutral';
   }
-
   private calculateEngagementLevel(metrics: { hover_time_ms?: number; clicked?: boolean; interpretation_read?: boolean }): 'low' | 'medium' | 'high' {
     let score = 0;
     
@@ -1013,7 +936,6 @@ except Exception as e:
     if (score >= 2) return 'medium';
     return 'low';
   }
-
   private assessInsightValue(response: string): boolean {
     // Simple heuristic: longer responses with personal references likely contain insights
     return response.length > 100 && (
@@ -1022,15 +944,12 @@ except Exception as e:
       response.toLowerCase().includes('me ')
     );
   }
-
   private async updateResponsePatterns(userId: string, event: LearningEvent): Promise<void> {
     const profile = this.userProfiles.get(userId);
     if (!profile) return;
-
     // Track response patterns
     const responseStyle = event.data.response_style;
     const responseTime = event.data.response_time;
-
     // Update personalization data based on response patterns
     if (responseStyle === 'emotional') {
       if (!profile.personalization_data.growth_areas.includes('emotional_guidance')) {
@@ -1041,10 +960,8 @@ except Exception as e:
         profile.personalization_data.growth_areas.push('practical_wisdom');
       }
     }
-
     this.userProfiles.set(userId, profile);
   }
-
   /**
    * Progressive Reveal System - Check and increment engagement level
    */
@@ -1058,10 +975,8 @@ except Exception as e:
       console.log('PersonaLearner: Skipping engagement level check for guest user');
       return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
     }
-
     try {
       console.log(`PersonaLearner: Checking engagement level for user ${userId}`);
-
       // Step 1: Get current engagement level from database
       const currentLevel = await this.getCurrentEngagementLevel(userId);
       
@@ -1090,19 +1005,16 @@ except Exception as e:
           };
         }
       }
-
       return {
         levelIncreased: false,
         newLevel: currentLevel,
         previousLevel: currentLevel
       };
-
     } catch (error) {
       console.error('PersonaLearner: Failed to check engagement level:', error);
       return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
     }
   }
-
   /**
    * Get current engagement level from database
    */
@@ -1116,7 +1028,6 @@ except Exception as e:
       return 1; // Default to level 1
     }
   }
-
   /**
    * Analyze user memories to calculate engagement metrics
    */
@@ -1134,7 +1045,6 @@ except Exception as e:
     const uniqueSessions = new Set<string>();
     let totalEngagement = 0;
     let engagementCount = 0;
-
     userMemories.forEach(memory => {
       try {
         if (memory.content && typeof memory.content === 'string') {
@@ -1172,12 +1082,10 @@ except Exception as e:
         // Skip malformed memory entries
       }
     });
-
     const avgEngagement = engagementCount > 0 ? totalEngagement / engagementCount : 0;
     
     // Calculate consistency score based on session frequency
     const consistencyScore = Math.min(uniqueSessions.size / 10, 1); // Max at 10 sessions
-
     return {
       completedReadings,
       conversationTurns,
@@ -1187,7 +1095,6 @@ except Exception as e:
       consistencyScore
     };
   }
-
   /**
    * Calculate new engagement level based on metrics
    */
@@ -1200,7 +1107,6 @@ except Exception as e:
       { level: 4, readings: 25, turns: 75, questions: 20, description: 'Enlightened Seeker' },
       { level: 5, readings: 50, turns: 150, questions: 40, description: 'Master Oracle' }
     ];
-
     // Find the highest level the user qualifies for
     let qualifiedLevel = 1;
     
@@ -1218,11 +1124,9 @@ except Exception as e:
         qualifiedLevel = threshold.level;
       }
     }
-
     // Only allow level increases, never decreases
     return Math.max(qualifiedLevel, currentLevel);
   }
-
   /**
    * Update engagement level in database
    */
@@ -1246,7 +1150,6 @@ except Exception as e:
       return false;
     }
   }
-
   /**
    * Get threshold name for level
    */
@@ -1260,7 +1163,6 @@ except Exception as e:
     };
     return names[level as keyof typeof names] || 'Unknown Level';
   }
-
   /**
    * Get detailed engagement analysis for user
    */
@@ -1280,7 +1182,6 @@ except Exception as e:
         progressToNext: 0
       };
     }
-
     try {
       const currentLevel = await this.getCurrentEngagementLevel(userId);
       const userMemories = await this.retrieveUserMemories(userId);
@@ -1304,7 +1205,6 @@ except Exception as e:
         
         progressToNext = Math.max(readingProgress, turnProgress, questionProgress) * 100;
       }
-
       return {
         currentLevel,
         levelName: this.getThresholdName(currentLevel),
@@ -1323,7 +1223,6 @@ except Exception as e:
       };
     }
   }
-
   /**
    * Get learning statistics for monitoring
    */
@@ -1338,13 +1237,10 @@ except Exception as e:
     const lastActivity = this.learningQueue.length > 0 
       ? this.learningQueue[this.learningQueue.length - 1].timestamp
       : null;
-
     const interactionEvents = this.learningQueue.filter(e => 
       ['conversation_turn', 'user_response', 'card_revealed', 'question_answered'].includes(e.eventType)
     ).length;
-
     const conversationTurns = this.learningQueue.filter(e => e.eventType === 'conversation_turn').length;
-
     return {
       total_users: this.userProfiles.size,
       total_events: this.learningQueue.length,

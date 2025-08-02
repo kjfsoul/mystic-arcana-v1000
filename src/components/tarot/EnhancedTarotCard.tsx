@@ -1,10 +1,9 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { TarotCard as TarotCardType } from '@/types/tarot';
-
 interface EnhancedTarotCardProps {
   card: TarotCardType;
   isFlipped?: boolean;
@@ -16,7 +15,6 @@ interface EnhancedTarotCardProps {
   delay?: number;
   className?: string;
 }
-
 export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   card,
   isFlipped = false,
@@ -31,18 +29,15 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [glowIntensity, setGlowIntensity] = useState(0);
   const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
-
   // Size configurations
   const sizeConfig = {
     small: { width: 120, height: 180, fontSize: '12px' },
     medium: { width: 160, height: 240, fontSize: '14px' },
     large: { width: 200, height: 300, fontSize: '16px' }
   };
-
   const config = sizeConfig[size];
-
   // Generate bioluminescent particles
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (showBioluminescence && (isHovered || isFlipped)) {
       const newParticles = Array.from({ length: 8 }, (_, i) => ({
@@ -56,9 +51,8 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
       setParticles([]);
     }
   }, [isHovered, isFlipped, showBioluminescence, config.width, config.height]);
-
   // Dynamic glow effect
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (isHovered || isFlipped) {
       const interval = setInterval(() => {
@@ -69,12 +63,10 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
       setGlowIntensity(0);
     }
   }, [isHovered, isFlipped]);
-
   const handleCardClick = () => {
     if (disabled) return;
     onFlip?.();
   };
-
   // Bioluminescent colors that shift
   const getBioluminescentGlow = () => {
     const colors = [
@@ -87,7 +79,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
     const colorIndex = Math.floor(glowIntensity * colors.length);
     return colors[colorIndex] || colors[0];
   };
-
   const cardVariants = {
     hidden: {
       rotateY: 180,
@@ -107,7 +98,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
       }
     }
   };
-
   return (
     <motion.div
       className={`relative cursor-pointer ${className}`}
@@ -141,7 +131,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
           }}
         />
       )}
-
       {/* Card container with 3D flip */}
       <motion.div
         className="relative w-full h-full preserve-3d"
@@ -185,7 +174,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
             }}
           />
         </div>
-
         {/* Card Front */}
         <div
           className="absolute inset-0 w-full h-full backface-hidden rounded-lg overflow-hidden border-2 border-amber-500/50"
@@ -226,7 +214,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
               </div>
             )}
           </div>
-
           {/* Card name overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
             <h3 
@@ -239,7 +226,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
           </div>
         </div>
       </motion.div>
-
       {/* Bioluminescent particles */}
       <AnimatePresence>
         {showBioluminescence && particles.map((particle) => (
@@ -268,7 +254,6 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
           />
         ))}
       </AnimatePresence>
-
       {/* Mobile touch feedback */}
       {!disabled && (
         <motion.div

@@ -1,7 +1,6 @@
 /**
  * PersonaLearner Client - Client-side version without server dependencies
  */
-
 export interface EngagementAnalysis {
   currentLevel: number;
   levelName: string;
@@ -19,7 +18,6 @@ export interface EngagementAnalysis {
   };
   progressToNext?: number;
 }
-
 export class PersonaLearnerAgentClient {
   async getEngagementAnalysis(userId: string): Promise<EngagementAnalysis> {
     // In client mode, return mock data or fetch from API

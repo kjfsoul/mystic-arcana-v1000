@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -13,13 +13,11 @@ import {
 } from 'lucide-react';
 import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
 import { calculateCompatibility, CompatibilityResult } from '@/lib/astrology/SynastryCalculator';
-
 interface CompatibilityReportProps {
   person1Data: BirthData;
   person2Data: BirthData;
   onBack: () => void;
 }
-
 export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
   person1Data,
   person2Data,
@@ -29,8 +27,7 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     async function fetchCompatibility() {
       try {
@@ -49,10 +46,8 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
         setLoading(false);
       }
     }
-
     fetchCompatibility();
   }, [person1Data, person2Data]);
-
   const handleRetry = () => {
     setIsUnavailable(false);
     setError(null);
@@ -63,7 +58,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
       setCompatibility(null);
     }, 100);
   };
-
   const getScoreColor = (rating: number) => {
     if (rating === 0) return 'text-gray-400';
     if (rating >= 4) return 'text-green-400';
@@ -71,12 +65,10 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
     if (rating >= 2) return 'text-yellow-400';
     return 'text-red-400';
   };
-
   const getScoreStars = (rating: number) => {
     if (rating === 0) return '◦◦◦◦◦';
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4 flex items-center justify-center">
@@ -99,7 +91,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
       </div>
     );
   }
-
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
@@ -127,11 +118,9 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
       </div>
     );
   }
-
   if (!compatibility) {
     return null;
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
       <div className="max-w-4xl mx-auto">
@@ -154,7 +143,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
           
           <div className="w-24"></div> {/* Spacer */}
         </motion.div>
-
         {/* Service Unavailable Warning */}
         {isUnavailable && (
           <motion.div 
@@ -180,7 +168,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
             </button>
           </motion.div>
         )}
-
         {/* Compatibility Scores */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           {/* Love Compatibility */}
@@ -199,7 +186,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
             </div>
             <p className="text-white/80 text-sm leading-relaxed">{compatibility.love.description}</p>
           </motion.div>
-
           {/* Friendship Compatibility */}
           <motion.div 
             className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
@@ -216,7 +202,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
             </div>
             <p className="text-white/80 text-sm leading-relaxed">{compatibility.friendship.description}</p>
           </motion.div>
-
           {/* Teamwork Compatibility */}
           <motion.div 
             className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
@@ -234,7 +219,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
             <p className="text-white/80 text-sm leading-relaxed">{compatibility.teamwork.description}</p>
           </motion.div>
         </div>
-
         {/* Overall Summary */}
         <motion.div 
           className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-6"
@@ -248,7 +232,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
           </h3>
           <p className="text-white/90 text-lg leading-relaxed">{compatibility.overall.summary}</p>
         </motion.div>
-
         {/* Key Aspects */}
         <motion.div 
           className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
@@ -272,7 +255,6 @@ export const CompatibilityReport: React.FC<CompatibilityReportProps> = ({
             ))}
           </div>
         </motion.div>
-
         {/* Footer Note */}
         {!isUnavailable && (
           <motion.div 

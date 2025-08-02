@@ -1,13 +1,10 @@
 'use client';
-
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-
 function AuthCodeErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error') || 'Unknown authentication error';
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-black">
       <div className="max-w-md w-full mx-4 p-6 bg-black/40 backdrop-blur-sm border border-red-500/20 rounded-lg">
@@ -36,7 +33,6 @@ function AuthCodeErrorContent() {
     </div>
   );
 }
-
 export default function AuthCodeErrorPage() {
   return (
     <Suspense fallback={

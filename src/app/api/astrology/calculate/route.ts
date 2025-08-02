@@ -5,7 +5,6 @@ import type { BirthData } from '@/types/astrology';
 import { z } from 'zod';
 import { spawn } from 'child_process';
 import path from 'path';
-
 // Zod validation schema for exact payload format (matching birth-chart route)
 const CalculatePayloadSchema = z.object({
   name: z.string().optional(),
@@ -18,10 +17,8 @@ const CalculatePayloadSchema = z.object({
     timezone: z.string().optional().default("UTC")
   }, { message: "Invalid location format - must include lat, lon, city, country" })
 });
-
 type ValidatedCalculatePayload = z.infer<typeof CalculatePayloadSchema>;
 type ValidatedBirthData = BirthData; // For internal use
-
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   const cache = new AstrologyCache();
@@ -83,7 +80,6 @@ export async function POST(request: NextRequest) {
       longitude: payload.location.lon,
       timezone: payload.location.timezone
     };
-
     // Check cache first for performance
     const cacheKey = `calculate_${(birthData.date || new Date(birthData.birthDate)).getTime()}_${birthData.latitude}_${birthData.longitude}`;
     
@@ -226,7 +222,6 @@ export async function POST(request: NextRequest) {
     });
   }
 }
-
 /**
  * Python calculation wrapper with enhanced error handling
  */
@@ -282,7 +277,6 @@ function callPythonCalculation(birthData: ValidatedBirthData): Promise<any> {
     }, 30000);
   });
 }
-
 /**
  * Log events to a_mem for debugging
  */
@@ -295,7 +289,6 @@ async function logToAMem(logData: any): Promise<void> {
     console.warn('Failed to log to a_mem:', error);
   }
 }
-
 export async function GET() {
   return NextResponse.json({
     message: 'Mystic Arcana Astrology Calculation API',

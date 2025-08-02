@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/supabase/client';
-
 export interface UserProfile {
   birth_date?: string;
   birth_time?: string;
@@ -7,7 +6,6 @@ export interface UserProfile {
   chosen_reader?: string;
   preferences?: Record<string, unknown>;
 }
-
 export const profileService = {
   async createProfile(userId: string, profileData: UserProfile) {
     const { data, error } = await supabase
@@ -26,7 +24,6 @@ export const profileService = {
     
     return data;
   },
-
   async updateProfile(userId: string, profileData: Partial<UserProfile>) {
     const { data, error } = await supabase
       .from('user_profiles')
@@ -40,7 +37,6 @@ export const profileService = {
     
     return data;
   },
-
   async getProfile(userId: string) {
     try {
       // First try to get existing profile

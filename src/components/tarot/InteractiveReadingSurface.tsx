@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { Shuffle, Save, Share, RefreshCw, BookOpen, Sparkles, Eye, EyeOff } from 'lucide-react';
 import { EnhancedTarotSpreadLayouts, SpreadType } from './EnhancedTarotSpreadLayouts';
@@ -18,7 +17,6 @@ import {
 } from '@/agents/sophia';
 import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
 import { VirtualReaderDisplay } from '@/components/readers/VirtualReaderDisplay';
-
 interface ReadingSession {
   id: string;
   spreadType: SpreadType;
@@ -29,14 +27,12 @@ interface ReadingSession {
   isGuest: boolean;
   sophiaReading?: SophiaReading;
 }
-
 interface InteractiveReadingSurfaceProps {
   selectedSpread: SpreadType;
   onReadingComplete?: (session: ReadingSession) => void;
   onBackToSelection?: () => void;
   className?: string;
 }
-
 export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps> = ({
   selectedSpread,
   onReadingComplete,
@@ -45,7 +41,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
 }) => {
   const { user } = useAuth();
   const isAuthenticated = !!user;
-
   // State management - Enhanced for conversational flow
   const [phase, setPhase] = useState<'preparation' | 'shuffling' | 'drawing' | 'revealing' | 'conversation' | 'interpreting' | 'complete'>('preparation');
   const [drawnCards, setDrawnCards] = useState<TarotCard[]>([]);
@@ -75,28 +70,26 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     thresholdMet: string;
   } | null>(null);
   
-  // Agent instances
-  const sophiaAgent = new SophiaAgent();
-  const personaLearner = new PersonaLearnerAgent();
+  // Agent instances - wrapped in useMemo to prevent recreation on every render
+  const sophiaAgent = useMemo(() => new SophiaAgent(), []);
+  const personaLearner = useMemo(() => new PersonaLearnerAgent(), []);
   
   // Refs and animations
   const surfaceRef = useRef<HTMLDivElement>(null);
   const shuffleControls = useAnimation();
   
   // Auth context (already declared above)
-
-  // Spread configuration mapping
-  const spreadRequirements = {
+  // Spread configuration mapping - wrapped in useMemo to prevent recreation
+  const spreadRequirements = useMemo(() => ({
     'single': 1,
     'three-card': 3,
     'celtic-cross': 10,
     'horseshoe': 5,
     'relationship': 5,
     'custom': 7
-  };
-
+  }), []);
   // Initialize reading session
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const sessionId = `reading_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const newSession: ReadingSession = {
@@ -108,9 +101,8 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     };
     setCurrentSession(newSession);
   }, [selectedSpread, isAuthenticated]);
-
   // API call to draw cards
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const drawCardsFromAPI = useCallback(async (spreadType: SpreadType) => {
     setIsLoading(true);
     setError(null);
@@ -126,13 +118,11 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           userId: user?.id || null
         })
       });
-
       const data = await response.json();
       
       if (!data.success) {
         throw new Error(data.error || 'Failed to draw cards');
       }
-
       return data.data.cards;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to connect to cosmic energies';
@@ -142,9 +132,8 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setIsLoading(false);
     }
   }, [user?.id]);
-
   // Handle shuffle completion and card drawing
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleShuffleComplete = useCallback(async () => {
     try {
       setPhase('drawing');
@@ -168,10 +157,9 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setPhase('preparation');
       console.error('Failed to draw cards:', err);
     }
-  }, [selectedSpread, drawCardsFromAPI, currentSession]);
-
+  }, [selectedSpread, drawCardsFromAPI]);
   // Handle individual card reveal
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCardReveal = useCallback((card: TarotCard, index: number) => {
     setRevealedCards(prev => new Set([...prev, index]));
     
@@ -189,8 +177,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     if (revealedCards.size + 1 >= totalCards) {
       setTimeout(() => setPhase('interpreting'), 1000);
     }
-  }, [revealedCards.size, selectedSpread]);
-
+  }, [selectedSpread, spreadRequirements]);
   // Generate contextual card interpretation
   const generateCardInterpretation = (card: TarotCard, position: number, spread: SpreadType): string => {
     const positionMeanings: Record<SpreadType, string[]> = {
@@ -216,19 +203,17 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       'relationship': ['Default relationship interpretation'],
       'custom': ['Custom spread interpretation']
     };
-
     const positionContext = positionMeanings[spread]?.[position] || `Position ${position + 1} guidance:`;
     const meaning = card.isReversed ? card.meaning_reversed : card.meaning_upright;
     
     return `${positionContext} ${meaning}`;
   };
-
   // Conversational Flow Methods
   
   /**
    * Start the conversational reading flow
    */
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const startConversation = useCallback(async () => {
     if (!currentSession || drawnCards.length === 0) return;
     
@@ -243,7 +228,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         timestamp: new Date(),
         cards: drawnCards
       };
-
       const turn = await sophiaAgent.processReadingTurn(
         currentSession.id,
         ConversationState.AWAITING_DRAW,
@@ -251,7 +235,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         drawnCards,
         context
       );
-
       setCurrentTurn(turn);
       setConversationState(turn.newState);
       setConversationHistory([turn]);
@@ -262,12 +245,11 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsProcessingTurn(false);
     }
-  }, [currentSession, drawnCards, selectedSpread, user?.id, sophiaAgent]);
-
+  }, [drawnCards, selectedSpread, user?.id, sophiaAgent]);
   /**
    * Process user input and advance conversation
    */
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleUserInput = useCallback(async (userInput: string) => {
     if (!currentSession || isProcessingTurn) return;
     
@@ -295,7 +277,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         conversationState,
         userInput
       );
-
       setCurrentTurn(turn);
       setConversationState(turn.newState);
       setConversationHistory(prev => [...prev, turn]);
@@ -352,15 +333,13 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsProcessingTurn(false);
     }
-  }, [currentSession, conversationState, isProcessingTurn, sophiaAgent, drawnCards, user, currentTurn, personaLearner, conversationHistory.length]);
-
+  }, [sophiaAgent, drawnCards, user, personaLearner]);
   /**
    * Handle saving the conversational reading with engagement level check
    */
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSaveConversationalReading = useCallback(async () => {
     if (!finalReading || !user?.id) return;
-
     try {
       const response = await fetch('/api/tarot/save-reading', {
         method: 'POST',
@@ -386,7 +365,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           tags: ['sophia', 'conversational', selectedSpread]
         })
       });
-
       if (response.ok) {
         setShowSaveModal(false);
         
@@ -402,11 +380,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setError('Unable to save your reading. Please try again.');
     }
   }, [finalReading, user, selectedSpread, drawnCards, currentSession]);
-
   /**
    * Check and increment user engagement level (Progressive Reveal System)
    */
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const checkEngagementLevel = useCallback(async () => {
     if (!user?.id) return; // Skip for guest users
     
@@ -436,9 +413,8 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       console.error('InteractiveReadingSurface: Failed to check engagement level:', error);
     }
   }, [personaLearner, user?.id]);
-
   // Auto-start conversation when cards are drawn
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (phase === 'drawing' && drawnCards.length === spreadRequirements[selectedSpread]) {
       // Wait a moment for cards to be displayed, then start conversation
@@ -448,10 +424,9 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       
       return () => clearTimeout(timer);
     }
-  }, [phase, drawnCards.length, selectedSpread, startConversation]);
-
+  }, [phase, drawnCards.length, selectedSpread]);
   // Handle save reading with PersonaLearner integration
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSaveReading = useCallback(async (journalEntry?: string, userFeedback?: any) => {
     if (!currentSession) return;
     
@@ -533,9 +508,8 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     onReadingComplete?.(sessionWithJournal);
     setShowSaveModal(false);
   }, [currentSession, cardInterpretations, drawnCards, isAuthenticated, user, onReadingComplete, sophiaReading, personaLearner]);
-
   // Auto-reveal cards in sequence and generate Sophia reading
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (phase === 'revealing' && drawnCards.length > 0) {
       const totalCards = drawnCards.length;
@@ -557,7 +531,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       return () => clearInterval(revealInterval);
     }
   }, [phase, drawnCards.length]);
-
   // Generate Sophia reading from Knowledge Pool
   const generateSophiaReading = async () => {
     if (!drawnCards.length || !currentSession) return;
@@ -606,7 +579,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       setIsGeneratingReading(false);
     }
   };
-
   // Phase-specific renders
   const renderPreparation = () => (
     <motion.div
@@ -656,7 +628,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       </motion.div>
     </motion.div>
   );
-
   const renderShuffling = () => (
     <motion.div
       className="text-center space-y-8"
@@ -687,7 +658,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       />
     </motion.div>
   );
-
   const renderReading = () => (
     <div className="w-full">
       {/* Header */}
@@ -703,7 +673,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           {phase === 'conversation' ? 'In conversation with Sophia' : `${revealedCards.size} of ${drawnCards.length} cards revealed`}
         </p>
       </motion.div>
-
       {/* Conversational Reading Display */}
       {phase === 'conversation' && currentTurn && (
         <motion.div
@@ -838,7 +807,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           )}
         </motion.div>
       )}
-
       {/* Sophia Reading Display */}
       {sophiaReading && phase === 'interpreting' && (
         <motion.div
@@ -926,7 +894,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           </div>
         </motion.div>
       )}
-
       {/* Spread Layout - Show during revealing/interpreting phases, hide during conversation */}
       {phase !== 'conversation' && (
         <EnhancedTarotSpreadLayouts
@@ -987,7 +954,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           </div>
         </motion.div>
       )}
-
       {/* Controls */}
       {(phase === 'interpreting' || phase === 'complete') && (
         <motion.div
@@ -1039,7 +1005,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       )}
     </div>
   );
-
   const renderCompleteReading = () => (
     <motion.div
       className="w-full max-w-4xl mx-auto"
@@ -1060,7 +1025,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           Sophia's personalized guidance for your {selectedSpread.replace('-', ' ')} spread
         </p>
       </motion.div>
-
       {/* Final Reading Display */}
       {finalReading && (
         <motion.div
@@ -1160,7 +1124,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           </div>
         </motion.div>
       )}
-
       {/* Cards Display */}
       <motion.div
         className="mb-8"
@@ -1201,7 +1164,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       </motion.div>
     </motion.div>
   );
-
   // Error state
   if (error) {
     return (
@@ -1233,7 +1195,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       </div>
     );
   }
-
   return (
     <div ref={surfaceRef} className={`relative w-full min-h-screen ${className}`}>
       {/* Background Effects */}
@@ -1252,7 +1213,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
         />
       </div>
-
       {/* Sophia Virtual Reader Display - Fixed Position */}
       {(phase === 'revealing' || phase === 'interpreting' || phase === 'conversation' || phase === 'complete') && (
         <motion.div 
@@ -1271,7 +1231,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           />
         </motion.div>
       )}
-
       {/* Main Content */}
       <div className="relative z-10 w-full min-h-screen flex items-center justify-center p-6">
         <AnimatePresence mode="wait">
@@ -1297,7 +1256,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           )}
         </AnimatePresence>
       </div>
-
       {/* Loading Overlay */}
       <AnimatePresence>
         {isLoading && (
@@ -1325,7 +1283,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Save Modal - Placeholder for now */}
       <AnimatePresence>
         {showSaveModal && (
@@ -1372,7 +1329,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Progressive Reveal Level Up Notification */}
       <AnimatePresence>
         {engagementLevelUp && engagementLevelUp.show && (

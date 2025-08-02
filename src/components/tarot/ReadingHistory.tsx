@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGetReadings } from '@/hooks/useTarotAPI';
@@ -14,11 +14,9 @@ import {
   Search
 } from 'lucide-react';
 import { format } from 'date-fns';
-
 interface ReadingHistoryProps {
   className?: string;
 }
-
 export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }) => {
   const { user, isGuest } = useAuth();
   const { data, loading, error, getReadings, deleteReading } = useGetReadings();
@@ -29,18 +27,16 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
-
   // Check if mobile
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
   // Load readings on mount and when filters change
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (user && !isGuest) {
       getReadings({
@@ -54,7 +50,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
       });
     }
   }, [user, isGuest, filterSpread, searchTags, page, getReadings]);
-
   const handleDelete = async (readingId: string) => {
     if (!user) return;
     
@@ -66,7 +61,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
       console.error('Failed to delete reading:', error);
     }
   };
-
   const formatSpreadType = (type: string) => {
     switch (type) {
       case 'single': return 'Single Card';
@@ -75,7 +69,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
       default: return type;
     }
   };
-
   if (isGuest) {
     return (
       <div className={`${className} flex items-center justify-center p-8`}>
@@ -87,7 +80,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
       </div>
     );
   }
-
   return (
     <div className={`${className} p-4 md:p-6`}>
       {/* Header with Filters */}
@@ -119,14 +111,12 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
           </select>
         </div>
       </div>
-
       {/* Loading State */}
       {loading && (
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
         </div>
       )}
-
       {/* Error State */}
       {error && !loading && (
         <motion.div
@@ -146,7 +136,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
           </button>
         </motion.div>
       )}
-
       {/* Readings List */}
       {!loading && !error && (
         <>
@@ -185,13 +174,11 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
                           <span>{format(new Date(reading.createdAt), 'h:mm a')}</span>
                         </div>
                       </div>
-
                       {reading.question && (
                         <p className="mt-2 text-sm text-gray-300 italic">
                           &ldquo;{reading.question}&rdquo;
                         </p>
                       )}
-
                       {reading.tags?.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-2">
                           {reading.tags.map((tag, idx) => (
@@ -205,14 +192,12 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
                         </div>
                       )}
                     </div>
-
                     <ChevronRight 
                       className={`w-5 h-5 text-gray-400 transition-transform ${
                         selectedReading === reading.id ? 'rotate-90' : ''
                       }`}
                     />
                   </div>
-
                   {/* Expanded Details */}
                   <AnimatePresence>
                     {selectedReading === reading.id && (
@@ -245,7 +230,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
                             ))}
                           </div>
                         </div>
-
                         {/* Interpretation */}
                         <div className="mb-4">
                           <h4 className="text-sm font-semibold text-gray-400 mb-2">Interpretation:</h4>
@@ -253,7 +237,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
                             {reading.interpretation}
                           </p>
                         </div>
-
                         {/* Notes */}
                         {reading.notes && (
                           <div className="mb-4">
@@ -263,7 +246,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
                             </p>
                           </div>
                         )}
-
                         {/* Actions */}
                         <div className="flex justify-end gap-2 mt-4">
                           {deleteConfirm === reading.id ? (
@@ -307,7 +289,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
               ))}
             </AnimatePresence>
           </div>
-
           {/* Empty State */}
           {(!data?.readings || data.readings.length === 0) && (
             <div className="text-center py-12">
@@ -317,7 +298,6 @@ export const ReadingHistory: React.FC<ReadingHistoryProps> = ({ className = "" }
               </div>
             </div>
           )}
-
           {/* Pagination */}
           {data?.pagination && data.pagination.total > 10 && (
             <div className="flex justify-center items-center gap-4 mt-6">

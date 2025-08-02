@@ -11,7 +11,6 @@
  * - Aspect calculations with precise orbs
  * - Node.js child process communication with Python scripts
  */
-
 // Browser-compatible Swiss Ephemeris bridge
 // Uses mock data for development and API endpoints for production
 import type {
@@ -21,24 +20,20 @@ import type {
   CosmicInfluenceData,
   MoonPhaseData
 } from '../../types/astronomical';
-
 import type {
   RetrogradeData
 } from './types';
-
 import {
   Planet,
   ZodiacSign,
   AspectType
 } from '../../types/astronomical';
-
 export interface SwissEphemerisConfig {
   apiEndpoint?: string;
   timeout?: number;
   precision?: 'low' | 'medium' | 'high' | 'ultra';
   useMockData?: boolean;
 }
-
 export interface PlanetaryCalculationRequest {
   planets: string[];
   datetime: Date;
@@ -50,7 +45,6 @@ export interface PlanetaryCalculationRequest {
     heliocentric?: boolean;
   };
 }
-
 export interface SwissEphemerisResponse {
   success: boolean;
   data?: unknown;
@@ -58,13 +52,11 @@ export interface SwissEphemerisResponse {
   calculationTime?: number;
   precision?: string;
 }
-
 export class SwissEphemerisBridge {
   private config: Required<SwissEphemerisConfig>;
   public isInitialized: boolean = false;
   private calculationCache: Map<string, { data: unknown; timestamp: number }> = new Map();
   private readonly CACHE_TTL = 60000; // 1 minute cache
-
   constructor(config: SwissEphemerisConfig = {}) {
     this.config = {
       apiEndpoint: config.apiEndpoint || '/api/ephemeris',
@@ -73,7 +65,6 @@ export class SwissEphemerisBridge {
       useMockData: config.useMockData ?? true // Default to mock data for development
     };
   }
-
   /**
    * Initialize the Swiss Ephemeris bridge
    */
@@ -85,14 +76,12 @@ export class SwissEphemerisBridge {
         this.isInitialized = true;
         return true;
       }
-
       // Validate API endpoint availability for production
       const validation = await this.validateInstallation();
       if (!validation.success) {
         console.warn(`Swiss Ephemeris API validation failed: ${validation.error}, falling back to mock data`);
         this.config.useMockData = true;
       }
-
       this.isInitialized = true;
       console.log('Swiss Ephemeris bridge initialized successfully');
       return true;
@@ -103,7 +92,6 @@ export class SwissEphemerisBridge {
       return true; // Always succeed in browser environment
     }
   }
-
   /**
    * Calculate precise planetary positions
    */
@@ -111,11 +99,9 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('planets', request);
     const cached = this.getFromCache<PlanetaryData[]>(cacheKey);
     if (cached) return cached;
-
     try {
       if (this.config.useMockData) {
         // Generate mock planetary data for browser compatibility
@@ -123,7 +109,6 @@ export class SwissEphemerisBridge {
         this.setCache(cacheKey, planets);
         return planets;
       }
-
       const scriptArgs = [
         'planetary_positions.py',
         '--datetime', request.datetime.toISOString(),
@@ -132,28 +117,22 @@ export class SwissEphemerisBridge {
         '--planets', request.planets.join(','),
         '--precision', this.config.precision
       ];
-
       if (request.options?.includeRetrograde) scriptArgs.push('--include-retrograde');
       if (request.options?.calculateAspects) scriptArgs.push('--calculate-aspects');
       if (request.options?.includeHouses) scriptArgs.push('--include-houses');
       if (request.options?.heliocentric) scriptArgs.push('--heliocentric');
-
       const result = await this.executePythonScript(scriptArgs);
-
       if (!result.success || !result.data) {
         throw new Error(`Planetary calculation failed: ${result.error}`);
       }
-
       const planets = this.parsePlanetaryData(result.data as { planets: unknown[] });
       this.setCache(cacheKey, planets);
-
       return planets;
     } catch (error) {
       console.error('Planetary position calculation error:', error);
       throw error;
     }
   }
-
   /**
    * Calculate precise aspects between planetary bodies
    */
@@ -165,11 +144,9 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('aspects', { planets, datetime, orbTolerance });
     const cached = this.getFromCache<AspectData[]>(cacheKey);
     if (cached) return cached;
-
     try {
       if (this.config.useMockData) {
         // Generate mock aspect data
@@ -177,7 +154,6 @@ export class SwissEphemerisBridge {
         this.setCache(cacheKey, aspects);
         return aspects;
       }
-
       const scriptArgs = [
         'aspect_calculator.py',
         '--datetime', datetime.toISOString(),
@@ -185,23 +161,18 @@ export class SwissEphemerisBridge {
         '--orb-tolerance', orbTolerance.toString(),
         '--precision', this.config.precision
       ];
-
       const result = await this.executePythonScript(scriptArgs);
-
       if (!result.success || !result.data) {
         throw new Error(`Aspect calculation failed: ${result.error}`);
       }
-
       const aspects = this.parseAspectData(result.data as { aspects: unknown[] });
       this.setCache(cacheKey, aspects);
-
       return aspects;
     } catch (error) {
       console.error('Aspect calculation error:', error);
       throw error;
     }
   }
-
   /**
    * Detect retrograde periods for planets
    */
@@ -213,11 +184,9 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('retrogrades', { planet, startDate, endDate });
     const cached = this.getFromCache<RetrogradeData[]>(cacheKey);
     if (cached) return cached;
-
     try {
       if (this.config.useMockData) {
         // Generate mock retrograde data
@@ -225,7 +194,6 @@ export class SwissEphemerisBridge {
         this.setCache(cacheKey, retrogrades);
         return retrogrades;
       }
-
       const scriptArgs = [
         'retrograde_detector.py',
         '--planet', planet,
@@ -233,23 +201,18 @@ export class SwissEphemerisBridge {
         '--end-date', endDate.toISOString(),
         '--precision', this.config.precision
       ];
-
       const result = await this.executePythonScript(scriptArgs);
-
       if (!result.success || !result.data) {
         throw new Error(`Retrograde detection failed: ${result.error}`);
       }
-
       const retrogrades = this.parseRetrogradeData(result.data as { retrogrades: unknown[] });
       this.setCache(cacheKey, retrogrades);
-
       return retrogrades;
     } catch (error) {
       console.error('Retrograde detection error:', error);
       throw error;
     }
   }
-
   /**
    * Calculate cosmic weather influences
    */
@@ -260,11 +223,9 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('cosmic_weather', { datetime, location });
     const cached = this.getFromCache<CosmicInfluenceData>(cacheKey);
     if (cached) return cached;
-
     try {
       if (this.config.useMockData) {
         // Generate mock cosmic weather data
@@ -272,7 +233,6 @@ export class SwissEphemerisBridge {
         this.setCache(cacheKey, cosmicWeather);
         return cosmicWeather;
       }
-
       const scriptArgs = [
         'cosmic_weather.py',
         '--datetime', datetime.toISOString(),
@@ -280,23 +240,18 @@ export class SwissEphemerisBridge {
         '--longitude', location.longitude.toString(),
         '--precision', this.config.precision
       ];
-
       const result = await this.executePythonScript(scriptArgs);
-
       if (!result.success || !result.data) {
         throw new Error(`Cosmic weather calculation failed: ${result.error}`);
       }
-
       const cosmicWeather = this.parseCosmicWeatherData(result.data as Record<string, unknown>);
       this.setCache(cacheKey, cosmicWeather);
-
       return cosmicWeather;
     } catch (error) {
       console.error('Cosmic weather calculation error:', error);
       throw error;
     }
   }
-
   /**
    * Get moon phase with high precision
    */
@@ -312,7 +267,6 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('moon_phase', { datetime });
     const cached = this.getFromCache<{
       phase: string;
@@ -324,7 +278,6 @@ export class SwissEphemerisBridge {
       nextFullMoon: Date;
     }>(cacheKey);
     if (cached) return cached;
-
     try {
       if (this.config.useMockData) {
         // Generate mock moon data
@@ -332,31 +285,24 @@ export class SwissEphemerisBridge {
         this.setCache(cacheKey, moonData);
         return moonData;
       }
-
       const scriptArgs = [
         'moon_calculator.py',
         '--datetime', datetime.toISOString(),
         '--precision', this.config.precision
       ];
-
       const result = await this.executePythonScript(scriptArgs);
-
       if (!result.success || !result.data) {
         throw new Error(`Moon phase calculation failed: ${result.error}`);
       }
-
       const moonData = this.parseMoonData(result.data as Record<string, unknown>);
       this.setCache(cacheKey, moonData);
-
       return moonData;
     } catch (error) {
       console.error('Moon phase calculation error:', error);
       throw error;
     }
   }
-
   // === Private Helper Methods ===
-
   private async validateInstallation(): Promise<SwissEphemerisResponse> {
     try {
       // In browser environment, validate API endpoint
@@ -364,7 +310,6 @@ export class SwissEphemerisBridge {
         method: 'GET',
         signal: AbortSignal.timeout(this.config.timeout)
       });
-
       return {
         success: response.ok,
         data: await response.text(),
@@ -377,10 +322,8 @@ export class SwissEphemerisBridge {
       };
     }
   }
-
   private async executePythonScript(args: string[]): Promise<SwissEphemerisResponse> {
     const startTime = Date.now();
-
     try {
       // Browser-compatible API call instead of Python script execution
       const response = await fetch(`${this.config.apiEndpoint}/${args[0].replace('.py', '')}`, {
@@ -391,13 +334,10 @@ export class SwissEphemerisBridge {
         body: JSON.stringify({ args: args.slice(1) }),
         signal: AbortSignal.timeout(this.config.timeout)
       });
-
       const calculationTime = Date.now() - startTime;
-
       if (!response.ok) {
         throw new Error(`API request failed: ${response.status}`);
       }
-
       return {
         success: true,
         data: await response.json(),
@@ -412,17 +352,14 @@ export class SwissEphemerisBridge {
       };
     }
   }
-
   private generateMockPlanetaryData(request: PlanetaryCalculationRequest): PlanetaryData[] {
     const now = Date.now();
     const dayOfYear = Math.floor((now - new Date(new Date().getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-
     return request.planets.map((planetName, index) => {
       const baseAngle = (dayOfYear + index * 30) % 360;
       const ra = (baseAngle + Math.sin(now / 1000000) * 10) % 360;
       const dec = Math.sin((baseAngle + index * 45) * Math.PI / 180) * 23.5;
       const zodiacSign = this.getZodiacSign(baseAngle);
-
       return {
         planet: this.getPlanetEnum(planetName),
         name: planetName,
@@ -446,7 +383,6 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   private getPlanetSymbol(planetName: string): string {
     const symbols: { [key: string]: string } = {
       sun: '☉', moon: '☽', mercury: '☿', venus: '♀', mars: '♂',
@@ -454,13 +390,11 @@ export class SwissEphemerisBridge {
     };
     return symbols[planetName] || '○';
   }
-
   private getZodiacSign(longitude: number): string {
     const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
       'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
     return signs[Math.floor(longitude / 30) % 12];
   }
-
   private getZodiacSignEnum(sign: string): ZodiacSign {
     const signMap: { [key: string]: ZodiacSign } = {
       'Aries': ZodiacSign.ARIES,
@@ -478,7 +412,6 @@ export class SwissEphemerisBridge {
     };
     return signMap[sign] || ZodiacSign.ARIES;
   }
-
   private getPlanetEnum(planetName: string): Planet {
     const planetMap: { [key: string]: Planet } = {
       'sun': Planet.SUN,
@@ -497,7 +430,6 @@ export class SwissEphemerisBridge {
     };
     return planetMap[planetName.toLowerCase()] || Planet.SUN;
   }
-
   private generateMockAspectData(planets: string[], datetime: Date, orbTolerance: number): AspectData[] {
     const aspects: AspectData[] = [];
     const aspectTypes: AspectType[] = [
@@ -507,7 +439,6 @@ export class SwissEphemerisBridge {
       AspectType.TRINE, 
       AspectType.OPPOSITION
     ];
-
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
         if (Math.random() < 0.3) { // 30% chance of aspect
@@ -529,10 +460,8 @@ export class SwissEphemerisBridge {
         }
       }
     }
-
     return aspects;
   }
-
   private getAspectAngle(type: AspectType): number {
     const angles: { [key in AspectType]: number } = {
       [AspectType.CONJUNCTION]: 0,
@@ -547,28 +476,22 @@ export class SwissEphemerisBridge {
     };
     return angles[type] || 0;
   }
-
   private getAspectInfluence(type: AspectType): 'harmonious' | 'challenging' | 'neutral' {
     const harmonious: AspectType[] = [AspectType.CONJUNCTION, AspectType.SEXTILE, AspectType.TRINE];
     const challenging: AspectType[] = [AspectType.SQUARE, AspectType.OPPOSITION];
-
     if (harmonious.includes(type)) return 'harmonious';
     if (challenging.includes(type)) return 'challenging';
     return 'neutral';
   }
-
   private generateMockRetrogradeData(planet: string, startDate: Date, endDate: Date): RetrogradeData[] {
     const retrogrades: RetrogradeData[] = [];
-
     // Generate 1-3 retrograde periods in the date range
     const numRetrogrades = Math.floor(Math.random() * 3) + 1;
-
     for (let i = 0; i < numRetrogrades; i++) {
       const start = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
       const duration = 30 + Math.random() * 60; // 30-90 days
       const end = new Date(start.getTime() + duration * 24 * 60 * 60 * 1000);
       const peak = new Date((start.getTime() + end.getTime()) / 2);
-
       retrogrades.push({
         planet: this.getPlanetEnum(planet),
         startDate: start,
@@ -584,10 +507,8 @@ export class SwissEphemerisBridge {
         }
       });
     }
-
     return retrogrades;
   }
-
   private generateMockCosmicWeather(datetime: Date): CosmicInfluenceData {
     const moonPhase: MoonPhaseData = {
       phase: 'Waxing Gibbous',
@@ -599,7 +520,6 @@ export class SwissEphemerisBridge {
       libration: { longitude: 0, latitude: 0 },
       nextPhase: { type: 'Full Moon', date: new Date(datetime.getTime() + 3 * 24 * 60 * 60 * 1000) }
     };
-
     return {
       timestamp: datetime,
       moonPhase,
@@ -616,7 +536,6 @@ export class SwissEphemerisBridge {
       optimalActivities: []
     };
   }
-
   private generateMockMoonData(datetime: Date): {
     phase: string;
     illumination: number;
@@ -636,11 +555,9 @@ export class SwissEphemerisBridge {
       nextFullMoon: new Date(datetime.getTime() + 3 * 24 * 60 * 60 * 1000)
     };
   }
-
   private generateCacheKey(operation: string, params: unknown): string {
     return `${operation}_${JSON.stringify(params)}_${this.config.precision}`;
   }
-
   private getFromCache<T>(key: string): T | null {
     const cached = this.calculationCache.get(key);
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
@@ -649,14 +566,12 @@ export class SwissEphemerisBridge {
     this.calculationCache.delete(key);
     return null;
   }
-
   private setCache(key: string, data: unknown): void {
     this.calculationCache.set(key, {
       data,
       timestamp: Date.now()
     });
   }
-
   private parsePlanetaryData(rawData: { planets: unknown[] }): PlanetaryData[] {
     // Parse the JSON response from Python script into PlanetaryData objects
     return rawData.planets.map((planet: unknown) => {
@@ -691,7 +606,6 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   private parseAspectData(rawData: { aspects: unknown[] }): AspectData[] {
     return rawData.aspects.map((aspect: unknown) => {
       const a = aspect as Record<string, unknown>;
@@ -711,7 +625,6 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   private parseAspectType(type: string): AspectType {
     const aspectMap: { [key: string]: AspectType } = {
       'conjunction': AspectType.CONJUNCTION,
@@ -726,13 +639,11 @@ export class SwissEphemerisBridge {
     };
     return aspectMap[type.toLowerCase()] || AspectType.CONJUNCTION;
   }
-
   private parseRetrogradeData(rawData: { retrogrades: unknown[] }): RetrogradeData[] {
     return rawData.retrogrades.map((retro: unknown) => {
       const r = retro as Record<string, unknown>;
       const shadow = r.shadow as Record<string, unknown>;
       const zodiacRange = r.zodiac_range as Record<string, unknown>;
-
       return {
         planet: r.planet as string,
         startDate: new Date(r.start_date as string),
@@ -749,10 +660,8 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   private parseCosmicWeatherData(rawData: Record<string, unknown>): CosmicInfluenceData {
     const aspects = rawData.aspects as Record<string, unknown>;
-
     return {
       timestamp: new Date(rawData.timestamp as string),
       moonPhase: rawData.moon_phase as CosmicInfluenceData['moonPhase'],
@@ -769,7 +678,6 @@ export class SwissEphemerisBridge {
       warnings: rawData.warnings as CosmicInfluenceData['warnings']
     };
   }
-
   private parseMoonData(rawData: Record<string, unknown>): {
     phase: string;
     illumination: number;
@@ -789,14 +697,12 @@ export class SwissEphemerisBridge {
       nextFullMoon: new Date(rawData.next_full_moon as string)
     };
   }
-
   /**
    * Clear calculation cache
    */
   clearCache(): void {
     this.calculationCache.clear();
   }
-
   /**
    * Get bridge statistics
    */
@@ -807,7 +713,6 @@ export class SwissEphemerisBridge {
       config: this.config
     };
   }
-
   async getObliquity(date: Date): Promise<number> {
     // Mock implementation for browser compatibility
     // The true obliquity of the ecliptic changes very slowly.
@@ -816,6 +721,5 @@ export class SwissEphemerisBridge {
     return Promise.resolve(23.439281);
   }
 }
-
 // Singleton instance for application-wide use
 export const swissEphemeris = new SwissEphemerisBridge();

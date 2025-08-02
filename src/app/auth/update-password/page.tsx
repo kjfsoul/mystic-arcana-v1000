@@ -1,17 +1,15 @@
 'use client';
-
+ 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
-
 export default function UpdatePasswordPage() {
   const router = useRouter();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     // Check if user has a valid session from the reset link
     const checkSession = async () => {
@@ -22,7 +20,6 @@ export default function UpdatePasswordPage() {
     };
     checkSession();
   }, [router]);
-
   const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -30,18 +27,14 @@ export default function UpdatePasswordPage() {
       setMessage({ type: 'error', text: 'Passwords do not match' });
       return;
     }
-
     if (password.length < 6) {
       setMessage({ type: 'error', text: 'Password must be at least 6 characters' });
       return;
     }
-
     setLoading(true);
     setMessage(null);
-
     try {
       const { error } = await supabase.auth.updateUser({ password });
-
       if (error) {
         setMessage({ type: 'error', text: error.message });
       } else {
@@ -59,7 +52,6 @@ export default function UpdatePasswordPage() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-black to-purple-900">
       <div className="max-w-md w-full mx-4">
@@ -84,7 +76,6 @@ export default function UpdatePasswordPage() {
                 required
               />
             </div>
-
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-purple-200 mb-1">
                 Confirm Password
@@ -100,7 +91,6 @@ export default function UpdatePasswordPage() {
                 required
               />
             </div>
-
             {message && (
               <div className={`p-3 rounded-lg text-sm ${
                 message.type === 'success' 
@@ -110,7 +100,6 @@ export default function UpdatePasswordPage() {
                 {message.text}
               </div>
             )}
-
             <button
               type="submit"
               disabled={loading}

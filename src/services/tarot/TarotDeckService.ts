@@ -1,7 +1,5 @@
 import { TarotCard } from '@/types/tarot';
-
 const RIDER_WAITE_DECK_ID = '00000000-0000-0000-0000-000000000001';
-
 export interface DeckResponse {
   deck: {
     id: string;
@@ -22,27 +20,22 @@ export interface DeckResponse {
     };
   };
 }
-
 export class TarotDeckService {
   private static instance: TarotDeckService;
   private deckCache: Map<string, DeckResponse> = new Map();
-
   private constructor() {}
-
   static getInstance(): TarotDeckService {
     if (!TarotDeckService.instance) {
       TarotDeckService.instance = new TarotDeckService();
     }
     return TarotDeckService.instance;
   }
-
   async getDeck(deckId: string = RIDER_WAITE_DECK_ID): Promise<DeckResponse> {
     // Check cache first
     if (this.deckCache.has(deckId)) {
       console.log('🎴 Returning cached deck');
       return this.deckCache.get(deckId)!;
     }
-
     try {
       console.log('🎴 Fetching deck from API:', deckId);
       const response = await fetch(`/api/tarot/deck/${deckId}`);
@@ -50,7 +43,6 @@ export class TarotDeckService {
       if (!response.ok) {
         throw new Error(`Failed to fetch deck: ${response.statusText}`);
       }
-
       const data: DeckResponse = await response.json();
       
       // Cache the deck data
@@ -63,11 +55,9 @@ export class TarotDeckService {
       throw error;
     }
   }
-
   async getDefaultDeck(): Promise<DeckResponse> {
     return this.getDeck(RIDER_WAITE_DECK_ID);
   }
-
   shuffleDeck(cards: TarotCard[]): TarotCard[] {
     const shuffled = [...cards];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -76,17 +66,14 @@ export class TarotDeckService {
     }
     return shuffled;
   }
-
   drawCards(cards: TarotCard[], count: number): TarotCard[] {
     const shuffled = this.shuffleDeck(cards);
     return shuffled.slice(0, count);
   }
-
   drawSingleCard(cards: TarotCard[]): TarotCard {
     const shuffled = this.shuffleDeck(cards);
     return shuffled[0];
   }
-
   drawThreeCardSpread(cards: TarotCard[]): {
     past: TarotCard;
     present: TarotCard;
@@ -99,7 +86,6 @@ export class TarotDeckService {
       future: drawn[2]
     };
   }
-
   drawCelticCross(cards: TarotCard[]): {
     significator: TarotCard;
     cross: TarotCard;

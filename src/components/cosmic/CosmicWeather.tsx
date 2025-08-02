@@ -1,15 +1,13 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getMoonPhase, MoonPhaseData, isFullMoon, formatNextPhaseDate } from '@/lib/astrology/MoonPhase';
 import styles from './CosmicWeather.module.css';
-
 interface CosmicWeatherProps {
   onClick?: () => void;
   className?: string;
 }
-
 export const CosmicWeather: React.FC<CosmicWeatherProps> = ({ 
   onClick, 
   className = '' 
@@ -18,18 +16,16 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
   const [activeOrb, setActiveOrb] = useState(0);
   const [moonPhase, setMoonPhase] = useState<MoonPhaseData | null>(null);
   const [moonError, setMoonError] = useState(false);
-
   // Rotate through different cosmic elements
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveOrb(prev => (prev + 1) % 4);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
   // Load real moon phase data
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     async function loadMoonPhase() {
       try {
@@ -48,10 +44,8 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
         setLoading(false);
       }
     }
-
     loadMoonPhase();
   }, []);
-
   const cosmicOrbs = [
     { 
       emoji: moonPhase?.emoji || '🌙', 
@@ -82,7 +76,6 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
       isFullMoon: false
     }
   ];
-
   if (loading) {
     return (
       <div className={`${styles.container} ${className}`}>
@@ -106,7 +99,6 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
       </div>
     );
   }
-
   return (
     <motion.div 
       className={`${styles.container} ${className}`}
@@ -162,7 +154,6 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
             </motion.div>
           </AnimatePresence>
         </motion.div>
-
         {/* Orbital Elements */}
         <div className={styles.orbitalRing}>
           {[0, 1, 2, 3, 4, 5].map((index) => (
@@ -194,7 +185,6 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
             </motion.div>
           ))}
         </div>
-
         {/* Cosmic Weather Indicators */}
         <div className={styles.weatherIndicators}>
           {activeOrb === 0 && moonPhase && !moonError ? (
@@ -238,7 +228,6 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
           )}
         </div>
       </div>
-
       {/* Interactive Hint */}
       <motion.div 
         className={styles.interactiveHint}

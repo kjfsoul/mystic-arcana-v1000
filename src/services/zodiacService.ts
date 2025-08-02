@@ -7,7 +7,6 @@ export interface ZodiacSign {
   dateRange: string;
   traits: string[];
 }
-
 const ZODIAC_SIGNS: Record<string, ZodiacSign> = {
   aries: {
     name: 'Aries',
@@ -118,7 +117,6 @@ const ZODIAC_SIGNS: Record<string, ZodiacSign> = {
     traits: ['compassionate', 'artistic', 'intuitive', 'gentle', 'wise']
   }
 };
-
 export const zodiacService = {
   /**
    * Calculate zodiac sign from birth date
@@ -128,10 +126,8 @@ export const zodiacService = {
     if (isNaN(date.getTime())) {
       return null;
     }
-
     const month = date.getMonth() + 1; // getMonth() returns 0-11
     const day = date.getDate();
-
     // Determine zodiac sign based on date ranges
     if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
       return ZODIAC_SIGNS.aries;
@@ -158,17 +154,14 @@ export const zodiacService = {
     } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
       return ZODIAC_SIGNS.pisces;
     }
-
     return null;
   },
-
   /**
    * Get all zodiac signs
    */
   getAllSigns(): ZodiacSign[] {
     return Object.values(ZODIAC_SIGNS);
   },
-
   /**
    * Get zodiac sign by name
    */
@@ -176,14 +169,12 @@ export const zodiacService = {
     const lowercaseName = name.toLowerCase();
     return ZODIAC_SIGNS[lowercaseName] || null;
   },
-
   /**
    * Get signs by element
    */
   getSignsByElement(element: ZodiacSign['element']): ZodiacSign[] {
     return Object.values(ZODIAC_SIGNS).filter(sign => sign.element === element);
   },
-
   /**
    * Generate personalized daily horoscope based on zodiac sign
    */
@@ -250,7 +241,6 @@ export const zodiacService = {
         "Artistic inspiration flows freely. Create something beautiful today."
       ]
     };
-
     const signKey = sign.name.toLowerCase() as keyof typeof horoscopes;
     const messages = horoscopes[signKey] || horoscopes.aries;
     

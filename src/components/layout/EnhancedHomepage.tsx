@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
@@ -9,13 +9,10 @@ import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
 import { AstrologyPanel } from "../panels/AstrologyPanel";
 import { ApiDrivenTarotPanel } from "../tarot/ApiDrivenTarotPanel";
 import styles from './EnhancedHomepage.module.css';
-
 export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
-
 interface EnhancedHomepageProps {
   className?: string;
 }
-
 /**
  * Enhanced Homepage with improved galaxy background visibility and API-driven tarot system
  * 
@@ -31,9 +28,8 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
 }) => {
   const [readingMode, setReadingMode] = useState<ReadingMode>('home');
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.8);
-
   // Adjust galaxy intensity based on reading mode
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     switch (readingMode) {
       case 'home':
@@ -47,11 +43,9 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
         break;
     }
   }, [readingMode]);
-
   const handleTarotClick = () => setReadingMode('tarot-room');
   const handleAstrologyClick = () => setReadingMode('astrology-room');
   const handleBackToHome = () => setReadingMode('home');
-
   return (
     <AccessibilityProvider>
       <div className={`${styles.container} ${className}`}>
@@ -62,7 +56,6 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
           showMilkyWay={true}
           animated={true}
         />
-
         {/* Main Content */}
         <div className={styles.mainContent}>
           <AnimatePresence mode="wait">
@@ -85,7 +78,6 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
             )}
           </AnimatePresence>
         </div>
-
         {/* Floating Navigation */}
         {readingMode !== 'home' && (
           <motion.button
@@ -104,16 +96,13 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
     </AccessibilityProvider>
   );
 };
-
 // Home View Component
 interface HomeViewProps {
   onTarotClick: () => void;
   onAstrologyClick: () => void;
 }
-
 const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) => {
   const { user, isGuest } = useAuth();
-
   return (
     <motion.div
       className={styles.homeView}
@@ -144,7 +133,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           }
         </motion.p>
       </div>
-
       {/* Main Panels */}
       <div className={styles.panelsContainer}>
         {/* Tarot Panel */}
@@ -168,7 +156,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           </div>
           <div className={styles.panelGlow} />
         </motion.div>
-
         {/* Astrology Panel */}
         <motion.div
           className={styles.panel}
@@ -191,7 +178,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           <div className={styles.panelGlow} />
         </motion.div>
       </div>
-
       {/* Celestial Events */}
       <motion.div
         className={styles.celestialEvents}
@@ -204,12 +190,10 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
     </motion.div>
   );
 };
-
 // Tarot Room Component
 interface TarotRoomProps {
   onBack: () => void;
 }
-
 const TarotRoom: React.FC<TarotRoomProps> = () => {
   return (
     <motion.div
@@ -233,12 +217,10 @@ const TarotRoom: React.FC<TarotRoomProps> = () => {
     </motion.div>
   );
 };
-
 // Astrology Room Component
 interface AstrologyRoomProps {
   onBack: () => void;
 }
-
 const AstrologyRoom: React.FC<AstrologyRoomProps> = () => {
   return (
     <motion.div

@@ -1,13 +1,10 @@
 'use client';
-
 import { createBrowserClient } from '@supabase/ssr';
-
 export default function TestOAuth() {
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-
   const testGoogleAuth = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -22,7 +19,6 @@ export default function TestOAuth() {
       alert(`Error: ${error.message}`);
     }
   };
-
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Test OAuth</h1>

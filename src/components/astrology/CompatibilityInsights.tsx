@@ -1,16 +1,13 @@
 'use client';
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { BirthData } from "@/lib/astrology/AstronomicalCalculator";
 import { CompatibilityReport } from "./CompatibilityReport";
 import { LocationInput } from "@/components/forms/LocationInput";
-
 interface CompatibilityInsightsProps {
   userBirthData: BirthData;
   onBack: () => void;
 }
-
 interface Person2Data {
   name: string;
   date: string;
@@ -19,7 +16,6 @@ interface Person2Data {
   latitude: number;
   longitude: number;
 }
-
 export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
   userBirthData,
   onBack,
@@ -33,18 +29,15 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
     latitude: 0,
     longitude: 0
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (person2Data.name && person2Data.date && person2Data.city && person2Data.latitude && person2Data.longitude) {
       setShowForm(false);
     }
   };
-
   const handleFormChange = (field: keyof Person2Data, value: string) => {
     setPerson2Data(prev => ({ ...prev, [field]: value }));
   };
-
   const handleLocationSelect = (location: { city: string; country: string; latitude: number; longitude: number }) => {
     setPerson2Data(prev => ({
       ...prev,
@@ -54,11 +47,9 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
       longitude: location.longitude
     }));
   };
-
   const handleBackToForm = () => {
     setShowForm(true);
   };
-
   if (!showForm && person2Data.name) {
     // Convert person2Data to BirthData format
     const person2BirthData: BirthData = {
@@ -78,7 +69,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
       longitude: person2Data.longitude,
       timezone: 'UTC'
     };
-
     return (
       <CompatibilityReport
         person1Data={userBirthData}
@@ -87,7 +77,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
       />
     );
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
       <div className="max-w-2xl mx-auto pt-8">
@@ -109,7 +98,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
           
           <div className="w-24"></div> {/* Spacer */}
         </motion.div>
-
         <motion.div 
           className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
           initial={{ opacity: 0, y: 20 }}
@@ -134,7 +122,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
                 required
               />
             </div>
-
             <div>
               <label className="block text-white/80 text-sm font-medium mb-2">
                 Birth Date & Time
@@ -147,7 +134,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
                 required
               />
             </div>
-
             <div>
               <label className="block text-white/80 text-sm font-medium mb-2">
                 Birth Location
@@ -164,7 +150,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
                 </p>
               )}
             </div>
-
             <motion.button
               type="submit"
               className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
@@ -174,7 +159,6 @@ export const CompatibilityInsights: React.FC<CompatibilityInsightsProps> = ({
               Calculate Compatibility ✨
             </motion.button>
           </form>
-
           <div className="mt-6 text-center text-white/60 text-sm">
             <p>⭐ Analysis uses authentic astronomical calculations with Swiss Ephemeris data</p>
           </div>

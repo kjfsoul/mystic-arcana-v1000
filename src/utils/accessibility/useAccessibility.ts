@@ -1,10 +1,9 @@
+ 
 import { useCallback, useEffect, useRef } from 'react';
-
 interface AccessibilityOptions {
   announceDelay?: number;
   politeness?: 'polite' | 'assertive';
 }
-
 /**
  * useAccessibility Hook
  * 
@@ -22,9 +21,8 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
   const announcerRef = useRef<HTMLDivElement | null>(null);
   const focusTrapRef = useRef<HTMLElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
-
   // Create screen reader announcer element
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (!announcerRef.current) {
       const announcer = document.createElement('div');
@@ -39,21 +37,18 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
       document.body.appendChild(announcer);
       announcerRef.current = announcer;
     }
-
     return () => {
       if (announcerRef.current && document.body.contains(announcerRef.current)) {
         document.body.removeChild(announcerRef.current);
       }
     };
   }, [politeness]);
-
   // Announce message to screen readers
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const announceToScreenReader = useCallback((message: string) => {
     if (announcerRef.current) {
       // Clear previous announcement
       announcerRef.current.textContent = '';
-
       // Set new announcement after delay to ensure it's read
       setTimeout(() => {
         if (announcerRef.current) {
@@ -62,9 +57,8 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
       }, announceDelay);
     }
   }, [announceDelay]);
-
   // Release focus trap and restore previous focus
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const releaseFocusTrap = useCallback(() => {
     if (previousFocusRef.current) {
       previousFocusRef.current.focus();
@@ -72,28 +66,22 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
     }
     focusTrapRef.current = null;
   }, []);
-
   // Create focus trap for modals/overlays
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const createFocusTrap = useCallback((element: HTMLElement) => {
     // Store current focus
     previousFocusRef.current = document.activeElement as HTMLElement;
     focusTrapRef.current = element;
-
     // Get all focusable elements
     const focusableElements = element.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
     );
-
     const firstFocusable = focusableElements[0] as HTMLElement;
     const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
-
     // Focus first element
     firstFocusable?.focus();
-
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-
       if (e.shiftKey) {
         // Shift + Tab
         if (document.activeElement === firstFocusable) {
@@ -108,24 +96,20 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
         }
       }
     };
-
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         releaseFocusTrap();
       }
     };
-
     element.addEventListener('keydown', handleTabKey);
     element.addEventListener('keydown', handleEscapeKey);
-
     return () => {
       element.removeEventListener('keydown', handleTabKey);
       element.removeEventListener('keydown', handleEscapeKey);
     };
   }, [releaseFocusTrap]);
-
   // Get appropriate ARIA label for interactive elements
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const getAriaLabel = useCallback((elementType: string, context: string) => {
     const labels: Record<string, string> = {
       'tarot-card': `Select ${context} tarot card`,
@@ -134,18 +118,15 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
       'spread-position': `${context} position in spread`,
       'cosmic-weather': `Current cosmic weather: ${context}`,
     };
-
     return labels[elementType] || context;
   }, []);
-
   // Check if user prefers reduced motion
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const prefersReducedMotion = useCallback(() => {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
-
   // Keyboard navigation helper
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleKeyboardNavigation = useCallback((
     e: React.KeyboardEvent,
     callbacks: {
@@ -189,7 +170,6 @@ export const useAccessibility = (options: AccessibilityOptions = {}) => {
         break;
     }
   }, []);
-
   return {
     announceToScreenReader,
     createFocusTrap,

@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -8,7 +8,6 @@ import { MercuryRetrogradeBanner } from '@/components/astrology/MercuryRetrograd
 import { FilterSidebar, FilterState } from '@/components/marketplace/FilterSidebar';
 import { WishlistService, useWishlist, ProductKey } from '@/lib/marketplace/wishlist';
 import { useAuth } from '@/contexts/AuthContext';
-
 interface Product {
   key: keyof typeof MYSTIC_PRODUCTS;
   name: string;
@@ -19,7 +18,6 @@ interface Product {
   metadata: ProductMetadata;
   featured?: boolean;
 }
-
 export default function MarketplacePage() {
   const { user, isGuest } = useAuth();
   const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist, wishlistCount } = useWishlist();
@@ -36,23 +34,20 @@ export default function MarketplacePage() {
     priceRange: [0, 10000],
     showLimitedEdition: false
   });
-
   // Convert MYSTIC_PRODUCTS to array format
   const allProducts: Product[] = Object.entries(MYSTIC_PRODUCTS).map(([key, product]) => ({
     key: key as keyof typeof MYSTIC_PRODUCTS,
     ...product,
     featured: key === 'retrograde_collection'
   }));
-
   // Filter and sort products
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const filteredProducts = useMemo(() => {
     const filtered = allProducts.filter(product => {
       // Price range filter
       if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
         return false;
       }
-
       // Celestial events filter
       if (filters.celestialEvents.length > 0) {
         const cosmicAlignment = product.metadata.cosmic_alignment;
@@ -62,30 +57,24 @@ export default function MarketplacePage() {
         );
         if (!hasMatchingEvent) return false;
       }
-
       // Product type filter
       if (filters.productTypes.length > 0) {
         if (!filters.productTypes.includes(product.metadata.type)) return false;
       }
-
       // Element filter
       if (filters.elements.length > 0) {
         if (!product.metadata.element || !filters.elements.includes(product.metadata.element)) return false;
       }
-
       // Moon phase filter
       if (filters.moonPhases.length > 0) {
         if (!product.metadata.moon_phase || !filters.moonPhases.includes(product.metadata.moon_phase)) return false;
       }
-
       // Limited edition filter
       if (filters.showLimitedEdition) {
         if (product.metadata.limited_edition !== 'true') return false;
       }
-
       return true;
     });
-
     // Sort products
     switch (sortBy) {
       case 'price_low':
@@ -106,10 +95,8 @@ export default function MarketplacePage() {
         });
         break;
     }
-
     return filtered;
   }, [allProducts, filters, sortBy]);
-
   const handlePurchase = async (productKey: keyof typeof MYSTIC_PRODUCTS) => {
     try {
       setLoading(productKey);
@@ -123,13 +110,11 @@ export default function MarketplacePage() {
       setLoading(null);
     }
   };
-
   const handleWishlistToggle = async (productKey: ProductKey) => {
     if (isGuest) {
       setError('Please sign in to add items to your wishlist');
       return;
     }
-
     try {
       if (isInWishlist(productKey)) {
         await removeFromWishlist(productKey);
@@ -141,7 +126,6 @@ export default function MarketplacePage() {
       console.error('Wishlist error:', err);
     }
   };
-
   const getProductEmoji = (productKey: string) => {
     const emojiMap: Record<string, string> = {
       'retrograde_collection': '👗',
@@ -157,19 +141,16 @@ export default function MarketplacePage() {
     };
     return emojiMap[productKey] || '✨';
   };
-
   const formatPrice = (price: number, currency: string) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency.toUpperCase(),
     }).format(price / 100);
   };
-
   const scrollToRetrograde = () => {
     const element = document.getElementById('retrograde-collection');
     element?.scrollIntoView({ behavior: 'smooth' });
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* Header */}
@@ -209,7 +190,6 @@ export default function MarketplacePage() {
               </motion.button>
             </div>
           </div>
-
           {/* Controls Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div className="flex items-center gap-4">
@@ -230,12 +210,10 @@ export default function MarketplacePage() {
               {filteredProducts.length} of {allProducts.length} cosmic treasures
             </div>
           </div>
-
           {/* Mercury Retrograde Banner */}
           <div className="mb-8">
             <MercuryRetrogradeBanner onMarketplaceClick={scrollToRetrograde} />
           </div>
-
           <motion.p 
             className="text-xl text-center text-white/80 mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -246,7 +224,6 @@ export default function MarketplacePage() {
           </motion.p>
         </div>
       </div>
-
       {/* Error Display */}
       {error && (
         <motion.div 
@@ -265,7 +242,6 @@ export default function MarketplacePage() {
           </div>
         </motion.div>
       )}
-
       {/* Products Grid */}
       <div className="max-w-6xl mx-auto px-6 pb-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -295,7 +271,6 @@ export default function MarketplacePage() {
                   </motion.div>
                 </div>
               )}
-
               {/* Wishlist Button */}
               {!isGuest && (
                 <motion.button
@@ -311,7 +286,6 @@ export default function MarketplacePage() {
                   {isInWishlist(product.key) ? '💖' : '🤍'}
                 </motion.button>
               )}
-
               {/* Product Image Placeholder */}
               <div className={`h-48 ${
                 product.featured 
@@ -322,7 +296,6 @@ export default function MarketplacePage() {
                   {getProductEmoji(product.key)}
                 </div>
               </div>
-
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
                 <p className="text-white/70 text-sm mb-4 leading-relaxed">{product.description}</p>
@@ -363,7 +336,6 @@ export default function MarketplacePage() {
                     </span>
                   )}
                 </div>
-
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold text-white">
                     {formatPrice(product.price, product.currency)}
@@ -394,7 +366,6 @@ export default function MarketplacePage() {
             </motion.div>
           ))}
         </div>
-
         {/* Footer Info */}
         <motion.div 
           className="mt-16 text-center text-white/60"
@@ -421,7 +392,6 @@ export default function MarketplacePage() {
           </div>
         </motion.div>
       </div>
-
       {/* Filter Sidebar */}
       <FilterSidebar
         isOpen={showFilters}

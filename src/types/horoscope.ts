@@ -11,7 +11,6 @@ export type ZodiacSign =
   | 'capricorn' 
   | 'aquarius' 
   | 'pisces';
-
 export interface ZodiacInfo {
   sign: ZodiacSign;
   name: string;
@@ -22,7 +21,6 @@ export interface ZodiacInfo {
   dateRange: string;
   emoji: string;
 }
-
 export interface DailyHoroscope {
   date: string;
   general: {
@@ -40,7 +38,6 @@ export interface DailyHoroscope {
     compatibility: ZodiacSign[];
   };
 }
-
 export interface UserBirthData {
   birthDate: string; // ISO date string
   birthTime?: string; // Optional time (HH:MM format)

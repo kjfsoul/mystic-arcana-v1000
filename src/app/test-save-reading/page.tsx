@@ -1,17 +1,14 @@
 'use client';
-
 import React, { useState } from 'react';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
 import { SaveReadingModal } from '@/components/modals/SaveReadingModal';
 import { TarotService } from '@/services/TarotService';
 import { useAuth } from '@/contexts/AuthContext';
-
 // Test page to demonstrate the save reading functionality
 export default function TestSaveReadingPage() {
   const { user } = useAuth();
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [saveStatus, setSaveStatus] = useState<string>('');
-
   // Mock reading for testing
   const mockReading: TarotReading = {
     id: 'test-reading-123',
@@ -70,12 +67,10 @@ export default function TestSaveReadingPage() {
       planetaryHour: 'Venus'
     }
   };
-
   const handleSaveReading = async (notes: string, isPublic: boolean) => {
     if (!user) {
       throw new Error('User must be authenticated to save readings');
     }
-
     setSaveStatus('Saving...');
     
     try {
@@ -85,13 +80,11 @@ export default function TestSaveReadingPage() {
         notes,
         isPublic
       };
-
       const { data, error } = await TarotService.saveReading(readingToSave, user.id);
       
       if (error) {
         throw new Error(typeof error === 'string' ? error : 'Failed to save reading');
       }
-
       setSaveStatus('✅ Reading saved successfully!');
       console.log('Saved reading:', data);
     } catch (error) {
@@ -99,7 +92,6 @@ export default function TestSaveReadingPage() {
       throw error;
     }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-8">
       <div className="max-w-4xl mx-auto">
@@ -118,7 +110,6 @@ export default function TestSaveReadingPage() {
             </div>
           )}
         </div>
-
         {/* Mock Reading Display */}
         <div className="mb-8 p-6 bg-gray-800 rounded-lg">
           <h2 className="text-xl font-semibold text-purple-300 mb-4">Sample Reading</h2>
@@ -138,7 +129,6 @@ export default function TestSaveReadingPage() {
             <p className="text-gray-300 mt-4">{mockReading.interpretation}</p>
           </div>
         </div>
-
         {/* Test Buttons */}
         <div className="space-y-4">
           <button
@@ -147,14 +137,12 @@ export default function TestSaveReadingPage() {
           >
             🪶 Open Save Reading Modal
           </button>
-
           {saveStatus && (
             <div className="p-4 bg-gray-800 rounded-lg">
               <p className="text-center">{saveStatus}</p>
             </div>
           )}
         </div>
-
         {/* Instructions */}
         <div className="mt-12 p-6 bg-gray-800/50 rounded-lg">
           <h3 className="text-lg font-semibold text-purple-300 mb-3">How to Fix the Issues:</h3>
@@ -177,7 +165,6 @@ export default function TestSaveReadingPage() {
           </ol>
         </div>
       </div>
-
       {/* Save Reading Modal */}
       <SaveReadingModal
         isOpen={showSaveModal}

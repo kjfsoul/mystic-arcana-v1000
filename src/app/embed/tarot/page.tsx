@@ -1,15 +1,12 @@
 'use client';
-
 import { SpreadType } from '@/components/tarot/EnhancedTarotSpreadLayouts';
 import { MobileTarotReader } from "@/components/tarot/MobileTarotReader";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-
 interface EmbedPageProps {
   params: { object: any };
   searchParams: { [key: string]: string | string[] | undefined };
 }
-
 // Loading component for embed
 const EmbedLoading = () => (
   <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -21,14 +18,12 @@ const EmbedLoading = () => (
     </div>
   </div>
 );
-
 // Main embed component
 const TarotEmbedContent = () => {
   const searchParams = useSearchParams();
   const spread = searchParams.get('spread') as SpreadType || 'three-card';
   const theme = searchParams.get('theme') || 'dark';
   const size = searchParams.get('size') || 'mobile';
-
   // Handle sharing from embed
   const handleShare = (cards: any[], image: string) => {
     // Send message to parent window for social media sharing
@@ -39,7 +34,6 @@ const TarotEmbedContent = () => {
       }, '*');
     }
   };
-
   return (
     <div 
       className="w-full h-screen overflow-hidden"
@@ -97,7 +91,6 @@ const TarotEmbedContent = () => {
     </div>
   );
 };
-
 // Main page component with error boundary
 export default function TarotEmbedPage() {
   return (

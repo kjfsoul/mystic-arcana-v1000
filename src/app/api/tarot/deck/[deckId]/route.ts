@@ -1,9 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 import Logger from '@/utils/logger';
-
 const logger = new Logger('TarotDeckAPI');
-
 /**
  * GET /api/tarot/deck/[deckId]
  *
@@ -21,16 +19,13 @@ const logger = new Logger('TarotDeckAPI');
  * @param deckId - UUID of the deck to fetch cards for
  * @returns JSON response with deck info, all cards, and statistics
  */
-
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ deckId: string }> }
 ) {
   const startTime = Date.now();
-
   try {
     const { deckId } = await params;
-
     // Validate deck ID format (basic UUID check)
     if (!deckId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(deckId)) {
       logger.warn('invalid_deck_id_format', undefined, { deckId }, `Invalid deck ID format: ${deckId}`);
@@ -43,11 +38,8 @@ export async function GET(
         { status: 400 }
       );
     }
-
     logger.info('fetching_tarot_deck', undefined, { deckId }, `Fetching deck: ${deckId}`);
-
     const supabase = await createClient();
-
     // First, get the deck information
     const { data: deck, error: deckError } = await supabase
       .from('decks')
@@ -55,7 +47,6 @@ export async function GET(
       .eq('id', deckId)
       .eq('is_active', true)
       .single();
-
     if (deckError || !deck) {
       logger.error('tarot_deck_fetch_error', undefined, {}, new Error(deckError?.message || 'Unknown error'), `Deck fetch error for ${deckId}.`);
       return NextResponse.json(
@@ -68,7 +59,6 @@ export async function GET(
         { status: 404 }
       );
     }
-
     // Then, get all cards for this deck
     const { data: cards, error: cardsError } = await supabase
       .from('cards')
@@ -86,7 +76,6 @@ export async function GET(
       .eq('deck_id', deckId)
       .order('arcana_type', { ascending: true })
       .order('card_number', { ascending: true });
-
     if (cardsError) {
       logger.error('tarot_cards_fetch_error', undefined, {}, new Error(cardsError?.message || 'Unknown error'), `Cards fetch error for deck ${deckId}.`);
       return NextResponse.json(
@@ -99,7 +88,6 @@ export async function GET(
         { status: 500 }
       );
     }
-
     // Transform the data to match the frontend format
     const transformedCards = cards?.map(card => ({
       id: `${card.card_number}-${card.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
@@ -116,7 +104,6 @@ export async function GET(
       },
       description: `${card.name} represents ${card.meaning_upright.toLowerCase()}.`
     })) || [];
-
     // Group cards by arcana type for easier frontend consumption
     const majorArcana = transformedCards.filter(card => card.arcana === 'major');
     const minorArcana = transformedCards.filter(card => card.arcana === 'minor');
@@ -141,7 +128,6 @@ export async function GET(
         }
       }
     };
-
     const responseTime = Date.now() - startTime;
     logger.info(
       'tarot_deck_fetched',
@@ -153,7 +139,6 @@ export async function GET(
       },
       `Successfully fetched deck ${deckId} with ${transformedCards.length} cards.`
     );
-
     return NextResponse.json(response, {
       headers: {
         'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400', // Cache for 1 hour
@@ -161,7 +146,6 @@ export async function GET(
         'X-Cards-Count': transformedCards.length.toString()
       }
     });
-
   } catch (error) {
     const responseTime = Date.now() - startTime;
     logger.error(

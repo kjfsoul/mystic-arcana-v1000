@@ -1,23 +1,20 @@
+ 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { ProfileDataService, ProfileData } from '@/services/ProfileDataService';
-
 interface AutofillOptions {
   includeCoordinates?: boolean;
   autoLoad?: boolean;
 }
-
 export function useProfileAutofill(options: AutofillOptions = {}) {
   const { user } = useAuth();
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   // Load profile data on mount or user change
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (!user || !options.autoLoad) return;
-
     const loadData = async () => {
       setIsLoading(true);
       setError(null);
@@ -32,20 +29,16 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
         setIsLoading(false);
       }
     };
-
     loadData();
   }, [user, options.autoLoad]);
-
   // Subscribe to profile changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const unsubscribe = ProfileDataService.subscribe((data) => {
       setProfileData(data);
     });
-
     return unsubscribe;
   }, []);
-
   // Get autofill values
   const getAutofillValues = () => {
     const data = profileData || ProfileDataService.getAutofillData();
@@ -58,14 +51,12 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
       preferredTarotReader: data.preferredTarotReader || ''
     };
   };
-
   // Save profile field
   const saveProfileField = async (field: keyof ProfileData, value: any) => {
     if (!user) {
       setError('User not authenticated');
       return false;
     }
-
     try {
       const success = await ProfileDataService.updateField(user.id, field, value);
       if (!success) {
@@ -78,14 +69,12 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
       return false;
     }
   };
-
   // Save all profile data
   const saveProfile = async (data: Partial<ProfileData>) => {
     if (!user) {
       setError('User not authenticated');
       return false;
     }
-
     try {
       const success = await ProfileDataService.saveProfile(user.id, data);
       if (!success) {
@@ -98,12 +87,10 @@ export function useProfileAutofill(options: AutofillOptions = {}) {
       return false;
     }
   };
-
   // Format birth info for display
   const getFormattedBirthInfo = () => {
     return ProfileDataService.formatBirthDateTime();
   };
-
   return {
     profileData,
     isLoading,

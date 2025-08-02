@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
-
 interface MoonPhaseData {
   phase: string;
   illumination: number;
@@ -9,7 +8,6 @@ interface MoonPhaseData {
   nextFullMoon: string;
   nextNewMoon: string;
 }
-
 interface MoonPhaseResult {
   success: boolean;
   data?: {
@@ -24,7 +22,6 @@ interface MoonPhaseResult {
   };
   error?: string;
 }
-
 function getMoonEmoji(phaseName: string): string {
   const phase = phaseName.toLowerCase();
   
@@ -40,7 +37,6 @@ function getMoonEmoji(phaseName: string): string {
   // Default based on illumination if phase name doesn't match
   return '🌙';
 }
-
 function callPythonScript(action: string): Promise<MoonPhaseResult> {
   return new Promise((resolve) => {
     const pythonPath = process.env.PYTHON_PATH || 'python3';
@@ -99,12 +95,10 @@ function callPythonScript(action: string): Promise<MoonPhaseResult> {
     }, 30000); // 30 second timeout
   });
 }
-
 export async function GET() {
   try {
     // Call Python script for moon phase calculation
     const moonResult = await callPythonScript('moon_phase');
-
     if (!moonResult.success || !moonResult.data) {
       // Fallback to data temporarily unavailable
       return NextResponse.json({
@@ -119,7 +113,6 @@ export async function GET() {
         }
       });
     }
-
     // Transform Python response to expected format
     const moonData: MoonPhaseData = {
       phase: moonResult.data.phase_name,
@@ -128,12 +121,10 @@ export async function GET() {
       nextFullMoon: moonResult.data.next_full_moon,
       nextNewMoon: moonResult.data.next_new_moon
     };
-
     return NextResponse.json({
       success: true,
       data: moonData
     });
-
   } catch (error) {
     console.error('Moon phase API error:', error);
     

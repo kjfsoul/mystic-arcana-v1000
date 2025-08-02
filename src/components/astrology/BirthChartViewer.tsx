@@ -1,17 +1,15 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, RefreshCw, Info, Star } from 'lucide-react';
 import { BirthData } from '../../types/astrology';
-
 interface BirthChartData {
   svg: string;
   signSummary: string;
   houseBreakdown: string[];
   isUnavailable?: boolean;
 }
-
 interface BirthChartAPIResponse {
   success: boolean;
   data?: BirthChartData & {
@@ -20,13 +18,11 @@ interface BirthChartAPIResponse {
   };
   error?: string;
 }
-
 interface BirthChartViewerProps {
   birthData: BirthData;
   onBack?: () => void;
   className?: string;
 }
-
 async function callBirthChartAPI(birthData: BirthData): Promise<BirthChartAPIResponse> {
   try {
     const response = await fetch('/api/astrology/birth-chart', {
@@ -46,11 +42,9 @@ async function callBirthChartAPI(birthData: BirthData): Promise<BirthChartAPIRes
         }
       })
     });
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     return await response.json();
   } catch (error) {
     console.error('Failed to call birth chart API:', error);
@@ -60,7 +54,6 @@ async function callBirthChartAPI(birthData: BirthData): Promise<BirthChartAPIRes
     };
   }
 }
-
 function getFallbackChart(): BirthChartData {
   return {
     svg: '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="200" r="180" fill="none" stroke="#6B7280" stroke-width="2" stroke-dasharray="10,5"/><text x="200" y="200" text-anchor="middle" fill="#6B7280" font-size="16">Chart Unavailable</text></svg>',
@@ -73,7 +66,6 @@ function getFallbackChart(): BirthChartData {
     isUnavailable: true
   };
 }
-
 export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
   birthData,
   onBack,
@@ -83,8 +75,7 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isUnavailable, setIsUnavailable] = useState(false);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     async function fetchBirthChart() {
       try {
@@ -99,12 +90,10 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
           setIsUnavailable(true);
           return;
         }
-
         // Check if service is temporarily unavailable
         if (result.data.isUnavailable) {
           setIsUnavailable(true);
         }
-
         setChartData({
           svg: result.data.svg,
           signSummary: result.data.signSummary,
@@ -119,10 +108,8 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
         setLoading(false);
       }
     }
-
     fetchBirthChart();
   }, [birthData]);
-
   const handleRetry = () => {
     setIsUnavailable(false);
     setError(null);
@@ -131,7 +118,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
       setChartData(null);
     }, 100);
   };
-
   // Shimmer loading component
   const ShimmerContent = () => (
     <motion.div 
@@ -181,11 +167,9 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
       </div>
     </motion.div>
   );
-
   if (loading) {
     return <ShimmerContent />;
   }
-
   if (error && !chartData) {
     return (
       <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4 ${className}`}>
@@ -215,11 +199,9 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
       </div>
     );
   }
-
   if (!chartData) {
     return null;
   }
-
   return (
     <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4 ${className}`}>
       <div className="max-w-6xl mx-auto">
@@ -244,7 +226,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
             <div className="w-24"></div> {/* Spacer */}
           </motion.div>
         )}
-
         {/* Service Unavailable Warning */}
         {isUnavailable && (
           <motion.div 
@@ -269,7 +250,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
             </button>
           </motion.div>
         )}
-
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Birth Chart SVG */}
           <motion.div 
@@ -288,7 +268,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
               dangerouslySetInnerHTML={{ __html: chartData.svg }}
             />
           </motion.div>
-
           {/* Chart Information */}
           <div className="space-y-6">
             {/* Sign Summary */}
@@ -304,7 +283,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
               </h3>
               <p className="text-white/90 leading-relaxed">{chartData.signSummary}</p>
             </motion.div>
-
             {/* House Breakdown */}
             <motion.div 
               className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20"
@@ -333,7 +311,6 @@ export const BirthChartViewer: React.FC<BirthChartViewerProps> = ({
             </motion.div>
           </div>
         </div>
-
         {/* Footer Note */}
         {!isUnavailable && (
           <motion.div 

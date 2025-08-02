@@ -1,3 +1,4 @@
+ 
 import {
   DrawCardsRequest,
   DrawCardsResponse,
@@ -10,13 +11,11 @@ import {
   tarotAPI,
 } from "@/services/tarot/TarotAPIClient";
 import { useCallback, useState } from "react";
-
 export interface APIState<T> {
   data: T | null;
   loading: boolean;
   error: string | null;
 }
-
 /**
  * Hook for drawing tarot cards
  */
@@ -26,14 +25,11 @@ export function useDrawCards() {
     loading: false,
     error: null,
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const drawCards = useCallback(async (request: DrawCardsRequest) => {
     setState({ data: null, loading: true, error: null });
-
     try {
       const response = await tarotAPI.drawCards(request);
-
       if (response.success) {
         setState({ data: response, loading: false, error: null });
       } else {
@@ -43,7 +39,6 @@ export function useDrawCards() {
           error: response.error || "Failed to draw cards",
         });
       }
-
       return response;
     } catch (error) {
       const errorMessage =
@@ -52,10 +47,8 @@ export function useDrawCards() {
       throw error;
     }
   }, []);
-
   return { ...state, drawCards };
 }
-
 /**
  * Hook for shuffling tarot deck
  */
@@ -65,14 +58,11 @@ export function useShuffleDeck() {
     loading: false,
     error: null,
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const shuffleDeck = useCallback(async (request?: ShuffleRequest) => {
     setState({ data: null, loading: true, error: null });
-
     try {
       const response = await tarotAPI.shuffleDeck(request);
-
       if (response.success) {
         setState({ data: response, loading: false, error: null });
       } else {
@@ -82,7 +72,6 @@ export function useShuffleDeck() {
           error: response.error || "Failed to shuffle deck",
         });
       }
-
       return response;
     } catch (error) {
       const errorMessage =
@@ -91,10 +80,8 @@ export function useShuffleDeck() {
       throw error;
     }
   }, []);
-
   return { ...state, shuffleDeck };
 }
-
 /**
  * Hook for saving tarot readings
  */
@@ -104,14 +91,11 @@ export function useSaveReading() {
     loading: false,
     error: null,
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const saveReading = useCallback(async (request: SaveReadingRequest) => {
     setState({ data: null, loading: true, error: null });
-
     try {
       const response = await tarotAPI.saveReading(request);
-
       if (response.success) {
         setState({ data: response, loading: false, error: null });
       } else {
@@ -121,7 +105,6 @@ export function useSaveReading() {
           error: response.error || "Failed to save reading",
         });
       }
-
       return response;
     } catch (error) {
       const errorMessage =
@@ -130,10 +113,8 @@ export function useSaveReading() {
       throw error;
     }
   }, []);
-
   return { ...state, saveReading };
 }
-
 /**
  * Hook for fetching tarot readings
  */
@@ -143,14 +124,11 @@ export function useGetReadings() {
     loading: false,
     error: null,
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const getReadings = useCallback(async (params?: GetReadingsRequest) => {
     setState((prev) => ({ ...prev, loading: true, error: null }));
-
     try {
       const response = await tarotAPI.getReadings(params);
-
       if (response.success) {
         setState({ data: response, loading: false, error: null });
       } else {
@@ -160,7 +138,6 @@ export function useGetReadings() {
           error: response.error || "Failed to fetch readings",
         });
       }
-
       return response;
     } catch (error) {
       const errorMessage =
@@ -169,19 +146,16 @@ export function useGetReadings() {
       throw error;
     }
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const deleteReading = useCallback(
     async (id: string, userId: string) => {
       try {
         const response = await tarotAPI.deleteReading(id, userId);
-
         if (response.success) {
           // Refresh readings after deletion
           const currentParams = state.data?.readings ? { userId } : undefined;
           await getReadings(currentParams);
         }
-
         return response;
       } catch (error) {
         console.error("Delete reading error:", error);
@@ -190,10 +164,8 @@ export function useGetReadings() {
     },
     [getReadings, state.data]
   );
-
   return { ...state, getReadings, deleteReading };
 }
-
 /**
  * Hook for managing reading statistics
  */
@@ -209,15 +181,13 @@ export interface ReadingStatsResponse {
   } | null;
   error?: string;
 }
-
 export function useReadingStats(userId?: string) {
   const [state, setState] = useState<APIState<ReadingStatsResponse>>({
     data: null,
     loading: false,
     error: null,
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const getStats = useCallback(
     async (uid?: string) => {
       const userIdToUse = uid || userId;
@@ -225,12 +195,9 @@ export function useReadingStats(userId?: string) {
         setState({ data: null, loading: false, error: "User ID required" });
         return;
       }
-
       setState({ data: null, loading: true, error: null });
-
       try {
         const response = await tarotAPI.getReadingStats(userIdToUse);
-
         if (response.success) {
           setState({
             data: {
@@ -248,7 +215,6 @@ export function useReadingStats(userId?: string) {
             error: response.error || "Failed to fetch statistics",
           });
         }
-
         return response;
       } catch (error) {
         const errorMessage =
@@ -259,10 +225,8 @@ export function useReadingStats(userId?: string) {
     },
     [userId]
   );
-
   return { ...state, getStats };
 }
-
 /**
  * Combined hook for complete tarot reading workflow
  */
@@ -271,13 +235,11 @@ export function useTarotReading() {
   const shuffle = useShuffleDeck();
   const save = useSaveReading();
   const readings = useGetReadings();
-
   const [currentDrawId, setCurrentDrawId] = useState<string | null>(null);
   const [drawnCards, setDrawnCards] = useState<
     DrawCardsResponse["cards"] | null
   >(null);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const performReading = useCallback(
     async (
       spreadType: "single" | "three-card" | "celtic-cross",
@@ -286,7 +248,6 @@ export function useTarotReading() {
       try {
         // 1. Shuffle the deck
         await shuffle.shuffleDeck({ algorithm: "fisher-yates" });
-
         // 2. Draw cards based on spread
         const cardCount =
           spreadType === "single" ? 1 : spreadType === "three-card" ? 3 : 10;
@@ -296,7 +257,6 @@ export function useTarotReading() {
           allowReversed: true,
           userId,
         });
-
         if (drawResult.success) {
           // Handle the actual API response structure
           const apiResponse = drawResult as unknown as {
@@ -315,7 +275,6 @@ export function useTarotReading() {
             setDrawnCards(drawResult.cards);
           }
         }
-
         return drawResult;
       } catch (error) {
         console.error("Perform reading error:", error);
@@ -324,8 +283,7 @@ export function useTarotReading() {
     },
     [draw, shuffle]
   );
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const saveCurrentReading = useCallback(
     async (
       userId: string,
@@ -337,14 +295,12 @@ export function useTarotReading() {
       if (!drawnCards || !currentDrawId) {
         throw new Error("No active reading to save");
       }
-
       const spreadType =
         drawnCards.length === 1
           ? "single"
           : drawnCards.length === 3
           ? "three-card"
           : "celtic-cross";
-
       const result = await save.saveReading({
         userId,
         spreadType,
@@ -365,24 +321,20 @@ export function useTarotReading() {
         tags,
         isPublic: false,
       });
-
       if (result.success) {
         // Clear current reading state after successful save
         setCurrentDrawId(null);
         setDrawnCards(null);
       }
-
       return result;
     },
     [drawnCards, currentDrawId, save]
   );
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const clearCurrentReading = useCallback(() => {
     setDrawnCards(null);
     setCurrentDrawId(null);
   }, []);
-
   return {
     // States
     isLoading:
@@ -390,14 +342,12 @@ export function useTarotReading() {
     error: draw.error || shuffle.error || save.error || readings.error,
     currentDrawId,
     drawnCards,
-
     // Actions
     performReading,
     saveCurrentReading,
     clearCurrentReading,
     getReadingHistory: readings.getReadings,
     deleteReading: readings.deleteReading,
-
     // Individual states for fine control
     draw,
     shuffle,

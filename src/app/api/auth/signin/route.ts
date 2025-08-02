@@ -1,24 +1,20 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
-
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
-
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
         { status: 400 }
       );
     }
-
     const supabase = await createClient();
     
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
     if (error) {
       console.error('Signin error:', error);
       return NextResponse.json(
@@ -26,13 +22,11 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     return NextResponse.json({
       message: 'Signin successful',
       user: data.user,
       session: data.session
     });
-
   } catch (error) {
     console.error('Signin API error:', error);
     return NextResponse.json(

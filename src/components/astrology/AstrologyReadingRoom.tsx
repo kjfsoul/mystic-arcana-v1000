@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import {
   BirthData,
   HousePosition,
@@ -21,21 +21,16 @@ import styles from "./AstrologyReadingRoom.module.css";
 import { CompatibilityInsights } from "./CompatibilityInsights";
 import { InteractiveBirthChart } from "./InteractiveBirthChart";
 import { InteractiveCareerInsights } from "./InteractiveCareerInsights";
-
 interface AstrologyReadingRoomProps {
   onBack: () => void;
 }
-
 // interface BirthData {
-
 //   date: string;
 //   time: string;
 //   location: string;
 //   birthDate?: string;
 //}
-
 type UserTier = 'guest' | 'signed-up' | 'subscriber';
-
 export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBack }) => {
   const { user, isGuest } = useAuth();
   const [userTier, setUserTier] = useState<UserTier>('guest');
@@ -79,13 +74,11 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     };
   } | null>(null);
   const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
-
  
  
  
   const loadPersonalizedHoroscope = useCallback(async () => {
     if (!user) return;
-
     setIsLoadingHoroscope(true);
     try {
       const profile = await profileService.getProfile(user.id);
@@ -100,7 +93,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       setIsLoadingHoroscope(false);
     }
   }, [user]);
-
  
  
   useEffect(() => {
@@ -110,12 +102,10 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       // For MVP, assume signed-up users are not subscribers yet
       // In production, check user subscription status
       setUserTier("signed-up");
-
       // Load personalized horoscope for authenticated users
       loadPersonalizedHoroscope();
     }
   }, [user, isGuest, loadPersonalizedHoroscope]);
-
   const handleLifeEventsChange = (events: LifeEvent[]) => {
     setLifeEvents(events);
     // Persist to localStorage
@@ -123,7 +113,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       localStorage.setItem("mystic-arcana-life-events", JSON.stringify(events));
     }
   };
-
   const handleServiceSelection = (
     service:
       | "chart"
@@ -134,7 +123,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       | "timeline"
   ) => {
     setSelectedService(service);
-
     if (service === "chart") {
       // Chart always needs birth form
       setShowBirthForm(true);
@@ -154,19 +142,15 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     }
     // Advanced chart and timeline don't need birth form - timeline is standalone, advanced is a preview/upsell
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!selectedLocation) {
       alert("Please select a birth location");
       return;
     }
-
     // Handle optional birth time - use noon if not provided
     const timeString = formData.time || "12:00";
     const combinedDateTime = new Date(`${formData.date}T${timeString}:00`);
-
     setBirthData({
       name: "Form Input",
       birthDate: combinedDateTime.toISOString(),
@@ -181,24 +165,18 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       city: selectedLocation.city || "Unknown",
       country: selectedLocation.country || "Unknown",
     });
-
     setShowBirthForm(false);
-
     // Show unlock modal for guests after they see the chart
     if (userTier === "guest") {
       setTimeout(() => setShowUnlockModal(true), 5000);
     }
   };
-
   const handlePlanetClick = (planet: PlanetPosition) => {
     console.log('Planet clicked:', planet);
   };
-
   const handleHouseClick = (house: HousePosition) => {
     console.log('House clicked:', house);
   };
-
-
   const renderBirthDataForm = () => (
     <motion.div 
       className={styles.chartContainer}
@@ -212,7 +190,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           Generate your personalized interactive birth chart
         </p>
       </div>
-
       <form onSubmit={handleFormSubmit} className={styles.birthForm}>
         <div className={styles.formGrid}>
           <div className={styles.formField}>
@@ -260,7 +237,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       </form>
     </motion.div>
   );
-
   const renderInteractiveChart = () => (
     <motion.div 
       className={styles.chartContainer}
@@ -280,14 +256,12 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           Edit Birth Info
         </button>
       </div>
-
       <InteractiveBirthChart
         birthData={birthData}
         onPlanetClick={handlePlanetClick}
         onHouseClick={handleHouseClick}
         className={styles.birthChart}
       />
-
       <div className={styles.chartInstructions}>
         <h4>🔮 How to Use Your Chart</h4>
         <div className={styles.instructions}>
@@ -324,7 +298,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       </div>
     </motion.div>
   );
-
   const renderDailyHoroscope = () => (
     <motion.div 
       className={styles.horoscopeContainer}
@@ -343,7 +316,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           })}
         </p>
       </div>
-
       <div className={styles.horoscopeContent}>
         <div className={styles.cosmicHighlight}>
           <h4>✨ Today&apos;s Cosmic Spotlight</h4>
@@ -353,7 +325,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             and grounded manifestation.
           </p>
         </div>
-
         <div className={styles.generalGuidance}>
           <h4>🌟 Universal Guidance</h4>
           <ul>
@@ -363,7 +334,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             <li>🔮 Evening meditation brings clarity</li>
           </ul>
         </div>
-
         {userTier === 'guest' ? (
           <div className={styles.premiumTeaser}>
             <div className={styles.teaserContent}>
@@ -433,7 +403,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       </div>
     </motion.div>
   );
-
   return (
     <div className={styles.container}>
       <motion.button
@@ -447,7 +416,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       >
         ← Back to Cosmic Lobby
       </motion.button>
-
       <motion.div
         className={styles.content}
         initial={{ opacity: 0, y: 20 }}
@@ -460,7 +428,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             Discover your cosmic blueprint and celestial guidance
           </p>
         </div>
-
         {!selectedService ? (
           <div className={styles.serviceSelection}>
             <motion.div 
@@ -478,7 +445,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 {userTier === 'subscriber' && <span className={styles.accessBadge}>Full Access</span>}
               </div>
             </motion.div>
-
             <motion.div 
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
@@ -492,7 +458,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <span className={styles.accessBadge}>Free for All</span>
               </div>
             </motion.div>
-
             <motion.div 
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
@@ -508,7 +473,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium</span>}
               </div>
             </motion.div>
-
             <motion.div 
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
@@ -524,7 +488,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium Plus</span>}
               </div>
             </motion.div>
-
             <motion.div 
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
@@ -539,7 +502,6 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <span className={styles.accessBadge}>Free for All</span>
               </div>
             </motion.div>
-
             <motion.div 
               className={`${styles.serviceCard} ${styles.advancedCard}`}
               whileHover={{ scale: 1.02 }}
@@ -612,14 +574,12 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           </div>
         )}
       </motion.div>
-
       {/* Unlock Journey Modal */}
       <UnlockJourneyModal
         isVisible={showUnlockModal}
         onClose={() => setShowUnlockModal(false)}
         type="astrology"
       />
-
       {/* Auth Modal */}
       <AuthModal
         isOpen={showAuthModal}

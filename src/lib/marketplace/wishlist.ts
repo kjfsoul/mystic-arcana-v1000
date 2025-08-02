@@ -1,8 +1,7 @@
+ 
 import { supabase } from '@/lib/supabase/client';
 import { MYSTIC_PRODUCTS } from '@/lib/stripe/initStripe';
-
 export type ProductKey = keyof typeof MYSTIC_PRODUCTS;
-
 export interface WishlistItem {
   id: string;
   user_id: string;
@@ -16,7 +15,6 @@ export interface WishlistItem {
     metadata: any;
   };
 }
-
 export class WishlistService {
   /**
    * Add a product to the user's wishlist
@@ -28,7 +26,6 @@ export class WishlistService {
       if (!user) {
         return { success: false, error: 'User must be authenticated to add to wishlist' };
       }
-
       // Check if item already exists in wishlist
       const { data: existingItem } = await supabase
         .from('wishlist_items')
@@ -36,11 +33,9 @@ export class WishlistService {
         .eq('user_id', user.id)
         .eq('product_key', productKey)
         .single();
-
       if (existingItem) {
         return { success: false, error: 'Item already in wishlist' };
       }
-
       // Add to wishlist
       const product = MYSTIC_PRODUCTS[productKey];
       const { error } = await supabase
@@ -56,19 +51,16 @@ export class WishlistService {
             metadata: product.metadata
           }
         });
-
       if (error) {
         console.error('Error adding to wishlist:', error);
         return { success: false, error: 'Failed to add item to wishlist' };
       }
-
       return { success: true };
     } catch (error) {
       console.error('Error adding to wishlist:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Remove a product from the user's wishlist
    */
@@ -79,25 +71,21 @@ export class WishlistService {
       if (!user) {
         return { success: false, error: 'User must be authenticated' };
       }
-
       const { error } = await supabase
         .from('wishlist_items')
         .delete()
         .eq('user_id', user.id)
         .eq('product_key', productKey);
-
       if (error) {
         console.error('Error removing from wishlist:', error);
         return { success: false, error: 'Failed to remove item from wishlist' };
       }
-
       return { success: true };
     } catch (error) {
       console.error('Error removing from wishlist:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Get all items in the user's wishlist
    */
@@ -108,25 +96,21 @@ export class WishlistService {
       if (!user) {
         return { success: false, error: 'User must be authenticated' };
       }
-
       const { data, error } = await supabase
         .from('wishlist_items')
         .select('*')
         .eq('user_id', user.id)
         .order('added_at', { ascending: false });
-
       if (error) {
         console.error('Error fetching wishlist:', error);
         return { success: false, error: 'Failed to fetch wishlist' };
       }
-
       return { success: true, data: data || [] };
     } catch (error) {
       console.error('Error fetching wishlist:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Check if a product is in the user's wishlist
    */
@@ -137,26 +121,22 @@ export class WishlistService {
       if (!user) {
         return { success: true, isInWishlist: false };
       }
-
       const { data, error } = await supabase
         .from('wishlist_items')
         .select('id')
         .eq('user_id', user.id)
         .eq('product_key', productKey)
         .single();
-
       if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows found"
         console.error('Error checking wishlist:', error);
         return { success: false, error: 'Failed to check wishlist status' };
       }
-
       return { success: true, isInWishlist: !!data };
     } catch (error) {
       console.error('Error checking wishlist:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Get wishlist item count for the user
    */
@@ -167,24 +147,20 @@ export class WishlistService {
       if (!user) {
         return { success: true, count: 0 };
       }
-
       const { count, error } = await supabase
         .from('wishlist_items')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', user.id);
-
       if (error) {
         console.error('Error getting wishlist count:', error);
         return { success: false, error: 'Failed to get wishlist count' };
       }
-
       return { success: true, count: count || 0 };
     } catch (error) {
       console.error('Error getting wishlist count:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Clear the entire wishlist for the user
    */
@@ -195,24 +171,20 @@ export class WishlistService {
       if (!user) {
         return { success: false, error: 'User must be authenticated' };
       }
-
       const { error } = await supabase
         .from('wishlist_items')
         .delete()
         .eq('user_id', user.id);
-
       if (error) {
         console.error('Error clearing wishlist:', error);
         return { success: false, error: 'Failed to clear wishlist' };
       }
-
       return { success: true };
     } catch (error) {
       console.error('Error clearing wishlist:', error);
       return { success: false, error: 'An unexpected error occurred' };
     }
   }
-
   /**
    * Get products from wishlist that match specific filters
    */
@@ -227,9 +199,7 @@ export class WishlistService {
       if (!wishlistResult.success || !wishlistResult.data) {
         return wishlistResult;
       }
-
       let filteredItems = wishlistResult.data;
-
       // Apply celestial event filter
       if (filters.celestialEvents && filters.celestialEvents.length > 0) {
         filteredItems = filteredItems.filter(item => {
@@ -239,7 +209,6 @@ export class WishlistService {
           return filters.celestialEvents!.some(event => alignmentArray.includes(event));
         });
       }
-
       // Apply product type filter
       if (filters.productTypes && filters.productTypes.length > 0) {
         filteredItems = filteredItems.filter(item => {
@@ -247,7 +216,6 @@ export class WishlistService {
           return type && filters.productTypes!.includes(type);
         });
       }
-
       // Apply element filter
       if (filters.elements && filters.elements.length > 0) {
         filteredItems = filteredItems.filter(item => {
@@ -255,7 +223,6 @@ export class WishlistService {
           return element && filters.elements!.includes(element);
         });
       }
-
       return { success: true, data: filteredItems };
     } catch (error) {
       console.error('Error getting filtered wishlist:', error);
@@ -263,7 +230,6 @@ export class WishlistService {
     }
   }
 }
-
 /**
  * Hook for managing wishlist state in React components
  */
@@ -271,7 +237,6 @@ export function useWishlist() {
   const [wishlistItems, setWishlistItems] = React.useState<WishlistItem[]>([]);
   const [wishlistCount, setWishlistCount] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
-
   const refreshWishlist = async () => {
     setLoading(true);
     try {
@@ -286,7 +251,6 @@ export function useWishlist() {
       setLoading(false);
     }
   };
-
   const addToWishlist = async (productKey: ProductKey) => {
     const result = await WishlistService.addToWishlist(productKey);
     if (result.success) {
@@ -294,7 +258,6 @@ export function useWishlist() {
     }
     return result;
   };
-
   const removeFromWishlist = async (productKey: ProductKey) => {
     const result = await WishlistService.removeFromWishlist(productKey);
     if (result.success) {
@@ -302,16 +265,13 @@ export function useWishlist() {
     }
     return result;
   };
-
   const isInWishlist = (productKey: ProductKey) => {
     return wishlistItems.some(item => item.product_key === productKey);
   };
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   React.useEffect(() => {
     refreshWishlist();
   }, []);
-
   return {
     wishlistItems,
     wishlistCount,
@@ -322,6 +282,5 @@ export function useWishlist() {
     isInWishlist
   };
 }
-
 // Import React for the hook
 import React from 'react';

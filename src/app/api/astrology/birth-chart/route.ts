@@ -4,7 +4,6 @@ import path from "path";
 import { BirthData } from '@/types/astrology';
 import { AstrologyCache } from "@/lib/cache/AstrologyCache";
 import { z } from "zod";
-
 // Zod validation schema for exact payload format
 const BirthChartPayloadSchema = z.object({
   name: z.string().optional(),
@@ -17,13 +16,10 @@ const BirthChartPayloadSchema = z.object({
     timezone: z.string().optional().default("UTC")
   }, { message: "Invalid location format - must include lat, lon, city, country" })
 });
-
 type ValidatedBirthChartPayload = z.infer<typeof BirthChartPayloadSchema>;
-
 interface BirthChartRequest {
   birthData: BirthData;
 }
-
 interface BirthChartData {
   svg: string;
   signSummary: string;
@@ -31,7 +27,6 @@ interface BirthChartData {
   houses?: any; // Enhanced house data
   placidusMethod?: boolean;
 }
-
 interface BirthChartResult {
   success: boolean;
   data?: {
@@ -42,7 +37,6 @@ interface BirthChartResult {
   };
   error?: string;
 }
-
 function callPythonScript(action: string, data: object): Promise<BirthChartResult> {
   return new Promise((resolve) => {
     const pythonPath = process.env.PYTHON_PATH || 'python3';
@@ -101,7 +95,6 @@ function callPythonScript(action: string, data: object): Promise<BirthChartResul
     }, 30000); // 30 second timeout
   });
 }
-
 function generateEnhancedSignSummary(chartData: any): string {
   try {
     const houses = chartData.chart_data?.houses;
@@ -131,7 +124,6 @@ function generateEnhancedSignSummary(chartData: any): string {
     return "Birth chart calculated with enhanced astrological methods and house system precision.";
   }
 }
-
 function generateEnhancedHouseBreakdown(chartData: any): string[] {
   try {
     const houses = chartData.chart_data?.houses;
@@ -195,7 +187,6 @@ function generateEnhancedHouseBreakdown(chartData: any): string[] {
     ];
   }
 }
-
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   const cache = new AstrologyCache();
@@ -256,7 +247,6 @@ export async function POST(request: NextRequest) {
       longitude: payload.location.lon,
       timezone: payload.location.timezone
     };
-
     // Check cache first
     const cachedChart = await cache.getCachedBirthChart(birthData);
     if (cachedChart) {
@@ -282,7 +272,6 @@ export async function POST(request: NextRequest) {
         }
       });
     }
-
     // Convert birth data to proper format for Python script
     const pythonBirthData = {
       name: birthData.name || 'User',
@@ -294,10 +283,8 @@ export async function POST(request: NextRequest) {
       city: birthData.city,
       country: birthData.country || ""
     };
-
     // Call Python script for birth chart generation
     const chartResult = await callPythonScript('birth_chart', pythonBirthData);
-
     if (!chartResult.success || !chartResult.data) {
       // Fallback to data temporarily unavailable
       const responseTime = Date.now() - startTime;
@@ -321,7 +308,6 @@ export async function POST(request: NextRequest) {
         }
       });
     }
-
     // Transform Python response to expected format with enhanced house data
     const birthChartData: BirthChartData = {
       svg: chartResult.data.svg_chart,
@@ -331,7 +317,6 @@ export async function POST(request: NextRequest) {
       placidusMethod: chartResult.data.chart_data?.houses?.method?.includes('Placidus') || 
                      chartResult.data.chart_data?.houses?.method?.includes('Swiss Ephemeris')
     };
-
     // Cache the successful result
     const calculationTime = Date.now() - startTime;
     const swissEphemeris = chartResult.data.chart_data?.houses?.method?.includes('Swiss Ephemeris') || false;
@@ -349,7 +334,6 @@ export async function POST(request: NextRequest) {
       swissEphemeris,
       fallbackMode
     );
-
     return NextResponse.json({
       success: true,
       data: birthChartData
@@ -360,7 +344,6 @@ export async function POST(request: NextRequest) {
         'X-Response-Time': `${calculationTime}ms`
       }
     });
-
   } catch (error) {
     console.error('Birth chart API error:', error);
     const responseTime = Date.now() - startTime;

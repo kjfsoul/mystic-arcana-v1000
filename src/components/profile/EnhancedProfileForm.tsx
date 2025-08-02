@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, User, Calendar, Clock, MapPin, Sparkles } from 'lucide-react';
@@ -7,19 +6,16 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useProfileAutofill } from '@/hooks/useProfileAutofill';
 import { LocationInput } from '@/components/astrology/LocationInput';
 import styles from './EnhancedProfileForm.module.css';
-
 const tarotReaders = [
   { id: 'sage', name: 'Sage - The Wisdom Keeper', icon: '🔮' },
   { id: 'luna', name: 'Luna - The Moon Guide', icon: '🌙' },
   { id: 'mystic', name: 'Mystic - The Spirit Walker', icon: '✨' },
   { id: 'oracle', name: 'Oracle - The Truth Seer', icon: '👁️' }
 ];
-
 interface EnhancedProfileFormProps {
   onComplete?: () => void;
   embedded?: boolean;
 }
-
 export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
   onComplete,
   embedded = false
@@ -32,7 +28,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
     saveProfile,
     getAutofillValues
   } = useProfileAutofill({ autoLoad: true });
-
   // Form state
   const [formData, setFormData] = useState({
     birthDate: '',
@@ -45,9 +40,8 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
-
   // Load autofill data when profile loads
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const autofillData = getAutofillValues();
     setFormData({
@@ -58,7 +52,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
       preferredTarotReader: autofillData.preferredTarotReader || 'sage'
     });
   }, [profileData]);
-
   // Validate form
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -90,7 +83,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,7 +115,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
       setIsSaving(false);
     }
   };
-
   // Handle location change
   const handleLocationChange = (location: string, coordinates?: { lat: number; lng: number }) => {
     setFormData(prev => ({
@@ -132,7 +123,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
       birthCoordinates: coordinates
     }));
   };
-
   return (
     <motion.div
       className={`${styles.container} ${embedded ? styles.embedded : ''}`}
@@ -151,7 +141,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
           </p>
         </div>
       )}
-
       <form onSubmit={handleSubmit} className={styles.form}>
         {/* Birth Information Section */}
         <div className={styles.section}>
@@ -162,7 +151,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
           <p className={styles.sectionDescription}>
             Your birth details allow us to calculate accurate astrological charts and provide personalized readings.
           </p>
-
           <div className={styles.fieldGroup}>
             {/* Birth Date */}
             <div className={styles.field}>
@@ -183,7 +171,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
                 <p className={styles.error}>{validationErrors.birthDate}</p>
               )}
             </div>
-
             {/* Birth Time */}
             <div className={styles.field}>
               <label className={styles.label}>
@@ -205,7 +192,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
               )}
             </div>
           </div>
-
           {/* Birth Location */}
           <div className={styles.field}>
             <LocationInput
@@ -219,7 +205,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
             </p>
           </div>
         </div>
-
         {/* Reading Preferences Section */}
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>
@@ -249,7 +234,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
             </p>
           </div>
         </div>
-
         {/* Error Message */}
         {error && (
           <motion.div
@@ -260,7 +244,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
             {error}
           </motion.div>
         )}
-
         {/* Success Message */}
         {saveSuccess && (
           <motion.div
@@ -271,7 +254,6 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
             ✨ Your cosmic profile has been saved!
           </motion.div>
         )}
-
         {/* Submit Button */}
         <button
           type="submit"

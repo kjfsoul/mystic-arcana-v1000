@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { spawn } from 'child_process';
 import path from 'path';
-
 // Python script paths
 const PYTHON_SCRIPTS_PATH = path.join(process.cwd(), 'src/services/astrology-python');
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { action, data } = body;
-
     let pythonScript = '';
     let args: string[] = [];
-
     switch (action) {
       case 'calculate-birth-chart':
         pythonScript = 'simple_astrology.py';
@@ -40,7 +36,6 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
     }
-
     // Execute Python script
     const result = await executePythonScript(pythonScript, args);
     
@@ -53,7 +48,6 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
 function executePythonScript(scriptName: string, args: string[]): Promise<unknown> {
   return new Promise((resolve, reject) => {
     const pythonPath = process.env.PYTHON_PATH || path.join(process.cwd(), 'venv-astrology/bin/python');
@@ -90,7 +84,6 @@ function executePythonScript(scriptName: string, args: string[]): Promise<unknow
     });
   });
 }
-
 // TypeScript interfaces for the API
 export interface BirthChartRequest {
   name: string;
@@ -98,7 +91,6 @@ export interface BirthChartRequest {
   city: string;
   country?: string;
 }
-
 export interface SynastryRequest {
   person1: {
     name: string;
@@ -121,7 +113,6 @@ export interface SynastryRequest {
     country?: string;
   };
 }
-
 export interface GeocodeRequest {
   city: string;
   country?: string;

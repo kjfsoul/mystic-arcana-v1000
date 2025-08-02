@@ -1,6 +1,5 @@
 // Note: RIDER_WAITE_DECK import removed - now using API-driven data
 // import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
-
 export interface TarotCardData {
   id: string;
   name: string;
@@ -18,7 +17,6 @@ export interface TarotCardData {
   description: string;
   position?: 'upright' | 'reversed'; // Add position property
 }
-
 export interface TarotReading {
   id: string;
   spreadType: 'single' | 'three-card' | 'celtic-cross';
@@ -30,13 +28,11 @@ export interface TarotReading {
   isGuest: boolean;
   question?: string; // Add question property
 }
-
 export interface TarotEngineOptions {
   isGuest: boolean;
   cosmicInfluence?: unknown;
   deckId?: string; // Allow custom deck selection
 }
-
 // Mock interpretations for different spreads
 const MOCK_INTERPRETATIONS = {
   single: [
@@ -54,18 +50,15 @@ const MOCK_INTERPRETATIONS = {
     "The Celtic Cross illuminates the path ahead, showing both the challenges you face and the strengths you possess to overcome them."
   ]
 };
-
 export class TarotEngine {
   private deck: TarotCardData[];
   private options: TarotEngineOptions;
   private deckLoaded: boolean = false;
-
   constructor(options: TarotEngineOptions = { isGuest: false }) {
     this.deck = [];
     this.options = options;
     // Deck will be loaded asynchronously via loadDeck()
   }
-
   /**
    * Load deck data from API
    */
@@ -73,19 +66,15 @@ export class TarotEngine {
     if (this.deckLoaded && this.deck.length > 0) {
       return; // Already loaded
     }
-
     try {
       const deckId = this.options.deckId || '00000000-0000-0000-0000-000000000001';
       const response = await fetch(`/api/tarot/deck/${deckId}`);
-
       if (!response.ok) {
         throw new Error(`Failed to load deck: ${response.status}`);
       }
-
       const data = await response.json();
       this.deck = data.cards || [];
       this.deckLoaded = true;
-
       console.log(`✅ TarotEngine loaded ${this.deck.length} cards`);
     } catch (error) {
       console.error('❌ Failed to load tarot deck:', error);
@@ -95,7 +84,6 @@ export class TarotEngine {
       throw error;
     }
   }
-
   /**
    * Shuffle the deck using Fisher-Yates algorithm
    */
@@ -107,19 +95,15 @@ export class TarotEngine {
     }
     return shuffled;
   }
-
   /**
    * Draw cards for a specific spread type
    */
   async drawCards(spreadType: 'single' | 'three-card' | 'celtic-cross'): Promise<TarotCardData[]> {
     await this.loadDeck(); // Ensure deck is loaded
-
     if (this.deck.length === 0) {
       throw new Error('No cards available - deck failed to load');
     }
-
     const shuffled = this.shuffleDeck();
-
     switch (spreadType) {
       case 'single':
         return [shuffled[0]];
@@ -131,7 +115,6 @@ export class TarotEngine {
         return [shuffled[0]];
     }
   }
-
   /**
    * Get positions for a spread type
    */
@@ -158,7 +141,6 @@ export class TarotEngine {
         return ['Present Situation'];
     }
   }
-
   /**
    * Generate interpretation for a reading
    */
@@ -179,27 +161,22 @@ export class TarotEngine {
       const position = positions[index];
       return `In the position of ${position}, ${card.name} suggests: ${card.meaning.upright}`;
     }).join(' ');
-
     // Add cosmic influence if available
     let cosmicNote = '';
     if (this.options.cosmicInfluence && typeof this.options.cosmicInfluence === 'object' && this.options.cosmicInfluence !== null && 'currentPhase' in this.options.cosmicInfluence) {
       cosmicNote = ` The cosmic energies of ${(this.options.cosmicInfluence as { currentPhase: string }).currentPhase} amplify this reading's significance.`;
     }
-
     return `${baseInterpretation} ${cardInsights}${cosmicNote}`;
   }
-
   /**
    * Perform a complete tarot reading
    */
   async performReading(spreadType: 'single' | 'three-card' | 'celtic-cross'): Promise<TarotReading> {
     // Simulate shuffling delay for dramatic effect
     await new Promise(resolve => setTimeout(resolve, 1500));
-
     const cards = await this.drawCards(spreadType); // Now async
     const positions = this.getSpreadPositions(spreadType);
     const interpretation = this.generateInterpretation(cards, spreadType, positions);
-
     const reading: TarotReading = {
       id: `reading_${Date.now()}`,
       spreadType,
@@ -210,10 +187,8 @@ export class TarotEngine {
       timestamp: new Date(),
       isGuest: this.options.isGuest
     };
-
     return reading;
   }
-
   /**
    * Get available spread types
    */
@@ -239,7 +214,6 @@ export class TarotEngine {
       }
     ];
   }
-
   /**
    * Get a specific card by ID
    */
@@ -247,7 +221,6 @@ export class TarotEngine {
     await this.loadDeck(); // Ensure deck is loaded
     return this.deck.find(card => card.id === cardId);
   }
-
   /**
    * Get all cards in the deck
    */
@@ -255,7 +228,6 @@ export class TarotEngine {
     await this.loadDeck(); // Ensure deck is loaded
     return [...this.deck];
   }
-
   /**
    * Check if user can access a spread type
    */

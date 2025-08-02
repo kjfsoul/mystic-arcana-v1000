@@ -1,16 +1,14 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MapPin, Search, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './LocationInput.module.css';
-
 interface LocationSuggestion {
   place_name: string;
   center: [number, number]; // [longitude, latitude]
   context?: Array<{ text: string; id: string }>;
 }
-
 interface LocationInputProps {
   value: string;
   onChange: (value: string, coordinates?: { lat: number; lng: number }) => void;
@@ -20,10 +18,8 @@ interface LocationInputProps {
   className?: string;
   label?: string;
 }
-
 // Mapbox API endpoint (you can also use other geocoding services)
 const GEOCODING_API = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
-
 export const LocationInput: React.FC<LocationInputProps> = ({
   value,
   onChange,
@@ -42,18 +38,15 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
-
   // Fetch location suggestions
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const fetchSuggestions = useCallback(async (searchQuery: string) => {
     if (searchQuery.length < 2) {
       setSuggestions([]);
       return;
     }
-
     setIsLoading(true);
     setError(null);
-
     try {
       // First try Mapbox if we have an API key
       const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
@@ -65,7 +58,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
           `types=place,locality,district&` +
           `limit=5`
         );
-
         if (response.ok) {
           const data = await response.json();
           setSuggestions(data.features || []);
@@ -73,7 +65,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
           return;
         }
       }
-
       // Fallback to Nominatim (OpenStreetMap) - no API key required
       const nominatimResponse = await fetch(
         `https://nominatim.openstreetmap.org/search?` +
@@ -82,7 +73,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
         `limit=5&` +
         `featuretype=city,town,village`
       );
-
       if (nominatimResponse.ok) {
         const data = await nominatimResponse.json();
         // Convert Nominatim format to our format
@@ -102,18 +92,15 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       setIsLoading(false);
     }
   }, []);
-
   // Debounced search
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (query !== value) {
       onChange(query);
     }
-
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
-
     if (query.length >= 2) {
       debounceTimerRef.current = setTimeout(() => {
         fetchSuggestions(query);
@@ -122,16 +109,14 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       setSuggestions([]);
       setShowSuggestions(false);
     }
-
     return () => {
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current);
       }
     };
   }, [query, fetchSuggestions, onChange, value]);
-
   // Handle click outside
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -143,15 +128,12 @@ export const LocationInput: React.FC<LocationInputProps> = ({
         setShowSuggestions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions || suggestions.length === 0) return;
-
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -175,7 +157,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
         break;
     }
   };
-
   // Select a location
   const selectLocation = (location: LocationSuggestion) => {
     const locationName = location.place_name.split(',')[0] + ', ' + 
@@ -194,14 +175,12 @@ export const LocationInput: React.FC<LocationInputProps> = ({
     setShowSuggestions(false);
     setSelectedIndex(-1);
   };
-
   // Get current location
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser');
       return;
     }
-
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -229,7 +208,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       }
     );
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       {label && (
@@ -284,7 +262,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
             )}
           </button>
         </div>
-
         {/* Suggestions dropdown */}
         <AnimatePresence>
           {showSuggestions && suggestions.length > 0 && (
@@ -315,7 +292,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-
         {/* Loading indicator */}
         {isLoading && (
           <div className={styles.loadingIndicator}>
@@ -323,7 +299,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
             <span>Searching locations...</span>
           </div>
         )}
-
         {/* Error message */}
         {error && (
           <motion.div

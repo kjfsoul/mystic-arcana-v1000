@@ -1,11 +1,8 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './MobileTarotSpreadSelector.module.css';
-
 export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
-
 interface Spread {
   id: SpreadType;
   name: string;
@@ -14,18 +11,15 @@ interface Spread {
   duration: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
 }
-
 interface MobileTarotSpreadSelectorProps {
   onSelectSpread: (spread: SpreadType) => void;
   className?: string;
 }
-
 export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps> = ({
   onSelectSpread,
   className = ''
 }) => {
   const [selectedSpread, setSelectedSpread] = useState<SpreadType | null>(null);
-
   const spreads: Spread[] = [
     {
       id: 'single',
@@ -52,7 +46,6 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
       difficulty: 'advanced'
     }
   ];
-
   const getDifficultyColor = (difficulty: Spread['difficulty']) => {
     const colors = {
       beginner: '#4ecdc4',
@@ -61,21 +54,18 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
     };
     return colors[difficulty];
   };
-
   const handleSelectSpread = (spread: SpreadType) => {
     setSelectedSpread(spread);
     setTimeout(() => {
       onSelectSpread(spread);
     }, 300);
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.header}>
         <h2 className={styles.title}>Choose Your Spread</h2>
         <p className={styles.subtitle}>Select a reading type that resonates with you</p>
       </div>
-
       <div className={styles.spreadsContainer}>
         <AnimatePresence mode="wait">
           {spreads.map((spread, index) => (
@@ -101,9 +91,7 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
                   {spread.difficulty}
                 </span>
               </div>
-
               <p className={styles.spreadDescription}>{spread.description}</p>
-
               <div className={styles.spreadMeta}>
                 <div className={styles.metaItem}>
                   <span className={styles.metaIcon}>🃏</span>
@@ -114,7 +102,6 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
                   <span className={styles.metaText}>{spread.duration}</span>
                 </div>
               </div>
-
               {/* Visual representation of card layout */}
               <div className={styles.cardPreview}>
                 {spread.id === 'single' && (
@@ -144,7 +131,6 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
                   </div>
                 )}
               </div>
-
               <motion.div 
                 className={styles.selectIndicator}
                 initial={{ scale: 0 }}
@@ -157,7 +143,6 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
           ))}
         </AnimatePresence>
       </div>
-
       <div className={styles.footer}>
         <p className={styles.hint}>Tap a spread to begin your reading</p>
       </div>

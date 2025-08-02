@@ -1,9 +1,7 @@
 import Logger from "@/utils/logger";
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
-
 const logger = new Logger("TarotShuffleAPI");
-
 interface ShuffleResponse {
   success: boolean;
   shuffleId: string;
@@ -33,7 +31,6 @@ interface ShuffleResponse {
   };
   error?: string;
 }
-
 /**
  * POST /api/tarot/shuffle
  *
@@ -56,11 +53,9 @@ export async function POST(request: NextRequest) {
       includePreview = false,
       userId,
     } = body;
-
     // Initialize Supabase client
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
     if (!supabaseUrl || !supabaseServiceKey) {
       return NextResponse.json(
         {
@@ -71,11 +66,9 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
       auth: { autoRefreshToken: false, persistSession: false },
     });
-
     // Fetch deck cards
     const startTime = Date.now();
     const { data: cards, error: fetchError } = await supabase
@@ -83,7 +76,6 @@ export async function POST(request: NextRequest) {
       .select("*")
       .eq("deck_id", deckId)
       .order("card_number");
-
     if (fetchError) {
       console.error("Database fetch error:", fetchError);
       return NextResponse.json(
@@ -96,7 +88,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
     if (!cards || cards.length === 0) {
       return NextResponse.json(
         {
@@ -107,23 +98,19 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
-
     // Perform shuffle based on algorithm
     const shuffledCards = shuffleDeck(cards, algorithm);
     const shuffleTime = Date.now() - startTime;
-
     // Generate shuffle state
     const shuffleId = `shuffle_${Date.now()}_${Math.random()
       .toString(36)
       .substr(2, 9)}`;
     const entropy = calculateEntropy(shuffledCards);
-
     const shuffleState = {
       algorithm,
       timestamp: new Date().toISOString(),
       entropy: Math.round(entropy * 100) / 100,
     };
-
     // Optional preview of shuffled deck
     let preview;
     if (includePreview && shuffledCards.length >= 3) {
@@ -146,7 +133,6 @@ export async function POST(request: NextRequest) {
         },
       };
     }
-
     const response: ShuffleResponse = {
       success: true,
       shuffleId,
@@ -155,7 +141,6 @@ export async function POST(request: NextRequest) {
       shuffleState,
       ...(preview && { preview }),
     };
-
     // Log the shuffle for monitoring
     logger.info(
       "tarot_deck_shuffled",
@@ -170,7 +155,6 @@ export async function POST(request: NextRequest) {
       },
       `Successfully shuffled ${shuffledCards.length} cards using ${algorithm} algorithm.`
     );
-
     return NextResponse.json(response, {
       headers: {
         "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -192,7 +176,6 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
 /**
  * Shuffle deck using specified algorithm
  */
@@ -205,10 +188,8 @@ interface Card {
   card_number: number;
   [key: string]: unknown; // For any additional properties
 }
-
 function shuffleDeck(cards: Card[], algorithm: string): Card[] {
   const deck = [...cards];
-
   switch (algorithm) {
     case "fisher-yates":
       return fisherYatesShuffle(deck);
@@ -220,7 +201,6 @@ function shuffleDeck(cards: Card[], algorithm: string): Card[] {
       return fisherYatesShuffle(deck);
   }
 }
-
 /**
  * Fisher-Yates (Knuth) shuffle - cryptographically strong
  */
@@ -232,7 +212,6 @@ function fisherYatesShuffle(array: Card[]): Card[] {
   }
   return shuffled;
 }
-
 /**
  * Riffle shuffle simulation - more natural feel
  */
@@ -241,11 +220,9 @@ function riffleShuffle(array: Card[]): Card[] {
   const mid = Math.floor(deck.length / 2);
   const left = deck.slice(0, mid);
   const right = deck.slice(mid);
-
   const shuffled: Card[] = [];
   let i = 0,
     j = 0;
-
   while (i < left.length && j < right.length) {
     // Bias towards alternating but with some randomness
     if (Math.random() < 0.6) {
@@ -254,20 +231,16 @@ function riffleShuffle(array: Card[]): Card[] {
       shuffled.push(right[j++]);
     }
   }
-
   // Add remaining cards
   shuffled.push(...left.slice(i), ...right.slice(j));
-
   return shuffled;
 }
-
 /**
  * Overhand shuffle simulation - gentle mixing
  */
 function overhandShuffle(array: Card[]): Card[] {
   let deck = [...array];
   const passes = 3 + Math.floor(Math.random() * 3); // 3-5 passes
-
   for (let pass = 0; pass < passes; pass++) {
     const newDeck: Card[] = [];
     while (deck.length > 0) {
@@ -282,23 +255,19 @@ function overhandShuffle(array: Card[]): Card[] {
     }
     deck = newDeck;
   }
-
   return deck;
 }
-
 /**
  * Calculate shuffle entropy (measure of randomness)
  */
 function calculateEntropy(shuffledCards: Card[]): number {
   let entropy = 0;
   const cardCount = shuffledCards.length;
-
   // Simple entropy calculation based on position displacement
   for (let i = 0; i < cardCount; i++) {
     const originalPosition = shuffledCards[i].card_number;
     const displacement = Math.abs(i - originalPosition);
     entropy += displacement / cardCount;
   }
-
   return entropy / cardCount;
 }

@@ -1,20 +1,18 @@
+ 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { GeoLocation } from '../types/astronomical';
-
 interface GeolocationState {
   location: GeoLocation | null;
   loading: boolean;
   error: string | null;
   permission: 'granted' | 'denied' | 'prompt' | 'unknown';
 }
-
 interface UseGeolocationOptions {
   enableHighAccuracy?: boolean;
   timeout?: number;
   maximumAge?: number;
   fallbackLocation?: GeoLocation;
 }
-
 /**
  * useGeolocation Hook
  * 
@@ -33,51 +31,42 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       timezone: 'America/New_York'
     }
   } = options;
-
   // Memoize fallback location to prevent infinite loops
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const memoizedFallbackLocation = useMemo(() => fallbackLocation, [fallbackLocation]);
-
   // Prevent multiple simultaneous requests
   const isRequestingRef = useRef(false);
-
   const [state, setState] = useState<GeolocationState>({
     location: null,
     loading: false,
     error: null,
     permission: 'unknown'
   });
-
   // Get timezone from coordinates
   const getTimezoneFromCoords = async (lat: number, lon: number): Promise<string> => {
     try {
       // Try to use Intl.DateTimeFormat to get timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       if (timezone) return timezone;
-
       // Fallback: estimate timezone from longitude
       const offsetHours = Math.round(lon / 15);
-
       // This is a rough approximation - in production, use a proper timezone API
       if (offsetHours >= -12 && offsetHours <= 12) {
         return `UTC${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
       }
-
       return 'UTC';
     } catch {
       return 'UTC';
     }
   };
-
   // Get elevation estimate (placeholder - would use elevation API in production)
   const getElevationEstimate = (): number => {
     // Placeholder elevation calculation
     // In production, use a proper elevation API like Google Elevation API
     return 0;
   };
-
   // Request geolocation permission and get position
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const requestLocation = useCallback(async () => {
     // Prevent multiple simultaneous requests
     if (isRequestingRef.current) {
@@ -93,16 +82,13 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       }));
       return;
     }
-
     isRequestingRef.current = true;
     setState(prev => ({ ...prev, loading: true, error: null }));
-
     try {
       // Check permission status if available
       if ('permissions' in navigator) {
         const permission = await navigator.permissions.query({ name: 'geolocation' });
         setState(prev => ({ ...prev, permission: permission.state }));
-
         if (permission.state === 'denied') {
           setState(prev => ({
             ...prev,
@@ -114,23 +100,19 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
           return;
         }
       }
-
       // Get current position
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude, altitude } = position.coords;
-
           try {
             const timezone = await getTimezoneFromCoords(latitude, longitude);
             const elevation = altitude || getElevationEstimate();
-
             const location: GeoLocation = {
               latitude,
               longitude,
               elevation,
               timezone
             };
-
             setState(prev => ({
               ...prev,
               location,
@@ -147,7 +129,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               elevation: altitude || 0,
               timezone: memoizedFallbackLocation.timezone
             };
-
             setState(prev => ({
               ...prev,
               location,
@@ -160,7 +141,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
         },
         (error) => {
           let errorMessage = 'Failed to get location';
-
           switch (error.code) {
             case error.PERMISSION_DENIED:
               errorMessage = 'Location access denied by user';
@@ -172,7 +152,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               errorMessage = 'Location request timed out';
               break;
           }
-
           setState(prev => ({
             ...prev,
             loading: false,
@@ -198,24 +177,20 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       isRequestingRef.current = false;
     }
   }, [enableHighAccuracy, maximumAge, timeout, memoizedFallbackLocation]);
-
   // Watch position for continuous updates
   const watchLocation = () => {
     if (!navigator.geolocation) return null;
-
     return navigator.geolocation.watchPosition(
       async (position) => {
         const { latitude, longitude, altitude } = position.coords;
         const timezone = await getTimezoneFromCoords(latitude, longitude);
         const elevation = altitude || getElevationEstimate();
-
         const location: GeoLocation = {
           latitude,
           longitude,
           elevation,
           timezone
         };
-
         setState(prev => ({
           ...prev,
           location,
@@ -232,7 +207,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       }
     );
   };
-
   // Clear location data
   const clearLocation = () => {
     setState(prev => ({
@@ -241,7 +215,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       error: null
     }));
   };
-
   // Use fallback location
   const useFallback = () => {
     setState(prev => ({
@@ -251,13 +224,11 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       loading: false
     }));
   };
-
   // Auto-request location on mount (only once)
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     requestLocation();
   }, [requestLocation]); // Empty dependency array to run only once
-
   return {
     ...state,
     requestLocation,

@@ -1,19 +1,15 @@
 'use client';
-
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Card } from '../../ui/Card/Card';
 import { CardAnimations } from '../../animations/CardAnimations/CardAnimations';
 import { useCosmicWeather } from '../../../utils/cosmic-weather/useCosmicWeather';
 import styles from './TarotPanel.module.css';
-
 interface TarotPanelProps {
   isActive: boolean;
   onActivate: () => void;
 }
-
 interface TarotCard {
-
   id: string;
   name: string;
   arcana: 'major' | 'minor';
@@ -30,7 +26,6 @@ interface TarotCard {
   card_number?: number;
 };
 }
-
 /**
  * TarotPanel Component
  * 
@@ -46,16 +41,12 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
   const [currentSpread, setCurrentSpread] = useState<'three-card' | 'celtic-cross' | 'single'>('three-card');
   const [isShuffling, setIsShuffling] = useState(false);
   const { cosmicInfluence } = useCosmicWeather();
-
-
-
   const handleShuffle = async () => {
     setIsShuffling(true);
     // Shuffle animation and logic
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsShuffling(false);
   };
-
   return (
     <div
       className={`${styles.panel} ${isActive ? styles.active : ''}`}
@@ -69,7 +60,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
           Cosmic Influence: {cosmicInfluence.currentPhase}
         </p>
       </header>
-
       <div className={styles.content}>
         {/* Spread selector */}
         <div className={styles.spreadSelector}>
@@ -85,7 +75,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
             <option value="celtic-cross">Celtic Cross</option>
           </select>
         </div>
-
         {/* Card display area with animations */}
         <div className={styles.cardArea}>
           <CardAnimations isShuffling={isShuffling}>
@@ -120,7 +109,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
             )}
           </CardAnimations>
         </div>
-
         {/* Interpretation area */}
         {selectedCards.length > 0 && (
           <div className={styles.interpretation} role="region" aria-label="Card interpretation">

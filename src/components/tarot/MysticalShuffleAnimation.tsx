@@ -1,9 +1,8 @@
 'use client';
-
+ 
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw } from 'lucide-react';
-
 interface MysticalShuffleAnimationProps {
   onShuffleComplete?: () => void;
   onShuffleStart?: () => void;
@@ -12,7 +11,6 @@ interface MysticalShuffleAnimationProps {
   className?: string;
   size?: 'small' | 'medium' | 'large';
 }
-
 interface StarParticle {
   id: number;
   x: number;
@@ -21,7 +19,6 @@ interface StarParticle {
   duration: number;
   size: number;
 }
-
 export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> = ({
   onShuffleComplete,
   onShuffleStart,
@@ -33,7 +30,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   const [isHovered, setIsHovered] = useState(false);
   const [starParticles, setStarParticles] = useState<StarParticle[]>([]);
   const [showFlash, setShowFlash] = useState(false);
-
   // Size configurations
   const sizeConfig = {
     small: {
@@ -52,11 +48,9 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
       icon: 'w-12 h-12',
     },
   };
-
   const config = sizeConfig[size];
-
   // Generate star particles
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const generateStars = useCallback(() => {
     const stars: StarParticle[] = [];
     for (let i = 0; i < 15; i++) {
@@ -73,9 +67,8 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
     }
     setStarParticles(stars);
   }, []);
-
   // Play shuffle sound
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const playShuffleSound = useCallback(() => {
     try {
       const audio = new Audio('/sounds/card-shuffle.mp3');
@@ -101,9 +94,8 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
       console.log('Sound playback not available');
     }
   }, []);
-
   // Handle shuffle trigger
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleShuffle = useCallback(() => {
     if (isShuffling) return;
     
@@ -111,7 +103,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
     playShuffleSound();
     onShuffleStart?.();
     onTriggerShuffle?.();
-
     // Show flash effect at the end
     setTimeout(() => {
       setShowFlash(true);
@@ -119,16 +110,14 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
       onShuffleComplete?.();
     }, 2500);
   }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateStars, playShuffleSound]);
-
   // Clear particles when shuffling ends
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (!isShuffling) {
       const timer = setTimeout(() => setStarParticles([]), 500);
       return () => clearTimeout(timer);
     }
   }, [isShuffling]);
-
   return (
     <div className={`relative inline-block ${className}`}>
       {/* Main deck container */}
@@ -174,7 +163,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
             `,
           }}
         />
-
         {/* Shuffle icon */}
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
@@ -195,7 +183,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
             />
           </motion.div>
         </div>
-
         {/* Animated cards during shuffle */}
         <AnimatePresence>
           {isShuffling && (
@@ -235,7 +222,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
             </>
           )}
         </AnimatePresence>
-
         {/* Star particles */}
         <AnimatePresence>
           {starParticles.map((particle) => (
@@ -292,7 +278,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
             </motion.div>
           ))}
         </AnimatePresence>
-
         {/* Flash effect */}
         <AnimatePresence>
           {showFlash && (
@@ -306,7 +291,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
           )}
         </AnimatePresence>
       </motion.div>
-
       {/* Hover instruction */}
       {!isShuffling && (
         <motion.div
@@ -318,7 +302,6 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
           {isHovered ? 'Click to shuffle!' : 'Hover to see magic ✨'}
         </motion.div>
       )}
-
       {/* Shuffling indicator */}
       {isShuffling && (
         <motion.div

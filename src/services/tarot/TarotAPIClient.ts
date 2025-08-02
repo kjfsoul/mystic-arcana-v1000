@@ -2,7 +2,6 @@
  * TarotAPIClient - Production API client for all tarot endpoints
  * Handles all API calls with proper error handling and type safety
  */
-
 export interface DrawCardsRequest {
   count: number;
   deckId?: string;
@@ -10,7 +9,6 @@ export interface DrawCardsRequest {
   allowReversed?: boolean;
   userId?: string;
 }
-
 export interface DrawCardsResponse {
   success: boolean;
   cards: DrawnCard[];
@@ -19,7 +17,6 @@ export interface DrawCardsResponse {
   deckId: string;
   error?: string;
 }
-
 export interface DrawnCard {
   id: string;
   name: string;
@@ -34,20 +31,17 @@ export interface DrawnCard {
   drawnAt: string;
   position?: string;
 }
-
 export interface SpreadInfo {
   type: string;
   positions: string[];
   description: string;
 }
-
 export interface ShuffleRequest {
   deckId?: string;
   algorithm?: 'fisher-yates' | 'riffle' | 'overhand';
   includePreview?: boolean;
   userId?: string;
 }
-
 export interface ShuffleResponse {
   success: boolean;
   shuffleId: string;
@@ -65,7 +59,6 @@ export interface ShuffleResponse {
   };
   error?: string;
 }
-
 export interface SaveReadingRequest {
   userId: string;
   spreadType: "single" | "three-card" | "celtic-cross";
@@ -86,14 +79,12 @@ export interface SaveReadingRequest {
   isPublic?: boolean;
   tags?: string[];
 }
-
 export interface SaveReadingResponse {
   success: boolean;
   readingId: string;
   savedAt: string;
   error?: string;
 }
-
 export interface GetReadingsRequest {
   id?: string;
   userId?: string;
@@ -108,7 +99,6 @@ export interface GetReadingsRequest {
   sort?: "created_at" | "spread_type";
   order?: "asc" | "desc";
 }
-
 export interface GetReadingsResponse {
   success: boolean;
   reading?: TarotReading;
@@ -121,7 +111,6 @@ export interface GetReadingsResponse {
   };
   error?: string;
 }
-
 export interface TarotReading {
   id: string;
   userId: string;
@@ -137,14 +126,12 @@ export interface TarotReading {
   createdAt: string;
   drawId?: string;
 }
-
 export interface APIError {
   success: false;
   error: string;
   code: string;
   details?: string;
 }
-
 export interface GetReadingStatsResponse {
   success: boolean;
   stats?: {
@@ -157,18 +144,15 @@ export interface GetReadingStatsResponse {
   };
   error?: string;
 }
-
 class TarotAPIClient {
   private baseUrl: string;
   private defaultHeaders: HeadersInit;
-
   constructor(baseUrl: string = "") {
     this.baseUrl = baseUrl || "";
     this.defaultHeaders = {
       "Content-Type": "application/json",
     };
   }
-
   /**
    * Draw cards from the tarot deck
    */
@@ -179,13 +163,10 @@ class TarotAPIClient {
         headers: this.defaultHeaders,
         body: JSON.stringify(request),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Draw cards error:", error);
@@ -198,7 +179,6 @@ class TarotAPIClient {
       };
     }
   }
-
   /**
    * Shuffle the tarot deck
    */
@@ -209,13 +189,10 @@ class TarotAPIClient {
         headers: this.defaultHeaders,
         body: JSON.stringify(request),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Shuffle deck error:", error);
@@ -234,7 +211,6 @@ class TarotAPIClient {
       };
     }
   }
-
   /**
    * Save a tarot reading
    */
@@ -248,15 +224,12 @@ class TarotAPIClient {
       if (!isAuth) {
         throw new Error('Authentication required - please sign in');
       }
-
       // Make authenticated request
       const response = await APIAuthHelper.authenticatedFetch(`${this.baseUrl}/api/tarot/save-reading`, {
         method: "POST",
         body: JSON.stringify(request),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         // Handle specific authentication errors
         if (response.status === 401) {
@@ -264,7 +237,6 @@ class TarotAPIClient {
         }
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Save reading error:", error);
@@ -277,7 +249,6 @@ class TarotAPIClient {
       };
     }
   }
-
   /**
    * Get tarot readings
    */
@@ -286,13 +257,11 @@ class TarotAPIClient {
   ): Promise<GetReadingsResponse> {
     try {
       const queryParams = new URLSearchParams();
-
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
           queryParams.append(key, String(value));
         }
       });
-
       const url = `${this.baseUrl}/api/tarot/get-reading${
         queryParams.toString() ? "?" + queryParams.toString() : ""
       }`;
@@ -300,13 +269,10 @@ class TarotAPIClient {
         method: "GET",
         headers: this.defaultHeaders,
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Get readings error:", error);
@@ -317,7 +283,6 @@ class TarotAPIClient {
       };
     }
   }
-
   /**
    * Delete a reading
    */
@@ -334,13 +299,10 @@ class TarotAPIClient {
           headers: this.defaultHeaders,
         }
       );
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Delete reading error:", error);
@@ -351,7 +313,6 @@ class TarotAPIClient {
       };
     }
   }
-
   /**
    * Get reading statistics for a user
    */
@@ -364,13 +325,10 @@ class TarotAPIClient {
           headers: this.defaultHeaders,
         }
       );
-
       const data: GetReadingStatsResponse = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || `API error: ${response.status}`);
       }
-
       return data;
     } catch (error) {
       console.error("Get reading stats error:", error);
@@ -383,9 +341,7 @@ class TarotAPIClient {
     }
   }
 }
-
 // Export singleton instance
 export const tarotAPI = new TarotAPIClient();
-
 // Export class for testing or custom instances
 export { TarotAPIClient };

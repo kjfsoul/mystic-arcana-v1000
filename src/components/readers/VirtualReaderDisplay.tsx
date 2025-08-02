@@ -1,11 +1,9 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { PersonaLearnerAgentClient } from '@/agents/PersonaLearner-client';
 import { Sparkles, Eye, Lock, Unlock } from 'lucide-react';
-
 interface VirtualReaderDisplayProps {
   readerId?: string;
   size?: 'small' | 'medium' | 'large';
@@ -13,7 +11,6 @@ interface VirtualReaderDisplayProps {
   showProgress?: boolean;
   className?: string;
 }
-
 interface EngagementData {
   currentLevel: number;
   levelName: string;
@@ -31,7 +28,6 @@ interface EngagementData {
   };
   progressToNext?: number;
 }
-
 export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   readerId = 'sophia',
   size = 'medium',
@@ -46,7 +42,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   const [previousLevel, setPreviousLevel] = useState<number | null>(null);
   
   const personaLearner = new PersonaLearnerAgentClient();
-
   // Size configurations
   const sizeConfig = {
     small: {
@@ -68,14 +63,12 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
       badge: 'text-base px-4 py-2'
     }
   };
-
   const config = sizeConfig[size];
-
   // Load engagement data
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const loadEngagementData = async () => {
-      if (!!user) {
+      if (user) {
         // Guest users see level 1
         setEngagementData({
           currentLevel: 1,
@@ -90,7 +83,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
         setIsLoading(false);
         return;
       }
-
       try {
         const userId = (user as any)?.id;
         if (!userId) {
@@ -130,12 +122,10 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
         setIsLoading(false);
       }
     };
-
     loadEngagementData();
   }, [user, personaLearner]);
-
   // Clear level up indicator after animation
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (previousLevel !== null) {
       const timer = setTimeout(() => {
@@ -144,13 +134,11 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
       return () => clearTimeout(timer);
     }
   }, [previousLevel]);
-
   const getImagePath = (level: number): string => {
     // Ensure level is within valid range
     const validLevel = Math.max(1, Math.min(5, level));
     return `/images/readers/${readerId}/level_${validLevel}.png`;
   };
-
   const getLevelColor = (level: number): string => {
     switch (level) {
       case 1: return 'from-purple-600 to-purple-800';
@@ -161,13 +149,11 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
       default: return 'from-purple-600 to-purple-800';
     }
   };
-
   const getLevelIcon = (level: number) => {
     if (level >= 5) return <Unlock className="w-4 h-4" />;
     if (level >= 3) return <Eye className="w-4 h-4" />;
     return <Lock className="w-4 h-4" />;
   };
-
   if (isLoading) {
     return (
       <div className={`${config.container} ${className} flex items-center justify-center`}>
@@ -179,7 +165,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
       </div>
     );
   }
-
   return (
     <div className={`relative ${config.container} ${className}`}>
       {/* Level Up Animation Overlay */}
@@ -216,7 +201,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Main Reader Image */}
       <motion.div
         className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-to-br from-purple-900/50 to-black/50"
@@ -245,7 +229,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
             </div>
           </div>
         )}
-
         {/* Level Badge */}
         {showLevel && engagementData && (
           <motion.div
@@ -260,7 +243,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
             <span>{engagementData.currentLevel}</span>
           </motion.div>
         )}
-
         {/* Cosmic Glow Effect */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-purple-500/10 pointer-events-none"
@@ -274,7 +256,6 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
           }}
         />
       </motion.div>
-
       {/* Level Name and Progress */}
       {(showLevel || showProgress) && engagementData && (
         <motion.div

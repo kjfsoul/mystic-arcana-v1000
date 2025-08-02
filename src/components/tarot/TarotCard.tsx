@@ -1,10 +1,8 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './TarotCard.module.css';
-
 interface TarotCardProps {
   frontImage: string;
   backImage: string;
@@ -17,7 +15,6 @@ interface TarotCardProps {
   className?: string;
   style?: React.CSSProperties;
 }
-
 export const TarotCard: React.FC<TarotCardProps> = ({
   frontImage,
   backImage,
@@ -31,7 +28,6 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   style
 }) => {
   const [isFlippedState, setIsFlippedState] = useState(isFlipped);
-
   const handleCardClick = () => {
     if (disabled) {
       return;
@@ -44,7 +40,6 @@ export const TarotCard: React.FC<TarotCardProps> = ({
       onFlip();
     }
   };
-
   return (
     <div 
       className={`${styles.cardContainer} ${className}`} 
@@ -101,7 +96,6 @@ export const TarotCard: React.FC<TarotCardProps> = ({
             />
             <div className={styles.mysticalGlow} />
           </div>
-
           {/* Card Front */}
           <div className={`${styles.cardFace} ${styles.cardFront}`}>
             <div 
@@ -149,7 +143,6 @@ export const TarotCard: React.FC<TarotCardProps> = ({
           </div>
         </motion.div>
       </motion.div>
-
       {/* Floating particles effect when flipped */}
       {isFlippedState && (
         <div className={styles.particleContainer} aria-hidden="true">

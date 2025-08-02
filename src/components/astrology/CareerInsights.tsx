@@ -1,15 +1,13 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
 import { analyzeCareer, CareerAnalysis } from '@/lib/astrology/CareerAnalyzer';
 import styles from './CareerInsights.module.css';
-
 interface CareerInsightsProps {
   userBirthData: BirthData;
   onBack: () => void;
 }
-
 export const CareerInsights: React.FC<CareerInsightsProps> = ({ 
   userBirthData,
   onBack 
@@ -17,8 +15,7 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
   const [analysis, setAnalysis] = useState<CareerAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     async function generateCareerAnalysis() {
       try {
@@ -31,12 +28,10 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
         setLoading(false);
       }
     }
-
     if (userBirthData) {
       generateCareerAnalysis();
     }
   }, [userBirthData]);
-
   if (loading) {
     return (
       <div className={styles.container}>
@@ -54,7 +49,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
       </div>
     );
   }
-
   if (error || !analysis) {
     return (
       <div className={styles.container}>
@@ -90,7 +84,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
           <h3 className={styles.sectionTitle}>🌟 Your Cosmic Career Blueprint</h3>
           <p className={styles.overview}>{analysis.overview}</p>
         </section>
-
         {/* Key Placements */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>🎯 Key Astrological Influences</h3>
@@ -109,7 +102,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             </div>
           </div>
         </section>
-
         {/* Strengths */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>💪 Your Professional Strengths</h3>
@@ -127,7 +119,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             ))}
           </div>
         </section>
-
         {/* Challenges */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>🎯 Growth Opportunities</h3>
@@ -143,7 +134,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             ))}
           </div>
         </section>
-
         {/* Career Paths */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>🛤️ Recommended Career Paths</h3>
@@ -169,7 +159,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             ))}
           </div>
         </section>
-
         {/* House Information */}
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>🏠 Career-Related Houses</h3>
@@ -188,7 +177,6 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             </div>
           </div>
         </section>
-
         {/* Footer */}
         <div className={styles.footer}>
           <p>✨ Generated using real astronomical calculations and traditional astrological principles</p>

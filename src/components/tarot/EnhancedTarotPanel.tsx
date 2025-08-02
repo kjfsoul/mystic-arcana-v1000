@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EnhancedShuffleAnimation } from './EnhancedShuffleAnimation';
@@ -8,7 +7,6 @@ import { useTarotDeck } from '@/hooks/useTarotDeck';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { TarotCard } from '@/types/tarot';
 import { Sparkles, Users, Heart, Zap, Star, Moon } from 'lucide-react';
-
 interface EnhancedTarotPanelProps {
   initialSpreadType?: SpreadType;
   showDeckSelection?: boolean;
@@ -16,7 +14,6 @@ interface EnhancedTarotPanelProps {
   onReadingComplete?: (cards: TarotCard[], interpretation: string) => void;
   className?: string;
 }
-
 export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
   initialSpreadType = 'three-card',
   showDeckSelection = true,
@@ -46,7 +43,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
     majorArcana,
     minorArcana
   } = useTarotDeck(selectedDeckId);
-
   // Spread configurations
   const spreadConfigs = {
     'single': { cardCount: 1, title: 'Single Card', icon: Star, description: 'Quick cosmic guidance' },
@@ -56,9 +52,8 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
     'relationship': { cardCount: 5, title: 'Relationship', icon: Heart, description: 'Love & connection' },
     'custom': { cardCount: 7, title: 'Custom Spread', icon: Users, description: 'Personalized layout' }
   };
-
   // Handle shuffle completion
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleShuffleComplete = useCallback(() => {
     setIsShuffling(false);
     
@@ -73,18 +68,16 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
       setIsRevealing(true);
     }, 500);
   }, [selectedSpreadType, drawCards]);
-
   // Handle new reading
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const startNewReading = useCallback(() => {
     setDrawnCards([]);
     setShowSpread(false);
     setIsRevealing(false);
     setShowSpreadSelector(!socialMediaMode);
   }, [socialMediaMode]);
-
   // Handle card click in spread
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCardClick = useCallback((card: TarotCard, index: number) => {
     console.log(`Card clicked: ${card.name} at position ${index}`);
     
@@ -93,9 +86,8 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
       navigator.vibrate(50);
     }
   }, []);
-
   // Social media optimization - auto-start with popular spreads
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (socialMediaMode && cards.length > 0 && !showSpread) {
       // Auto-select three-card spread for social media
@@ -103,7 +95,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
       setShowSpreadSelector(false);
     }
   }, [socialMediaMode, cards.length, showSpread]);
-
   // Loading state
   if (loading) {
     return (
@@ -126,7 +117,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
       </div>
     );
   }
-
   // Error state
   if (error) {
     return (
@@ -156,7 +146,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
       </div>
     );
   }
-
   return (
     <div className={`relative w-full min-h-screen overflow-hidden ${className}`}>
       {/* Background cosmic effects */}
@@ -176,7 +165,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
           transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
         />
       </div>
-
       {/* Main content */}
       <div className="relative z-10 w-full min-h-screen flex flex-col">
         {/* Header */}
@@ -200,7 +188,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
             )}
           </motion.div>
         )}
-
         {/* Spread selector */}
         <AnimatePresence>
           {showSpreadSelector && (
@@ -253,7 +240,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-
         {/* Main content area */}
         <div className="flex-1 flex items-center justify-center px-6">
           <AnimatePresence mode="wait">
@@ -278,7 +264,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
                     </p>
                   )}
                 </div>
-
                 <EnhancedShuffleAnimation
                   isShuffling={isShuffling}
                   onShuffleStart={() => setIsShuffling(true)}
@@ -287,7 +272,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
                   cardCount={stats?.totalCards || 78}
                   showCardPreview={!socialMediaMode}
                 />
-
                 {/* Spread info */}
                 {!isShuffling && (
                   <motion.div
@@ -327,7 +311,6 @@ export const EnhancedTarotPanel: React.FC<EnhancedTarotPanelProps> = ({
             )}
           </AnimatePresence>
         </div>
-
         {/* Controls */}
         <AnimatePresence>
           {showSpread && (

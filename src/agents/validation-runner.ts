@@ -4,11 +4,9 @@
  * Creates comprehensive test suites for astrological calculations with regression testing,
  * ephemeris validation, and accuracy verification against trusted sources.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface ValidationTestCase {
   id: string;
   name: string;
@@ -20,7 +18,6 @@ export interface ValidationTestCase {
   source: string;
   priority: 'high' | 'medium' | 'low';
 }
-
 export interface ValidationResult {
   testId: string;
   passed: boolean;
@@ -30,7 +27,6 @@ export interface ValidationResult {
   errorMessage?: string;
   executionTime: number;
 }
-
 export interface RegressionReport {
   timestamp: string;
   totalTests: number;
@@ -42,12 +38,10 @@ export interface RegressionReport {
   regressions: ValidationResult[];
   improvements: ValidationResult[];
 }
-
 export class ValidationRunnerAgent extends Agent {
   private testSuite: Map<string, ValidationTestCase>;
   private referenceData: Map<string, any>;
   private lastResults: Map<string, ValidationResult>;
-
   constructor() {
     super('validation-runner', 'ValidationRunnerAgent');
     this.testSuite = new Map();
@@ -55,7 +49,6 @@ export class ValidationRunnerAgent extends Agent {
     this.lastResults = new Map();
     this.initializeTestSuite();
   }
-
   /**
    * Initialize comprehensive test suite with historical reference data
    */
@@ -102,7 +95,6 @@ export class ValidationRunnerAgent extends Agent {
         priority: 'high'
       }
     ];
-
     // Test cases for aspect calculations
     const aspectTests: ValidationTestCase[] = [
       {
@@ -125,7 +117,6 @@ export class ValidationRunnerAgent extends Agent {
         priority: 'medium'
       }
     ];
-
     // Test cases for house calculations
     const houseTests: ValidationTestCase[] = [
       {
@@ -150,13 +141,11 @@ export class ValidationRunnerAgent extends Agent {
         priority: 'medium'
       }
     ];
-
     // Store all test cases
     [...planetaryTests, ...aspectTests, ...houseTests].forEach(test => {
       this.testSuite.set(test.id, test);
     });
   }
-
   /**
    * Create comprehensive validation test file
    */
@@ -171,13 +160,11 @@ export class ValidationRunnerAgent extends Agent {
       
       console.log(`Validation test file created at ${outputPath}`);
       return true;
-
     } catch (error) {
       console.error('ValidationRunnerAgent: Test file creation failed:', error);
       return false;
     }
   }
-
   /**
    * Run complete regression test suite
    */
@@ -192,16 +179,13 @@ export class ValidationRunnerAgent extends Agent {
         const result = await this.executeTestCase(testCase);
         results.push(result);
       }
-
       // Analyze results
       const passed = results.filter(r => r.passed).length;
       const failed = results.filter(r => !r.passed).length;
       const accuracy = passed / results.length;
-
       // Detect regressions (newly failing tests)
       const regressions = this.detectRegressions(results);
       const improvements = this.detectImprovements(results);
-
       const report: RegressionReport = {
         timestamp: new Date().toISOString(),
         totalTests: results.length,
@@ -213,20 +197,16 @@ export class ValidationRunnerAgent extends Agent {
         regressions,
         improvements
       };
-
       // Update last results for future comparison
       results.forEach(result => {
         this.lastResults.set(result.testId, result);
       });
-
       return report;
-
     } catch (error) {
       console.error('ValidationRunnerAgent: Regression testing failed:', error);
       throw new Error('Failed to run regression tests');
     }
   }
-
   /**
    * Validate ephemeris accuracy against reference data
    */
@@ -253,19 +233,15 @@ export class ValidationRunnerAgent extends Agent {
           source: 'Swiss Ephemeris',
           priority: 'high'
         };
-
         const result = await this.executeTestCase(testCase);
         results.push(result);
       }
-
       return results;
-
     } catch (error) {
       console.error('ValidationRunnerAgent: Ephemeris validation failed:', error);
       throw new Error('Failed to validate ephemeris accuracy');
     }
   }
-
   /**
    * Execute individual test case
    */
@@ -283,7 +259,6 @@ export class ValidationRunnerAgent extends Agent {
       const deviation = this.calculateDeviation(actualOutput, testCase.expectedOutput);
       const passed = testCase.tolerance ? deviation <= testCase.tolerance : 
                     JSON.stringify(actualOutput) === JSON.stringify(testCase.expectedOutput);
-
       return {
         testId: testCase.id,
         passed,
@@ -292,7 +267,6 @@ export class ValidationRunnerAgent extends Agent {
         deviation,
         executionTime: Date.now() - startTime
       };
-
     } catch (error) {
       return {
         testId: testCase.id,
@@ -304,7 +278,6 @@ export class ValidationRunnerAgent extends Agent {
       };
     }
   }
-
   /**
    * Helper methods
    */
@@ -312,24 +285,20 @@ export class ValidationRunnerAgent extends Agent {
     return `
 import { describe, test, expect } from '@jest/globals';
 import { AstronomicalCalculator } from '@/lib/astrology/AstronomicalCalculator';
-
 describe('Astrological Calculations Validation', () => {
   const calculator = new AstronomicalCalculator();
-
   describe('Planetary Positions', () => {
     ${Array.from(this.testSuite.values())
       .filter(test => test.testType === 'ephemeris')
       .map(test => this.generateTestCode(test))
       .join('\n\n')}
   });
-
   describe('Aspect Calculations', () => {
     ${Array.from(this.testSuite.values())
       .filter(test => test.testType === 'aspect')
       .map(test => this.generateTestCode(test))
       .join('\n\n')}
   });
-
   describe('House Systems', () => {
     ${Array.from(this.testSuite.values())
       .filter(test => test.testType === 'house')
@@ -339,7 +308,6 @@ describe('Astrological Calculations Validation', () => {
 });
 `;
   }
-
   private generateTestCode(testCase: ValidationTestCase): string {
     return `
   test('${testCase.name}', async () => {
@@ -353,12 +321,10 @@ describe('Astrological Calculations Validation', () => {
     expect(result).toBeCloseTo(expected, ${testCase.tolerance || 0});
   });`;
   }
-
   private async getReferencePosition(planet: string, date: string, coordinates: any): Promise<any> {
     // TODO: Fetch from reference ephemeris data
     return { longitude: 0, latitude: 0, distance: 1 };
   }
-
   private getToleranceForPlanet(planet: string): number {
     const tolerances: Record<string, number> = {
       sun: 0.01,
@@ -374,22 +340,18 @@ describe('Astrological Calculations Validation', () => {
     };
     return tolerances[planet] || 0.1;
   }
-
   private calculateDeviation(actual: any, expected: any): number {
     // TODO: Implement sophisticated deviation calculation
     return 0;
   }
-
   private detectRegressions(results: ValidationResult[]): ValidationResult[] {
     // TODO: Compare with last results to detect regressions
     return [];
   }
-
   private detectImprovements(results: ValidationResult[]): ValidationResult[] {
     // TODO: Compare with last results to detect improvements
     return [];
   }
-
   /**
    * Get agent status and test suite information
    */
@@ -412,5 +374,4 @@ describe('Astrological Calculations Validation', () => {
     };
   }
 }
-
 export default ValidationRunnerAgent;

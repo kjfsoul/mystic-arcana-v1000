@@ -1,11 +1,8 @@
 'use client';
-
 import React from 'react';
-
 interface AstrologyZonePreviewProps {
   onSelectFeature?: (feature: string) => void;
 }
-
 export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
   onSelectFeature
 }) => {
@@ -35,7 +32,6 @@ export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
       description: 'Planetary movements'
     }
   ];
-
   return (
     <div className="h-full p-6 lg:p-8 flex flex-col text-white/90 overflow-y-auto">
       <h2 className="text-2xl lg:text-3xl font-light text-center mb-6 lg:mb-8 tracking-wider drop-shadow-[0_2px_10px_rgba(255,215,0,0.5)]">
@@ -62,7 +58,6 @@ export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
           </button>
         ))}
       </div>
-
       <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4 lg:p-6 mb-6 lg:mb-8 flex-1">
         <h3 className="text-base lg:text-lg font-medium text-amber-400 mb-2">
           Today&apos;s Cosmic Weather
@@ -72,7 +67,6 @@ export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
           The waxing moon invites new beginnings.
         </p>
       </div>
-
       <div className="mt-auto text-center text-sm lg:text-base text-white/50 italic">
         Click to explore the cosmos
       </div>

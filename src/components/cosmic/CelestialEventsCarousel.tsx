@@ -1,9 +1,8 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CelestialEventsCarousel.module.css';
-
 interface CelestialEvent {
   id: string;
   type: 'moon-phase' | 'retrograde' | 'eclipse' | 'conjunction' | 'meteor-shower' | 'solstice';
@@ -13,11 +12,9 @@ interface CelestialEvent {
   impact: 'high' | 'medium' | 'low';
   zodiacSigns?: string[];
 }
-
 interface CelestialEventsCarouselProps {
   onClick?: () => void;
 }
-
 export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = ({ onClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [events] = useState<CelestialEvent[]>([
@@ -58,24 +55,20 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
       zodiacSigns: ['Scorpio', 'Taurus']
     }
   ]);
-
   // Auto-rotate carousel
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % events.length);
     }, 6000);
     return () => clearInterval(interval);
   }, [events.length]);
-
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + events.length) % events.length);
   };
-
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % events.length);
   };
-
   const getEventIcon = (type: CelestialEvent['type']) => {
     const icons = {
       'moon-phase': '🌙',
@@ -87,7 +80,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
     };
     return icons[type] || '⭐';
   };
-
   const getImpactColor = (impact: CelestialEvent['impact']) => {
     const colors = {
       high: 'var(--color-impact-high)',
@@ -96,7 +88,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
     };
     return colors[impact];
   };
-
   const formatDate = (date: Date) => {
     const days = Math.ceil((date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
     if (days === 0) return 'Today';
@@ -104,7 +95,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
     if (days < 7) return `In ${days} days`;
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
-
   return (
     <div className={styles.carouselContainer} onClick={onClick}>
       <h2 className={styles.title}>Cosmic Events</h2>
@@ -117,7 +107,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
         >
           ←
         </button>
-
         <AnimatePresence mode="wait">
           <motion.div
             key={events[currentIndex].id}
@@ -138,15 +127,12 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
                 {formatDate(events[currentIndex].date)}
               </span>
             </div>
-
             <h3 className={styles.eventTitle}>
               {events[currentIndex].title}
             </h3>
-
             <p className={styles.eventDescription}>
               {events[currentIndex].description}
             </p>
-
             {events[currentIndex].zodiacSigns && (
               <div className={styles.zodiacSigns}>
                 <span className={styles.zodiacLabel}>Affects:</span>
@@ -157,7 +143,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
                 ))}
               </div>
             )}
-
             <div 
               className={styles.impactIndicator}
               style={{ '--impact-color': getImpactColor(events[currentIndex].impact) } as React.CSSProperties}
@@ -169,7 +154,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
             </div>
           </motion.div>
         </AnimatePresence>
-
         <button 
           className={styles.navButton} 
           onClick={(e) => { e.stopPropagation(); handleNext(); }}
@@ -178,7 +162,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
           →
         </button>
       </div>
-
       <div className={styles.indicators}>
         {events.map((_, index) => (
           <button
@@ -189,7 +172,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
           />
         ))}
       </div>
-
       <motion.div 
         className={styles.clickHint}
         initial={{ opacity: 0 }}

@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { TarotPanel } from '../../panels/TarotPanel/TarotPanel';
 import { ReaderPanel } from '../../panels/ReaderPanel/ReaderPanel';
@@ -7,11 +6,9 @@ import { AstrologyPanel } from '../../panels/AstrologyPanel/AstrologyPanel';
 import { CosmicBackground } from '../../animations/CosmicBackground/CosmicBackground';
 import { useAccessibility } from '../../../utils/accessibility/useAccessibility';
 import styles from './ThreePanelLayout.module.css';
-
 interface ThreePanelLayoutProps {
   className?: string;
 }
-
 /**
  * ThreePanelLayout Component
  * 
@@ -26,17 +23,14 @@ interface ThreePanelLayoutProps {
 export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({ className = '' }) => {
   const [activePanel, setActivePanel] = useState<'tarot' | 'reader' | 'astrology'>('reader');
   const { announceToScreenReader } = useAccessibility();
-
   const handlePanelChange = (panel: 'tarot' | 'reader' | 'astrology') => {
     setActivePanel(panel);
     announceToScreenReader(`Switched to ${panel} panel`);
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       {/* Cosmic background with animated stars and galaxy effects */}
       <CosmicBackground />
-
       <div className={styles.panelContainer}>
         {/* Tarot Panel - Left Side */}
         <div
@@ -49,7 +43,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({ className = 
             onActivate={() => handlePanelChange('tarot')}
           />
         </div>
-
         {/* Reader Panel - Center */}
         <div
           className={`${styles.panel} ${styles.readerPanel} ${activePanel === 'reader' ? styles.active : ''}`}
@@ -61,7 +54,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({ className = 
             onActivate={() => handlePanelChange('reader')}
           />
         </div>
-
         {/* Astrology Panel - Right Side */}
         <div
           className={`${styles.panel} ${styles.astrologyPanel} ${activePanel === 'astrology' ? styles.active : ''}`}
@@ -74,7 +66,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({ className = 
           />
         </div>
       </div>
-
       {/* Mobile navigation for smaller screens */}
       <nav className={styles.mobileNav} role="navigation" aria-label="Panel navigation">
         <button

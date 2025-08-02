@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AstrologyCache } from '@/lib/cache/AstrologyCache';
-
 export async function GET(request: NextRequest) {
   try {
     const cache = new AstrologyCache();

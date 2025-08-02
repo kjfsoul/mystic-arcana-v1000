@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -25,7 +24,6 @@ import {
 } from 'lucide-react';
 import { TarotCard } from '@/types/tarot';
 import { SpreadType } from './EnhancedTarotSpreadLayouts';
-
 interface InterpretationContext {
   spread: SpreadType;
   position: number;
@@ -33,7 +31,6 @@ interface InterpretationContext {
   adjacentCards?: TarotCard[];
   overallTheme?: string;
 }
-
 interface DynamicInterpretationPanelProps {
   selectedCard?: TarotCard;
   selectedPosition?: number;
@@ -43,7 +40,6 @@ interface DynamicInterpretationPanelProps {
   onClose?: () => void;
   className?: string;
 }
-
 interface InterpretationSection {
   id: string;
   title: string;
@@ -51,7 +47,6 @@ interface InterpretationSection {
   content: string;
   relevance: number; // 0-1 scale
 }
-
 export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProps> = ({
   selectedCard,
   selectedPosition = 0,
@@ -66,7 +61,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
   const [showReversedMeaning, setShowReversedMeaning] = useState(false);
   const [bookmarkedSections, setBookmarkedSections] = useState<Set<string>>(new Set());
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['core-meaning']));
-
   // Position meanings for different spreads
   const positionMeanings = {
     'single': ['Your guidance'],
@@ -99,12 +93,10 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     ],
     'custom': ['Custom position']
   };
-
   // Generate dynamic interpretation sections
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const interpretationSections = useMemo((): InterpretationSection[] => {
     if (!selectedCard) return [];
-
     const context: InterpretationContext = {
       spread: spreadType,
       position: selectedPosition,
@@ -112,7 +104,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       adjacentCards: allCards.filter((_, index) => index !== selectedPosition),
       overallTheme: determineOverallTheme(allCards)
     };
-
     return [
       {
         id: 'core-meaning',
@@ -172,7 +163,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       }
     ].sort((a, b) => b.relevance - a.relevance);
   }, [selectedCard, selectedPosition, allCards, spreadType]);
-
   // Helper function to determine overall theme
   function determineOverallTheme(cards: TarotCard[]): string {
     const majorArcanaCount = cards.filter(card => card.arcana_type === 'major').length;
@@ -188,7 +178,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       return 'balanced-reading';
     }
   }
-
   // Content generation functions
   function generateCoreMeaning(card: TarotCard, context: InterpretationContext): string {
     const baseMeaning = context.isReversed ? card.meaning.reversed : card.meaning.upright;
@@ -196,14 +185,12 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     
     return `${baseMeaning}\n\nKey themes: ${keywords}\n\n${context.isReversed ? 'In its reversed position, this card suggests a need to look inward and address internal blocks or resistance to the card\'s upright energy.' : 'In its upright position, this card\'s energy flows freely and encourages you to embrace its positive aspects.'}`;
   }
-
   function generatePositionContext(card: TarotCard, context: InterpretationContext): string {
     const positionName = positionMeanings[context.spread]?.[context.position] || `Position ${context.position + 1}`;
     const baseMeaning = context.isReversed ? card.meaning.reversed : card.meaning.upright;
     
     return `As the "${positionName}" in your ${context.spread.replace('-', ' ')} spread, ${card.name} ${context.isReversed ? '(reversed)' : ''} suggests: ${baseMeaning}\n\nThis position represents a crucial aspect of your current situation and offers specific guidance for this area of your life.`;
   }
-
   function generateEmotionalGuidance(card: TarotCard, context: InterpretationContext): string {
     const emotionalKeywords = ['love', 'fear', 'joy', 'anxiety', 'peace', 'anger', 'compassion', 'grief'];
     const cardKeywords = card.keywords ? card.keywords.filter(k => emotionalKeywords.some(ek => k.toLowerCase().includes(ek))) : [];
@@ -216,7 +203,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       return `${baseGuidance} This card encourages emotional growth and suggests that your feelings are valid guides in this situation.`;
     }
   }
-
   function generatePracticalAdvice(card: TarotCard, context: InterpretationContext): string {
     const practicalActions = [
       'Consider taking concrete steps toward your goals',
@@ -229,7 +215,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     const randomAdvice = practicalActions[Math.floor(Math.random() * practicalActions.length)];
     return `${card.name} suggests: ${randomAdvice}. ${context.isReversed ? 'However, be aware of potential obstacles or the need to adjust your approach.' : 'The energy is favorable for moving forward with confidence.'}`;
   }
-
   function generateCareerInsights(card: TarotCard, context: InterpretationContext): string {
     if (card.arcana === 'major') {
       return `Major Arcana cards in career readings often indicate significant professional transformation or calling. ${card.name} suggests this is a pivotal time for your professional growth and development.`;
@@ -245,7 +230,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       return `In your career, this card emphasizes ${insight}. ${context.isReversed ? 'Consider what internal or external factors might be blocking your professional progress.' : 'The energy supports growth and advancement in this area.'}`;
     }
   }
-
   function generateSpiritualWisdom(card: TarotCard, context: InterpretationContext): string {
     const spiritualThemes = [
       'divine timing and trust in the universe',
@@ -258,11 +242,9 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     const theme = spiritualThemes[Math.floor(Math.random() * spiritualThemes.length)];
     return `From a spiritual perspective, ${card.name} speaks to ${theme}. ${context.isReversed ? 'This may be a time for inner reflection and spiritual healing.' : 'You are supported by spiritual forces and encouraged to trust your path.'}`;
   }
-
   function generateShadowAspects(card: TarotCard, context: InterpretationContext): string {
     return `Every card contains both light and shadow aspects. ${card.name} may reveal hidden fears, limiting beliefs, or unconscious patterns that need attention. ${context.isReversed ? 'The reversed position suggests these shadow aspects are particularly active now.' : 'Acknowledge these aspects with compassion while focusing on growth and integration.'}`;
   }
-
   function generateTimingEnergy(card: TarotCard, context: InterpretationContext): string {
     const timingMap = {
       'wands': 'spring energy - time for new beginnings and quick action',  
@@ -274,9 +256,8 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     const timing = timingMap[card.suit as keyof typeof timingMap] || 'divine timing at work';
     return `The energy of ${card.name} suggests ${timing}. ${context.isReversed ? 'There may be delays or a need to slow down and reassess timing.' : 'The cosmic timing supports your intentions and actions.'}`;
   }
-
   // Audio narration (placeholder)
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const playAudio = useCallback((text: string) => {
     if (isAudioEnabled && 'speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -285,9 +266,8 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       speechSynthesis.speak(utterance);
     }
   }, [isAudioEnabled]);
-
   // Section management
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const toggleSection = useCallback((sectionId: string) => {
     setExpandedSections(prev => {
       const newSet = new Set(prev);
@@ -299,8 +279,7 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       return newSet;
     });
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const toggleBookmark = useCallback((sectionId: string) => {
     setBookmarkedSections(prev => {
       const newSet = new Set(prev);
@@ -312,7 +291,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       return newSet;
     });
   }, []);
-
   if (!selectedCard) {
     return (
       <motion.div
@@ -327,7 +305,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       </motion.div>
     );
   }
-
   return (
     <motion.div
       className={`bg-gradient-to-br from-purple-900/40 via-purple-800/40 to-purple-900/40 backdrop-blur-lg rounded-2xl border border-purple-500/30 ${className}`}
@@ -401,7 +378,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
             )}
           </div>
         </div>
-
         {/* Tab Navigation */}
         <div className="flex space-x-1 bg-purple-900/50 rounded-lg p-1">
           {[
@@ -427,7 +403,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
           ))}
         </div>
       </div>
-
       {/* Content */}
       <div className="p-6 max-h-96 overflow-y-auto custom-scrollbar">
         <AnimatePresence mode="wait">
@@ -515,7 +490,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
                 ))}
               </div>
             )}
-
             {activeTab === 'context' && (
               <div className="space-y-4">
                 <div className="bg-purple-900/30 rounded-lg p-4">
@@ -568,7 +542,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
                 </div>
               </div>
             )}
-
             {activeTab === 'guidance' && (
               <div className="space-y-4">
                 {interpretationSections.filter(s => ['emotional-guidance', 'practical-advice', 'spiritual-wisdom'].includes(s.id)).map((section) => (
@@ -584,7 +557,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
                 ))}
               </div>
             )}
-
             {activeTab === 'connections' && (
               <div className="space-y-4">
                 <h3 className="font-semibold text-white mb-4">Card Relationships</h3>
@@ -609,7 +581,6 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
           </motion.div>
         </AnimatePresence>
       </div>
-
       {/* Footer Actions */}
       <div className="p-4 border-t border-purple-500/30 flex items-center justify-between">
         <div className="flex items-center space-x-2">

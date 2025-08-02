@@ -1,10 +1,8 @@
 // CrewAI Orchestration Runner for Tarot Deck Generation
 // Handles task execution, health monitoring, and a_mem logging
-
 import { dataOracle, uiEnchanter, cardWeaver, qualityGuardian } from './agents';
 import fs from 'fs/promises';
 import path from 'path';
-
 export interface CrewTask {
   id: string;
   name: string;
@@ -13,7 +11,6 @@ export interface CrewTask {
   dependencies?: string[];
   params?: any;
 }
-
 export interface CrewResult {
   taskId: string;
   success: boolean;
@@ -22,7 +19,6 @@ export interface CrewResult {
   duration: number;
   timestamp: string;
 }
-
 export interface CrewOperationLog {
   operationId: string;
   taskName: string;
@@ -31,16 +27,13 @@ export interface CrewOperationLog {
   success: boolean;
   timestamp: string;
 }
-
 class CrewRunner {
   private logDir: string;
   private memLogFile: string;
-
   constructor() {
     this.logDir = path.join(process.cwd(), 'crew_memory_logs');
     this.memLogFile = path.join(process.cwd(), 'A-mem', 'crew-operations.log');
   }
-
   /**
    * Initialize logging directories
    */
@@ -59,7 +52,6 @@ class CrewRunner {
       console.error('Failed to initialize logging:', error);
     }
   }
-
   /**
    * Log events to a_mem system
    */
@@ -71,14 +63,12 @@ class CrewRunner {
       console.error('Failed to log to a_mem:', error);
     }
   }
-
   /**
    * Execute a single task with timing and logging
    */
   private async executeTask(task: CrewTask): Promise<CrewResult> {
     const startTime = Date.now();
     const timestamp = new Date().toISOString();
-
     try {
       await this.logToMemory({
         event: 'task_started',
@@ -86,7 +76,6 @@ class CrewRunner {
         agent: task.agent,
         timestamp
       });
-
       let result;
       switch (task.agent) {
         case 'DataOracle':
@@ -120,11 +109,9 @@ class CrewRunner {
         default:
           throw new Error(`Unknown agent: ${task.agent}`);
       }
-
       if (!result) {
         throw new Error(`Agent ${task.agent} returned no result for task ${task.name}`);
       }
-
       const duration = Date.now() - startTime;
       const taskResult: CrewResult = {
         taskId: task.id,
@@ -134,7 +121,6 @@ class CrewRunner {
         duration,
         timestamp
       };
-
       await this.logToMemory({
         event: 'task_completed',
         taskId: task.id,
@@ -143,7 +129,6 @@ class CrewRunner {
         duration,
         timestamp
       });
-
       return taskResult;
     } catch (error) {
       const duration = Date.now() - startTime;
@@ -154,7 +139,6 @@ class CrewRunner {
         duration,
         timestamp
       };
-
       await this.logToMemory({
         event: 'task_failed',
         taskId: task.id,
@@ -163,11 +147,9 @@ class CrewRunner {
         duration,
         timestamp
       });
-
       return taskResult;
     }
   }
-
   /**
    * Main crew execution method
    */
@@ -175,20 +157,16 @@ class CrewRunner {
     const operationId = `crew_${Date.now()}`;
     const startTime = Date.now();
     const timestamp = new Date().toISOString();
-
     await this.initializeLogging();
-
     await this.logToMemory({
       event: 'crew_operation_started',
       operationId,
       taskName,
       timestamp
     });
-
     try {
       const results: CrewResult[] = [];
       const operationData: any = { ...params };
-
       switch (taskName) {
         case 'generateCrewTarotDeck':
           results.push(...await this.executeCrewTarotDeckGeneration(operationData));
@@ -205,10 +183,8 @@ class CrewRunner {
         default:
           throw new Error(`Unknown task: ${taskName}`);
       }
-
       const totalDuration = Date.now() - startTime;
       const allSuccessful = results.every(r => r.success);
-
       const operationLog: CrewOperationLog = {
         operationId,
         taskName,
@@ -217,11 +193,9 @@ class CrewRunner {
         success: allSuccessful,
         timestamp
       };
-
       // Store operation log
       const logFile = path.join(this.logDir, `${operationId}.json`);
       await fs.writeFile(logFile, JSON.stringify(operationLog, null, 2));
-
       await this.logToMemory({
         event: 'crew_operation_completed',
         operationId,
@@ -231,7 +205,6 @@ class CrewRunner {
         resultsCount: results.length,
         timestamp
       });
-
       return operationLog;
     } catch (error) {
       const totalDuration = Date.now() - startTime;
@@ -243,7 +216,6 @@ class CrewRunner {
         success: false,
         timestamp
       };
-
       await this.logToMemory({
         event: 'crew_operation_failed',
         operationId,
@@ -252,11 +224,9 @@ class CrewRunner {
         totalDuration,
         timestamp
       });
-
       throw error;
     }
   }
-
   /**
    * Execute the complete Crew Tarot Deck generation process
    */
@@ -304,10 +274,8 @@ class CrewRunner {
         dependencies: ['validate_deck']
       }
     ];
-
     const results: CrewResult[] = [];
     const taskData: any = {};
-
     // Execute tasks in dependency order
     for (const task of tasks) {
       // Check dependencies
@@ -326,7 +294,6 @@ class CrewRunner {
           continue;
         }
       }
-
       // Prepare task parameters
       const taskParams: any = { ...task.params };
       
@@ -353,12 +320,10 @@ class CrewRunner {
           taskParams.deckId = '00000000-0000-0000-0000-000000000002';
         }
       }
-
       // Execute task
       const taskWithParams = { ...task, params: taskParams };
       const result = await this.executeTask(taskWithParams);
       results.push(result);
-
       // Stop execution if critical task fails
       if (!result.success && ['blueprint_generation', 'generate_cards', 'validate_deck'].includes(task.id)) {
         await this.logToMemory({
@@ -370,10 +335,8 @@ class CrewRunner {
         break;
       }
     }
-
     return results;
   }
-
   /**
    * Validate an existing deck
    */
@@ -385,10 +348,8 @@ class CrewRunner {
       description: 'Validate existing deck structure',
       params
     };
-
     return [await this.executeTask(task)];
   }
-
   /**
    * Perform system health check
    */
@@ -403,7 +364,6 @@ class CrewRunner {
         { name: 'CardWeaver', test: () => cardWeaver.generateCardData({}, {}) },
         { name: 'QualityGuardian', test: () => qualityGuardian.validateDeck([]) }
       ];
-
       const healthResults = await Promise.allSettled(
         agentTests.map(async (agent) => {
           try {
@@ -414,7 +374,6 @@ class CrewRunner {
           }
         })
       );
-
       const duration = Date.now() - startTime;
       
       return {
@@ -440,7 +399,6 @@ class CrewRunner {
       };
     }
   }
-
   /**
    * Autonomous health monitoring (for background operation)
    */
@@ -455,7 +413,6 @@ class CrewRunner {
         error: healthResult.error,
         timestamp: new Date().toISOString()
       });
-
       // If health check fails, could trigger alerts here
       if (!healthResult.success) {
         console.warn('Health check failed:', healthResult.error);
@@ -469,10 +426,8 @@ class CrewRunner {
     }
   }
 }
-
 // Export singleton instance
 export const crewRunner = new CrewRunner();
-
 // Auto-start health monitoring in autonomous mode
 if (process.env.AUTONOMOUS_MODE === 'true') {
   // Health check every 5 minutes for local development

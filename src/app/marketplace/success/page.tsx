@@ -1,17 +1,15 @@
 'use client';
-
+ 
 import React, { useEffect, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-
 function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (sessionId) {
       // In a real implementation, you'd fetch order details from your backend
@@ -29,7 +27,6 @@ function SuccessPageContent() {
       setLoading(false);
     }
   }, [sessionId]);
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
@@ -45,7 +42,6 @@ function SuccessPageContent() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-6">
       <motion.div 
@@ -70,7 +66,6 @@ function SuccessPageContent() {
             🎉
           </motion.div>
         </motion.div>
-
         <motion.h1 
           className="text-3xl font-bold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +74,6 @@ function SuccessPageContent() {
         >
           Cosmic Order Complete!
         </motion.h1>
-
         <motion.p 
           className="text-white/80 mb-6"
           initial={{ opacity: 0, y: 20 }}
@@ -89,7 +83,6 @@ function SuccessPageContent() {
           Your mystical treasures are being prepared for their journey to you. 
           The universe has aligned to deliver cosmic magic to your doorstep.
         </motion.p>
-
         {orderDetails && (
           <motion.div 
             className="bg-white/5 rounded-lg p-4 mb-6 text-left"
@@ -118,7 +111,6 @@ function SuccessPageContent() {
             </div>
           </motion.div>
         )}
-
         <motion.div 
           className="space-y-3"
           initial={{ opacity: 0, y: 20 }}
@@ -133,7 +125,6 @@ function SuccessPageContent() {
             🚚 Expected delivery: 5-10 business days
           </p>
         </motion.div>
-
         <motion.div 
           className="flex flex-col sm:flex-row gap-3 mt-8"
           initial={{ opacity: 0, y: 20 }}
@@ -153,7 +144,6 @@ function SuccessPageContent() {
             Back to Mystic Arcana
           </Link>
         </motion.div>
-
         {/* Floating particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
           {[...Array(8)].map((_, i) => (
@@ -182,7 +172,6 @@ function SuccessPageContent() {
     </div>
   );
 }
-
 export default function SuccessPage() {
   return (
     <Suspense fallback={

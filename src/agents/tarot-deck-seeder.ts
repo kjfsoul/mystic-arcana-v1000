@@ -4,14 +4,11 @@
  * Manages complete 78-card tarot deck data, fixes ESM import issues,
  * and handles database seeding operations for all tarot functionality.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 import { createClient } from '@/lib/supabase/client';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface TarotCardData {
-
   id: string;
   name: string;
   suit?: 'cups' | 'pentacles' | 'swords' | 'wands' | null;
@@ -27,14 +24,12 @@ export interface TarotCardData {
   astrological_association?: string;
   position?: string;
 }
-
 export interface DeckSeedingResult {
   success: boolean;
   cardsSeeded: number;
   errors: string[];
   timestamp: string;
 }
-
 export interface ValidationResult {
   isComplete: boolean;
   totalCards: number;
@@ -43,17 +38,14 @@ export interface ValidationResult {
   missingCards: string[];
   invalidCards: string[];
 }
-
 export class TarotDeckSeederAgent extends Agent {
   private supabase: any;
   private deckData: TarotCardData[];
-
   constructor() {
     super('tarot-deck-seeder', 'TarotDeckSeederAgent');
     this.supabase = createClient();
     this.deckData = [];
   }
-
   /**
    * Load complete 78-card Rider-Waite deck data
    */
@@ -100,16 +92,13 @@ export class TarotDeckSeederAgent extends Agent {
         
         // TODO: Add complete Pentacles, Swords, and Wands suits (42 more cards)
       ];
-
       this.deckData = completeDeck;
       return completeDeck;
-
     } catch (error) {
       console.error('TarotDeckSeederAgent: Failed to load deck data:', error);
       throw new Error('Failed to load complete deck data');
     }
   }
-
   /**
    * Validate deck completeness and data integrity
    */
@@ -122,10 +111,8 @@ export class TarotDeckSeederAgent extends Agent {
       const expectedMajor = 22;
       const expectedMinor = 56;
       const expectedTotal = 78;
-
       const missingCards: string[] = [];
       const invalidCards: string[] = [];
-
       // Validate Major Arcana (0-21)
       for (let i = 0; i <= 21; i++) {
         const found = majorArcana.find(card => card.number === i);
@@ -133,7 +120,6 @@ export class TarotDeckSeederAgent extends Agent {
           missingCards.push(`Major Arcana ${i}`);
         }
       }
-
       // Validate Minor Arcana suits
       const suits = ['cups', 'pentacles', 'swords', 'wands'];
       for (const suit of suits) {
@@ -144,14 +130,12 @@ export class TarotDeckSeederAgent extends Agent {
           }
         }
       }
-
       // Validate data integrity
       deckData.forEach(card => {
         if (!card.id || !card.name || !card.upright_meaning || !card.image_url) {
           invalidCards.push(`${card.name || 'Unknown'} - missing required fields`);
         }
       });
-
       return {
         isComplete: deckData.length === expectedTotal && missingCards.length === 0,
         totalCards: deckData.length,
@@ -160,13 +144,11 @@ export class TarotDeckSeederAgent extends Agent {
         missingCards,
         invalidCards
       };
-
     } catch (error) {
       console.error('TarotDeckSeederAgent: Validation failed:', error);
       throw new Error('Failed to validate deck data');
     }
   }
-
   /**
    * Seed database with complete tarot deck data
    */
@@ -179,20 +161,16 @@ export class TarotDeckSeederAgent extends Agent {
       if (!validation.isComplete) {
         throw new Error(`Deck data incomplete: ${validation.missingCards.length} missing cards`);
       }
-
       const errors: string[] = [];
       let cardsSeeded = 0;
-
       // Clear existing cards for this deck
       const { error: deleteError } = await this.supabase
         .from('cards')
         .delete()
         .eq('deck_id', deckId);
-
       if (deleteError) {
         errors.push(`Failed to clear existing cards: ${deleteError.message}`);
       }
-
       // Insert new cards
       for (const card of deckData) {
         const { error } = await this.supabase
@@ -213,21 +191,18 @@ export class TarotDeckSeederAgent extends Agent {
             element: card.element,
             astrological_association: card.astrological_association
           });
-
         if (error) {
           errors.push(`Failed to insert ${card.name}: ${error.message}`);
         } else {
           cardsSeeded++;
         }
       }
-
       return {
         success: errors.length === 0,
         cardsSeeded,
         errors,
         timestamp: new Date().toISOString()
       };
-
     } catch (error) {
       console.error('TarotDeckSeederAgent: Database seeding failed:', error);
       return {
@@ -238,7 +213,6 @@ export class TarotDeckSeederAgent extends Agent {
       };
     }
   }
-
   /**
    * Fix ESM import syntax in seeding scripts
    */
@@ -252,13 +226,11 @@ export class TarotDeckSeederAgent extends Agent {
       
       console.log(`ESM import fixes applied to ${scriptPath}`);
       return true;
-
     } catch (error) {
       console.error('TarotDeckSeederAgent: ESM fix failed:', error);
       return false;
     }
   }
-
   /**
    * Enrich card metadata with additional symbolism and associations
    */
@@ -269,19 +241,15 @@ export class TarotDeckSeederAgent extends Agent {
         .from('cards')
         .update(additionalData)
         .eq('id', cardId);
-
       if (error) {
         throw error;
       }
-
       return true;
-
     } catch (error) {
       console.error('TarotDeckSeederAgent: Metadata enrichment failed:', error);
       return false;
     }
   }
-
   /**
    * Get agent status and current deck information
    */
@@ -304,5 +272,4 @@ export class TarotDeckSeederAgent extends Agent {
     };
   }
 }
-
 export default TarotDeckSeederAgent;

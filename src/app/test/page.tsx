@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 export default function TestPage() {
   return (
     <div style={{ background: 'black', color: 'white', padding: '2rem', minHeight: '100vh' }}>

@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, Globe, Settings } from 'lucide-react';
@@ -7,15 +7,13 @@ import CosmicCalendar from './calendar';
 import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
 import { useAuth } from '@/contexts/AuthContext';
 import { BirthData } from '../../types/astrology';
-
 export default function HoroscopePage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'today' | 'calendar' | 'chart'>('today');
   const [birthData, setBirthData] = useState<BirthData | null>(null);
   const [showTransits, setShowTransits] = useState(false);
-
   // Load user's birth data if available
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (user) {
       // This would typically come from user profile/database
@@ -29,13 +27,11 @@ export default function HoroscopePage() {
       });
     }
   }, [user]);
-
   const tabs = [
     { id: 'today', label: 'Today', icon: Globe },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'chart', label: 'Birth Chart', icon: User }
   ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* Cosmic Background */}
@@ -62,7 +58,6 @@ export default function HoroscopePage() {
           ))}
         </div>
       </div>
-
       <div className="relative z-10">
         {/* Header */}
         <div className="container mx-auto px-4 py-8">
@@ -79,7 +74,6 @@ export default function HoroscopePage() {
               Real-time planetary movements with personalized insights and astronomical accuracy
             </p>
           </motion.div>
-
           {/* Navigation Tabs */}
           <div className="flex justify-center mb-8">
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-2 border border-purple-500/20">
@@ -104,7 +98,6 @@ export default function HoroscopePage() {
               </div>
             </div>
           </div>
-
           {/* Settings Toggle for Chart View */}
           {activeTab === 'chart' && birthData && (
             <motion.div
@@ -135,7 +128,6 @@ export default function HoroscopePage() {
               </div>
             </motion.div>
           )}
-
           {/* Content */}
           <motion.div
             key={activeTab}
@@ -150,14 +142,12 @@ export default function HoroscopePage() {
                 className="bg-gray-900/70 backdrop-blur-sm border border-purple-500/30"
               />
             )}
-
             {activeTab === 'calendar' && (
               <CosmicCalendar 
                 birthData={birthData || undefined}
                 className="bg-gray-900/70 backdrop-blur-sm border border-purple-500/30"
               />
             )}
-
             {activeTab === 'chart' && (
               <div className="space-y-6">
                 {!birthData ? (
@@ -200,7 +190,6 @@ export default function HoroscopePage() {
                         className="max-w-2xl w-full"
                       />
                     </div>
-
                     {showTransits && (
                       <div className="mt-6 grid md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-gray-800/50 rounded-lg p-4">

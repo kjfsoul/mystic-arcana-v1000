@@ -1,8 +1,6 @@
 'use client';
-
 import React from 'react';
 import { GalaxyBackground } from '../../components/effects/GalaxyBackground/GalaxyBackground';
-
 export default function GalaxyTestPage() {
   return (
     <div style={{ 

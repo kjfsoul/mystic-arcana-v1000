@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link'; //  Add Next.js Link component
-
 export default function Header() {
   return (
     <motion.nav

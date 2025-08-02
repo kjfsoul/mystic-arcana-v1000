@@ -1,12 +1,9 @@
 'use client';
-
 import React, { useState } from 'react';
 import styles from './TarotPanel.module.css';
-
 export interface TarotPanelProps {
   className?: string;
 }
-
 /**
  * Interactive Tarot Panel - Left zone of the 3-panel layout
  * 
@@ -21,7 +18,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
   const [selectedSpread, setSelectedSpread] = useState<string>('one-card');
   const [selectedDeck, setSelectedDeck] = useState<string>('classic');
   const [isShuffling, setIsShuffling] = useState(false);
-
   const spreads = [
     { id: 'one-card', name: 'One Card', description: 'Quick insight for your day' },
     { id: 'three-card', name: 'Past/Present/Future', description: 'Timeline perspective' },
@@ -30,20 +26,17 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
     { id: 'career', name: 'Career Path', description: 'Professional guidance' },
     { id: 'love', name: 'Love & Relationships', description: 'Matters of the heart' }
   ];
-
   const decks = [
     { id: 'classic', name: 'Classic Tarot', description: 'Traditional Rider-Waite imagery' },
     { id: 'mystic-arcana', name: 'Mystic Arcana', description: 'Our signature cosmic deck' },
     { id: 'ethereal', name: 'Ethereal Dreams', description: 'Celestial-themed artwork' }
   ];
-
   const handleShuffle = async () => {
     setIsShuffling(true);
     // Simulate shuffle animation
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsShuffling(false);
   };
-
   const handleSpreadSelect = (spreadId: string) => {
     setSelectedSpread(spreadId);
     // Announce change for screen readers
@@ -53,12 +46,10 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
       ariaLive.textContent = announcement;
     }
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       {/* Screen Reader Announcements */}
       <div id="tarot-announcements" aria-live="polite" className="sr-only" />
-
       {/* Panel Header */}
       <header className={styles.header}>
         <div className={styles.headerContent}>
@@ -71,7 +62,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
           </p>
         </div>
       </header>
-
       {/* Deck Selection */}
       <section className={styles.deckSection} aria-labelledby="deck-selection-title">
         <h2 id="deck-selection-title" className={styles.sectionTitle}>
@@ -101,7 +91,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
           ))}
         </div>
       </section>
-
       {/* Spread Selection */}
       <section className={styles.spreadSection} aria-labelledby="spread-selection-title">
         <h2 id="spread-selection-title" className={styles.sectionTitle}>
@@ -136,7 +125,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
           ))}
         </div>
       </section>
-
       {/* Card Interaction Area */}
       <section className={styles.cardSection} aria-labelledby="card-interaction-title">
         <h2 id="card-interaction-title" className={styles.sectionTitle}>
@@ -185,7 +173,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
           </div>
         </div>
       </section>
-
       {/* Quick Reading Section */}
       <section className={styles.quickSection}>
         <h2 className={styles.sectionTitle}>Quick Actions</h2>
@@ -201,7 +188,6 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ className = '' }) => {
           </button>
         </div>
       </section>
-
       {/* Archetype Gallery Background */}
       <div className={styles.archetypeGallery} aria-hidden="true">
         <div className={styles.archetypeSymbol}>♈</div>

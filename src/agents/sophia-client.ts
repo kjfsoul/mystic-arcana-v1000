@@ -2,13 +2,11 @@
  * SOPHIA CLIENT - Client-side version of the Virtual Reader
  * For use in browser components without server-side dependencies
  */
-
 export interface SophiaMessage {
   type: 'greeting' | 'insight' | 'guidance' | 'farewell';
   message: string;
   emotion?: 'neutral' | 'excited' | 'contemplative' | 'encouraging';
 }
-
 export class SophiaAgentClient {
   private greetings = [
     "Welcome, seeker. I am Sophia, your guide through the cosmic mysteries.",
@@ -16,7 +14,6 @@ export class SophiaAgentClient {
     "Greetings, dear one. I sense you seek wisdom from the cards.",
     "Welcome to this sacred space. I am Sophia, your mystic companion."
   ];
-
   private cardRevealMessages = [
     "Ah, the {card} reveals itself in the position of {position}.",
     "The {card} speaks of {meaning}.",
@@ -24,7 +21,6 @@ export class SophiaAgentClient {
     "The universe has chosen the {card} for your {position}. Listen to its wisdom.",
     "{card} emerges from the cosmic tapestry, bringing {meaning}."
   ];
-
   private spreadInsights = {
     'single': [
       "This single card holds the key to your current situation.",
@@ -42,7 +38,6 @@ export class SophiaAgentClient {
       "This ancient spread reveals both challenges and opportunities."
     ]
   };
-
   getGreeting(): SophiaMessage {
     return {
       type: 'greeting',
@@ -50,7 +45,6 @@ export class SophiaAgentClient {
       emotion: 'encouraging'
     };
   }
-
   getCardRevealMessage(
     cardName: string, 
     position: string, 
@@ -79,7 +73,6 @@ export class SophiaAgentClient {
       emotion: isReversed ? 'contemplative' : 'excited'
     };
   }
-
   getSpreadInsight(spreadType: string): SophiaMessage {
     const insights = this.spreadInsights[spreadType as keyof typeof this.spreadInsights] || 
                     ["The cards are aligning to reveal your truth."];
@@ -90,7 +83,6 @@ export class SophiaAgentClient {
       emotion: 'contemplative'
     };
   }
-
   getReadingComplete(): SophiaMessage {
     const messages = [
       "The cards have spoken. May their wisdom guide your path.",
@@ -105,7 +97,6 @@ export class SophiaAgentClient {
       emotion: 'encouraging'
     };
   }
-
   getSaveReadingPrompt(): SophiaMessage {
     return {
       type: 'guidance',

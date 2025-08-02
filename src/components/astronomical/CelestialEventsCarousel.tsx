@@ -1,9 +1,8 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CelestialEventsCarousel.module.css';
-
 interface CelestialEvent {
   id: string;
   type: 'retrograde' | 'eclipse' | 'conjunction' | 'full-moon' | 'new-moon' | 'meteor-shower';
@@ -14,7 +13,6 @@ interface CelestialEvent {
   icon: string;
   color: string;
 }
-
 // Mock celestial events data - in production this would come from astronomical API
 const mockEvents: CelestialEvent[] = [
   {
@@ -68,11 +66,9 @@ const mockEvents: CelestialEvent[] = [
     color: '#ff9a9e'
   }
 ];
-
 interface CelestialEventsCarouselProps {
   onEventClick?: () => void;
 }
-
 /**
  * Celestial Events Carousel Component
  * 
@@ -82,36 +78,28 @@ interface CelestialEventsCarouselProps {
 export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = ({ onEventClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
   // Auto-advance carousel
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (!isAutoPlaying) return;
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % mockEvents.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
-
   const currentEvent = mockEvents[currentIndex];
-
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % mockEvents.length);
     setIsAutoPlaying(false);
   };
-
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + mockEvents.length) % mockEvents.length);
     setIsAutoPlaying(false);
   };
-
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
     setIsAutoPlaying(false);
   };
-
   const getImpactColor = (impact: string) => {
     switch (impact) {
       case 'high': return '#ff6b9d';
@@ -120,7 +108,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
       default: return '#ffffff';
     }
   };
-
   return (
     <div className={styles.carousel}>
       <div className={styles.header}>
@@ -130,7 +117,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
         </h2>
         <p className={styles.subtitle}>Current celestial influences</p>
       </div>
-
       <div 
         className={styles.eventContainer}
         onMouseEnter={() => setIsAutoPlaying(false)}
@@ -174,7 +160,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
             </div>
           </motion.div>
         </AnimatePresence>
-
         {/* Navigation Controls */}
         <button
           className={`${styles.navButton} ${styles.prevButton}`}
@@ -192,7 +177,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
           ›
         </button>
       </div>
-
       {/* Pagination Dots */}
       <div className={styles.pagination}>
         {mockEvents.map((_, index) => (
@@ -204,7 +188,6 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
           />
         ))}
       </div>
-
       {/* Auto-play indicator */}
       {isAutoPlaying && (
         <div className={styles.autoPlayIndicator}>

@@ -1,10 +1,8 @@
 // [`src/lib/astrology/BirthChartCalculator.ts`](src/lib/astrology/BirthChartCalculator.ts:1)
 import { SwissEphemerisBridge as SwissEphemeris } from '../astronomy/SwissEphemerisBridge';
 import { NatalData, Chart, Planet, Angle, House } from './types';
-
 export class BirthChartCalculator {
     constructor(private swissEphemeris: SwissEphemeris) {}
-
   async calculate(natalData: NatalData): Promise<Chart> {
     this._getGeographicCoordinates();
     this.swissEphemeris.getObliquity(natalData.time);
@@ -15,12 +13,10 @@ export class BirthChartCalculator {
       ascendant: this._computeAscendant()
     };
   }
-
   private _getGeographicCoordinates(): [number, number] { // Removed unused 'location'
     // Implementation using geocoding API
     return [40.7128, -74.0060]; // Default to New York for testing
   }
-
   private _calculateHouses(): House[] {
     // Calculate houses using Swiss Ephemeris coordinates
         return [
@@ -28,12 +24,10 @@ export class BirthChartCalculator {
       { degree: 90, midpoint: 90, ruler: 'Venus' }
     ]; // Sample house data
   }
-
   private _computePlanetaryPositions(): Planet[] {
     // Swiss Ephemeris planetary position logic
     return []; // Placeholder
   }
-
   private _computeAscendant(): Angle {
     // Ascendant calculation logic
     return { degrees: 0, minutes: 0, seconds: 0 }; // Placeholder

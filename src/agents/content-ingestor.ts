@@ -4,11 +4,9 @@
  * Crawls and ingests astrology sources (Cafe Astrology, Astro.com, etc.) into
  * structured JSON knowledge pool with proper source attribution and data validation.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface ContentSource {
   id: string;
   name: string;
@@ -27,7 +25,6 @@ export interface ContentSource {
     credentials?: any;
   };
 }
-
 export interface CrawlConfig {
   respectRobotsTxt: boolean;
   userAgent: string;
@@ -38,7 +35,6 @@ export interface CrawlConfig {
   excludePatterns: string[];
   includePatterns: string[];
 }
-
 export interface StructuredContent {
   id: string;
   sourceId: string;
@@ -65,7 +61,6 @@ export interface StructuredContent {
     extractionMethod: string;
   };
 }
-
 export interface IngestionReport {
   timestamp: string;
   sourceId: string;
@@ -78,13 +73,11 @@ export interface IngestionReport {
   errors: string[];
   processingTime: number; // milliseconds
 }
-
 export class ContentIngestorAgent extends Agent {
   private sources: Map<string, ContentSource>;
   private crawlConfig: CrawlConfig;
   private knowledgePool: Map<string, StructuredContent>;
   private ingestionHistory: IngestionReport[];
-
   constructor() {
     super('content-ingestor', 'ContentIngestorAgent');
     this.sources = new Map();
@@ -93,7 +86,6 @@ export class ContentIngestorAgent extends Agent {
     this.crawlConfig = {} as CrawlConfig;
     this.initializeContentSources();
   }
-
   /**
    * Initialize crawling configuration with ethical guidelines
    */
@@ -126,7 +118,6 @@ export class ContentIngestorAgent extends Agent {
       ]
     };
   }
-
   /**
    * Initialize trusted astrological content sources
    */
@@ -206,12 +197,10 @@ export class ContentIngestorAgent extends Agent {
         authentication: { type: 'none' }
       }
     ];
-
     sources.forEach(source => {
       this.sources.set(source.id, source);
     });
   }
-
   /**
    * Crawl and ingest content from specified source
    */
@@ -224,7 +213,6 @@ export class ContentIngestorAgent extends Agent {
       if (!source) {
         throw new Error(`Source ${sourceId} not found`);
       }
-
       const report: IngestionReport = {
         timestamp: new Date().toISOString(),
         sourceId,
@@ -237,12 +225,10 @@ export class ContentIngestorAgent extends Agent {
         errors: [],
         processingTime: 0
       };
-
       // Check robots.txt if configured
       if (this.crawlConfig.respectRobotsTxt) {
         await this.checkRobotsTxt(source.baseUrl);
       }
-
       // Crawl each endpoint
       for (const endpoint of source.endpoints) {
         try {
@@ -251,25 +237,19 @@ export class ContentIngestorAgent extends Agent {
         } catch (error) {
           report.errors.push(`Endpoint ${endpoint}: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
-
         // Respect rate limits
         await this.delay(this.crawlConfig.delayBetweenRequests);
       }
-
       report.processingTime = Date.now() - startTime;
       this.ingestionHistory.push(report);
-
       // Update source last crawled timestamp
       source.lastCrawled = new Date().toISOString();
-
       return report;
-
     } catch (error) {
       console.error('ContentIngestorAgent: Ingestion failed:', error);
       throw new Error(`Failed to ingest content from ${sourceId}`);
     }
   }
-
   /**
    * Extract and structure content from HTML/JSON
    */
@@ -295,7 +275,6 @@ export class ContentIngestorAgent extends Agent {
       
       // Generate metadata
       const metadata = this.generateMetadata(contentData.text, 'nlp_extraction');
-
       const structuredContent: StructuredContent = {
         id: this.generateContentId(url, sourceId),
         sourceId,
@@ -312,18 +291,14 @@ export class ContentIngestorAgent extends Agent {
         extractedData,
         metadata
       };
-
       // Store in knowledge pool
       this.knowledgePool.set(structuredContent.id, structuredContent);
-
       return structuredContent;
-
     } catch (error) {
       console.error('ContentIngestorAgent: Content extraction failed:', error);
       throw new Error('Failed to extract structured content');
     }
   }
-
   /**
    * Search knowledge pool with semantic understanding
    */
@@ -339,7 +314,6 @@ export class ContentIngestorAgent extends Agent {
   ): Promise<StructuredContent[]> {
     try {
       let results = Array.from(this.knowledgePool.values());
-
       // Apply filters
       if (filters) {
         if (filters.category) {
@@ -355,7 +329,6 @@ export class ContentIngestorAgent extends Agent {
           results = results.filter(content => content.credibilityScore >= (filters.minCredibility || 0));
         }
       }
-
       // Perform semantic search
       results = await this.performSemanticSearch(results, query);
       
@@ -365,15 +338,12 @@ export class ContentIngestorAgent extends Agent {
         const scoreB = b.credibilityScore;
         return scoreB - scoreA;
       });
-
       return results.slice(0, 20); // Return top 20 results
-
     } catch (error) {
       console.error('ContentIngestorAgent: Knowledge search failed:', error);
       throw new Error('Failed to search knowledge pool');
     }
   }
-
   /**
    * Validate and clean ingested content
    */
@@ -382,7 +352,6 @@ export class ContentIngestorAgent extends Agent {
     try {
       const content = this.knowledgePool.get(contentId);
       if (!content) return false;
-
       // Check for content quality indicators
       const qualityChecks = {
         hasTitle: content.title.length > 0,
@@ -392,25 +361,20 @@ export class ContentIngestorAgent extends Agent {
         languageCheck: content.metadata.language === 'english',
         duplicateCheck: await this.checkForDuplicates(content)
       };
-
       const validChecks = Object.values(qualityChecks).filter(Boolean).length;
       const isValid = validChecks >= 4; // Require at least 4/6 checks to pass
-
       return isValid;
-
     } catch (error) {
       console.error('ContentIngestorAgent: Content validation failed:', error);
       return false;
     }
   }
-
   /**
    * Private helper methods
    */
   private async checkRobotsTxt(baseUrl: string): Promise<void> {
     // TODO: Implement robots.txt checking
   }
-
   private async crawlEndpoint(source: ContentSource, endpoint: string): Promise<Partial<IngestionReport>> {
     // TODO: Implement actual web crawling with respect for rate limits
     return {
@@ -421,7 +385,6 @@ export class ContentIngestorAgent extends Agent {
       updatedContent: 1
     };
   }
-
   private mergeReports(main: IngestionReport, partial: Partial<IngestionReport>): void {
     main.totalPages += partial.totalPages || 0;
     main.successfulExtractions += partial.successfulExtractions || 0;
@@ -429,11 +392,9 @@ export class ContentIngestorAgent extends Agent {
     main.newContent += partial.newContent || 0;
     main.updatedContent += partial.updatedContent || 0;
   }
-
   private async delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
   private async parseContent(rawContent: string, url: string): Promise<any> {
     // TODO: Implement HTML/JSON parsing with proper extraction
     return {
@@ -443,7 +404,6 @@ export class ContentIngestorAgent extends Agent {
       publishDate: '2024-01-01'
     };
   }
-
   private async performNLPExtraction(text: string): Promise<any> {
     // TODO: Implement NLP extraction for key terms, definitions, etc.
     return {
@@ -453,25 +413,21 @@ export class ContentIngestorAgent extends Agent {
       references: []
     };
   }
-
   private categorizeContent(title: string, text: string, url: string): 'planets' | 'signs' | 'houses' | 'aspects' | 'techniques' | 'history' | 'modern' {
     // TODO: Implement content categorization logic
     const categories = ['planets', 'signs', 'houses', 'aspects', 'techniques', 'history', 'modern'];
     return 'planets'; // Simplified
   }
-
   private determineContentType(text: string, url: string): 'article' | 'definition' | 'interpretation' | 'tutorial' | 'reference' {
     // TODO: Implement content type determination
     return 'article';
   }
-
   private calculateCredibilityScore(sourceId: string, contentData: any): number {
     // TODO: Implement credibility scoring algorithm
     const source = this.sources.get(sourceId);
     const baseScore = source?.credibility === 'high' ? 0.8 : source?.credibility === 'medium' ? 0.6 : 0.4;
     return baseScore;
   }
-
   private generateMetadata(text: string, method: string): any {
     return {
       wordCount: text.split(' ').length,
@@ -480,16 +436,13 @@ export class ContentIngestorAgent extends Agent {
       extractionMethod: method
     };
   }
-
   private generateContentId(url: string, sourceId: string): string {
     return `${sourceId}_${Buffer.from(url).toString('base64').slice(0, 16)}`;
   }
-
   private generateTags(text: string, category: string): string[] {
     // TODO: Implement tag generation from content analysis
     return [category, 'astrology', 'wisdom'];
   }
-
   private async performSemanticSearch(contents: StructuredContent[], query: string): Promise<StructuredContent[]> {
     // TODO: Implement semantic search with embeddings or keyword matching
     return contents.filter(content => 
@@ -497,12 +450,10 @@ export class ContentIngestorAgent extends Agent {
       content.content.toLowerCase().includes(query.toLowerCase())
     );
   }
-
   private async checkForDuplicates(content: StructuredContent): Promise<boolean> {
     // TODO: Implement duplicate detection
     return false;
   }
-
   /**
    * Get agent status and knowledge pool statistics
    */
@@ -526,5 +477,4 @@ export class ContentIngestorAgent extends Agent {
     };
   }
 }
-
 export default ContentIngestorAgent;

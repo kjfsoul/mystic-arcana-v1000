@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Lazy load the heavy GalaxyBackground component to prevent blocking main page load
@@ -10,31 +9,23 @@ import { MercuryRetrogradeBanner } from '../astrology/MercuryRetrogradeBanner';
 import { Header } from './Header';
 import { useRouter } from 'next/navigation';
 import styles from './CosmicHub.module.css';
-
 // Lazy load the horoscope widget to prevent blocking main page load
 const DailyHoroscopeWidget = lazy(() => import('../horoscope/DailyHoroscopeWidget').then(m => ({ default: m.DailyHoroscopeWidget })));
-
 // Lazy load the Daily Oracle Display component
 const DailyOracleDisplay = lazy(() => import('../oracle/DailyOracleDisplay').then(m => ({ default: m.DailyOracleDisplay })));
-
 export type ViewMode = 'hub' | 'tarot' | 'astrology';
-
 export const CosmicHub: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewMode>('hub');
   const router = useRouter();
-
   const handleReturnToHub = () => {
     setCurrentView('hub');
   };
-
   const handleEnterTarot = () => {
     setCurrentView('tarot');
   };
-
   const handleEnterAstrology = () => {
     setCurrentView('astrology');
   };
-
   const renderHub = () => (
     <motion.div
       key="hub"
@@ -62,7 +53,6 @@ export const CosmicHub: React.FC = () => {
         >
           Choose your path to cosmic wisdom
         </motion.p>
-
         {/* Mercury Retrograde Banner */}
         <motion.div
           className="w-full max-w-4xl mx-auto mb-8"
@@ -72,7 +62,6 @@ export const CosmicHub: React.FC = () => {
         >
           <MercuryRetrogradeBanner onMarketplaceClick={() => router.push('/marketplace')} />
         </motion.div>
-
         <div className={styles.realmCards}>
           {/* Tarot Realm Card */}
           <motion.div
@@ -107,7 +96,6 @@ export const CosmicHub: React.FC = () => {
               </div>
             </div>
           </motion.div>
-
           {/* Astrology Realm Card */}
           <motion.div
             className={`${styles.realmCard} ${styles.astrologyCard}`}
@@ -142,7 +130,6 @@ export const CosmicHub: React.FC = () => {
             </div>
           </motion.div>
         </div>
-
         {/* Daily Horoscope Widget - Lazy Loaded */}
         <motion.div
           className={styles.horoscopeSection}
@@ -158,7 +145,6 @@ export const CosmicHub: React.FC = () => {
             <DailyHoroscopeWidget />
           </Suspense>
         </motion.div>
-
         {/* Daily Oracle Display - Comprehensive Reading */}
         <motion.div
           className={styles.oracleSection}
@@ -177,7 +163,6 @@ export const CosmicHub: React.FC = () => {
       </div>
     </motion.div>
   );
-
   const renderContent = () => {
     switch (currentView) {
       case 'hub':
@@ -227,7 +212,6 @@ export const CosmicHub: React.FC = () => {
         return renderHub();
     }
   };
-
   return (
     <div className={styles.cosmicHub}>
       {/* Header with Return to Hub functionality */}
@@ -246,7 +230,6 @@ export const CosmicHub: React.FC = () => {
           />
         </Suspense>
       </div>
-
       {/* Return to Main Menu Button (visible on non-hub views) */}
       {currentView !== 'hub' && (
         <motion.button
@@ -261,7 +244,6 @@ export const CosmicHub: React.FC = () => {
           🏠 Return to Main Menu
         </motion.button>
       )}
-
       {/* Main Content Area */}
       <div className={styles.contentArea}>
         <AnimatePresence mode="wait">

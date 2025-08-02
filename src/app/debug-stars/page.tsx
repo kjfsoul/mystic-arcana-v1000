@@ -1,23 +1,18 @@
 'use client';
-
+ 
 import React, { useRef, useEffect, useState } from 'react';
-
 export default function DebugStarsPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [logs, setLogs] = useState<string[]>([]);
-
   const addLog = (message: string) => {
     console.log(message);
     setLogs(prev => [...prev.slice(-10), `${new Date().toLocaleTimeString()}: ${message}`]);
   };
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     addLog('🚀 Starting debug star renderer...');
-
     try {
       // Get 2D context for simple debugging
       const ctx = canvas.getContext('2d');
@@ -25,7 +20,6 @@ export default function DebugStarsPage() {
         addLog('❌ Could not get 2D context');
         return;
       }
-
       // Set canvas size
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
@@ -33,13 +27,10 @@ export default function DebugStarsPage() {
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
-
       addLog(`📐 Canvas sized: ${rect.width}x${rect.height} (${canvas.width}x${canvas.height})`);
-
       // Clear canvas
       ctx.fillStyle = '#000011';
       ctx.fillRect(0, 0, rect.width, rect.height);
-
       // Generate some test stars
       const starCount = 1000;
       const stars = [];
@@ -52,9 +43,7 @@ export default function DebugStarsPage() {
           color: Math.random() // B-V color index
         });
       }
-
       addLog(`✨ Generated ${stars.length} test stars`);
-
       // Draw stars
       let drawnCount = 0;
       stars.forEach((star) => {
@@ -81,12 +70,10 @@ export default function DebugStarsPage() {
             g = 210 - star.color * 100;
             b = 161 - star.color * 150;
           }
-
           ctx.fillStyle = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
           ctx.beginPath();
           ctx.arc(star.x, star.y, size, 0, Math.PI * 2);
           ctx.fill();
-
           // Add glow for bright stars
           if (star.magnitude < 3) {
             ctx.shadowColor = ctx.fillStyle;
@@ -96,20 +83,16 @@ export default function DebugStarsPage() {
             ctx.fill();
             ctx.shadowBlur = 0;
           }
-
           drawnCount++;
         }
       });
-
       addLog(`🎨 Drew ${drawnCount} visible stars (magnitude <= 6)`);
-
       // Add some bright reference stars
       const brightStars = [
         { x: rect.width * 0.2, y: rect.height * 0.3, name: 'Sirius (mag -1.46)' },
         { x: rect.width * 0.8, y: rect.height * 0.7, name: 'Vega (mag 0.03)' },
         { x: rect.width * 0.5, y: rect.height * 0.2, name: 'Polaris (mag 1.98)' },
       ];
-
       brightStars.forEach(star => {
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
@@ -123,21 +106,17 @@ export default function DebugStarsPage() {
         ctx.arc(star.x, star.y, 2, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
-
         // Add label
         ctx.fillStyle = '#cccccc';
         ctx.font = '12px monospace';
         ctx.fillText(star.name, star.x + 10, star.y - 10);
       });
-
       addLog(`⭐ Added ${brightStars.length} bright reference stars`);
       addLog('✅ Debug star field complete!');
-
     } catch (error) {
       addLog(`❌ Error: ${error}`);
     }
   }, []);
-
   return (
     <div style={{ 
       width: '100vw', 

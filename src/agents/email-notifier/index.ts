@@ -1,41 +1,34 @@
 #!/usr/bin/env npx tsx
-
 /**
  * Email Notification Agent
  * Sends automated email updates to kjfsoul@gmail.com
  */
-
 import * as nodemailer from 'nodemailer';
 import { readFileSync, existsSync, writeFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
-
 interface CompletedTask {
   agent_name: string;
   task_description: string;
   timestamp: string;
   status: string;
 }
-
 interface AgentStatus {
   total: number;
   active: number;
   failed: number;
   system_health?: unknown;
 }
-
 interface SystemHealth {
   uptime: number;
   memory_usage: NodeJS.MemoryUsage;
   active_processes: number;
 }
-
 interface TodoItem {
   priority: string;
   status: string;
   content: string;
 }
-
 interface AgentRegistry {
   agents: Record<string, {
     status: string;
@@ -46,11 +39,9 @@ interface AgentRegistry {
   };
   [key: string]: unknown;
 }
-
 interface MessageData {
   messages: unknown[];
 }
-
 interface EmailReport {
   timestamp: string;
   completed_tasks: CompletedTask[];
@@ -64,7 +55,6 @@ interface EmailReport {
   agent_status: AgentStatus;
   system_health: SystemHealth;
 }
-
 class EmailNotificationAgent {
   private recipient = 'kjfsoul@gmail.com';
   private transporter: nodemailer.Transporter;
@@ -74,7 +64,6 @@ class EmailNotificationAgent {
   private todoPath: string;
   private taskLogPath: string;
   private messageBusPath: string;
-
   constructor() {
     const baseDir = process.cwd();
     this.logPath = join(baseDir, 'logs', 'agent-activity', `${new Date().toISOString().split('T')[0]}.log`);
@@ -83,7 +72,6 @@ class EmailNotificationAgent {
     this.todoPath = join(baseDir, 'temp', 'todos.json');
     this.taskLogPath = join(baseDir, 'logs', 'agent-tasks.jsonl');
     this.messageBusPath = join(baseDir, 'temp', 'agent-messages.json');
-
     // Configure email transporter
     // Using Gmail SMTP - you'll need to set up app password
     this.transporter = nodemailer.createTransport({
@@ -94,7 +82,6 @@ class EmailNotificationAgent {
       }
     });
   }
-
   private log(message: string) {
     const timestamp = new Date().toISOString();
     const logEntry = `${timestamp} [EMAIL_NOTIFIER] ${message}`;
@@ -105,7 +92,6 @@ class EmailNotificationAgent {
       console.warn('Warning: Could not write to log file:', error instanceof Error ? error.message : 'Unknown error');
     }
   }
-
   /**
    * Collect all updates since last report
    */
@@ -127,7 +113,6 @@ class EmailNotificationAgent {
         active_processes: 1
       }
     };
-
     try {
       // 1. Get completed tasks from task log
       if (existsSync(this.taskLogPath)) {
@@ -145,7 +130,6 @@ class EmailNotificationAgent {
           }
         }
       }
-
       // 2. Get current todos
       if (existsSync(this.todoPath)) {
         const todos = JSON.parse(readFileSync(this.todoPath, 'utf-8')) as TodoItem[];
@@ -153,7 +137,6 @@ class EmailNotificationAgent {
         report.todos.in_progress = todos.filter((t) => t.status === 'in_progress').map((t) => t.content);
         report.todos.pending = todos.filter((t) => t.status === 'pending').map((t) => t.content);
       }
-
       // 3. Get agent status
       if (existsSync(this.registryPath)) {
         const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
@@ -164,21 +147,16 @@ class EmailNotificationAgent {
           system_health: registry.system_health
         };
       }
-
       // 4. Identify challenges and urgent needs
       report.challenges = await this.identifyChallenges();
       report.urgent_needs = await this.identifyUrgentNeeds();
-
       // 5. Get system health metrics
       report.system_health = await this.getSystemHealth();
-
     } catch (error) {
       this.log(`Error collecting updates: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-
     return report;
   }
-
   /**
    * Get last report time
    */
@@ -193,13 +171,11 @@ class EmailNotificationAgent {
     }
     return new Date(Date.now() - 24 * 60 * 60 * 1000);
   }
-
   /**
    * Identify current challenges
    */
   private async identifyChallenges(): Promise<string[]> {
     const challenges: string[] = [];
-
     // Check for failed agents
     try {
       const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
@@ -208,7 +184,6 @@ class EmailNotificationAgent {
         challenges.push(`${failedAgents.length} agents are in failed state`);
       }
     } catch {}
-
     // Check for pending messages
     try {
       const messages = JSON.parse(readFileSync(this.messageBusPath, 'utf-8')) as MessageData;
@@ -216,20 +191,16 @@ class EmailNotificationAgent {
         challenges.push(`${messages.messages.length} unprocessed messages in queue`);
       }
     } catch {}
-
     // Known critical issues
     challenges.push('Mobile responsiveness broken in three-panel layout');
     challenges.push('4 competing layout systems need consolidation');
-
     return challenges;
   }
-
   /**
    * Identify urgent needs
    */
   private async identifyUrgentNeeds(): Promise<string[]> {
     const urgent: string[] = [];
-
     // Check todos for high priority items
     if (existsSync(this.todoPath)) {
       try {
@@ -240,7 +211,6 @@ class EmailNotificationAgent {
         }
       } catch {}
     }
-
     // Check for MCP server connectivity
     try {
       const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
@@ -248,10 +218,8 @@ class EmailNotificationAgent {
         urgent.push('All MCP servers are offline - external integrations unavailable');
       }
     } catch {}
-
     return urgent;
   }
-
   /**
    * Get system health metrics
    */
@@ -261,16 +229,13 @@ class EmailNotificationAgent {
       memory_usage: process.memoryUsage(),
       active_processes: 0
     };
-
     try {
       // Count active processes
       const psCount = execSync('ps aux | grep -E "(tsx|node)" | grep -v grep | wc -l', { encoding: 'utf-8' });
       health.active_processes = parseInt(psCount.trim());
     } catch {}
-
     return health;
   }
-
   /**
    * Format email content
    */
@@ -279,7 +244,6 @@ class EmailNotificationAgent {
     const completedCount = report.completed_tasks.length;
     
     const subject = `Mystic Arcana Daily Report - ${urgentCount} Urgent Items, ${completedCount} Completed Tasks`;
-
     const html = `
 <!DOCTYPE html>
 <html>
@@ -370,21 +334,17 @@ class EmailNotificationAgent {
 </body>
 </html>
     `;
-
     const text = `
 MYSTIC ARCANA DAILY REPORT
 Generated: ${new Date(report.timestamp).toLocaleString()}
-
 ${report.urgent_needs.length > 0 ? `URGENT NEEDS (${report.urgent_needs.length}):
 ${report.urgent_needs.map(need => `- ${need}`).join('\n')}
-
 ` : ''}
 COMPLETED TASKS (${report.completed_tasks.length}):
 ${report.completed_tasks.length > 0 ? 
   report.completed_tasks.map(task => 
     `- ${task.agent_name}: ${task.task_description} - ${new Date(task.timestamp).toLocaleTimeString()}`
   ).join('\n') : 'No tasks completed since last report.'}
-
 CURRENT TODOS:
 ${report.todos.high_priority.length > 0 ? `High Priority (${report.todos.high_priority.length}):
 ${report.todos.high_priority.map(todo => `- ${todo}`).join('\n')}
@@ -395,22 +355,17 @@ ${report.todos.in_progress.map(todo => `- ${todo}`).join('\n')}
 ${report.todos.pending.length > 0 ? `Pending (${report.todos.pending.length}):
 ${report.todos.pending.map(todo => `- ${todo}`).join('\n')}
 ` : ''}
-
 ${report.challenges.length > 0 ? `CURRENT CHALLENGES (${report.challenges.length}):
 ${report.challenges.map(challenge => `- ${challenge}`).join('\n')}
-
 ` : ''}
 SYSTEM STATUS:
 - Active Agents: ${report.agent_status.active}/${report.agent_status.total}
 - Failed Agents: ${report.agent_status.failed}
 - Active Processes: ${report.system_health.active_processes}
-
 This is an automated report from the Mystic Arcana development system.
     `;
-
     return { subject, html, text };
   }
-
   /**
    * Send email report
    */
@@ -420,7 +375,6 @@ This is an automated report from the Mystic Arcana development system.
     try {
       const report = await this.collectUpdates();
       const { subject, html, text } = this.formatEmailContent(report);
-
       // Check if email credentials are configured
       if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
         this.log('Email credentials not configured. Set EMAIL_USER and EMAIL_PASS environment variables.');
@@ -432,7 +386,6 @@ This is an automated report from the Mystic Arcana development system.
         this.log(`Report saved to: ${reportPath}`);
         return;
       }
-
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: this.recipient,
@@ -440,19 +393,15 @@ This is an automated report from the Mystic Arcana development system.
         text,
         html
       };
-
       const info = await this.transporter.sendMail(mailOptions);
       this.log(`Email sent successfully: ${info.messageId}`);
-
       // Save last report timestamp
       writeFileSync(this.lastReportPath, JSON.stringify({ timestamp: report.timestamp }));
-
     } catch (error) {
       this.log(`Error sending email report: ${error instanceof Error ? error.message : 'Unknown error'}`);
       throw error;
     }
   }
-
   /**
    * Send urgent notification
    */
@@ -464,7 +413,6 @@ This is an automated report from the Mystic Arcana development system.
         this.log('Email credentials not configured for urgent notification.');
         return;
       }
-
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: this.recipient,
@@ -478,24 +426,19 @@ This is an automated report from the Mystic Arcana development system.
           </div>
         `
       };
-
       await this.transporter.sendMail(mailOptions);
       this.log('Urgent notification sent successfully');
-
     } catch (error) {
       this.log(`Error sending urgent notification: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 }
-
 // Create and export agent instance
 export const emailNotifier = new EmailNotificationAgent();
-
 // CLI usage
 if (require.main === module) {
   const args = process.argv.slice(2);
   const command = args[0];
-
   switch (command) {
     case 'send':
       emailNotifier.sendReport().catch(console.error);

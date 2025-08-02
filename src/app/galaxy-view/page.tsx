@@ -1,28 +1,23 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { HighPerformanceStarField } from '../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField';
 import { GalaxyBackground } from '../../components/effects/GalaxyBackground/GalaxyBackground';
 import styles from './page.module.css';
-
 export default function GalaxyView() {
   const router = useRouter();
   const [viewPerspective, setViewPerspective] = useState<'earth' | 'moon' | 'mars' | 'deep-space'>('earth');
   const [showStarField, setShowStarField] = useState(true);
-
   const handleBackToLobby = () => {
     router.push('/');
   };
-
   const perspectives = [
     { id: 'earth', name: '🌍 Earth View', description: 'Your current perspective' },
     { id: 'moon', name: '🌙 Moon View', description: 'Lunar perspective' },
     { id: 'mars', name: '♂️ Mars Perspective', description: 'The red planet view' },
     { id: 'deep-space', name: '🌌 Deep Space', description: 'Beyond the solar system' }
   ];
-
   return (
     <div className={styles.container}>
       {/* Background Layers */}
@@ -40,7 +35,6 @@ export default function GalaxyView() {
           />
         </div>
       )}
-
       {/* UI Overlay */}
       <motion.div
         className={styles.uiOverlay}
@@ -56,7 +50,6 @@ export default function GalaxyView() {
         >
           ← Back
         </button>
-
         {/* Title */}
         <motion.div
           className={styles.header}
@@ -67,7 +60,6 @@ export default function GalaxyView() {
           <h1 className={styles.title}>Cosmic Explorer</h1>
           <p className={styles.subtitle}>Journey through the celestial realms</p>
         </motion.div>
-
         {/* Perspective Controls */}
         <motion.div
           className={styles.controls}
@@ -93,7 +85,6 @@ export default function GalaxyView() {
             ))}
           </div>
         </motion.div>
-
         {/* Toggle Controls */}
         <motion.div
           className={styles.toggles}
@@ -110,7 +101,6 @@ export default function GalaxyView() {
             <span>High-Performance Stars</span>
           </label>
         </motion.div>
-
         {/* Impulse Buy Element */}
         <motion.div
           className={styles.specialOffer}

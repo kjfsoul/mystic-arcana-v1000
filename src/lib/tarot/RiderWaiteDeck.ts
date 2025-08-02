@@ -1,5 +1,4 @@
 import { TarotCardData } from './TarotEngine';
-
 // Complete 78-Card Rider-Waite Tarot Deck Definition
 export const RIDER_WAITE_DECK: TarotCardData[] = [
   // MAJOR ARCANA (22 cards)
@@ -311,7 +310,6 @@ export const RIDER_WAITE_DECK: TarotCardData[] = [
     },
     description: 'The World represents completion, fulfillment, and the successful end of a journey.'
   },
-
   // MINOR ARCANA - CUPS (14 cards)
   {
     id: 'ace-cups',
@@ -523,7 +521,6 @@ export const RIDER_WAITE_DECK: TarotCardData[] = [
     },
     description: 'The King of Cups represents emotional mastery and compassionate leadership.'
   },
-
   // MINOR ARCANA - PENTACLES (14 cards)
   {
     id: 'ace-pentacles',
@@ -735,7 +732,6 @@ export const RIDER_WAITE_DECK: TarotCardData[] = [
     },
     description: 'The King of Pentacles represents financial mastery, business success, and generous leadership.'
   },
-
   // MINOR ARCANA - SWORDS (14 cards)
   {
     id: 'ace-swords',
@@ -947,7 +943,6 @@ export const RIDER_WAITE_DECK: TarotCardData[] = [
     },
     description: 'The King of Swords represents intellectual mastery, authority, and the pursuit of truth.'
   },
-
   // MINOR ARCANA - WANDS (14 cards)
   {
     id: 'ace-wands',
@@ -1160,13 +1155,11 @@ export const RIDER_WAITE_DECK: TarotCardData[] = [
     description: 'The King of Wands represents leadership, vision, and entrepreneurial spirit.'
   }
 ];
-
 // Helper function to get a random card from the deck
 export const getRandomCard = (): TarotCardData => {
   const randomIndex = Math.floor(Math.random() * RIDER_WAITE_DECK.length);
   return RIDER_WAITE_DECK[randomIndex];
 };
-
 // Helper function to get multiple random cards
 export const getRandomCards = (count: number): TarotCardData[] => {
   const shuffled = [...RIDER_WAITE_DECK].sort(() => Math.random() - 0.5);

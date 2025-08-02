@@ -1,27 +1,21 @@
 // API Route for CrewAI Operation Logs
 // Provides access to crew execution history and monitoring
-
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
-
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const operationId = searchParams.get('operationId');
     const limit = parseInt(searchParams.get('limit') || '10');
     const type = searchParams.get('type') || 'operations'; // 'operations' or 'memory'
-
     if (type === 'memory') {
       return await getMemoryLogs(limit);
     }
-
     if (operationId) {
       return await getSpecificOperation(operationId);
     }
-
     return await getRecentOperations(limit);
-
   } catch (error) {
     return NextResponse.json(
       {
@@ -32,7 +26,6 @@ export async function GET(req: NextRequest) {
     );
   }
 }
-
 async function getSpecificOperation(operationId: string) {
   try {
     const logDir = path.join(process.cwd(), 'crew_memory_logs');
@@ -40,7 +33,6 @@ async function getSpecificOperation(operationId: string) {
     
     const logData = await fs.readFile(logFile, 'utf-8');
     const operation = JSON.parse(logData);
-
     return NextResponse.json({
       success: true,
       operation,
@@ -62,7 +54,6 @@ async function getSpecificOperation(operationId: string) {
     throw error;
   }
 }
-
 async function getRecentOperations(limit: number) {
   try {
     const logDir = path.join(process.cwd(), 'crew_memory_logs');
@@ -73,10 +64,8 @@ async function getRecentOperations(limit: number) {
     } catch (error) {
       // Directory might already exist
     }
-
     const files = await fs.readdir(logDir);
     const operationFiles = files.filter(f => f.endsWith('.json'));
-
     // Sort by creation time (newest first)
     const operations = await Promise.allSettled(
       operationFiles
@@ -87,12 +76,10 @@ async function getRecentOperations(limit: number) {
           return JSON.parse(data);
         })
     );
-
     const validOperations = operations
       .filter(op => op.status === 'fulfilled')
       .map(op => (op as PromiseFulfilledResult<any>).value)
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-
     return NextResponse.json({
       success: true,
       operations: validOperations,
@@ -117,7 +104,6 @@ async function getRecentOperations(limit: number) {
     });
   }
 }
-
 async function getMemoryLogs(limit: number) {
   try {
     const memLogFile = path.join(process.cwd(), 'A-mem', 'crew-operations.log');
@@ -136,7 +122,6 @@ async function getMemoryLogs(limit: number) {
           }
         })
         .reverse(); // Most recent first
-
       return NextResponse.json({
         success: true,
         logs,
@@ -165,14 +150,12 @@ async function getMemoryLogs(limit: number) {
     throw error;
   }
 }
-
 // DELETE endpoint to clean up old logs
 export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const olderThan = searchParams.get('olderThan'); // ISO date string
     const confirm = searchParams.get('confirm') === 'true';
-
     if (!confirm) {
       return NextResponse.json(
         {
@@ -182,14 +165,11 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
-
     const logDir = path.join(process.cwd(), 'crew_memory_logs');
     const files = await fs.readdir(logDir);
     const operationFiles = files.filter(f => f.endsWith('.json'));
-
     let deletedCount = 0;
     const cutoffDate = olderThan ? new Date(olderThan) : new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago default
-
     for (const file of operationFiles) {
       const filePath = path.join(logDir, file);
       const stats = await fs.stat(filePath);
@@ -199,14 +179,12 @@ export async function DELETE(req: NextRequest) {
         deletedCount++;
       }
     }
-
     return NextResponse.json({
       success: true,
       message: `Deleted ${deletedCount} operation logs older than ${cutoffDate.toISOString()}`,
       deletedCount,
       cutoffDate: cutoffDate.toISOString()
     });
-
   } catch (error) {
     return NextResponse.json(
       {

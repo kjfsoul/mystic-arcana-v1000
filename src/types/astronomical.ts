@@ -3,7 +3,6 @@
  * 
  * Core types for the astronomical calculation system
  */
-
 // Geographic location for observer
 export interface GeoLocation {
   latitude: number;   // degrees, -90 to +90
@@ -11,26 +10,22 @@ export interface GeoLocation {
   elevation: number;  // meters above sea level
   timezone: string;   // IANA timezone identifier
 }
-
 // Celestial coordinates
 export interface EquatorialCoordinates {
   ra: number;   // right ascension in degrees (0-360)
   dec: number;  // declination in degrees (-90 to +90)
   epoch?: number;  // Julian year (e.g., 2000.0) - optional for compatibility
 }
-
 export interface HorizontalCoordinates {
   azimuth: number;    // degrees (0-360, N=0, E=90)
   altitude: number;   // degrees (-90 to +90)
 }
-
 export interface ScreenCoordinates {
   x: number;          // pixel coordinates
   y: number;
   visible: boolean;   // above horizon
   brightness?: number; // Visual brightness factor (0-1)
 }
-
 // Star catalog data
 export interface Star {
   id: string;                    // catalog identifier (e.g., "HIP 37279")
@@ -54,7 +49,6 @@ export interface Star {
   multiplicity?: string;         // Binary/multiple star info
   metadata?: Record<string, unknown>;
 }
-
 // Planetary data
 export interface PlanetaryData {
   planet: Planet;
@@ -82,7 +76,6 @@ export interface PlanetaryData {
   set?: Date;
   aspects?: AspectData[];
 }
-
 // Planetary bodies
 export enum Planet {
   SUN = 'Sun',
@@ -99,7 +92,6 @@ export enum Planet {
   NORTH_NODE = 'North Node',
   SOUTH_NODE = 'South Node'
 }
-
 // Zodiac signs
 export enum ZodiacSign {
   ARIES = 'Aries',
@@ -115,7 +107,6 @@ export enum ZodiacSign {
   AQUARIUS = 'Aquarius',
   PISCES = 'Pisces'
 }
-
 // Astrological aspects
 export interface AspectData {
   planet1: Planet | string;      // Can be Planet enum or string
@@ -131,7 +122,6 @@ export interface AspectData {
   influence?: 'harmonious' | 'challenging' | 'neutral';
   strength?: number;             // 0-1 based on orb and planets
 }
-
 export enum AspectType {
   CONJUNCTION = 'Conjunction',
   OPPOSITION = 'Opposition',
@@ -143,7 +133,6 @@ export enum AspectType {
   SEMISQUARE = 'Semisquare',
   SESQUIQUADRATE = 'Sesquiquadrate'
 }
-
 // Retrograde motion data
 export interface RetrogradeData {
   planet: Planet;
@@ -152,7 +141,6 @@ export interface RetrogradeData {
   stationaryRetrograde?: Date;   // when planet goes retrograde
   speed: number;                 // degrees per day
 }
-
 // Moon phase data
 export interface MoonPhaseData {
   phase: MoonPhase | string;     // Can be MoonPhase enum or string
@@ -172,7 +160,6 @@ export interface MoonPhaseData {
     date: Date;
   };
 }
-
 export enum MoonPhase {
   NEW_MOON = 'New Moon',
   WAXING_CRESCENT = 'Waxing Crescent',
@@ -183,7 +170,6 @@ export enum MoonPhase {
   LAST_QUARTER = 'Last Quarter',
   WANING_CRESCENT = 'Waning Crescent'
 }
-
 // Cosmic weather data
 export interface CosmicInfluenceData {
   moonPhase: MoonPhaseData;
@@ -206,7 +192,6 @@ export interface CosmicInfluenceData {
   warnings?: CosmicWarning[];
   timestamp?: Date;
 }
-
 // Supporting types for cosmic weather
 export interface PlanetaryHourData {
   current: {
@@ -221,7 +206,6 @@ export interface PlanetaryHourData {
   ruler: string;
   dayNight: 'day' | 'night';
 }
-
 export interface RetrogradeInfo {
   planet: string;
   isRetrograde: boolean;
@@ -229,7 +213,6 @@ export interface RetrogradeInfo {
   shadow?: boolean;
   influence?: string;
 }
-
 export interface SpiritualInfluence {
   type: 'enhancing' | 'challenging' | 'neutral' | 'transformative';
   source: string;
@@ -240,7 +223,6 @@ export interface SpiritualInfluence {
     spread: string;
   };
 }
-
 export interface OptimalActivity {
   activity: string;
   rating: number;
@@ -253,7 +235,6 @@ export interface OptimalActivity {
   enhancers: string[];
   cautions: string[];
 }
-
 export interface CosmicWarning {
   level: 'info' | 'caution' | 'warning';
   type: string;
@@ -264,7 +245,6 @@ export interface CosmicWarning {
   };
   mitigation: string[];
 }
-
 export enum CosmicWeatherType {
   CALM = 'calm',
   ACTIVE = 'active',
@@ -275,7 +255,6 @@ export enum CosmicWeatherType {
   FULL_MOON = 'full-moon',
   NEW_MOON = 'new-moon'
 }
-
 // Rendering configuration
 export interface RenderConfig {
   starCatalog: 'hipparcos' | 'yale' | 'gaia';
@@ -287,7 +266,6 @@ export interface RenderConfig {
   coordinateSystem: 'equatorial' | 'horizontal' | 'ecliptic';
   projection: 'stereographic' | 'orthographic' | 'mercator';
 }
-
 // Calculation precision settings
 export interface CalculationConfig {
   ephemerisAccuracy: 'low' | 'medium' | 'high' | 'ultra';

@@ -2,9 +2,7 @@
  * AstrologyService - TypeScript interface for Python astrology calculations
  * Uses real astronomical data via PySwisseph and Kerykeion
  */
-
 export interface PlanetPosition {
-
   planet: string;
   zodiacSign: string;
   zodiacDegree: number;
@@ -21,7 +19,6 @@ export interface PlanetPosition {
   symbol?: string;
 };
 }
-
 export interface BirthChart {
   subjectData: {
     name: string;
@@ -42,7 +39,6 @@ export interface BirthChart {
   houses: Record<string, unknown>;
   aspects: Aspect[];
 }
-
 export interface Aspect {
   planet1: string;
   planet2: string;
@@ -51,13 +47,11 @@ export interface Aspect {
   orb: number;
   applying?: boolean;
 }
-
 export interface CurrentTransits {
   timestamp: string;
   julianDay: number;
   planets: Record<string, PlanetPosition>;
 }
-
 export interface SynastryChart {
   svgChart: string;
   synastryAspects: unknown[];
@@ -65,7 +59,6 @@ export interface SynastryChart {
   scoreDescription: string;
   relevantAspects: unknown[];
 }
-
 export interface LocationData {
   lat: number;
   lng: number;
@@ -74,10 +67,8 @@ export interface LocationData {
   city: string;
   country: string;
 }
-
 class AstrologyService {
   private apiEndpoint = '/api/astrology';
-
   /**
    * Calculate a complete birth chart
    */
@@ -100,20 +91,16 @@ class AstrologyService {
         }
       })
     });
-
     if (!response.ok) {
       throw new Error(`Failed to calculate birth chart: ${response.statusText}`);
     }
-
     const result = await response.json();
     
     if (!result.success) {
       throw new Error(result.error || 'Failed to calculate birth chart');
     }
-
     return result.data;
   }
-
   /**
    * Calculate synastry (compatibility) between two people
    */
@@ -147,20 +134,16 @@ class AstrologyService {
         data: { person1, person2 }
       })
     });
-
     if (!response.ok) {
       throw new Error(`Failed to calculate synastry: ${response.statusText}`);
     }
-
     const result = await response.json();
     
     if (!result.success) {
       throw new Error(result.error || 'Failed to calculate synastry');
     }
-
     return result.data;
   }
-
   /**
    * Get current planetary transits
    */
@@ -172,20 +155,16 @@ class AstrologyService {
         action: 'get-current-transits'
       })
     });
-
     if (!response.ok) {
       throw new Error(`Failed to get current transits: ${response.statusText}`);
     }
-
     const result = await response.json();
     
     if (!result.success) {
       throw new Error(result.error || 'Failed to get current transits');
     }
-
     return result.data;
   }
-
   /**
    * Geocode a location
    */
@@ -198,20 +177,16 @@ class AstrologyService {
         data: { city, country }
       })
     });
-
     if (!response.ok) {
       throw new Error(`Failed to geocode location: ${response.statusText}`);
     }
-
     const result = await response.json();
     
     if (!result.success) {
       throw new Error(result.error || 'Failed to geocode location');
     }
-
     return result.data;
   }
-
   /**
    * Format planet position for display
    */
@@ -221,7 +196,6 @@ class AstrologyService {
     const retrograde = position.retrograde ? ' ℞' : '';
     return `${position.zodiacSign} ${degree}°${minute}'${retrograde}`;
   }
-
   /**
    * Get zodiac symbol
    */
@@ -242,7 +216,6 @@ class AstrologyService {
     };
     return symbols[sign] || sign;
   }
-
   /**
    * Get planet symbol
    */
@@ -264,7 +237,6 @@ class AstrologyService {
     };
     return symbols[planet.toLowerCase()] || planet;
   }
-
   /**
    * Get aspect symbol
    */
@@ -279,6 +251,5 @@ class AstrologyService {
     return symbols[aspect.toLowerCase()] || aspect;
   }
 }
-
 const astrologyService = new AstrologyService();
 export default astrologyService;

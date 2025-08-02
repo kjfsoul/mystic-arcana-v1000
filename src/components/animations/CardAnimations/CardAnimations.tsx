@@ -1,15 +1,12 @@
 'use client';
-
 import React from 'react';
 import styles from './CardAnimations.module.css';
-
 interface CardAnimationsProps {
   children: React.ReactNode;
   isShuffling?: boolean;
   isRevealing?: boolean;
   className?: string;
 }
-
 /**
  * CardAnimations Component
  * 

@@ -1,11 +1,9 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { TarotCard } from '@/types/tarot';
 import styles from './TarotCardDisplay.module.css';
-
 interface TarotCardDisplayProps {
   card: TarotCard;
   isFlipped?: boolean;
@@ -14,7 +12,6 @@ interface TarotCardDisplayProps {
   size?: 'small' | 'medium' | 'large';
   showMeaning?: boolean;
 }
-
 export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
   card,
   isFlipped = false,
@@ -30,12 +27,10 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
     medium: styles.medium,
     large: styles.large
   };
-
   const handleImageError = () => {
     setImageError(true);
     console.error(`Failed to load image for card: ${card.name}`);
   };
-
   return (
     <motion.div
       className={`${styles.cardContainer} ${sizeClasses[size]}`}
@@ -58,7 +53,6 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
             </div>
           </div>
         </div>
-
         {/* Card Front */}
         <div className={`${styles.cardFace} ${styles.cardFront}`}>
           {isRevealing && (
@@ -96,7 +90,6 @@ export const TarotCardDisplay: React.FC<TarotCardDisplayProps> = ({
               </div>
             )}
           </div>
-
           {showMeaning && isFlipped && (
             <motion.div
               className={styles.meaningPanel}

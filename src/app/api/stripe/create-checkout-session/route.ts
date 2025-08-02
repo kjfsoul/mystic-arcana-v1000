@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-06-30.basil', // Latest API version
 });
-
 export async function POST(request: NextRequest) {
   try {
     const { product_data, unit_amount, currency, quantity = 1 } = await request.json();
-
     // Validate required fields
     if (!product_data || !unit_amount || !currency) {
       return NextResponse.json(
@@ -16,10 +13,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     // Get the origin for success/cancel URLs
     const origin = request.headers.get('origin') || 'http://localhost:3000';
-
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -99,9 +94,7 @@ export async function POST(request: NextRequest) {
         },
       ],
     });
-
     return NextResponse.json({ sessionId: session.id });
-
   } catch (error) {
     console.error('Error creating checkout session:', error);
     
@@ -111,14 +104,12 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
     );
   }
 }
-
 export async function GET() {
   return NextResponse.json({
     message: 'Stripe Checkout Session API',

@@ -1,5 +1,5 @@
 "use client";
-
+ 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
@@ -9,18 +9,15 @@ import { useCosmicWeather } from "../../utils/cosmic-weather/useCosmicWeather";
 import { AuthModal } from "../auth/AuthModal";
 import { UnlockJourneyModal } from "../modals/UnlockJourneyModal";
 import { TarotCard } from "./TarotCard";
-
 interface UnifiedTarotPanelProps {
   onActivate?: () => void;
   className?: string;
 }
-
 export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
   className = "",
 }) => {
   const { user, isGuest } = useAuth();
   const { cosmicInfluence } = useCosmicWeather();
-
   const [currentReading, setCurrentReading] = useState<TarotReading | null>(
     null
   );
@@ -34,23 +31,20 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [showReadingModal, setShowReadingModal] = useState(false);
-
   // Responsive breakpoint detection
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkResponsive = () => {
       const width = window.innerWidth;
       setIsMobile(width < 768);
       setIsTablet(width >= 768 && width < 1024);
     };
-
     checkResponsive();
     window.addEventListener("resize", checkResponsive);
     return () => window.removeEventListener("resize", checkResponsive);
   }, []);
-
   // Initialize tarot engine with user context
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const tarotEngine = useMemo(
     () =>
       new TarotEngine({
@@ -59,17 +53,14 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       }),
     [isGuest, cosmicInfluence]
   );
-
   const availableSpreads = tarotEngine.getAvailableSpreadTypes();
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSpreadSelection = useCallback(
     (spreadType: "single" | "three-card" | "celtic-cross") => {
       if (isGuest && spreadType !== "single") {
         setShowAuthModal(true);
         return;
       }
-
       setSelectedSpread(spreadType);
       setCurrentReading(null);
       setFlippedCards(new Set());
@@ -77,17 +68,14 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
     },
     [isGuest]
   );
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const performReading = useCallback(async () => {
     setIsPerformingReading(true);
     setFlippedCards(new Set());
-
     try {
       const reading = await tarotEngine.performReading(selectedSpread);
       setCurrentReading(reading);
       setShowReadingModal(true); // Show the modal with the reading
-
       // Save reading for registered users
       if (!isGuest && user) {
         try {
@@ -99,7 +87,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
           console.warn("Error saving reading:", saveError);
         }
       }
-
       // For guests, show unlock modal after single card reading with interpretation
       if (isGuest && selectedSpread === "single") {
         setTimeout(() => setShowUnlockModal(true), 6000);
@@ -110,17 +97,14 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       setIsPerformingReading(false);
     }
   }, [selectedSpread, isGuest, tarotEngine, user]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCardFlip = useCallback((cardIndex: number) => {
     setFlippedCards((prev) => new Set([...prev, cardIndex]));
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCloseUnlockModal = useCallback(() => {
     setShowUnlockModal(false);
   }, []);
-
   // Get responsive layout configuration
   const getLayoutConfig = () => {
     if (isMobile) {
@@ -161,9 +145,7 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       };
     }
   };
-
   const layout = getLayoutConfig();
-
   return (
     <div className={`relative w-full ${layout.containerClass} ${className}`}>
       {/* Header */}
@@ -180,7 +162,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
           Discover cosmic insights through the ancient art of tarot
         </p>
       </motion.header>
-
       {/* Spread Selection - Mobile-optimized buttons */}
       <motion.section
         className="space-y-3"
@@ -243,7 +224,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
           ))}
         </div>
       </motion.section>
-
       {/* Reading Button - Enhanced */}
       <motion.div
         className="flex justify-center py-4"
@@ -280,7 +260,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
           )}
         </motion.button>
       </motion.div>
-
       {/* Reading Results Modal */}
       <AnimatePresence>
         {showReadingModal && currentReading && (
@@ -325,7 +304,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
                   ×
                 </button>
               </div>
-
               {/* Background gradient effect */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-600/10 to-blue-600/20 pointer-events-none" />
               
@@ -399,7 +377,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
                 </motion.div>
               ))}
             </div>
-
             {/* Interpretation */}
             {flippedCards.size > 0 && (
               <motion.div
@@ -464,7 +441,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
                     {currentReading.interpretation}
                   </div>
                 )}
-
                 {/* Cosmic Influence */}
                 {cosmicInfluence && (
                   <motion.div
@@ -497,7 +473,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Modals */}
       <AuthModal
         isOpen={showAuthModal}
@@ -506,7 +481,6 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
         title="Sign in to unlock full readings"
         subtitle="Guest users can only access single card readings"
       />
-
       <UnlockJourneyModal
         isVisible={showUnlockModal}
         onClose={handleCloseUnlockModal}

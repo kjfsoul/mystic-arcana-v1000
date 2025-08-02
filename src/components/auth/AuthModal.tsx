@@ -1,10 +1,9 @@
 'use client';
-
+ 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from './AuthModal.module.css';
-
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,7 +11,6 @@ interface AuthModalProps {
   title?: string;
   subtitle?: string;
 }
-
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
@@ -23,7 +21,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   
   // Sync internal mode with prop when modal opens
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   React.useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
@@ -45,13 +43,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [success, setSuccess] = useState<string | null>(null);
   
   const { signIn, signUp, signInWithGoogle } = useAuth();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     setSuccess(null);
-
     try {
       if (mode === 'signin') {
         const { error } = await signIn(email, password);
@@ -89,11 +85,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setLoading(false);
     }
   };
-
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setError(null);
-
     try {
       const { error } = await signInWithGoogle();
       if (error) {
@@ -105,12 +99,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       setLoading(false);
     }
   };
-
   const toggleMode = () => {
     setMode(mode === 'signin' ? 'signup' : 'signin');
     setError(null);
   };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -142,12 +134,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             >
               ×
             </button>
-
             <div className={styles.header}>
               <h2 className={styles.title}>{title}</h2>
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
-
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.inputGroup}>
                 <label htmlFor="email" className={styles.label}>
@@ -163,7 +153,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   required
                 />
               </div>
-
               <div className={styles.inputGroup}>
                 <label htmlFor="password" className={styles.label}>
                   Password
@@ -179,7 +168,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   minLength={6}
                 />
               </div>
-
               {mode === 'signup' && (
                 <>
                   <div className={styles.inputGroup}>
@@ -195,7 +183,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       required
                     />
                   </div>
-
                   <div className={styles.inputGroup}>
                     <label htmlFor="birthTime" className={styles.label}>
                       Birth Time (Optional)
@@ -208,7 +195,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       className={styles.input}
                     />
                   </div>
-
                   <div className={styles.inputGroup}>
                     <label htmlFor="birthLocation" className={styles.label}>
                       Birth Location (Optional)
@@ -224,19 +210,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </div>
                 </>
               )}
-
               {error && (
                 <div className={styles.error} role="alert">
                   {error}
                 </div>
               )}
-
               {success && (
                 <div className={styles.success} role="alert">
                   {success}
                 </div>
               )}
-
               <button
                 type="submit"
                 className={styles.submitButton}
@@ -245,11 +228,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 {loading ? 'Loading...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
               </button>
             </form>
-
             <div className={styles.divider}>
               <span>or</span>
             </div>
-
             <button
               type="button"
               onClick={handleGoogleSignIn}
@@ -259,7 +240,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <span className={styles.googleIcon}>G</span>
               Continue with Google
             </button>
-
             <div className={styles.footer}>
               {mode === 'signin' ? (
                 <>

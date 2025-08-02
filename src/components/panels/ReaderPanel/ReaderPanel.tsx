@@ -1,16 +1,14 @@
 'use client';
-
+ 
 import React, { useState, useRef, useEffect } from 'react';
 import { VirtualReader } from '../../readers/VirtualReader/VirtualReader';
 import { ReaderChat } from '../../readers/ReaderChat/ReaderChat';
 import { useAccessibility } from '../../../utils/accessibility/useAccessibility';
 import styles from './ReaderPanel.module.css';
-
 interface ReaderPanelProps {
   isActive: boolean;
   onActivate: () => void;
 }
-
 interface Message {
   id: string;
   text: string;
@@ -18,7 +16,6 @@ interface Message {
   timestamp: Date;
   type?: 'greeting' | 'reading' | 'guidance' | 'cosmic-update';
 }
-
 /**
  * ReaderPanel Component
  * 
@@ -46,15 +43,13 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
   const [readerMood, setReaderMood] = useState<'neutral' | 'mystical' | 'contemplative'>('mystical');
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const { announceToScreenReader } = useAccessibility();
-
   // Auto-scroll chat to latest message
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
-
   const handleUserMessage = async (text: string) => {
     // Add user message
     const userMessage: Message = {
@@ -63,13 +58,10 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
       sender: 'user',
       timestamp: new Date()
     };
-
     setMessages(prev => [...prev, userMessage]);
     setIsReaderTyping(true);
-
     // Simulate reader thinking/typing
     await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1500));
-
     // Generate reader response (would connect to AI in production)
     const readerResponse: Message = {
       id: (Date.now() + 1).toString(),
@@ -78,14 +70,11 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
       timestamp: new Date(),
       type: 'guidance'
     };
-
     setIsReaderTyping(false);
     setMessages(prev => [...prev, readerResponse]);
-
     // Announce to screen reader
     announceToScreenReader(`Reader says: ${readerResponse.text}`);
   };
-
   const generateReaderResponse = (): string => {
     // Placeholder for AI response generation
     const responses = [
@@ -96,7 +85,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
     ];
     return responses[Math.floor(Math.random() * responses.length)];
   };
-
   return (
     <div
       className={`${styles.panel} ${isActive ? styles.active : ''}`}
@@ -111,7 +99,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
           isTyping={isReaderTyping}
           onMoodChange={setReaderMood}
         />
-
         <div className={styles.readerInfo}>
           <h2>Celestia</h2>
           <p className={styles.readerTitle}>Cosmic Oracle & Tarot Guide</p>
@@ -129,7 +116,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
           </div>
         </div>
       </div>
-
       {/* Chat Interface */}
       <div className={styles.chatSection}>
         <div
@@ -156,7 +142,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
               </div>
             </div>
           ))}
-
           {isReaderTyping && (
             <div className={`${styles.message} ${styles.reader}`}>
               <div className={styles.typingIndicator}>
@@ -167,7 +152,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ isActive, onActivate }
             </div>
           )}
         </div>
-
         <ReaderChat
           onSendMessage={handleUserMessage}
           disabled={isReaderTyping}

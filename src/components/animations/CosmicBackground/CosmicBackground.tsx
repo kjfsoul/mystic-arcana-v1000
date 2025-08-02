@@ -1,6 +1,5 @@
-
 'use client';
-
+ 
 import React, { useRef, useEffect } from 'react';
 import { StarField } from '../../effects/StarField/StarField';
 import { RealStarField } from '../../astronomical/RealStarField/RealStarField';
@@ -8,7 +7,6 @@ import { HighPerformanceStarField } from '../../astronomical/HighPerformanceStar
 import { ParticleSystem } from '../../effects/ParticleSystem/ParticleSystem';
 import { useGeolocation } from '../../../hooks/useGeolocation';
 import styles from './CosmicBackground.module.css';
-
 interface CosmicBackgroundProps {
   className?: string;
   intensity?: 'low' | 'medium' | 'high';
@@ -16,7 +14,6 @@ interface CosmicBackgroundProps {
   useRealStars?: boolean; // Toggle between real and decorative stars
   useHighPerformance?: boolean; // Use WebGL2 high-performance renderer
 }
-
 /**
  * CosmicBackground Component
  *
@@ -42,15 +39,12 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
     // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -58,7 +52,6 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
     // Nebula gradient colors
     const nebulaColors = [
       { r: 147, g: 112, b: 219 }, // Medium purple
@@ -66,11 +59,9 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       { r: 75, g: 0, b: 130 },    // Indigo
       { r: 255, g: 215, b: 0 },   // Gold accents
     ];
-
     // Animated nebula clouds
     const drawNebula = (time: number) => {
       ctx.globalAlpha = 0.02;
-
       const gradient = ctx.createRadialGradient(
         canvas.width * 0.5 + Math.sin(time * 0.0001) * 100,
         canvas.height * 0.5 + Math.cos(time * 0.0001) * 100,
@@ -79,7 +70,6 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         canvas.height * 0.5,
         canvas.width * 0.7
       );
-
       // Animate gradient colors
       nebulaColors.forEach((color, i) => {
         const offset = i / (nebulaColors.length - 1);
@@ -89,11 +79,9 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
           `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`
         );
       });
-
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
-
     // Shooting stars
     class ShootingStar {
       x: number = 0;
@@ -103,17 +91,14 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       angle: number = 0;
       opacity: number = 0;
       fadeSpeed: number = 0;
-
       constructor(canvasWidth: number, canvasHeight: number) {
         this.reset(canvasWidth, canvasHeight);
       }
-
       update(canvasWidth: number, canvasHeight: number) {
         // Move and fade the star
         this.x += Math.cos(this.angle) * this.speed;
         this.y += Math.sin(this.angle) * this.speed;
         this.opacity -= this.fadeSpeed;
-
         // Reset when faded out or off screen
         if (
           this.opacity <= 0 ||
@@ -123,7 +108,6 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
           this.reset(canvasWidth, canvasHeight);
         }
       }
-
       reset(canvasWidth: number, canvasHeight: number) {
         this.x = Math.random() * canvasWidth;
         this.y = Math.random() * canvasHeight * 0.5;
@@ -133,7 +117,6 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         this.opacity = 1;
         this.fadeSpeed = Math.random() * 0.02 + 0.01;
       }
-
       draw(ctx: CanvasRenderingContext2D) {
         ctx.save();
         ctx.globalAlpha = this.opacity;
@@ -149,34 +132,27 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         ctx.restore();
       }
     }
-
     // Create shooting stars based on intensity
     const shootingStarsCount = intensity === 'high' ? 5 : intensity === 'medium' ? 3 : 1;
     const shootingStars: ShootingStar[] = Array.from(
       { length: shootingStarsCount },
       () => new ShootingStar(canvas.width, canvas.height)
     );
-
     // Animation loop
     const animate = (time: number) => {
       if (!canvas || !ctx) return;
-
       // Clear with fade effect
       ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       // Draw nebula
       drawNebula(time);
-
       // Draw and update shooting stars
       shootingStars.forEach(star => {
         star.update(canvas.width, canvas.height);
         star.draw(ctx);
       });
-
       animationRef.current = requestAnimationFrame(animate);
     };
-
     // Handle mouse movement for interactive effects
     const handleMouseMove = (e: MouseEvent) => {
       if (!interactive) return;
@@ -185,15 +161,12 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         y: e.clientY
       };
     };
-
     window.addEventListener('mousemove', handleMouseMove);
-
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!prefersReducedMotion) {
       animationRef.current = requestAnimationFrame(animate);
     }
-
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -202,7 +175,6 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       }
     };
   }, [intensity, interactive]);
-
   return (
     <div className={`${styles.cosmicBackground} ${className}`}>
       {/* Conditional star field layer */}
@@ -237,34 +209,29 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
           className={styles.starFieldLayer}
         />
       )}
-
       {/* Loading indicator for real stars */}
       {useRealStars && locationLoading && (
         <div className={styles.loadingIndicator}>
           <p>🌍 Getting your location for accurate star positions...</p>
         </div>
       )}
-
       {/* Error fallback for real stars */}
       {useRealStars && locationError && (
         <div className={styles.errorIndicator}>
           <p>⚠️ Using approximate star positions</p>
         </div>
       )}
-
       {/* Animated canvas layer */}
       <canvas
         ref={canvasRef}
         className={styles.nebulaLayer}
         aria-hidden="true"
       />
-
       {/* Particle system for additional effects */}
       <ParticleSystem
         particleCount={intensity === 'high' ? 100 : intensity === 'medium' ? 50 : 25}
         className={styles.particleLayer}
       />
-
       {/* Gradient overlay for depth */}
       <div className={styles.gradientOverlay} aria-hidden="true" />
     </div>

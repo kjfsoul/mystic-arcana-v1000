@@ -122,19 +122,15 @@ export const MOCK_TAROT_DECK = {
     }
   }
 };
-
 export type MockTarotCard = typeof MOCK_TAROT_DECK.cards[0];
 export type MockTarotDeck = typeof MOCK_TAROT_DECK;
-
 export const getRandomCards = (count: number): MockTarotCard[] => {
   const shuffled = [...MOCK_TAROT_DECK.cards].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 };
-
 export const getCardById = (id: string): MockTarotCard | undefined => {
   return MOCK_TAROT_DECK.cards.find(card => card.id === id);
 };
-
 export const getCardsByArcana = (arcana: 'major' | 'minor'): MockTarotCard[] => {
   return MOCK_TAROT_DECK.cards.filter(card => card.arcana === arcana);
 };

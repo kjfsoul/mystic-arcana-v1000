@@ -1,21 +1,17 @@
 'use client';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { AuthModal } from '../auth/AuthModal';
 import styles from './Header.module.css';
-
 interface HeaderProps {
   onHomeClick?: () => void;
 }
-
 export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
   const { user, isGuest, signOut, loading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
-
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -23,17 +19,14 @@ export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
       console.error('Error signing out:', error);
     }
   };
-
   const handleShowSignIn = () => {
     setAuthMode('signin');
     setShowAuthModal(true);
   };
-
   const handleShowSignUp = () => {
     setAuthMode('signup');
     setShowAuthModal(true);
   };
-
   return (
     <>
       <motion.header 
@@ -57,7 +50,6 @@ export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
               </div>
             </Link>
           )}
-
           {/* Authentication Section */}
           <div className={styles.authSection}>
             {loading ? (
@@ -105,7 +97,6 @@ export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
           </div>
         </div>
       </motion.header>
-
       {/* Authentication Modal */}
       <AuthModal
         isOpen={showAuthModal}

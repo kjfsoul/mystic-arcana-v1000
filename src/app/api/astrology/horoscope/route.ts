@@ -2,17 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
 import { BirthData } from '@/types/astrology';
-
 interface HoroscopeRequest {
   birthData: BirthData;
 }
-
 interface HoroscopeData {
   sign: string;
   degrees: number;
   daily: string;
 }
-
 interface HoroscopeResult {
   success: boolean;
   data?: {
@@ -24,7 +21,6 @@ interface HoroscopeResult {
   };
   error?: string;
 }
-
 // Daily interpretation templates for each zodiac sign
 const getDailyInterpretations = (): Record<string, string[]> => ({
   aries: [
@@ -88,14 +84,12 @@ const getDailyInterpretations = (): Record<string, string[]> => ({
     "Your empathetic heart is your gift to the world today. Use your emotional depth to create beauty and bring comfort to those in need."
   ]
 });
-
 function getRandomDailyInterpretation(sign: string): string {
   const interpretations = getDailyInterpretations();
   const signInterpretations = interpretations[sign.toLowerCase()] || interpretations['aries'];
   const randomIndex = Math.floor(Math.random() * signInterpretations.length);
   return signInterpretations[randomIndex];
 }
-
 function callPythonScript(action: string, data: object): Promise<HoroscopeResult> {
   return new Promise((resolve) => {
     const pythonPath = process.env.PYTHON_PATH || 'python3';
@@ -154,7 +148,6 @@ function callPythonScript(action: string, data: object): Promise<HoroscopeResult
     }, 30000); // 30 second timeout
   });
 }
-
 export async function POST(request: NextRequest) {
   try {
     const body: HoroscopeRequest = await request.json();
@@ -166,7 +159,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     // Convert birth data to proper format for Python script
     const birthDate = new Date(body.birthData.date || body.birthData.birthDate);
     const birthData = {
@@ -179,10 +171,8 @@ export async function POST(request: NextRequest) {
       city: body.birthData.city,
       country: body.birthData.country || ""
     };
-
     // Call Python script for sun sign calculation
     const horoscopeResult = await callPythonScript('birth_chart', birthData);
-
     if (!horoscopeResult.success || !horoscopeResult.data) {
       // Fallback to data temporarily unavailable
       return NextResponse.json({
@@ -195,25 +185,20 @@ export async function POST(request: NextRequest) {
         }
       });
     }
-
     // Extract sun sign and degrees from Python response
     const sunSign = horoscopeResult.data.sun_sign;
     const sunDegrees = horoscopeResult.data.sun_degrees;
-
     // Generate daily interpretation based on real sun sign
     const dailyInterpretation = getRandomDailyInterpretation(sunSign);
-
     const horoscopeData: HoroscopeData = {
       sign: sunSign,
       degrees: sunDegrees,
       daily: dailyInterpretation
     };
-
     return NextResponse.json({
       success: true,
       data: horoscopeData
     });
-
   } catch (error) {
     console.error('Horoscope API error:', error);
     

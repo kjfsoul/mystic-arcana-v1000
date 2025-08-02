@@ -3,9 +3,7 @@
  * This module provides a compatibility layer between swisseph-v2 and our application
  * It handles API differences and provides fallback calculations when needed
  */
-
 import type { BirthData, PlanetPosition, HousePosition } from './AstronomicalCalculator';
-
 // Swiss Ephemeris constants
 const SE_SUN = 0;
 const SE_MOON = 1;
@@ -17,10 +15,8 @@ const SE_SATURN = 6;
 const SE_URANUS = 7;
 const SE_NEPTUNE = 8;
 const SE_PLUTO = 9;
-
 const SEFLG_SWIEPH = 2;
 const SEFLG_SPEED = 256;
-
 // Planet mapping
 const PLANET_MAP = {
   'Sun': SE_SUN,
@@ -34,7 +30,6 @@ const PLANET_MAP = {
   'Neptune': SE_NEPTUNE,
   'Pluto': SE_PLUTO
 };
-
 const PLANET_SYMBOLS = {
   'Sun': '☉',
   'Moon': '☽',
@@ -47,24 +42,19 @@ const PLANET_SYMBOLS = {
   'Neptune': '♆',
   'Pluto': '♇'
 };
-
 export class SwissEphemerisShim {
   private static swisseph: unknown = null;
   private static initialized = false;
-
   /**
    * Initialize the Swiss Ephemeris shim
    */
   static async initialize(): Promise<boolean> {
     if (this.initialized) return true;
-
     // Always use fallback calculations since swisseph-v2 is not installed
     console.log('Using enhanced fallback calculations (Swiss Ephemeris compatibility mode)');
-
     this.initialized = true;
     return false;
   }
-
   /**
    * Convert date to Julian Day
    */
@@ -73,7 +63,6 @@ export class SwissEphemerisShim {
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
     const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
-
     // If swisseph is available, try to use it
     if (this.swisseph && (this.swisseph as any).swe_utc_to_jd) {
       try {
@@ -85,7 +74,6 @@ export class SwissEphemerisShim {
         // Fall through to manual calculation
       }
     }
-
     // Manual Julian Day calculation
     const a = Math.floor((14 - month) / 12);
     const y = year + 4800 - a;
@@ -96,7 +84,6 @@ export class SwissEphemerisShim {
     
     return jdn + (hour - 12) / 24;
   }
-
   /**
    * Calculate planetary position using Swiss Ephemeris or fallback
    */
@@ -107,7 +94,6 @@ export class SwissEphemerisShim {
   ): { longitude: number; latitude: number; distance: number; speed: number } | null {
     const planetNum = PLANET_MAP[planetName as keyof typeof PLANET_MAP];
     if (planetNum === undefined) return null;
-
     // Try Swiss Ephemeris first
     if (this.swisseph && (this.swisseph as any).swe_calc_ut) {
       try {
@@ -127,11 +113,9 @@ export class SwissEphemerisShim {
         // Fall through to calculation
       }
     }
-
     // Fallback to enhanced calculations
     return this.calculatePlanetFallback(planetName, jd);
   }
-
   /**
    * Enhanced fallback calculation for when Swiss Ephemeris is not available
    */
@@ -139,7 +123,6 @@ export class SwissEphemerisShim {
     longitude: number; latitude: number; distance: number; speed: number;
   } | null {
     const t = (jd - 2451545.0) / 36525; // J2000 century
-
     switch (planetName) {
       case 'Sun':
         return this.calculateSunPosition(t);
@@ -165,7 +148,6 @@ export class SwissEphemerisShim {
         return null;
     }
   }
-
   /**
    * Calculate Sun position (VSOP87 simplified)
    */
@@ -197,7 +179,6 @@ export class SwissEphemerisShim {
       speed: 0.985647 // degrees per day average
     };
   }
-
   /**
    * Calculate Moon position (ELP2000 simplified)
    */
@@ -210,11 +191,9 @@ export class SwissEphemerisShim {
     const M = (357.5291092 + 35999.0502909 * t) % 360;
     const M1 = (134.9633964 + 477198.8675055 * t) % 360;
     const F = (93.2720950 + 483202.0175233 * t) % 360;
-
     // Convert to radians
     const toRad = Math.PI / 180;
     const Dr = D * toRad, Mr = M * toRad, M1r = M1 * toRad, Fr = F * toRad;
-
     // Longitude corrections (major terms)
     let longitude = L;
     longitude += 6.288774 * Math.sin(M1r);
@@ -223,22 +202,18 @@ export class SwissEphemerisShim {
     longitude += 0.213618 * Math.sin(2 * M1r);
     longitude -= 0.185116 * Math.sin(Mr);
     longitude -= 0.114332 * Math.sin(2 * Fr);
-
     // Latitude
     let latitude = 5.128122 * Math.sin(Fr);
     latitude += 0.280602 * Math.sin(M1r + Fr);
     latitude += 0.277693 * Math.sin(M1r - Fr);
-
     // Distance (Earth radii, convert to AU)
     let distance = 385000.56;
     distance -= 20905.355 * Math.cos(M1r);
     distance -= 3699.111 * Math.cos(2 * Dr - M1r);
     distance -= 2955.968 * Math.cos(2 * Dr);
     distance = distance / 149597870.7; // Convert to AU
-
     // Daily motion (approximate)
     const speed = 13.176358;
-
     // Normalize longitude to 0-360 range
     longitude = longitude % 360;
     if (longitude < 0) longitude += 360;
@@ -250,7 +225,6 @@ export class SwissEphemerisShim {
       speed: speed
     };
   }
-
   /**
    * Calculate inner planet position (Mercury, Venus)
    */
@@ -292,7 +266,6 @@ export class SwissEphemerisShim {
       speed: n
     };
   }
-
   /**
    * Convert heliocentric to geocentric longitude
    */
@@ -317,7 +290,6 @@ export class SwissEphemerisShim {
     
     return geoLon;
   }
-
   /**
    * Calculate outer planet position
    */
@@ -368,7 +340,6 @@ export class SwissEphemerisShim {
       speed: apparentSpeed
     };
   }
-
   /**
    * Calculate houses using Swiss Ephemeris or fallback
    */
@@ -384,7 +355,6 @@ export class SwissEphemerisShim {
         // Fall through to calculation
       }
     }
-
     // Fallback to equal house system
     const lst = this.calculateSiderealTime(jd, longitude);
     const ascendant = this.calculateAscendant(latitude, lst);
@@ -396,7 +366,6 @@ export class SwissEphemerisShim {
     
     return houses;
   }
-
   /**
    * Calculate sidereal time
    */
@@ -407,7 +376,6 @@ export class SwissEphemerisShim {
     lst = (lst + longitude) % 360;
     return lst < 0 ? lst + 360 : lst;
   }
-
   /**
    * Calculate ascendant
    */
@@ -421,7 +389,6 @@ export class SwissEphemerisShim {
     
     return asc < 0 ? asc + 360 : asc;
   }
-
   /**
    * Get zodiac sign from longitude
    */
@@ -430,7 +397,6 @@ export class SwissEphemerisShim {
                    'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
     return signs[Math.floor(longitude / 30)] || 'Unknown';
   }
-
   /**
    * Main calculation method that provides full chart data
    */
@@ -505,7 +471,6 @@ export class SwissEphemerisShim {
     
     return { planets, houses, ascendant, midheaven };
   }
-
   /**
    * Get ruling planet for a sign
    */
@@ -519,5 +484,4 @@ export class SwissEphemerisShim {
     return rulers[sign] || 'Unknown';
   }
 }
-
 export default SwissEphemerisShim;

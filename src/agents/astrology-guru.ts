@@ -4,18 +4,15 @@
  * Extends astrology interpretation logic and knowledge pooling for deep chart analysis,
  * predictive astrology, and synastry compatibility calculations.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface AstrologyGuruConfig {
   ephemerisSource: 'swiss' | 'nasa' | 'fallback';
   interpretationDepth: 'basic' | 'intermediate' | 'advanced' | 'master';
   aspectOrbs: Record<string, number>;
   houseSystem: 'placidus' | 'koch' | 'equal' | 'whole_sign';
 }
-
 export interface ChartAnalysisRequest {
   birthData: {
     datetime: string;
@@ -26,7 +23,6 @@ export interface ChartAnalysisRequest {
   analysisType: 'natal' | 'progressed' | 'solar_return' | 'synastry';
   focusAreas?: string[];
 }
-
 export interface AstrologyInterpretation {
   summary: string;
   keyThemes: string[];
@@ -39,11 +35,9 @@ export interface AstrologyInterpretation {
   houseAnalysis: Record<string, string>;
   predictiveInsights?: string[];
 }
-
 export class AstrologyGuruAgent extends Agent {
   private config: AstrologyGuruConfig;
   private knowledgeBase: Map<string, any>;
-
   constructor(config: Partial<AstrologyGuruConfig> = {}) {
     super('astrology-guru', 'AstrologyGuruAgent');
     
@@ -61,14 +55,12 @@ export class AstrologyGuruAgent extends Agent {
       houseSystem: 'placidus',
       ...config
     };
-
     this.knowledgeBase = new Map();
     // Initialize knowledge base asynchronously
     this.initializeKnowledgeBase().catch(error => {
       console.error('AstrologyGuru: Failed to initialize knowledge base:', error);
     });
   }
-
   /**
    * Initialize the astrology knowledge base with comprehensive structured knowledge
    */
@@ -101,7 +93,6 @@ export class AstrologyGuruAgent extends Agent {
       this.loadFallbackKnowledge();
     }
   }
-
   /**
    * Load fallback knowledge if main knowledge pool is unavailable
    */
@@ -119,7 +110,6 @@ export class AstrologyGuruAgent extends Agent {
       pluto: { name: 'Pluto', keywords: ['transformation', 'power', 'rebirth'], rulerOf: ['scorpio'] }
     });
   }
-
   /**
    * Perform deep chart analysis with comprehensive interpretation
    */
@@ -139,7 +129,6 @@ export class AstrologyGuruAgent extends Agent {
         longitude: request.birthData.longitude,
         timezone: request.birthData.timezone
       };
-
       const chart = await SwissEphemerisShim.calculateFullChart(birthData);
       
       // Generate interpretation using knowledge base
@@ -156,15 +145,12 @@ export class AstrologyGuruAgent extends Agent {
         houseAnalysis,
         predictiveInsights: this.generatePredictiveInsights(chart)
       };
-
       return analysis;
-
     } catch (error) {
       console.error('AstrologyGuruAgent: Deep analysis failed:', error);
       throw new Error('Failed to perform deep chart analysis');
     }
   }
-
   /**
    * Interpret planetary positions using knowledge base
    */
@@ -172,7 +158,6 @@ export class AstrologyGuruAgent extends Agent {
     const planetData = this.knowledgeBase.get('planets') || {};
     const signData = this.knowledgeBase.get('signs') || {};
     const interpretations: Record<string, string> = {};
-
     planets.forEach(planet => {
       const planetInfo = planetData[planet.name.toLowerCase()];
       const signInfo = signData[planet.sign.toLowerCase()];
@@ -187,17 +172,14 @@ export class AstrologyGuruAgent extends Agent {
           (planetInfo.basicMeaning || `Strong ${planet.name} influence.`);
       }
     });
-
     return interpretations;
   }
-
   /**
    * Interpret aspects between planets
    */
   private interpretAspects(planets: any[]): Array<{ aspect: string; interpretation: string; strength: number; }> {
     const aspectData = this.knowledgeBase.get('aspects') || {};
     const aspects: { aspect: string; interpretation: string; strength: number }[] = [];
-
     // Calculate major aspects between planets
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
@@ -231,17 +213,14 @@ export class AstrologyGuruAgent extends Agent {
         });
       }
     }
-
     return aspects.sort((a, b) => b.strength - a.strength).slice(0, 5); // Return top 5 aspects
   }
-
   /**
    * Interpret house positions
    */
   private interpretHouses(houses: any[], planets: any[]): Record<string, string> {
     const houseData = this.knowledgeBase.get('houses') || {};
     const interpretations: Record<string, string> = {};
-
     // Group planets by house
     const planetsByHouse: Record<number, any[]> = {};
     planets.forEach(planet => {
@@ -250,7 +229,6 @@ export class AstrologyGuruAgent extends Agent {
       }
       planetsByHouse[planet.house].push(planet);
     });
-
     // Interpret each house
     for (let houseNum = 1; houseNum <= 12; houseNum++) {
       const houseInfo = houseData[`house_${houseNum}`];
@@ -267,10 +245,8 @@ export class AstrologyGuruAgent extends Agent {
         interpretations[houseNum.toString()] = interpretation;
       }
     }
-
     return interpretations;
   }
-
   /**
    * Extract key themes from chart
    */
@@ -285,13 +261,11 @@ export class AstrologyGuruAgent extends Agent {
         planetInfo.keywords.slice(0, 2).forEach((keyword: string) => themes.add(keyword));
       }
     });
-
     // Add themes from prominent houses (houses with multiple planets)
     const planetsByHouse: Record<number, number> = {};
     chart.planets.forEach((planet: any) => {
       planetsByHouse[planet.house] = (planetsByHouse[planet.house] || 0) + 1;
     });
-
     Object.entries(planetsByHouse).forEach(([house, count]) => {
       if (count >= 2) {
         const houseData = this.knowledgeBase.get('houses') || {};
@@ -301,10 +275,8 @@ export class AstrologyGuruAgent extends Agent {
         }
       }
     });
-
     return Array.from(themes).slice(0, 5);
   }
-
   /**
    * Generate overall summary
    */
@@ -316,7 +288,6 @@ export class AstrologyGuruAgent extends Agent {
            `With ${planetCount} planetary influences examined, the chart shows a complex interplay of energies ` +
            `that shape both conscious and unconscious patterns of behavior and life experience.`;
   }
-
   /**
    * Generate predictive insights
    */
@@ -334,14 +305,11 @@ export class AstrologyGuruAgent extends Agent {
     if (moonSign) {
       insights.push(`Lunar patterns in ${moonSign} indicate emotional cycles connected to ${moonSign.toLowerCase()} qualities`);
     }
-
     // Add general timing insights
     insights.push('Current planetary transits suggest a period of personal growth and self-discovery');
     insights.push('Pay attention to recurring themes in relationships and communication over the next few months');
-
     return insights;
   }
-
   /**
    * Synthesize knowledge from multiple astrological sources
    */
@@ -351,15 +319,12 @@ export class AstrologyGuruAgent extends Agent {
       // TODO: Implement knowledge synthesis from multiple authoritative sources
       // TODO: Cross-reference traditional and modern interpretations
       // TODO: Apply machine learning for pattern recognition
-
       return `Synthesized knowledge about ${topic} from ${sources.length} sources`;
-
     } catch (error) {
       console.error('AstrologyGuruAgent: Knowledge synthesis failed:', error);
       throw new Error('Failed to synthesize astrological knowledge');
     }
   }
-
   /**
    * Calculate synastry compatibility between two charts
    */
@@ -379,7 +344,6 @@ export class AstrologyGuruAgent extends Agent {
         longitude: chart1.birthData.longitude,
         timezone: chart1.birthData.timezone
       };
-
       const person2 = {
         name: 'Person 2',
         birthDate: chart2.birthData.datetime,
@@ -390,9 +354,7 @@ export class AstrologyGuruAgent extends Agent {
         longitude: chart2.birthData.longitude,
         timezone: chart2.birthData.timezone
       };
-
       const compatibilityResult = await calculateCompatibility(person1, person2);
-
       // Enhance with additional insights from knowledge base
       const enhancedResult = {
         ...compatibilityResult,
@@ -400,15 +362,12 @@ export class AstrologyGuruAgent extends Agent {
         relationshipAdvice: this.generateRelationshipAdvice(compatibilityResult),
         astrologicalInsights: this.generateAstrologicalInsights(compatibilityResult)
       };
-
       return enhancedResult;
-
     } catch (error) {
       console.error('AstrologyGuruAgent: Synastry calculation failed:', error);
       throw new Error('Failed to calculate synastry compatibility');
     }
   }
-
   /**
    * Generate detailed synastry analysis
    */
@@ -428,14 +387,11 @@ export class AstrologyGuruAgent extends Agent {
     } else {
       analysis += `moderate compatibility requiring conscious effort. `;
     }
-
     analysis += `Love compatibility (${loveScore}/5) suggests ${this.interpretScore(loveScore, 'romantic')} potential. `;
     analysis += `Friendship compatibility (${friendshipScore}/5) indicates ${this.interpretScore(friendshipScore, 'friendship')} bonds. `;
     analysis += `Teamwork compatibility (${teamworkScore}/5) shows ${this.interpretScore(teamworkScore, 'collaborative')} dynamics.`;
-
     return analysis;
   }
-
   /**
    * Generate relationship advice based on compatibility scores
    */
@@ -444,51 +400,41 @@ export class AstrologyGuruAgent extends Agent {
     const loveScore = compatibilityResult.love?.rating || 0;
     const friendshipScore = compatibilityResult.friendship?.rating || 0;
     const teamworkScore = compatibilityResult.teamwork?.rating || 0;
-
     if (loveScore < 3) {
       advice.push("Focus on understanding each other's emotional needs and love languages");
     } else if (loveScore >= 4) {
       advice.push("Your romantic connection is strong - nurture it through shared experiences");
     }
-
     if (friendshipScore < 3) {
       advice.push("Build friendship through shared interests and open communication");
     } else if (friendshipScore >= 4) {
       advice.push("Your friendship foundation is excellent - this supports all other aspects");
     }
-
     if (teamworkScore < 3) {
       advice.push("Practice patience and compromise when working together on shared goals");
     } else if (teamworkScore >= 4) {
       advice.push("Your collaborative energy is powerful - consider joint projects or ventures");
     }
-
     // Add general advice
     advice.push("Remember that all relationships require conscious effort and mutual respect");
     advice.push("Use astrology as a tool for understanding, not limiting your potential together");
-
     return advice;
   }
-
   /**
    * Generate astrological insights
    */
   private generateAstrologicalInsights(compatibilityResult: any): string[] {
     const insights = [];
     const keyAspects = compatibilityResult.overall?.keyAspects || [];
-
     if (keyAspects.length > 0) {
       insights.push(`Key astrological factors: ${keyAspects.slice(0, 3).join(', ')}`);
     }
-
     // Add insights based on knowledge base
     insights.push("Planetary aspects between your charts reveal the energy dynamics of your relationship");
     insights.push("House overlays show how you experience each other in different life areas");
     insights.push("Sign compatibility reflects your fundamental approaches to life and love");
-
     return insights;
   }
-
   /**
    * Interpret compatibility scores
    */
@@ -499,7 +445,6 @@ export class AstrologyGuruAgent extends Agent {
     if (score >= 2) return `moderate ${type}`;
     return `challenging ${type}`;
   }
-
   /**
    * Get agent status and capabilities
    */
@@ -519,5 +464,4 @@ export class AstrologyGuruAgent extends Agent {
     };
   }
 }
-
 export default AstrologyGuruAgent;

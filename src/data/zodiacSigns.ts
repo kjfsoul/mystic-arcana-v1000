@@ -1,5 +1,4 @@
 import { ZodiacInfo, ZodiacSign } from '@/types/horoscope';
-
 export const ZODIAC_SIGNS: Record<ZodiacSign, ZodiacInfo> = {
   aries: {
     sign: 'aries',

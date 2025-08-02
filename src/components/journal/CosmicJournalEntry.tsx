@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Save, Feather, Scroll, Check, AlertCircle } from 'lucide-react';
@@ -7,7 +7,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase/client';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
 import styles from './CosmicJournalEntry.module.css';
-
 interface CosmicJournalEntryProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,14 +15,12 @@ interface CosmicJournalEntryProps {
   cardMeaning?: string;
   question?: string;
 }
-
 const writingQuills = [
   { id: 'phoenix', name: 'Phoenix Feather', icon: '🔥', color: 'from-orange-500 to-red-600', description: 'Fiery insights' },
   { id: 'swan', name: 'Swan Quill', icon: '🦢', color: 'from-blue-400 to-purple-500', description: 'Graceful wisdom' },
   { id: 'eagle', name: 'Eagle Plume', icon: '🦅', color: 'from-yellow-500 to-amber-600', description: 'Soaring vision' },
   { id: 'mystic', name: 'Mystic Ink', icon: '✨', color: 'from-purple-500 to-pink-600', description: 'Magical clarity' },
 ];
-
 export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
   isOpen,
   onClose,
@@ -41,9 +38,8 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   // Check authentication status on mount and when user changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -61,9 +57,7 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
         setAuthChecked(true);
       }
     };
-
     checkAuth();
-
     // Subscribe to auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setIsAuthenticated(!!session && !!user && !isGuest);
@@ -71,12 +65,10 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
         setSaveError(null);
       }
     });
-
     return () => {
       subscription.unsubscribe();
     };
   }, [user, isGuest]);
-
   const handleSave = async () => {
     // Re-check authentication before saving
     const { data: { session } } = await supabase.auth.getSession();
@@ -85,10 +77,8 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
       setSaveError('Please sign in to save your reading to the cosmic journal');
       return;
     }
-
     setSaving(true);
     setSaveError(null);
-
     try {
       // Save to journal_entries table
       const journalEntry = {
@@ -106,17 +96,14 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
         tags: ['tarot', cardName.toLowerCase().replace(/\s+/g, '-')],
         is_public: false
       };
-
       const { error: dbError } = await supabase
         .from('journal_entries')
         .insert([journalEntry]);
-
       if (dbError) {
         console.error('Database error:', dbError);
         setSaveError('Failed to save to cosmic journal. Please try again.');
         return;
       }
-
       // If there's a full reading, save that too
       if (reading && session.access_token) {
         const response = await fetch('/api/tarot/save-reading', {
@@ -135,14 +122,12 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
             isPublic: false
           })
         });
-
         if (!response.ok) {
           const errorData = await response.json();
           console.error('API error:', errorData);
           // Don't fail the whole save if just the reading API fails
         }
       }
-
       setSaveSuccess(true);
       setTimeout(() => {
         onClose();
@@ -158,7 +143,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
       setSaving(false);
     }
   };
-
   const getQuillStyles = (quillId: string) => {
     const quill = writingQuills.find(q => q.id === quillId);
     if (!quill) return '';
@@ -176,9 +160,7 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
         return 'text-gray-400';
     }
   };
-
   if (!isOpen) return null;
-
   return (
     <AnimatePresence>
       <motion.div
@@ -203,7 +185,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
               <X className="w-5 h-5" />
             </button>
           </div>
-
           {/* Content */}
           <div className={styles.content}>
             {/* Writing Quill Selection */}
@@ -225,7 +206,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 ))}
               </div>
             </div>
-
             {/* Question */}
             {question && (
               <div className={styles.questionSection}>
@@ -233,7 +213,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 <p className={styles.questionText}>{question}</p>
               </div>
             )}
-
             {/* Sacred Interpretation */}
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>💜 Your Sacred Interpretation *</h3>
@@ -250,7 +229,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 </span>
               </div>
             </div>
-
             {/* Single Reading Info */}
             <div className={styles.singleReadingInfo}>
               <p className={styles.readingLabel}>⭐ Your single Reading **</p>
@@ -259,7 +237,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 <p className={styles.cardMeaning}>{cardMeaning}</p>
               </div>
             </div>
-
             {/* Additional Notes */}
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>📜 Additional Sacred Notes</h3>
@@ -273,7 +250,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 />
               </div>
             </div>
-
             {/* Authentication Warning */}
             {authChecked && !isAuthenticated && (
               <motion.div
@@ -285,7 +261,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 <p>Authentication required - Please sign in to save your cosmic insights</p>
               </motion.div>
             )}
-
             {/* Error Message */}
             {saveError && (
               <motion.div
@@ -297,7 +272,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 <p>{saveError}</p>
               </motion.div>
             )}
-
             {/* Success Message */}
             {saveSuccess && (
               <motion.div
@@ -308,7 +282,6 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                 <p>✨ Your cosmic wisdom has been preserved in the eternal journal!</p>
               </motion.div>
             )}
-
             {/* Action Buttons */}
             <div className={styles.actions}>
               <button

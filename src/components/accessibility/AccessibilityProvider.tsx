@@ -1,7 +1,6 @@
 'use client';
-
+ 
 import React, { createContext, useContext, useEffect, useState, useRef, ReactNode } from 'react';
-
 interface AccessibilitySettings {
   reducedMotion: boolean;
   highContrast: boolean;
@@ -10,16 +9,13 @@ interface AccessibilitySettings {
   keyboardNavigation: boolean;
   announcements: boolean;
 }
-
 interface AccessibilityContextType {
   settings: AccessibilitySettings;
   updateSetting: (key: keyof AccessibilitySettings, value: AccessibilitySettings[keyof AccessibilitySettings]) => void;
   announce: (message: string, priority?: 'polite' | 'assertive') => void;
   focusElement: (selector: string) => boolean;
 }
-
 const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
-
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
   if (!context) {
@@ -27,11 +23,9 @@ export const useAccessibility = () => {
   }
   return context;
 };
-
 interface AccessibilityProviderProps {
   children: ReactNode;
 }
-
 /**
  * Accessibility Provider - WCAG 2.2+ compliance system
  * 
@@ -52,19 +46,16 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
     keyboardNavigation: false,
     announcements: true
   });
-
   // Ref to track live region element
   const liveRegionRef = useRef<HTMLDivElement | null>(null);
-
   // Detect user preferences on mount
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const detectPreferences = () => {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const highContrast = window.matchMedia('(prefers-contrast: high)').matches;
       const screenReader = detectScreenReader();
       const keyboardNavigation = detectKeyboardNavigation();
-
       setSettings(prev => ({
         ...prev,
         reducedMotion,
@@ -72,36 +63,28 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
         screenReader,
         keyboardNavigation
       }));
-
       // Apply CSS classes to document
       document.documentElement.classList.toggle('reduced-motion', reducedMotion);
       document.documentElement.classList.toggle('high-contrast', highContrast);
       document.documentElement.classList.toggle('screen-reader', screenReader);
       document.documentElement.classList.toggle('keyboard-nav', keyboardNavigation);
     };
-
     detectPreferences();
-
     // Listen for preference changes
     const mediaQueries = [
       window.matchMedia('(prefers-reduced-motion: reduce)'),
       window.matchMedia('(prefers-contrast: high)')
     ];
-
     const handleChange = () => detectPreferences();
-
     mediaQueries.forEach(mq => mq.addEventListener('change', handleChange));
-
     return () => {
       mediaQueries.forEach(mq => mq.removeEventListener('change', handleChange));
     };
   }, []);
-
   // Screen reader detection
   const detectScreenReader = (): boolean => {
     // Check for common screen reader indicators
     if (typeof window === 'undefined') return false;
-
     return !!(
       // Check for screen reader specific APIs
       'speechSynthesis' in window ||
@@ -110,11 +93,9 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
       navigator?.userAgent?.includes('VoiceOver')
     );
   };
-
   // Keyboard navigation detection
   const detectKeyboardNavigation = (): boolean => {
     let isKeyboardUser = false;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Tab') {
         isKeyboardUser = true;
@@ -122,23 +103,18 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
-
     const handleMouseDown = () => {
       isKeyboardUser = false;
       document.documentElement.classList.remove('keyboard-nav');
     };
-
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('mousedown', handleMouseDown);
-
     return isKeyboardUser;
   };
-
   // Update accessibility setting
   const updateSetting = (key: keyof AccessibilitySettings, value: AccessibilitySettings[keyof AccessibilitySettings]) => {
     setSettings(prev => {
       const newSettings = { ...prev, [key]: value };
-
       // Apply changes to document
       if (key === 'fontSize') {
         const fontSizes = {
@@ -149,24 +125,19 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
         } as const;
         document.documentElement.style.fontSize = fontSizes[value as keyof typeof fontSizes];
       }
-
       if (key === 'highContrast') {
         document.documentElement.classList.toggle('high-contrast', value as boolean);
       }
-
       if (key === 'reducedMotion') {
         document.documentElement.classList.toggle('reduced-motion', value as boolean);
       }
-
       // Save to localStorage
       localStorage.setItem('accessibility-settings', JSON.stringify(newSettings));
-
       return newSettings;
     });
   };
-
   // Load saved settings
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const saved = localStorage.getItem('accessibility-settings');
     if (saved) {
@@ -178,19 +149,15 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
       }
     }
   }, []);
-
   // Announcement system for screen readers
   const announce = (message: string, priority: 'polite' | 'assertive' = 'polite') => {
     if (!settings.announcements) return;
-
     const announcement = document.createElement('div');
     announcement.setAttribute('aria-live', priority);
     announcement.setAttribute('aria-atomic', 'true');
     announcement.className = 'sr-only';
     announcement.textContent = message;
-
     document.body.appendChild(announcement);
-
     // Remove after announcement with safe DOM check
     setTimeout(() => {
       // Check if the element still exists and is a child of body
@@ -199,7 +166,6 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
       }
     }, 1000);
   };
-
   // Focus management utility
   const focusElement = (selector: string): boolean => {
     try {
@@ -213,9 +179,8 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
     }
     return false;
   };
-
   // Keyboard event handlers
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Escape key handling for modals/overlays
@@ -229,7 +194,6 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
           }
         }
       }
-
       // Skip links navigation (Alt + S)
       if (event.altKey && event.key === 's') {
         event.preventDefault();
@@ -238,48 +202,40 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
           skipLink.focus();
         }
       }
-
       // Main content focus (Alt + M)
       if (event.altKey && event.key === 'm') {
         event.preventDefault();
         focusElement('#main-content, main, [role="main"]');
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
-
   // Focus visible management
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleMouseDown = () => {
       document.body.classList.add('mouse-user');
       document.body.classList.remove('keyboard-user');
     };
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Tab') {
         document.body.classList.add('keyboard-user');
         document.body.classList.remove('mouse-user');
       }
     };
-
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
   // Live region for dynamic content - using React best practices
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     // Only create if we're in the browser and don't already have one
     if (typeof window === 'undefined') return;
-
     // Check if live region already exists
     const existingRegion = document.getElementById('aria-live-region');
     if (!existingRegion && !liveRegionRef.current) {
@@ -288,12 +244,10 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
       liveRegion.setAttribute('aria-live', 'polite');
       liveRegion.setAttribute('aria-atomic', 'false');
       liveRegion.className = 'sr-only';
-
       // Store ref before appending
       liveRegionRef.current = liveRegion;
       document.body.appendChild(liveRegion);
     }
-
     return () => {
       // Clean up using ref and safe parent check
       if (liveRegionRef.current && liveRegionRef.current.parentNode) {
@@ -302,18 +256,15 @@ export const AccessibilityProvider: React.FC<AccessibilityProviderProps> = ({ ch
       }
     };
   }, []);
-
   const contextValue: AccessibilityContextType = {
     settings,
     updateSetting,
     announce,
     focusElement
   };
-
   return (
     <AccessibilityContext.Provider value={contextValue}>
       {children}
-
       {/* Screen reader only status information */}
       <div className="sr-only" aria-live="polite" id="accessibility-status">
         {settings.screenReader && 'Screen reader support enabled. '}

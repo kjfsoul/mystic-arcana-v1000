@@ -4,26 +4,22 @@ import { Footer } from "../components/layout/Footer";
 import { AuthProvider } from "../contexts/AuthContext";
 import { TarotSessionProvider } from "../contexts/TarotSessionContext";
 import "./globals.css";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
   preload: true,
 });
-
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
   preload: true,
 });
-
 export const metadata: Metadata = {
   title: "Mystic Arcana",
   description: "AI-powered tarot and astrology platform",
 };
-
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -31,7 +27,6 @@ export const viewport = {
   userScalable: false,
   themeColor: "#1a1a2e",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

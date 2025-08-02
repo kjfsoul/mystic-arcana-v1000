@@ -1,15 +1,12 @@
 'use client';
-
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-
 /**
  * Debug component to help troubleshoot authentication issues
  * Remove this component in production
  */
 export const AuthDebug: React.FC = () => {
   const { user, session, loading, isGuest } = useAuth();
-
   const styles = {
     debug: {
       position: 'fixed' as const,
@@ -39,7 +36,6 @@ export const AuthDebug: React.FC = () => {
       color: '#ff6b6b'
     }
   };
-
   return (
     <div style={styles.debug}>
       <div style={styles.title}>🔍 Auth Debug</div>

@@ -7,13 +7,11 @@
  * 
  * Updated: 2025-07-24 - Full Swiss Ephemeris integration with career/compatibility synthesis
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
 import { AstrologyGuruAgent } from './astrology-guru';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 // n8n Automation JSON Interface
 export interface DailyHoroscopeJSON {
   sign: string;
@@ -35,7 +33,6 @@ export interface DailyHoroscopeJSON {
     health: number;
   };
 }
-
 export interface LunarPhaseData {
   phase: 'new' | 'waxing_crescent' | 'first_quarter' | 'waxing_gibbous' | 'full' | 'waning_gibbous' | 'last_quarter' | 'waning_crescent';
   illumination: number; // percentage
@@ -48,7 +45,6 @@ export interface LunarPhaseData {
   moonDegree: number;
   lunarMonth: number; // days since new moon
 }
-
 export interface TransitEvent {
   type: 'conjunction' | 'opposition' | 'trine' | 'square' | 'sextile' | 'quincunx';
   planet1: string;
@@ -63,7 +59,6 @@ export interface TransitEvent {
     separating: string;
   };
 }
-
 export interface DailyLunarForecast {
   date: string;
   lunarPhase: LunarPhaseData;
@@ -89,7 +84,6 @@ export interface DailyLunarForecast {
     release: string;
   };
 }
-
 export interface PersonalizedLunarReading {
   userId: string;
   natalMoon: {
@@ -105,7 +99,6 @@ export interface PersonalizedLunarReading {
   spiritualMessage: string;
   actionItems: string[];
 }
-
 export class LunarTransitNarratorAgent extends Agent {
   private lunarCycles: Map<string, any>;
   private transitTemplates: Map<string, any>;
@@ -113,7 +106,6 @@ export class LunarTransitNarratorAgent extends Agent {
   private astrologyGuru: AstrologyGuruAgent;
   private knowledgeBase: Map<string, any>;
   private zodiacSigns: string[];
-
   constructor() {
     super('lunar-transit-narrator', 'LunarTransitNarratorAgent');
     this.lunarCycles = new Map();
@@ -128,7 +120,6 @@ export class LunarTransitNarratorAgent extends Agent {
     this.initializeLunarWisdom();
     this.loadAstrologyKnowledge();
   }
-
   /**
    * Load AstrologyGuru knowledge base for enhanced interpretations
    */
@@ -158,7 +149,6 @@ export class LunarTransitNarratorAgent extends Agent {
       this.loadFallbackKnowledge();
     }
   }
-
   /**
    * Load fallback knowledge if main knowledge base unavailable
    */
@@ -180,7 +170,6 @@ export class LunarTransitNarratorAgent extends Agent {
     
     this.knowledgeBase.set('signs', signs);
   }
-
   /**
    * Initialize lunar wisdom database and narrative templates
    */
@@ -245,7 +234,6 @@ export class LunarTransitNarratorAgent extends Agent {
         crystal: 'amethyst'
       }
     });
-
     // Transit interpretation templates
     this.transitTemplates.set('moon_aspects', {
       conjunction: 'Unity and new beginnings with {planet} energy',
@@ -254,21 +242,18 @@ export class LunarTransitNarratorAgent extends Agent {
       square: 'Tension requiring growth between heart and {planet}',
       sextile: 'Opportunity to blend intuition with {planet} wisdom'
     });
-
     // Narrative style configurations
     this.narrativeStyles.set('mystical', {
       tone: 'poetic and ethereal',
       language: 'symbolic and metaphorical',
       structure: 'flowing narrative with spiritual insights'
     });
-
     this.narrativeStyles.set('practical', {
       tone: 'grounded and actionable',
       language: 'clear and direct',
       structure: 'organized guidance with specific steps'
     });
   }
-
   /**
    * Generate daily horoscopes for all 12 signs using Swiss Ephemeris
    * Returns JSON format optimized for n8n automation
@@ -340,7 +325,6 @@ export class LunarTransitNarratorAgent extends Agent {
       };
     }
   }
-
   /**
    * Calculate daily ephemeris data using Swiss Ephemeris
    */
@@ -386,7 +370,6 @@ export class LunarTransitNarratorAgent extends Agent {
       throw new Error('Failed to calculate ephemeris data');
     }
   }
-
   /**
    * Generate horoscope for a specific zodiac sign
    */
@@ -439,7 +422,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return this.generateFallbackHoroscope(sign, ephemerisData.date.split('T')[0]);
     }
   }
-
   /**
    * Create personalized lunar reading for specific user
    */
@@ -467,7 +449,6 @@ export class LunarTransitNarratorAgent extends Agent {
       
       // Suggest personalized actions
       const actionItems = this.generateActionItems(natalMoon, currentTransits);
-
       return {
         userId,
         natalMoon,
@@ -479,13 +460,11 @@ export class LunarTransitNarratorAgent extends Agent {
         spiritualMessage,
         actionItems
       };
-
     } catch (error) {
       console.error('LunarTransitNarratorAgent: Personalized reading failed:', error);
       throw new Error('Failed to generate personalized lunar reading');
     }
   }
-
   /**
    * Analyze moon phase patterns and cycles
    */
@@ -501,13 +480,11 @@ export class LunarTransitNarratorAgent extends Agent {
         emotionalIntensityPeaks: [],
         optimalActionDays: []
       };
-
     } catch (error) {
       console.error('LunarTransitNarratorAgent: Phase pattern analysis failed:', error);
       throw new Error('Failed to analyze moon phase patterns');
     }
   }
-
   /**
    * Calculate moon phase from ephemeris data
    */
@@ -566,7 +543,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return { phase: 'unknown', illumination: 50 };
     }
   }
-
   /**
    * Identify key planetary transits for the day
    */
@@ -608,7 +584,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return ['No major transits identified'];
     }
   }
-
   /**
    * Calculate aspect between two planetary positions
    */
@@ -633,7 +608,6 @@ export class LunarTransitNarratorAgent extends Agent {
     
     return null;
   }
-
   /**
    * Calculate planetary influences for a specific sign
    */
@@ -671,7 +645,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return influences;
     }
   }
-
   /**
    * Calculate how a specific planet influences a sign
    */
@@ -715,7 +688,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return influence;
     }
   }
-
   /**
    * Check compatibility between two signs
    */
@@ -739,7 +711,6 @@ export class LunarTransitNarratorAgent extends Agent {
     // Default neutral compatibility
     return 0.5;
   }
-
   /**
    * Synthesize horoscope text using knowledge base
    */
@@ -781,7 +752,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return `Today brings cosmic opportunities for ${sign} growth and self-discovery. Trust your instincts and embrace the journey ahead.`;
     }
   }
-
   /**
    * Generate career insight based on planetary influences
    */
@@ -800,7 +770,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return `Professional growth opportunities are present for focused ${sign} individuals.`;
     }
   }
-
   /**
    * Generate love insight based on moon phase and influences
    */
@@ -822,7 +791,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return `Love energy supports authentic ${sign} expression and meaningful connections.`;
     }
   }
-
   /**
    * Determine energy level based on influences
    */
@@ -850,7 +818,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return 'Moderate';
     }
   }
-
   /**
    * Generate daily advice based on sign and influences
    */
@@ -869,7 +836,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return `Stay true to your ${sign} essence while remaining open to growth and new experiences.`;
     }
   }
-
   /**
    * Calculate daily ratings for different life areas
    */
@@ -903,7 +869,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return { overall: 3.0, love: 3.0, career: 3.0, health: 3.0 };
     }
   }
-
   /**
    * Generate lucky numbers based on sign and ephemeris
    */
@@ -925,7 +890,6 @@ export class LunarTransitNarratorAgent extends Agent {
       return [7, 14, 21, 28, 35];
     }
   }
-
   /**
    * Determine favorable colors based on sign and influences
    */
@@ -947,7 +911,6 @@ export class LunarTransitNarratorAgent extends Agent {
     
     return colorMap[sign] || ['Blue', 'White', 'Gold'];
   }
-
   /**
    * Generate fallback horoscope when calculations fail
    */
@@ -976,14 +939,12 @@ export class LunarTransitNarratorAgent extends Agent {
       }
     };
   }
-
   private synthesizeDailyTheme(lunarPhase: LunarPhaseData, transits: TransitEvent[]): string {
     const phaseData = this.lunarCycles.get('phases')[lunarPhase.phase];
     const transitInfluences = transits.map(t => t.influence).flat();
     
     return `Today's lunar energy of ${phaseData.energy} combines with ${transitInfluences.join(', ')} influences`;
   }
-
   private analyzeEmotionalWeather(lunarPhase: LunarPhaseData, transits: TransitEvent[]): any {
     // TODO: Implement sophisticated emotional weather analysis
     return {
@@ -993,7 +954,6 @@ export class LunarTransitNarratorAgent extends Agent {
       challenging: ['overthinking', 'sensitivity']
     };
   }
-
   private async generateAreaGuidance(lunarPhase: LunarPhaseData, transits: TransitEvent[]): Promise<any> {
     // TODO: Generate specific guidance for each life area
     return {
@@ -1003,17 +963,14 @@ export class LunarTransitNarratorAgent extends Agent {
       spiritual: 'Moon phase energy enhances meditation and reflection'
     };
   }
-
   private suggestRituals(lunarPhase: LunarPhaseData, transits: TransitEvent[]): string[] {
     const phaseData = this.lunarCycles.get('phases')[lunarPhase.phase];
     return [phaseData.ritual, 'moon water creation', 'intention journaling'];
   }
-
   private recommendCrystals(lunarPhase: LunarPhaseData, transits: TransitEvent[]): string[] {
     const phaseData = this.lunarCycles.get('phases')[lunarPhase.phase];
     return [phaseData.crystal, 'moonstone', 'labradorite'];
   }
-
   private async calculateOptimalTimes(date: string, transits: TransitEvent[]): Promise<any> {
     // TODO: Calculate precise optimal timing based on transits
     return {
@@ -1022,7 +979,6 @@ export class LunarTransitNarratorAgent extends Agent {
       release: '22:30 - 23:30'
     };
   }
-
   private async calculateNatalMoon(birthData: any): Promise<any> {
     // TODO: Calculate natal moon position from birth data
     return {
@@ -1031,33 +987,26 @@ export class LunarTransitNarratorAgent extends Agent {
       house: 4
     };
   }
-
   private async findPersonalTransits(natalMoon: any, date: string): Promise<TransitEvent[]> {
     // TODO: Find transits to personal natal moon
     return [];
   }
-
   private generatePersonalThemes(natalMoon: any, transits: TransitEvent[]): string[] {
     // TODO: Generate personalized themes based on natal moon and transits
     return ['emotional healing', 'family connections', 'intuitive development'];
   }
-
   private async generateEmotionalForecast(natalMoon: any, transits: TransitEvent[]): Promise<string> {
     return 'Your emotional landscape is supported by nurturing cosmic influences today';
   }
-
   private async generateRelationshipInsights(natalMoon: any, transits: TransitEvent[]): Promise<string> {
     return 'Deep emotional connections are highlighted with opportunities for greater intimacy';
   }
-
   private async generateCareerGuidance(natalMoon: any, transits: TransitEvent[]): Promise<string> {
     return 'Trust your instincts in professional matters - your intuition is particularly sharp';
   }
-
   private async generateSpiritualMessage(natalMoon: any, transits: TransitEvent[]): Promise<string> {
     return 'The moon\'s gentle energy invites you to connect with your inner wisdom and divine feminine';
   }
-
   private generateActionItems(natalMoon: any, transits: TransitEvent[]): string[] {
     return [
       'Practice moon salutations at sunset',
@@ -1065,7 +1014,6 @@ export class LunarTransitNarratorAgent extends Agent {
       'Connect with water through ritual or nature'
     ];
   }
-
   /**
    * Generate sample horoscopes for testing (July 24, 2025)
    */
@@ -1077,7 +1025,6 @@ export class LunarTransitNarratorAgent extends Agent {
     console.log('Generating sample horoscopes for July 24, 2025...');
     return await this.generateDailyHoroscopes('2025-07-24');
   }
-
   /**
    * Get agent status and capabilities
    */
@@ -1116,5 +1063,4 @@ export class LunarTransitNarratorAgent extends Agent {
     };
   }
 }
-
 export default LunarTransitNarratorAgent;

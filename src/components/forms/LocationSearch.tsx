@@ -1,10 +1,9 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { geocodeLocation, getSuggestions, getPopularLocations, LocationResult } from '@/lib/location/GeocodingService';
 import styles from './LocationSearch.module.css';
-
 interface LocationSearchProps {
   value?: LocationResult | null;
   onChange: (location: LocationResult | null) => void;
@@ -13,7 +12,6 @@ interface LocationSearchProps {
   error?: string;
   className?: string;
 }
-
 export const LocationSearch: React.FC<LocationSearchProps> = ({
   value,
   onChange,
@@ -29,9 +27,8 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const [searchError, setSearchError] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
-
   // Update query when value changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (value) {
       setQuery(value.name);
@@ -39,9 +36,8 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       setQuery('');
     }
   }, [value]);
-
   // Get suggestions when query changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (query.length >= 2) {
@@ -53,16 +49,13 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
         setShowSuggestions(false);
       }
     };
-
     const debounceTimer = setTimeout(() => {
       fetchSuggestions();
     }, 300); // Debounce API calls
-
     return () => clearTimeout(debounceTimer);
   }, [query]);
-
   // Close suggestions when clicking outside
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -74,11 +67,9 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
         setShowSuggestions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
@@ -88,7 +79,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       onChange(null); // Clear selection when typing
     }
   };
-
   const handleInputFocus = () => {
     if (suggestions.length > 0) {
       setShowSuggestions(true);
@@ -97,17 +87,14 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       setShowSuggestions(true);
     }
   };
-
   const handleSuggestionClick = (location: LocationResult) => {
     setQuery(location.name);
     onChange(location);
     setShowSuggestions(false);
     setSearchError('');
   };
-
   const handleSearch = async () => {
     if (!query.trim()) return;
-
     setIsLoading(true);
     setSearchError('');
     
@@ -131,7 +118,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       setIsLoading(false);
     }
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -144,7 +130,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       setShowSuggestions(false);
     }
   };
-
   return (
     <div className={`${styles.container} ${className || ''}`}>
       {label && (
@@ -185,7 +170,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
             '🔍'
           )}
         </button>
-
         <AnimatePresence>
           {showSuggestions && suggestions.length > 0 && (
             <motion.div
@@ -230,7 +214,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           )}
         </AnimatePresence>
       </div>
-
       {(error || searchError) && (
         <motion.div
           className={styles.errorMessage}
@@ -241,7 +224,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           {error || searchError}
         </motion.div>
       )}
-
       {value && (
         <motion.div
           className={styles.selectedLocation}

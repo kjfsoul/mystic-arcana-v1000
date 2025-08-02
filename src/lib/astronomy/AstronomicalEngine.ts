@@ -11,7 +11,6 @@
  * - Cosmic weather correlations
  * - Performance optimized for 100,000+ stars at 60fps
  */
-
 import {
   Star,
   PlanetaryData,
@@ -27,7 +26,6 @@ import {
   CosmicWeatherType,
   MoonPhase
 } from '../../types/astronomical';
-
 // Import additional types from lib/astronomy/types for compatibility
 import {
   PrecessionCorrection,
@@ -37,39 +35,30 @@ import {
 // import { SwissEphemerisBridge } from './SwissEphemerisBridge';
 // import { CoordinateTransforms } from './CoordinateTransforms';
 // import { CosmicWeatherAPI } from './CosmicWeatherAPI';
-
 // Constants for astronomical calculations
 export const ASTRONOMICAL_CONSTANTS = {
   // J2000.0 epoch (January 1, 2000, 12:00 TT)
   J2000_JULIAN_DATE: 2451545.0,
-
   // Earth's obliquity at J2000.0 (degrees)
   EARTH_OBLIQUITY_J2000: 23.4392911,
-
   // Precession rate (arcseconds per century)
   PRECESSION_RATE: 5029.0966,
-
   // Nutation constants
   NUTATION_PERIOD: 18.6, // years
-
   // Atmospheric refraction at horizon (arcminutes)
   REFRACTION_AT_HORIZON: 34.0,
-
   // Star magnitude limit for naked eye visibility
   NAKED_EYE_MAGNITUDE_LIMIT: 6.5,
-
   // WebGL optimization thresholds
   STAR_CULLING_THRESHOLD: 100000,
   LOD_DISTANCE_THRESHOLD: 1000
 } as const;
-
 export class AstronomicalEngine {
   private starCatalog: Map<string, Star> = new Map();
   private planetaryCache: Map<string, PlanetaryData> = new Map();
   private coordinateCache: Map<string, ScreenCoordinates> = new Map();
   private lastUpdateTime: number = 0;
   private updateInterval: number = 1000; // 1 second update interval
-
   // Performance tracking
   private frameTime: number = 0;
   private renderStats = {
@@ -78,7 +67,6 @@ export class AstronomicalEngine {
     cacheHits: 0,
     cacheMisses: 0
   };
-
   constructor(private config: {
     highPrecision?: boolean;
     cacheTimeout?: number;
@@ -91,23 +79,19 @@ export class AstronomicalEngine {
       ...config
     };
   }
-
   /**
    * Load star catalog from various sources
    */
   async loadStarCatalog(catalog: 'hipparcos' | 'yale' | 'gaia'): Promise<Star[]> {
     console.log(`Loading ${catalog} star catalog...`);
-
     try {
       // In production, this would load from actual catalog files or APIs
       // For now, we'll create a subset of real stars from the Hipparcos catalog
       const stars = await this.loadHipparcosSubset();
-
       // Store in catalog map for quick access
       stars.forEach(star => {
         this.starCatalog.set(star.id, star);
       });
-
       console.log(`Loaded ${stars.length} stars from ${catalog} catalog`);
       return stars;
     } catch (error) {
@@ -115,7 +99,6 @@ export class AstronomicalEngine {
       throw error;
     }
   }
-
   /**
    * Transform celestial coordinates to screen coordinates
    * Handles RA/Dec → Alt/Az → Screen transformation
@@ -134,29 +117,22 @@ export class AstronomicalEngine {
       return cached;
     }
     this.renderStats.cacheMisses++;
-
     // Step 1: Apply precession correction
     const precessed = this.applyPrecession({ ra, dec }, time);
-
     // Step 2: Convert to horizontal coordinates (Alt/Az)
     const horizontal = this.equatorialToHorizontal(
       precessed,
       location,
       time
     );
-
     // Step 3: Apply atmospheric refraction
     const refracted = this.applyRefraction(horizontal);
-
     // Step 4: Convert to screen coordinates
     const screen = this.horizontalToScreen(refracted);
-
     // Cache the result
     this.coordinateCache.set(cacheKey, screen);
-
     return screen;
   }
-
   /**
    * Get current planetary positions with high precision
    */
@@ -166,13 +142,10 @@ export class AstronomicalEngine {
   ): Promise<PlanetaryData[]> {
     // Use Swiss Ephemeris bridge for high-precision calculations
     const { swissEphemeris } = await import('./SwissEphemerisBridge');
-
     if (!swissEphemeris.isInitialized) {
       await swissEphemeris.initialize();
     }
-
     const planets = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
-
     const request = {
       planets,
       datetime: time,
@@ -193,9 +166,7 @@ export class AstronomicalEngine {
         heliocentric: false
       }
     };
-
     const rawPlanetaryData = await swissEphemeris.calculatePlanetaryPositions(request);
-
     // Convert from SwissEphemeris format to our PlanetaryData format
     const planetaryData: PlanetaryData[] = rawPlanetaryData.map(planet => {
       // The SwissEphemeris already returns data in the correct format
@@ -208,16 +179,13 @@ export class AstronomicalEngine {
         }
       };
     });
-
     // Update cache
     planetaryData.forEach(planet => {
       this.planetaryCache.set(planet.planet, planet);
     });
     this.lastUpdateTime = Date.now();
-
     return planetaryData;
   }
-
   /**
    * Calculate aspects between planetary bodies
    */
@@ -225,18 +193,15 @@ export class AstronomicalEngine {
   async calculateAspects(_planets: PlanetaryData[]): Promise<AspectData[]> {
     // Use Swiss Ephemeris bridge for high-precision aspect calculations
     const { swissEphemeris } = await import('./SwissEphemerisBridge');
-
     if (!swissEphemeris.isInitialized) {
       await swissEphemeris.initialize();
     }
-
     // TODO: Fix aspect data conversion - for now return empty array
     // const planetNames = planets.map(p => p.planet);
     // const datetime = new Date(); // Would normally come from the context
     // const rawAspects = await swissEphemeris.calculateAspects(planetNames, datetime, 8.0);
     return [];
   }
-
   /**
    * Detect retrograde motion for planets
    */
@@ -249,29 +214,22 @@ export class AstronomicalEngine {
     const steps = Math.floor(
       (timeRange.end.getTime() - timeRange.start.getTime()) / (1000 * 60 * 60 * 24)
     );
-
     let previousLongitude: number | null = null;
     let isRetrograde = false;
     let retrogradeStart: Date | null = null;
-
     for (let i = 0; i <= steps; i++) {
       const currentDate = new Date(
         timeRange.start.getTime() + i * stepDays * 24 * 60 * 60 * 1000
       );
-
       // Get planet position (simplified - would use Swiss Ephemeris)
       const position = this.getPlanetPosition(planet, currentDate);
       const currentLongitude = position.eclipticLongitude;
-
       if (previousLongitude !== null) {
         const motion = currentLongitude - previousLongitude;
-
         // Handle longitude wrap-around
         const adjustedMotion = motion > 180 ? motion - 360 :
           motion < -180 ? motion + 360 : motion;
-
         const currentlyRetrograde = adjustedMotion < 0;
-
         if (currentlyRetrograde && !isRetrograde) {
           // Retrograde begins
           retrogradeStart = currentDate;
@@ -288,28 +246,22 @@ export class AstronomicalEngine {
           isRetrograde = false;
         }
       }
-
       previousLongitude = currentLongitude;
     }
-
     return retrogrades;
   }
-
   /**
    * Calculate precession correction for a given epoch
    */
   calculatePrecession(epoch: Date, targetDate: Date): PrecessionCorrection {
     const julianEpoch = this.dateToJulianDate(epoch);
     const julianTarget = this.dateToJulianDate(targetDate);
-
     // Calculate centuries since epoch
     const T = (julianTarget - julianEpoch) / 36525.0;
-
     // Precession angles (simplified - full calculation would be more complex)
     const zetaA = (2306.2181 + 1.39656 * T - 0.000139 * T * T) * T / 3600.0;
     const zA = (2306.2181 + 1.39656 * T - 0.000139 * T * T) * T / 3600.0;
     const thetaA = (2004.3109 - 0.85330 * T - 0.000217 * T * T) * T / 3600.0;
-
     return {
       deltaRA: zetaA,
       deltaDec: thetaA,
@@ -318,7 +270,6 @@ export class AstronomicalEngine {
       matrix: this.calculatePrecessionMatrix(zetaA, zA, thetaA)
     };
   }
-
   /**
    * Get visible celestial bodies for a given location and time
    */
@@ -331,7 +282,6 @@ export class AstronomicalEngine {
       milkyWayVisible: false,
       limitingMagnitude: this.calculateLimitingMagnitude(location)
     };
-
     // Filter stars by visibility
     this.starCatalog.forEach(star => {
       if (star.magnitude <= visible.limitingMagnitude) {
@@ -340,7 +290,6 @@ export class AstronomicalEngine {
           location,
           time
         );
-
         if (horizontal.altitude > 0) {
           visible.stars.push({
             ...star,
@@ -352,16 +301,12 @@ export class AstronomicalEngine {
         }
       }
     });
-
     // Sort by magnitude for rendering priority
     visible.stars.sort((a, b) => a.magnitude - b.magnitude);
-
     // Check Milky Way visibility
     visible.milkyWayVisible = this.isMilkyWayVisible(location);
-
     return visible;
   }
-
   /**
    * Calculate cosmic weather based on current celestial configuration
    */
@@ -388,7 +333,6 @@ export class AstronomicalEngine {
       influences: ['A time of balance and reflection']
     };
   }
-
   /**
    * Get planet position (simplified - would use Swiss Ephemeris)
    */
@@ -397,7 +341,6 @@ export class AstronomicalEngine {
     const baseAngle = (currentDate.getTime() / (1000 * 60 * 60 * 24)) + this.getPlanetOffset(planet);
     return { eclipticLongitude: (baseAngle % 360) };
   }
-
   /**
    * Calculate precession matrix for coordinate transformation
    */
@@ -409,14 +352,12 @@ export class AstronomicalEngine {
     const sinZ = Math.sin(zA);
     const cosTheta = Math.cos(thetaA);
     const sinTheta = Math.sin(thetaA);
-
     return [
       [cosZeta * cosZ * cosTheta - sinZeta * sinZ, -sinZeta * cosZ * cosTheta - cosZeta * sinZ, -sinZ * cosTheta],
       [cosZeta * sinZ * cosTheta + sinZeta * cosZ, -sinZeta * sinZ * cosTheta + cosZeta * cosZ, cosZ * cosTheta],
       [cosZeta * sinTheta, -sinZeta * sinTheta, cosTheta]
     ];
   }
-
   /**
    * Calculate limiting magnitude based on location and atmospheric conditions
    */
@@ -428,7 +369,6 @@ export class AstronomicalEngine {
     const elevationBonus = elevation / 1000 * 0.1; // 0.1 mag per km elevation
     return Math.min(baseLimit + elevationBonus, 7.0);
   }
-
   /**
    * Check if Milky Way is visible based on conditions
    */
@@ -437,7 +377,6 @@ export class AstronomicalEngine {
     const limitingMag = this.calculateLimitingMagnitude(location);
     return limitingMag > 5.0; // Milky Way visible with magnitude > 5
   }
-
   /**
    * Calculate visual brightness based on altitude (atmospheric extinction)
    */
@@ -448,7 +387,6 @@ export class AstronomicalEngine {
     const extinction = Math.exp(-0.2 * (airMass - 1));
     return Math.max(0, Math.min(1, extinction));
   }
-
   /**
    * Get planet offset for mock calculations
    */
@@ -459,7 +397,6 @@ export class AstronomicalEngine {
     };
     return offsets[planet] || 0;
   }
-
   /**
    * Convert ecliptic longitude to zodiac sign
    */
@@ -472,9 +409,7 @@ export class AstronomicalEngine {
     const signIndex = Math.floor(longitude / 30) % 12;
     return signs[signIndex];
   }
-
   // === Private Helper Methods ==="
-
   private async loadHipparcosSubset(): Promise<Star[]> {
     // In production, this would load from actual Hipparcos catalog
     // For now, return a subset of bright stars
@@ -537,7 +472,6 @@ export class AstronomicalEngine {
       }
       // ... would include full catalog in production
     ];
-
     // Generate additional stars for demonstration
     for (let i = 0; i < 1000; i++) {
       brightStars.push({
@@ -554,19 +488,15 @@ export class AstronomicalEngine {
         constellation: 'Various'
       });
     }
-
     return brightStars;
   }
-
   private applyPrecession(
     coords: EquatorialCoordinates,
     date: Date
   ): EquatorialCoordinates {
     if (!this.config.highPrecision) return coords;
-
     const j2000 = new Date('2000-01-01T12:00:00Z');
     const precession = this.calculatePrecession(j2000, date);
-
     // Apply precession matrix to coordinates
     // Simplified - full implementation would use rotation matrices
     return {
@@ -574,7 +504,6 @@ export class AstronomicalEngine {
       dec: coords.dec + precession.deltaDec / 3600
     };
   }
-
   private equatorialToHorizontal(
     celestial: EquatorialCoordinates,
     location: GeoLocation,
@@ -582,65 +511,51 @@ export class AstronomicalEngine {
   ): HorizontalCoordinates {
     // Calculate local sidereal time
     const lst = this.calculateLocalSiderealTime(location.longitude, time);
-
     // Hour angle
     const ha = lst - celestial.ra;
-
     // Convert to radians
     const haRad = ha * Math.PI / 180;
     const decRad = celestial.dec * Math.PI / 180;
     const latRad = location.latitude * Math.PI / 180;
-
     // Calculate altitude
     const sinAlt = Math.sin(decRad) * Math.sin(latRad) +
       Math.cos(decRad) * Math.cos(latRad) * Math.cos(haRad);
     const altitude = Math.asin(sinAlt) * 180 / Math.PI;
-
     // Calculate azimuth
     const cosAz = (Math.sin(decRad) - Math.sin(altitude * Math.PI / 180) * Math.sin(latRad)) /
       (Math.cos(altitude * Math.PI / 180) * Math.cos(latRad));
     let azimuth = Math.acos(Math.max(-1, Math.min(1, cosAz))) * 180 / Math.PI;
-
     if (Math.sin(haRad) > 0) {
       azimuth = 360 - azimuth;
     }
-
     return { altitude, azimuth };
   }
-
   private applyRefraction(coords: HorizontalCoordinates): HorizontalCoordinates {
     if (coords.altitude < 0) return coords; // No refraction below horizon
-
     // Simplified refraction formula
     const r = 1.02 / Math.tan((coords.altitude + 10.3 / (coords.altitude + 5.11)) * Math.PI / 180);
-
     return {
       altitude: coords.altitude + r / 60, // Convert arcminutes to degrees
       azimuth: coords.azimuth
     };
   }
-
   private horizontalToScreen(horizontal: HorizontalCoordinates): ScreenCoordinates {
     // Stereographic projection
     const altRad = horizontal.altitude * Math.PI / 180;
     const azRad = horizontal.azimuth * Math.PI / 180;
-
     // Project onto unit sphere
     const r = Math.cos(altRad);
     const x = r * Math.sin(azRad);
     const y = r * Math.cos(azRad);
     const z = Math.sin(altRad);
-
     // Stereographic projection to 2D
     const scale = 1 / (1 + z);
-
     return {
       x: x * scale,
       y: y * scale,
       visible: horizontal.altitude > 0
     };
   }
-
   private dateToJulianDate(date: Date): number {
     const year = date.getUTCFullYear();
     const month = date.getUTCMonth() + 1;
@@ -648,39 +563,29 @@ export class AstronomicalEngine {
     const hour = date.getUTCHours();
     const minute = date.getUTCMinutes();
     const second = date.getUTCSeconds();
-
     const a = Math.floor((14 - month) / 12);
     const y = year + 4800 - a;
     const m = month + 12 * a - 3;
-
     const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y +
       Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-
     const jd = jdn + (hour - 12) / 24 + minute / 1440 + second / 86400;
-
     return jd;
   }
-
   private calculateLocalSiderealTime(longitude: number, date: Date): number {
     const jd = this.dateToJulianDate(date);
     const T = (jd - ASTRONOMICAL_CONSTANTS.J2000_JULIAN_DATE) / 36525.0;
-
     // Greenwich mean sidereal time
     let gmst = 280.46061837 + 360.98564736629 * (jd - 2451545.0) +
       0.000387933 * T * T - T * T * T / 38710000.0;
-
     // Normalize to 0-360
     gmst = gmst % 360;
     if (gmst < 0) gmst += 360;
-
     // Local sidereal time
     let lst = gmst + longitude;
     lst = lst % 360;
     if (lst < 0) lst += 360;
-
     return lst;
   }
-
   private calculateAngularSeparation(
     pos1: EquatorialCoordinates,
     pos2: EquatorialCoordinates
@@ -689,15 +594,11 @@ export class AstronomicalEngine {
     const dec1 = pos1.dec * Math.PI / 180;
     const ra2 = pos2.ra * Math.PI / 180;
     const dec2 = pos2.dec * Math.PI / 180;
-
     const cosSep = Math.sin(dec1) * Math.sin(dec2) +
       Math.cos(dec1) * Math.cos(dec2) * Math.cos(ra1 - ra2);
-
     return Math.acos(Math.max(-1, Math.min(1, cosSep))) * 180 / Math.PI;
   }
-
   // Additional helper methods would be implemented here...
-
   /**
    * Get performance statistics for optimization
    */

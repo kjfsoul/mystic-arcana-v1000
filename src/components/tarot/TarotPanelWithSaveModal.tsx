@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Save, BookOpen } from 'lucide-react';
@@ -7,12 +6,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
 import { TarotService } from '@/services/TarotService';
 import { SaveReadingModal } from '@/components/modals/SaveReadingModal';
-
 interface TarotPanelWithSaveModalProps {
   reading: TarotReading | null;
   onReadingComplete?: () => void;
 }
-
 export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = ({
   reading,
   onReadingComplete
@@ -20,12 +17,10 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
   const { user, isGuest } = useAuth();
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [isSaving, setSaving] = useState(false);
-
   const handleSaveReading = async (notes: string, isPublic: boolean) => {
     if (!reading || !user) {
       throw new Error('Cannot save reading without user authentication');
     }
-
     setSaving(true);
     
     try {
@@ -36,13 +31,11 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
         isPublic,
         tags: ['manual-save', new Date().toISOString().split('T')[0]]
       };
-
       const { error } = await TarotService.saveReading(readingWithNotes, user.id);
       
       if (error) {
         throw new Error(typeof error === 'string' ? error : 'Failed to save reading');
       }
-
       // Success - the modal will handle closing itself
     } catch (error) {
       console.error('Save reading error:', error);
@@ -51,7 +44,6 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
       setSaving(false);
     }
   };
-
   return (
     <>
       {/* Save Button - Make it prominent and easy to click */}
@@ -79,7 +71,6 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
               transition={{ duration: 2, repeat: Infinity }}
             />
           </button>
-
           {/* Guest tooltip */}
           {isGuest && (
             <div className="absolute bottom-full right-0 mb-2 p-3 bg-gray-800 rounded-lg shadow-lg">
@@ -90,7 +81,6 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
           )}
         </motion.div>
       )}
-
       {/* Alternative inline save button for better visibility */}
       {reading && (
         <div className="mt-8 flex justify-center">
@@ -107,7 +97,6 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
           </button>
         </div>
       )}
-
       {/* Save Reading Modal */}
       <SaveReadingModal
         isOpen={showSaveModal}
@@ -118,11 +107,9 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
     </>
   );
 };
-
 // Example of how to integrate in your existing component:
 /*
 import { TarotPanelWithSaveModal } from './TarotPanelWithSaveModal';
-
 // In your component:
 const YourTarotComponent = () => {
   const [currentReading, setCurrentReading] = useState<TarotReading | null>(null);

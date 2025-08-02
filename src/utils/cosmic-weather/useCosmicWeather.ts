@@ -1,5 +1,5 @@
+ 
 import { useState, useEffect, useCallback } from 'react';
-
 interface CosmicWeatherData {
   moonPhase: string;
   moonSign: string;
@@ -10,7 +10,6 @@ interface CosmicWeatherData {
   retrogradeAlert?: string;
   cosmicIntensity: 'calm' | 'active' | 'intense';
 }
-
 interface Transit {
   planet: string;
   aspect: string;
@@ -18,14 +17,12 @@ interface Transit {
   orb: number;
   influence: 'harmonious' | 'challenging' | 'neutral';
 }
-
 interface CosmicInfluence {
   currentPhase: string;
   planetaryAlignment: string;
   favorableFor: string[];
   challengingFor: string[];
 }
-
 /**
  * useCosmicWeather Hook
  * 
@@ -49,7 +46,6 @@ export const useCosmicWeather = () => {
     nextHourTime: '3:42 PM',
     cosmicIntensity: 'active'
   });
-
   const [currentTransits] = useState<Transit[]>([
     {
       planet: 'Mars',
@@ -66,35 +62,30 @@ export const useCosmicWeather = () => {
       influence: 'harmonious'
     }
   ]);
-
   const [cosmicInfluence] = useState<CosmicInfluence>({
     currentPhase: 'Manifestation Window',
     planetaryAlignment: 'Favorable for new beginnings',
     favorableFor: ['Romance', 'Creative Projects', 'Spiritual Work'],
     challengingFor: ['Major Decisions', 'Confrontations']
   });
-
   // Calculate moon phase based on current date
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const calculateMoonPhase = useCallback(() => {
     const phases = [
       'New Moon', 'Waxing Crescent', 'First Quarter', 'Waxing Gibbous',
       'Full Moon', 'Waning Gibbous', 'Last Quarter', 'Waning Crescent'
     ];
-
     // Simplified moon phase calculation (would use precise ephemeris in production)
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-
     let adjustedYear = year;
     let adjustedMonth = month;
     if (month < 3) {
       adjustedYear--;
       adjustedMonth += 12;
     }
-
     const c = 365.25 * adjustedYear;
     const e = 30.6 * adjustedMonth;
     let jd = c + e + day - 694039.09; // Julian day
@@ -102,30 +93,24 @@ export const useCosmicWeather = () => {
     const b = parseInt(jd.toString());
     jd -= b;
     let phaseIndex = Math.round(jd * 8);
-
     if (phaseIndex >= 8) phaseIndex = 0;
-
     return phases[phaseIndex];
   }, []);
-
   // Calculate current planetary hour
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const calculatePlanetaryHour = useCallback(() => {
     const planets = ['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'];
     const dayOfWeek = new Date().getDay();
     const hour = new Date().getHours();
-
     // Simplified planetary hour calculation
     const planetIndex = (dayOfWeek * 24 + hour) % 7;
     return planets[planetIndex];
   }, []);
-
   // Update cosmic weather data
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const updateCosmicWeather = useCallback(() => {
     const moonPhase = calculateMoonPhase();
     const planetaryHour = calculatePlanetaryHour();
-
     // Calculate next planetary hour time
     const nextHour = new Date();
     nextHour.setHours(nextHour.getHours() + 1, 0, 0, 0);
@@ -133,7 +118,6 @@ export const useCosmicWeather = () => {
       hour: 'numeric',
       minute: '2-digit'
     });
-
     // Determine cosmic intensity based on current aspects
     let cosmicIntensity: 'calm' | 'active' | 'intense' = 'active';
     if (moonPhase === 'Full Moon' || moonPhase === 'New Moon') {
@@ -143,7 +127,6 @@ export const useCosmicWeather = () => {
     } else {
       cosmicIntensity = 'calm';
     }
-
     setCosmicWeather({
       moonPhase,
       moonSign: getMoonSign(), // Would calculate from ephemeris
@@ -155,7 +138,6 @@ export const useCosmicWeather = () => {
       cosmicIntensity
     });
   }, [calculateMoonPhase, calculatePlanetaryHour]);
-
   // Helper functions (would use real ephemeris data in production)
   const getMoonSign = () => {
     const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
@@ -163,7 +145,6 @@ export const useCosmicWeather = () => {
     const dayOfMonth = new Date().getDate();
     return `Moon in ${signs[dayOfMonth % 12]}`;
   };
-
   const getPhaseDescription = (phase: string): string => {
     const descriptions: Record<string, string> = {
       'New Moon': 'New Beginnings & Intention Setting',
@@ -177,7 +158,6 @@ export const useCosmicWeather = () => {
     };
     return descriptions[phase] || 'Cosmic Flow';
   };
-
   const getCurrentAlignment = () => {
     const alignments = [
       'Sun conjunct Mercury - Clear Communication',
@@ -189,7 +169,6 @@ export const useCosmicWeather = () => {
     const hour = new Date().getHours();
     return alignments[hour % alignments.length];
   };
-
   const checkRetrogrades = () => {
     // Simplified retrograde check (would use ephemeris)
     const month = new Date().getMonth();
@@ -198,18 +177,15 @@ export const useCosmicWeather = () => {
     }
     return undefined;
   };
-
   // Get tarot timing recommendations
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const getTarotTiming = useCallback(() => {
     const { moonPhase, planetaryHour, cosmicIntensity } = cosmicWeather;
-
     const timing = {
       optimal: false,
       reason: '',
       alternatives: [] as string[]
     };
-
     // Check if current time is optimal for readings
     if (moonPhase === 'Full Moon' || moonPhase === 'New Moon') {
       timing.optimal = true;
@@ -227,21 +203,16 @@ export const useCosmicWeather = () => {
         'Focus on specific questions rather than general readings'
       ];
     }
-
     return timing;
   }, [cosmicWeather]);
-
   // Initialize and update periodically
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     updateCosmicWeather();
-
     // Update every 5 minutes
     const interval = setInterval(updateCosmicWeather, 5 * 60 * 1000);
-
     return () => clearInterval(interval);
   }, [updateCosmicWeather]);
-
   return {
     cosmicWeather,
     currentTransits,

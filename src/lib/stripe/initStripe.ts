@@ -1,7 +1,5 @@
 import { Stripe, loadStripe } from '@stripe/stripe-js';
-
 let stripePromise: Promise<Stripe | null>;
-
 const getStripe = (): Promise<Stripe | null> => {
   if (!stripePromise) {
     const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
@@ -15,9 +13,7 @@ const getStripe = (): Promise<Stripe | null> => {
   }
   return stripePromise;
 };
-
 export default getStripe;
-
 // Stripe configuration for Mystic Arcana products
 export const STRIPE_CONFIG = {
   currency: 'usd',
@@ -27,7 +23,6 @@ export const STRIPE_CONFIG = {
     allowed_countries: ['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'IT', 'ES', 'NL', 'SE', 'NO', 'DK', 'FI']
   }
 };
-
 // Celestial event types
 export type CelestialEventType = 
   | 'mercury_retrograde' 
@@ -40,7 +35,6 @@ export type CelestialEventType =
   | 'saturn_return'
   | 'venus_retrograde'
   | 'mars_retrograde';
-
 export interface ProductMetadata {
   collection: string;
   type: 'fashion' | 'crystals' | 'tarot' | 'jewelry' | 'candles' | 'books' | 'oils';
@@ -50,7 +44,6 @@ export interface ProductMetadata {
   element?: 'fire' | 'earth' | 'air' | 'water';
   moon_phase?: 'waxing' | 'full' | 'waning' | 'new';
 }
-
 // Product configurations
 export const MYSTIC_PRODUCTS = {
   retrograde_collection: {
@@ -191,7 +184,6 @@ export const MYSTIC_PRODUCTS = {
     } as ProductMetadata
   }
 };
-
 // Create Stripe checkout session
 export const createCheckoutSession = async (productKey: keyof typeof MYSTIC_PRODUCTS) => {
   try {
@@ -200,7 +192,6 @@ export const createCheckoutSession = async (productKey: keyof typeof MYSTIC_PROD
     if (!product) {
       throw new Error('Product not found');
     }
-
     const response = await fetch('/api/stripe/create-checkout-session', {
       method: 'POST',
       headers: {
@@ -218,26 +209,21 @@ export const createCheckoutSession = async (productKey: keyof typeof MYSTIC_PROD
         quantity: 1
       }),
     });
-
     if (!response.ok) {
       throw new Error('Failed to create checkout session');
     }
-
     const { sessionId } = await response.json();
     
     const stripe = await getStripe();
     if (!stripe) {
       throw new Error('Stripe not initialized');
     }
-
     const result = await stripe.redirectToCheckout({
       sessionId: sessionId,
     });
-
     if (result.error) {
       throw new Error(result.error.message);
     }
-
     return { success: true };
   } catch (error) {
     console.error('Error creating checkout session:', error);

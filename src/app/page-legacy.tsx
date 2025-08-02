@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../components/effects/GalaxyBackground/GalaxyBackground';
@@ -10,14 +10,11 @@ import { UnifiedTarotPanelV2 } from '../components/tarot/UnifiedTarotPanelV2';
 import { AstrologyReadingRoom } from '../components/astrology/AstrologyReadingRoom';
 import { Header } from '../components/layout/Header';
 import { AuthDebug } from '../components/debug/AuthDebug';
-
 export type ViewMode = 'lobby' | 'tarot-room' | 'astrology-room' | 'awe-view';
-
 export default function Home() {
   const [viewMode, setViewMode] = useState<ViewMode>('lobby');
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.7);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     // Adjust galaxy intensity based on view mode
     switch (viewMode) {
@@ -35,23 +32,18 @@ export default function Home() {
         break;
     }
   }, [viewMode]);
-
   const handleEnterTarotRoom = () => {
     setViewMode('tarot-room');
   };
-
   const handleEnterAstrologyRoom = () => {
     setViewMode('astrology-room');
   };
-
   const handleEnterAweView = () => {
     setViewMode('awe-view');
   };
-
   const handleBackToLobby = () => {
     setViewMode('lobby');
   };
-
   return (
     <main className="relative min-h-screen w-full overflow-hidden pt-20 perspective-[1200px] preserve-3d">
       {/* Header with Authentication */}
@@ -68,7 +60,6 @@ export default function Home() {
           animated={true}
         />
       </div>
-
       <AnimatePresence mode="wait">
         {viewMode === 'lobby' && (
           <CosmicLobby
@@ -78,21 +69,18 @@ export default function Home() {
             onEnterAweView={handleEnterAweView}
           />
         )}
-
         {viewMode === 'tarot-room' && (
           <TarotReadingRoom
             key="tarot-room"
             onBack={handleBackToLobby}
           />
         )}
-
         {viewMode === 'astrology-room' && (
           <AstrologyRoom
             key="astrology-room"
             onBack={handleBackToLobby}
           />
         )}
-
         {viewMode === 'awe-view' && (
           <AweView
             key="awe-view"
@@ -103,7 +91,6 @@ export default function Home() {
     </main>
   );
 }
-
 // Cosmic Lobby Component
 const CosmicLobby: React.FC<{
   onEnterTarot: () => void;
@@ -131,7 +118,6 @@ const CosmicLobby: React.FC<{
           <CelestialEventsCarousel onClick={onEnterAweView} />
         </div>
       </motion.section>
-
       {/* Left Panel - Tarot Zone Preview */}
       <motion.section
         className="order-2 lg:order-1 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
@@ -149,7 +135,6 @@ const CosmicLobby: React.FC<{
           <TarotZonePreview />
         </div>
       </motion.section>
-
       {/* Right Panel - Astrology Zone Preview */}
       <motion.section
         className="order-3 lg:order-3 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
@@ -170,7 +155,6 @@ const CosmicLobby: React.FC<{
     </motion.div>
   );
 };
-
 // Tarot Reading Room
 const TarotReadingRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   return (
@@ -190,7 +174,6 @@ const TarotReadingRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       >
         ← Back to Cosmic Lobby
       </motion.button>
-
       <motion.div
         className="w-full max-w-6xl flex flex-col items-center gap-8"
         initial={{ opacity: 0, y: 20 }}
@@ -204,7 +187,6 @@ const TarotReadingRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     </motion.div>
   );
 };
-
 // Astrology Reading Room
 const AstrologyRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   return (
@@ -219,12 +201,10 @@ const AstrologyRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     </motion.div>
   );
 };
-
 // Awe View Component
 const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [currentView, setCurrentView] = useState<'earth' | 'moon' | 'mars' | 'deep-space'>('earth');
   const [isTransitioning, setIsTransitioning] = useState(false);
-
   const handleViewChange = async (newView: 'earth' | 'moon' | 'mars' | 'deep-space') => {
     if (isTransitioning || newView === currentView) return;
     
@@ -236,7 +216,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       setIsTransitioning(false);
     }, 1000);
   };
-
   const viewConfig = {
     earth: {
       title: 'Earth View',
@@ -259,7 +238,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       emoji: '🌌'
     }
   };
-
   return (
     <motion.div
       className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 lg:p-8 overflow-hidden"
@@ -292,7 +270,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           </div>
         </div>
       </motion.div>
-
       {/* Back Button */}
       <motion.button
         className="absolute top-4 lg:top-8 left-4 lg:left-8 bg-black/60 backdrop-blur-xl border border-white/20 rounded-xl text-white px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base font-medium hover:bg-black/80 hover:border-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 z-10"
@@ -305,7 +282,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       >
         ← Back to Lobby
       </motion.button>
-
       {/* Main Content */}
       <motion.div
         className="text-center text-white max-w-4xl mx-auto"
@@ -372,7 +348,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             </motion.button>
           ))}
         </motion.div>
-
         {/* Transition Overlay */}
         <AnimatePresence>
           {isTransitioning && (
@@ -397,7 +372,6 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           )}
         </AnimatePresence>
       </motion.div>
-
       {/* Impulse Elements */}
       <motion.div
         className="absolute bottom-4 lg:bottom-8 right-4 lg:right-8 z-10"

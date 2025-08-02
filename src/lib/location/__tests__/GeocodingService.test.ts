@@ -1,12 +1,9 @@
 import { geocodeLocation, getSuggestions, getPopularLocations } from '@/lib/location/GeocodingService';
-
 global.fetch = jest.fn();
-
 describe('GeocodingService', () => {
   beforeEach(() => {
     (fetch as jest.Mock).mockClear();
   });
-
   describe('geocodeLocation', () => {
     it('should return a location result for a valid query', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
@@ -17,17 +14,14 @@ describe('GeocodingService', () => {
         ok: true,
         json: async () => ({ status: 'OK', timeZoneId: 'America/New_York' }),
       });
-
       const result = await geocodeLocation('New York');
       expect(result).toHaveProperty('name', 'New York, NY, USA');
     });
-
     it('should return an error for an invalid query', async () => {
       const result = await geocodeLocation('');
       expect(result).toHaveProperty('code', 'INVALID_INPUT');
     });
   });
-
   describe('getSuggestions', () => {
     it('should return a list of suggestions for a valid query', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
@@ -42,13 +36,11 @@ describe('GeocodingService', () => {
         ok: true,
         json: async () => ({ status: 'OK', timeZoneId: 'America/New_York' }),
       });
-
       const result = await getSuggestions('New York');
       expect(result.length).toBeGreaterThan(0);
       expect(result[0]).toHaveProperty('name', 'New York, NY, USA');
     });
   });
-
   describe('getPopularLocations', () => {
     it('should return a list of popular locations', () => {
       const result = getPopularLocations();

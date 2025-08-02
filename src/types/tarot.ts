@@ -22,9 +22,7 @@ export interface TarotCard {
   description: string;
   isReversed?: boolean;
 }
-
 export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
-
 export interface TarotDeck {
   id: string;
   name: string;
@@ -33,13 +31,11 @@ export interface TarotDeck {
   is_active: boolean;
   cards?: TarotCard[];
 }
-
 export interface TarotDeckFilter {
   id?: string;
   type?: 'core' | 'seasonal';
   is_active?: boolean;
 }
-
 export interface TarotReading {
   id: string;
   userId?: string;

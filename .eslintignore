@@ -1,7 +1,76 @@
-node_modules/
-.next/
-out/
-build/
-dist/
-public/
-coverage/
+# Virtual environments
+venv-astrology/**
+venv/**
+.venv/**
+env/**
+.env/**
+
+# Node dependencies
+node_modules/**
+
+# Build outputs
+.next/**
+dist/**
+build/**
+out/**
+
+# Package manager lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env*
+
+# Cache directories
+.cache/**
+.eslintcache
+.turbo
+
+# IDE files
+.vscode/**
+.idea/**
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage reports
+coverage/**
+.nyc_output/**
+
+# Temporary files
+tmp/**
+temp/**
+
+# Python specific
+**/__pycache__/**
+*.pyc
+*.pyo
+*.pyd
+
+# Torch and other ML libraries that include JS files
+**/site-packages/**
+**/torch/**
+**/tensorflow/**
+**/onnx/**
+# Virtual environments
+venv-astrology/**
+venv/**
+.venv/**
+
+# Node dependencies
+node_modules/**
+
+# Build outputs
+.next/**
+dist/**
+
+# Python specific
+**/__pycache__/**
+**/site-packages/**
+
+# ML libraries
+**/torch/**

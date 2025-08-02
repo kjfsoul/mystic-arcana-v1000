@@ -1,5 +1,4 @@
 "use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AlertCircle,
@@ -23,13 +22,11 @@ import { TarotCard } from "./TarotCard";
 import { MysticalShuffleAnimation } from "./MysticalShuffleAnimation";
 import { VirtualReaderDisplay } from "../readers/VirtualReaderDisplay";
 import { SophiaAgentClient } from "@/agents/sophia-client";
-
 interface UnifiedTarotPanelV2Props {
   onActivate?: () => void;
   onInterpret?: (cards: DrawnCard[], interpretation: string) => void;
   className?: string;
 }
-
 // Generate automatic interpretation based on spread type
 /* function generateSpreadInterpretation(
   cards: DrawnCard[], 
@@ -75,7 +72,6 @@ interface UnifiedTarotPanelV2Props {
   
   return interpretation;
 }
-
 // Helper function to provide card-specific advice
 function getCardAdvice(card: DrawnCard): string {
   const adviceMap: Record<string, string> = {
@@ -106,7 +102,6 @@ function getCardAdvice(card: DrawnCard): string {
   const baseAdvice = adviceMap[card.name] || "trust the wisdom this card brings";
   return card.isReversed ? `reconsider how to ${baseAdvice}` : baseAdvice;
 }
-
 // Generate synthesis for three-card spread
 function getThreeCardSynthesis(cards: DrawnCard[]): string {
   const past = cards[0];
@@ -130,7 +125,6 @@ function getThreeCardSynthesis(cards: DrawnCard[]): string {
   
   return synthesis;
 } */
-
 export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
   className = "",
   onInterpret,
@@ -138,7 +132,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
   const { user, isGuest } = useAuth();
   // const { cosmicInfluence } = useCosmicWeather();
   const tarotReading = useTarotReading();
-
   const [selectedSpread, setSelectedSpread] = useState<"single" | "three-card" | "celtic-cross">("single");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -158,9 +151,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
   const [sophiaAgent] = useState(() => new SophiaAgentClient());
   const [isShuffling, setIsShuffling] = useState(false);
   const [cardPositions, setCardPositions] = useState<string[]>([]);
-
   // Available spreads configuration
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const availableSpreads = useMemo(() => {
     const spreads = [
       {
@@ -185,12 +177,10 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         available: !isGuest,
       },
     ];
-
     return spreads;
   }, [isGuest]);
-
   // Generate interpretation only when cards are flipped
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const generateInterpretationForFlippedCards = useCallback(() => {
     if (!tarotReading.drawnCards || tarotReading.drawnCards.length === 0) return;
     
@@ -219,20 +209,18 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     
     console.log('🔮 Setting interpretation:', spreadInterpretation);
     setInterpretation(spreadInterpretation);
-
     if (onInterpret) {
       onInterpret(flippedCardsList, spreadInterpretation);
     }
   }, [tarotReading.drawnCards, selectedSpread, flippedCards, onInterpret]);
-
   // Generate interpretation when cards are flipped
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     generateInterpretationForFlippedCards();
   }, [generateInterpretationForFlippedCards]);
   
   // Show Sophia's greeting on mount
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const greeting = sophiaAgent.getGreeting();
     setSophiaMessage(greeting.message);
@@ -241,9 +229,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     const timer = setTimeout(() => setSophiaMessage(""), 7000);
     return () => clearTimeout(timer);
   }, [sophiaAgent]);
-
   // Responsive breakpoint detection with touch optimization
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkResponsive = () => {
       const width = window.innerWidth;
@@ -254,12 +241,10 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       const positions = getCardPositions(selectedSpread);
       setCardPositions(positions);
     };
-
     checkResponsive();
     window.addEventListener("resize", checkResponsive);
     return () => window.removeEventListener("resize", checkResponsive);
   }, [selectedSpread]);
-
   // Get card positions for spreads
   const getCardPositions = (spread: string) => {
     switch (spread) {
@@ -284,9 +269,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         return [];
     }
   };
-
   // Perform shuffle animation with enhanced effects
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const performShuffle = useCallback(async () => {
     setIsShuffling(true);
     
@@ -370,39 +354,32 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       setTimeout(() => setIsShuffling(false), 2500);
     }
   }, [tarotReading.shuffle]);
-
   // Perform tarot reading using production API
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const performReading = useCallback(async () => {
     // Allow guests to use single card readings, require auth for multi-card spreads
     if (isGuest && selectedSpread !== "single") {
       setShowAuthModal(true);
       return;
     }
-
     try {
       setFlippedCards(new Set());
       setSaveSuccess(false);
       setSaveError(null);
-
       const result = await tarotReading.performReading(
         selectedSpread,
         user?.id
       );
-
       if (!result.success) {
         throw new Error(result.error || "Failed to perform reading");
       }
-
       // Cards remain face-down until manually clicked by user
       // User must click each card to reveal it
-
       // Interpretation will be generated by useEffect when cards are available
       
       // Sophia welcome message
       const spreadInsight = sophiaAgent.getSpreadInsight(selectedSpread);
       setSophiaMessage(spreadInsight.message);
-
       // Show unlock modal for guests after experience (disabled for better UX)
       // if (isGuest && selectedSpread === "single") {
       //   setTimeout(() => setShowUnlockModal(true), 8000);
@@ -412,27 +389,23 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       setSaveError(error instanceof Error ? error.message : "Failed to perform reading");
     }
   }, [selectedSpread, isGuest, tarotReading, user]);
-
   // Save current reading
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSaveReading = useCallback(async () => {
     if (!user) {
       setSaveError("Please sign in to save your reading");
       setShowAuthModal(true);
       return;
     }
-
     if (isGuest) {
       setSaveError("Guest users cannot save readings. Please create an account to save your cosmic insights.");
       setShowAuthModal(true);
       return;
     }
-
     if (!interpretation.trim()) {
       setSaveError("Please provide an interpretation for your reading");
       return;
     }
-
     try {
       setSaveError(null);
       const result = await tarotReading.saveCurrentReading(
@@ -442,7 +415,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
         notes || undefined,
         [] // tags - could be enhanced later
       );
-
       if (result.success) {
         setSaveSuccess(true);
         setShowSaveModal(false);
@@ -459,8 +431,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       setSaveError(error instanceof Error ? error.message : "Failed to save reading");
     }
   }, [user, isGuest, interpretation, question, notes, tarotReading]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCardFlip = useCallback((cardIndex: number) => {
     setFlippedCards((prev) => new Set([...prev, cardIndex]));
     
@@ -477,7 +448,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       setTimeout(() => setSophiaMessage(""), 5000);
     }
   }, [tarotReading.drawnCards, cardPositions]);
-
   // Get responsive layout configuration with accessibility
   const getLayoutConfig = () => {
     if (isMobile) {
@@ -521,9 +491,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
       };
     }
   };
-
   const layout = getLayoutConfig();
-
   return (
     <div className={`relative w-full ${layout.containerClass} ${className}`}>
       {/* Sophia Virtual Reader Display */}
@@ -606,7 +574,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           Discover cosmic insights through ancient wisdom
         </motion.p>
       </motion.header>
-
       {/* Error/Success Messages */}
       <AnimatePresence mode="wait">
         {tarotReading.error && (
@@ -620,7 +587,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
             <span className="text-red-200 text-sm">{tarotReading.error}</span>
           </motion.div>
         )}
-
         {saveSuccess && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -633,7 +599,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Spread Selection with enhanced design */}
       <motion.section
         className="space-y-6 relative z-10"
@@ -762,7 +727,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           })}
         </div>
       </motion.section>
-
       {/* Mystical Shuffle Animation and Draw Button */}
       <motion.div
         className="flex flex-col items-center gap-8 relative z-10"
@@ -783,7 +747,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           size={isMobile ? "small" : isTablet ? "medium" : "large"}
           className="mb-4"
         />
-
         {/* Draw Cards Button */}
         <motion.button
           className={`${layout.buttonClass} rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 border-2 border-pink-400/30`}
@@ -808,7 +771,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           )}
         </motion.button>
       </motion.div>
-
       {/* Card Display Area with enhanced presentation */}
       <AnimatePresence mode="wait">
         {tarotReading.drawnCards && tarotReading.drawnCards.length > 0 && (
@@ -877,8 +839,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                 );
               })}
             </div>
-
-
             {/* Enhanced Reading Presentation with Right-Side Scrollable Credits */}
             {tarotReading.drawnCards && interpretation && (
               <motion.div
@@ -907,7 +867,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                       <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32" />
                       <Star className="w-8 h-8 text-yellow-400 animate-pulse" />
                     </div>
-
                     {/* Premium Enhancement Button */}
                     <motion.div
                       className="flex justify-center gap-4 mb-8"
@@ -933,7 +892,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                       </motion.button>
                     </motion.div>
                   </motion.div>
-
                   {/* Two-Column Layout */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Left Side - Card Summary */}
@@ -966,7 +924,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                         </motion.div>
                       ))}
                     </motion.div>
-
                     {/* Right Side - Scrollable Reading Credits */}
                     <motion.div
                       className="relative"
@@ -987,7 +944,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                             ↓
                           </button>
                         </div>
-
                         {/* Scrollable Content */}
                         <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-400/30 scrollbar-track-transparent p-6">
                           <div className="space-y-6">
@@ -1023,7 +979,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                       </div>
                     </motion.div>
                   </div>
-
                   {/* Mystical Particles */}
                   <div className="absolute inset-0 pointer-events-none">
                     {[...Array(15)].map((_, i) => (
@@ -1050,7 +1005,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                 </div>
               </motion.div>
             )}
-
             {/* Action buttons for completed reading - Fixed height container to prevent wobbling */}
             <div className="h-16 mt-8">
               {flippedCards.size > 0 && (
@@ -1077,7 +1031,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Scroll & Quill Style Save Reading Modal */}
       <AnimatePresence>
         {showSaveModal && (
@@ -1103,7 +1056,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     <div className="text-amber-100 text-xs font-bold tracking-wider">✦ COSMIC JOURNAL ENTRY ✦</div>
                   </div>
                 </div>
-
                 {/* Scrollable Content Area */}
                 <div className="pt-12 pb-6 px-8 max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-amber-600/30 scrollbar-track-transparent">
                   {/* Quill Header */}
@@ -1117,7 +1069,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                       <p className="text-amber-700 italic">Preserve this moment of divine insight</p>
                     </div>
                   </div>
-
                   {/* Quill Selector */}
                   <div className="mb-6 p-4 bg-amber-200/50 rounded-xl border border-amber-300/50">
                     <label className="block text-sm font-serif text-amber-800 mb-2">
@@ -1134,7 +1085,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                       ))}
                     </div>
                   </div>
-
                   <div className="space-y-6">
                     {/* Question Field */}
                     <div className="relative">
@@ -1154,7 +1104,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                         <div className="absolute right-3 top-3 text-amber-600/50 text-lg">📜</div>
                       </div>
                     </div>
-
                     {/* Interpretation Field */}
                     <div className="relative">
                       <label className="block text-sm font-serif text-amber-800 mb-2 flex items-center gap-2">
@@ -1174,7 +1123,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                         <div className="absolute bottom-3 right-3 text-amber-600/50 text-lg">🖋️</div>
                       </div>
                     </div>
-
                     {/* Notes Field */}
                     <div className="relative">
                       <label className="block text-sm font-serif text-amber-800 mb-2 flex items-center gap-2">
@@ -1193,7 +1141,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                         <div className="absolute bottom-3 right-3 text-amber-600/50 text-lg">📖</div>
                       </div>
                     </div>
-
                     {saveError && (
                       <motion.div 
                         className="bg-red-100 border-2 border-red-300 rounded-xl p-4"
@@ -1208,7 +1155,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     )}
                   </div>
                 </div>
-
                 {/* Scroll Bottom Action Bar */}
                 <div className="bg-gradient-to-r from-amber-600 to-amber-700 px-8 py-4 border-t-2 border-amber-800/50 rounded-b-lg">
                   <div className="flex gap-4">
@@ -1237,7 +1183,6 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
                     </button>
                   </div>
                 </div>
-
                 {/* Decorative Corner Scrollwork */}
                 <div className="absolute top-8 left-4 text-amber-600/30 text-2xl transform -rotate-12">✦</div>
                 <div className="absolute top-8 right-4 text-amber-600/30 text-2xl transform rotate-12">✦</div>
@@ -1248,10 +1193,8 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Auth Modal */}
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
-
       {/* Unlock Journey Modal */}
       <UnlockJourneyModal
         isVisible={showUnlockModal}

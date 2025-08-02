@@ -1,17 +1,15 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Star, Zap, Eye, Heart } from 'lucide-react';
 import { TransitEngine, DailyTransit, PersonalizedHoroscope } from '@/lib/ephemeris/transitEngine';
 import { BirthData } from '../../types/astrology';
 import { useAuth } from '@/contexts/AuthContext';
-
 interface CosmicCalendarProps {
   birthData?: BirthData;
   className?: string;
 }
-
 interface CalendarDay {
   date: Date;
   isToday: boolean;
@@ -20,7 +18,6 @@ interface CalendarDay {
   majorTransits: number;
   lunarPhase: string;
 }
-
 export default function CosmicCalendar({ birthData, className = '' }: CosmicCalendarProps) {
   const {} = useAuth();
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -31,15 +28,13 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<'calendar' | 'today' | 'week'>('today');
   const [transitEngine] = useState(() => new TransitEngine());
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const loadDailyData = useCallback(async (date: Date) => {
     setLoading(true);
     try {
       // Load daily transit data
       const transit = await transitEngine.getDailyTransit(date);
       setDailyTransit(transit);
-
       // Load personalized horoscope if birth data available
       if (birthData) {
         const horoscope = await transitEngine.generatePersonalizedHoroscope(birthData, date);
@@ -55,19 +50,16 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       setLoading(false);
     }
   }, [birthData, transitEngine]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     loadDailyData(selectedDate);
   }, [selectedDate, loadDailyData]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (view === 'calendar') {
       generateCalendarDays(currentDate);
     }
   }, [currentDate, view]);
-
   const generateCalendarDays = async (baseDate: Date) => {
     const year = baseDate.getFullYear();
     const month = baseDate.getMonth();
@@ -100,7 +92,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
     
     setCalendarDays(days);
   };
-
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', { 
       weekday: 'long', 
@@ -109,7 +100,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       day: 'numeric' 
     });
   };
-
   const getEnergyColor = (energy: 'high' | 'medium' | 'low') => {
     switch (energy) {
       case 'high': return 'text-red-400 bg-red-400/10';
@@ -118,7 +108,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       default: return 'text-purple-400 bg-purple-400/10';
     }
   };
-
   const getLunarPhaseIcon = (phase: string) => {
     const phases = {
       new: '🌑',
@@ -132,10 +121,8 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
     };
     return phases[phase as keyof typeof phases] || '🌑';
   };
-
   const renderPlanetaryPositions = () => {
     if (!dailyTransit) return null;
-
     return (
       <div className="space-y-3">
         <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
@@ -170,10 +157,8 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       </div>
     );
   };
-
   const renderPersonalizedHoroscope = () => {
     if (!personalHoroscope) return null;
-
     return (
       <div className="space-y-6">
         <motion.div
@@ -185,7 +170,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
           <h3 className="text-xl font-semibold text-purple-300 mb-3">Today&apos;s Theme</h3>
           <p className="text-gray-300 leading-relaxed">{personalHoroscope.overallTheme}</p>
         </motion.div>
-
         {personalHoroscope.keyTransits.length > 0 && (
           <div className="space-y-3">
             <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
@@ -224,7 +208,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             ))}
           </div>
         )}
-
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
@@ -242,7 +225,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
               ))}
             </div>
           </div>
-
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-purple-300">Cosmic Details</h3>
             <div className="space-y-3">
@@ -268,10 +250,8 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       </div>
     );
   };
-
   const renderCosmicWeather = () => {
     if (!dailyTransit) return null;
-
     return (
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-purple-300 flex items-center gap-2">
@@ -305,7 +285,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             </div>
           </div>
         </div>
-
         {dailyTransit.cosmicWeather.opportunities.length > 0 && (
           <div className="bg-green-400/10 border border-green-400/20 rounded-lg p-4">
             <div className="text-sm font-medium text-green-400 mb-2">Opportunities</div>
@@ -316,7 +295,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             </ul>
           </div>
         )}
-
         {dailyTransit.cosmicWeather.challenges.length > 0 && (
           <div className="bg-orange-400/10 border border-orange-400/20 rounded-lg p-4">
             <div className="text-sm font-medium text-orange-400 mb-2">Challenges</div>
@@ -330,7 +308,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       </div>
     );
   };
-
   const renderCalendarView = () => {
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
@@ -355,7 +332,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             </button>
           </div>
         </div>
-
         <div className="grid grid-cols-7 gap-1">
           {weekdays.map(day => (
             <div key={day} className="text-center text-sm font-medium text-purple-300 py-2">
@@ -388,7 +364,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       </div>
     );
   };
-
   if (loading) {
     return (
       <div className={`bg-gray-900 rounded-lg p-6 ${className}`}>
@@ -398,7 +373,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
       </div>
     );
   }
-
   return (
     <div className={`bg-gray-900 rounded-lg p-6 ${className}`}>
       {/* Header */}
@@ -424,12 +398,10 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
           ))}
         </div>
       </div>
-
       {/* Date Display */}
       <div className="mb-6">
         <h2 className="text-lg text-gray-300">{formatDate(selectedDate)}</h2>
       </div>
-
       {/* View Content */}
       <AnimatePresence mode="wait">
         {view === 'today' && (
@@ -449,13 +421,11 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
                 </div>
               </div>
             )}
-
             {renderCosmicWeather()}
             {renderPlanetaryPositions()}
             {personalHoroscope && renderPersonalizedHoroscope()}
           </motion.div>
         )}
-
         {view === 'calendar' && (
           <motion.div
             key="calendar"
@@ -466,7 +436,6 @@ export default function CosmicCalendar({ birthData, className = '' }: CosmicCale
             {renderCalendarView()}
           </motion.div>
         )}
-
         {view === 'week' && (
           <motion.div
             key="week"

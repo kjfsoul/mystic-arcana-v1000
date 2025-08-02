@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useMemo, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
@@ -8,13 +8,11 @@ import { TarotEngine, TarotReading } from "../../lib/tarot/TarotEngine";
 import { TarotService } from "../../services/TarotService";
 import styles from './ApiDrivenTarotPanel.module.css';
 import { TarotCard } from "./TarotCard";
-
 interface ApiDrivenTarotPanelProps {
   className?: string;
   deckId?: string;
   onReadingComplete?: (reading: TarotReading) => void;
 }
-
 /**
  * Enhanced Tarot Panel using the Tarot Data Engine API
  * 
@@ -38,17 +36,14 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
   const [isPerformingReading, setIsPerformingReading] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showAuthModal, setShowAuthModal] = useState(false);
-
   // Initialize tarot engine with API-driven data
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const tarotEngine = useMemo(() => new TarotEngine({
     isGuest,
     deckId
   }), [isGuest, deckId]);
-
   const availableSpreads = tarotEngine.getAvailableSpreadTypes();
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSpreadSelection = useCallback((spreadType: 'single' | 'three-card' | 'celtic-cross') => {
     if (isGuest && spreadType !== 'single') {
       setShowAuthModal(true);
@@ -59,14 +54,12 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
     setCurrentReading(null);
     setFlippedCards(new Set());
   }, [isGuest]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const performReading = useCallback(async () => {
     if (loading || error) {
       console.warn('Cannot perform reading: deck not loaded');
       return;
     }
-
     setIsPerformingReading(true);
     setFlippedCards(new Set());
     
@@ -96,12 +89,10 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
       setIsPerformingReading(false);
     }
   }, [selectedSpread, isGuest, tarotEngine, user, loading, error, onReadingComplete]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleCardFlip = useCallback((cardIndex: number) => {
     setFlippedCards(prev => new Set([...prev, cardIndex]));
   }, []);
-
   // Loading state
   if (loading) {
     return (
@@ -120,7 +111,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
       </div>
     );
   }
-
   // Error state
   if (error) {
     return (
@@ -139,7 +129,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
       </div>
     );
   }
-
   return (
     <div className={`${styles.container} ${className}`}>
       {/* Deck Information */}
@@ -152,7 +141,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           </div>
         </div>
       )}
-
       {/* Spread Selection */}
       <div className={styles.spreadSelection}>
         <h3>Choose Your Reading</h3>
@@ -184,7 +172,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           ))}
         </div>
       </div>
-
       {/* Reading Area */}
       <div className={styles.readingArea}>
         {!currentReading ? (
@@ -242,7 +229,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
                   </motion.div>
                 ))}
               </div>
-
               {/* Interpretation */}
               {flippedCards.size > 0 && (
                 <motion.div
@@ -268,7 +254,6 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           </AnimatePresence>
         )}
       </div>
-
       {/* Auth Modal for Guests */}
       {showAuthModal && (
         <div className={styles.modalOverlay} onClick={() => setShowAuthModal(false)}>

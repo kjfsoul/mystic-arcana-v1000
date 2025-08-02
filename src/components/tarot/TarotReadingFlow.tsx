@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,15 +8,12 @@ import { TarotCard, SpreadType } from '@/types/tarot';
 import { TarotCardDisplay } from './TarotCardDisplay';
 import { useSaveReading } from '@/hooks/useTarotAPI';
 import styles from './TarotReadingFlow.module.css';
-
 interface TarotReadingFlowProps {
   spreadType: SpreadType;
   onComplete?: (cards: TarotCard[]) => void;
   onCancel?: () => void;
 }
-
 type Phase = 'loading' | 'shuffle' | 'cut' | 'draw' | 'reveal' | 'save';
-
 export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
   spreadType,
   onComplete,
@@ -30,14 +27,11 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
   const [isShuffling, setIsShuffling] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSaved, setIsSaved] = useState(false);
-
   const cardCount = spreadType === 'single' ? 1 : spreadType === 'three-card' ? 3 : 10;
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     loadDeck();
   }, []);
-
   const loadDeck = async () => {
     try {
       const deckService = TarotDeckService.getInstance();
@@ -49,7 +43,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
       setError('Failed to load tarot deck. Please try again.');
     }
   };
-
   const handleShuffle = () => {
     setIsShuffling(true);
     
@@ -62,7 +55,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
       setPhase('cut');
     }, 3000);
   };
-
   const handleCut = () => {
     // Simulate cutting the deck
     const cutPoint = Math.floor(Math.random() * (deck.length - 20)) + 10;
@@ -70,7 +62,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
     setDeck(cutDeck);
     setPhase('draw');
   };
-
   const handleDraw = () => {
     // Draw cards with reversal chance
     const drawnCards = deck.slice(0, cardCount).map(card => ({
@@ -80,10 +71,8 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
     setSelectedCards(drawnCards);
     setPhase('reveal');
   };
-
   const handleSaveReading = async () => {
     if (!user || !selectedCards.length) return;
-
     try {
       setPhase('save');
       
@@ -102,7 +91,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
         question: `Tarot reading completed on ${new Date().toLocaleDateString()}`,
         isPublic: false
       });
-
       if (response.success) {
         setIsSaved(true);
         setTimeout(() => {
@@ -118,11 +106,9 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
       setPhase('reveal');
     }
   };
-
   const handleRevealComplete = () => {
     onComplete?.(selectedCards);
   };
-
   if (error || saveError) {
     return (
       <div className={styles.errorContainer}>
@@ -133,7 +119,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
       </div>
     );
   }
-
   return (
     <div className={styles.container}>
       <AnimatePresence mode="wait">
@@ -151,7 +136,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
             </div>
           </motion.div>
         )}
-
         {phase === 'shuffle' && (
           <motion.div
             key="shuffle"
@@ -189,7 +173,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
                 ))}
               </motion.div>
             </div>
-
             <button
               onClick={handleShuffle}
               disabled={isShuffling}
@@ -199,7 +182,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
             </button>
           </motion.div>
         )}
-
         {phase === 'cut' && (
           <motion.div
             key="cut"
@@ -223,7 +205,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
                 whileHover={{ x: 20 }}
               />
             </div>
-
             <button
               onClick={handleCut}
               className={`${styles.button} ${styles.primaryButton}`}
@@ -232,7 +213,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
             </button>
           </motion.div>
         )}
-
         {phase === 'draw' && (
           <motion.div
             key="draw"
@@ -250,7 +230,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
               <span className={styles.cardCount}>{cardCount}</span>
               <span>card{cardCount > 1 ? 's' : ''} will be drawn</span>
             </div>
-
             <motion.button
               onClick={handleDraw}
               className={`${styles.button} ${styles.primaryButton} ${styles.glowButton}`}
@@ -261,7 +240,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
             </motion.button>
           </motion.div>
         )}
-
         {phase === 'reveal' && (
           <motion.div
             key="reveal"
@@ -290,7 +268,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
                 </motion.div>
               ))}
             </div>
-
             <div className={styles.actionButtons}>
               <motion.button
                 onClick={handleSaveReading}
@@ -303,7 +280,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
               >
                 {saveLoading ? 'Saving...' : isSaved ? 'Saved ✓' : 'Save Reading'}
               </motion.button>
-
               <motion.button
                 onClick={handleRevealComplete}
                 className={`${styles.button} ${styles.secondaryButton}`}
@@ -316,7 +292,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
             </div>
           </motion.div>
         )}
-
         {phase === 'save' && (
           <motion.div
             key="save"
@@ -339,7 +314,6 @@ export const TarotReadingFlow: React.FC<TarotReadingFlowProps> = ({
                 {isSaved ? 'Reading saved successfully!' : 'Preserving your cosmic insights...'}
               </p>
             </div>
-
             {isSaved && (
               <motion.div
                 className={styles.successMessage}

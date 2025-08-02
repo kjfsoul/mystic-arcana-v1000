@@ -1,16 +1,13 @@
 'use client';
-
+ 
 import React, { useRef, useEffect, useState } from 'react';
-
 export default function SimpleStarsPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState('Initializing...');
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     try {
       setStatus('Getting WebGL context...');
       
@@ -20,17 +17,13 @@ export default function SimpleStarsPage() {
         setStatus('❌ WebGL2 not supported');
         return;
       }
-
       setStatus('✅ WebGL2 context created');
-
       // Set canvas size
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
       canvas.height = rect.height * window.devicePixelRatio;
       gl.viewport(0, 0, canvas.width, canvas.height);
-
       setStatus(`✅ Canvas sized: ${canvas.width}x${canvas.height}`);
-
       // Simple vertex shader
       const vertexShaderSource = `#version 300 es
         precision highp float;
@@ -40,7 +33,6 @@ export default function SimpleStarsPage() {
           gl_PointSize = 3.0;
         }
       `;
-
       // Simple fragment shader
       const fragmentShaderSource = `#version 300 es
         precision highp float;
@@ -49,39 +41,31 @@ export default function SimpleStarsPage() {
           fragColor = vec4(1.0, 1.0, 1.0, 1.0);
         }
       `;
-
       // Compile shaders
       const vertexShader = gl.createShader(gl.VERTEX_SHADER)!;
       gl.shaderSource(vertexShader, vertexShaderSource);
       gl.compileShader(vertexShader);
-
       if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
         setStatus(`❌ Vertex shader error: ${gl.getShaderInfoLog(vertexShader)}`);
         return;
       }
-
       const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)!;
       gl.shaderSource(fragmentShader, fragmentShaderSource);
       gl.compileShader(fragmentShader);
-
       if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
         setStatus(`❌ Fragment shader error: ${gl.getShaderInfoLog(fragmentShader)}`);
         return;
       }
-
       // Create program
       const program = gl.createProgram()!;
       gl.attachShader(program, vertexShader);
       gl.attachShader(program, fragmentShader);
       gl.linkProgram(program);
-
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
         setStatus(`❌ Program link error: ${gl.getProgramInfoLog(program)}`);
         return;
       }
-
       setStatus('✅ Shaders compiled and linked');
-
       // Create some test star positions
       const starPositions = new Float32Array([
         0.0, 0.0,    // Center
@@ -94,37 +78,28 @@ export default function SimpleStarsPage() {
         0.8, 0.0,    // Right center
         -0.8, 0.0,   // Left center
       ]);
-
       // Create buffer
       const positionBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.bufferData(gl.ARRAY_BUFFER, starPositions, gl.STATIC_DRAW);
-
       setStatus(`✅ Created ${starPositions.length / 2} test stars`);
-
       // Set up rendering
       gl.clearColor(0.0, 0.0, 0.1, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-
       gl.useProgram(program);
-
       // Set up vertex attribute
       const positionLocation = gl.getAttribLocation(program, 'a_position');
       gl.enableVertexAttribArray(positionLocation);
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
       // Draw the stars
       gl.drawArrays(gl.POINTS, 0, starPositions.length / 2);
-
       setStatus(`✅ Rendered ${starPositions.length / 2} stars successfully!`);
-
     } catch (error) {
       setStatus(`❌ Error: ${error}`);
       console.error('WebGL Error:', error);
     }
   }, []);
-
   return (
     <div style={{ 
       width: '100vw', 

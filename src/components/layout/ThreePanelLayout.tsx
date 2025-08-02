@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { TarotPanel } from '../panels/TarotPanel';
 import { ReaderPanel } from '../panels/ReaderPanel';
@@ -7,14 +7,11 @@ import { AstrologyPanel } from '../panels/AstrologyPanel';
 import { CosmicBackground } from '../effects/CosmicBackground';
 import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
 import styles from './ThreePanelLayout.module.css';
-
 export type ActivePanel = 'tarot' | 'reader' | 'astrology';
-
 export interface ThreePanelLayoutProps {
   initialPanel?: ActivePanel;
   className?: string;
 }
-
 /**
  * Main layout component implementing the signature 3-panel Mystic Arcana interface
  * 
@@ -32,9 +29,8 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
   const [activePanel, setActivePanel] = useState<ActivePanel>(initialPanel);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   // Responsive breakpoint detection
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -44,16 +40,14 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
   // Loading state management
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
-
   // Keyboard navigation
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.altKey) {
@@ -70,11 +64,9 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
         }
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
   const panelConfig = {
     tarot: {
       title: 'Tarot Zone',
@@ -92,7 +84,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
       description: 'Birth charts, horoscopes, and cosmic insights'
     }
   };
-
   const handlePanelSwitch = (panel: ActivePanel) => {
     setActivePanel(panel);
     // Announce panel change for screen readers
@@ -102,7 +93,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
       ariaLive.textContent = announcement;
     }
   };
-
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
@@ -116,7 +106,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
       </div>
     );
   }
-
   return (
     <AccessibilityProvider>
       <div className={`${styles.container} ${className}`}>
@@ -130,7 +119,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
           aria-atomic="true"
           className="sr-only"
         />
-
         {/* Skip Navigation */}
         <nav className={styles.skipNav}>
           <a href="#main-content" className={styles.skipLink}>
@@ -140,7 +128,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
             Skip to panel navigation
           </a>
         </nav>
-
         {/* Mobile Panel Navigation */}
         {isMobile && (
           <nav 
@@ -171,7 +158,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
             ))}
           </nav>
         )}
-
         {/* Main Content Area */}
         <main 
           id="main-content"
@@ -218,7 +204,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
             </div>
           )}
         </main>
-
         {/* Quick Actions Floating Menu */}
         <div className={styles.quickActions}>
           <button 
@@ -243,7 +228,6 @@ export const ThreePanelLayout: React.FC<ThreePanelLayoutProps> = ({
             ⚙️
           </button>
         </div>
-
         {/* Cosmic Weather Indicator */}
         <div className={styles.cosmicWeather}>
           <div className={styles.weatherIndicator}>

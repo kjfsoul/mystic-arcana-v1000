@@ -1,12 +1,10 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EnhancedTarotCard } from './EnhancedTarotCard';
 import { TarotCard } from '@/types/tarot';
-
 export type SpreadType = 'single' | 'three-card' | 'celtic-cross' | 'horseshoe' | 'relationship' | 'custom';
-
 interface SpreadPosition {
   x: number;
   y: number;
@@ -15,7 +13,6 @@ interface SpreadPosition {
   description?: string;
   size?: 'small' | 'medium' | 'large';
 }
-
 interface EnhancedTarotSpreadLayoutsProps {
   spreadType: SpreadType;
   cards: TarotCard[];
@@ -25,7 +22,6 @@ interface EnhancedTarotSpreadLayoutsProps {
   customPositions?: SpreadPosition[];
   isMobile?: boolean;
 }
-
 export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProps> = ({
   spreadType,
   cards,
@@ -38,9 +34,8 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [connectionLines, setConnectionLines] = useState<Array<{ from: number; to: number; strength: number }>>([]);
   const [energyFlow, setEnergyFlow] = useState(0);
-
   // Energy flow animation
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (isRevealing) {
       const interval = setInterval(() => {
@@ -49,9 +44,8 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       return () => clearInterval(interval);
     }
   }, [isRevealing]);
-
   // Generate connection lines between cards for energy flow
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (spreadType === 'three-card' && cards.length === 3) {
       setConnectionLines([
@@ -68,7 +62,6 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       ]);
     }
   }, [spreadType, cards.length]);
-
   const getSpreadPositions = (spreadType: SpreadType): SpreadPosition[] => {
     const mobileScale = isMobile ? 0.7 : 1;
     const positions: Record<SpreadType, SpreadPosition[]> = {
@@ -108,32 +101,25 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       ],
       'custom': customPositions
     };
-
     return positions[spreadType] || positions['single'];
   };
-
   const positions = getSpreadPositions(spreadType);
-
   const handleCardReveal = (card: TarotCard, index: number) => {
     setRevealedCards(prev => new Set([...prev, index]));
     onCardClick?.(card, index);
   };
-
   // Generate bioluminescent connection lines
   const renderConnectionLines = () => {
     if (!showBioluminescence || !isRevealing) return null;
-
     return connectionLines.map((connection, index) => {
       const fromPos = positions[connection.from];
       const toPos = positions[connection.to];
       
       if (!fromPos || !toPos) return null;
-
       const lineLength = Math.sqrt(
         Math.pow(toPos.x - fromPos.x, 2) + Math.pow(toPos.y - fromPos.y, 2)
       );
       const angle = Math.atan2(toPos.y - fromPos.y, toPos.x - fromPos.x) * (180 / Math.PI);
-
       return (
         <motion.div
           key={`connection-${index}`}
@@ -175,11 +161,9 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       );
     });
   };
-
   // Render energy field background
   const renderEnergyField = () => {
     if (!showBioluminescence || !isRevealing) return null;
-
     return (
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -202,7 +186,6 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       />
     );
   };
-
   const cardVariants = {
     hidden: { 
       rotateY: 180,
@@ -224,15 +207,12 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       }
     })
   };
-
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* Energy field background */}
       {renderEnergyField()}
-
       {/* Connection lines */}
       {renderConnectionLines()}
-
       {/* Main spread container */}
       <motion.div 
         className="relative"
@@ -295,7 +275,6 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
                 showBioluminescence={showBioluminescence}
                 delay={index * 0.2}
               />
-
               {/* Card number indicator */}
               <motion.div
                 className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-purple-600/80 text-white text-xs px-2 py-1 rounded-full font-bold backdrop-blur-sm"
@@ -309,7 +288,6 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
           );
         })}
       </motion.div>
-
       {/* Mobile-optimized position guide */}
       {isMobile && spreadType === 'celtic-cross' && (
         <motion.div 
@@ -331,7 +309,6 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
           </div>
         </motion.div>
       )}
-
       {/* Spread info overlay */}
       <motion.div
         className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm rounded-lg p-3 text-sm"

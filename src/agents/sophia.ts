@@ -3,12 +3,10 @@
  * Agent: PersonaImplementer (Persona Learner Activation Mission)
  * Purpose: Primary virtual reader connecting UI to Knowledge Pool for personalized readings
  */
-
 import { SpreadType } from "@/components/tarot/EnhancedTarotSpreadLayouts";
 import { createClient } from "@/lib/supabase/server";
 import { TarotCard } from "@/types/tarot";
 import { PersonaLearnerAgent } from "./PersonaLearner";
-
 // Conversational State Machine Enums
 export enum ConversationState {
   AWAITING_DRAW = "AWAITING_DRAW",
@@ -31,21 +29,18 @@ export enum ConversationState {
   AWAITING_USER_RESPONSE = "AWAITING_USER_RESPONSE",
   PROVIDING_GUIDANCE = "PROVIDING_GUIDANCE",
 }
-
 export interface ConversationOption {
   id: string;
   text: string;
   value: string;
   hint?: string;
 }
-
 export interface InteractiveQuestion {
   question: string;
   options: ConversationOption[];
   theme: string;
   context?: string;
 }
-
 export interface ConversationTurn {
   dialogue: string;
   newState: ConversationState;
@@ -61,7 +56,6 @@ export interface ConversationTurn {
   // Added missing property
   sophiaDialogue?: string;
 }
-
 export interface ConversationSession {
   sessionId: string;
   userId?: string;
@@ -78,7 +72,6 @@ export interface ConversationSession {
   startTime: Date;
   context: ReadingContext;
 }
-
 export interface ReadingContext {
   userId?: string;
   spreadType: SpreadType;
@@ -91,7 +84,6 @@ export interface ReadingContext {
     active_transits?: string[];
   };
 }
-
 interface PersonalizedInterpretation {
   base_interpretation: string;
   personalized_guidance: string;
@@ -102,7 +94,6 @@ interface PersonalizedInterpretation {
   source_references: string[];
   toString?: () => string;
 }
-
 export interface SophiaReading {
   id: string;
   narrative: string;
@@ -113,7 +104,6 @@ export interface SophiaReading {
   session_context: ReadingContext;
   created_at: Date;
 }
-
 /**
  * Sophia - The Weaver of Wisdom
  *
@@ -142,22 +132,17 @@ export class SophiaAgent {
     ],
     tone: "nurturing yet empowering, mystical yet grounded",
   };
-
   private supabase: any;
-
   // Fixed: Remove duplicate constructors
   constructor() {
     this.initializeSupabase();
   }
-
   // Fixed: Remove duplicate function
   private async initializeSupabase() {
     this.supabase = await createClient();
   }
-
   private personaLearner = new PersonaLearnerAgent();
   private conversationSessions = new Map<string, ConversationSession>();
-
   /**
    * Generate a complete personalized reading by querying the Knowledge Pool
    * and synthesizing interpretations through Sophia's wise perspective
@@ -185,14 +170,11 @@ export class SophiaAgent {
           );
         }
       }
-
       // Query Knowledge Pool for each card's interpretation
       const cardInterpretations: PersonalizedInterpretation[] = [];
-
       for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         const positionName = this.getPositionName(spreadType, i);
-
         // Fetch base interpretation from Knowledge Pool
         const { data: interpretationData, error } = await this.supabase
           .from("tarot_interpretations")
@@ -201,13 +183,11 @@ export class SophiaAgent {
           .eq("spread_type", spreadType)
           .eq("position_name", positionName)
           .single();
-
         if (error) {
           console.warn(
             `No specific interpretation found for ${card.name} in ${positionName}, using fallback`
           );
         }
-
         // Create personalized interpretation with user memories
         const interpretation = await this.createPersonalizedInterpretation(
           card,
@@ -217,10 +197,8 @@ export class SophiaAgent {
           i,
           userMemories
         );
-
         cardInterpretations.push(interpretation);
       }
-
       // Synthesize overall reading narrative with memory context
       const narrative = await this.synthesizeNarrative(
         cards,
@@ -239,7 +217,6 @@ export class SophiaAgent {
         context,
         userMemories
       );
-
       // Fixed: Replace deprecated substr with substring
       const reading: SophiaReading = {
         id: `sophia_reading_${Date.now()}_${Math.random()
@@ -253,7 +230,6 @@ export class SophiaAgent {
         session_context: context,
         created_at: new Date(),
       };
-
       return reading;
     } catch (error) {
       console.error("Sophia reading generation failed:", error);
@@ -262,7 +238,6 @@ export class SophiaAgent {
       );
     }
   }
-
   /**
    * Process a turn in the conversational reading flow
    * This is the main method for the Living Oracle Initiative
@@ -276,13 +251,11 @@ export class SophiaAgent {
   ): Promise<ConversationTurn> {
     try {
       let session = this.conversationSessions.get(sessionId);
-
       // Initialize session if this is the first turn
       if (!session && currentState === ConversationState.AWAITING_DRAW) {
         if (!cards || !context) {
           throw new Error("Cards and context required for new session");
         }
-
         session = {
           sessionId,
           userId: context.userId,
@@ -295,14 +268,11 @@ export class SophiaAgent {
           startTime: new Date(),
           context,
         };
-
         this.conversationSessions.set(sessionId, session);
       }
-
       if (!session) {
         throw new Error(`Session ${sessionId} not found`);
       }
-
       // Record user input if provided
       if (userInput) {
         session.userResponses.push({
@@ -311,7 +281,6 @@ export class SophiaAgent {
           timestamp: new Date(),
         });
       }
-
       // Process the current state and determine the next action
       return await this.processStateTransition(session, userInput);
     } catch (error) {
@@ -319,7 +288,6 @@ export class SophiaAgent {
       throw new Error(`Unable to process the cosmic conversation: ${error}`);
     }
   }
-
   /**
    * Process state transitions in the conversation flow
    */
@@ -330,34 +298,27 @@ export class SophiaAgent {
     switch (session.currentState) {
       case ConversationState.AWAITING_DRAW:
         return await this.handleAwaitingDraw(session);
-
       case ConversationState.REVEALING_CARD_1:
       case ConversationState.REVEALING_CARD_2:
       case ConversationState.REVEALING_CARD_3:
         return await this.handleRevealingCard(session);
-
       case ConversationState.INTERPRETING_CARD_1:
       case ConversationState.INTERPRETING_CARD_2:
       case ConversationState.INTERPRETING_CARD_3:
         return await this.handleInterpretingCard(session);
-
       case ConversationState.AWAITING_INPUT_1:
       case ConversationState.AWAITING_INPUT_2:
       case ConversationState.AWAITING_INPUT_3:
         return await this.handleAwaitingInput(session, userInput);
-
       case ConversationState.INTERACTIVE_QUESTION_1:
       case ConversationState.INTERACTIVE_QUESTION_2:
         return await this.handleInteractiveQuestion(session, userInput);
-
       case ConversationState.FINAL_SYNTHESIS:
         return await this.handleFinalSynthesis(session);
-
       default:
         throw new Error(`Unknown conversation state: ${session.currentState}`);
     }
   }
-
   /**
    * Handle the initial draw state
    */
@@ -368,10 +329,8 @@ export class SophiaAgent {
       this.personality.signature_phrases[
         Math.floor(Math.random() * this.personality.signature_phrases.length)
       ];
-
     session.currentState = ConversationState.REVEALING_CARD_1;
     this.conversationSessions.set(session.sessionId, session);
-
     return {
       dialogue: `Welcome, beautiful soul. ${signaturePhrase} as we begin this sacred journey together. I have drawn three cards that hold the wisdom you seek. Let us unveil them one by one, allowing each to speak its truth in its own time.`,
       newState: ConversationState.REVEALING_CARD_1,
@@ -381,7 +340,6 @@ export class SophiaAgent {
       ],
     };
   }
-
   /**
    * Handle revealing a card
    */
@@ -391,10 +349,8 @@ export class SophiaAgent {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     const card = session.cards[cardIndex];
     const positionName = this.getPositionName(session.spreadType, cardIndex);
-
     let dialogue = "";
     let nextState: ConversationState;
-
     if (cardIndex === 0) {
       dialogue = `I now reveal your first card: **${card.name}** in the position of ${positionName}. `;
       dialogue += `The energy of this card fills the space between us. Take a moment to feel its presence.`;
@@ -408,11 +364,9 @@ export class SophiaAgent {
       dialogue += `The trinity is complete. Feel how all three cards now speak as one unified voice.`;
       nextState = ConversationState.INTERPRETING_CARD_3;
     }
-
     session.currentState = nextState;
     session.currentCardIndex = cardIndex;
     this.conversationSessions.set(session.sessionId, session);
-
     return {
       dialogue,
       newState: nextState,
@@ -426,7 +380,6 @@ export class SophiaAgent {
       ],
     };
   }
-
   /**
    * Handle interpreting a card
    */
@@ -436,7 +389,6 @@ export class SophiaAgent {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     const card = session.cards[cardIndex];
     const positionName = this.getPositionName(session.spreadType, cardIndex);
-
     // Retrieve user memories for personalization
     let userMemories: any[] = [];
     if (session.userId) {
@@ -448,7 +400,6 @@ export class SophiaAgent {
         console.warn("Could not retrieve user memories:", memoryError);
       }
     }
-
     // Query Knowledge Pool for card interpretation
     const { data: interpretationData, error } = await this.supabase
       .from("tarot_interpretations")
@@ -457,13 +408,11 @@ export class SophiaAgent {
       .eq("spread_type", session.spreadType)
       .eq("position_name", positionName)
       .single();
-
     if (error) {
       console.warn(
         `No specific interpretation found for ${card.name} in ${positionName}`
       );
     }
-
     // Create personalized interpretation
     const interpretation = await this.createPersonalizedInterpretation(
       card,
@@ -473,12 +422,9 @@ export class SophiaAgent {
       cardIndex,
       userMemories
     );
-
     session.cardInterpretations[cardIndex] = interpretation;
-
     const dialogue = interpretation.personalized_guidance;
     let nextState: ConversationState;
-
     // Determine next state based on current card
     if (cardIndex === 0) {
       nextState = ConversationState.AWAITING_INPUT_1;
@@ -487,10 +433,8 @@ export class SophiaAgent {
     } else {
       nextState = ConversationState.AWAITING_INPUT_3;
     }
-
     session.currentState = nextState;
     this.conversationSessions.set(session.sessionId, session);
-
     return {
       dialogue,
       newState: nextState,
@@ -506,7 +450,6 @@ export class SophiaAgent {
       ],
     };
   }
-
   /**
    * Handle awaiting user input
    */
@@ -515,18 +458,14 @@ export class SophiaAgent {
     userInput?: string
   ): Promise<ConversationTurn> {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
-
     if (!userInput) {
       throw new Error("User input required for this state");
     }
-
     let dialogue = "";
     let nextState: ConversationState;
-
     if (userInput === "tell_more") {
       const card = session.cards[cardIndex];
       const interpretation = session.cardInterpretations[cardIndex];
-
       dialogue = `${interpretation.spiritual_wisdom} ${interpretation.practical_advice}`;
       nextState = this.getInteractiveQuestionState(cardIndex);
     } else if (userInput === "continue") {
@@ -541,16 +480,13 @@ export class SophiaAgent {
       dialogue = "I feel your energy shifting as you process this wisdom.";
       nextState = this.getInteractiveQuestionState(cardIndex);
     }
-
     // Create interactive question for deeper engagement
     const interactiveQuestion = this.createInteractiveQuestion(
       session.cards[cardIndex],
       session.cardInterpretations[cardIndex]
     );
-
     session.currentState = nextState;
     this.conversationSessions.set(session.sessionId, session);
-
     return {
       dialogue: dialogue + " " + interactiveQuestion.question,
       newState: nextState,
@@ -558,7 +494,6 @@ export class SophiaAgent {
       options: interactiveQuestion.options,
     };
   }
-
   /**
    * Handle interactive question responses and log to PersonaLearner
    */
@@ -569,11 +504,9 @@ export class SophiaAgent {
     if (!userInput) {
       throw new Error("User input required for interactive question");
     }
-
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     const card = session.cards[cardIndex];
     const interpretation = session.cardInterpretations[cardIndex];
-
     // Log the interaction to PersonaLearner for a-mem storage
     if (session.userId) {
       try {
@@ -587,7 +520,6 @@ export class SophiaAgent {
           session_context: session.context,
           created_at: new Date(),
         };
-
         const mockSession: ConversationSession = {
           sessionId: mockReading.id,
           userId: mockReading.session_context.userId,
@@ -600,13 +532,11 @@ export class SophiaAgent {
           startTime: mockReading.created_at,
           context: mockReading.session_context,
         };
-
         await this.personaLearner.logInteraction(session.userId, mockSession, {
           rating: 5, // Assume positive engagement
           helpful_cards: [card.name],
           session_notes: `Interactive response: ${userInput} for card ${card.name}`,
         });
-
         console.log(
           `Logged interactive response for user ${session.userId}: ${userInput}`
         );
@@ -614,10 +544,8 @@ export class SophiaAgent {
         console.warn("Failed to log interactive response:", error);
       }
     }
-
     let dialogue = this.generateResponseToInteractiveAnswer(card, userInput);
     let nextState: ConversationState;
-
     // Determine next state based on current card
     if (cardIndex === 0) {
       nextState = ConversationState.REVEALING_CARD_2;
@@ -631,17 +559,14 @@ export class SophiaAgent {
       dialogue +=
         " Now let me weave all three cards together to reveal the complete message...";
     }
-
     session.currentState = nextState;
     this.conversationSessions.set(session.sessionId, session);
-
     return {
       dialogue,
       newState: nextState,
       options: [{ id: "continue", text: "Continue", value: "continue" }],
     };
   }
-
   /**
    * Handle final synthesis of the three-card reading
    */
@@ -660,7 +585,6 @@ export class SophiaAgent {
         console.warn("Could not retrieve user memories for synthesis:", error);
       }
     }
-
     const narrative = await this.synthesizeNarrative(
       session.cards,
       session.cardInterpretations,
@@ -668,19 +592,16 @@ export class SophiaAgent {
       session.context,
       userMemories
     );
-
     const overallGuidance = await this.synthesizeOverallGuidance(
       session.cardInterpretations,
       session.context,
       userMemories
     );
-
     const spiritualInsight = await this.generateSpiritualInsight(
       session.cards,
       session.context,
       userMemories
     );
-
     const finalReading: SophiaReading = {
       id: `sophia_conversation_${session.sessionId}`,
       narrative,
@@ -691,12 +612,9 @@ export class SophiaAgent {
       session_context: session.context,
       created_at: new Date(),
     };
-
     session.currentState = ConversationState.READING_COMPLETE;
     this.conversationSessions.set(session.sessionId, session);
-
     const dialogue = `As our sacred conversation draws to a close, I offer you this synthesis of all that has emerged:\n\n${overallGuidance}\n\n${spiritualInsight}`;
-
     return {
       dialogue,
       newState: ConversationState.READING_COMPLETE,
@@ -716,7 +634,6 @@ export class SophiaAgent {
       ],
     };
   }
-
   /**
    * Helper method to get current card index from state
    */
@@ -726,7 +643,6 @@ export class SophiaAgent {
     if (state.includes("_3")) return 2;
     return 0;
   }
-
   /**
    * Helper method to get interactive question state
    */
@@ -735,7 +651,6 @@ export class SophiaAgent {
     if (cardIndex === 1) return ConversationState.INTERACTIVE_QUESTION_2;
     return ConversationState.FINAL_SYNTHESIS; // No interactive question for 3rd card
   }
-
   /**
    * Create interactive questions based on card themes
    */
@@ -821,12 +736,10 @@ export class SophiaAgent {
         theme: "clarity",
       },
     };
-
     // Return specific question for known cards, or create generic one
     if (cardQuestions[card.name]) {
       return cardQuestions[card.name];
     }
-
     // Generic question based on card type
     if (card.arcana === "major") {
       return {
@@ -870,7 +783,6 @@ export class SophiaAgent {
       };
     }
   }
-
   /**
    * Generate personalized response to interactive answer
    */
@@ -916,13 +828,11 @@ export class SophiaAgent {
       need_different_guidance:
         "Sometimes we need to hear what we don't expect to find what we truly need.",
     };
-
     return (
       responseMap[userInput] ||
       "Your response reveals the unique way you process wisdom. This itself is valuable insight."
     );
   }
-
   /**
    * Create a personalized interpretation for a single card
    */
@@ -938,10 +848,8 @@ export class SophiaAgent {
     const baseInterpretation =
       knowledgePoolData?.base_meaning ||
       this.generateFallbackInterpretation(card, positionName);
-
     // Extract personalization hooks if available
     const personalizationHooks = knowledgePoolData?.personalization_hooks || [];
-
     // Generate Sophia's personalized guidance with memory synthesis
     const personalizedGuidance = await this.generateSophiaGuidance(
       card,
@@ -951,36 +859,30 @@ export class SophiaAgent {
       personalizationHooks,
       userMemories
     );
-
     // Extract spiritual wisdom and practical advice
     const spiritualWisdom =
       knowledgePoolData?.spiritual_wisdom ||
       this.generateSpiritualWisdom(card, positionName);
-
     const practicalAdvice =
       knowledgePoolData?.actionable_reflection ||
       this.generatePracticalAdvice(card, positionName);
-
     // Generate Sophia's reader notes
     const readerNotes = this.generateReaderNotes(
       card,
       knowledgePoolData,
       context
     );
-
     // Calculate confidence score based on data availability
     const confidenceScore = this.calculateConfidenceScore(
       knowledgePoolData,
       context
     );
-
     // Source references
     const sourceReferences = [
       "Mystic Arcana Knowledge Pool",
       knowledgePoolData?.db_entry_id || "Sophia's Ancient Wisdom",
       "Rider-Waite Tarot Tradition",
     ];
-
     return {
       base_interpretation: baseInterpretation,
       personalized_guidance: personalizedGuidance,
@@ -991,7 +893,6 @@ export class SophiaAgent {
       source_references: sourceReferences,
     };
   }
-
   /**
    * Generate Sophia's signature guidance style with memory synthesis
    */
@@ -1007,13 +908,10 @@ export class SophiaAgent {
       this.personality.signature_phrases[
         Math.floor(Math.random() * this.personality.signature_phrases.length)
       ];
-
     // Analyze user memories for relevant patterns
     const memoryInsights = this.analyzeUserMemories(card, userMemories);
-
     // Weave Sophia's voice into the interpretation
     let guidance = `${signaturePhrase} through ${card.name} in your ${positionName}. `;
-
     // Add memory-aware context if available
     if (memoryInsights.previousEncounters.length > 0) {
       const cardHistory = memoryInsights.previousEncounters[0];
@@ -1022,22 +920,18 @@ export class SophiaAgent {
         " and "
       )}. `;
     }
-
     // Add base interpretation with Sophia's perspective
     guidance += `${baseInterpretation} `;
-
     // Synthesize memory patterns with current reading
     if (memoryInsights.recurringThemes.length > 0) {
       const primaryTheme = memoryInsights.recurringThemes[0];
       guidance += `Your spiritual journey shows a continuing focus on ${primaryTheme}, `;
       guidance += `and ${card.name} now offers you deeper wisdom in this area. `;
     }
-
     // Add specific memory synthesis for common patterns
     if (memoryInsights.progressionPattern) {
       guidance += `${memoryInsights.progressionPattern} `;
     }
-
     // Add personalization if available
     if (personalizationHooks.length > 0) {
       const relevantHook = personalizationHooks[0]; // Use first hook for now
@@ -1045,7 +939,6 @@ export class SophiaAgent {
         guidance += `Your soul's journey suggests that ${relevantHook.interpretation.toLowerCase()}. `;
       }
     }
-
     // Add Sophia's empowerment with memory awareness
     if (userMemories.length > 0) {
       guidance += `As I reflect on our journey together, I see how much you've grown in understanding. `;
@@ -1054,10 +947,8 @@ export class SophiaAgent {
       guidance += `Remember, dear one, that you carry within you all the wisdom needed to navigate this path. `;
       guidance += `Trust in the unfolding of your spiritual evolution. `;
     }
-
     return guidance;
   }
-
   /**
    * Analyze user memories for relevant patterns and insights
    */
@@ -1082,16 +973,13 @@ export class SophiaAgent {
       recurringThemes: [] as string[],
       progressionPattern: null as string | null,
     };
-
     if (userMemories.length === 0) return insights;
-
     // Analyze each memory for card patterns
     for (const memory of userMemories) {
       try {
         if (memory.content && typeof memory.content === "string") {
           const memoryData = JSON.parse(memory.content);
           const readingSummary = memoryData.reading_summary;
-
           if (readingSummary && readingSummary.cards) {
             // Check if current card appeared before
             if (readingSummary.cards.includes(currentCard.name)) {
@@ -1103,7 +991,6 @@ export class SophiaAgent {
                 timestamp: readingSummary.timestamp || memory.timestamp,
               });
             }
-
             // Collect themes for pattern analysis
             if (memoryData.learning_insights?.themes_identified) {
               insights.recurringThemes.push(
@@ -1117,18 +1004,15 @@ export class SophiaAgent {
         continue;
       }
     }
-
     // Find most common themes
     const themeCounts: Record<string, number> = {};
     insights.recurringThemes.forEach((theme) => {
       themeCounts[theme] = (themeCounts[theme] || 0) + 1;
     });
-
     insights.recurringThemes = Object.entries(themeCounts)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 3)
       .map(([theme]) => theme);
-
     // Generate progression pattern for specific card combinations
     if (insights.previousEncounters.length > 0 && userMemories.length > 1) {
       insights.progressionPattern = this.generateProgressionPattern(
@@ -1136,10 +1020,8 @@ export class SophiaAgent {
         userMemories
       );
     }
-
     return insights;
   }
-
   /**
    * Generate progression pattern narrative based on user's reading history
    */
@@ -1170,7 +1052,6 @@ export class SophiaAgent {
           "Having moved through Death's profound transformation, you now step forward as The Fool on a completely new journey.",
       },
     };
-
     // Try to find patterns in recent memory
     try {
       const recentCards = userMemories
@@ -1183,7 +1064,6 @@ export class SophiaAgent {
         })
         .flat()
         .filter(Boolean);
-
       for (const previousCard of recentCards) {
         if (
           progressionMappings[previousCard] &&
@@ -1195,10 +1075,8 @@ export class SophiaAgent {
     } catch (error) {
       // Return empty string if pattern analysis fails
     }
-
     return "";
   }
-
   /**
    * Synthesize overall narrative connecting all cards
    */
@@ -1214,7 +1092,6 @@ export class SophiaAgent {
       " "
     )} spread, `;
     narrative += `I see a beautiful tapestry of wisdom woven by the cosmic forces. `;
-
     // Opening based on spread type
     // Fixed: Added missing 'custom' property
     const spreadIntroductions: Record<SpreadType, string> = {
@@ -1231,13 +1108,10 @@ export class SophiaAgent {
       custom:
         "This custom spread reveals unique insights tailored specifically to your journey.",
     };
-
     narrative +=
       spreadIntroductions[spreadType] ||
       "The cards have arranged themselves in a pattern of profound significance.";
-
     narrative += "\n\n";
-
     // Weave card meanings together
     if (cards.length === 1) {
       narrative += `${cards[0].name} speaks to you with singular clarity, `;
@@ -1250,25 +1124,20 @@ export class SophiaAgent {
       // Multi-card synthesis
       const majorArcana = cards.filter((c) => c.arcana === "major");
       const minorArcana = cards.filter((c) => c.arcana === "minor");
-
       if (majorArcana.length > 0) {
         narrative += `The presence of ${
           majorArcana.length > 1 ? "Major Arcana cards" : "the Major Arcana"
         } `;
         narrative += `signals that significant spiritual themes are at play. `;
       }
-
       if (minorArcana.length > 0) {
         narrative += `The Minor Arcana cards speak to the practical aspects of your journey, `;
         narrative += `offering concrete guidance for your daily path.`;
       }
     }
-
     narrative += "\n\nLet me share what the cards reveal...";
-
     return narrative;
   }
-
   /**
    * Synthesize overall guidance from all interpretations
    */
@@ -1278,26 +1147,20 @@ export class SophiaAgent {
     userMemories: any[] = []
   ): Promise<string> {
     let guidance = `As I weave together the wisdom of your spread, several key themes emerge. `;
-
     // Extract common themes
     const themes = this.extractCommonThemes(interpretations);
-
     if (themes.length > 0) {
       guidance += `The cards speak consistently of ${themes.join(", ")}, `;
       guidance += `suggesting these are the areas where the universe seeks your attention. `;
     }
-
     // Add overall empowerment
     guidance += `\n\nRemember, precious soul, that you are both the author and the hero of your story. `;
     guidance += `These cards do not dictate your future—they illuminate the path you are already walking `;
     guidance += `and empower you to walk it with greater consciousness and grace. `;
-
     guidance += `\n\nTrust in your inner wisdom, for it resonates with the same cosmic intelligence `;
     guidance += `that speaks through these ancient symbols. Your journey is unfolding exactly as it should.`;
-
     return guidance;
   }
-
   /**
    * Generate spiritual insight connecting to user's deeper journey
    */
@@ -1308,7 +1171,6 @@ export class SophiaAgent {
   ): Promise<string> {
     let insight = `On a deeper spiritual level, this reading reveals that you are being called `;
     insight += `to embrace a new level of consciousness and self-understanding. `;
-
     // Look for spiritual patterns
     const spiritualCards = cards.filter((card) =>
       [
@@ -1321,19 +1183,15 @@ export class SophiaAgent {
         "The World",
       ].includes(card.name)
     );
-
     if (spiritualCards.length > 0) {
       insight += `The presence of ${spiritualCards[0].name} `;
       insight += `particularly emphasizes the spiritual dimensions of your current experience. `;
     }
-
     insight += `\n\nThe universe is inviting you to trust in the perfect timing of your awakening. `;
     insight += `Every experience, every challenge, every moment of joy is part of your soul\'s `;
     insight += `carefully orchestrated curriculum for growth and expansion.`;
-
     return insight;
   }
-
   /**
    * Generate Sophia's signature for the reading
    */
@@ -1345,10 +1203,8 @@ export class SophiaAgent {
       "Channeling ancient wisdom for your journey, Sophia 🔮",
       "With deep reverence for your spiritual path, Sophia ⭐",
     ];
-
     return signatures[Math.floor(Math.random() * signatures.length)];
   }
-
   /**
    * Helper method to get position name for a given spread and index
    */
@@ -1379,11 +1235,9 @@ export class SophiaAgent {
       relationship: ["You", "Them", "Connection", "Challenges", "Potential"],
       custom: ["Custom Position 1", "Custom Position 2", "Custom Position 3"],
     };
-
     const spreadPositions = positions[spreadType] || ["Position"];
     return spreadPositions[index] || `Position ${index + 1}`;
   }
-
   /**
    * Generate fallback interpretation when Knowledge Pool data is unavailable
    */
@@ -1395,7 +1249,6 @@ export class SophiaAgent {
       ? card.meaning.reversed ||
         "This card's reversed energy asks for inner reflection"
       : card.meaning.upright || "This card brings positive energy to your path";
-
     return (
       `In the ${positionName} position, ${
         card.name
@@ -1403,7 +1256,6 @@ export class SophiaAgent {
       `The ancient wisdom of this card invites you to consider how its energy applies to this aspect of your journey.`
     );
   }
-
   /**
    * Generate spiritual wisdom for a card
    */
@@ -1416,7 +1268,6 @@ export class SophiaAgent {
       `In the ${positionName}, this card reminds you that you are exactly where you need to be for your soul\'s growth.`
     );
   }
-
   /**
    * Generate practical advice for a card
    */
@@ -1429,7 +1280,6 @@ export class SophiaAgent {
       `Take one small action today that honors the wisdom this card offers in your ${positionName}.`
     );
   }
-
   /**
    * Generate reader notes about the interpretation
    */
@@ -1439,22 +1289,18 @@ export class SophiaAgent {
     context: ReadingContext
   ): string {
     let notes = `Sophia\'s Notes: ${card.name} appeared with `;
-
     if (knowledgePoolData) {
       notes += `rich Knowledge Pool guidance, offering deep personalized insight. `;
     } else {
       notes += `the pure energy of ancient wisdom, speaking directly to your soul. `;
     }
-
     if (card.isReversed) {
       notes += `The reversed position suggests a need for inner reflection and patience with your growth process.`;
     } else {
       notes += `The upright position indicates flowing energy and positive manifestation potential.`;
     }
-
     return notes;
   }
-
   /**
    * Calculate confidence score based on available data
    */
@@ -1463,14 +1309,11 @@ export class SophiaAgent {
     context: ReadingContext
   ): number {
     let score = 0.6; // Base confidence
-
     if (knowledgePoolData) score += 0.3; // Knowledge Pool data available
     if (context.userId) score += 0.1; // User context available
     if (knowledgePoolData?.personalization_hooks?.length > 0) score += 0.1; // Personalization available
-
     return Math.min(score, 1.0);
   }
-
   /**
    * Extract common themes from multiple interpretations
    */
@@ -1478,7 +1321,6 @@ export class SophiaAgent {
     interpretations: PersonalizedInterpretation[]
   ): string[] {
     const themes = [];
-
     // Simple keyword analysis - could be enhanced with NLP
     const commonWords = [
       "growth",
@@ -1489,29 +1331,24 @@ export class SophiaAgent {
       "journey",
       "spiritual",
     ];
-
     for (const theme of commonWords) {
       const count = interpretations.filter(
         (interp) =>
           interp.personalized_guidance.toLowerCase().includes(theme) ||
           interp.spiritual_wisdom.toLowerCase().includes(theme)
       ).length;
-
       if (count >= Math.ceil(interpretations.length / 2)) {
         themes.push(theme);
       }
     }
-
     return themes.slice(0, 3); // Return top 3 themes
   }
-
   /**
    * Get Sophia's personality information for external use
    */
   getPersonality() {
     return this.personality;
   }
-
   /**
    * Health check method
    */
@@ -1520,7 +1357,6 @@ export class SophiaAgent {
       const { data, error } = await this.supabase
         .from("tarot_interpretations")
         .select("count", { count: "exact", head: true });
-
       return !error;
     } catch {
       return false;

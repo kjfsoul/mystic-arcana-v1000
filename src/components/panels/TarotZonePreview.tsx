@@ -1,21 +1,16 @@
 'use client';
-
 import React from 'react';
-
 interface TarotZonePreviewProps {
   onSelectReading?: (type: string) => void;
 }
-
 export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
   onSelectReading
 }) => {
-
   const readings = [
     { id: 'single', name: 'Single Card', description: 'Quick insight' },
     { id: 'three-card', name: 'Three Card', description: 'Past, Present, Future' },
     { id: 'celtic-cross', name: 'Celtic Cross', description: 'Deep exploration' }
   ];
-
   return (
     <div className="h-full p-6 lg:p-8 flex flex-col text-white/90 overflow-y-auto">
       <h2 className="text-2xl lg:text-3xl font-light text-center mb-6 lg:mb-8 tracking-wider drop-shadow-[0_2px_10px_rgba(138,43,226,0.5)]">
@@ -30,7 +25,6 @@ export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
           The classic tarot deck for timeless wisdom
         </p>
       </div>
-
       <div className="mb-6 lg:mb-8 flex-1">
         <h3 className="text-sm lg:text-base font-normal mb-4 text-white/70 uppercase tracking-wider">
           Select Reading Type
@@ -53,7 +47,6 @@ export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
           ))}
         </div>
       </div>
-
       <div className="mt-auto text-center text-sm lg:text-base text-white/50 italic">
         Click to enter the Tarot Realm
       </div>

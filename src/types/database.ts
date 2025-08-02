@@ -1,5 +1,4 @@
 import { SpreadType } from '../types/tarot'; // Corrected path
-
 export interface Database {
   tarotCards: {
     id: string;

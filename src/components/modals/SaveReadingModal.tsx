@@ -1,32 +1,27 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Save, Feather, Scroll, Check } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
-
 interface SaveReadingModalProps {
   isOpen: boolean;
   onClose: () => void;
   reading: TarotReading;
   onSave: (notes: string, isPublic: boolean) => Promise<void>;
 }
-
 const quillStyles = [
   { name: 'Classic', icon: '🪶', color: 'from-gray-600 to-gray-800' },
   { name: 'Phoenix', icon: '🔥', color: 'from-orange-500 to-red-600' },
   { name: 'Mystic', icon: '✨', color: 'from-purple-500 to-pink-600' },
   { name: 'Ocean', icon: '🌊', color: 'from-blue-500 to-teal-600' },
 ];
-
 const scrollStyles = [
   { name: 'Ancient', icon: '📜', texture: 'bg-gradient-to-br from-yellow-100 to-amber-200' },
   { name: 'Starlight', icon: '⭐', texture: 'bg-gradient-to-br from-indigo-100 to-purple-200' },
   { name: 'Moon', icon: '🌙', texture: 'bg-gradient-to-br from-gray-100 to-blue-200' },
   { name: 'Rose', icon: '🌹', texture: 'bg-gradient-to-br from-pink-100 to-rose-200' },
 ];
-
 export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
   isOpen,
   onClose,
@@ -41,16 +36,13 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
   const [isSaving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
-
   const handleSave = async () => {
     if (!user) {
       setSaveError('Please sign in to save your reading');
       return;
     }
-
     setSaving(true);
     setSaveError(null);
-
     try {
       await onSave(notes, isPublic);
       setSaveSuccess(true);
@@ -64,9 +56,7 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
       setSaving(false);
     }
   };
-
   if (!isOpen) return null;
-
   return (
     <AnimatePresence>
       <motion.div
@@ -96,7 +86,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
             <h2 className="text-2xl font-bold text-white mb-2">Save Your Reading</h2>
             <p className="text-purple-100">Preserve this moment of cosmic wisdom in your personal journal</p>
           </div>
-
           {/* Content */}
           <div className="p-6 space-y-6">
             {/* Scroll Style Selection */}
@@ -133,7 +122,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 ))}
               </div>
             </div>
-
             {/* Quill Style Selection */}
             <div>
               <h3 className="text-lg font-semibold text-purple-300 mb-3 flex items-center gap-2">
@@ -168,7 +156,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 ))}
               </div>
             </div>
-
             {/* Notes Section */}
             <div>
               <h3 className="text-lg font-semibold text-purple-300 mb-3">Personal Reflections</h3>
@@ -189,7 +176,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 </div>
               </div>
             </div>
-
             {/* Privacy Toggle */}
             <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
               <div>
@@ -209,7 +195,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 />
               </button>
             </div>
-
             {/* Error Message */}
             {saveError && (
               <motion.div
@@ -220,7 +205,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 <p className="text-red-400 text-sm">{saveError}</p>
               </motion.div>
             )}
-
             {/* Success Message */}
             {saveSuccess && (
               <motion.div
@@ -231,7 +215,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 <p className="text-green-400 text-center">✨ Reading saved to your journal!</p>
               </motion.div>
             )}
-
             {/* Action Buttons */}
             <div className="flex gap-3">
               <button
@@ -259,7 +242,6 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 )}
               </button>
             </div>
-
             {!user && (
               <p className="text-center text-sm text-gray-400">
                 Please <button onClick={() => {/* trigger auth modal */}} className="text-purple-400 hover:text-purple-300 underline">sign in</button> to save your readings

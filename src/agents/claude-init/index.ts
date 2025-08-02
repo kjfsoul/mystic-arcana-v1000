@@ -1,14 +1,11 @@
 #!/usr/bin/env npx tsx
-
 /**
  * Claude Session Initialization Agent
  * Automatically triggers on every Claude session start to provide briefing
  */
-
 import { existsSync, readFileSync, writeFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
-
 interface AgentTask {
   agent_id: string;
   agent_name: string;
@@ -18,7 +15,6 @@ interface AgentTask {
   timestamp: string;
   error?: string;
 }
-
 interface AgentRegistry {
   agents: Record<string, {
     status: string;
@@ -26,23 +22,19 @@ interface AgentRegistry {
   }>;
   [key: string]: unknown;
 }
-
 interface TodoItem {
   priority: string;
   status: string;
   content: string;
 }
-
 interface MemoryGraph {
   entities?: Record<string, unknown>;
   [key: string]: unknown;
 }
-
 interface MessageBusStats {
   pending_messages: number;
   active_coordinations: number;
 }
-
 interface SessionBriefing {
   session_id: string;
   timestamp: string;
@@ -63,7 +55,6 @@ interface SessionBriefing {
   };
   initialization_status: string;
 }
-
 class ClaudeInitializationAgent {
   private taskLogPath: string;
   private briefingPath: string;
@@ -72,7 +63,6 @@ class ClaudeInitializationAgent {
   private memoryGraphPath: string;
   private todoPath: string;
   private logPath: string;
-
   constructor() {
     const baseDir = process.cwd();
     this.taskLogPath = join(baseDir, 'logs', 'agent-tasks.jsonl');
@@ -83,7 +73,6 @@ class ClaudeInitializationAgent {
     this.todoPath = join(baseDir, 'temp', 'todos.json');
     this.logPath = join(baseDir, 'logs', 'agent-activity', `${new Date().toISOString().split('T')[0]}.log`);
   }
-
   private log(message: string) {
     const timestamp = new Date().toISOString();
     const logEntry = `${timestamp} [CLAUDE_INIT] ${message}`;
@@ -94,7 +83,6 @@ class ClaudeInitializationAgent {
       console.warn('Warning: Could not write to log file:', error instanceof Error ? error.message : 'Unknown error');
     }
   }
-
   /**
    * Log agent task completion
    */
@@ -103,7 +91,6 @@ class ClaudeInitializationAgent {
       ...task,
       timestamp: new Date().toISOString()
     };
-
     try {
       appendFileSync(this.taskLogPath, JSON.stringify(fullTask) + '\n');
       this.log(`Task logged: ${task.agent_name} - ${task.task_type} - ${task.status}`);
@@ -114,7 +101,6 @@ class ClaudeInitializationAgent {
       this.log(`Error logging task: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
-
   /**
    * Update memory graph with task completion
    */
@@ -129,7 +115,6 @@ class ClaudeInitializationAgent {
       this.log(`Error updating memory: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
-
   /**
    * Generate session briefing for Claude
    */
@@ -186,7 +171,6 @@ class ClaudeInitializationAgent {
       throw error;
     }
   }
-
   /**
    * Get recent tasks from log
    */
@@ -218,7 +202,6 @@ class ClaudeInitializationAgent {
       return [];
     }
   }
-
   /**
    * Get memory context summary
    */
@@ -240,7 +223,6 @@ class ClaudeInitializationAgent {
       recent_updates: []
     };
   }
-
   /**
    * Get todos from todo system
    */
@@ -269,7 +251,6 @@ class ClaudeInitializationAgent {
       pending: []
     };
   }
-
   /**
    * Get critical issues from CLAUDE.md
    */
@@ -296,7 +277,6 @@ class ClaudeInitializationAgent {
     
     return issues;
   }
-
   /**
    * Get pending tasks from message bus
    */
@@ -322,7 +302,6 @@ class ClaudeInitializationAgent {
     
     return tasks;
   }
-
   /**
    * Generate Claude-friendly summary
    */
@@ -378,7 +357,6 @@ class ClaudeInitializationAgent {
     writeFileSync(summaryPath, summary);
     this.log(`Claude session summary written to ${summaryPath}`);
   }
-
   /**
    * Auto-trigger on session start
    */
@@ -415,10 +393,8 @@ class ClaudeInitializationAgent {
     }
   }
 }
-
 // Create and export agent instance
 export const claudeInitAgent = new ClaudeInitializationAgent();
-
 // Auto-run if called directly
 if (require.main === module) {
   claudeInitAgent.autoInitialize().catch(console.error);

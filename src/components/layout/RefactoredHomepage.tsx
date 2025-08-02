@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
@@ -9,14 +8,11 @@ import { AstrologyPanel } from '../panels/AstrologyPanel';
 import { CelestialEventsCarousel } from '../astronomical/CelestialEventsCarousel';
 import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
 import styles from './RefactoredHomepage.module.css';
-
 export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
-
 interface ReadingRoomProps {
   mode: ReadingMode;
   onBack: () => void;
 }
-
 /**
  * Refactored Homepage Component
  * 
@@ -28,19 +24,15 @@ interface ReadingRoomProps {
  */
 export const RefactoredHomepage: React.FC = () => {
   const [readingMode, setReadingMode] = useState<ReadingMode>('home');
-
   const handleTarotClick = () => {
     setReadingMode('tarot-room');
   };
-
   const handleAstrologyClick = () => {
     setReadingMode('astrology-room');
   };
-
   const handleBackToHome = () => {
     setReadingMode('home');
   };
-
   return (
     <AccessibilityProvider>
       <div className={styles.container}>
@@ -51,7 +43,6 @@ export const RefactoredHomepage: React.FC = () => {
           showMilkyWay={true}
           animated={true}
         />
-
         <AnimatePresence mode="wait">
           {readingMode === 'home' ? (
             <HomeView 
@@ -71,7 +62,6 @@ export const RefactoredHomepage: React.FC = () => {
     </AccessibilityProvider>
   );
 };
-
 const HomeView: React.FC<{
   onTarotClick: () => void;
   onAstrologyClick: () => void;
@@ -105,7 +95,6 @@ const HomeView: React.FC<{
           </div>
         </div>
       </motion.section>
-
       {/* Center - Celestial Events Carousel */}
       <motion.section 
         className={`${styles.panel} ${styles.centerPanel}`}
@@ -116,7 +105,6 @@ const HomeView: React.FC<{
       >
         <CelestialEventsCarousel />
       </motion.section>
-
       {/* Right Panel - Astrology */}
       <motion.section 
         className={`${styles.panel} ${styles.astrologyPanel}`}
@@ -141,7 +129,6 @@ const HomeView: React.FC<{
     </motion.div>
   );
 };
-
 const ReadingRoom: React.FC<ReadingRoomProps> = ({ mode, onBack }) => {
   return (
     <motion.div
@@ -162,7 +149,6 @@ const ReadingRoom: React.FC<ReadingRoomProps> = ({ mode, onBack }) => {
       >
         ← Back to Galaxy View
       </motion.button>
-
       {/* Reading Room Content */}
       <motion.div
         className={styles.roomContent}
@@ -177,7 +163,6 @@ const ReadingRoom: React.FC<ReadingRoomProps> = ({ mode, onBack }) => {
             </div>
           </div>
         )}
-
         {mode === 'astrology-room' && (
           <div className={styles.astrologyRoom}>
             <h1 className={styles.roomTitle}>✨ Astrology Reading Room</h1>

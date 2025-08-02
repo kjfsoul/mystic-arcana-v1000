@@ -1,10 +1,8 @@
 'use client';
-
 import React, { useState } from 'react';
 // import { Card } from '@ag-ui/core';
 import { RenderConfig, CalculationConfig } from '../../../types/astronomical';
 import styles from './AstronomicalSettings.module.css';
-
 interface AstronomicalSettingsProps {
   className?: string;
   onSettingsChange?: (settings: {
@@ -13,7 +11,6 @@ interface AstronomicalSettingsProps {
     calculationConfig: CalculationConfig;
   }) => void;
 }
-
 /**
  * AstronomicalSettings Component
  * 
@@ -35,7 +32,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
     coordinateSystem: 'horizontal',
     projection: 'stereographic'
   });
-
   const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>({
     ephemerisAccuracy: 'medium',
     updateInterval: 1000,
@@ -44,7 +40,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
     aberrationCorrection: true,
     refractionCorrection: true
   });
-
   const handleSettingChange = (newSettings: Partial<{
     useRealStars: boolean;
     renderConfig: Partial<RenderConfig>;
@@ -53,25 +48,21 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
     const updatedUseRealStars = newSettings.useRealStars ?? useRealStars;
     const updatedRenderConfig = { ...renderConfig, ...newSettings.renderConfig };
     const updatedCalculationConfig = { ...calculationConfig, ...newSettings.calculationConfig };
-
     setUseRealStars(updatedUseRealStars);
     setRenderConfig(updatedRenderConfig);
     setCalculationConfig(updatedCalculationConfig);
-
     onSettingsChange?.({
       useRealStars: updatedUseRealStars,
       renderConfig: updatedRenderConfig,
       calculationConfig: updatedCalculationConfig
     });
   };
-
   return (
     <div className={`${styles.astronomicalSettings} ${className}`}>
       <div className={styles.header}>
         <h3>🌟 Astronomical Settings</h3>
         <p>Configure star field accuracy and rendering options</p>
       </div>
-
       {/* Main Toggle */}
       <div className={styles.section}>
         <div className={styles.toggleGroup}>
@@ -89,7 +80,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
           </label>
         </div>
       </div>
-
       {/* Real Stars Configuration */}
       {useRealStars && (
         <>
@@ -107,7 +97,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
               <option value="gaia">Gaia DR3 (1.8 billion stars)</option>
             </select>
           </div>
-
           <div className={styles.section}>
             <h4>Performance Settings</h4>
             <div className={styles.inputGroup}>
@@ -126,7 +115,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 />
               </label>
             </div>
-
             <div className={styles.inputGroup}>
               <label>
                 Faintest Magnitude: {renderConfig.minMagnitude}
@@ -144,7 +132,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
               </label>
             </div>
           </div>
-
           <div className={styles.section}>
             <h4>Display Options</h4>
             <div className={styles.checkboxGroup}>
@@ -158,7 +145,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 />
                 Show Constellation Lines
               </label>
-
               <label className={styles.checkbox}>
                 <input
                   type="checkbox"
@@ -169,7 +155,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 />
                 Show Planets
               </label>
-
               <label className={styles.checkbox}>
                 <input
                   type="checkbox"
@@ -182,7 +167,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
               </label>
             </div>
           </div>
-
           <div className={styles.section}>
             <h4>Calculation Accuracy</h4>
             <select
@@ -198,7 +182,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
               <option value="ultra">Ultra (Research, ±0.1 arcsecond)</option>
             </select>
           </div>
-
           <div className={styles.section}>
             <h4>Corrections</h4>
             <div className={styles.checkboxGroup}>
@@ -212,7 +195,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 />
                 Precession Correction
               </label>
-
               <label className={styles.checkbox}>
                 <input
                   type="checkbox"
@@ -223,7 +205,6 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 />
                 Nutation Correction
               </label>
-
               <label className={styles.checkbox}>
                 <input
                   type="checkbox"
@@ -238,14 +219,12 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
           </div>
         </>
       )}
-
       {/* Performance Warning */}
       {useRealStars && renderConfig.maxStars > 50000 && (
         <div className={styles.warning}>
           ⚠️ High star count may impact performance on slower devices
         </div>
       )}
-
       {/* Info Panel */}
       <div className={styles.info}>
         <h4>ℹ️ About Astronomical Accuracy</h4>

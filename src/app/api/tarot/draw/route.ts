@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import Logger from '@/utils/logger';
-
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   const logger = new Logger('tarot-api');
-
   try {
     const body = await request.json();
     const { 
@@ -15,7 +13,6 @@ export async function POST(request: NextRequest) {
       allowReversed = true, 
       userId 
     } = body;
-
     // Validate input parameters
     if (!Number.isInteger(count) || count < 1 || count > 10) {
       return NextResponse.json(
@@ -27,7 +24,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     const validSpreads = ['single', 'three-card', 'celtic-cross'];
     if (!validSpreads.includes(spread)) {
       return NextResponse.json(
@@ -40,10 +36,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     // Initialize Supabase client
     const supabase = await createClient();
-
     // Fetch deck data
     const { data: deckData, error: deckError } = await supabase
       .from('decks')
@@ -51,7 +45,6 @@ export async function POST(request: NextRequest) {
       .eq('id', deckId)
       .eq('is_active', true)
       .single();
-
     if (deckError || !deckData) {
       logger.error('deck_fetch_error', userId, { deckId }, deckError || undefined, 'Failed to fetch deck data');
       return NextResponse.json(
@@ -63,14 +56,12 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
-
     // Fetch all cards for the deck
     const { data: cardData, error: cardError } = await supabase
       .from('cards')
       .select('*')
       .eq('deck_id', deckId)
       .order('card_number');
-
     if (cardError || !cardData || cardData.length === 0) {
       logger.error('cards_fetch_error', userId, { deckId }, cardError || undefined, 'Failed to fetch cards');
       return NextResponse.json(
@@ -82,14 +73,12 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
     // Validate card count vs spread requirements
     const spreadRequirements = {
       'single': 1,
       'three-card': 3,
       'celtic-cross': 10
     };
-
     const requiredCount = spreadRequirements[spread as keyof typeof spreadRequirements] || count;
     if (cardData.length < requiredCount) {
       return NextResponse.json(
@@ -101,18 +90,15 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
     // Fisher-Yates shuffle algorithm
     const deck = [...cardData];
     for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-
     // Draw cards
     const drawnCards = deck.slice(0, requiredCount).map((card, index) => {
       const isReversed = allowReversed && Math.random() < 0.3; // 30% chance of reversal
-
       // Get position name based on spread
       const getPositionName = (spread: string, index: number): string => {
         const positions: Record<string, string[]> = {
@@ -131,11 +117,9 @@ export async function POST(request: NextRequest) {
             'Final Outcome'
           ]
         };
-
         const spreadPositions = positions[spread] || positions.single;
         return spreadPositions[index] || `Position ${index + 1}`;
       };
-
       return {
         id: card.id,
         name: card.name,
@@ -153,10 +137,8 @@ export async function POST(request: NextRequest) {
         astrological_association: card.astrological_association
       };
     });
-
     const fetchTime = Date.now() - startTime;
     const drawId = `draw_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
     // Build response
     const response = {
       success: true,
@@ -180,13 +162,11 @@ export async function POST(request: NextRequest) {
         }
       }
     };
-
     logger.info('tarot_draw_success', userId, {
       spread,
       deckId,
       drawId
     }, `Drew ${drawnCards.length} cards`);
-
     return NextResponse.json(response, {
       headers: {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -194,7 +174,6 @@ export async function POST(request: NextRequest) {
         'X-Draw-ID': drawId,
       },
     });
-
   } catch (error) {
     logger.error(
       'tarot_draw_error',

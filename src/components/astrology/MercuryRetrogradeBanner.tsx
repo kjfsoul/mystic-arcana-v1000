@@ -1,19 +1,15 @@
 'use client';
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
-
 interface MercuryRetrogradeBannerProps {
   onMarketplaceClick?: () => void;
 }
-
 interface RetrogradePeriod {
   start: Date;
   end: Date;
   stationaryDate: Date;
 }
-
 export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = ({
   onMarketplaceClick
 }) => {
@@ -22,7 +18,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
   const [loading, setLoading] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
-
   // Mercury Retrograde periods for 2025
   const retrogradePeriods: RetrogradePeriod[] = [
     {
@@ -41,8 +36,7 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       stationaryDate: new Date('2025-11-19')
     }
   ];
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkMercuryRetrograde = async () => {
       try {
@@ -52,7 +46,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
         const activePeriod = retrogradePeriods.find(period => 
           now >= period.start && now <= period.end
         );
-
         if (activePeriod) {
           setIsRetrograde(true);
           setCurrentPeriod(activePeriod);
@@ -89,27 +82,21 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
         setLoading(false);
       }
     };
-
     checkMercuryRetrograde();
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (!isRetrograde || !canvasRef.current) return;
-
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
     let time = 0;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-
     const animate = () => {
       // Clear canvas
       ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       // Draw star field
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
       for (let i = 0; i < 50; i++) {
@@ -118,7 +105,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
         const size = Math.sin(time * 0.01 + i) * 1 + 1;
         ctx.fillRect(x, y, size, size);
       }
-
       // Draw Sun (center)
       ctx.beginPath();
       ctx.arc(centerX, centerY, 15, 0, Math.PI * 2);
@@ -127,39 +113,33 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       ctx.strokeStyle = '#FFA500';
       ctx.lineWidth = 2;
       ctx.stroke();
-
       // Draw Earth orbit
       ctx.beginPath();
       ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
       ctx.strokeStyle = 'rgba(100, 149, 237, 0.3)';
       ctx.lineWidth = 1;
       ctx.stroke();
-
       // Draw Mercury orbit
       ctx.beginPath();
       ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
       ctx.strokeStyle = 'rgba(255, 140, 0, 0.3)';
       ctx.lineWidth = 1;
       ctx.stroke();
-
       // Calculate Earth position (normal orbit)
       const earthAngle = time * 0.02;
       const earthX = centerX + Math.cos(earthAngle) * 80;
       const earthY = centerY + Math.sin(earthAngle) * 80;
-
       // Draw Earth
       ctx.beginPath();
       ctx.arc(earthX, earthY, 8, 0, Math.PI * 2);
       ctx.fillStyle = '#6B93D6';
       ctx.fill();
-
       // Calculate Mercury position (retrograde motion - appears to move backward relative to Earth)
       const mercuryBaseAngle = time * 0.08; // Mercury orbits faster
       const retrogradeEffect = Math.sin(time * 0.05) * 0.3; // Retrograde loop effect
       const mercuryAngle = mercuryBaseAngle - retrogradeEffect; // Backward motion
       const mercuryX = centerX + Math.cos(mercuryAngle) * 50;
       const mercuryY = centerY + Math.sin(mercuryAngle) * 50;
-
       // Draw Mercury with retrograde glow
       ctx.beginPath();
       ctx.arc(mercuryX, mercuryY, 6, 0, Math.PI * 2);
@@ -172,7 +152,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       ctx.strokeStyle = 'rgba(255, 107, 107, 0.5)';
       ctx.lineWidth = 2;
       ctx.stroke();
-
       // Draw Mercury's retrograde trail
       ctx.strokeStyle = 'rgba(255, 107, 107, 0.3)';
       ctx.lineWidth = 1;
@@ -188,20 +167,16 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
         }
       }
       ctx.stroke();
-
       time += 1;
       animationRef.current = requestAnimationFrame(animate);
     };
-
     animate();
-
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
   }, [isRetrograde]);
-
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', { 
       month: 'long', 
@@ -209,14 +184,12 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       year: 'numeric'
     });
   };
-
   const getDaysRemaining = (endDate: Date) => {
     const now = new Date();
     const diffTime = endDate.getTime() - now.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
   };
-
   if (loading) {
     return (
       <div className="w-full h-32 bg-gradient-to-r from-purple-900/50 to-blue-900/50 flex items-center justify-center rounded-lg">
@@ -227,7 +200,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       </div>
     );
   }
-
   if (!isRetrograde) {
     return (
       <motion.div 
@@ -257,7 +229,6 @@ export const MercuryRetrogradeBanner: React.FC<MercuryRetrogradeBannerProps> = (
       </motion.div>
     );
   }
-
   return (
     <AnimatePresence>
       <motion.div 

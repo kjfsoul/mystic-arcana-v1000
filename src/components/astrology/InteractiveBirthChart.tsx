@@ -1,11 +1,11 @@
 'use client';
+ 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
 import { TransitEngine, PlanetaryPosition, TransitAspect } from '@/lib/ephemeris/transitEngine';
 import styles from './InteractiveBirthChart.module.css';
-
 interface ChartProps {
   birthData: BirthData;
   onPlanetClick?: (planet: PlanetPosition) => void;
@@ -14,7 +14,6 @@ interface ChartProps {
   transitDate?: Date;
   className?: string;
 }
-
 // Zodiac signs configuration
 const ZODIAC_SIGNS = [
   { name: 'Aries', symbol: '♈', startDegree: 0, element: 'fire' },
@@ -30,7 +29,6 @@ const ZODIAC_SIGNS = [
   { name: 'Aquarius', symbol: '♒', startDegree: 300, element: 'air' },
   { name: 'Pisces', symbol: '♓', startDegree: 330, element: 'water' }
 ];
-
 // Planet symbols and information
 const PLANETS = {
   sun: { symbol: '☉', name: 'Sun', color: '#FFD700' },
@@ -44,7 +42,6 @@ const PLANETS = {
   neptune: { symbol: '♆', name: 'Neptune', color: '#4B0082' },
   pluto: { symbol: '♇', name: 'Pluto', color: '#8B0000' }
 };
-
 export const InteractiveBirthChart: React.FC<ChartProps> = ({
   birthData,
   onPlanetClick,
@@ -66,9 +63,8 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     positions: PlanetaryPosition[];
     aspects: TransitAspect[];
   }>({ positions: [], aspects: [] });
-
   // Calculate responsive chart size
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const updateSize = () => {
       const container = document.querySelector(`.${styles.chartContainer}`);
@@ -78,12 +74,10 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
         setChartSize(size);
       }
     };
-
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-
   // Calculate real astronomical positions
   const [chartData, setChartData] = useState<{
     planets: PlanetPosition[];
@@ -96,8 +90,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     ascendant: 0,
     midheaven: 0
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const calculateChart = async () => {
       try {
@@ -117,9 +110,8 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     
     calculateChart();
   }, [birthData]);
-
   // Load transit data when transits are enabled
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (showTransits) {
       const loadTransits = async () => {
@@ -136,9 +128,7 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
       loadTransits();
     }
   }, [showTransits, transitDate, birthData, transitEngine]);
-
   const { planets: planetPositions, houses: housePositions } = chartData;
-
   // Convert degree to SVG coordinates
   const degreeToCoords = (degree: number, radius: number, centerX: number, centerY: number) => {
     const radians = ((degree - 90) * Math.PI) / 180; // -90 to start from top
@@ -147,7 +137,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
       y: centerY + radius * Math.sin(radians)
     };
   };
-
   const handleObjectClick = (type: 'planet' | 'house' | 'sign' | 'transit', data: PlanetPosition | HousePosition | typeof ZODIAC_SIGNS[0] | PlanetaryPosition) => {
     setSelectedObject({ type, data });
     setShowModal(true);
@@ -158,19 +147,16 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
       onHouseClick(data as HousePosition);
     }
   };
-
   const closeModal = () => {
     setShowModal(false);
     setSelectedObject(null);
   };
-
   const center = chartSize / 2;
   const outerRadius = chartSize * 0.45;
   const zodiacRadius = chartSize * 0.42;
   const planetRadius = chartSize * 0.35;
   const transitRadius = chartSize * 0.32; // Outer ring for transits
   const houseRadius = chartSize * 0.25;
-
   return (
     <div className={`${styles.chartContainer} ${className || ''}`}>
       <motion.div
@@ -213,7 +199,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
             stroke="rgba(25, 25, 112, 0.2)"
             strokeWidth="1"
           />
-
           {/* Zodiac signs */}
           {ZODIAC_SIGNS.map((sign) => {
             const startAngle = sign.startDegree;
@@ -249,7 +234,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               </g>
             );
           })}
-
           {/* House numbers */}
           {housePositions.map((house, index) => {
             const coords = degreeToCoords(house.cusp, houseRadius, center, center);
@@ -285,7 +269,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               </motion.g>
             );
           })}
-
           {/* Natal Planets */}
           {planetPositions.map((planet, index) => {
             const coords = degreeToCoords(planet.longitude, planetRadius, center, center);
@@ -360,7 +343,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               </motion.g>
             );
           })}
-
           {/* Transit Planets */}
           {showTransits && transitData.positions.map((transit, index) => {
             const coords = degreeToCoords(transit.longitude, transitRadius, center, center);
@@ -422,7 +404,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
               </motion.g>
             );
           })}
-
           {/* Transit Aspect Lines */}
           {showTransits && transitData.aspects.map((aspect, index) => {
             const natalPlanet = planetPositions.find(p => p.name.toLowerCase() === aspect.natalPlanet);
@@ -471,7 +452,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
           {isAnimating ? '⏸️' : '▶️'}
         </motion.button>
       </motion.div>
-
       {/* Modal for detailed information */}
       <AnimatePresence>
         {showModal && selectedObject && (
@@ -595,7 +575,6 @@ export const InteractiveBirthChart: React.FC<ChartProps> = ({
     </div>
   );
 };
-
 // Interpretation functions
 function getPlantInterpretation(planet: PlanetPosition): string {
   const interpretations: Record<string, string> = {
@@ -613,7 +592,6 @@ function getPlantInterpretation(planet: PlanetPosition): string {
   
   return interpretations[planet.name] || 'This celestial body influences your personal journey in profound ways.';
 }
-
 function getHouseInterpretation(house: number): string {
   const interpretations: Record<number, string> = {
     1: 'The First House represents your identity, appearance, and first impressions. It shows how you present yourself to the world and your natural approach to new beginnings.',
@@ -632,7 +610,6 @@ function getHouseInterpretation(house: number): string {
   
   return interpretations[house] || 'This house area of life holds special significance in your personal journey.';
 }
-
 function getSignInterpretation(sign: { name: string; element: string }): string {
   const interpretations: Record<string, string> = {
     'Aries': 'Aries energy is pioneering, courageous, and initiating. This fire sign brings enthusiasm, leadership, and a desire to be first. It represents new beginnings and the warrior spirit.',

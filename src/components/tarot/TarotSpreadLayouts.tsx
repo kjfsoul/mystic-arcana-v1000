@@ -1,19 +1,16 @@
 'use client';
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TarotCardDisplay } from './TarotCardDisplay';
 import { TarotCard } from '@/types/tarot';
 import styles from './TarotSpreadLayouts.module.css';
 import { SpreadType } from './MobileTarotSpreadSelector';
-
 interface TarotSpreadLayoutsProps {
   spreadType: SpreadType;
   cards: TarotCard[];
   onCardClick?: (card: TarotCard, index: number) => void;
   isRevealing?: boolean;
 }
-
 export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
   spreadType,
   cards,
@@ -43,10 +40,8 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
         { x: 250, y: -150, rotate: 0, label: 'Final Outcome' }
       ]
     };
-
     return positions[spreadType][index] || { x: 0, y: 0, rotate: 0, label: '' };
   };
-
   const cardVariants = {
     hidden: { 
       rotateY: 180,
@@ -65,7 +60,6 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
       }
     })
   };
-
   return (
     <div className={styles.spreadContainer}>
       <motion.div 
@@ -105,7 +99,6 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
           );
         })}
       </motion.div>
-
       {/* Mobile-optimized position guide */}
       {spreadType === 'celtic-cross' && (
         <div className={styles.positionGuide}>

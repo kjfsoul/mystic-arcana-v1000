@@ -1,16 +1,14 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Search, X } from 'lucide-react';
-
 interface LocationSuggestion {
   display_name: string;
   lat: string;
   lon: string;
   place_id: string;
 }
-
 interface LocationAutocompleteProps {
   value: string;
   onChange: (value: string) => void;
@@ -18,7 +16,6 @@ interface LocationAutocompleteProps {
   className?: string;
   onLocationSelect?: (location: { name: string; lat: number; lon: number }) => void;
 }
-
 export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   value,
   onChange,
@@ -32,9 +29,8 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
   // Debounced search
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (value.length >= 3) {
@@ -44,23 +40,19 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
         setShowSuggestions(false);
       }
     }, 300);
-
     return () => clearTimeout(timeoutId);
   }, [value]);
-
   // Handle clicks outside to close suggestions
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
   const searchLocations = async (query: string) => {
     try {
       setIsLoading(true);
@@ -85,12 +77,10 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
       setIsLoading(false);
     }
   };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     onChange(newValue);
   };
-
   const handleSuggestionClick = (suggestion: LocationSuggestion) => {
     const locationName = suggestion.display_name.split(',').slice(0, 3).join(',').trim();
     onChange(locationName);
@@ -104,10 +94,8 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
       });
     }
   };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions) return;
-
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -131,13 +119,11 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
         break;
     }
   };
-
   const clearInput = () => {
     onChange('');
     setShowSuggestions(false);
     inputRef.current?.focus();
   };
-
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       <div className="relative">
@@ -181,7 +167,6 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
           )}
         </div>
       </div>
-
       <AnimatePresence>
         {showSuggestions && suggestions.length > 0 && (
           <motion.div

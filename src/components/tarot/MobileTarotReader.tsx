@@ -1,19 +1,17 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EnhancedTarotPanel } from './EnhancedTarotPanel';
 import { SpreadType } from './EnhancedTarotSpreadLayouts';
 import { TarotCard } from '@/types/tarot';
 import { Share2, Download, Heart, MessageCircle } from 'lucide-react';
-
 interface MobileTarotReaderProps {
   embedMode?: boolean; // For TikTok/Instagram embeds
   showSocialActions?: boolean;
   onShare?: (cards: TarotCard[], image: string) => void;
   className?: string;
 }
-
 export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
   embedMode = false,
   showSocialActions = true,
@@ -27,24 +25,20 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
   } | null>(null);
   const [showSharePanel, setShowSharePanel] = useState(false);
   const [isPortrait, setIsPortrait] = useState(true);
-
   // Detect orientation changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkOrientation = () => {
       setIsPortrait(window.innerHeight > window.innerWidth);
     };
-
     checkOrientation();
     window.addEventListener('orientationchange', checkOrientation);
     window.addEventListener('resize', checkOrientation);
-
     return () => {
       window.removeEventListener('orientationchange', checkOrientation);
       window.removeEventListener('resize', checkOrientation);
     };
   }, []);
-
   // Handle reading completion
   const handleReadingComplete = (cards: TarotCard[], interpretation: string) => {
     setCurrentReading({
@@ -53,7 +47,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
       timestamp: new Date()
     });
   };
-
   // Generate shareable content
   const generateShareContent = () => {
     if (!currentReading) return '';
@@ -61,17 +54,14 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
     const cardNames = currentReading.cards.map(card => card.name).join(', ');
     return `🔮 My Mystic Arcana reading: ${cardNames}\n\n✨ Get your cosmic guidance at mysticarcana.com\n\n#TarotReading #Mystical #CosmicGuidance`;
   };
-
   // Share functionality
   const handleShare = async () => {
     if (!currentReading) return;
-
     const shareData = {
       title: '🔮 My Mystic Arcana Reading',
       text: generateShareContent(),
       url: window.location.href
     };
-
     try {
       if (navigator.share && navigator.canShare?.(shareData)) {
         await navigator.share(shareData);
@@ -87,11 +77,9 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
       console.error('Error sharing:', error);
     }
   };
-
   // Download reading as image (for social media)
   const handleDownload = async () => {
     if (!currentReading) return;
-
     try {
       // This would generate an image of the reading
       // For now, we'll trigger the browser's save functionality
@@ -140,7 +128,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
       console.error('Error generating image:', error);
     }
   };
-
   return (
     <div className={`relative w-full min-h-screen ${className}`}>
       {/* Main tarot panel optimized for mobile */}
@@ -151,7 +138,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
         onReadingComplete={handleReadingComplete}
         className="w-full"
       />
-
       {/* Social media actions */}
       <AnimatePresence>
         {showSocialActions && currentReading && !embedMode && (
@@ -177,7 +163,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Share panel */}
       <AnimatePresence>
         {showSharePanel && (
@@ -260,7 +245,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Embed overlay info */}
       {embedMode && (
         <motion.div
@@ -277,7 +261,6 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
           </div>
         </motion.div>
       )}
-
       {/* Viewport meta for proper mobile scaling */}
       <style jsx global>{`
         @media (max-width: 768px) {

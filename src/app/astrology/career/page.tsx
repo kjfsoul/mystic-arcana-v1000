@@ -1,12 +1,11 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { InteractiveCareerInsights } from '@/components/astrology/InteractiveCareerInsights';
 import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
 import { createClient } from '@/lib/supabase/client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-
 interface UserProfile {
   birth_date: string | null;
   birth_time: string | null;
@@ -14,14 +13,12 @@ interface UserProfile {
   latitude: number | null;
   longitude: number | null;
 }
-
 export default function CareerPage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [birthData, setBirthData] = useState<BirthData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     async function loadUserProfile() {
       try {
@@ -33,27 +30,22 @@ export default function CareerPage() {
           setLoading(false);
           return;
         }
-
         const { data: profileData, error: profileError } = await supabase
           .from('user_profiles')
           .select('birth_date, birth_time, birth_location, latitude, longitude')
           .eq('user_id', user.id)
           .single();
-
         if (profileError || !profileData) {
           setError('Profile not found. Please complete your profile first.');
           setLoading(false);
           return;
         }
-
         if (!profileData.birth_date || !profileData.latitude || !profileData.longitude) {
           setError('Birth information incomplete. Please complete your profile first.');
           setLoading(false);
           return;
         }
-
         setProfile(profileData);
-
         // Convert to BirthData format
         const birthDateTime = new Date(`${profileData.birth_date}T${profileData.birth_time || '12:00:00'}`);
         
@@ -69,7 +61,6 @@ export default function CareerPage() {
           city: profileData.birth_location || 'Unknown',
           country: 'Unknown'
         };
-
         setBirthData(formattedBirthData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load profile');
@@ -77,14 +68,11 @@ export default function CareerPage() {
         setLoading(false);
       }
     }
-
     loadUserProfile();
   }, []);
-
   const handleBack = () => {
     window.history.back();
   };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
@@ -102,7 +90,6 @@ export default function CareerPage() {
       </div>
     );
   }
-
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
@@ -144,7 +131,6 @@ export default function CareerPage() {
       </div>
     );
   }
-
   if (!birthData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
@@ -168,7 +154,6 @@ export default function CareerPage() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       <InteractiveCareerInsights 

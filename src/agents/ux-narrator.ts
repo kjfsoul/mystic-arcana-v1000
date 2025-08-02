@@ -4,11 +4,9 @@
  * Ensures all outputs are spiritually grounded, UX-readable, and accessible
  * while maintaining authentic mystical voice and accessibility compliance.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface ContentRefinementRequest {
   rawContent: string;
   contentType: 'tarot_reading' | 'horoscope' | 'astrology_interpretation' | 'guidance' | 'educational';
@@ -18,7 +16,6 @@ export interface ContentRefinementRequest {
   maxLength?: number;
   accessibilityRequirements?: string[];
 }
-
 export interface SpiritualVoiceProfile {
   archetype: 'sage' | 'healer' | 'mystic' | 'teacher' | 'guide';
   communicationStyle: {
@@ -34,7 +31,6 @@ export interface SpiritualVoiceProfile {
     avoidancePatterns: string[];
   };
 }
-
 export interface RefinedContent {
   originalContent: string;
   refinedContent: string;
@@ -54,20 +50,17 @@ export interface RefinedContent {
   };
   voiceProfile: SpiritualVoiceProfile;
 }
-
 export interface AccessibilityFeature {
   type: 'alt_text' | 'screen_reader' | 'cognitive_support' | 'language_clarity' | 'visual_hierarchy';
   description: string;
   implementation: string;
   wcagLevel: 'A' | 'AA' | 'AAA';
 }
-
 export class UXNarratorAgent extends Agent {
   private voiceProfiles: Map<string, SpiritualVoiceProfile>;
   private lexicon: Map<string, any>;
   private accessibilityGuidelines: Map<string, AccessibilityFeature>;
   private contentTemplates: Map<string, any>;
-
   constructor() {
     super('ux-narrator', 'UXNarratorAgent');
     this.voiceProfiles = new Map();
@@ -78,7 +71,6 @@ export class UXNarratorAgent extends Agent {
     this.initializeVoiceProfiles();
     this.initializeAccessibilityGuidelines();
   }
-
   /**
    * Initialize spiritual lexicon with respectful, inclusive terminology
    */
@@ -107,7 +99,6 @@ export class UXNarratorAgent extends Agent {
         culturalNotes: 'Emphasize free will and choice'
       }
     });
-
     // Accessibility vocabulary
     this.lexicon.set('accessibility_terms', {
       'complex_concepts': {
@@ -122,7 +113,6 @@ export class UXNarratorAgent extends Agent {
         'aspects': 'angles between planets that create specific energies'
       }
     });
-
     // Cultural sensitivity guidelines
     this.lexicon.set('cultural_guidelines', {
       'avoid': [
@@ -139,7 +129,6 @@ export class UXNarratorAgent extends Agent {
       ]
     });
   }
-
   /**
    * Initialize voice profiles for different spiritual archetypes
    */
@@ -192,12 +181,10 @@ export class UXNarratorAgent extends Agent {
         }
       }
     };
-
     Object.entries(profiles).forEach(([key, profile]) => {
       this.voiceProfiles.set(key, profile);
     });
   }
-
   /**
    * Initialize accessibility guidelines for spiritual content
    */
@@ -235,12 +222,10 @@ export class UXNarratorAgent extends Agent {
         wcagLevel: 'AA'
       }
     };
-
     Object.entries(guidelines).forEach(([key, guideline]) => {
       this.accessibilityGuidelines.set(key, guideline);
     });
   }
-
   /**
    * Refine content for optimal UX and spiritual authenticity
    */
@@ -266,13 +251,11 @@ export class UXNarratorAgent extends Agent {
       if (request.maxLength) {
         refinedContent = await this.trimToLength(refinedContent, request.maxLength);
       }
-
       // Generate improvement metrics
       const improvements = await this.analyzeImprovements(request.rawContent, refinedContent);
       
       // Create metadata
       const metadata = this.generateMetadata(refinedContent);
-
       return {
         originalContent: request.rawContent,
         refinedContent,
@@ -280,13 +263,11 @@ export class UXNarratorAgent extends Agent {
         metadata,
         voiceProfile
       };
-
     } catch (error) {
       console.error('UXNarratorAgent: Content refinement failed:', error);
       throw new Error('Failed to refine content');
     }
   }
-
   /**
    * Ensure spiritual authenticity while maintaining accessibility
    */
@@ -310,19 +291,16 @@ export class UXNarratorAgent extends Agent {
       
       // Identify cultural considerations
       const culturalConsiderations = this.identifyCulturalConsiderations(content);
-
       return {
         authenticityScore,
         recommendations,
         culturalConsiderations
       };
-
     } catch (error) {
       console.error('UXNarratorAgent: Authenticity check failed:', error);
       throw new Error('Failed to ensure spiritual authenticity');
     }
   }
-
   /**
    * Generate accessibility-compliant content structure
    */
@@ -338,7 +316,6 @@ export class UXNarratorAgent extends Agent {
     try {
       let enhancedContent = content;
       const appliedFeatures: AccessibilityFeature[] = [];
-
       // Apply each accessibility requirement
       for (const requirement of requirements) {
         const feature = this.accessibilityGuidelines.get(requirement);
@@ -347,22 +324,18 @@ export class UXNarratorAgent extends Agent {
           appliedFeatures.push(feature);
         }
       }
-
       // Assess WCAG compliance
       const wcagCompliance = this.assessWCAGCompliance(appliedFeatures);
-
       return {
         enhancedContent,
         accessibilityFeatures: appliedFeatures,
         wcagCompliance
       };
-
     } catch (error) {
       console.error('UXNarratorAgent: Accessibility enhancement failed:', error);
       throw new Error('Failed to enhance accessibility');
     }
   }
-
   /**
    * Private helper methods
    */
@@ -372,31 +345,26 @@ export class UXNarratorAgent extends Agent {
                       request.tone === 'nurturing' ? 'healer' : 'sage';
     return this.voiceProfiles.get(profileKey) || this.voiceProfiles.get('sage')!;
   }
-
   private async applySpiritualRefinements(content: string, profile: SpiritualVoiceProfile): Promise<string> {
     // TODO: Implement spiritual language refinements
     // Replace problematic terms, enhance inclusive language, etc.
     return content;
   }
-
   private async enhanceAccessibility(content: string, request: ContentRefinementRequest): Promise<string> {
     // TODO: Implement accessibility enhancements
     // Add explanations for complex terms, improve structure, etc.
     return content;
   }
-
   private async optimizeReadingLevel(content: string, targetLevel: string): Promise<string> {
     // TODO: Implement reading level optimization
     // Simplify complex sentences, replace difficult words, etc.
     return content;
   }
-
   private async adjustTone(content: string, tone: string, profile: SpiritualVoiceProfile): Promise<string> {
     // TODO: Implement tone adjustment
     // Modify language patterns to match desired tone
     return content;
   }
-
   private async trimToLength(content: string, maxLength: number): Promise<string> {
     if (content.length <= maxLength) return content;
     
@@ -414,7 +382,6 @@ export class UXNarratorAgent extends Agent {
     
     return trimmed.trim();
   }
-
   private async analyzeImprovements(original: string, refined: string): Promise<any> {
     // TODO: Implement improvement analysis
     return {
@@ -425,7 +392,6 @@ export class UXNarratorAgent extends Agent {
       accessibilityFeatures: ['Clear headings', 'Alt text descriptions']
     };
   }
-
   private generateMetadata(content: string): any {
     const wordCount = content.split(' ').length;
     const readingTime = Math.ceil(wordCount / 200); // Average reading speed
@@ -438,37 +404,30 @@ export class UXNarratorAgent extends Agent {
       culturalConsiderations: ['universal spirituality', 'inclusive language']
     };
   }
-
   private identifySpiritualTerms(content: string): any {
     // TODO: Implement spiritual term identification and analysis
     return { appropriateUse: 0.85 };
   }
-
   private assessCulturalSensitivity(content: string): number {
     // TODO: Implement cultural sensitivity assessment
     return 0.9;
   }
-
   private assessEmpowermentLanguage(content: string): number {
     // TODO: Implement empowerment language assessment
     return 0.8;
   }
-
   private async generateAuthenticityRecommendations(content: string, analysis: any): Promise<string[]> {
     // TODO: Generate specific recommendations for improving authenticity
     return ['Use more inclusive spiritual language', 'Emphasize personal empowerment'];
   }
-
   private identifyCulturalConsiderations(content: string): string[] {
     // TODO: Identify cultural considerations in content
     return ['Avoid religious assumptions', 'Use universal spiritual concepts'];
   }
-
   private async applyAccessibilityFeature(content: string, feature: AccessibilityFeature): Promise<string> {
     // TODO: Apply specific accessibility feature to content
     return content;
   }
-
   private assessWCAGCompliance(features: AccessibilityFeature[]): any {
     const levels = features.map(f => f.wcagLevel);
     const highestLevel = levels.includes('AAA') ? 'AAA' : levels.includes('AA') ? 'AA' : 'A';
@@ -478,7 +437,6 @@ export class UXNarratorAgent extends Agent {
       criteria: features.map(f => f.description)
     };
   }
-
   /**
    * Get agent status and content refinement metrics
    */
@@ -502,5 +460,4 @@ export class UXNarratorAgent extends Agent {
     };
   }
 }
-
 export default UXNarratorAgent;

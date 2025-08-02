@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/supabase/client';
-
 export interface ProfileData {
   birthDate?: string;
   birthTime?: string;
@@ -11,17 +10,14 @@ export interface ProfileData {
   preferredTarotReader?: string;
   timezone?: string;
 }
-
 interface StoredProfile extends ProfileData {
   user_id: string;
   updated_at: string;
 }
-
 class ProfileDataServiceClass {
   private static instance: ProfileDataServiceClass;
   private cachedProfile: ProfileData | null = null;
   private listeners: Set<(profile: ProfileData) => void> = new Set();
-
   private constructor() {
     // Initialize auth state change listener
     supabase.auth.onAuthStateChange((event, session) => {
@@ -32,14 +28,12 @@ class ProfileDataServiceClass {
       }
     });
   }
-
   static getInstance(): ProfileDataServiceClass {
     if (!ProfileDataServiceClass.instance) {
       ProfileDataServiceClass.instance = new ProfileDataServiceClass();
     }
     return ProfileDataServiceClass.instance;
   }
-
   /**
    * Load profile data from database
    */
@@ -50,12 +44,10 @@ class ProfileDataServiceClass {
         .select('birth_date, birth_time, birth_location, birth_coordinates, preferred_tarot_reader, timezone')
         .eq('user_id', userId)
         .single();
-
       if (error) {
         console.error('Error loading profile:', error);
         return null;
       }
-
       const profile: ProfileData = {
         birthDate: data?.birth_date,
         birthTime: data?.birth_time,
@@ -64,7 +56,6 @@ class ProfileDataServiceClass {
         preferredTarotReader: data?.preferred_tarot_reader,
         timezone: data?.timezone
       };
-
       this.cachedProfile = profile;
       this.notifyListeners(profile);
       
@@ -79,7 +70,6 @@ class ProfileDataServiceClass {
       return this.loadFromLocalStorage();
     }
   }
-
   /**
    * Save profile data
    */
@@ -95,28 +85,23 @@ class ProfileDataServiceClass {
         timezone: data.timezone,
         updated_at: new Date().toISOString()
       };
-
       const { error } = await supabase
         .from('user_profiles')
         .upsert(updates, { onConflict: 'user_id' });
-
       if (error) {
         console.error('Error saving profile:', error);
         return false;
       }
-
       // Update cache
       this.cachedProfile = { ...this.cachedProfile, ...data };
       this.notifyListeners(this.cachedProfile);
       this.saveToLocalStorage(this.cachedProfile);
-
       return true;
     } catch (error) {
       console.error('Failed to save profile:', error);
       return false;
     }
   }
-
   /**
    * Get current profile data
    */
@@ -128,7 +113,6 @@ class ProfileDataServiceClass {
     // Try localStorage as fallback
     return this.loadFromLocalStorage();
   }
-
   /**
    * Subscribe to profile changes
    */
@@ -145,7 +129,6 @@ class ProfileDataServiceClass {
       this.listeners.delete(callback);
     };
   }
-
   /**
    * Get autofill data for birth information
    */
@@ -166,7 +149,6 @@ class ProfileDataServiceClass {
       preferredTarotReader: profile?.preferredTarotReader
     };
   }
-
   /**
    * Update specific field
    */
@@ -174,7 +156,6 @@ class ProfileDataServiceClass {
     const updates = { [field]: value };
     return this.saveProfile(userId, updates);
   }
-
   /**
    * Clear cache
    */
@@ -183,7 +164,6 @@ class ProfileDataServiceClass {
     localStorage.removeItem('mystic_arcana_profile');
     this.notifyListeners({});
   }
-
   /**
    * Notify all listeners
    */
@@ -196,7 +176,6 @@ class ProfileDataServiceClass {
       }
     });
   }
-
   /**
    * Save to localStorage
    */
@@ -207,7 +186,6 @@ class ProfileDataServiceClass {
       console.error('Failed to save profile to localStorage:', error);
     }
   }
-
   /**
    * Load from localStorage
    */
@@ -222,7 +200,6 @@ class ProfileDataServiceClass {
     }
     return null;
   }
-
   /**
    * Format birth datetime for display
    */
@@ -241,6 +218,5 @@ class ProfileDataServiceClass {
     return result;
   }
 }
-
 // Export singleton instance
 export const ProfileDataService = ProfileDataServiceClass.getInstance();

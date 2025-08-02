@@ -1,12 +1,10 @@
 // src/utils/logger.ts
-
 export enum LogLevel {
   DEBUG = 'DEBUG',
   INFO = 'INFO',
   WARN = 'WARN',
   ERROR = 'ERROR',
 }
-
 export interface LogEntry {
   timestamp: string;
   level: LogLevel;
@@ -21,14 +19,11 @@ export interface LogEntry {
     stack?: string;
   };
 }
-
 class Logger {
   private serviceName: string;
-
   constructor(serviceName: string) {
     this.serviceName = serviceName;
   }
-
   private log(
     level: LogLevel,
     action: string,
@@ -46,7 +41,6 @@ class Logger {
       metadata,
       message,
     };
-
     if (error) {
       entry.error = {
         name: error.name,
@@ -54,12 +48,10 @@ class Logger {
         stack: error.stack,
       };
     }
-
     // In a real application, this would send to a logging service (e.g., Splunk, Datadog, CloudWatch)
     // For now, we'll log to console.
     console.log(JSON.stringify(entry));
   }
-
   debug(
     action: string,
     userId?: string,
@@ -68,7 +60,6 @@ class Logger {
   ) {
     this.log(LogLevel.DEBUG, action, userId, metadata, message);
   }
-
   info(
     action: string,
     userId?: string,
@@ -77,7 +68,6 @@ class Logger {
   ) {
     this.log(LogLevel.INFO, action, userId, metadata, message);
   }
-
   warn(
     action: string,
     userId?: string,
@@ -86,7 +76,6 @@ class Logger {
   ) {
     this.log(LogLevel.WARN, action, userId, metadata, message);
   }
-
   error(
     action: string,
     userId?: string,
@@ -97,5 +86,4 @@ class Logger {
     this.log(LogLevel.ERROR, action, userId, metadata, message, error);
   }
 }
-
 export default Logger;

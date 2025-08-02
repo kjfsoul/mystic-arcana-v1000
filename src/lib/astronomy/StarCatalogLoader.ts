@@ -6,12 +6,10 @@
  * 
  * Optimized for real-time rendering of 100,000+ stars.
  */
-
 import type {
   Star,
   EquatorialCoordinates
 } from '../../types/astronomical';
-
 export class StarCatalogLoader {
   private static readonly CATALOG_URLS = {
     hipparcos: '/data/catalogs/hipparcos_bright.json',
@@ -20,7 +18,6 @@ export class StarCatalogLoader {
     messier: '/data/catalogs/messier.json',
     constellations: '/data/catalogs/constellation_lines.json'
   };
-
   // Color temperature lookup table for spectral types
   private static readonly SPECTRAL_COLORS = {
     'O': { r: 0.59, g: 0.67, b: 1.0, temp: 30000 },
@@ -31,10 +28,8 @@ export class StarCatalogLoader {
     'K': { r: 1.0, g: 0.85, b: 0.63, temp: 4500 },
     'M': { r: 1.0, g: 0.73, b: 0.54, temp: 3000 }
   };
-
   private catalogCache: Map<string, Star[]> = new Map();
   private loadingPromises: Map<string, Promise<Star[]>> = new Map();
-
   /**
    * Load star catalog with caching and optimization
    */
@@ -48,21 +43,17 @@ export class StarCatalogLoader {
     } = {}
   ): Promise<Star[]> {
     const cacheKey = `${type}_${JSON.stringify(options)}`;
-
     // Check cache first
     if (this.catalogCache.has(cacheKey)) {
       return this.catalogCache.get(cacheKey)!;
     }
-
     // Check if already loading
     if (this.loadingPromises.has(cacheKey)) {
       return this.loadingPromises.get(cacheKey)!;
     }
-
     // Start loading
     const loadPromise = this.loadCatalogData(type, options);
     this.loadingPromises.set(cacheKey, loadPromise);
-
     try {
       const stars = await loadPromise;
       this.catalogCache.set(cacheKey, stars);
@@ -73,7 +64,6 @@ export class StarCatalogLoader {
       throw error;
     }
   }
-
   /**
    * Load constellation line data for visualization
    */
@@ -88,7 +78,6 @@ export class StarCatalogLoader {
       return {};
     }
   }
-
   /**
    * Get bright navigation stars (for alignment and calibration)
    */
@@ -106,20 +95,16 @@ export class StarCatalogLoader {
       'Kaus Australis', 'Vega', 'Nunki', 'Altair', 'Peacock', 'Deneb',
       'Enif', 'Alnair', 'Fomalhaut', 'Markab'
     ];
-
     const allStars = await this.loadCatalog('hipparcos', { maxMagnitude: 3 });
     return allStars.filter(star => star.name && navStars.includes(star.name));
   }
-
   // === Private Methods ===
-
   private async loadCatalogData(
     type: string,
     options: { maxMagnitude?: number; minDeclination?: number; maxDeclination?: number; constellations?: string[] }
   ): Promise<Star[]> {
     // For development, generate synthetic star data
     // In production, this would load from actual catalog files
-
     if (type === 'hipparcos') {
       return this.generateHipparcosCatalog(options);
     } else if (type === 'yale') {
@@ -127,31 +112,24 @@ export class StarCatalogLoader {
     } else if (type === 'messier') {
       return this.loadMessierObjects();
     }
-
     throw new Error(`Unknown catalog type: ${type}`);
   }
-
   private generateHipparcosCatalog(options: { maxMagnitude?: number; minDeclination?: number; maxDeclination?: number; constellations?: string[] }): Star[] {
     const stars: Star[] = [];
     const maxMag = options.maxMagnitude ?? 6.5;
-
     // First, add real bright stars
     const brightStars = this.getRealBrightStars();
     stars.push(...brightStars.filter(s => s.magnitude <= maxMag));
-
     // Then generate additional stars based on realistic distribution
     const additionalCount = Math.min(100000, Math.floor(10 ** (maxMag / 2.5)));
-
     for (let i = 0; i < additionalCount; i++) {
       const star = this.generateRealisticStar(i, maxMag);
       if (this.passesFilters(star, options)) {
         stars.push(star);
       }
     }
-
     return stars;
   }
-
   private getRealBrightStars(): Star[] {
     // Real data for the brightest stars
     const brightStarsData = [
@@ -279,7 +257,6 @@ export class StarCatalogLoader {
         variableType: 'LC'
       }
     ];
-
     // Convert to the required Star format
     return brightStarsData.map(star => ({
       id: star.id,
@@ -298,27 +275,20 @@ export class StarCatalogLoader {
       variableType: star.variableType
     }));
   }
-
   private generateRealisticStar(index: number, maxMagnitude: number): Star {
     // Use realistic galactic distribution
     const galacticLat = this.gaussianRandom() * 30; // Most stars near galactic plane
     const galacticLon = Math.random() * 360;
-
     // Convert galactic to equatorial coordinates
     const equatorial = this.galacticToEquatorial(galacticLon, galacticLat);
-
     // Magnitude distribution follows power law
     const magnitude = this.generateMagnitude(maxMagnitude);
-
     // Spectral type distribution based on real statistics
     const spectralType = this.generateSpectralType(magnitude);
-
     // Distance based on magnitude and spectral type
     const distance = this.estimateDistance(magnitude, spectralType);
-
     const constellation = this.getConstellation(equatorial.ra, equatorial.dec);
     const colorIndex = this.getColorIndex(spectralType);
-
     return {
       id: `SYN${index}`,
       name: undefined,
@@ -334,45 +304,36 @@ export class StarCatalogLoader {
       constellation
     };
   }
-
   private galacticToEquatorial(l: number, b: number): EquatorialCoordinates {
     // Convert galactic coordinates to equatorial (J2000)
     const lRad = l * Math.PI / 180;
     const bRad = b * Math.PI / 180;
-
     // Galactic north pole (J2000)
     const alphaNGP = 192.85948 * Math.PI / 180;
     const deltaNGP = 27.12825 * Math.PI / 180;
     const lNCP = 122.93192 * Math.PI / 180;
-
     const sinDec = Math.sin(bRad) * Math.sin(deltaNGP) +
       Math.cos(bRad) * Math.cos(deltaNGP) * Math.sin(lRad - lNCP);
     const dec = Math.asin(sinDec);
-
     const y = Math.cos(bRad) * Math.cos(lRad - lNCP);
     const x = Math.sin(bRad) * Math.cos(deltaNGP) -
       Math.cos(bRad) * Math.sin(deltaNGP) * Math.sin(lRad - lNCP);
-
     let ra = Math.atan2(y, x) + alphaNGP;
     if (ra < 0) ra += 2 * Math.PI;
-
     return {
       ra: ra * 180 / Math.PI,
       dec: dec * 180 / Math.PI
     };
   }
-
   private generateMagnitude(maxMag: number): number {
     // Power law distribution: N(m) ∝ 10^(0.6m)
     const u = Math.random();
     return -2.5 * Math.log10(1 - u * (1 - Math.pow(10, -0.4 * maxMag)));
   }
-
   private generateSpectralType(magnitude: number): string {
     // Spectral type distribution based on magnitude
     const rand = Math.random();
     let type: string;
-
     if (magnitude < 2) {
       // Bright stars - more giants and supergiants
       if (rand < 0.05) type = 'O';
@@ -392,30 +353,24 @@ export class StarCatalogLoader {
       else if (rand < 0.60) type = 'K';
       else type = 'M';
     }
-
     // Add subclass
     const subclass = Math.floor(Math.random() * 10);
     const luminosityClass = magnitude < 3 ?
       ['I', 'II', 'III', 'IV', 'V'][Math.floor(Math.random() * 5)] : 'V';
-
     return `${type}${subclass}${luminosityClass}`;
   }
-
   private estimateDistance(magnitude: number, spectralType: string): number {
     // Simplified distance estimation based on absolute magnitude
     const absoluteMagnitudes: { [key: string]: number } = {
       'O': -5.7, 'B': -1.1, 'A': 1.4, 'F': 3.0,
       'G': 4.6, 'K': 5.9, 'M': 9.0
     };
-
     const spectralClass = spectralType[0];
     const absMag = absoluteMagnitudes[spectralClass] || 5.0;
-
     // Distance modulus: m - M = 5 * log10(d) - 5
     const distanceParsecs = Math.pow(10, (magnitude - absMag + 5) / 5);
     return distanceParsecs * 3.26156; // Convert to light years
   }
-
   private getColorIndex(spectralType: string): number {
     const colorIndices: { [key: string]: number } = {
       'O': -0.33, 'B': -0.17, 'A': 0.00, 'F': 0.38,
@@ -423,14 +378,11 @@ export class StarCatalogLoader {
     };
     return colorIndices[spectralType[0]] || 0.63;
   }
-
   private getConstellation(ra: number, dec: number): string {
     // Simplified constellation assignment
     // In production, would use actual IAU constellation boundaries
-
     if (dec > 55) return 'UMa'; // Ursa Major region
     if (dec < -55) return 'Cru'; // Southern Cross region
-
     const raHours = ra / 15;
     if (raHours < 3) return 'Psc';
     if (raHours < 6) return 'Ori';
@@ -441,12 +393,10 @@ export class StarCatalogLoader {
     if (raHours < 21) return 'Cyg';
     return 'And';
   }
-
   private generateYaleBrightStars(options: { maxMagnitude?: number; minDeclination?: number; maxDeclination?: number; constellations?: string[] }): Star[] {
     // Generate subset based on Yale Bright Star Catalog
     return this.generateHipparcosCatalog({ ...options, maxMagnitude: 6.5 });
   }
-
   private async loadMessierObjects(): Promise<Star[]> {
     // Messier objects as "stars" for rendering purposes
     const messierObjects = [
@@ -456,7 +406,6 @@ export class StarCatalogLoader {
       { id: 'M45', name: 'Pleiades', ra: 56.871, dec: 24.105, magnitude: 1.6, type: 'Cluster' },
       // ... more Messier objects
     ];
-
     return messierObjects.map(obj => ({
       id: obj.id,
       name: obj.name,
@@ -472,7 +421,6 @@ export class StarCatalogLoader {
       metadata: { messier: true, type: obj.type }
     }));
   }
-
   private passesFilters(star: Star, options: { maxMagnitude?: number; minDeclination?: number; maxDeclination?: number; constellations?: string[] }): boolean {
     if (options.maxMagnitude && star.magnitude > options.maxMagnitude) {
       return false;
@@ -490,7 +438,6 @@ export class StarCatalogLoader {
     }
     return true;
   }
-
   private gaussianRandom(): number {
     // Box-Muller transform for gaussian distribution
     let u = 0, v = 0;
@@ -498,18 +445,15 @@ export class StarCatalogLoader {
     while (v === 0) v = Math.random();
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
   }
-
   /**
    * Get star color based on spectral type
    */
   static getStarColor(spectralType?: string): { r: number; g: number; b: number } {
     if (!spectralType) return { r: 1, g: 1, b: 1 };
-
     const spectralClass = spectralType[0].toUpperCase();
     return this.SPECTRAL_COLORS[spectralClass as keyof typeof this.SPECTRAL_COLORS] ||
       { r: 1, g: 1, b: 1 };
   }
-
   /**
    * Clear all cached data
    */

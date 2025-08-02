@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AstrologyCache } from '@/lib/cache/AstrologyCache';
-
 export async function POST(request: NextRequest) {
   try {
     const cache = new AstrologyCache();
@@ -25,7 +24,6 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-
 export async function GET(request: NextRequest) {
   // Return cache clear endpoint info
   return NextResponse.json({

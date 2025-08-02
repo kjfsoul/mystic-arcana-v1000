@@ -1,12 +1,10 @@
 'use client';
-
+ 
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './ReaderPanel.module.css';
-
 export interface ReaderPanelProps {
   className?: string;
 }
-
 interface Message {
   id: string;
   type: 'user' | 'reader';
@@ -14,7 +12,6 @@ interface Message {
   timestamp: Date;
   readerMood?: 'mystical' | 'contemplative' | 'encouraging' | 'neutral';
 }
-
 interface VirtualReader {
   id: string;
   name: string;
@@ -23,7 +20,6 @@ interface VirtualReader {
   avatar: string;
   description: string;
 }
-
 /**
  * Virtual Reader Panel - Center zone of the 3-panel layout
  * 
@@ -52,7 +48,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const virtualReaders: VirtualReader[] = [
     {
       id: 'sophia',
@@ -87,7 +82,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
       description: 'Solar energy for transformation and growth'
     }
   ];
-
   const quickQuestions = [
     "What do I need to know today?",
     "How can I improve my relationships?",
@@ -95,23 +89,19 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
     "What opportunities await me?",
     "How can I find inner peace?"
   ];
-
   const currentReader = virtualReaders.find(r => r.id === selectedReader) || virtualReaders[0];
-
   // Auto-scroll to bottom when new messages arrive
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
   // Focus input when reader changes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, [selectedReader]);
-
   const handleReaderChange = (readerId: string) => {
     setSelectedReader(readerId);
     const newReader = virtualReaders.find(r => r.id === readerId);
@@ -128,10 +118,8 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
     setMessages(prev => [...prev, transitionMessage]);
     setReaderMood('neutral');
   };
-
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) return;
-
     // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -139,11 +127,9 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
       content: content.trim(),
       timestamp: new Date()
     };
-
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
-
     // Simulate AI response delay
     setTimeout(() => {
       const responses = [
@@ -153,10 +139,8 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
         { content: "Your intuition is trying to communicate something important. Take time for quiet reflection today.", mood: 'contemplative' as const },
         { content: "The energy around you suggests new opportunities emerging. Be open to unexpected possibilities.", mood: 'encouraging' as const }
       ];
-
       const randomResponse = responses[Math.floor(Math.random() * responses.length)];
       setReaderMood(randomResponse.mood);
-
       const readerMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'reader',
@@ -164,23 +148,19 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
         timestamp: new Date(),
         readerMood: randomResponse.mood
       };
-
       setMessages(prev => [...prev, readerMessage]);
       setIsTyping(false);
     }, 2000 + Math.random() * 1000);
   };
-
   const handleQuickQuestion = (question: string) => {
     handleSendMessage(question);
   };
-
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       handleSendMessage(inputValue);
     }
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       {/* Reader Selection */}
@@ -214,7 +194,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
           </div>
         </div>
       </header>
-
       {/* Active Reader Display */}
       <section className={styles.activeReader} aria-label="Current reader information">
         <div className={styles.currentReaderCard}>
@@ -234,7 +213,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
           </div>
         </div>
       </section>
-
       {/* Chat Messages */}
       <section 
         className={styles.chatContainer}
@@ -293,7 +271,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
           <div ref={messagesEndRef} />
         </div>
       </section>
-
       {/* Quick Questions */}
       <section className={styles.quickQuestions} aria-label="Quick question suggestions">
         <h3 className={styles.quickTitle}>Need inspiration? Try asking:</h3>
@@ -310,7 +287,6 @@ export const ReaderPanel: React.FC<ReaderPanelProps> = ({ className = '' }) => {
           ))}
         </div>
       </section>
-
       {/* Input Area */}
       <section className={styles.inputSection} aria-label="Ask your question">
         <div className={styles.inputContainer}>

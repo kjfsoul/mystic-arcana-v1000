@@ -1,15 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import Logger from "@/utils/logger";
 import { NextResponse } from "next/server";
-
 const logger = new Logger("AuthLogoutAPI");
-
 export async function POST() {
   const supabase = await createClient();
-
   try {
     const { error } = await supabase.auth.signOut();
-
     if (error) {
       logger.error(
         "auth_logout_failed",
@@ -20,7 +16,6 @@ export async function POST() {
       );
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
-
     logger.info(
       "auth_logout_success",
       undefined,

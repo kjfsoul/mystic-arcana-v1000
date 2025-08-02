@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
@@ -10,31 +10,26 @@ import { UnifiedTarotPanel } from '../tarot/UnifiedTarotPanel';
 import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
 import { Header } from './Header';
 import { AuthDebug } from '../debug/AuthDebug';
-
 export type ViewMode = 'lobby' | 'tarot-room' | 'astrology-room' | 'awe-view';
-
 export const UnifiedResponsiveLayout: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('lobby');
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.7);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-
   // Responsive breakpoint detection
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const checkResponsive = () => {
       const width = window.innerWidth;
       setIsMobile(width < 768);
       setIsTablet(width >= 768 && width < 1024);
     };
-
     checkResponsive();
     window.addEventListener('resize', checkResponsive);
     return () => window.removeEventListener('resize', checkResponsive);
   }, []);
-
   // Adjust galaxy intensity based on view mode and device (REDUCED for readability)
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     let intensity = 0.3; // Significantly reduced default
     
@@ -55,12 +50,10 @@ export const UnifiedResponsiveLayout: React.FC = () => {
     
     setGalaxyIntensity(intensity);
   }, [viewMode, isMobile]);
-
   const handleEnterTarotRoom = () => setViewMode('tarot-room');
   const handleEnterAstrologyRoom = () => setViewMode('astrology-room');
   const handleEnterAweView = () => setViewMode('awe-view');
   const handleBackToLobby = () => setViewMode('lobby');
-
   return (
     <main className="relative min-h-screen w-full overflow-hidden">
       {/* Header with mobile-optimized spacing */}
@@ -78,7 +71,6 @@ export const UnifiedResponsiveLayout: React.FC = () => {
           starCount={isMobile ? 800 : 1500} // Drastically reduced star count for clarity
         />
       </div>
-
       {/* Dynamic content area with proper mobile spacing */}
       <div className="relative z-10 pt-16 md:pt-20">
         <AnimatePresence mode="wait">
@@ -92,7 +84,6 @@ export const UnifiedResponsiveLayout: React.FC = () => {
               onEnterAweView={handleEnterAweView}
             />
           )}
-
           {viewMode === 'tarot-room' && (
             <ResponsiveTarotRoom
               key="tarot-room"
@@ -100,7 +91,6 @@ export const UnifiedResponsiveLayout: React.FC = () => {
               onBack={handleBackToLobby}
             />
           )}
-
           {viewMode === 'astrology-room' && (
             <ResponsiveAstrologyRoom
               key="astrology-room"
@@ -108,7 +98,6 @@ export const UnifiedResponsiveLayout: React.FC = () => {
               onBack={handleBackToLobby}
             />
           )}
-
           {viewMode === 'awe-view' && (
             <ResponsiveAweView
               key="awe-view"
@@ -121,7 +110,6 @@ export const UnifiedResponsiveLayout: React.FC = () => {
     </main>
   );
 };
-
 // Mobile-First Lobby Component
 const MobileFirstLobby: React.FC<{
   isMobile: boolean;
@@ -159,7 +147,6 @@ const MobileFirstLobby: React.FC<{
             <CelestialEventsCarousel onClick={onEnterAweView} />
           </div>
         </motion.section>
-
         {/* Mobile: Tarot Zone */}
         <motion.section
           className="cursor-pointer"
@@ -176,7 +163,6 @@ const MobileFirstLobby: React.FC<{
             <TarotZonePreview />
           </div>
         </motion.section>
-
         {/* Mobile: Astrology Zone */}
         <motion.section
           className="cursor-pointer"
@@ -196,7 +182,6 @@ const MobileFirstLobby: React.FC<{
       </motion.div>
     );
   }
-
   // Tablet/Desktop layout: Grid with proper responsive breakpoints
   return (
     <motion.div
@@ -228,7 +213,6 @@ const MobileFirstLobby: React.FC<{
           <TarotZonePreview />
         </div>
       </motion.section>
-
       {/* Desktop/Tablet: Cosmic Weather */}
       <motion.section
         className={`flex items-center justify-center ${
@@ -249,7 +233,6 @@ const MobileFirstLobby: React.FC<{
           <CelestialEventsCarousel onClick={onEnterAweView} />
         </div>
       </motion.section>
-
       {/* Desktop/Tablet: Astrology Zone */}
       <motion.section
         className={`cursor-pointer transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 ${
@@ -271,7 +254,6 @@ const MobileFirstLobby: React.FC<{
     </motion.div>
   );
 };
-
 // Responsive Tarot Room
 const ResponsiveTarotRoom: React.FC<{ 
   isMobile: boolean;
@@ -301,7 +283,6 @@ const ResponsiveTarotRoom: React.FC<{
       >
         ← Back to Lobby
       </motion.button>
-
       <motion.div
         className={`w-full max-w-6xl flex flex-col items-center ${
           isMobile ? 'gap-4' : 'gap-8'
@@ -319,7 +300,6 @@ const ResponsiveTarotRoom: React.FC<{
     </motion.div>
   );
 };
-
 // Responsive Astrology Room
 const ResponsiveAstrologyRoom: React.FC<{ 
   isMobile: boolean;
@@ -339,7 +319,6 @@ const ResponsiveAstrologyRoom: React.FC<{
     </motion.div>
   );
 };
-
 // Responsive Awe View
 const ResponsiveAweView: React.FC<{ 
   isMobile: boolean;
@@ -347,7 +326,6 @@ const ResponsiveAweView: React.FC<{
 }> = ({ isMobile, onBack }) => {
   const [currentView, setCurrentView] = useState<'earth' | 'moon' | 'mars' | 'deep-space'>('earth');
   const [isTransitioning, setIsTransitioning] = useState(false);
-
   const handleViewChange = async (newView: 'earth' | 'moon' | 'mars' | 'deep-space') => {
     if (isTransitioning || newView === currentView) return;
     
@@ -357,14 +335,12 @@ const ResponsiveAweView: React.FC<{
       setIsTransitioning(false);
     }, 1000);
   };
-
   const viewConfig = {
     earth: { title: 'Earth View', description: 'Your home perspective in the cosmic dance', emoji: '🌍' },
     moon: { title: 'Lunar Perspective', description: 'See Earth from our celestial companion', emoji: '🌙' },
     mars: { title: 'Martian Vista', description: 'The red planet\'s unique cosmic viewpoint', emoji: '♂️' },
     'deep-space': { title: 'Deep Space Explorer', description: 'Journey beyond our solar system', emoji: '🌌' }
   };
-
   return (
     <motion.div
       className={`min-h-screen flex flex-col items-center justify-center overflow-hidden ${
@@ -401,7 +377,6 @@ const ResponsiveAweView: React.FC<{
           </div>
         </div>
       </motion.div>
-
       {/* Mobile-optimized back button */}
       <motion.button
         className={`absolute top-4 left-4 bg-black/60 backdrop-blur-xl border border-white/20 rounded-xl text-white font-medium hover:bg-black/80 hover:border-white/30 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 z-10 ${
@@ -418,7 +393,6 @@ const ResponsiveAweView: React.FC<{
       >
         ← Back to Lobby
       </motion.button>
-
       {/* Main content with mobile-optimized typography */}
       <motion.div
         className="text-center text-white max-w-4xl mx-auto"
@@ -501,7 +475,6 @@ const ResponsiveAweView: React.FC<{
             </motion.button>
           ))}
         </motion.div>
-
         {/* Transition overlay */}
         <AnimatePresence>
           {isTransitioning && (
@@ -532,7 +505,6 @@ const ResponsiveAweView: React.FC<{
           )}
         </AnimatePresence>
       </motion.div>
-
       {/* Mobile-optimized premium offer */}
       {!isMobile && (
         <motion.div

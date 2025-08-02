@@ -6,7 +6,6 @@ export interface MoonPhaseData {
   nextNewMoon: string; // ISO timestamp
   isUnavailable?: boolean;
 }
-
 interface MoonPhaseAPIResponse {
   success: boolean;
   data?: MoonPhaseData & {
@@ -15,7 +14,6 @@ interface MoonPhaseAPIResponse {
   };
   error?: string;
 }
-
 async function callMoonPhaseAPI(): Promise<MoonPhaseAPIResponse> {
   try {
     const response = await fetch('/api/astrology/moon-phase', {
@@ -24,11 +22,9 @@ async function callMoonPhaseAPI(): Promise<MoonPhaseAPIResponse> {
         'Content-Type': 'application/json',
       }
     });
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     return await response.json();
   } catch (error) {
     console.error('Failed to call moon phase API:', error);
@@ -38,7 +34,6 @@ async function callMoonPhaseAPI(): Promise<MoonPhaseAPIResponse> {
     };
   }
 }
-
 function getFallbackMoonPhase(): MoonPhaseData {
   return {
     phase: "Moon phase temporarily unavailable",
@@ -49,7 +44,6 @@ function getFallbackMoonPhase(): MoonPhaseData {
     isUnavailable: true
   };
 }
-
 export async function getMoonPhase(): Promise<MoonPhaseData> {
   try {
     // Call the Python backend for real moon phase calculations
@@ -59,12 +53,10 @@ export async function getMoonPhase(): Promise<MoonPhaseData> {
       console.warn('Moon phase API failed, using fallback:', apiResponse.error);
       return getFallbackMoonPhase();
     }
-
     // Check if service is temporarily unavailable
     if (apiResponse.data.isUnavailable) {
       return getFallbackMoonPhase();
     }
-
     // Return the real moon phase data from Python backend
     return {
       phase: apiResponse.data.phase,
@@ -78,12 +70,10 @@ export async function getMoonPhase(): Promise<MoonPhaseData> {
     return getFallbackMoonPhase();
   }
 }
-
 // Helper function to check if it's a full moon (for animation effects)
 export function isFullMoon(moonPhase: MoonPhaseData): boolean {
   return moonPhase.phase.toLowerCase().includes('full') && moonPhase.illumination > 95;
 }
-
 // Helper function to format next phase dates
 export function formatNextPhaseDate(dateString: string): string {
   try {

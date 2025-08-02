@@ -1,4 +1,4 @@
 declare module 'swisseph-v2' {
-  const module: any;
-  export default module;
+  const swisseph: any;
+  export default swisseph;
 }

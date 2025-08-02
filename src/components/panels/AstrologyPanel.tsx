@@ -1,12 +1,10 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import styles from './AstrologyPanel.module.css';
-
 export interface AstrologyPanelProps {
   className?: string;
 }
-
 interface PlanetaryPosition {
   name: string;
   sign: string;
@@ -14,14 +12,12 @@ interface PlanetaryPosition {
   symbol: string;
   energy: string;
 }
-
 interface MoonPhase {
   phase: string;
   illumination: number;
   symbol: string;
   energy: string;
 }
-
 /**
  * Astrology Panel - Right zone of the 3-panel layout
  * 
@@ -42,7 +38,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
     symbol: '🌒',
     energy: 'Setting intentions and new beginnings'
   });
-
   const [planetaryPositions] = useState<PlanetaryPosition[]>([
     { name: 'Sun', sign: 'Capricorn', degree: 18.5, symbol: '☉', energy: 'Achievement and structure' },
     { name: 'Moon', sign: 'Pisces', degree: 12.3, symbol: '☽', energy: 'Intuition and dreams' },
@@ -51,14 +46,12 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
     { name: 'Mars', sign: 'Sagittarius', degree: 29.2, symbol: '♂', energy: 'Adventurous action' },
     { name: 'Jupiter', sign: 'Taurus', degree: 8.4, symbol: '♃', energy: 'Grounded expansion' }
   ]);
-
   const views = [
     { id: 'sky', name: 'Night Sky', icon: '🌌', description: 'Live cosmic view' },
     { id: 'chart', name: 'Birth Chart', icon: '🔮', description: 'Personal astrology' },
     { id: 'horoscope', name: 'Horoscope', icon: '📜', description: 'Daily guidance' },
     { id: 'moon', name: 'Moon Cycle', icon: '🌙', description: 'Lunar insights' }
   ];
-
   const zodiacSigns = [
     { name: 'Aries', symbol: '♈', dates: 'Mar 21 - Apr 19', element: 'Fire' },
     { name: 'Taurus', symbol: '♉', dates: 'Apr 20 - May 20', element: 'Earth' },
@@ -73,21 +66,17 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
     { name: 'Aquarius', symbol: '♒', dates: 'Jan 20 - Feb 18', element: 'Air' },
     { name: 'Pisces', symbol: '♓', dates: 'Feb 19 - Mar 20', element: 'Water' }
   ];
-
   // Update current time every minute
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());
     }, 60000);
-
     return () => clearInterval(timer);
   }, []);
-
   const handleViewChange = (viewId: string) => {
     setSelectedView(viewId as typeof selectedView);
   };
-
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       weekday: 'long',
@@ -96,7 +85,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
       day: 'numeric'
     });
   };
-
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -104,7 +92,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
       timeZoneName: 'short'
     });
   };
-
   return (
     <div className={`${styles.container} ${className}`}>
       {/* Panel Header */}
@@ -120,7 +107,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           </div>
         </div>
       </header>
-
       {/* View Navigation */}
       <nav className={styles.viewNav} role="tablist" aria-label="Astrology views">
         {views.map(view => (
@@ -138,7 +124,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           </button>
         ))}
       </nav>
-
       {/* Main Content Area */}
       <main className={styles.mainContent}>
         {/* Night Sky View */}
@@ -165,7 +150,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
                   <div className={styles.constellationLabel}>Orion</div>
                 </div>
               </div>
-
               <div className={styles.cosmicWeather}>
                 <h4 className={styles.weatherTitle}>Cosmic Weather</h4>
                 <div className={styles.weatherCard}>
@@ -179,7 +163,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
             </div>
           </section>
         )}
-
         {/* Birth Chart View */}
         {selectedView === 'chart' && (
           <section
@@ -206,7 +189,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
                   ))}
                 </div>
               </div>
-
               <div className={styles.chartInfo}>
                 <p className={styles.chartDescription}>
                   Create your personalized birth chart by entering your birth details.
@@ -218,7 +200,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
             </div>
           </section>
         )}
-
         {/* Horoscope View */}
         {selectedView === 'horoscope' && (
           <section
@@ -229,7 +210,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           >
             <div className={styles.horoscopeContainer}>
               <h3 className={styles.sectionTitle}>Daily Horoscope</h3>
-
               <div className={styles.signSelector}>
                 <h4 className={styles.selectorTitle}>Select Your Sign</h4>
                 <div className={styles.signGrid}>
@@ -248,7 +228,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
             </div>
           </section>
         )}
-
         {/* Moon Cycle View */}
         {selectedView === 'moon' && (
           <section
@@ -259,7 +238,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           >
             <div className={styles.moonContainer}>
               <h3 className={styles.sectionTitle}>Lunar Cycle</h3>
-
               <div className={styles.currentMoon}>
                 <div className={styles.moonPhaseCard}>
                   <div className={styles.moonSymbol}>{moonPhase.symbol}</div>
@@ -272,7 +250,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
                   </div>
                 </div>
               </div>
-
               <div className={styles.moonCalendar}>
                 <h4 className={styles.calendarTitle}>This Month&apos;s Phases</h4>
                 <div className={styles.phasesList}>
@@ -303,7 +280,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           </section>
         )}
       </main>
-
       {/* Planetary Positions */}
       <section className={styles.planetaryPositions} aria-label="Current planetary positions">
         <h3 className={styles.sectionTitle}>Planetary Positions</h3>
@@ -321,7 +297,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           ))}
         </div>
       </section>
-
       {/* Quick Actions */}
       <section className={styles.quickActions}>
         <button className={styles.quickButton}>
@@ -334,7 +309,6 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ className = '' }
           ⭐ Compatibility
         </button>
       </section>
-
       {/* Constellation Background */}
       <div className={styles.constellationBackground} aria-hidden="true">
         <div className={styles.backgroundStar} style={{ top: '10%', left: '15%' }}>✦</div>

@@ -4,12 +4,10 @@
  * Implements adaptive logic for user personalization based on interaction history,
  * preferences, and behavioral patterns to optimize spiritual guidance delivery.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 import { createClient } from '@/lib/supabase/client';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface UserProfile {
   userId: string;
   preferences: {
@@ -33,7 +31,6 @@ export interface UserProfile {
     challengeLevel: 'comfort-zone' | 'growth-edge' | 'breakthrough';
   };
 }
-
 export interface AdaptationContext {
   currentSession: {
     timestamp: string;
@@ -55,7 +52,6 @@ export interface AdaptationContext {
     astrologyTransits?: any[];
   };
 }
-
 export interface PersonalizationRecommendation {
   readerId: string;
   readerPersonality: string;
@@ -66,12 +62,10 @@ export interface PersonalizationRecommendation {
   focusAreas: string[];
   confidenceScore: number;
 }
-
 export class PersonalizationOrchestratorAgent extends Agent {
   private supabase: any;
   private userProfiles: Map<string, UserProfile>;
   private adaptationRules: Map<string, any>;
-
   constructor() {
     super('personalization-orchestrator', 'PersonalizationOrchestratorAgent');
     this.supabase = createClient();
@@ -79,7 +73,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
     this.adaptationRules = new Map();
     this.initializeAdaptationRules();
   }
-
   /**
    * Initialize machine learning and rule-based adaptation logic
    */
@@ -92,14 +85,12 @@ export class PersonalizationOrchestratorAgent extends Agent {
       'transformational': { bestFor: ['growth-seeking', 'challenge-ready'], readers: ['sol'] },
       'nurturing': { bestFor: ['healing', 'emotional-support'], readers: ['luna'] }
     });
-
     // Complexity progression rules
     this.adaptationRules.set('complexityProgression', {
       beginner: { spreads: ['single-card', 'three-card'], guidance: 'foundational' },
       intermediate: { spreads: ['three-card', 'cross', 'relationship'], guidance: 'analytical' },
       advanced: { spreads: ['celtic-cross', 'year-ahead', 'soul-purpose'], guidance: 'transformational' }
     });
-
     // Communication style adaptation
     this.adaptationRules.set('communicationStyles', {
       'anxious': { tone: 'gentle', pace: 'slow', reassurance: 'high' },
@@ -107,7 +98,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       'experienced': { tone: 'direct', pace: 'fast', challenge: 'appropriate' }
     });
   }
-
   /**
    * Build comprehensive user profile from interaction history
    */
@@ -120,18 +110,15 @@ export class PersonalizationOrchestratorAgent extends Agent {
         .select('*')
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
-
       const { data: readings } = await this.supabase
         .from('tarot_readings')
         .select('*')
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
-
       const { data: feedback } = await this.supabase
         .from('user_feedback')
         .select('*')
         .eq('user_id', userId);
-
       // Analyze behavioral patterns
       const behaviorPatterns = this.analyzeBehaviorPatterns(interactions, readings);
       
@@ -140,25 +127,21 @@ export class PersonalizationOrchestratorAgent extends Agent {
       
       // Determine learning profile
       const learningProfile = this.assessLearningProfile(interactions, feedback);
-
       const profile: UserProfile = {
         userId,
         preferences,
         behaviorPatterns,
         learningProfile
       };
-
       // Cache the profile
       this.userProfiles.set(userId, profile);
       
       return profile;
-
     } catch (error) {
       console.error('PersonalizationOrchestratorAgent: Profile building failed:', error);
       throw new Error('Failed to build user profile');
     }
   }
-
   /**
    * Generate personalized recommendations based on context
    */
@@ -175,7 +158,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       const spreadRecommendation = this.recommendSpread(profile, context);
       const guidanceStyle = this.adaptGuidanceStyle(profile, context);
       const communicationAdjustments = this.determineCommunicationAdjustments(profile, context);
-
       return {
         readerId: readerMatch.readerId,
         readerPersonality: readerMatch.personality,
@@ -186,13 +168,11 @@ export class PersonalizationOrchestratorAgent extends Agent {
         focusAreas: this.identifyFocusAreas(profile, context),
         confidenceScore: this.calculateConfidence(profile, context)
       };
-
     } catch (error) {
       console.error('PersonalizationOrchestratorAgent: Recommendation failed:', error);
       throw new Error('Failed to generate personalization recommendation');
     }
   }
-
   /**
    * Learn from user feedback to improve future recommendations
    */
@@ -205,7 +185,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
     try {
       const profile = this.userProfiles.get(userId);
       if (!profile) return;
-
       // Update preference weights based on feedback
       if (feedback.satisfactionScore < 3) {
         // Negative feedback - adjust away from current settings
@@ -214,7 +193,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
         // Positive feedback - reinforce current settings
         this.adjustPreferenceWeights(profile, feedback, 'positive');
       }
-
       // Store learning data
       await this.supabase
         .from('personalization_learning')
@@ -225,15 +203,12 @@ export class PersonalizationOrchestratorAgent extends Agent {
           adjustment_type: feedback.satisfactionScore > 4 ? 'positive' : 'negative',
           created_at: new Date().toISOString()
         });
-
       // Update cached profile
       this.userProfiles.set(userId, profile);
-
     } catch (error) {
       console.error('PersonalizationOrchestratorAgent: Feedback learning failed:', error);
     }
   }
-
   /**
    * Private helper methods
    */
@@ -243,7 +218,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
     }
     return await this.buildUserProfile(userId);
   }
-
   private analyzeBehaviorPatterns(interactions: any[], readings: any[]): any {
     // TODO: Implement sophisticated behavioral analysis
     return {
@@ -254,7 +228,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       feedbackSentiment: 'positive'
     };
   }
-
   private inferPreferences(interactions: any[], readings: any[], feedback: any[]): any {
     // TODO: Implement preference inference algorithms
     return {
@@ -265,7 +238,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       spiritualPath: 'eclectic'
     };
   }
-
   private assessLearningProfile(interactions: any[], feedback: any[]): any {
     // TODO: Implement learning style assessment
     return {
@@ -275,7 +247,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       challengeLevel: 'growth-edge'
     };
   }
-
   private selectOptimalReader(profile: UserProfile, context: AdaptationContext): any {
     // TODO: Implement reader selection algorithm
     return {
@@ -283,7 +254,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       personality: 'mystical-intuitive'
     };
   }
-
   private recommendSpread(profile: UserProfile, context: AdaptationContext): any {
     // TODO: Implement spread recommendation logic
     return {
@@ -291,7 +261,6 @@ export class PersonalizationOrchestratorAgent extends Agent {
       complexity: 'intermediate'
     };
   }
-
   private adaptGuidanceStyle(profile: UserProfile, context: AdaptationContext): any {
     // TODO: Implement guidance style adaptation
     return {
@@ -299,26 +268,21 @@ export class PersonalizationOrchestratorAgent extends Agent {
       depth: 'moderate'
     };
   }
-
   private determineCommunicationAdjustments(profile: UserProfile, context: AdaptationContext): string[] {
     // TODO: Implement communication adjustment logic
     return ['use_metaphors', 'gentle_tone', 'encourage_reflection'];
   }
-
   private identifyFocusAreas(profile: UserProfile, context: AdaptationContext): string[] {
     // TODO: Implement focus area identification
     return ['relationships', 'personal_growth', 'career'];
   }
-
   private calculateConfidence(profile: UserProfile, context: AdaptationContext): number {
     // TODO: Implement confidence calculation
     return 0.82;
   }
-
   private adjustPreferenceWeights(profile: UserProfile, feedback: any, type: 'positive' | 'negative'): void {
     // TODO: Implement preference weight adjustment
   }
-
   /**
    * Get agent status and personalization metrics
    */
@@ -341,5 +305,4 @@ export class PersonalizationOrchestratorAgent extends Agent {
     };
   }
 }
-
 export default PersonalizationOrchestratorAgent;

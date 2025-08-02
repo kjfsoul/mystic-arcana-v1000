@@ -1,24 +1,19 @@
 'use client';
-
+ 
 import React, { useEffect, useRef } from 'react';
 import styles from './CosmicDeepDive.module.css';
-
 interface CosmicDeepDiveProps {
   className?: string;
 }
-
 export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
     // Set canvas size
     const updateCanvasSize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -26,10 +21,8 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       canvas.height = rect.height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
-
     updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize);
-
     // Animation state
     let time = 0;
     const planets: Array<{
@@ -41,14 +34,12 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       orbitSpeed: number;
       angle: number;
     }> = [];
-
     const blackHoles: Array<{
       x: number;
       y: number;
       radius: number;
       intensity: number;
     }> = [];
-
     const gravitationalWaves: Array<{
       x: number;
       y: number;
@@ -56,12 +47,10 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       opacity: number;
       speed: number;
     }> = [];
-
     // Initialize cosmic objects
     const initializeObjects = () => {
       const centerX = canvas.width / (2 * window.devicePixelRatio);
       const centerY = canvas.height / (2 * window.devicePixelRatio);
-
       // Create planets in orbital system
       planets.push(
         { x: centerX, y: centerY, radius: 8, color: '#FFD700', orbitRadius: 60, orbitSpeed: 0.01, angle: 0 }, // Sun
@@ -74,13 +63,11 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         { x: centerX, y: centerY, radius: 6, color: '#40E0D0', orbitRadius: 260, orbitSpeed: 0.002, angle: Math.PI * 0.9 }, // Uranus
         { x: centerX, y: centerY, radius: 6, color: '#0000FF', orbitRadius: 300, orbitSpeed: 0.001, angle: Math.PI * 1.6 } // Neptune
       );
-
       // Create black holes
       blackHoles.push(
         { x: centerX - 150, y: centerY - 100, radius: 25, intensity: 1 },
         { x: centerX + 180, y: centerY + 120, radius: 30, intensity: 0.8 }
       );
-
       // Initialize gravitational waves
       for (let i = 0; i < 8; i++) {
         gravitationalWaves.push({
@@ -92,9 +79,7 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         });
       }
     };
-
     initializeObjects();
-
     const drawGravitationalWaves = () => {
       gravitationalWaves.forEach(wave => {
         ctx.save();
@@ -118,7 +103,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         ctx.restore();
       });
     };
-
     const drawBlackHoles = () => {
       blackHoles.forEach(hole => {
         // Event horizon
@@ -165,17 +149,14 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         ctx.restore();
       });
     };
-
     const drawPlanets = () => {
       const centerX = canvas.width / (2 * window.devicePixelRatio);
       const centerY = canvas.height / (2 * window.devicePixelRatio);
-
       planets.forEach((planet, index) => {
         // Update orbital position
         planet.angle += planet.orbitSpeed;
         planet.x = centerX + Math.cos(planet.angle) * planet.orbitRadius;
         planet.y = centerY + Math.sin(planet.angle) * planet.orbitRadius;
-
         // Draw orbital path (faint)
         if (index > 0) { // Skip sun
           ctx.save();
@@ -188,7 +169,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
           ctx.stroke();
           ctx.restore();
         }
-
         // Draw planet
         const planetGradient = ctx.createRadialGradient(
           planet.x - planet.radius * 0.3, 
@@ -200,13 +180,11 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         );
         planetGradient.addColorStop(0, planet.color);
         planetGradient.addColorStop(1, `${planet.color}88`);
-
         ctx.save();
         ctx.fillStyle = planetGradient;
         ctx.beginPath();
         ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
         ctx.fill();
-
         // Add planetary glow
         ctx.globalAlpha = 0.3;
         ctx.shadowColor = planet.color;
@@ -218,7 +196,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         ctx.restore();
       });
     };
-
     const drawCosmicBackground = () => {
       // Create deep space gradient
       const centerX = canvas.width / (2 * window.devicePixelRatio);
@@ -231,7 +208,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       
       ctx.fillStyle = spaceGradient;
       ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
-
       // Add distant stars
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
       for (let i = 0; i < 100; i++) {
@@ -248,7 +224,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
         ctx.restore();
       }
     };
-
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
       
@@ -260,9 +235,7 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       time += 1;
       animationRef.current = requestAnimationFrame(animate);
     };
-
     animate();
-
     return () => {
       window.removeEventListener('resize', updateCanvasSize);
       if (animationRef.current) {
@@ -270,7 +243,6 @@ export const CosmicDeepDive: React.FC<CosmicDeepDiveProps> = ({ className }) => 
       }
     };
   }, []);
-
   return (
     <div className={`${styles.container} ${className || ''}`}>
       <canvas 

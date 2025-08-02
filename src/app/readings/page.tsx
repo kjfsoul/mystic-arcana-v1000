@@ -1,5 +1,5 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,7 +8,6 @@ import { supabase } from '@/lib/supabase/client';
 import { AuthModal } from '@/components/auth/AuthModal';
 import Link from 'next/link';
 import styles from './page.module.css';
-
 interface ReadingRecord {
   id: string;
   spread_type: string;
@@ -22,25 +21,21 @@ interface ReadingRecord {
   };
   created_at: string;
 }
-
 export default function ReadingsPage() {
   const { user, isGuest } = useAuth();
   const router = useRouter();
   const [readings, setReadings] = useState<ReadingRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const loadReadings = useCallback(async () => {
     if (!user) return;
-
     try {
       const { data, error } = await supabase
         .from('tarot_readings')
         .select('id, spread_type, cards_drawn, created_at')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
-
       if (error) {
         console.error('Error loading readings:', error);
       } else {
@@ -52,8 +47,7 @@ export default function ReadingsPage() {
       setLoading(false);
     }
   }, [user]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (isGuest) {
       setShowAuthModal(true);
@@ -61,7 +55,6 @@ export default function ReadingsPage() {
     }
     loadReadings();
   }, [user, isGuest, loadReadings]);
-
   const formatSpreadType = (spreadType: string) => {
     const types = {
       'single': 'Single Card',
@@ -70,7 +63,6 @@ export default function ReadingsPage() {
     };
     return types[spreadType as keyof typeof types] || spreadType;
   };
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -81,7 +73,6 @@ export default function ReadingsPage() {
       minute: '2-digit'
     });
   };
-
   if (isGuest) {
     return (
       <>
@@ -118,7 +109,6 @@ export default function ReadingsPage() {
       </>
     );
   }
-
   return (
     <div className={styles.container}>
       <motion.div
@@ -132,7 +122,6 @@ export default function ReadingsPage() {
           ← Back to Home
         </Link>
       </motion.div>
-
       {loading ? (
         <div className={styles.loading}>
           <motion.div

@@ -1,13 +1,12 @@
+ 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, AlertCircle, CheckCircle, X, Info } from 'lucide-react';
-
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   message?: string;
   className?: string;
 }
-
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
   size = 'md', 
   message,
@@ -18,7 +17,6 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     md: 'w-8 h-8',
     lg: 'w-12 h-12'
   };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -33,14 +31,12 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     </motion.div>
   );
 };
-
 interface ErrorMessageProps {
   error: string;
   onRetry?: () => void;
   onClose?: () => void;
   className?: string;
 }
-
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ 
   error, 
   onRetry, 
@@ -80,7 +76,6 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     </motion.div>
   );
 };
-
 interface SuccessMessageProps {
   message: string;
   onClose?: () => void;
@@ -88,7 +83,6 @@ interface SuccessMessageProps {
   duration?: number;
   className?: string;
 }
-
 export const SuccessMessage: React.FC<SuccessMessageProps> = ({ 
   message, 
   onClose,
@@ -96,14 +90,13 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
   duration = 3000,
   className = "" 
 }) => {
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   React.useEffect(() => {
     if (autoHide && onClose) {
       const timer = setTimeout(onClose, duration);
       return () => clearTimeout(timer);
     }
   }, [autoHide, onClose, duration]);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -127,13 +120,11 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
     </motion.div>
   );
 };
-
 interface InfoMessageProps {
   message: string;
   onClose?: () => void;
   className?: string;
 }
-
 export const InfoMessage: React.FC<InfoMessageProps> = ({ 
   message, 
   onClose,
@@ -162,13 +153,11 @@ export const InfoMessage: React.FC<InfoMessageProps> = ({
     </motion.div>
   );
 };
-
 interface LoadingOverlayProps {
   isLoading: boolean;
   message?: string;
   fullScreen?: boolean;
 }
-
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ 
   isLoading, 
   message = "Loading...",
@@ -198,7 +187,6 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
     </AnimatePresence>
   );
 };
-
 // Mobile-optimized card skeleton loader
 export const CardSkeleton: React.FC<{ count?: number }> = ({ count = 1 }) => {
   return (
@@ -225,7 +213,6 @@ export const CardSkeleton: React.FC<{ count?: number }> = ({ count = 1 }) => {
     </>
   );
 };
-
 // Floating action button for mobile
 interface FloatingActionButtonProps {
   onClick: () => void;
@@ -234,7 +221,6 @@ interface FloatingActionButtonProps {
   position?: 'bottom-right' | 'bottom-left' | 'bottom-center';
   className?: string;
 }
-
 export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onClick,
   icon,
@@ -247,7 +233,6 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
     'bottom-left': 'bottom-4 left-4 sm:bottom-6 sm:left-6',
     'bottom-center': 'bottom-4 left-1/2 -translate-x-1/2'
   };
-
   return (
     <motion.button
       className={`fixed ${positionClasses[position]} bg-purple-600 hover:bg-purple-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all z-40 ${className}`}
@@ -260,14 +245,12 @@ export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
     </motion.button>
   );
 };
-
 // Pull to refresh component for mobile
 interface PullToRefreshProps {
   onRefresh: () => Promise<void>;
   children: React.ReactNode;
   threshold?: number;
 }
-
 export const PullToRefresh: React.FC<PullToRefreshProps> = ({ 
   onRefresh, 
   children,
@@ -277,13 +260,11 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [startY, setStartY] = useState(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
-
   const handleTouchStart = (e: React.TouchEvent) => {
     if (containerRef.current?.scrollTop === 0) {
       setStartY(e.touches[0].clientY);
     }
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!startY || isRefreshing) return;
     
@@ -294,7 +275,6 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
       setPullDistance(Math.min(diff, threshold * 1.5));
     }
   };
-
   const handleTouchEnd = async () => {
     if (pullDistance >= threshold && !isRefreshing) {
       setIsRefreshing(true);
@@ -307,7 +287,6 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
     setPullDistance(0);
     setStartY(0);
   };
-
   return (
     <div className="relative">
       <AnimatePresence>

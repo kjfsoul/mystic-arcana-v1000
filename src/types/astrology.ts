@@ -1,7 +1,6 @@
 /**
  * Core astrology type definitions
  */
-
 /**
  * Birth data required for astrological calculations
  */
@@ -20,7 +19,6 @@ export interface BirthData {
   lat?: number; // Deprecated in favor of latitude
   lng?: number; // Deprecated in favor of longitude
 }
-
 /**
  * Planetary position data
  */
@@ -38,7 +36,6 @@ export interface PlanetPosition {
   zodiacSign?: string; // Deprecated in favor of sign
   zodiacDegree?: number; // Deprecated in favor of longitude
 }
-
 /**
  * House position data
  */
@@ -51,7 +48,6 @@ export interface HousePosition {
   zodiacSign: string; // Kept for compatibility
   zodiacDegree: number; // Kept for compatibility
 }
-
 /**
  * Complete birth chart data
  */
@@ -61,7 +57,6 @@ export interface BirthChart {
   houses: HousePosition[];
   aspects?: AspectData[];
 }
-
 /**
  * Aspect data between planets
  */
@@ -73,7 +68,6 @@ export interface AspectData {
   orb: number;
   isApplying: boolean;
 }
-
 /**
  * Aspect types used in astrological calculations
  */
@@ -83,17 +77,14 @@ export type AspectType =
   | "square"
   | "trine"
   | "opposition";
-
 /**
  * House systems used in astrological calculations
  */
 export type HouseSystem = "Placidus" | "Koch" | "Equal" | "WholeSign";
-
 /**
  * Planet names for transit calculations
  */
 export type Planet = 'sun' | 'moon' | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune' | 'pluto';
-
 /**
  * Additional utility types for compatibility
  */
@@ -101,14 +92,12 @@ export interface BirthCoordinates {
   lat: number;
   lng: number;
 }
-
 export interface PlanetInHouse {
   planet: string;
   house: number;
   sign: string;
   degree: number;
 }
-
 export interface TransitData {
   planet: Planet;
   position: number;

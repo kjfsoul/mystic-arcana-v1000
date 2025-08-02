@@ -12,7 +12,6 @@ import {
   CompatibilityInsight
 } from '@/types/oracle';
 import { BirthData } from '@/types/astrology';
-
 /**
  * Daily Oracle API - Comprehensive mystical guidance combining tarot, astrology, and cosmic insights
  * 
@@ -23,13 +22,10 @@ import { BirthData } from '@/types/astrology';
  * - Cosmic event awareness (moon phases, planetary transits)
  * - Compatibility insights
  */
-
 const logger = new Logger('daily-oracle-api');
-
 // Cached oracle data to prevent redundant calculations
 const oracleCache = new Map<string, { data: DailyOracleData; timestamp: number }>();
 const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours for daily oracle
-
 /**
  * Get today's date as a cache key
  */
@@ -37,7 +33,6 @@ function getTodayKey(userId?: string): string {
   const today = new Date().toISOString().split('T')[0];
   return `${today}_${userId || 'anonymous'}`;
 }
-
 /**
  * Call internal tarot API for daily spread
  */
@@ -87,7 +82,6 @@ async function getDailyTarotSpread(): Promise<TarotCardOracleData[]> {
     throw error;
   }
 }
-
 /**
  * Call internal horoscope API
  */
@@ -135,7 +129,6 @@ async function getDailyHoroscope(birthData: BirthData): Promise<HoroscopeOracleD
     };
   }
 }
-
 /**
  * Generate cosmic focus for the day
  */
@@ -186,7 +179,6 @@ function getCosmicFocus(): CosmicFocusData {
     recommendation: recommendations[dominantPlanetIndex]
   };
 }
-
 /**
  * Generate compatibility insights based on sun sign
  */
@@ -268,7 +260,6 @@ function getCompatibilityInsight(sign: string): CompatibilityInsight {
   
   return compatibilityData[sign.toLowerCase()] || compatibilityData.aries;
 }
-
 /**
  * Get zodiac sign metadata
  */
@@ -290,7 +281,6 @@ function getSignMetadata(sign: string): { element: string; quality: string; ruli
   
   return signData[sign] || signData.aries;
 }
-
 /**
  * Generate personalized interpretation for tarot card
  */
@@ -317,7 +307,6 @@ function generatePersonalizedInterpretation(card: TarotCardOracleData, position:
   const randomIndex = Math.floor(Math.random() * positionInterpretations.length);
   return positionInterpretations[randomIndex];
 }
-
 /**
  * Generate overall theme based on cards and horoscope
  */
@@ -333,7 +322,6 @@ function generateOverallTheme(cards: TarotCardOracleData[], horoscope: Horoscope
   
   return themes[Math.floor(Math.random() * themes.length)];
 }
-
 /**
  * Generate key message
  */
@@ -346,7 +334,6 @@ function generateKeyMessage(cards: TarotCardOracleData[], horoscope: HoroscopeOr
   
   return messages[Math.floor(Math.random() * messages.length)];
 }
-
 /**
  * Generate actionable advice
  */
@@ -359,7 +346,6 @@ function generateActionableAdvice(cards: TarotCardOracleData[], horoscope: Horos
     `Let ${cards[2].name} remind you to ${cards[2].isReversed ? 'release' : 'embrace'} ${cards[2].keywords[0]} this evening.`
   ];
 }
-
 /**
  * Generate affirmation
  */
@@ -373,7 +359,6 @@ function generateAffirmation(horoscope: HoroscopeOracleData, cosmic: CosmicFocus
   
   return affirmations[Math.floor(Math.random() * affirmations.length)];
 }
-
 /**
  * Main API handler
  */
@@ -563,7 +548,6 @@ export async function POST(request: NextRequest) {
     });
   }
 }
-
 // Store notification about completion
 async function Bash(command: string) {
   try {

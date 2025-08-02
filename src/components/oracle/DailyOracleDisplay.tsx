@@ -1,16 +1,14 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DailyOracleData, DailyOracleResponse } from '@/types/oracle';
 import { useAuth } from '@/contexts/AuthContext';
 import { profileService } from '@/services/profileService';
 import styles from './DailyOracleDisplay.module.css';
-
 interface DailyOracleDisplayProps {
   className?: string;
 }
-
 export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ className }) => {
   const [oracleData, setOracleData] = useState<DailyOracleData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,8 +17,7 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
   const [isExpanded, setIsExpanded] = useState(false);
   
   const { user } = useAuth();
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const loadOracleData = async () => {
       setIsLoading(true);
@@ -33,7 +30,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           setIsLoading(false);
           return;
         }
-
         // Get user profile for birth data
         const profile = await profileService.getProfile(user.id);
         console.log('Profile data for Oracle:', profile);
@@ -43,7 +39,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           setIsLoading(false);
           return;
         }
-
         // Prepare birth data
         const birthData = {
           name: profile.full_name || 'User',
@@ -54,7 +49,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           longitude: -74.0060,
           timezone: 'America/New_York'
         };
-
         // Call the Daily Oracle API
         const response = await fetch('/api/oracle/daily', {
           method: 'POST',
@@ -66,17 +60,14 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
             userId: user.id,
           }),
         });
-
         if (!response.ok) {
           throw new Error('Failed to fetch Daily Oracle data');
         }
-
         const result: DailyOracleResponse = await response.json();
         
         if (!result.success || !result.data) {
           throw new Error(result.error || 'Failed to generate Daily Oracle reading');
         }
-
         setOracleData(result.data);
       } catch (err) {
         console.error('Error loading Daily Oracle:', err);
@@ -85,10 +76,8 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
         setIsLoading(false);
       }
     };
-
     loadOracleData();
   }, [user]);
-
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('en-US', {
       weekday: 'long',
@@ -97,7 +86,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
       day: 'numeric'
     });
   };
-
   const LoadingShimmer = () => (
     <motion.div 
       className={`${styles.container} ${className} ${styles.loading}`}
@@ -122,7 +110,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
       </div>
     </motion.div>
   );
-
   const ErrorState = () => (
     <motion.div 
       className={`${styles.container} ${className} ${styles.error}`}
@@ -147,10 +134,8 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
       </div>
     </motion.div>
   );
-
   if (isLoading) return <LoadingShimmer />;
   if (error || !oracleData) return <ErrorState />;
-
   const tabContent = {
     overview: (
       <div className={styles.overviewTab}>
@@ -163,7 +148,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           <h4 className={styles.messageTitle}>Today's Key Message</h4>
           <p className={styles.messageText}>{oracleData.keyMessage}</p>
         </motion.div>
-
         <motion.div 
           className={styles.affirmation}
           initial={{ opacity: 0, y: 20 }}
@@ -173,7 +157,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           <h4 className={styles.affirmationTitle}>✨ Daily Affirmation</h4>
           <p className={styles.affirmationText}>"{oracleData.affirmation}"</p>
         </motion.div>
-
         <motion.div 
           className={styles.actionAdvice}
           initial={{ opacity: 0, y: 20 }}
@@ -253,7 +236,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           </h4>
           <p className={styles.horoscopeText}>{oracleData.horoscope.daily}</p>
         </motion.div>
-
         <motion.div 
           className={styles.cosmicFocus}
           initial={{ opacity: 0, y: 20 }}
@@ -280,7 +262,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
               <span className={styles.cosmicValue}>{oracleData.cosmicFocus.energyTheme}</span>
             </div>
           </div>
-
           <div className={styles.keyAspects}>
             <span className={styles.aspectsLabel}>Key Planetary Aspects:</span>
             <div className={styles.aspectsList}>
@@ -289,7 +270,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
               ))}
             </div>
           </div>
-
           <div className={styles.cosmicRecommendation}>
             <h5 className={styles.recommendationTitle}>Cosmic Recommendation</h5>
             <p className={styles.recommendationText}>{oracleData.cosmicFocus.recommendation}</p>
@@ -333,7 +313,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
       </div>
     )
   };
-
   return (
     <motion.div 
       className={`${styles.container} ${className} ${isExpanded ? styles.expanded : ''}`}
@@ -361,7 +340,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           {isExpanded ? '−' : '+'}
         </button>
       </div>
-
       <AnimatePresence>
         {isExpanded && (
           <motion.div 
@@ -390,7 +368,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
                 </motion.button>
               ))}
             </div>
-
             <div className={styles.tabContent}>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -407,7 +384,6 @@ export const DailyOracleDisplay: React.FC<DailyOracleDisplayProps> = ({ classNam
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Compact preview when collapsed */}
       {!isExpanded && (
         <motion.div 

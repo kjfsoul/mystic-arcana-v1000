@@ -1,8 +1,7 @@
 'use client';
-
+ 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
 interface LocationData {
   city: string;
   country: string;
@@ -10,14 +9,12 @@ interface LocationData {
   longitude: number;
   timezone?: string;
 }
-
 interface LocationInputProps {
   onLocationSelect: (location: LocationData) => void;
   initialValue?: string;
   className?: string;
   placeholder?: string;
 }
-
 interface GeocodingResult {
   name: string;
   country: string;
@@ -26,7 +23,6 @@ interface GeocodingResult {
   lon: number;
   timezone?: string;
 }
-
 export const LocationInput: React.FC<LocationInputProps> = ({
   onLocationSelect,
   initialValue = '',
@@ -42,31 +38,26 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
-
   // Debounced search
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (query.length < 2) {
       setSuggestions([]);
       setShowSuggestions(false);
       return;
     }
-
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
     }
-
     debounceRef.current = setTimeout(async () => {
       await searchLocations(query);
     }, 300);
-
     return () => {
       if (debounceRef.current) {
         clearTimeout(debounceRef.current);
       }
     };
   }, [query]);
-
   const searchLocations = async (searchQuery: string) => {
     setIsLoading(true);
     try {
@@ -82,13 +73,11 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       setIsLoading(false);
     }
   };
-
   const getCurrentLocation = async () => {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by this browser.');
       return;
     }
-
     setGpsLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -117,15 +106,12 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       { timeout: 10000, enableHighAccuracy: true }
     );
   };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     setSelectedIndex(-1);
   };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions || suggestions.length === 0) return;
-
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -149,7 +135,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
         break;
     }
   };
-
   const selectLocation = (location: GeocodingResult) => {
     const displayName = `${location.name}, ${location.country}`;
     setQuery(displayName);
@@ -164,7 +149,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       timezone: location.timezone
     });
   };
-
   return (
     <div className={`relative ${className}`}>
       <div className="relative">
@@ -196,7 +180,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
             </svg>
           )}
         </button>
-
         {/* Loading indicator */}
         {isLoading && (
           <div className="absolute right-12 top-1/2 transform -translate-y-1/2">
@@ -204,7 +187,6 @@ export const LocationInput: React.FC<LocationInputProps> = ({
           </div>
         )}
       </div>
-
       {/* Suggestions dropdown */}
       <AnimatePresence>
         {showSuggestions && suggestions.length > 0 && (

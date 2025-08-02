@@ -7,14 +7,11 @@ export interface LocationResult {
   city?: string;
   timezone?: string;
 }
-
 export interface GeocodingError {
   message: string;
   code: 'NO_RESULTS' | 'NETWORK_ERROR' | 'INVALID_INPUT' | 'API_ERROR';
 }
-
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
 export async function geocodeLocation(query: string): Promise<LocationResult | GeocodingError> {
   if (!query || query.trim().length < 2) {
     return {
@@ -22,18 +19,14 @@ export async function geocodeLocation(query: string): Promise<LocationResult | G
       code: 'INVALID_INPUT'
     };
   }
-
   
-
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${GOOGLE_MAPS_API_KEY}`;
-
   try {
     const response = await fetch(url);
     if (!response.ok) {
       return { message: 'Network response was not ok.', code: 'NETWORK_ERROR' };
     }
     const data = await response.json();
-
     if (data.status === 'OK' && data.results && data.results.length > 0) {
       const result = data.results[0];
       const location = parseGoogleMapsResult(result);
@@ -52,20 +45,16 @@ export async function geocodeLocation(query: string): Promise<LocationResult | G
     return { message: 'An error occurred while fetching location data.', code: 'NETWORK_ERROR' };
   }
 }
-
 export async function getSuggestions(query: string): Promise<LocationResult[]> {
   if (!query || query.length < 2) return [];
-
   // Use our API proxy to avoid CORS issues
   const url = `/api/geocode?input=${encodeURIComponent(query)}`;
-
   try {
     const response = await fetch(url);
     if (!response.ok) {
       return [];
     }
     const data = await response.json();
-
     // Handle OpenStreetMap Nominatim response format
     if (Array.isArray(data)) {
       return data.slice(0, 5).map((item: any) => ({
@@ -77,7 +66,6 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
         city: item.city || item.name
       }));
     }
-
     // Handle Google Places API format if using it
     if (
       data.status === "OK" &&
@@ -95,17 +83,14 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
       );
       return suggestions.filter((s): s is LocationResult => s !== null);
     }
-
     return [];
   } catch {
     return [];
   }
 }
-
 async function getTimezone(lat: number, lng: number): Promise<string | undefined> {
   
   
-
   const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${Math.floor(Date.now() / 1000)}&key=${GOOGLE_MAPS_API_KEY}`;
   try {
     const response = await fetch(url);
@@ -118,7 +103,6 @@ async function getTimezone(lat: number, lng: number): Promise<string | undefined
   }
   return undefined;
 }
-
 function parseGoogleMapsResult(result: {
   geometry: { location: { lat: number; lng: number } };
   formatted_address: string;
@@ -127,13 +111,11 @@ function parseGoogleMapsResult(result: {
   if (!result.geometry || !result.geometry.location) {
     return null;
   }
-
   const location: Partial<import("./GeocodingService").LocationResult> = {
     name: result.formatted_address,
     latitude: result.geometry.location.lat,
     longitude: result.geometry.location.lng,
   };
-
   result.address_components.forEach((component: { types: string[]; long_name: string }) => {
     if (component.types.includes("country")) {
       location.country = component.long_name;
@@ -145,7 +127,6 @@ function parseGoogleMapsResult(result: {
       location.city = component.long_name;
     }
   });
-
   if (
     location.name &&
     location.latitude &&
@@ -154,11 +135,8 @@ function parseGoogleMapsResult(result: {
   ) {
     return location as import("./GeocodingService").LocationResult;
   }
-
   return null;
 }
-
-
 export function getPopularLocations(): LocationResult[] {
   return [
     { name: 'New York, NY, USA', latitude: 40.7128, longitude: -74.0060, country: 'USA', state: 'NY', city: 'New York', timezone: 'America/New_York' },

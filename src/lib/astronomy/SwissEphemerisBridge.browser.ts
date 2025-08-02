@@ -10,7 +10,6 @@
  * - Caching for performance
  * - Type-safe interfaces
  */
-
 import type {
   PlanetaryData,
   GeoLocation,
@@ -18,19 +17,16 @@ import type {
   RetrogradeData,
   CosmicInfluenceData
 } from '../../types/astronomical';
-
 import {
   Planet,
   ZodiacSign
 } from '../../types/astronomical';
-
 export interface SwissEphemerisConfig {
   apiEndpoint?: string;
   timeout?: number;
   precision?: 'low' | 'medium' | 'high' | 'ultra';
   useMockData?: boolean;
 }
-
 export interface PlanetaryCalculationRequest {
   planets: string[];
   datetime: Date;
@@ -42,7 +38,6 @@ export interface PlanetaryCalculationRequest {
     heliocentric?: boolean;
   };
 }
-
 export interface SwissEphemerisResponse {
   success: boolean;
   data?: unknown;
@@ -50,13 +45,11 @@ export interface SwissEphemerisResponse {
   calculationTime?: number;
   precision?: string;
 }
-
 export class SwissEphemerisBridge {
   private config: Required<SwissEphemerisConfig>;
   private isInitialized: boolean = false;
   private calculationCache: Map<string, { data: unknown; timestamp: number }> = new Map();
   private readonly CACHE_TTL = 60000; // 1 minute cache
-
   constructor(config: SwissEphemerisConfig = {}) {
     this.config = {
       apiEndpoint: config.apiEndpoint || '/api/ephemeris',
@@ -65,7 +58,6 @@ export class SwissEphemerisBridge {
       useMockData: config.useMockData ?? true // Default to mock data for development
     };
   }
-
   /**
    * Initialize the Swiss Ephemeris bridge
    */
@@ -76,13 +68,11 @@ export class SwissEphemerisBridge {
         this.isInitialized = true;
         return true;
       }
-
       // In production, validate API endpoint
       const response = await fetch(`${this.config.apiEndpoint}/health`, {
         method: 'GET',
         signal: AbortSignal.timeout(this.config.timeout)
       });
-
       if (response.ok) {
         this.isInitialized = true;
         console.log('🌟 Swiss Ephemeris bridge initialized with API endpoint');
@@ -99,7 +89,6 @@ export class SwissEphemerisBridge {
       return true;
     }
   }
-
   /**
    * Calculate precise planetary positions
    */
@@ -107,14 +96,11 @@ export class SwissEphemerisBridge {
     if (!this.isInitialized) {
       throw new Error('Swiss Ephemeris bridge not initialized');
     }
-
     const cacheKey = this.generateCacheKey('planets', request);
     const cached = this.getFromCache<PlanetaryData[]>(cacheKey);
     if (cached) return cached;
-
     try {
       let planets: PlanetaryData[];
-
       if (this.config.useMockData) {
         planets = this.generateMockPlanetaryData(request);
       } else {
@@ -124,15 +110,12 @@ export class SwissEphemerisBridge {
           body: JSON.stringify(request),
           signal: AbortSignal.timeout(this.config.timeout)
         });
-
         if (!response.ok) {
           throw new Error(`API request failed: ${response.status}`);
         }
-
         const data = await response.json();
         planets = this.parsePlanetaryData(data);
       }
-
       this.setCache(cacheKey, planets);
       return planets;
     } catch (error) {
@@ -143,7 +126,6 @@ export class SwissEphemerisBridge {
       return planets;
     }
   }
-
   /**
    * Generate mock planetary data for development
    */
@@ -188,7 +170,6 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   /**
    * Get planet symbol
    */
@@ -207,7 +188,6 @@ export class SwissEphemerisBridge {
     };
     return symbols[planetName.toLowerCase()] || '●';
   }
-
   /**
    * Get zodiac sign from ecliptic longitude
    */
@@ -219,7 +199,6 @@ export class SwissEphemerisBridge {
     ];
     return signs[Math.floor(longitude / 30)];
   }
-
   /**
    * Get zodiac sign enum from string
    */
@@ -240,7 +219,6 @@ export class SwissEphemerisBridge {
     };
     return signMap[sign] || ZodiacSign.ARIES;
   }
-
   /**
    * Get planet enum from string
    */
@@ -262,7 +240,6 @@ export class SwissEphemerisBridge {
     };
     return planetMap[planetName.toLowerCase()] || Planet.SUN;
   }
-
   /**
    * Parse planetary data from API response
    */
@@ -299,13 +276,10 @@ export class SwissEphemerisBridge {
       };
     });
   }
-
   // === Cache Management ===
-
   private generateCacheKey(operation: string, params: unknown): string {
     return `${operation}_${JSON.stringify(params)}_${this.config.precision}`;
   }
-
   private getFromCache<T>(key: string): T | null {
     const cached = this.calculationCache.get(key);
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
@@ -314,21 +288,18 @@ export class SwissEphemerisBridge {
     this.calculationCache.delete(key);
     return null;
   }
-
   private setCache(key: string, data: unknown): void {
     this.calculationCache.set(key, {
       data,
       timestamp: Date.now()
     });
   }
-
   /**
    * Clear calculation cache
    */
   clearCache(): void {
     this.calculationCache.clear();
   }
-
   /**
    * Get bridge statistics
    */
@@ -339,22 +310,18 @@ export class SwissEphemerisBridge {
       config: this.config
     };
   }
-
   /**
    * Stub methods for compatibility (will be implemented later)
    */
   async calculateAspects(): Promise<AspectData[]> {
     return [];
   }
-
   async detectRetrogrades(): Promise<RetrogradeData[]> {
     return [];
   }
-
   async calculateCosmicWeather(): Promise<CosmicInfluenceData> {
     return {} as CosmicInfluenceData;
   }
-
   async calculateMoonPhase() {
     return {
       phase: 'waxing_crescent',
@@ -366,7 +333,6 @@ export class SwissEphemerisBridge {
       nextFullMoon: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
     };
   }
-
   async getObliquity(date: Date): Promise<number> {
     // Mock implementation for browser compatibility
     // The true obliquity of the ecliptic changes very slowly.
@@ -375,6 +341,5 @@ export class SwissEphemerisBridge {
     return Promise.resolve(23.439281);
   }
 }
-
 // Singleton instance for application-wide use
 export const swissEphemeris = new SwissEphemerisBridge();

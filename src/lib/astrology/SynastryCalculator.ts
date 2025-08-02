@@ -1,6 +1,5 @@
 import { BirthData, PlanetPosition } from './AstronomicalCalculator';
 import { SwissEphemerisShim } from './SwissEphemerisShim';
-
 interface CompatibilityAPIResponse {
   success: boolean;
   data?: {
@@ -16,12 +15,10 @@ interface CompatibilityAPIResponse {
   };
   error?: string;
 }
-
 export interface CompatibilityRating {
   rating: number; // 1-5 scale
   description: string;
 }
-
 export interface CompatibilityResult {
   love: CompatibilityRating;
   friendship: CompatibilityRating;
@@ -31,7 +28,6 @@ export interface CompatibilityResult {
     keyAspects: string[];
   };
 }
-
 // Calculate compatibility using Swiss Ephemeris Shim
 async function calculateRealCompatibility(person1Data: BirthData, person2Data: BirthData): Promise<CompatibilityAPIResponse> {
   try {
@@ -57,7 +53,6 @@ async function calculateRealCompatibility(person1Data: BirthData, person2Data: B
     };
   }
 }
-
 // Fallback function for when API is unavailable
 function getFallbackCompatibility(): CompatibilityResult {
   return {
@@ -83,7 +78,6 @@ function getFallbackCompatibility(): CompatibilityResult {
     }
   };
 }
-
 // Analyze synastry aspects between two charts
 function analyzeSynastryAspects(chart1: any, chart2: any): {
   love: CompatibilityRating;
@@ -120,7 +114,6 @@ function analyzeSynastryAspects(chart1: any, chart2: any): {
     }
   };
 }
-
 // Calculate aspects between planets in two charts
 function calculateAspects(planets1: PlanetPosition[], planets2: PlanetPosition[]): Array<{
   planet1: string;
@@ -161,7 +154,6 @@ function calculateAspects(planets1: PlanetPosition[], planets2: PlanetPosition[]
   
   return aspects;
 }
-
 // Calculate love compatibility score (1-5)
 function calculateLoveCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
   let score = 0;
@@ -211,7 +203,6 @@ function calculateLoveCompatibility(aspects: any[], planets1: PlanetPosition[], 
   const normalizedScore = (score / maxScore) * 4 + 1; // 1-5 scale
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
-
 // Calculate friendship compatibility score (1-5)
 function calculateFriendshipCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
   let score = 0;
@@ -254,7 +245,6 @@ function calculateFriendshipCompatibility(aspects: any[], planets1: PlanetPositi
   const normalizedScore = (score / maxScore) * 4 + 1;
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
-
 // Calculate teamwork compatibility score (1-5)
 function calculateTeamworkCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
   let score = 0;
@@ -288,7 +278,6 @@ function calculateTeamworkCompatibility(aspects: any[], planets1: PlanetPosition
   const normalizedScore = (score / maxScore) * 4 + 1;
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
-
 // Generate descriptive text for love compatibility
 function getLoveDescription(score: number, aspects: any[]): string {
   const descriptions = {
@@ -300,7 +289,6 @@ function getLoveDescription(score: number, aspects: any[]): string {
   };
   return descriptions[score as keyof typeof descriptions] || descriptions[3];
 }
-
 // Generate descriptive text for friendship compatibility
 function getFriendshipDescription(score: number, aspects: any[]): string {
   const descriptions = {
@@ -312,7 +300,6 @@ function getFriendshipDescription(score: number, aspects: any[]): string {
   };
   return descriptions[score as keyof typeof descriptions] || descriptions[3];
 }
-
 // Generate descriptive text for teamwork compatibility
 function getTeamworkDescription(score: number, aspects: any[]): string {
   const descriptions = {
@@ -324,7 +311,6 @@ function getTeamworkDescription(score: number, aspects: any[]): string {
   };
   return descriptions[score as keyof typeof descriptions] || descriptions[3];
 }
-
 // Generate key aspects summary
 function generateKeyAspects(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): string[] {
   const keyAspects = [];
@@ -348,7 +334,6 @@ function generateKeyAspects(aspects: any[], planets1: PlanetPosition[], planets2
   
   return keyAspects.slice(0, 4); // Limit to 4 key aspects
 }
-
 // Get description for a specific aspect
 function getAspectDescription(aspect: any): string {
   const descriptions: Record<string, Record<string, string>> = {
@@ -370,7 +355,6 @@ function getAspectDescription(aspect: any): string {
          descriptions[aspect.planet2]?.[aspect.planet1] || 
          `${aspect.planet1}-${aspect.planet2} ${aspect.aspectType}: Significant planetary interaction`;
 }
-
 // Analyze element distribution in chart
 function getElementDistribution(planets: PlanetPosition[]): Record<string, number> {
   const elements = { fire: 0, earth: 0, air: 0, water: 0 };
@@ -388,7 +372,6 @@ function getElementDistribution(planets: PlanetPosition[]): Record<string, numbe
   
   return elements;
 }
-
 // Analyze element compatibility
 function analyzeElementCompatibility(elements1: Record<string, number>, elements2: Record<string, number>): string {
   const person1Dominant = Object.entries(elements1).reduce((a, b) => elements1[a[0]] > elements1[b[0]] ? a : b)[0];
@@ -423,7 +406,6 @@ function analyzeElementCompatibility(elements1: Record<string, number>, elements
   
   return compatibility[person1Dominant]?.[person2Dominant] || "Unique elemental blend creates interesting dynamics";
 }
-
 // Generate overall summary
 function generateOverallSummary(loveScore: number, friendshipScore: number, teamworkScore: number, keyAspects: string[]): string {
   const avgScore = (loveScore + friendshipScore + teamworkScore) / 3;
@@ -438,8 +420,6 @@ function generateOverallSummary(loveScore: number, friendshipScore: number, team
     return "Your astrological compatibility reveals significant differences in your cosmic blueprints. While challenging, these differences can lead to profound growth if approached with understanding, patience, and mutual respect.";
   }
 }
-
-
 export async function calculateCompatibility(
   person1Data: BirthData, 
   person2Data: BirthData
@@ -452,7 +432,6 @@ export async function calculateCompatibility(
       console.warn('Compatibility calculation failed, using fallback:', apiResponse.error);
       return getFallbackCompatibility();
     }
-
     // Return the real compatibility data
     return {
       love: apiResponse.data.love,
@@ -465,6 +444,5 @@ export async function calculateCompatibility(
     return getFallbackCompatibility();
   }
 }
-
 // Legacy compatibility calculation functions removed
 // All calculations now handled by Python backend with real astronomical data

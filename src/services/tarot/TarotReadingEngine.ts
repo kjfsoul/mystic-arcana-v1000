@@ -1,20 +1,16 @@
 import { supabase } from '@/lib/supabase/client';
 import { TarotDeckService } from './TarotDeckService';
 import { TarotCard as BaseTarotCard, SpreadType } from '@/types/tarot';
-
 export type { SpreadType };
-
 export interface TarotCard extends BaseTarotCard {
   isReversed?: boolean;
 }
-
 export interface SpreadPosition {
   position: number;
   label: string;
   card: TarotCard;
   interpretation?: string;
 }
-
 export interface TarotReading {
   id: string;
   userId?: string;
@@ -29,7 +25,6 @@ export interface TarotReading {
   };
   createdAt: Date;
 }
-
 export class TarotReadingEngine {
   private deck: TarotCard[] = [];
   private deckService: TarotDeckService;
@@ -38,7 +33,6 @@ export class TarotReadingEngine {
   constructor() {
     this.deckService = TarotDeckService.getInstance();
   }
-
   private async initializeDeck() {
     if (this.isInitialized) return;
     
@@ -55,7 +49,6 @@ export class TarotReadingEngine {
       throw error;
     }
   }
-
   private getRankName(number: number): string {
     const rankMap: { [key: number]: string } = {
       1: 'ace',
@@ -72,7 +65,6 @@ export class TarotReadingEngine {
     const numberWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
     return numberWords[number] || number.toString();
   }
-
   /**
    * Shuffle the deck using Fisher-Yates algorithm
    */
@@ -89,7 +81,6 @@ export class TarotReadingEngine {
       isReversed: Math.random() < 0.5
     }));
   }
-
   /**
    * Draw cards for a specific spread
    */
@@ -106,7 +97,6 @@ export class TarotReadingEngine {
       label: this.getPositionLabel(spreadType, index),
       card: card
     }));
-
     const reading: TarotReading = {
       id: crypto.randomUUID(),
       spreadType,
@@ -114,13 +104,10 @@ export class TarotReadingEngine {
       question,
       createdAt: new Date()
     };
-
     // Get cosmic influences
     reading.cosmicInfluences = await this.getCosmicInfluences();
-
     return reading;
   }
-
   /**
    * Generate AI-powered interpretation using the Mystic Arcana agent
    */
@@ -134,26 +121,22 @@ export class TarotReadingEngine {
       ...pos,
       interpretation: this.generatePositionInterpretation(pos)
     }));
-
     const overallInterpretation = this.generateOverallInterpretation(
       reading.spreadType,
       interpretedPositions,
       reading.question
     );
-
     return {
       ...reading,
       positions: interpretedPositions,
       overallInterpretation
     };
   }
-
   /**
    * Save reading to database
    */
   public async saveReading(reading: TarotReading, userId?: string): Promise<void> {
     if (!userId) return;
-
     const { error } = await supabase
       .from('tarot_readings')
       .insert({
@@ -169,12 +152,10 @@ export class TarotReadingEngine {
         cosmic_influences: reading.cosmicInfluences,
         created_at: reading.createdAt
       });
-
     if (error) {
       console.error('Error saving reading:', error);
     }
   }
-
   /**
    * Get user's reading history
    */
@@ -185,16 +166,13 @@ export class TarotReadingEngine {
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
       .limit(limit);
-
     if (error || !data) {
       console.error('Error fetching readings:', error);
       return [];
     }
-
     // Transform database records back to TarotReading objects
     return data.map(record => this.transformDatabaseReading(record));
   }
-
   private getCardCount(spreadType: SpreadType): number {
     const counts = {
       'single': 1,
@@ -203,7 +181,6 @@ export class TarotReadingEngine {
     };
     return counts[spreadType];
   }
-
   private getPositionLabel(spreadType: SpreadType, index: number): string {
     const labels = {
       'single': ['Your Card'],
@@ -223,7 +200,6 @@ export class TarotReadingEngine {
     };
     return labels[spreadType][index] || `Position ${index + 1}`;
   }
-
   private async getCosmicInfluences() {
     // This would connect to astronomical calculation services
     // For now, return placeholder data
@@ -233,7 +209,6 @@ export class TarotReadingEngine {
       astrologyNotes: 'Favorable time for new beginnings and creative pursuits'
     };
   }
-
   private generatePositionInterpretation(
     position: SpreadPosition
   ): string {
@@ -246,7 +221,6 @@ export class TarotReadingEngine {
       card.isReversed ? '(Reversed)' : ''
     } suggests: ${meaning}`;
   }
-
   private generateOverallInterpretation(
     spreadType: SpreadType,
     positions: SpreadPosition[],
@@ -261,7 +235,6 @@ export class TarotReadingEngine {
       'The cards reveal important insights about your current path...'
     }`;
   }
-
   private transformDatabaseReading(record: {
     id: string;
     user_id: string;

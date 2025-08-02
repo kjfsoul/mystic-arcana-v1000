@@ -1,16 +1,13 @@
 // API Route for CrewAI Orchestration
 // Handles crew task execution and monitoring
-
 import { NextRequest, NextResponse } from 'next/server';
 import { crewRunner } from '../../../crew/runner';
-
 export async function POST(req: NextRequest) {
   const startTime = Date.now();
   
   try {
     const body = await req.json();
     const { task, params = {} } = body;
-
     if (!task) {
       return NextResponse.json(
         { 
@@ -25,14 +22,10 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
     console.log(`🚀 Starting crew task: ${task}`);
-
     const result = await crewRunner.runCrew(task, params);
     const duration = Date.now() - startTime;
-
     console.log(`✅ Crew task completed: ${task} (${duration}ms)`);
-
     return NextResponse.json({
       success: true,
       result,
@@ -42,13 +35,11 @@ export async function POST(req: NextRequest) {
         timestamp: new Date().toISOString()
       }
     });
-
   } catch (error) {
     const duration = Date.now() - startTime;
     const errorMessage = error instanceof Error ? error.message : String(error);
     
     console.error(`❌ Crew task failed: ${errorMessage}`);
-
     return NextResponse.json(
       {
         success: false,
@@ -62,7 +53,6 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
 export async function GET(req: NextRequest) {
   try {
     // Health check endpoint

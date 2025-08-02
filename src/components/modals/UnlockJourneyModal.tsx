@@ -1,18 +1,15 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // import { useAuth } from '../../contexts/AuthContext';
 import { AuthModal } from '../auth/AuthModal';
 import styles from './UnlockJourneyModal.module.css';
-
 interface UnlockJourneyModalProps {
   isVisible: boolean;
   onClose: () => void;
   type?: 'tarot' | 'astrology';
   className?: string;
 }
-
 export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
   isVisible,
   onClose,
@@ -21,20 +18,16 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   // const { isGuest } = useAuth(); // Uncomment if needed for future logic
-
   const handleBeginJourney = () => {
     setShowAuthModal(true);
   };
-
   const handleContinueAsGuest = () => {
     onClose();
   };
-
   const handleAuthClose = () => {
     setShowAuthModal(false);
     onClose();
   };
-
   const content = {
     tarot: {
       emoji: '🌟',
@@ -61,11 +54,8 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
       ]
     }
   };
-
   const currentContent = content[type];
-
   if (!isVisible) return null;
-
   return (
     <>
       <AnimatePresence>
@@ -103,7 +93,6 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
                 </motion.div>
               ))}
             </div>
-
             {/* Modal Content */}
             <div className={styles.content}>
               {/* Header */}
@@ -117,7 +106,6 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
                 <h2 className={styles.headline}>{currentContent.headline}</h2>
                 <p className={styles.description}>{currentContent.description}</p>
               </motion.div>
-
               {/* Features List */}
               <motion.div 
                 className={styles.features}
@@ -137,7 +125,6 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
                   </motion.div>
                 ))}
               </motion.div>
-
               {/* Actions */}
               <motion.div 
                 className={styles.actions}
@@ -163,7 +150,6 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
                   Continue as Guest
                 </motion.button>
               </motion.div>
-
               {/* Close Button */}
               <motion.button
                 className={styles.closeButton}
@@ -180,7 +166,6 @@ export const UnlockJourneyModal: React.FC<UnlockJourneyModalProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Authentication Modal */}
       <AuthModal
         isOpen={showAuthModal}

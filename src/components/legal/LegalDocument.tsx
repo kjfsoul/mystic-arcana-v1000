@@ -1,15 +1,13 @@
 "use client";
-
+ 
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 interface LegalDocumentProps {
   content: string;
   title: string;
 }
-
 export const LegalDocument: React.FC<LegalDocumentProps> = ({
   content,
   title,
@@ -18,8 +16,7 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
     Array<{ left: number; top: number; duration: number; delay: number }>
   >([]);
   const [mounted, setMounted] = useState(false);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     // Generate star positions only on client side to avoid hydration mismatch
     const starData = Array.from({ length: 50 }, () => ({
@@ -31,7 +28,6 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
     setStars(starData);
     setMounted(true);
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900">
       {/* Background Stars - Only render after mount to avoid hydration issues */}
@@ -58,7 +54,6 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
           ))}
         </div>
       )}
-
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">
         {/* Header */}
@@ -73,7 +68,6 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-purple-400 mx-auto rounded-full"></div>
         </motion.div>
-
         {/* Legal Document Content */}
         <motion.div
           className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 shadow-2xl"
@@ -85,7 +79,6 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
           </div>
         </motion.div>
-
         {/* Back to Home Button */}
         <motion.div
           className="text-center mt-12"

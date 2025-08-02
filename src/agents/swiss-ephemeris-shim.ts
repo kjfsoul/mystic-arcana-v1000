@@ -4,11 +4,9 @@
  * Handles API key management, timezone conversions, and coordinate transformations
  * for Swiss Ephemeris calculations with robust fallback mechanisms.
  */
-
 import { Agent } from '@/lib/ag-ui/agent';
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
-
 export interface EphemerisConfig {
   primarySource: 'swiss' | 'nasa' | 'astrodienst';
   fallbackSources: string[];
@@ -17,7 +15,6 @@ export interface EphemerisConfig {
   cacheDuration: number; // hours
   precision: 'low' | 'medium' | 'high' | 'ultra';
 }
-
 export interface CoordinateRequest {
   date: string | Date;
   planet: string;
@@ -29,7 +26,6 @@ export interface CoordinateRequest {
   timezone?: string;
   houseSystem?: 'placidus' | 'koch' | 'equal' | 'whole_sign';
 }
-
 export interface EphemerisResponse {
   planet: string;
   longitude: number;
@@ -45,7 +41,6 @@ export interface EphemerisResponse {
   source: string;
   accuracy: 'high' | 'medium' | 'low';
 }
-
 export interface TimezoneConversionRequest {
   datetime: string;
   fromTimezone: string;
@@ -55,13 +50,11 @@ export interface TimezoneConversionRequest {
     longitude: number;
   };
 }
-
 export class SwissEphemerisShimAgent extends Agent {
   private config: EphemerisConfig;
   private apiKeyRotation: Map<string, number>;
   private requestCache: Map<string, any>;
   private lastRotation: Date;
-
   constructor(config: Partial<EphemerisConfig> = {}) {
     super('swiss-ephemeris-shim', 'SwissEphemerisShimAgent');
     
@@ -74,14 +67,12 @@ export class SwissEphemerisShimAgent extends Agent {
       precision: 'high',
       ...config
     };
-
     this.apiKeyRotation = new Map();
     this.requestCache = new Map();
     this.lastRotation = new Date();
     
     this.initializeAPIKeys();
   }
-
   /**
    * Initialize and validate API keys for various ephemeris sources
    */
@@ -91,17 +82,14 @@ export class SwissEphemerisShimAgent extends Agent {
     const swissKey = process.env.SWISS_EPHEMERIS_API_KEY;
     const nasaKey = process.env.NASA_JPL_API_KEY;
     const astrodientKey = process.env.ASTRODIENST_API_KEY;
-
     if (swissKey) this.config.apiKeys['swiss'] = swissKey;
     if (nasaKey) this.config.apiKeys['nasa'] = nasaKey;
     if (astrodientKey) this.config.apiKeys['astrodienst'] = astrodientKey;
-
     // Initialize rotation counters
     Object.keys(this.config.apiKeys).forEach(source => {
       this.apiKeyRotation.set(source, 0);
     });
   }
-
   /**
    * Get planetary position with automatic fallback handling
    */
@@ -118,7 +106,6 @@ export class SwissEphemerisShimAgent extends Agent {
           return { ...cached.data, source: `${cached.data.source} (cached)` };
         }
       }
-
       // Convert timezone if needed
       const utcDate = await this.convertToUTC(request.date, request.timezone, request.coordinates);
       
@@ -138,7 +125,6 @@ export class SwissEphemerisShimAgent extends Agent {
           date: utcDate
         });
       }
-
       // Cache the response
       if (this.config.cacheEnabled) {
         this.requestCache.set(cacheKey, {
@@ -146,15 +132,12 @@ export class SwissEphemerisShimAgent extends Agent {
           timestamp: new Date().toISOString()
         });
       }
-
       return response;
-
     } catch (error) {
       console.error('SwissEphemerisShimAgent: Position calculation failed:', error);
       throw new Error('Failed to calculate planetary position');
     }
   }
-
   /**
    * Convert datetime between timezones with coordinate-based precision
    */
@@ -165,18 +148,15 @@ export class SwissEphemerisShimAgent extends Agent {
       if (!request.fromTimezone && request.coordinates) {
         request.fromTimezone = await this.detectTimezone(request.coordinates);
       }
-
       // Perform conversion with daylight saving time handling
       const convertedDate = await this.performTimezoneConversion(request);
       
       return convertedDate;
-
     } catch (error) {
       console.error('SwissEphemerisShimAgent: Timezone conversion failed:', error);
       throw new Error('Failed to convert timezone');
     }
   }
-
   /**
    * Rotate API keys to prevent rate limiting
    */
@@ -185,7 +165,6 @@ export class SwissEphemerisShimAgent extends Agent {
     try {
       const now = new Date();
       const hoursSinceLastRotation = (now.getTime() - this.lastRotation.getTime()) / (1000 * 60 * 60);
-
       // Rotate every 6 hours or on demand
       if (hoursSinceLastRotation >= 6) {
         for (const [source, currentIndex] of this.apiKeyRotation) {
@@ -200,12 +179,10 @@ export class SwissEphemerisShimAgent extends Agent {
         this.lastRotation = now;
         console.log('API keys rotated successfully');
       }
-
     } catch (error) {
       console.error('SwissEphemerisShimAgent: API key rotation failed:', error);
     }
   }
-
   /**
    * Transform coordinates between different systems
    */
@@ -224,13 +201,11 @@ export class SwissEphemerisShimAgent extends Agent {
       // - Equatorial (right ascension/declination)
       
       return coordinates; // Placeholder
-
     } catch (error) {
       console.error('SwissEphemerisShimAgent: Coordinate transformation failed:', error);
       throw new Error('Failed to transform coordinates');
     }
   }
-
   /**
    * Private helper methods
    */
@@ -243,7 +218,6 @@ export class SwissEphemerisShimAgent extends Agent {
     const inputDate = typeof date === 'string' ? new Date(date) : date;
     return inputDate.toISOString();
   }
-
   private async calculateWithSource(
     source: string, 
     request: CoordinateRequest
@@ -267,7 +241,6 @@ export class SwissEphemerisShimAgent extends Agent {
       accuracy: 'high'
     };
   }
-
   private async tryFallbackSources(request: CoordinateRequest): Promise<EphemerisResponse> {
     for (const source of this.config.fallbackSources) {
       try {
@@ -280,32 +253,26 @@ export class SwissEphemerisShimAgent extends Agent {
     
     throw new Error('All ephemeris sources failed');
   }
-
   private generateCacheKey(request: CoordinateRequest): string {
     return `${request.planet}_${request.date}_${JSON.stringify(request.coordinates)}`;
   }
-
   private isCacheValid(timestamp: string): boolean {
     const cacheAge = Date.now() - new Date(timestamp).getTime();
     const maxAge = this.config.cacheDuration * 60 * 60 * 1000; // Convert hours to ms
     return cacheAge < maxAge;
   }
-
   private async detectTimezone(coordinates: { latitude: number; longitude: number }): Promise<string> {
     // TODO: Implement timezone detection from coordinates
     return 'UTC';
   }
-
   private async performTimezoneConversion(request: TimezoneConversionRequest): Promise<string> {
     // TODO: Implement precise timezone conversion with DST handling
     return new Date(request.datetime).toISOString();
   }
-
   private getKeysForSource(source: string): string[] {
     // TODO: Return array of available keys for rotation
     return [this.config.apiKeys[source]].filter(Boolean);
   }
-
   /**
    * Get agent status and configuration
    */
@@ -334,5 +301,4 @@ export class SwissEphemerisShimAgent extends Agent {
     };
   }
 }
-
 export default SwissEphemerisShimAgent;

@@ -1,20 +1,17 @@
 'use client';
-
+ 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
 import { analyzeCareer, CareerAnalysis } from '@/lib/astrology/CareerAnalyzer';
-
 interface InteractiveCareerInsightsProps {
   birthData: BirthData;
   onBack?: () => void;
 }
-
 interface PersonalityTest {
   question: string;
   answers: { text: string; weight: number; category: string }[];
 }
-
 const PERSONALITY_QUESTIONS: PersonalityTest[] = [
   {
     question: "What energizes you most in a work environment?",
@@ -53,7 +50,6 @@ const PERSONALITY_QUESTIONS: PersonalityTest[] = [
     ]
   }
 ];
-
 export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps> = ({
   birthData,
   onBack
@@ -70,8 +66,7 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
   const [testCompleted, setTestCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState<'overview' | 'strengths' | 'challenges' | 'paths'>('overview');
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const loadCareerAnalysis = async () => {
       try {
@@ -84,16 +79,13 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
         setLoading(false);
       }
     };
-
     loadCareerAnalysis();
   }, [birthData]);
-
   const handleAnswerSelect = (answer: { text: string; weight: number; category: string }) => {
     setPersonalityScores(prev => ({
       ...prev,
       [answer.category]: prev[answer.category] + answer.weight
     }));
-
     if (currentQuestion < PERSONALITY_QUESTIONS.length - 1) {
       setCurrentQuestion(prev => prev + 1);
     } else {
@@ -101,29 +93,24 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
       setShowTest(false);
     }
   };
-
   const resetTest = () => {
     setPersonalityScores({ leadership: 0, analytical: 0, creative: 0, social: 0 });
     setCurrentQuestion(0);
     setTestCompleted(false);
     setShowTest(true);
   };
-
   const getPersonalityInsight = () => {
     const maxScore = Math.max(...Object.values(personalityScores));
     const dominantType = Object.entries(personalityScores)
       .find(([_, score]) => score === maxScore)?.[0];
-
     const insights = {
       leadership: "Your astrological profile combined with your responses suggests strong leadership potential. You're drawn to positions where you can guide and influence others.",
       analytical: "Your cosmic blueprint aligns with analytical thinking. You excel at processing complex information and finding logical solutions.",
       creative: "Your birth chart resonates with creative expression. You're naturally inclined toward innovative and artistic pursuits.",
       social: "Your planetary influences emphasize interpersonal connections. You thrive in collaborative environments and helping others."
     };
-
     return dominantType ? insights[dominantType as keyof typeof insights] : '';
   };
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -134,7 +121,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
       </div>
     );
   }
-
   if (!careerAnalysis) {
     return (
       <div className="text-center py-8">
@@ -142,7 +128,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
       </div>
     );
   }
-
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto pt-8">
@@ -157,7 +142,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
           <h1 className="text-3xl font-bold text-white text-center flex-1">🌟 Career Insights</h1>
           <div className="w-24"></div> {/* Spacer */}
         </div>
-
         <div className="space-y-6">
           {/* Personality Test Button */}
           <div className="flex justify-between items-center">
@@ -169,7 +153,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
           {testCompleted ? 'Retake' : 'Take'} Personality Test
         </button>
       </div>
-
       {/* Personality Test Modal */}
       <AnimatePresence>
         {showTest && (
@@ -196,7 +179,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
                   ✕
                 </button>
               </div>
-
               <div className="mb-6">
                 <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
                   <div
@@ -208,7 +190,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
                   {PERSONALITY_QUESTIONS[currentQuestion].question}
                 </p>
               </div>
-
               <div className="space-y-3">
                 {PERSONALITY_QUESTIONS[currentQuestion].answers.map((answer, index) => (
                   <motion.button
@@ -226,7 +207,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Personality Test Results */}
       {testCompleted && (
         <motion.div
@@ -246,7 +226,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
           <p className="text-gray-300 text-sm">{getPersonalityInsight()}</p>
         </motion.div>
       )}
-
       {/* Navigation Tabs */}
       <div className="flex space-x-4 border-b border-gray-700">
         {[
@@ -268,7 +247,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
           </button>
         ))}
       </div>
-
       {/* Tab Content */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -309,7 +287,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
               </div>
             </div>
           )}
-
           {selectedTab === 'strengths' && (
             <div className="grid gap-4">
               {careerAnalysis.strengths.map((strength, index) => (
@@ -333,7 +310,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
               ))}
             </div>
           )}
-
           {selectedTab === 'challenges' && (
             <div className="grid gap-4">
               {careerAnalysis.challenges.map((challenge, index) => (
@@ -354,7 +330,6 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
               ))}
             </div>
           )}
-
           {selectedTab === 'paths' && (
             <div className="grid gap-4">
               {careerAnalysis.recommendedPaths.map((path, index) => (

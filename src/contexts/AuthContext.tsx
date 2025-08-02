@@ -1,10 +1,9 @@
 'use client';
-
+ 
 import { AuthError, AuthResponse, Session, User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from '../lib/supabase/client';
 import { profileService, UserProfile } from '../services/profileService';
-
 interface AuthContextType {
   user: User | null;
   session: Session | null;
@@ -22,14 +21,11 @@ interface AuthContextType {
   signOut: () => Promise<{ error: AuthError | null }>;
   isGuest: boolean;
 }
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
@@ -39,7 +35,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           data: { session },
           error,
         } = await supabase.auth.getSession();
-
         if (error) {
           console.error("❌ Error getting session:", error);
         } else {
@@ -49,7 +44,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             accessToken: session?.access_token ? "present" : "missing",
           });
         }
-
         setSession(session);
         setUser(session?.user ?? null);
       } catch (error) {
@@ -58,9 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setLoading(false);
       }
     };
-
     getInitialSession();
-
     // Listen for auth changes
     const {
       data: { subscription },
@@ -70,15 +62,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         user: session?.user?.email || "none",
         session: session ? "present" : "missing",
       });
-
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
     });
-
     return () => subscription.unsubscribe();
   }, []);
-
   const signUp = async (
     email: string,
     password: string,
@@ -91,7 +80,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
-
     // If signup is successful and user is created
     if (authResponse.data?.user && !authResponse.error) {
       // Create profile if profile data is provided
@@ -107,19 +95,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           // Don't return error here as auth was successful
         }
       }
-
       if (!authResponse.data.session) {
         console.log("📧 Email confirmation required for:", email);
       }
     }
-
     return authResponse;
   };
-
   const signIn = async (email: string, password: string) => {
     return await supabase.auth.signInWithPassword({ email, password });
   };
-
   const signInWithGoogle = async () => {
     return await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -128,10 +112,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
     });
   };
-
   const signOut = async () => {
     const result = await supabase.auth.signOut();
-
     // Clear API auth cache on logout
     try {
       const { APIAuthHelper } = await import("../utils/apiAuth");
@@ -139,10 +121,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.warn("Failed to clear API auth cache:", error);
     }
-
     return result;
   };
-
   const value = {
     user,
     session,
@@ -153,10 +133,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut,
     isGuest: !user,
   };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

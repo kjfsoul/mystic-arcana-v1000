@@ -1,14 +1,11 @@
 /**
  * Daily Oracle type definitions
  */
-
 import { BirthData } from './astrology';
-
 export interface DailyOracleRequest {
   birthData: BirthData;
   userId?: string;
 }
-
 export interface TarotCardOracleData {
   id: string;
   name: string;
@@ -25,7 +22,6 @@ export interface TarotCardOracleData {
   elemental_association?: string;
   astrological_association?: string;
 }
-
 export interface HoroscopeOracleData {
   sign: string;
   degrees: number;
@@ -34,7 +30,6 @@ export interface HoroscopeOracleData {
   quality?: string;
   rulingPlanet?: string;
 }
-
 export interface CosmicFocusData {
   moonPhase: string;
   moonSign: string;
@@ -43,13 +38,11 @@ export interface CosmicFocusData {
   energyTheme: string;
   recommendation: string;
 }
-
 export interface DailySpreadCard {
   card: TarotCardOracleData;
   interpretation: string;
   personalizedMessage: string;
 }
-
 export interface DailySpread {
   type: 'daily_guidance';
   theme: string;
@@ -61,14 +54,12 @@ export interface DailySpread {
   overallGuidance: string;
   practicalAdvice: string;
 }
-
 export interface CompatibilityInsight {
   bestMatchSign: string;
   challengingSign: string;
   relationshipAdvice: string;
   communicationTips: string;
 }
-
 export interface DailyOracleData {
   id: string;
   userId?: string;
@@ -92,7 +83,6 @@ export interface DailyOracleData {
   isUnavailable?: boolean;
   errorDetails?: string;
 }
-
 export interface DailyOracleResponse {
   success: boolean;
   data?: DailyOracleData;

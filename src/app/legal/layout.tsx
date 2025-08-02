@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-
 export const metadata: Metadata = {
   title: "Legal Documents - Mystic Arcana",
   description: "Privacy policy, terms of service, and other legal documents for Mystic Arcana",
 };
-
 export default function LegalLayout({
   children,
 }: {

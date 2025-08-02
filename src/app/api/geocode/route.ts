@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 /**
  * Geocoding API
  * Supports both location search and reverse geocoding
@@ -11,23 +10,19 @@ export async function GET(request: NextRequest) {
     const input = searchParams.get('input'); // Support both 'q' and 'input' parameters
     const lat = searchParams.get('lat');
     const lon = searchParams.get('lon');
-
     // If lat/lon provided, do reverse geocoding
     if (lat && lon) {
       return await reverseGeocode(parseFloat(lat), parseFloat(lon));
     }
-
     // If query or input provided, do forward geocoding
     const searchQuery = query || input;
     if (searchQuery) {
       return await forwardGeocode(searchQuery);
     }
-
     return NextResponse.json(
       { error: 'Either q/input (query) or lat/lon parameters are required' },
       { status: 400 }
     );
-
   } catch (error) {
     console.error('Geocode API error:', error);
     return NextResponse.json(
@@ -36,7 +31,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
 async function forwardGeocode(query: string) {
   try {
     // Use OpenStreetMap Nominatim as a free alternative
@@ -47,11 +41,9 @@ async function forwardGeocode(query: string) {
         'User-Agent': 'MysticArcana/1.0'
       }
     });
-
     if (!response.ok) {
       throw new Error('Nominatim API request failed');
     }
-
     const data = await response.json();
     
     // Transform to our format
@@ -63,9 +55,7 @@ async function forwardGeocode(query: string) {
       lon: parseFloat(item.lon),
       display_name: item.display_name
     }));
-
     return NextResponse.json(results);
-
   } catch (error) {
     console.error('Forward geocoding error:', error);
     return NextResponse.json(
@@ -74,7 +64,6 @@ async function forwardGeocode(query: string) {
     );
   }
 }
-
 async function reverseGeocode(lat: number, lon: number) {
   try {
     const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`;
@@ -84,11 +73,9 @@ async function reverseGeocode(lat: number, lon: number) {
         'User-Agent': 'MysticArcana/1.0'
       }
     });
-
     if (!response.ok) {
       throw new Error('Reverse geocoding request failed');
     }
-
     const data = await response.json();
     
     const result = {
@@ -99,9 +86,7 @@ async function reverseGeocode(lat: number, lon: number) {
       lon: parseFloat(data.lon),
       display_name: data.display_name
     };
-
     return NextResponse.json(result);
-
   } catch (error) {
     console.error('Reverse geocoding error:', error);
     return NextResponse.json(

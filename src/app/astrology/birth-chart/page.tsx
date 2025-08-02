@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
 import { BirthData } from '@/types/astrology';
 import { PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
-
 export default function BirthChartPage() {
   const [birthData, setBirthData] = useState<BirthData>({
     name: 'Sample Person',
@@ -18,7 +17,6 @@ export default function BirthChartPage() {
     city: 'New York',
     country: 'United States'
   });
-
   const [formData, setFormData] = useState({
     date: '1990-06-15',
     time: '14:30',
@@ -26,7 +24,6 @@ export default function BirthChartPage() {
     longitude: '-74.0060',
     timezone: 'America/New_York'
   });
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -45,15 +42,12 @@ export default function BirthChartPage() {
       country: 'Unknown'
     });
   };
-
   const handlePlanetClick = (planet: PlanetPosition) => {
     console.log('Planet clicked:', planet);
   };
-
   const handleHouseClick = (house: HousePosition) => {
     console.log('House clicked:', house);
   };
-
   return (
     <div style={{
       minHeight: '100vh',
@@ -197,7 +191,6 @@ export default function BirthChartPage() {
             Calculate Chart
           </motion.button>
         </motion.form>
-
         {/* Interactive Birth Chart */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -210,7 +203,6 @@ export default function BirthChartPage() {
             onHouseClick={handleHouseClick}
           />
         </motion.div>
-
         {/* Instructions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

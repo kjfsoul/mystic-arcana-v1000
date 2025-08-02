@@ -1,20 +1,17 @@
+ 
 import { useState, useEffect } from 'react';
-
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const media = window.matchMedia(query);
     
     // Set initial value
     setMatches(media.matches);
-
     // Create event listener
     const listener = (event: MediaQueryListEvent) => {
       setMatches(event.matches);
     };
-
     // Add event listener
     if (media.addEventListener) {
       media.addEventListener('change', listener);
@@ -22,7 +19,6 @@ export function useMediaQuery(query: string): boolean {
       // Fallback for older browsers
       media.addListener(listener);
     }
-
     // Clean up
     return () => {
       if (media.removeEventListener) {
@@ -33,6 +29,5 @@ export function useMediaQuery(query: string): boolean {
       }
     };
   }, [query]);
-
   return matches;
 }

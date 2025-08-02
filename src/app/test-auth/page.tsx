@@ -1,14 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase/client';
-
 export default function TestAuthPage() {
   const { user, session, isGuest } = useAuth();
   const [testResult, setTestResult] = useState<string>('');
   const [loading, setLoading] = useState(false);
-
   const testSignUp = async () => {
     setLoading(true);
     const testEmail = `test${Date.now()}@example.com`;
@@ -38,7 +35,6 @@ export default function TestAuthPage() {
       setLoading(false);
     }
   };
-
   const testSignIn = async () => {
     setLoading(true);
     try {
@@ -58,7 +54,6 @@ export default function TestAuthPage() {
       setLoading(false);
     }
   };
-
   const testGoogleOAuth = async () => {
     setLoading(true);
     try {
@@ -80,7 +75,6 @@ export default function TestAuthPage() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-3xl font-bold mb-8">Authentication Test Page</h1>
@@ -96,7 +90,6 @@ export default function TestAuthPage() {
           }, null, 2)}
         </pre>
       </div>
-
       <div className="space-y-4 mb-8">
         <button
           onClick={testSignUp}
@@ -122,7 +115,6 @@ export default function TestAuthPage() {
           Test Google OAuth
         </button>
       </div>
-
       {testResult && (
         <div className="p-4 bg-gray-900 rounded">
           <h3 className="text-lg mb-2">Test Result:</h3>

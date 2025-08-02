@@ -1,16 +1,13 @@
 'use client';
-
 import React, { useState, useRef } from 'react';
 import { useAccessibility } from '../../../utils/accessibility/useAccessibility';
 import styles from './ReaderChat.module.css';
-
 interface ReaderChatProps {
   onSendMessage: (message: string) => void;
   disabled?: boolean;
   placeholder?: string;
   className?: string;
 }
-
 /**
  * ReaderChat Component
  * 
@@ -27,7 +24,6 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
   const [isComposing, setIsComposing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { handleKeyboardNavigation } = useAccessibility();
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim() && !disabled) {
@@ -39,16 +35,13 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
       }
     }
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // Don't send while composing (for international keyboards)
     if (isComposing) return;
-
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
     }
-
     handleKeyboardNavigation(e, {
       onEscape: () => {
         setMessage('');
@@ -56,7 +49,6 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
       }
     });
   };
-
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     
@@ -65,20 +57,17 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
     textarea.style.height = 'auto';
     textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
   };
-
   const quickQuestions = [
     "What does my future hold?",
     "What should I focus on today?",
     "How can I find clarity?",
     "What energy surrounds me now?"
   ];
-
   const handleQuickQuestion = (question: string) => {
     if (!disabled) {
       onSendMessage(question);
     }
   };
-
   return (
     <div className={`${styles.chatContainer} ${className}`}>
       {/* Quick question buttons */}
@@ -95,7 +84,6 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
           </button>
         ))}
       </div>
-
       {/* Main chat input */}
       <form onSubmit={handleSubmit} className={styles.chatForm}>
         <div className={styles.inputContainer}>
@@ -134,7 +122,6 @@ export const ReaderChat: React.FC<ReaderChatProps> = ({
             </svg>
           </button>
         </div>
-
         <div id="chat-help" className={styles.helpText}>
           Press Enter to send, Shift+Enter for new line
         </div>

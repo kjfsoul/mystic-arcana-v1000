@@ -1,9 +1,7 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './UserTimeline.module.css';
-
 export interface LifeEvent {
   id: string;
   year: number;
@@ -13,13 +11,11 @@ export interface LifeEvent {
   description?: string;
   significance: 'low' | 'medium' | 'high' | 'transformative';
 }
-
 interface UserTimelineProps {
   events?: LifeEvent[];
   onEventsChange?: (events: LifeEvent[]) => void;
   className?: string;
 }
-
 const EVENT_CATEGORIES = [
   'Birth & Family',
   'Education',
@@ -34,14 +30,12 @@ const EVENT_CATEGORIES = [
   'Achievements',
   'Other'
 ];
-
 const SIGNIFICANCE_LEVELS = [
   { value: 'low', label: 'Minor', color: '#87CEEB' },
   { value: 'medium', label: 'Moderate', color: '#DDA0DD' },
   { value: 'high', label: 'Major', color: '#FF69B4' },
   { value: 'transformative', label: 'Life-Changing', color: '#FFD700' }
 ];
-
 export const UserTimeline: React.FC<UserTimelineProps> = ({
   events = [],
   onEventsChange,
@@ -56,15 +50,12 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
     significance: 'medium',
     description: ''
   });
-
   const sortedEvents = [...events].sort((a, b) => {
     if (a.year !== b.year) return a.year - b.year;
     return (a.month || 0) - (b.month || 0);
   });
-
   const handleAddEvent = () => {
     if (!newEvent.title || !newEvent.year) return;
-
     const event: LifeEvent = {
       id: Date.now().toString(),
       title: newEvent.title,
@@ -74,10 +65,8 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
       significance: newEvent.significance as LifeEvent['significance'] || 'medium',
       description: newEvent.description
     };
-
     const updatedEvents = [...events, event];
     onEventsChange?.(updatedEvents);
-
     setNewEvent({
       title: '',
       year: new Date().getFullYear(),
@@ -87,16 +76,13 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
     });
     setShowAddForm(false);
   };
-
   const handleEditEvent = (event: LifeEvent) => {
     setEditingEvent(event);
     setNewEvent(event);
     setShowAddForm(true);
   };
-
   const handleUpdateEvent = () => {
     if (!editingEvent || !newEvent.title || !newEvent.year) return;
-
     const updatedEvent: LifeEvent = {
       ...editingEvent,
       title: newEvent.title,
@@ -106,10 +92,8 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
       significance: newEvent.significance as LifeEvent['significance'] || 'medium',
       description: newEvent.description
     };
-
     const updatedEvents = events.map(e => e.id === editingEvent.id ? updatedEvent : e);
     onEventsChange?.(updatedEvents);
-
     setEditingEvent(null);
     setNewEvent({
       title: '',
@@ -120,16 +104,13 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
     });
     setShowAddForm(false);
   };
-
   const handleDeleteEvent = (eventId: string) => {
     const updatedEvents = events.filter(e => e.id !== eventId);
     onEventsChange?.(updatedEvents);
   };
-
   const getSignificanceColor = (significance: LifeEvent['significance']) => {
     return SIGNIFICANCE_LEVELS.find(level => level.value === significance)?.color || '#DDA0DD';
   };
-
   const renderEventForm = () => (
     <motion.div
       className={styles.eventForm}
@@ -157,7 +138,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
           ✕
         </button>
       </div>
-
       <div className={styles.formGrid}>
         <div className={styles.formField}>
           <label>Event Title *</label>
@@ -169,7 +149,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
             required
           />
         </div>
-
         <div className={styles.formRow}>
           <div className={styles.formField}>
             <label>Year *</label>
@@ -197,7 +176,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
             </select>
           </div>
         </div>
-
         <div className={styles.formRow}>
           <div className={styles.formField}>
             <label>Category</label>
@@ -222,7 +200,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
             </select>
           </div>
         </div>
-
         <div className={styles.formField}>
           <label>Description (Optional)</label>
           <textarea
@@ -233,7 +210,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
           />
         </div>
       </div>
-
       <div className={styles.formActions}>
         <button
           className={styles.saveButton}
@@ -254,7 +230,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
       </div>
     </motion.div>
   );
-
   return (
     <div className={`${styles.container} ${className || ''}`}>
       <div className={styles.header}>
@@ -272,11 +247,9 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
           + Add Life Event
         </button>
       </div>
-
       <AnimatePresence>
         {showAddForm && renderEventForm()}
       </AnimatePresence>
-
       {sortedEvents.length === 0 && !showAddForm && (
         <motion.div
           className={styles.emptyState}
@@ -295,7 +268,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
           </button>
         </motion.div>
       )}
-
       {sortedEvents.length > 0 && (
         <div className={styles.timeline}>
           <div className={styles.timelineAxis} />
@@ -350,7 +322,6 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
           ))}
         </div>
       )}
-
       {sortedEvents.length > 0 && (
         <div className={styles.timelineInsights}>
           <h4>🔮 Timeline Insights</h4>

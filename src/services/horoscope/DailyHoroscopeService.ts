@@ -1,18 +1,14 @@
 import { DailyHoroscope, ZodiacSign } from '@/types/horoscope';
 import { zodiacService } from '@/services/zodiacService';
-
 export class DailyHoroscopeService {
   private static instance: DailyHoroscopeService;
-
   private constructor() {}
-
   static getInstance(): DailyHoroscopeService {
     if (!DailyHoroscopeService.instance) {
       DailyHoroscopeService.instance = new DailyHoroscopeService();
     }
     return DailyHoroscopeService.instance;
   }
-
   /**
    * Generate a general daily horoscope for all users
    * In production, this would fetch from an API or database
@@ -58,7 +54,6 @@ export class DailyHoroscopeService {
         luckyColor: 'green'
       }
     ];
-
     // Use date to consistently pick a horoscope for the day
     const dayIndex = new Date().getDate() % generalHoroscopes.length;
     
@@ -67,7 +62,6 @@ export class DailyHoroscopeService {
       general: generalHoroscopes[dayIndex]
     };
   }
-
   /**
    * Get the current moon phase description
    * Simplified version - in production would use astronomical calculations
@@ -90,7 +84,6 @@ export class DailyHoroscopeService {
     
     return phases[phaseIndex];
   }
-
   /**
    * Get cosmic event of the day
    */
@@ -111,7 +104,6 @@ export class DailyHoroscopeService {
     
     return events[eventIndex];
   }
-
   /**
    * Generate personalized horoscope for user's zodiac sign
    */
@@ -120,22 +112,17 @@ export class DailyHoroscopeService {
     if (!zodiacSign) {
       return null;
     }
-
     const today = new Date().toISOString().split('T')[0];
     const general = this.getGeneralDailyHoroscope().general;
-
     // Generate personalized insight using zodiac service
     const insight = zodiacService.generateDailyHoroscope(zodiacSign);
-
     // Generate personalized advice based on sign traits
     const advice = this.generatePersonalizedAdvice(zodiacSign.name.toLowerCase() as ZodiacSign);
     
     // Focus area based on element and ruling planet
     const focus = this.generateFocusArea(zodiacSign);
-
     // Compatible signs for the day
     const compatibility = this.getCompatibleSigns(zodiacSign.name.toLowerCase() as ZodiacSign);
-
     return {
       date: today,
       general,
@@ -148,7 +135,6 @@ export class DailyHoroscopeService {
       }
     };
   }
-
   private generatePersonalizedAdvice(sign: ZodiacSign): string {
     const advice = {
       aries: "Channel your natural leadership today. Take initiative in projects that matter to you.",
@@ -164,10 +150,8 @@ export class DailyHoroscopeService {
       aquarius: "Think outside the box. Your innovative ideas lead to breakthroughs.",
       pisces: "Listen to your intuition. Your compassion creates meaningful connections."
     };
-
     return advice[sign] || advice.aries;
   }
-
   private generateFocusArea(zodiacSign: { element: string; rulingPlanet: string }): string {
     const elementFocus = {
       fire: "Energy and passion",
@@ -175,7 +159,6 @@ export class DailyHoroscopeService {
       air: "Communication and ideas",
       water: "Emotions and intuition"
     };
-
     const planetFocus = {
       'Mars': 'action and courage',
       'Venus': 'love and beauty',
@@ -188,13 +171,11 @@ export class DailyHoroscopeService {
       'Neptune': 'spirituality and dreams',
       'Pluto': 'transformation and rebirth'
     };
-
     const element = elementFocus[zodiacSign.element as keyof typeof elementFocus] || 'balance';
     const planet = planetFocus[zodiacSign.rulingPlanet as keyof typeof planetFocus] || 'growth';
     
     return `${element} guided by ${planet}`;
   }
-
   private getCompatibleSigns(sign: ZodiacSign): ZodiacSign[] {
     const compatibility: Record<ZodiacSign, ZodiacSign[]> = {
       aries: ['leo', 'sagittarius', 'gemini'],
@@ -210,7 +191,6 @@ export class DailyHoroscopeService {
       aquarius: ['gemini', 'libra', 'sagittarius'],
       pisces: ['cancer', 'scorpio', 'capricorn']
     };
-
     return compatibility[sign] || [];
   }
 }

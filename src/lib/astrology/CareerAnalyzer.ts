@@ -1,25 +1,21 @@
 import { BirthData } from './AstronomicalCalculator';
 import { SwissEphemerisShim } from './SwissEphemerisShim';
-
 export interface CareerStrength {
   title: string;
   description: string;
   rating: number; // 1-5 scale
 }
-
 export interface CareerChallenge {
   title: string;
   description: string;
   advice: string;
 }
-
 export interface CareerPath {
   title: string;
   description: string;
   industries: string[];
   compatibility: number; // 1-5 scale
 }
-
 export interface CareerAnalysis {
   overview: string;
   strengths: CareerStrength[];
@@ -34,7 +30,6 @@ export interface CareerAnalysis {
     tenthHouse: string;
   };
 }
-
 // Real planetary positions using Swiss Ephemeris calculations
 export async function getRealCareerPlacements(birthData: BirthData): Promise<Record<string, number>> {
   const chart = await SwissEphemerisShim.calculateFullChart(birthData);
@@ -60,7 +55,6 @@ export async function getRealCareerPlacements(birthData: BirthData): Promise<Rec
   
   return placements;
 }
-
 function getZodiacSign(degrees: number): string {
   const signs = [
     'Aries', 'Taurus', 'Gemini', 'Cancer', 
@@ -69,7 +63,6 @@ function getZodiacSign(degrees: number): string {
   ];
   return signs[Math.floor(degrees / 30)];
 }
-
 // House position calculation using real chart data
 async function getHousePositions(birthData: BirthData): Promise<Record<string, string>> {
   const chart = await SwissEphemerisShim.calculateFullChart(birthData);
@@ -80,7 +73,6 @@ async function getHousePositions(birthData: BirthData): Promise<Record<string, s
     tenthHouse: `House ${chart.houses[9]?.number || 10}: ${chart.houses[9]?.sign || 'Unknown'} - Your public reputation and achievement`
   };
 }
-
 function analyzeStrengths(placements: Record<string, number>): CareerStrength[] {
   const strengths: CareerStrength[] = [];
   
@@ -173,7 +165,6 @@ function analyzeStrengths(placements: Record<string, number>): CareerStrength[] 
   
   return strengths.slice(0, 3); // Return top 3 strengths
 }
-
 function analyzeChallenges(placements: Record<string, number>): CareerChallenge[] {
   const challenges: CareerChallenge[] = [];
   
@@ -263,7 +254,6 @@ function analyzeChallenges(placements: Record<string, number>): CareerChallenge[
   
   return challenges.slice(0, 2); // Return top 2 challenges
 }
-
 function analyzeCareerPaths(placements: Record<string, number>): CareerPath[] {
   const paths: CareerPath[] = [];
   
@@ -370,7 +360,6 @@ function analyzeCareerPaths(placements: Record<string, number>): CareerPath[] {
   
   return paths;
 }
-
 export async function analyzeCareer(birthData: BirthData): Promise<CareerAnalysis> {
   const placements = await getRealCareerPlacements(birthData);
   
@@ -394,7 +383,6 @@ export async function analyzeCareer(birthData: BirthData): Promise<CareerAnalysi
     }
   };
 }
-
 function generateOverview(midheaven: string, saturn: string, mars: string): string {
   return `Your cosmic career blueprint reveals a unique combination of ${midheaven} leadership style, ${saturn} work ethic, and ${mars} drive. This creates a professional personality that excels in roles requiring both vision and practical execution. Your path to success involves leveraging your natural ${midheaven} qualities while developing the discipline and structure indicated by your ${saturn} placement. The ${mars} energy provides the motivation and action-oriented approach needed to manifest your career aspirations into reality.`;
 }

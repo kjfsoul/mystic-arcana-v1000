@@ -1,19 +1,15 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CosmicDeepDive } from './CosmicDeepDive';
 import { LifeEvent } from '../timeline';
 import styles from './AdvancedChartPreview.module.css';
-
 interface AdvancedChartPreviewProps {
   onBack: () => void;
   lifeEvents?: LifeEvent[];
 }
-
 export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBack, lifeEvents = [] }) => {
   const [showLearnMore, setShowLearnMore] = useState(false);
-
   const upcomingFeatures = [
     {
       icon: '⏰',
@@ -54,7 +50,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
       status: 'Coming Q4 2025'
     }
   ];
-
   const renderLearnMoreModal = () => (
     <AnimatePresence>
       {showLearnMore && (
@@ -92,7 +87,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
                   This isn&apos;t just astrology—it&apos;s your personal roadmap through the cosmos.
                 </p>
               </div>
-
               <div className={styles.featuresGrid}>
                 {upcomingFeatures.map((feature, index) => (
                   <motion.div 
@@ -111,7 +105,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
                   </motion.div>
                 ))}
               </div>
-
               {lifeEvents.length === 0 && (
                 <div className={styles.timelineEncouragement}>
                   <h3>📅 Enhance Your Reading</h3>
@@ -134,7 +127,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
                   </button>
                 </div>
               )}
-
               <div className={styles.earlyAccessSection}>
                 <h3>🚀 Be Among the First</h3>
                 <p>
@@ -162,7 +154,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
                   </div>
                 </div>
               </div>
-
               <div className={styles.modalActions}>
                 <button className={styles.primaryButton}>
                   Join Early Access List
@@ -180,7 +171,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
       )}
     </AnimatePresence>
   );
-
   return (
     <div className={styles.container}>
       <motion.button
@@ -194,7 +184,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
       >
         ← Back to Astrology
       </motion.button>
-
       <motion.div
         className={styles.content}
         initial={{ opacity: 0, y: 20 }}
@@ -207,7 +196,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
             Unlock the deepest mysteries of your cosmic blueprint
           </p>
         </div>
-
         <motion.div 
           className={styles.visualSection}
           initial={{ opacity: 0, scale: 0.95 }}
@@ -216,7 +204,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
         >
           <CosmicDeepDive />
         </motion.div>
-
         <motion.div 
           className={styles.descriptionSection}
           initial={{ opacity: 0, y: 30 }}
@@ -257,7 +244,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
             </div>
           </div>
         </motion.div>
-
         <motion.div 
           className={styles.actionSection}
           initial={{ opacity: 0, y: 20 }}
@@ -277,7 +263,6 @@ export const AdvancedChartPreview: React.FC<AdvancedChartPreviewProps> = ({ onBa
           </p>
         </motion.div>
       </motion.div>
-
       {renderLearnMoreModal()}
     </div>
   );

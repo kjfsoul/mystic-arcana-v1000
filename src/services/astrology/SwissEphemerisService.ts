@@ -1,5 +1,4 @@
 import Swisseph from 'swisseph-v2';
-
 // Planet constants from Swiss Ephemeris
 export const PLANETS = {
   SUN: Swisseph.SE_SUN,
@@ -18,9 +17,7 @@ export const PLANETS = {
   ASCENDANT: -1,  // These need special handling
   MIDHEAVEN: -2   // These need special handling
 };
-
 export interface PlanetPosition {
-
   planet: string;
   longitude: number;
   latitude: number;
@@ -33,7 +30,6 @@ export interface PlanetPosition {
   house?: number;
   symbol?: string;
 }
-
 export interface BirthChart {
   date: Date;
   location: {
@@ -45,7 +41,6 @@ export interface BirthChart {
   houses: number[];
   aspects: Aspect[];
 }
-
 export interface Aspect {
   planet1: string;
   planet2: string;
@@ -54,10 +49,8 @@ export interface Aspect {
   orb: number;
   applying: boolean;
 }
-
 class SwissEphemerisService {
   private initialized = false;
-
   constructor() {
     // Set ephemeris path - we'll need to download ephemeris files
     // For now, use built-in Moshier ephemeris (less accurate but works without files)
@@ -67,7 +60,6 @@ class SwissEphemerisService {
       console.log('Using default ephemeris');
     }
   }
-
   /**
    * Convert date to Julian Day (UT)
    */
@@ -83,7 +75,6 @@ class SwissEphemerisService {
     );
     return result.julianDayUT;
   }
-
   /**
    * Calculate planet position for a given date
    */
@@ -97,19 +88,16 @@ class SwissEphemerisService {
         console.error('Error calculating planet position:', result.error);
         return null;
       }
-
       const longitude = result.data[0];
       const latitude = result.data[1];
       const distance = result.data[2];
       const speed = result.data[3];
-
       // Calculate zodiac sign
       const zodiacIndex = Math.floor(longitude / 30);
       const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
                           'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
       
       const planetName = this.getPlanetName(planet);
-
       return {
         planet: planetName,
         longitude,
@@ -125,7 +113,6 @@ class SwissEphemerisService {
       return null;
     }
   }
-
   /**
    * Calculate all planet positions for a birth chart
    */
@@ -135,9 +122,7 @@ class SwissEphemerisService {
       PLANETS.MARS, PLANETS.JUPITER, PLANETS.SATURN, PLANETS.URANUS, 
       PLANETS.NEPTUNE, PLANETS.PLUTO, PLANETS.CHIRON, PLANETS.NORTH_NODE
     ];
-
     const planetPositions: PlanetPosition[] = [];
-
     // Calculate each planet's position
     for (const planetNum of planetNumbers) {
       const position = this.calculatePlanetPosition(birthDate, planetNum);
@@ -145,13 +130,10 @@ class SwissEphemerisService {
         planetPositions.push(position);
       }
     }
-
     // Calculate houses (using Placidus system)
     const houses = this.calculateHouses(birthDate, latitude, longitude);
-
     // Calculate aspects
     const aspects = this.calculateAspects(planetPositions);
-
     return {
       date: birthDate,
       location: {
@@ -164,7 +146,6 @@ class SwissEphemerisService {
       aspects
     };
   }
-
   /**
    * Calculate house cusps using Placidus system
    */
@@ -184,7 +165,6 @@ class SwissEphemerisService {
         }
         return houses;
       }
-
       // Extract house cusps (first 12 values)
       const houses = [];
       for (let i = 0; i < 12; i++) {
@@ -201,7 +181,6 @@ class SwissEphemerisService {
       return houses;
     }
   }
-
   /**
    * Calculate aspects between planets
    */
@@ -214,17 +193,14 @@ class SwissEphemerisService {
       { name: 'trine', angle: 120, orb: 8 },
       { name: 'opposition', angle: 180, orb: 8 }
     ];
-
     // Check aspects between each pair of planets
     for (let i = 0; i < planets.length; i++) {
       for (let j = i + 1; j < planets.length; j++) {
         const planet1 = planets[i];
         const planet2 = planets[j];
-
         // Calculate the angle between planets
         let angle = Math.abs(planet1.longitude - planet2.longitude);
         if (angle > 180) angle = 360 - angle;
-
         // Check if this angle matches any aspect
         for (const aspectType of aspectTypes) {
           const orb = Math.abs(angle - aspectType.angle);
@@ -242,10 +218,8 @@ class SwissEphemerisService {
         }
       }
     }
-
     return aspects;
   }
-
   /**
    * Determine if an aspect is applying (getting closer) or separating
    */
@@ -260,7 +234,6 @@ class SwissEphemerisService {
       return planet2.longitude < planet1.longitude;
     }
   }
-
   /**
    * Get planet name from Swiss Ephemeris constant
    */
@@ -280,10 +253,8 @@ class SwissEphemerisService {
       [PLANETS.NORTH_NODE]: 'North Node',
       [PLANETS.SOUTH_NODE]: 'South Node'
     };
-
     return planetNames[planet] || 'Unknown';
   }
-
   /**
    * Test function to verify calculations
    */
@@ -294,7 +265,6 @@ class SwissEphemerisService {
     const testDate = new Date('1879-03-14T11:30:00Z');
     const testLat = 48.4;  // Ulm, Germany
     const testLon = 10.0;
-
     console.log('\nCalculating positions for:', testDate.toISOString());
     
     // Calculate Sun position
@@ -305,14 +275,12 @@ class SwissEphemerisService {
       console.log(`- Sign: ${sunPosition.zodiacSign} ${sunPosition.zodiacDegree.toFixed(2)}°`);
       console.log(`- Retrograde: ${sunPosition.retrograde}`);
     }
-
     // Calculate full birth chart
     const birthChart = this.calculateBirthChart(testDate, testLat, testLon);
     console.log('\nFull Birth Chart:');
     console.log(`- Planets calculated: ${birthChart.planets.length}`);
     console.log(`- Houses calculated: ${birthChart.houses.length}`);
     console.log(`- Aspects found: ${birthChart.aspects.length}`);
-
     // Show all planet positions
     console.log('\nAll Planet Positions:');
     birthChart.planets.forEach(planet => {
@@ -320,6 +288,5 @@ class SwissEphemerisService {
     });
   }
 }
-
 const swissEphemerisService = new SwissEphemerisService();
 export default swissEphemerisService;

@@ -1,9 +1,7 @@
 'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
 export const Footer: React.FC = () => {
   return (
     <footer className="relative z-10 bg-black/20 backdrop-blur-sm border-t border-white/10 mt-auto">
@@ -48,7 +46,6 @@ export const Footer: React.FC = () => {
               </div>
             </motion.div>
           </div>
-
           {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-4">Explore</h4>
@@ -70,7 +67,6 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-
           {/* Legal Links */}
           <div>
             <h4 className="text-white font-semibold mb-4">Legal</h4>
@@ -114,7 +110,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
         </div>
-
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">

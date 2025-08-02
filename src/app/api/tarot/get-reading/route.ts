@@ -2,13 +2,10 @@ import { supabase } from "@/lib/supabase";
 import Logger from "@/utils/logger";
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
-
 const logger = new Logger("TarotGetReadingAPI");
-
 // Define your Supabase credentials (replace with your actual environment variable names)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-
 interface Card {
   id: string;
   name: string;
@@ -17,7 +14,6 @@ interface Card {
   card_number: number;
   [key: string]: unknown;
 }
-
 interface GetReadingResponse {
   success: boolean;
   reading?: {
@@ -58,7 +54,6 @@ interface GetReadingResponse {
   };
   error?: string;
 }
-
 /**
  * GET /api/tarot/get-reading
  *
@@ -85,7 +80,6 @@ export async function GET(request: NextRequest) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-
     if (!user) {
       logger.warn(
         "tarot_get_reading_unauthenticated",
@@ -102,9 +96,7 @@ export async function GET(request: NextRequest) {
         { status: 401 }
       );
     }
-
     const userId = user.id;
-
     // Extract query parameters
     const id = searchParams.get("id");
     const date = searchParams.get("date");
@@ -120,7 +112,6 @@ export async function GET(request: NextRequest) {
     );
     const sort = searchParams.get("sort") || "created_at";
     const order = searchParams.get("order") === "asc" ? "asc" : "desc";
-
     // Case 1: Get specific reading by ID
     if (id) {
       const { data: reading, error } = await supabase
@@ -128,7 +119,6 @@ export async function GET(request: NextRequest) {
         .select("*")
         .eq("id", id)
         .single();
-
       if (error) {
         if (error.code === "PGRST116") {
           // Not found
@@ -141,7 +131,6 @@ export async function GET(request: NextRequest) {
             { status: 404 }
           );
         }
-
         console.error("Database fetch error:", error);
         return NextResponse.json(
           {
@@ -152,41 +141,33 @@ export async function GET(request: NextRequest) {
           { status: 500 }
         );
       }
-
       const formattedReading = formatReading(reading);
-
       return NextResponse.json({
         success: true,
         reading: formattedReading,
       });
     }
-
     // Case 2: Get multiple readings with filters
     let query = supabase.from("tarot_readings").select("*", { count: "exact" });
-
     // Apply filters
     if (userId) {
       query = query.eq("user_id", userId);
     }
-
     if (
       spreadType &&
       ["single", "three-card", "celtic-cross"].includes(spreadType)
     ) {
       query = query.eq("spread_type", spreadType);
     }
-
     if (isPublic !== null) {
       const publicFilter = isPublic === "true";
       query = query.eq("metadata->>isPublic", publicFilter.toString());
     }
-
     // Date filtering
     if (date) {
       const startOfDay = new Date(date);
       const endOfDay = new Date(date);
       endOfDay.setDate(endOfDay.getDate() + 1);
-
       query = query
         .gte("created_at", startOfDay.toISOString())
         .lt("created_at", endOfDay.toISOString());
@@ -200,7 +181,6 @@ export async function GET(request: NextRequest) {
         query = query.lt("created_at", endDate.toISOString());
       }
     }
-
     // Tag filtering (search in JSONB array)
     if (tags) {
       const tagList = tags.split(",").map((tag) => tag.trim());
@@ -208,18 +188,14 @@ export async function GET(request: NextRequest) {
         query = query.contains("cards_drawn->tags", [tag]);
       }
     }
-
     // Sorting
     const validSortFields = ["created_at", "spread_type"];
     const sortField = validSortFields.includes(sort) ? sort : "created_at";
     query = query.order(sortField, { ascending: order === "asc" });
-
     // Pagination
     const offset = (page - 1) * limit;
     query = query.range(offset, offset + limit - 1);
-
     const { data: readings, error: fetchError, count } = await query;
-
     if (fetchError) {
       console.error("Database fetch error:", fetchError);
       return NextResponse.json(
@@ -232,11 +208,9 @@ export async function GET(request: NextRequest) {
         { status: 500 }
       );
     }
-
     const formattedReadings = readings?.map(formatReading) || [];
     const total = count || 0;
     const hasMore = offset + limit < total;
-
     const response: GetReadingResponse = {
       success: true,
       readings: formattedReadings,
@@ -247,7 +221,6 @@ export async function GET(request: NextRequest) {
         hasMore,
       },
     };
-
     // Log the fetch for monitoring
     logger.info(
       "tarot_readings_fetched",
@@ -263,7 +236,6 @@ export async function GET(request: NextRequest) {
       },
       `Fetched ${formattedReadings.length} readings.`
     );
-
     return NextResponse.json(response, {
       headers: {
         "X-Total-Count": total.toString(),
@@ -284,7 +256,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
 /**
  * Format raw database reading into API response format
  */
@@ -307,10 +278,8 @@ interface RawReading {
   cosmic_influence?: unknown;
   created_at: string;
 }
-
 function formatReading(rawReading: RawReading) {
   const cardsDrawn = rawReading.cards_drawn || {};
-
   return {
     id: rawReading.id,
     userId: rawReading.user_id,
@@ -327,7 +296,6 @@ function formatReading(rawReading: RawReading) {
     drawId: cardsDrawn.drawId,
   };
 }
-
 /**
  * DELETE /api/tarot/get-reading
  *
@@ -338,7 +306,6 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const userId = searchParams.get("userId");
-
     if (!id || !userId) {
       return NextResponse.json(
         {
@@ -349,7 +316,6 @@ export async function DELETE(request: NextRequest) {
         { status: 400 }
       );
     }
-
     // Delete reading (only if user owns it)
     const { data, error } = await supabase
       .from("tarot_readings")
@@ -357,7 +323,6 @@ export async function DELETE(request: NextRequest) {
       .eq("id", id)
       .eq("user_id", userId)
       .select("id");
-
     if (error) {
       console.error("Database delete error:", error);
       return NextResponse.json(
@@ -369,7 +334,6 @@ export async function DELETE(request: NextRequest) {
         { status: 500 }
       );
     }
-
     if (!data || data.length === 0) {
       return NextResponse.json(
         {
@@ -380,14 +344,12 @@ export async function DELETE(request: NextRequest) {
         { status: 404 }
       );
     }
-
     logger.info(
       "tarot_reading_deleted",
       userId,
       { readingId: id },
       `Reading ${id} deleted by user ${userId}.`
     );
-
     return NextResponse.json({
       success: true,
       deletedId: id,

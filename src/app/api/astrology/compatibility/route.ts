@@ -2,25 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
 import { BirthData } from '@/types/astrology';
-
 interface CompatibilityRequest {
   person1: BirthData;
   person2: BirthData;
 }
-
 interface PlanetaryData {
   sign: string;
   degree: number;
   retrograde: boolean;
 }
-
 interface SynastryAspect {
   aspect: string;
   planet1: string;
   planet2: string;
   orb?: number;
 }
-
 interface SynastryResult {
   success: boolean;
   data?: {
@@ -37,7 +33,6 @@ interface SynastryResult {
   };
   error?: string;
 }
-
 function getDefaultScores() {
   return {
     love: { rating: 0, description: "Data unavailable" },
@@ -46,7 +41,6 @@ function getDefaultScores() {
     overall: { summary: "Data unavailable", keyAspects: ["Service unavailable"] }
   };
 }
-
 function calculateCompatibilityScores(synastryData: SynastryResult['data']): {
   love: { rating: number; description: string };
   friendship: { rating: number; description: string };
@@ -100,7 +94,6 @@ function calculateCompatibilityScores(synastryData: SynastryResult['data']): {
     }
   };
 }
-
 function getLoveDescription(score: number): string {
   if (score >= 4.5) return "Incredible romantic chemistry! Your hearts beat in cosmic harmony, creating a passionate and deeply fulfilling connection.";
   if (score >= 3.5) return "Strong romantic potential with natural attraction and emotional understanding. Your love story has beautiful cosmic support.";
@@ -108,7 +101,6 @@ function getLoveDescription(score: number): string {
   if (score >= 1.5) return "Moderate romantic connection that requires effort and understanding. Different approaches to love can create both challenges and growth.";
   return "Romantic compatibility may require significant work and compromise. Focus on building friendship and understanding first.";
 }
-
 function getFriendshipDescription(score: number): string {
   if (score >= 4.5) return "Exceptional friendship potential! You understand each other intuitively and bring out the best in one another.";
   if (score >= 3.5) return "Strong friendship compatibility with shared values and mutual respect. You'll create lasting memories together.";
@@ -116,7 +108,6 @@ function getFriendshipDescription(score: number): string {
   if (score >= 1.5) return "Moderate friendship compatibility. Building trust and finding common ground will strengthen your connection over time.";
   return "Friendship may require patience and understanding. Focus on respecting differences and finding shared interests.";
 }
-
 function getTeamworkDescription(score: number): string {
   if (score >= 4.5) return "Outstanding teamwork potential! You complement each other's strengths and work toward goals with unified energy.";
   if (score >= 3.5) return "Strong collaborative compatibility with shared work ethics and complementary skills. Projects together will flourish.";
@@ -124,7 +115,6 @@ function getTeamworkDescription(score: number): string {
   if (score >= 1.5) return "Moderate teamwork compatibility. Success will come through patience, compromise, and leveraging individual strengths.";
   return "Teamwork may face challenges. Focus on clear communication, defined roles, and respecting different working styles.";
 }
-
 function getOverallSummary(love: number, friendship: number, teamwork: number): string {
   const average = (love + friendship + teamwork) / 3;
   
@@ -142,7 +132,6 @@ function getOverallSummary(love: number, friendship: number, teamwork: number): 
   }
   return "Your relationship will require patience, communication, and mutual respect to flourish. The cosmos encourages you to approach this connection with open hearts and realistic expectations, focusing on building understanding over time.";
 }
-
 function extractKeyAspects(aspects: SynastryAspect[]): string[] {
   const keyAspects: string[] = [];
   
@@ -170,7 +159,6 @@ function extractKeyAspects(aspects: SynastryAspect[]): string[] {
   
   return keyAspects.slice(0, 5);
 }
-
 function callPythonScript(action: string, data: object): Promise<SynastryResult> {
   return new Promise((resolve) => {
     const pythonPath = process.env.PYTHON_PATH || 'python3';
@@ -229,7 +217,6 @@ function callPythonScript(action: string, data: object): Promise<SynastryResult>
     }, 30000); // 30 second timeout
   });
 }
-
 export async function POST(request: NextRequest) {
   try {
     const body: CompatibilityRequest = await request.json();
@@ -241,7 +228,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
     // Convert dates to proper format for Python script
     const person1Date = new Date(body.person1.date || body.person1.birthDate);
     const person2Date = new Date(body.person2.date || body.person2.birthDate);
@@ -256,7 +242,6 @@ export async function POST(request: NextRequest) {
       city: body.person1.city,
       country: body.person1.country || ""
     };
-
     const person2Data = {
       name: body.person2.name,
       year: person2Date.getFullYear(),
@@ -267,13 +252,11 @@ export async function POST(request: NextRequest) {
       city: body.person2.city,
       country: body.person2.country || ""
     };
-
     // Call Python script for synastry calculation
     const synastryResult = await callPythonScript('synastry', {
       person1: person1Data,
       person2: person2Data
     });
-
     if (!synastryResult.success) {
       // Fallback to data temporarily unavailable
       return NextResponse.json({
@@ -299,10 +282,8 @@ export async function POST(request: NextRequest) {
         }
       });
     }
-
     // Calculate compatibility scores from synastry data
     const compatibilityScores = calculateCompatibilityScores(synastryResult.data!);
-
     return NextResponse.json({
       success: true,
       data: {
@@ -311,7 +292,6 @@ export async function POST(request: NextRequest) {
         timestamp: new Date().toISOString()
       }
     });
-
   } catch (error) {
     console.error('Compatibility API error:', error);
     

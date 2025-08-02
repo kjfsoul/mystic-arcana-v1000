@@ -4,7 +4,6 @@
  * Central theme configuration following Mystic Arcana brand guidelines.
  * Based on galaxy/starry-sky interface with purples, golds, and deep blues.
  */
-
 export const cosmicTheme = {
   colors: {
     // Primary brand colors
@@ -36,7 +35,6 @@ export const cosmicTheme = {
       900: '#713f12',
       950: '#422006',
     },
-
     // Accent mystical colors
     accent: {
       50: '#f0f4ff',
@@ -51,7 +49,6 @@ export const cosmicTheme = {
       900: '#312e81',
       950: '#1e1b4b',
     },
-
     // Neutral galaxy tones
     neutral: {
       50: '#fafafa',
@@ -73,7 +70,6 @@ export const cosmicTheme = {
     error: '#ef4444',
     info: '#3b82f6',
   },
-
   // Spacing scale
   spacing: {
     0: '0',
@@ -91,7 +87,6 @@ export const cosmicTheme = {
     24: '6rem',
     32: '8rem',
   },
-
   // Typography
   typography: {
     fontFamily: {
@@ -113,7 +108,6 @@ export const cosmicTheme = {
       '5xl': ['3rem', { lineHeight: '1' }],
     },
   },
-
   // Border radius
   borderRadius: {
     none: '0',
@@ -126,7 +120,6 @@ export const cosmicTheme = {
     '3xl': '1.5rem',
     full: '9999px',
   },
-
   // Shadows with cosmic glow effects
   shadows: {
     sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
@@ -137,7 +130,6 @@ export const cosmicTheme = {
     cosmic: '0 0 20px rgb(132 61 255 / 0.4), 0 0 40px rgb(132 61 255 / 0.2)',
     mystical: '0 0 15px rgb(255 215 0 / 0.3), 0 0 30px rgb(255 215 0 / 0.1)',
   },
-
   // Animation curves
   animation: {
     timing: {
@@ -154,7 +146,6 @@ export const cosmicTheme = {
       cosmic: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
     },
   },
-
   // Breakpoints
   breakpoints: {
     sm: '640px',
@@ -163,7 +154,6 @@ export const cosmicTheme = {
     xl: '1280px',
     '2xl': '1536px',
   },
-
   // Z-index scale
   zIndex: {
     hide: -1,
@@ -181,5 +171,4 @@ export const cosmicTheme = {
     tooltip: 1800,
   },
 } as const;
-
 export type CosmicTheme = typeof cosmicTheme;

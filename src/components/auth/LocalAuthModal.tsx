@@ -1,16 +1,13 @@
 "use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./LocalAuthModal.module.css";
-
 interface LocalAuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultMode?: "signin" | "signup";
 }
-
 /**
  * Local Authentication Modal
  *
@@ -37,18 +34,15 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setError(null); // Clear error when user types
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
     try {
       if (mode === "signup") {
         // Validation for signup
@@ -64,7 +58,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
           setError("Password must be at least 6 characters");
           return;
         }
-
         const result = await signUp(formData.email, formData.password);
         if (result.error) {
           setError(result.error.message || "Failed to create account");
@@ -86,12 +79,10 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
       setIsLoading(false);
     }
   };
-
   const handleGuestAccess = () => {
     // For now, just close the modal - guest access can be implemented later
     onClose();
   };
-
   const switchMode = () => {
     setMode(mode === "signin" ? "signup" : "signin");
     setError(null);
@@ -102,9 +93,7 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
       confirmPassword: "",
     });
   };
-
   if (!isOpen) return null;
-
   return (
     <div className={styles.overlay} onClick={onClose}>
       <AnimatePresence>
@@ -130,7 +119,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
               ✕
             </button>
           </div>
-
           {/* Form */}
           <form className={styles.form} onSubmit={handleSubmit}>
             {mode === "signup" && (
@@ -150,7 +138,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
                 />
               </div>
             )}
-
             <div className={styles.inputGroup}>
               <label htmlFor="email" className={styles.label}>
                 Email
@@ -166,7 +153,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
                 required
               />
             </div>
-
             <div className={styles.inputGroup}>
               <label htmlFor="password" className={styles.label}>
                 Password
@@ -183,7 +169,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
                 minLength={6}
               />
             </div>
-
             {mode === "signup" && (
               <div className={styles.inputGroup}>
                 <label htmlFor="confirmPassword" className={styles.label}>
@@ -201,9 +186,7 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
                 />
               </div>
             )}
-
             {error && <div className={styles.error}>⚠️ {error}</div>}
-
             <button
               type="submit"
               className={styles.submitButton}
@@ -221,12 +204,10 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
               )}
             </button>
           </form>
-
           {/* Divider */}
           <div className={styles.divider}>
             <span>or</span>
           </div>
-
           {/* Guest Access */}
           <button
             type="button"
@@ -235,7 +216,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
           >
             👤 Continue as Guest
           </button>
-
           {/* Mode Switch */}
           <div className={styles.modeSwitch}>
             <p>
@@ -251,7 +231,6 @@ export const LocalAuthModal: React.FC<LocalAuthModalProps> = ({
               </button>
             </p>
           </div>
-
           {/* Features */}
           <div className={styles.features}>
             <div className={styles.feature}>

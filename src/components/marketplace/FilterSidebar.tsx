@@ -1,10 +1,8 @@
 'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CelestialEventType, ProductMetadata } from '@/lib/stripe/initStripe';
 import styles from './FilterSidebar.module.css';
-
 export interface FilterState {
   celestialEvents: CelestialEventType[];
   productTypes: ProductMetadata['type'][];
@@ -13,7 +11,6 @@ export interface FilterState {
   priceRange: [number, number];
   showLimitedEdition: boolean;
 }
-
 interface FilterSidebarProps {
   isOpen: boolean;
   onClose: () => void;
@@ -21,7 +18,6 @@ interface FilterSidebarProps {
   onFiltersChange: (filters: FilterState) => void;
   productCount: number;
 }
-
 const CELESTIAL_EVENTS: { value: CelestialEventType; label: string; emoji: string }[] = [
   { value: 'mercury_retrograde', label: 'Mercury Retrograde', emoji: '☿' },
   { value: 'full_moon', label: 'Full Moon', emoji: '🌕' },
@@ -34,7 +30,6 @@ const CELESTIAL_EVENTS: { value: CelestialEventType; label: string; emoji: strin
   { value: 'venus_retrograde', label: 'Venus Retrograde', emoji: '♀' },
   { value: 'mars_retrograde', label: 'Mars Retrograde', emoji: '♂' }
 ];
-
 const PRODUCT_TYPES: { value: ProductMetadata['type']; label: string; emoji: string }[] = [
   { value: 'fashion', label: 'Fashion', emoji: '👗' },
   { value: 'crystals', label: 'Crystals', emoji: '💎' },
@@ -44,21 +39,18 @@ const PRODUCT_TYPES: { value: ProductMetadata['type']; label: string; emoji: str
   { value: 'books', label: 'Books', emoji: '📚' },
   { value: 'oils', label: 'Oils', emoji: '🧴' }
 ];
-
 const ELEMENTS: { value: 'fire' | 'earth' | 'air' | 'water'; label: string; emoji: string }[] = [
   { value: 'fire', label: 'Fire', emoji: '🔥' },
   { value: 'earth', label: 'Earth', emoji: '🌍' },
   { value: 'air', label: 'Air', emoji: '💨' },
   { value: 'water', label: 'Water', emoji: '💧' }
 ];
-
 const MOON_PHASES: { value: 'waxing' | 'full' | 'waning' | 'new'; label: string; emoji: string }[] = [
   { value: 'waxing', label: 'Waxing', emoji: '🌒' },
   { value: 'full', label: 'Full', emoji: '🌕' },
   { value: 'waning', label: 'Waning', emoji: '🌘' },
   { value: 'new', label: 'New', emoji: '🌑' }
 ];
-
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   isOpen,
   onClose,
@@ -69,7 +61,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(['celestialEvents', 'productTypes'])
   );
-
   const toggleSection = (section: string) => {
     const newExpanded = new Set(expandedSections);
     if (newExpanded.has(section)) {
@@ -79,14 +70,12 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
     }
     setExpandedSections(newExpanded);
   };
-
   const updateFilter = <K extends keyof FilterState>(
     key: K,
     value: FilterState[K]
   ) => {
     onFiltersChange({ ...filters, [key]: value });
   };
-
   const toggleArrayFilter = <T,>(
     currentArray: T[],
     value: T,
@@ -97,7 +86,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       : [...currentArray, value];
     updateFilter(key, newArray as FilterState[typeof key]);
   };
-
   const clearAllFilters = () => {
     onFiltersChange({
       celestialEvents: [],
@@ -108,7 +96,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       showLimitedEdition: false
     });
   };
-
   const FilterSection: React.FC<{
     title: string;
     sectionKey: string;
@@ -143,7 +130,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       </AnimatePresence>
     </div>
   );
-
   const CheckboxFilter: React.FC<{
     items: { value: any; label: string; emoji: string }[];
     selectedItems: any[];
@@ -171,7 +157,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
       ))}
     </div>
   );
-
   return (
     <>
       {/* Backdrop */}
@@ -186,7 +171,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           />
         )}
       </AnimatePresence>
-
       {/* Sidebar */}
       <motion.div
         className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}
@@ -206,12 +190,10 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             ✕
           </button>
         </div>
-
         <div className={styles.sidebarContent}>
           <div className={styles.resultsCounter}>
             {productCount} cosmic treasures found
           </div>
-
           <FilterSection title="🌟 Celestial Events" sectionKey="celestialEvents">
             <CheckboxFilter
               items={CELESTIAL_EVENTS}
@@ -219,7 +201,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               onToggle={(value) => toggleArrayFilter(filters.celestialEvents, value, 'celestialEvents')}
             />
           </FilterSection>
-
           <FilterSection title="🛍️ Product Types" sectionKey="productTypes">
             <CheckboxFilter
               items={PRODUCT_TYPES}
@@ -227,7 +208,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               onToggle={(value) => toggleArrayFilter(filters.productTypes, value, 'productTypes')}
             />
           </FilterSection>
-
           <FilterSection title="🌈 Elements" sectionKey="elements">
             <CheckboxFilter
               items={ELEMENTS}
@@ -235,7 +215,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               onToggle={(value) => toggleArrayFilter(filters.elements, value, 'elements')}
             />
           </FilterSection>
-
           <FilterSection title="🌙 Moon Phases" sectionKey="moonPhases">
             <CheckboxFilter
               items={MOON_PHASES}
@@ -243,7 +222,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               onToggle={(value) => toggleArrayFilter(filters.moonPhases, value, 'moonPhases')}
             />
           </FilterSection>
-
           <FilterSection title="💰 Price Range" sectionKey="priceRange">
             <div className={styles.priceRange}>
               <div className={styles.priceInputs}>
@@ -271,7 +249,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
               </div>
             </div>
           </FilterSection>
-
           <FilterSection title="⭐ Special" sectionKey="special">
             <motion.label
               className={`${styles.toggleItem} ${
@@ -291,7 +268,6 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
             </motion.label>
           </FilterSection>
         </div>
-
         <div className={styles.sidebarFooter}>
           <motion.button
             className={styles.clearButton}

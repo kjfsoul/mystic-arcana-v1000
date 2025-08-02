@@ -1,19 +1,17 @@
 'use client';
-
+ 
 import React, { useState, useCallback } from 'react';
 import { HighPerformanceStarField } from '../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField';
 import { AstronomicalSettings } from '../../components/settings/AstronomicalSettings/AstronomicalSettings';
 import { RenderConfig, CalculationConfig } from '../../types/astronomical';
 import { Star } from '../../lib/astronomy/types';
 import styles from './page.module.css';
-
 interface PerformanceStats {
   totalStars: number;
   visibleStars: number;
   fps: number;
   renderTime: number;
 }
-
 /**
  * High-Performance Star Rendering Demo
  * 
@@ -30,7 +28,6 @@ export default function HighPerformanceStarsPage() {
     fps: 0,
     renderTime: 0
   });
-
   const [renderConfig, setRenderConfig] = useState<RenderConfig>({
     starCatalog: 'hipparcos',
     maxStars: 100000,
@@ -41,7 +38,6 @@ export default function HighPerformanceStarsPage() {
     coordinateSystem: 'horizontal',
     projection: 'stereographic'
   });
-
   const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>({
     ephemerisAccuracy: 'high',
     updateInterval: 1000,
@@ -50,8 +46,7 @@ export default function HighPerformanceStarsPage() {
     aberrationCorrection: true,
     refractionCorrection: true
   });
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSettingsChange = useCallback((settings: {
     useRealStars: boolean;
     renderConfig: RenderConfig;
@@ -61,26 +56,21 @@ export default function HighPerformanceStarsPage() {
     setRenderConfig(settings.renderConfig);
     setCalculationConfig(settings.calculationConfig);
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleStarClick = useCallback((star: Star) => {
     setSelectedStar(star);
   }, []);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handlePerformanceUpdate = useCallback((stats: PerformanceStats) => {
     setPerformanceStats(stats);
   }, []);
-
   const getPerformanceRating = (fps: number): { rating: string; color: string } => {
     if (fps >= 55) return { rating: 'Excellent', color: '#00FF00' };
     if (fps >= 45) return { rating: 'Good', color: '#FFD700' };
     if (fps >= 30) return { rating: 'Fair', color: '#FFA500' };
     return { rating: 'Poor', color: '#FF6B6B' };
   };
-
   const performanceRating = getPerformanceRating(performanceStats.fps);
-
   return (
     <div className={styles.demoPage}>
       {/* Header */}
@@ -88,7 +78,6 @@ export default function HighPerformanceStarsPage() {
         <div className={styles.headerContent}>
           <h1>🚀 High-Performance Star Renderer</h1>
           <p>WebGL2 rendering of 100,000+ real stars with Swiss Ephemeris precision</p>
-
           <div className={styles.headerControls}>
             <button
               onClick={() => setShowSettings(!showSettings)}
@@ -96,7 +85,6 @@ export default function HighPerformanceStarsPage() {
             >
               ⚙️ {showSettings ? 'Hide' : 'Show'} Settings
             </button>
-
             <div className={styles.performanceIndicator}>
               <span
                 className={styles.fpsIndicator}
@@ -108,7 +96,6 @@ export default function HighPerformanceStarsPage() {
           </div>
         </div>
       </header>
-
       {/* Settings Panel */}
       {showSettings && (
         <div className={styles.settingsPanel}>
@@ -118,7 +105,6 @@ export default function HighPerformanceStarsPage() {
           />
         </div>
       )}
-
       {/* Main Star Field Display */}
       <main className={styles.mainDisplay}>
         <HighPerformanceStarField
@@ -128,7 +114,6 @@ export default function HighPerformanceStarsPage() {
           onPerformanceUpdate={handlePerformanceUpdate}
           className={styles.starField}
         />
-
         {/* Performance Stats Overlay */}
         <div className={styles.performanceOverlay}>
           <div className={styles.performancePanel}>
@@ -140,14 +125,12 @@ export default function HighPerformanceStarsPage() {
                   {performanceStats.totalStars.toLocaleString()}
                 </span>
               </div>
-
               <div className={styles.statItem}>
                 <span className={styles.statLabel}>Visible:</span>
                 <span className={styles.statValue}>
                   {performanceStats.visibleStars.toLocaleString()}
                 </span>
               </div>
-
               <div className={styles.statItem}>
                 <span className={styles.statLabel}>FPS:</span>
                 <span
@@ -157,7 +140,6 @@ export default function HighPerformanceStarsPage() {
                   {performanceStats.fps.toFixed(1)}
                 </span>
               </div>
-
               <div className={styles.statItem}>
                 <span className={styles.statLabel}>Render Time:</span>
                 <span className={styles.statValue}>
@@ -166,7 +148,6 @@ export default function HighPerformanceStarsPage() {
               </div>
             </div>
           </div>
-
           {/* Configuration Info */}
           <div className={styles.configPanel}>
             <h3>🔧 Current Configuration</h3>
@@ -175,24 +156,20 @@ export default function HighPerformanceStarsPage() {
                 <strong>Mode:</strong>
                 <span>{useRealStars ? '🔬 Real Astronomical Data' : '🎨 Procedural Stars'}</span>
               </div>
-
               {useRealStars && (
                 <>
                   <div className={styles.configItem}>
                     <strong>Catalog:</strong>
                     <span>{renderConfig.starCatalog.toUpperCase()}</span>
                   </div>
-
                   <div className={styles.configItem}>
                     <strong>Max Stars:</strong>
                     <span>{renderConfig.maxStars.toLocaleString()}</span>
                   </div>
-
                   <div className={styles.configItem}>
                     <strong>Magnitude Limit:</strong>
                     <span>{renderConfig.minMagnitude}</span>
                   </div>
-
                   <div className={styles.configItem}>
                     <strong>Accuracy:</strong>
                     <span>{calculationConfig.ephemerisAccuracy.toUpperCase()}</span>
@@ -202,7 +179,6 @@ export default function HighPerformanceStarsPage() {
             </div>
           </div>
         </div>
-
         {/* Star Information Panel */}
         {selectedStar && (
           <div className={styles.starInfoPanel}>
@@ -212,32 +188,26 @@ export default function HighPerformanceStarsPage() {
                 <strong>Name:</strong>
                 <span>{selectedStar.name || selectedStar.id}</span>
               </div>
-
               <div className={styles.starItem}>
                 <strong>Magnitude:</strong>
                 <span>{selectedStar.magnitude.toFixed(2)}</span>
               </div>
-
               <div className={styles.starItem}>
                 <strong>Spectral Class:</strong>
                 <span>{selectedStar.spectralType || 'Unknown'}</span>
               </div>
-
               <div className={styles.starItem}>
                 <strong>Constellation:</strong>
                 <span>{selectedStar.constellation}</span>
               </div>
-
               <div className={styles.starItem}>
                 <strong>RA:</strong>
                 <span>{(selectedStar.ra ?? selectedStar.coordinates.ra).toFixed(4)}°</span>
               </div>
-
               <div className={styles.starItem}>
                 <strong>Dec:</strong>
                 <span>{(selectedStar.dec ?? selectedStar.coordinates.dec).toFixed(4)}°</span>
               </div>
-
               {selectedStar.colorIndex !== undefined && (
                 <div className={styles.starItem}>
                   <strong>Color Index (B-V):</strong>
@@ -245,7 +215,6 @@ export default function HighPerformanceStarsPage() {
                 </div>
               )}
             </div>
-
             <button
               onClick={() => setSelectedStar(null)}
               className={styles.closeButton}
@@ -255,11 +224,9 @@ export default function HighPerformanceStarsPage() {
           </div>
         )}
       </main>
-
       {/* Technical Information */}
       <section className={styles.technicalInfo}>
         <h2>🔬 Technical Implementation</h2>
-
         <div className={styles.techGrid}>
           <div className={styles.techItem}>
             <h3>🎮 WebGL2 Rendering</h3>
@@ -270,7 +237,6 @@ export default function HighPerformanceStarsPage() {
               <li>Optimized for 100,000+ stars at 60fps</li>
             </ul>
           </div>
-
           <div className={styles.techItem}>
             <h3>🌟 Astronomical Accuracy</h3>
             <ul>
@@ -280,7 +246,6 @@ export default function HighPerformanceStarsPage() {
               <li>Location and time-based accuracy</li>
             </ul>
           </div>
-
           <div className={styles.techItem}>
             <h3>⚡ Performance Optimizations</h3>
             <ul>
@@ -290,7 +255,6 @@ export default function HighPerformanceStarsPage() {
               <li>Adaptive quality scaling</li>
             </ul>
           </div>
-
           <div className={styles.techItem}>
             <h3>🎨 Visual Effects</h3>
             <ul>
@@ -302,7 +266,6 @@ export default function HighPerformanceStarsPage() {
           </div>
         </div>
       </section>
-
       {/* Status Information */}
       <footer className={styles.footer}>
         <div className={styles.status}>
@@ -313,7 +276,6 @@ export default function HighPerformanceStarsPage() {
               : ' High-performance rendering with procedural star generation for testing.'
             }
           </p>
-
           <p className={styles.disclaimer}>
             <strong>Performance:</strong> Optimized for modern GPUs.
             Performance may vary based on hardware capabilities and star count settings.

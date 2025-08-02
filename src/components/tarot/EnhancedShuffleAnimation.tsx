@@ -1,9 +1,7 @@
 'use client';
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Sparkles } from 'lucide-react';
-
 interface EnhancedShuffleAnimationProps {
   onShuffleComplete?: () => void;
   onShuffleStart?: () => void;
@@ -14,7 +12,6 @@ interface EnhancedShuffleAnimationProps {
   cardCount?: number;
   showCardPreview?: boolean;
 }
-
 interface CardParticle {
   id: number;
   x: number;
@@ -25,7 +22,6 @@ interface CardParticle {
   duration: number;
   color: string;
 }
-
 interface BioluminescentParticle {
   id: number;
   x: number;
@@ -35,7 +31,6 @@ interface BioluminescentParticle {
   size: number;
   color: string;
 }
-
 export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> = ({
   onShuffleComplete,
   onShuffleStart,
@@ -51,7 +46,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   const [bioluminescentParticles, setBioluminescentParticles] = useState<BioluminescentParticle[]>([]);
   const [shufflePhase, setShufflePhase] = useState<'idle' | 'gathering' | 'shuffling' | 'spreading' | 'complete'>('idle');
   const [rippleEffect, setRippleEffect] = useState(false);
-
   // Size configurations
   const sizeConfig = {
     small: {
@@ -73,9 +67,7 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
       cardSize: { width: 20, height: 30 }
     }
   };
-
   const config = sizeConfig[size];
-
   // Bioluminescent colors for particles
   const bioluminescentColors = [
     'rgba(0, 255, 255, 0.8)',      // Cyan
@@ -85,16 +77,14 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
     'rgba(221, 160, 221, 0.8)',    // Plum
     'rgba(255, 182, 193, 0.8)'     // Light pink
   ];
-
   const cardColors = [
     'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
     'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
     'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
     'linear-gradient(135deg, #059669 0%, #10b981 100%)'
   ];
-
   // Generate enhanced card particles with more realistic movement
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const generateCardParticles = useCallback(() => {
     const particles: CardParticle[] = [];
     const particleCount = Math.min(cardCount, 15); // Limit for performance
@@ -117,9 +107,8 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
     }
     setCardParticles(particles);
   }, [cardCount, config.radius]);
-
   // Generate bioluminescent particles
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const generateBioluminescentParticles = useCallback(() => {
     const particles: BioluminescentParticle[] = [];
     
@@ -140,9 +129,8 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
     }
     setBioluminescentParticles(particles);
   }, []);
-
   // Enhanced shuffle with phases
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleShuffle = useCallback(async () => {
     if (isShuffling) return;
     
@@ -176,9 +164,8 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
       }, 2000);
     }, 500);
   }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateCardParticles, generateBioluminescentParticles]);
-
   // Clear particles when shuffling ends
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     if (shufflePhase === 'idle') {
       const timer = setTimeout(() => {
@@ -188,15 +175,13 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
       return () => clearTimeout(timer);
     }
   }, [shufflePhase]);
-
   // Haptic feedback for mobile
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const triggerHaptic = useCallback(() => {
     if ('vibrate' in navigator) {
       navigator.vibrate([30, 10, 30]);
     }
   }, []);
-
   return (
     <div className={`relative inline-block ${className}`}>
       {/* Ripple effect */}
@@ -218,7 +203,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
           />
         )}
       </AnimatePresence>
-
       {/* Main deck container with enhanced styling */}
       <motion.div
         className={`relative ${config.deck} cursor-pointer rounded-xl`}
@@ -270,7 +254,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
             `
           }}
         />
-
         {/* Central icon with phase-based animation */}
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
@@ -308,7 +291,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
             )}
           </motion.div>
         </div>
-
         {/* Card count indicator */}
         {showCardPreview && !isShuffling && (
           <motion.div
@@ -320,7 +302,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
             {cardCount}
           </motion.div>
         )}
-
         {/* Enhanced animated cards during shuffle */}
         <AnimatePresence>
           {shufflePhase === 'shuffling' && cardParticles.map((particle) => (
@@ -360,7 +341,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
             />
           ))}
         </AnimatePresence>
-
         {/* Bioluminescent particles */}
         <AnimatePresence>
           {shufflePhase === 'shuffling' && bioluminescentParticles.map((particle) => (
@@ -402,7 +382,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
           ))}
         </AnimatePresence>
       </motion.div>
-
       {/* Enhanced status indicators */}
       {shufflePhase === 'idle' && (
         <motion.div
@@ -414,7 +393,6 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
           {isHovered ? 'Click to shuffle the cosmic deck!' : `${cardCount} cards ready ✨`}
         </motion.div>
       )}
-
       {shufflePhase !== 'idle' && (
         <motion.div
           className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-xs text-cyan-300 whitespace-nowrap font-medium text-center"

@@ -1,11 +1,9 @@
 'use client';
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Users, Heart, Zap, Star, Moon, Crown, Wand2, Shuffle, Play } from 'lucide-react';
 import { SpreadType } from './EnhancedTarotSpreadLayouts';
 import { TarotCard } from '@/types/tarot';
-
 interface SpreadConfig {
   cardCount: number;
   title: string;
@@ -16,7 +14,6 @@ interface SpreadConfig {
   preview: string[];
   keywords: string[];
 }
-
 interface CardSelectionSpreadUIProps {
   onSpreadSelected: (spreadType: SpreadType) => void;
   onReadingStart: (spreadType: SpreadType) => void;
@@ -24,7 +21,6 @@ interface CardSelectionSpreadUIProps {
   isAuthenticated?: boolean;
   className?: string;
 }
-
 export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   onSpreadSelected,
   onReadingStart,
@@ -35,7 +31,6 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   const [hoveredSpread, setHoveredSpread] = useState<SpreadType | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-
   // Enhanced spread configurations with detailed metadata
   const spreadConfigs: Record<SpreadType, SpreadConfig> = {
     'single': {
@@ -99,9 +94,8 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
       keywords: ['personalized', 'flexible', 'specific', 'tailored']
     }
   };
-
   // Handle spread selection with smooth animations
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleSpreadSelect = useCallback((spreadType: SpreadType) => {
     if (isAnimating) return;
     
@@ -111,18 +105,16 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
     // Reset animation after completion
     setTimeout(() => setIsAnimating(false), 800);
   }, [isAnimating, onSpreadSelected]);
-
   // Handle reading start with cosmic effects
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   const handleStartReading = useCallback(() => {
     if (!selectedSpread || isAnimating) return;
     
     setIsAnimating(true);
     onReadingStart(selectedSpread);
   }, [selectedSpread, isAnimating, onReadingStart]);
-
   // Keyboard navigation support
-// eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!selectedSpread) return;
@@ -150,11 +142,9 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
           break;
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedSpread, handleSpreadSelect, handleStartReading]);
-
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner': return 'text-green-400 bg-green-500/20';
@@ -163,14 +153,12 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
       default: return 'text-purple-400 bg-purple-500/20';
     }
   };
-
   const getAuthenticationRequirement = (spreadType: SpreadType) => {
     if (isAuthenticated) return null;
     
     const guestAllowed = ['single'];
     return guestAllowed.includes(spreadType) ? null : 'authentication';
   };
-
   return (
     <div className={`relative w-full max-w-6xl mx-auto p-6 ${className}`}>
       {/* Header Section */}
@@ -193,7 +181,6 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
           Select a spread that resonates with your spiritual journey
         </p>
       </motion.div>
-
       {/* Spread Selection Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {Object.entries(spreadConfigs).map(([type, config], index) => {
@@ -245,14 +232,12 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                     </div>
                   </div>
                 )}
-
                 {/* Background Glow Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10 rounded-2xl"
                   animate={isSelected ? { opacity: [0.1, 0.3, 0.1] } : { opacity: 0.1 }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-
                 {/* Header */}
                 <div className="relative z-20 flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
@@ -291,12 +276,10 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                     {config.cardCount} {config.cardCount === 1 ? 'card' : 'cards'}
                   </motion.div>
                 </div>
-
                 {/* Description */}
                 <p className={`text-sm mb-4 ${isSelected ? 'text-purple-200' : 'text-purple-400'}`}>
                   {config.description}
                 </p>
-
                 {/* Keywords */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {config.keywords.slice(0, 3).map((keyword, i) => (
@@ -312,7 +295,6 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                     </span>
                   ))}
                 </div>
-
                 {/* Preview Positions */}
                 <AnimatePresence>
                   {(isHovered || isSelected) && (
@@ -351,7 +333,6 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
           );
         })}
       </div>
-
       {/* Selected Spread Details */}
       <AnimatePresence>
         {selectedSpread && (
@@ -406,7 +387,6 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Keyboard Navigation Hint */}
       <motion.div
         className="text-center text-purple-400 text-sm"
