@@ -43,7 +43,10 @@
     "astrology:validate": "npx tsx scripts/astrology-validation-summary.ts",
     "test:chart-component": "npx tsx scripts/test-interactive-chart.ts",
     "test:caching-einstein": "npx tsx scripts/test-caching-einstein.ts",
-    "lint:quiet": "eslint . --max-warnings=100"
+    "lint:quiet": "eslint . --max-warnings=100",
+    "vercel-build": "npm run build",
+    "deploy": "vercel --archive=tgz",
+    "deploy:prod": "vercel --archive=tgz --prod"
   },
   "dependencies": {
     "@ag-ui/core": "^0.0.28",
@@ -70,6 +73,7 @@
     "react-markdown": "^9.1.0",
     "remark-gfm": "^4.0.1",
     "stripe": "^18.3.0",
+    "vercel": "^44.7.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
