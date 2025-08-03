@@ -10,7 +10,7 @@ import {
   ShuffleResponse,
   tarotAPI,
 } from "@/services/tarot/TarotAPIClient";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 export interface APIState<T> {
   data: T | null;
   loading: boolean;
@@ -335,7 +335,7 @@ export function useTarotReading() {
     setDrawnCards(null);
     setCurrentDrawId(null);
   }, []);
-  return {
+  return useMemo(() => ({
     // States
     isLoading:
       draw.loading || shuffle.loading || save.loading || readings.loading,
@@ -353,5 +353,15 @@ export function useTarotReading() {
     shuffle,
     save,
     readings,
-  };
+  }), [
+    draw.loading, draw.error, draw,
+    shuffle.loading, shuffle.error, shuffle,
+    save.loading, save.error, save,
+    readings.loading, readings.error, readings,
+    currentDrawId,
+    drawnCards,
+    performReading,
+    saveCurrentReading,
+    clearCurrentReading
+  ]);
 }

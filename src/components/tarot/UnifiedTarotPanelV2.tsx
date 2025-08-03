@@ -212,12 +212,13 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     if (onInterpret) {
       onInterpret(flippedCardsList, spreadInterpretation);
     }
-  }, [tarotReading.drawnCards, selectedSpread, flippedCards, onInterpret]);
+  }, [tarotReading.drawnCards, selectedSpread, flippedCards]);
   // Generate interpretation when cards are flipped
  
-  useEffect(() => {
-    generateInterpretationForFlippedCards();
-  }, [generateInterpretationForFlippedCards]);
+  // TEMPORARILY DISABLED TO STOP INFINITE LOOP
+  // useEffect(() => {
+  //   generateInterpretationForFlippedCards();
+  // }, [generateInterpretationForFlippedCards]);
   
   // Show Sophia's greeting on mount
  
@@ -228,7 +229,7 @@ export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
     // Clear after 7 seconds
     const timer = setTimeout(() => setSophiaMessage(""), 7000);
     return () => clearTimeout(timer);
-  }, [sophiaAgent]);
+  }, []);
   // Responsive breakpoint detection with touch optimization
  
   useEffect(() => {

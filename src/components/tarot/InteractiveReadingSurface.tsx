@@ -161,7 +161,17 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   // Handle individual card reveal
  
   const handleCardReveal = useCallback((card: TarotCard, index: number) => {
-    setRevealedCards(prev => new Set([...prev, index]));
+    setRevealedCards(prev => {
+      const newSet = new Set([...prev, index]);
+      
+      // Check if all cards are revealed using the new set size
+      const totalCards = spreadRequirements[selectedSpread];
+      if (newSet.size >= totalCards) {
+        setTimeout(() => setPhase('interpreting'), 1000);
+      }
+      
+      return newSet;
+    });
     
     // Generate basic interpretation for the card
     const interpretation = generateCardInterpretation(card, index, selectedSpread);
@@ -170,12 +180,6 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     // Haptic feedback on mobile
     if ('vibrate' in navigator) {
       navigator.vibrate(75);
-    }
-    
-    // Check if all cards are revealed
-    const totalCards = spreadRequirements[selectedSpread];
-    if (revealedCards.size + 1 >= totalCards) {
-      setTimeout(() => setPhase('interpreting'), 1000);
     }
   }, [selectedSpread, spreadRequirements]);
   // Generate contextual card interpretation
@@ -245,7 +249,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsProcessingTurn(false);
     }
-  }, [drawnCards, selectedSpread, user?.id, sophiaAgent]);
+  }, [currentSession, drawnCards, selectedSpread, user?.id]);
   /**
    * Process user input and advance conversation
    */
@@ -333,7 +337,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsProcessingTurn(false);
     }
-  }, [sophiaAgent, drawnCards, user, personaLearner]);
+  }, [drawnCards, user?.id, currentSession, isProcessingTurn, currentTurn, conversationState, conversationHistory.length]);
   /**
    * Handle saving the conversational reading with engagement level check
    */
@@ -412,7 +416,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } catch (error) {
       console.error('InteractiveReadingSurface: Failed to check engagement level:', error);
     }
-  }, [personaLearner, user?.id]);
+  }, [user?.id]);
   // Auto-start conversation when cards are drawn
  
   useEffect(() => {
@@ -424,7 +428,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       
       return () => clearTimeout(timer);
     }
-  }, [phase, drawnCards.length, selectedSpread]);
+  }, [phase, drawnCards.length, selectedSpread, startConversation]);
   // Handle save reading with PersonaLearner integration
  
   const handleSaveReading = useCallback(async (journalEntry?: string, userFeedback?: any) => {
@@ -507,32 +511,10 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     
     onReadingComplete?.(sessionWithJournal);
     setShowSaveModal(false);
-  }, [currentSession, cardInterpretations, drawnCards, isAuthenticated, user, onReadingComplete, sophiaReading, personaLearner]);
-  // Auto-reveal cards in sequence and generate Sophia reading
- 
-  useEffect(() => {
-    if (phase === 'revealing' && drawnCards.length > 0) {
-      const totalCards = drawnCards.length;
-      let currentCard = 0;
-      
-      const revealInterval = setInterval(() => {
-        if (currentCard < totalCards) {
-          setRevealedCards(prev => new Set([...prev, currentCard]));
-          currentCard++;
-        } else {
-          clearInterval(revealInterval);
-          setTimeout(async () => {
-            setPhase('interpreting');
-            await generateSophiaReading();
-          }, 1000);
-        }
-      }, 1200);
-      
-      return () => clearInterval(revealInterval);
-    }
-  }, [phase, drawnCards.length]);
+  }, [currentSession, cardInterpretations, drawnCards, isAuthenticated, user, onReadingComplete, sophiaReading, selectedSpread]);
+  
   // Generate Sophia reading from Knowledge Pool
-  const generateSophiaReading = async () => {
+  const generateSophiaReading = useCallback(async () => {
     if (!drawnCards.length || !currentSession) return;
     
     setIsGeneratingReading(true);
@@ -578,7 +560,38 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     } finally {
       setIsGeneratingReading(false);
     }
-  };
+  }, [drawnCards, currentSession, user?.id, selectedSpread]);
+  
+  // Auto-reveal cards in sequence and generate Sophia reading
+ 
+  useEffect(() => {
+    if (phase === 'revealing' && drawnCards.length > 0) {
+      const totalCards = drawnCards.length;
+      let currentCardIndex = 0;
+      
+      const revealInterval = setInterval(() => {
+        setRevealedCards(prev => {
+          // If we've already revealed all cards, don't update
+          if (prev.size >= totalCards) {
+            clearInterval(revealInterval);
+            setTimeout(() => {
+              setPhase('interpreting');
+              generateSophiaReading();
+            }, 1000);
+            return prev;
+          }
+          
+          // Add the next card
+          const newSet = new Set(prev);
+          newSet.add(currentCardIndex);
+          currentCardIndex++;
+          return newSet;
+        });
+      }, 1200);
+      
+      return () => clearInterval(revealInterval);
+    }
+  }, [phase, drawnCards.length, generateSophiaReading]);
   // Phase-specific renders
   const renderPreparation = () => (
     <motion.div

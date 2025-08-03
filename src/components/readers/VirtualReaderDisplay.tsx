@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { PersonaLearnerAgentClient } from '@/agents/PersonaLearner-client';
@@ -41,7 +41,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   const [imageError, setImageError] = useState(false);
   const [previousLevel, setPreviousLevel] = useState<number | null>(null);
   
-  const personaLearner = new PersonaLearnerAgentClient();
+  const personaLearner = useMemo(() => new PersonaLearnerAgentClient(), []);
   // Size configurations
   const sizeConfig = {
     small: {
