@@ -8,6 +8,7 @@
     "auto-fix-types": "tsx scripts/auto-fix-typescript-errors.ts",
     "typecheck": "tsc --noEmit",
     "build": "next build",
+    "vercel-build": "apt-get update && apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev && next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=1000 || true",
     "lint:strict": "eslint . --max-warnings=0",
@@ -44,7 +45,6 @@
     "test:chart-component": "npx tsx scripts/test-interactive-chart.ts",
     "test:caching-einstein": "npx tsx scripts/test-caching-einstein.ts",
     "lint:quiet": "eslint . --max-warnings=100",
-    "vercel-build": "npm run build",
     "deploy": "vercel --archive=tgz",
     "deploy:prod": "vercel --archive=tgz --prod"
   },

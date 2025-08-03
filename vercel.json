@@ -95,11 +95,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
-    "ANTHROPIC_API_KEY": "@anthropic_api_key",
-    "OPENAI_API_KEY": "@openai_api_key"
+    "NEXT_PUBLIC_SUPABASE_URL": "https://pqfsbxcbsxuyfgqrxdob.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxZnNieGNic3h1eWZncXJ4ZG9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc5NDk4MDAsImV4cCI6MjA2MzUyNTgwMH0.RH_VQLoTOdAauUciYWC39Wto1ZmK28gWjQ9eWJ0FEGU",
+    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxZnNieGNic3h1eWZncXJ4ZG9iIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0Nzk0OTgwMCwiZXhwIjoyMDYzNTI1ODAwfQ.MpxSuZQL4NZS-lTPkitBG4QdS_AMVw5xxNbbTmzIxOk",
+    "ANTHROPIC_API_KEY": "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",
+    "OPENAI_API_KEY": "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"
   },
   "build": {
     "env": {
