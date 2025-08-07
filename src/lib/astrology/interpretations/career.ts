@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { BirthData, PlanetPosition, HousePosition, AspectData } from '@/types/astrology';
 
 export interface CareerInterpretation {

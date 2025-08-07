@@ -1,5 +1,5 @@
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import type { BirthData, PlanetPosition, HousePosition } from './AstronomicalCalculator';
 import { NasaFallbackHandler } from './nasaFallbackHandler';
 import { resolveGeoLocation } from './geoResolver';

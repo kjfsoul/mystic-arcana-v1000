@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TarotCardDisplay } from './TarotCardDisplay';
 import { TarotCard } from '@/types/tarot';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 import styles from './TarotSpreadLayouts.module.css';
 import { SpreadType } from './MobileTarotSpreadSelector';
 interface TarotSpreadLayoutsProps {
@@ -16,7 +16,7 @@ export const TarotSpreadLayouts: React.FC<TarotSpreadLayoutsProps> = ({
   spreadType,
   cards,
   onCardClick,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   isRevealing = false
 }) => {
   const getCardPosition = (spreadType: SpreadType, index: number) => {

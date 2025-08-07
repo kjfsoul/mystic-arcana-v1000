@@ -2,7 +2,7 @@
  * LOVE-FOCUSED KNOWLEDGE POOL PROMPTS
  * Specialized prompts for Luna's emotional wellness and relationship readings
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 
 export interface LovePrompt {
   id: string;

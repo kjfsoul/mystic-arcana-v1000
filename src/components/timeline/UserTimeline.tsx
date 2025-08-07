@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 import styles from './UserTimeline.module.css';
 export interface LifeEvent {
   id: string;

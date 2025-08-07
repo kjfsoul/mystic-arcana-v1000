@@ -1,5 +1,5 @@
 // src/utils/logger.ts
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 export enum LogLevel {
   DEBUG = 'DEBUG',
   INFO = 'INFO',

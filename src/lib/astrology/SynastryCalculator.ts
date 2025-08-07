@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { BirthData, PlanetPosition } from './AstronomicalCalculator';
 import { SwissEphemerisShim } from './SwissEphemerisShim';
 interface CompatibilityAPIResponse {
