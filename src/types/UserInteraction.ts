@@ -1,4 +1,12 @@
-import { PromptType, PersonaInsightSource, InteractionSessionReadingType, MemoryLogNamespace, EmotionalState, SeekingType, ResponsePattern } from '@/constants/EventTypes';
+import {
+  PromptType,
+  PersonaInsightSource,
+  InteractionSessionReadingType,
+  MemoryLogNamespace,
+  EmotionalState,
+  SeekingType,
+  ResponsePattern,
+} from "@/constants/EventTypes";
 
 export interface InteractionPrompt {
   id: string;
@@ -8,7 +16,7 @@ export interface InteractionPrompt {
   options?: Array<{
     value: string;
     label: string;
-    sentiment?: 'positive' | 'neutral' | 'negative';
+    sentiment?: "positive" | "neutral" | "negative";
   }>;
   minValue?: number;
   maxValue?: number;

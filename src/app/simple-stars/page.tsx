@@ -1,23 +1,23 @@
-'use client';
- 
-import React, { useRef, useEffect, useState } from 'react';
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
 export default function SimpleStarsPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [status, setStatus] = useState('Initializing...');
- 
+  const [status, setStatus] = useState("Initializing...");
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     try {
-      setStatus('Getting WebGL context...');
-      
+      setStatus("Getting WebGL context...");
+
       // Get WebGL2 context
-      const gl = canvas.getContext('webgl2');
+      const gl = canvas.getContext("webgl2");
       if (!gl) {
-        setStatus('❌ WebGL2 not supported');
+        setStatus("❌ WebGL2 not supported");
         return;
       }
-      setStatus('✅ WebGL2 context created');
+      setStatus("✅ WebGL2 context created");
       // Set canvas size
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
@@ -46,14 +46,18 @@ export default function SimpleStarsPage() {
       gl.shaderSource(vertexShader, vertexShaderSource);
       gl.compileShader(vertexShader);
       if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
-        setStatus(`❌ Vertex shader error: ${gl.getShaderInfoLog(vertexShader)}`);
+        setStatus(
+          `❌ Vertex shader error: ${gl.getShaderInfoLog(vertexShader)}`,
+        );
         return;
       }
       const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)!;
       gl.shaderSource(fragmentShader, fragmentShaderSource);
       gl.compileShader(fragmentShader);
       if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
-        setStatus(`❌ Fragment shader error: ${gl.getShaderInfoLog(fragmentShader)}`);
+        setStatus(
+          `❌ Fragment shader error: ${gl.getShaderInfoLog(fragmentShader)}`,
+        );
         return;
       }
       // Create program
@@ -65,18 +69,27 @@ export default function SimpleStarsPage() {
         setStatus(`❌ Program link error: ${gl.getProgramInfoLog(program)}`);
         return;
       }
-      setStatus('✅ Shaders compiled and linked');
+      setStatus("✅ Shaders compiled and linked");
       // Create some test star positions
       const starPositions = new Float32Array([
-        0.0, 0.0,    // Center
-        0.5, 0.5,    // Top right
-        -0.5, 0.5,   // Top left
-        0.5, -0.5,   // Bottom right
-        -0.5, -0.5,  // Bottom left
-        0.0, 0.8,    // Top center
-        0.0, -0.8,   // Bottom center
-        0.8, 0.0,    // Right center
-        -0.8, 0.0,   // Left center
+        0.0,
+        0.0, // Center
+        0.5,
+        0.5, // Top right
+        -0.5,
+        0.5, // Top left
+        0.5,
+        -0.5, // Bottom right
+        -0.5,
+        -0.5, // Bottom left
+        0.0,
+        0.8, // Top center
+        0.0,
+        -0.8, // Bottom center
+        0.8,
+        0.0, // Right center
+        -0.8,
+        0.0, // Left center
       ]);
       // Create buffer
       const positionBuffer = gl.createBuffer();
@@ -88,7 +101,7 @@ export default function SimpleStarsPage() {
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program);
       // Set up vertex attribute
-      const positionLocation = gl.getAttribLocation(program, 'a_position');
+      const positionLocation = gl.getAttribLocation(program, "a_position");
       gl.enableVertexAttribArray(positionLocation);
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
@@ -97,40 +110,46 @@ export default function SimpleStarsPage() {
       setStatus(`✅ Rendered ${starPositions.length / 2} stars successfully!`);
     } catch (error) {
       setStatus(`❌ Error: ${error}`);
-      console.error('WebGL Error:', error);
+      console.error("WebGL Error:", error);
     }
   }, []);
   return (
-    <div style={{ 
-      width: '100vw', 
-      height: '100vh', 
-      position: 'relative',
-      background: '#000'
-    }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        position: "relative",
+        background: "#000",
+      }}
+    >
       <canvas
         ref={canvasRef}
         style={{
-          width: '100%',
-          height: '100%',
-          display: 'block'
+          width: "100%",
+          height: "100%",
+          display: "block",
         }}
       />
-      
-      <div style={{
-        position: 'absolute',
-        top: '20px',
-        left: '20px',
-        color: 'white',
-        fontFamily: 'monospace',
-        fontSize: '14px',
-        background: 'rgba(0,0,0,0.7)',
-        padding: '10px',
-        borderRadius: '5px',
-        zIndex: 10,
-        maxWidth: '400px'
-      }}>
+
+      <div
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          color: "white",
+          fontFamily: "monospace",
+          fontSize: "14px",
+          background: "rgba(0,0,0,0.7)",
+          padding: "10px",
+          borderRadius: "5px",
+          zIndex: 10,
+          maxWidth: "400px",
+        }}
+      >
         <h2>🌟 Simple WebGL Star Test</h2>
-        <p><strong>Status:</strong> {status}</p>
+        <p>
+          <strong>Status:</strong> {status}
+        </p>
         <p>This should show 9 white dots if WebGL is working.</p>
       </div>
     </div>

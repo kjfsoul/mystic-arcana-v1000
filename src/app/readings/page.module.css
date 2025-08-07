@@ -248,25 +248,25 @@
   .container {
     padding: 1rem 0.5rem;
   }
-  
+
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .readingsGrid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .readingCard {
     padding: 1rem;
   }
-  
+
   .readingHeader {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .readingDate {
     text-align: left;
   }

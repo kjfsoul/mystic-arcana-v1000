@@ -26,7 +26,7 @@ Object.entries(servers).forEach(([name, config]) => {
 
 // Main orchestrator loop
 console.log(
-  "Agent orchestrator running. Listening for commands (type 'help' for options):"
+  "Agent orchestrator running. Listening for commands (type 'help' for options):",
 );
 process.stdin.setEncoding("utf-8");
 process.stdin.on("data", async (data) => {

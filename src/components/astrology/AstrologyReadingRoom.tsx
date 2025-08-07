@@ -1,5 +1,5 @@
-'use client';
- 
+"use client";
+
 import {
   BirthData,
   HousePosition,
@@ -30,11 +30,21 @@ interface AstrologyReadingRoomProps {
 //   location: string;
 //   birthDate?: string;
 //}
-type UserTier = 'guest' | 'signed-up' | 'subscriber';
-export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBack }) => {
+type UserTier = "guest" | "signed-up" | "subscriber";
+export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({
+  onBack,
+}) => {
   const { user, isGuest } = useAuth();
-  const [userTier, setUserTier] = useState<UserTier>('guest');
-  const [selectedService, setSelectedService] = useState<'chart' | 'horoscope' | 'compatibility' | 'career' | 'advanced' | 'timeline' | null>(null);
+  const [userTier, setUserTier] = useState<UserTier>("guest");
+  const [selectedService, setSelectedService] = useState<
+    | "chart"
+    | "horoscope"
+    | "compatibility"
+    | "career"
+    | "advanced"
+    | "timeline"
+    | null
+  >(null);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showBirthForm, setShowBirthForm] = useState(false);
@@ -74,9 +84,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     };
   } | null>(null);
   const [isLoadingHoroscope, setIsLoadingHoroscope] = useState(false);
- 
- 
- 
+
   const loadPersonalizedHoroscope = useCallback(async () => {
     if (!user) return;
     setIsLoadingHoroscope(true);
@@ -93,8 +101,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       setIsLoadingHoroscope(false);
     }
   }, [user]);
- 
- 
+
   useEffect(() => {
     if (isGuest) {
       setUserTier("guest");
@@ -120,7 +127,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       | "compatibility"
       | "career"
       | "advanced"
-      | "timeline"
+      | "timeline",
   ) => {
     setSelectedService(service);
     if (service === "chart") {
@@ -172,13 +179,13 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     }
   };
   const handlePlanetClick = (planet: PlanetPosition) => {
-    console.log('Planet clicked:', planet);
+    console.log("Planet clicked:", planet);
   };
   const handleHouseClick = (house: HousePosition) => {
-    console.log('House clicked:', house);
+    console.log("House clicked:", house);
   };
   const renderBirthDataForm = () => (
-    <motion.div 
+    <motion.div
       className={styles.chartContainer}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -197,22 +204,26 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             <input
               type="date"
               value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
               required
             />
           </div>
-          
+
           <div className={styles.formField}>
             <label>Birth Time (Optional):</label>
             <input
               type="time"
               value={formData.time}
-              onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, time: e.target.value })
+              }
               placeholder="Leave blank if unknown"
             />
           </div>
         </div>
-        
+
         <div className={styles.locationField}>
           <LocationSearch
             value={selectedLocation}
@@ -221,13 +232,13 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             label="Birth Location"
           />
         </div>
-        
+
         <div className={styles.formActions}>
           <button type="submit" className={styles.generateButton}>
             Generate My Birth Chart ✨
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className={styles.cancelButton}
             onClick={() => setShowBirthForm(false)}
           >
@@ -238,7 +249,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     </motion.div>
   );
   const renderInteractiveChart = () => (
-    <motion.div 
+    <motion.div
       className={styles.chartContainer}
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -249,7 +260,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
         <p className={styles.chartSubtitle}>
           Click any planet, house, or zodiac sign to explore deeper meanings
         </p>
-        <button 
+        <button
           className={styles.editBirthData}
           onClick={() => setShowBirthForm(true)}
         >
@@ -267,7 +278,8 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
         <div className={styles.instructions}>
           <div className={styles.instruction}>
             <span className={styles.icon}>🪐</span>
-            <strong>Click Planets:</strong> Discover what each celestial body reveals about you
+            <strong>Click Planets:</strong> Discover what each celestial body
+            reveals about you
           </div>
           <div className={styles.instruction}>
             <span className={styles.icon}>🏠</span>
@@ -282,11 +294,12 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             <strong>Toggle Animation:</strong> Watch the cosmos come alive
           </div>
         </div>
-        
-        {userTier === 'guest' && (
+
+        {userTier === "guest" && (
           <div className={styles.upgradeHint}>
-            <p>Want to save your chart and unlock advanced features? 
-              <button 
+            <p>
+              Want to save your chart and unlock advanced features?
+              <button
                 className={styles.signUpLink}
                 onClick={() => setShowAuthModal(true)}
               >
@@ -299,7 +312,7 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
     </motion.div>
   );
   const renderDailyHoroscope = () => (
-    <motion.div 
+    <motion.div
       className={styles.horoscopeContainer}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -308,11 +321,11 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
       <div className={styles.horoscopeHeader}>
         <h3>🌙 Daily Cosmic Weather</h3>
         <p className={styles.horoscopeDate}>
-          {new Date().toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
           })}
         </p>
       </div>
@@ -320,9 +333,9 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
         <div className={styles.cosmicHighlight}>
           <h4>✨ Today&apos;s Cosmic Spotlight</h4>
           <p>
-            Mercury&apos;s harmonious aspect to Jupiter opens pathways for meaningful conversations 
-            and expanded thinking. The waning moon in Capricorn encourages practical magic 
-            and grounded manifestation.
+            Mercury&apos;s harmonious aspect to Jupiter opens pathways for
+            meaningful conversations and expanded thinking. The waning moon in
+            Capricorn encourages practical magic and grounded manifestation.
           </p>
         </div>
         <div className={styles.generalGuidance}>
@@ -334,15 +347,17 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
             <li>🔮 Evening meditation brings clarity</li>
           </ul>
         </div>
-        {userTier === 'guest' ? (
+        {userTier === "guest" ? (
           <div className={styles.premiumTeaser}>
             <div className={styles.teaserContent}>
               <h4>🎯 Want Your Personal Forecast?</h4>
               <p>
-                For deeper, personalized insights based on your unique birth chart, 
-                <strong> sign up for free</strong> to unlock your cosmic blueprint.
+                For deeper, personalized insights based on your unique birth
+                chart,
+                <strong> sign up for free</strong> to unlock your cosmic
+                blueprint.
               </p>
-              <button 
+              <button
                 className={styles.upgradeButton}
                 onClick={() => setShowAuthModal(true)}
               >
@@ -360,9 +375,18 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 </div>
               ) : personalizedHoroscope?.personalized ? (
                 <div className={styles.realPersonalizedContent}>
-                  <h4>🌟 Your {personalizedHoroscope.personalized.sign.charAt(0).toUpperCase() + personalizedHoroscope.personalized.sign.slice(1)} Reading</h4>
+                  <h4>
+                    🌟 Your{" "}
+                    {personalizedHoroscope.personalized.sign
+                      .charAt(0)
+                      .toUpperCase() +
+                      personalizedHoroscope.personalized.sign.slice(1)}{" "}
+                    Reading
+                  </h4>
                   <div className={styles.personalizedInsight}>
-                    <p className={styles.mainInsight}>{personalizedHoroscope.personalized.insight}</p>
+                    <p className={styles.mainInsight}>
+                      {personalizedHoroscope.personalized.insight}
+                    </p>
                   </div>
                   <div className={styles.personalizedAdvice}>
                     <h5>Your Focus Today:</h5>
@@ -370,11 +394,13 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                   </div>
                   <div className={styles.energyFocus}>
                     <h5>Energy Focus:</h5>
-                    <span className={styles.focusValue}>{personalizedHoroscope.personalized.focus}</span>
+                    <span className={styles.focusValue}>
+                      {personalizedHoroscope.personalized.focus}
+                    </span>
                   </div>
-                  <button 
+                  <button
                     className={styles.personalButton}
-                    onClick={() => handleServiceSelection('chart')}
+                    onClick={() => handleServiceSelection("chart")}
                   >
                     View My Birth Chart
                   </button>
@@ -383,15 +409,16 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <div className={styles.noPersonalizedData}>
                   <h4>🎯 Complete Your Profile for Personal Readings</h4>
                   <p>
-                    To receive personalized cosmic guidance, please add your birth date to your profile.
+                    To receive personalized cosmic guidance, please add your
+                    birth date to your profile.
                   </p>
                   <Link href="/profile" className={styles.personalButton}>
                     Complete Your Profile ✨
                   </Link>
-                  <button 
+                  <button
                     className={styles.personalButton}
-                    onClick={() => handleServiceSelection('chart')}
-                    style={{ marginTop: '0.5rem' }}
+                    onClick={() => handleServiceSelection("chart")}
+                    style={{ marginTop: "0.5rem" }}
                   >
                     Add Birth Information
                   </button>
@@ -430,26 +457,32 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
         </div>
         {!selectedService ? (
           <div className={styles.serviceSelection}>
-            <motion.div 
+            <motion.div
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('chart')}
+              onClick={() => handleServiceSelection("chart")}
             >
               <div className={styles.serviceIcon}>🌟</div>
               <h3>Birth Chart Reading</h3>
               <p>Explore your cosmic DNA and life purpose</p>
               <div className={styles.serviceAccess}>
-                {userTier === 'guest' && <span className={styles.accessBadge}>Preview Available</span>}
-                {userTier === 'signed-up' && <span className={styles.accessBadge}>Basic Chart</span>}
-                {userTier === 'subscriber' && <span className={styles.accessBadge}>Full Access</span>}
+                {userTier === "guest" && (
+                  <span className={styles.accessBadge}>Preview Available</span>
+                )}
+                {userTier === "signed-up" && (
+                  <span className={styles.accessBadge}>Basic Chart</span>
+                )}
+                {userTier === "subscriber" && (
+                  <span className={styles.accessBadge}>Full Access</span>
+                )}
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('horoscope')}
+              onClick={() => handleServiceSelection("horoscope")}
             >
               <div className={styles.serviceIcon}>🌙</div>
               <h3>Daily Horoscope</h3>
@@ -458,41 +491,53 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <span className={styles.accessBadge}>Free for All</span>
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('compatibility')}
+              onClick={() => handleServiceSelection("compatibility")}
             >
               <div className={styles.serviceIcon}>💫</div>
               <h3>Compatibility Insights</h3>
               <p>Discover your cosmic connection with another</p>
               <div className={styles.serviceAccess}>
-                {userTier === 'guest' && <span className={styles.accessBadge}>Demo Available</span>}
-                {userTier === 'signed-up' && <span className={styles.accessBadge}>Full Access</span>}
-                {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium</span>}
+                {userTier === "guest" && (
+                  <span className={styles.accessBadge}>Demo Available</span>
+                )}
+                {userTier === "signed-up" && (
+                  <span className={styles.accessBadge}>Full Access</span>
+                )}
+                {userTier === "subscriber" && (
+                  <span className={styles.accessBadge}>Premium</span>
+                )}
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('career')}
+              onClick={() => handleServiceSelection("career")}
             >
               <div className={styles.serviceIcon}>💼</div>
               <h3>Career Insights</h3>
               <p>Unlock your professional purpose and potential</p>
               <div className={styles.serviceAccess}>
-                {userTier === 'guest' && <span className={styles.accessBadge}>Demo Available</span>}
-                {userTier === 'signed-up' && <span className={styles.accessBadge}>Full Access</span>}
-                {userTier === 'subscriber' && <span className={styles.accessBadge}>Premium Plus</span>}
+                {userTier === "guest" && (
+                  <span className={styles.accessBadge}>Demo Available</span>
+                )}
+                {userTier === "signed-up" && (
+                  <span className={styles.accessBadge}>Full Access</span>
+                )}
+                {userTier === "subscriber" && (
+                  <span className={styles.accessBadge}>Premium Plus</span>
+                )}
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={styles.serviceCard}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('timeline')}
+              onClick={() => handleServiceSelection("timeline")}
               data-service="timeline"
             >
               <div className={styles.serviceIcon}>📅</div>
@@ -502,11 +547,11 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
                 <span className={styles.accessBadge}>Free for All</span>
               </div>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={`${styles.serviceCard} ${styles.advancedCard}`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => handleServiceSelection('advanced')}
+              onClick={() => handleServiceSelection("advanced")}
             >
               <div className={styles.serviceIcon}>🌌</div>
               <h3>Advanced Chart</h3>
@@ -518,59 +563,62 @@ export const AstrologyReadingRoom: React.FC<AstrologyReadingRoomProps> = ({ onBa
           </div>
         ) : (
           <div className={styles.serviceContent}>
-            {selectedService === 'chart' && (
+            {selectedService === "chart" && (
               <>
                 {showBirthForm && renderBirthDataForm()}
                 {!showBirthForm && renderInteractiveChart()}
               </>
             )}
-            {selectedService === 'horoscope' && renderDailyHoroscope()}
-            {selectedService === 'compatibility' && (
+            {selectedService === "horoscope" && renderDailyHoroscope()}
+            {selectedService === "compatibility" && (
               <>
                 {showBirthForm && renderBirthDataForm()}
                 {!showBirthForm && (
-                  <CompatibilityInsights 
+                  <CompatibilityInsights
                     userBirthData={birthData}
                     onBack={() => setSelectedService(null)}
                   />
                 )}
               </>
             )}
-            {selectedService === 'career' && (
+            {selectedService === "career" && (
               <>
                 {showBirthForm && renderBirthDataForm()}
                 {!showBirthForm && (
-                  <InteractiveCareerInsights 
+                  <InteractiveCareerInsights
                     birthData={birthData}
                     onBack={() => setSelectedService(null)}
                   />
                 )}
               </>
             )}
-            {selectedService === 'timeline' && (
-              <UserTimeline 
+            {selectedService === "timeline" && (
+              <UserTimeline
                 events={lifeEvents}
                 onEventsChange={handleLifeEventsChange}
               />
             )}
-            {selectedService === 'advanced' && (
-              <AdvancedChartPreview 
+            {selectedService === "advanced" && (
+              <AdvancedChartPreview
                 onBack={() => setSelectedService(null)}
                 lifeEvents={lifeEvents}
               />
             )}
-            
-            {selectedService !== 'compatibility' && selectedService !== 'career' && selectedService !== 'advanced' && selectedService !== 'timeline' && (
-              <button 
-                className={styles.backToServices}
-                onClick={() => {
-                  setSelectedService(null);
-                  setShowBirthForm(false);
-                }}
-              >
-                ← Choose Different Service
-              </button>
-            )}
+
+            {selectedService !== "compatibility" &&
+              selectedService !== "career" &&
+              selectedService !== "advanced" &&
+              selectedService !== "timeline" && (
+                <button
+                  className={styles.backToServices}
+                  onClick={() => {
+                    setSelectedService(null);
+                    setShowBirthForm(false);
+                  }}
+                >
+                  ← Choose Different Service
+                </button>
+              )}
           </div>
         )}
       </motion.div>

@@ -28,7 +28,11 @@
   bottom: 2rem;
   right: 2rem;
   z-index: 20;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(255, 107, 107, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.9) 0%,
+    rgba(255, 107, 107, 0.9) 100%
+  );
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: white;
   padding: 1rem 2rem;
@@ -37,15 +41,19 @@
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(20px);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(138, 43, 226, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
 .returnButton:hover {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
-  box-shadow: 
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 1) 0%,
+    rgba(255, 107, 107, 1) 100%
+  );
+  box-shadow:
     0 12px 48px rgba(138, 43, 226, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
@@ -103,7 +111,7 @@
   backdrop-filter: blur(20px);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   perspective: 1000px;
-  box-shadow: 
+  box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -119,32 +127,36 @@
 }
 
 .tarotCard {
-  background: linear-gradient(135deg, 
-    rgba(138, 43, 226, 0.2) 0%, 
-    rgba(255, 107, 107, 0.2) 50%, 
-    rgba(25, 25, 112, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.2) 0%,
+    rgba(255, 107, 107, 0.2) 50%,
+    rgba(25, 25, 112, 0.2) 100%
+  );
   border-color: rgba(138, 43, 226, 0.3);
   animation: tarotGlow 4s ease-in-out infinite alternate;
 }
 
 .astrologyCard {
-  background: linear-gradient(135deg, 
-    rgba(255, 215, 0, 0.2) 0%, 
-    rgba(75, 0, 130, 0.2) 50%, 
-    rgba(25, 25, 112, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(75, 0, 130, 0.2) 50%,
+    rgba(25, 25, 112, 0.2) 100%
+  );
   border-color: rgba(255, 215, 0, 0.3);
   animation: astrologyGlow 4s ease-in-out infinite alternate;
 }
 
 @keyframes tarotGlow {
-  0% { 
-    box-shadow: 
+  0% {
+    box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 0 20px rgba(138, 43, 226, 0.2);
   }
-  100% { 
-    box-shadow: 
+  100% {
+    box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 0 40px rgba(138, 43, 226, 0.4);
@@ -152,21 +164,22 @@
 }
 
 @keyframes astrologyGlow {
-  0% { 
-    box-shadow: 
+  0% {
+    box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 0 20px rgba(255, 215, 0, 0.2);
   }
-  100% { 
-    box-shadow: 
+  100% {
+    box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 0 40px rgba(255, 215, 0, 0.4);
   }
 }
 
-.tarotSymbols, .astrologySymbols {
+.tarotSymbols,
+.astrologySymbols {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -183,16 +196,33 @@
   animation: float 6s ease-in-out infinite;
 }
 
-.symbol:nth-child(1) { animation-delay: 0s; }
-.symbol:nth-child(2) { animation-delay: 1.5s; }
-.symbol:nth-child(3) { animation-delay: 3s; }
-.symbol:nth-child(4) { animation-delay: 4.5s; }
+.symbol:nth-child(1) {
+  animation-delay: 0s;
+}
+.symbol:nth-child(2) {
+  animation-delay: 1.5s;
+}
+.symbol:nth-child(3) {
+  animation-delay: 3s;
+}
+.symbol:nth-child(4) {
+  animation-delay: 4.5s;
+}
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(5deg); }
-  50% { transform: translateY(-5px) rotate(-3deg); }
-  75% { transform: translateY(-15px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(2deg);
+  }
 }
 
 .cardContent {
@@ -279,30 +309,30 @@
   .hubTitle {
     font-size: 2.5rem;
   }
-  
+
   .hubSubtitle {
     font-size: 1.2rem;
     margin-bottom: 3rem;
   }
-  
+
   .realmCards {
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 0 1rem;
   }
-  
+
   .realmCard {
     height: 400px;
   }
-  
+
   .cardTitle {
     font-size: 1.8rem;
   }
-  
+
   .cardDescription {
     font-size: 1rem;
   }
-  
+
   .returnButton {
     bottom: 1rem;
     right: 1rem;
@@ -336,15 +366,15 @@
   .hubContainer {
     padding: 1rem;
   }
-  
+
   .hubTitle {
     font-size: 2rem;
   }
-  
+
   .cardContent {
     padding: 2rem;
   }
-  
+
   .cardTitle {
     font-size: 1.5rem;
   }

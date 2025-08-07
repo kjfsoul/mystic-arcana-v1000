@@ -100,7 +100,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
         });
 
         const response = await fetch(
-          `/api/daily-oracle/astrology/horoscope/${sign}`
+          `/api/daily-oracle/astrology/horoscope/${sign}`,
         );
         const data = await response.json();
 
@@ -108,7 +108,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
 
         // Validate required fields
         expect(horoscope.db_identifier).toMatch(
-          new RegExp(`^DB_ENTRY_\\d{6}_horoscope_${sign}$`)
+          new RegExp(`^DB_ENTRY_\\d{6}_horoscope_${sign}$`),
         );
         expect(horoscope.sign).toBe(sign);
         expect(horoscope.element).toBe(zodiacElements[sign]);
@@ -151,7 +151,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
                 mood: `Emotional tone for ${sign}`,
                 self_growth: `Growth opportunities for ${sign}...`,
               },
-            ])
+            ]),
           ),
           metadata: {
             total_signs: 12,
@@ -167,7 +167,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
       });
 
       const response = await fetch(
-        "/api/daily-oracle/astrology/horoscopes/all"
+        "/api/daily-oracle/astrology/horoscopes/all",
       );
       const data = await response.json();
 
@@ -226,7 +226,8 @@ describe("Daily Oracle Astrology Horoscopes", () => {
             gemini: {
               daily:
                 "Uranus in your sign receives supportive energy from Saturn...",
-              transit_specific: "Uranus in Gemini brings revolutionary ideas and practical foundation",
+              transit_specific:
+                "Uranus in Gemini brings revolutionary ideas and practical foundation",
             },
           },
         },
@@ -243,7 +244,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
       // Validate transit data
       expect(data.data.current_transits.major_transits).toBeInstanceOf(Array);
       expect(data.data.current_transits.major_transits.length).toBeGreaterThan(
-        0
+        0,
       );
 
       // Validate transit-specific horoscope content
@@ -302,7 +303,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
       });
 
       const response = await fetch(
-        "/api/daily-oracle/astrology/elemental-analysis"
+        "/api/daily-oracle/astrology/elemental-analysis",
       );
       const data = await response.json();
 
@@ -316,10 +317,10 @@ describe("Daily Oracle Astrology Horoscopes", () => {
       elements.forEach((element) => {
         expect(data.data.elemental_analysis[element]).toBeDefined();
         expect(
-          data.data.elemental_analysis[element].general_energy
+          data.data.elemental_analysis[element].general_energy,
         ).toBeDefined();
         expect(data.data.elemental_analysis[element].signs).toBeInstanceOf(
-          Array
+          Array,
         );
         expect(data.data.elemental_analysis[element].signs.length).toBe(3);
       });
@@ -439,7 +440,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
         });
 
         const response = await fetch(
-          `/api/daily-oracle/astrology/quality/${sign}`
+          `/api/daily-oracle/astrology/quality/${sign}`,
         );
         const data = await response.json();
 

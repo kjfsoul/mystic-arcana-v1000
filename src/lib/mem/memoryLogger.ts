@@ -1,5 +1,13 @@
-import { MemoryLogEntry, UserResponse, PersonaInsight, InteractionSession } from '@/types/UserInteraction';
-import { PersonaInsightSource, MemoryLogNamespace } from '@/constants/EventTypes';
+import {
+  MemoryLogEntry,
+  UserResponse,
+  PersonaInsight,
+  InteractionSession,
+} from "@/types/UserInteraction";
+import {
+  PersonaInsightSource,
+  MemoryLogNamespace,
+} from "@/constants/EventTypes";
 
 export class MemoryLogger {
   private static instance: MemoryLogger;
@@ -35,14 +43,18 @@ export class MemoryLogger {
       userId: response.userId,
       sessionId: response.sessionId,
       timestamp: new Date().toISOString(),
-      ttl: 60 * 60 * 24 * 30
+      ttl: 60 * 60 * 24 * 30,
     };
 
     await this.store(entry);
     await this.analyzeAndExtract(response);
   }
 
-  async logInsight(insight: PersonaInsight, userId: string, sessionId: string): Promise<void> {
+  async logInsight(
+    insight: PersonaInsight,
+    userId: string,
+    sessionId: string,
+  ): Promise<void> {
     const key = `insight:${userId}:${insight.trait}:${Date.now()}`;
     const entry: MemoryLogEntry = {
       key,
@@ -51,7 +63,7 @@ export class MemoryLogger {
       userId,
       sessionId,
       timestamp: insight.timestamp,
-      ttl: 60 * 60 * 24 * 90
+      ttl: 60 * 60 * 24 * 90,
     };
 
     await this.store(entry);
@@ -66,7 +78,7 @@ export class MemoryLogger {
       userId: session.userId,
       sessionId: session.sessionId,
       timestamp: session.startTime,
-      ttl: 60 * 60 * 24 * 180
+      ttl: 60 * 60 * 24 * 180,
     };
 
     await this.store(entry);
@@ -87,29 +99,32 @@ export class MemoryLogger {
 
     if (responseTime < 2000) {
       insights.push({
-        trait: 'quick-responder',
+        trait: "quick-responder",
         confidence: 0.7,
         source: PersonaInsightSource.READING_RESPONSE,
         timestamp: new Date().toISOString(),
-        context: 'Responds quickly to prompts'
+        context: "Responds quickly to prompts",
       });
     } else if (responseTime > 10000) {
       insights.push({
-        trait: 'thoughtful-responder',
+        trait: "thoughtful-responder",
         confidence: 0.8,
         source: PersonaInsightSource.READING_RESPONSE,
         timestamp: new Date().toISOString(),
-        context: 'Takes time to consider responses'
+        context: "Takes time to consider responses",
       });
     }
 
-    if (typeof response.response === 'string' && response.response.length > 100) {
+    if (
+      typeof response.response === "string" &&
+      response.response.length > 100
+    ) {
       insights.push({
-        trait: 'expressive',
+        trait: "expressive",
         confidence: 0.75,
         source: PersonaInsightSource.READING_RESPONSE,
         timestamp: new Date().toISOString(),
-        context: 'Provides detailed responses'
+        context: "Provides detailed responses",
       });
     }
 
@@ -125,55 +140,75 @@ export class MemoryLogger {
     this.pendingWrites = [];
 
     try {
-      if (typeof window !== 'undefined') {
-        const response = await fetch('/api/mem/batch-write', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ entries: writes })
+      if (typeof window !== "undefined") {
+        const response = await fetch("/api/mem/batch-write", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ entries: writes }),
         });
 
         if (!response.ok) {
-          console.error('Failed to flush to a-mem:', response.statusText);
+          console.error("Failed to flush to a-mem:", response.statusText);
           this.pendingWrites.unshift(...writes);
         }
       } else {
-        console.log('[MemoryLogger] Server-side flush:', writes.length, 'entries');
+        console.log(
+          "[MemoryLogger] Server-side flush:",
+          writes.length,
+          "entries",
+        );
       }
     } catch (error) {
-      console.error('Error flushing to a-mem:', error);
+      console.error("Error flushing to a-mem:", error);
       this.pendingWrites.unshift(...writes);
     }
   }
 
-  async getUserInsights(userId: string, limit: number = 10): Promise<PersonaInsight[]> {
+  async getUserInsights(
+    userId: string,
+    limit: number = 10,
+  ): Promise<PersonaInsight[]> {
     const insights: PersonaInsight[] = [];
-    
+
     for (const [_key, entry] of this.memoryStore.entries()) {
-      if (entry.namespace === MemoryLogNamespace.PERSONA_LEARNING && entry.userId === userId) {
+      if (
+        entry.namespace === MemoryLogNamespace.PERSONA_LEARNING &&
+        entry.userId === userId
+      ) {
         insights.push(entry.value as PersonaInsight);
       }
     }
 
     return insights
-      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      .sort(
+        (a, b) =>
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+      )
       .slice(0, limit);
   }
 
   async getSessionResponses(sessionId: string): Promise<UserResponse[]> {
     const responses: UserResponse[] = [];
-    
+
     for (const [key, entry] of this.memoryStore.entries()) {
-      if (entry.namespace === MemoryLogNamespace.USER_INTERACTION && entry.sessionId === sessionId) {
+      if (
+        entry.namespace === MemoryLogNamespace.USER_INTERACTION &&
+        entry.sessionId === sessionId
+      ) {
         responses.push(entry.value as UserResponse);
       }
     }
 
-    return responses.sort((a, b) => 
-      new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+    return responses.sort(
+      (a, b) =>
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
     );
   }
 
-  async analyzeEngagement(userId: string, sessionId: string): Promise<{
+  async analyzeEngagement(
+    userId: string,
+    sessionId: string,
+  ): Promise<{
     engagementScore: number;
     responseRate: number;
     averageResponseTime: number;
@@ -183,12 +218,14 @@ export class MemoryLogger {
     const insights = await this.getUserInsights(userId, 50);
 
     const responseRate = responses.length > 0 ? 1 : 0;
-    const avgResponseTime = responses.length > 0
-      ? responses.reduce((sum, r) => sum + r.responseTime, 0) / responses.length
-      : 0;
+    const avgResponseTime =
+      responses.length > 0
+        ? responses.reduce((sum, r) => sum + r.responseTime, 0) /
+          responses.length
+        : 0;
 
     const traitCounts = new Map<string, number>();
-    insights.forEach(insight => {
+    insights.forEach((insight) => {
       traitCounts.set(insight.trait, (traitCounts.get(insight.trait) || 0) + 1);
     });
 
@@ -197,17 +234,18 @@ export class MemoryLogger {
       .slice(0, 3)
       .map(([trait]) => trait);
 
-    const engagementScore = Math.min(100, 
-      (responseRate * 40) + 
-      (Math.min(avgResponseTime / 5000, 1) * 30) +
-      (dominantTraits.length * 10)
+    const engagementScore = Math.min(
+      100,
+      responseRate * 40 +
+        Math.min(avgResponseTime / 5000, 1) * 30 +
+        dominantTraits.length * 10,
     );
 
     return {
       engagementScore,
       responseRate,
       averageResponseTime: avgResponseTime,
-      dominantTraits
+      dominantTraits,
     };
   }
 

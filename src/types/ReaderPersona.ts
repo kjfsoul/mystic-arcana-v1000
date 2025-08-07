@@ -1,4 +1,8 @@
-import { ReaderSpecialization, SummaryType as SummaryTypeEnum, ReadingRequestType } from '@/constants/EventTypes';
+import {
+  ReaderSpecialization,
+  SummaryType as SummaryTypeEnum,
+  ReadingRequestType,
+} from "@/constants/EventTypes";
 
 export interface ReaderPersona {
   id: string;
@@ -46,7 +50,7 @@ export interface AstrologyExpertise {
 export interface TarotExpertise {
   preferredSpreads: string[];
   cardAffinities: string[]; // Cards reader connects with most
-  interpretationStyle: 'traditional' | 'modern' | 'intuitive' | 'psychological';
+  interpretationStyle: "traditional" | "modern" | "intuitive" | "psychological";
   specializations: string[];
 }
 

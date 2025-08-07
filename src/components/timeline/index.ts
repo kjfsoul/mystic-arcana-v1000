@@ -1,2 +1,2 @@
-export { UserTimeline } from './UserTimeline';
-export type { LifeEvent } from './UserTimeline';
+export { UserTimeline } from "./UserTimeline";
+export type { LifeEvent } from "./UserTimeline";

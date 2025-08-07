@@ -1,31 +1,36 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { getMoonPhase, MoonPhaseData, isFullMoon, formatNextPhaseDate } from '@/lib/astrology/MoonPhase';
-import styles from './CosmicWeather.module.css';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  getMoonPhase,
+  MoonPhaseData,
+  isFullMoon,
+  formatNextPhaseDate,
+} from "@/lib/astrology/MoonPhase";
+import styles from "./CosmicWeather.module.css";
 interface CosmicWeatherProps {
   onClick?: () => void;
   className?: string;
 }
-export const CosmicWeather: React.FC<CosmicWeatherProps> = ({ 
-  onClick, 
-  className = '' 
+export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
+  onClick,
+  className = "",
 }) => {
   const [loading, setLoading] = useState(true);
   const [activeOrb, setActiveOrb] = useState(0);
   const [moonPhase, setMoonPhase] = useState<MoonPhaseData | null>(null);
   const [moonError, setMoonError] = useState(false);
   // Rotate through different cosmic elements
- 
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveOrb(prev => (prev + 1) % 4);
+      setActiveOrb((prev) => (prev + 1) % 4);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
   // Load real moon phase data
- 
+
   useEffect(() => {
     async function loadMoonPhase() {
       try {
@@ -33,12 +38,12 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
         setMoonError(false);
         const moonData = await getMoonPhase();
         setMoonPhase(moonData);
-        
+
         if (moonData.isUnavailable) {
           setMoonError(true);
         }
       } catch (error) {
-        console.error('Error loading moon phase:', error);
+        console.error("Error loading moon phase:", error);
         setMoonError(true);
       } finally {
         setLoading(false);
@@ -47,34 +52,38 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
     loadMoonPhase();
   }, []);
   const cosmicOrbs = [
-    { 
-      emoji: moonPhase?.emoji || '🌙', 
-      label: 'Moon Phase',
-      value: moonError ? 'Data Unavailable' : moonPhase ? `${moonPhase.phase} (${moonPhase.illumination}%)` : 'Loading...',
-      color: '#E6E6FA',
-      isFullMoon: moonPhase ? isFullMoon(moonPhase) : false
+    {
+      emoji: moonPhase?.emoji || "🌙",
+      label: "Moon Phase",
+      value: moonError
+        ? "Data Unavailable"
+        : moonPhase
+          ? `${moonPhase.phase} (${moonPhase.illumination}%)`
+          : "Loading...",
+      color: "#E6E6FA",
+      isFullMoon: moonPhase ? isFullMoon(moonPhase) : false,
     },
-    { 
-      emoji: '☿', 
-      label: 'Mercury',
-      value: 'Direct',
-      color: '#FFD700',
-      isFullMoon: false
+    {
+      emoji: "☿",
+      label: "Mercury",
+      value: "Direct",
+      color: "#FFD700",
+      isFullMoon: false,
     },
-    { 
-      emoji: '♀', 
-      label: 'Venus',
-      value: 'Harmonious',
-      color: '#FF69B4',
-      isFullMoon: false
+    {
+      emoji: "♀",
+      label: "Venus",
+      value: "Harmonious",
+      color: "#FF69B4",
+      isFullMoon: false,
     },
-    { 
-      emoji: '♂', 
-      label: 'Mars',
-      value: 'Energetic',
-      color: '#FF4500',
-      isFullMoon: false
-    }
+    {
+      emoji: "♂",
+      label: "Mars",
+      value: "Energetic",
+      color: "#FF4500",
+      isFullMoon: false,
+    },
   ];
   if (loading) {
     return (
@@ -84,12 +93,12 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
             className={styles.loadingOrb}
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.5, 1, 0.5]
+              opacity: [0.5, 1, 0.5],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           >
             ✦
@@ -100,7 +109,7 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
     );
   }
   return (
-    <motion.div 
+    <motion.div
       className={`${styles.container} ${className}`}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
@@ -108,15 +117,15 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
     >
       {/* Central Cosmic Display */}
       <div className={styles.centralDisplay}>
-        <motion.div 
+        <motion.div
           className={styles.mainOrb}
           animate={{
             rotate: 360,
-            scale: [1, 1.05, 1]
+            scale: [1, 1.05, 1],
           }}
           transition={{
             rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
           }}
         >
           <AnimatePresence mode="wait">
@@ -129,28 +138,40 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
               transition={{ duration: 0.5 }}
               style={{ color: cosmicOrbs[activeOrb].color }}
             >
-              <motion.div 
+              <motion.div
                 className={styles.orbEmoji}
-                animate={cosmicOrbs[activeOrb].isFullMoon ? {
-                  textShadow: [
-                    '0 0 10px #ffffff',
-                    '0 0 20px #e6e6fa',
-                    '0 0 30px #e6e6fa',
-                    '0 0 20px #e6e6fa',
-                    '0 0 10px #ffffff'
-                  ],
-                  scale: [1, 1.1, 1]
-                } : {}}
-                transition={cosmicOrbs[activeOrb].isFullMoon ? {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                } : {}}
+                animate={
+                  cosmicOrbs[activeOrb].isFullMoon
+                    ? {
+                        textShadow: [
+                          "0 0 10px #ffffff",
+                          "0 0 20px #e6e6fa",
+                          "0 0 30px #e6e6fa",
+                          "0 0 20px #e6e6fa",
+                          "0 0 10px #ffffff",
+                        ],
+                        scale: [1, 1.1, 1],
+                      }
+                    : {}
+                }
+                transition={
+                  cosmicOrbs[activeOrb].isFullMoon
+                    ? {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                    : {}
+                }
               >
                 {cosmicOrbs[activeOrb].emoji}
               </motion.div>
-              <div className={styles.orbLabel}>{cosmicOrbs[activeOrb].label}</div>
-              <div className={styles.orbValue}>{cosmicOrbs[activeOrb].value}</div>
+              <div className={styles.orbLabel}>
+                {cosmicOrbs[activeOrb].label}
+              </div>
+              <div className={styles.orbValue}>
+                {cosmicOrbs[activeOrb].value}
+              </div>
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -162,23 +183,23 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
               className={styles.orbitalElement}
               animate={{
                 rotate: 360,
-                scale: [0.8, 1.2, 0.8]
+                scale: [0.8, 1.2, 0.8],
               }}
               transition={{
-                rotate: { 
-                  duration: 15 + index * 2, 
-                  repeat: Infinity, 
-                  ease: "linear" 
+                rotate: {
+                  duration: 15 + index * 2,
+                  repeat: Infinity,
+                  ease: "linear",
                 },
-                scale: { 
-                  duration: 3 + index * 0.5, 
-                  repeat: Infinity, 
+                scale: {
+                  duration: 3 + index * 0.5,
+                  repeat: Infinity,
                   ease: "easeInOut",
-                  delay: index * 0.2
-                }
+                  delay: index * 0.2,
+                },
               }}
               style={{
-                transform: `rotate(${index * 60}deg) translateX(120px)`
+                transform: `rotate(${index * 60}deg) translateX(120px)`,
               }}
             >
               ✦
@@ -229,15 +250,15 @@ export const CosmicWeather: React.FC<CosmicWeatherProps> = ({
         </div>
       </div>
       {/* Interactive Hint */}
-      <motion.div 
+      <motion.div
         className={styles.interactiveHint}
         animate={{
-          opacity: [0.5, 1, 0.5]
+          opacity: [0.5, 1, 0.5],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       >
         <span className={styles.hintText}>Explore the Cosmos</span>

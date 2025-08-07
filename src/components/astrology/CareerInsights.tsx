@@ -1,21 +1,21 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { BirthData } from '@/lib/astrology/AstronomicalCalculator';
-import { analyzeCareer, CareerAnalysis } from '@/lib/astrology/CareerAnalyzer';
-import styles from './CareerInsights.module.css';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { BirthData } from "@/lib/astrology/AstronomicalCalculator";
+import { analyzeCareer, CareerAnalysis } from "@/lib/astrology/CareerAnalyzer";
+import styles from "./CareerInsights.module.css";
 interface CareerInsightsProps {
   userBirthData: BirthData;
   onBack: () => void;
 }
-export const CareerInsights: React.FC<CareerInsightsProps> = ({ 
+export const CareerInsights: React.FC<CareerInsightsProps> = ({
   userBirthData,
-  onBack 
+  onBack,
 }) => {
   const [analysis, setAnalysis] = useState<CareerAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- 
+
   useEffect(() => {
     async function generateCareerAnalysis() {
       try {
@@ -23,7 +23,11 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
         const careerAnalysis = await analyzeCareer(userBirthData);
         setAnalysis(careerAnalysis);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to generate career analysis');
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Failed to generate career analysis",
+        );
       } finally {
         setLoading(false);
       }
@@ -61,8 +65,11 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
         <div className={styles.errorContent}>
           <div className={styles.errorIcon}>⚠️</div>
           <h3>Analysis Temporarily Unavailable</h3>
-          <p>{error || 'Unable to generate career analysis at this time.'}</p>
-          <button onClick={() => window.location.reload()} className={styles.retryButton}>
+          <p>{error || "Unable to generate career analysis at this time."}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className={styles.retryButton}
+          >
             🔄 Try Again
           </button>
         </div>
@@ -77,16 +84,20 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
           ← Back
         </button>
       </div>
-      
+
       <div className={styles.analysisContent}>
         {/* Overview Section */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>🌟 Your Cosmic Career Blueprint</h3>
+          <h3 className={styles.sectionTitle}>
+            🌟 Your Cosmic Career Blueprint
+          </h3>
           <p className={styles.overview}>{analysis.overview}</p>
         </section>
         {/* Key Placements */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>🎯 Key Astrological Influences</h3>
+          <h3 className={styles.sectionTitle}>
+            🎯 Key Astrological Influences
+          </h3>
           <div className={styles.placementsGrid}>
             <div className={styles.placement}>
               <h4>Midheaven</h4>
@@ -104,14 +115,16 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
         </section>
         {/* Strengths */}
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>💪 Your Professional Strengths</h3>
+          <h3 className={styles.sectionTitle}>
+            💪 Your Professional Strengths
+          </h3>
           <div className={styles.strengthsList}>
             {analysis.strengths.map((strength, index) => (
               <div key={index} className={styles.strengthItem}>
                 <div className={styles.strengthHeader}>
                   <h4>{strength.title}</h4>
                   <div className={styles.rating}>
-                    {'⭐'.repeat(strength.rating)}
+                    {"⭐".repeat(strength.rating)}
                   </div>
                 </div>
                 <p>{strength.description}</p>
@@ -126,7 +139,9 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
             {analysis.challenges.map((challenge, index) => (
               <div key={index} className={styles.challengeItem}>
                 <h4>{challenge.title}</h4>
-                <p className={styles.challengeDescription}>{challenge.description}</p>
+                <p className={styles.challengeDescription}>
+                  {challenge.description}
+                </p>
                 <div className={styles.advice}>
                   <strong>Guidance:</strong> {challenge.advice}
                 </div>
@@ -143,7 +158,7 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
                 <div className={styles.pathHeader}>
                   <h4>{path.title}</h4>
                   <div className={styles.compatibility}>
-                    {'🌟'.repeat(path.compatibility)}
+                    {"🌟".repeat(path.compatibility)}
                   </div>
                 </div>
                 <p className={styles.pathDescription}>{path.description}</p>
@@ -151,7 +166,9 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
                   <strong>Ideal Industries:</strong>
                   <div className={styles.industryTags}>
                     {path.industries.map((industry, idx) => (
-                      <span key={idx} className={styles.industryTag}>{industry}</span>
+                      <span key={idx} className={styles.industryTag}>
+                        {industry}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -179,7 +196,10 @@ export const CareerInsights: React.FC<CareerInsightsProps> = ({
         </section>
         {/* Footer */}
         <div className={styles.footer}>
-          <p>✨ Generated using real astronomical calculations and traditional astrological principles</p>
+          <p>
+            ✨ Generated using real astronomical calculations and traditional
+            astrological principles
+          </p>
         </div>
       </div>
     </div>

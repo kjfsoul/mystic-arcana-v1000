@@ -1,6 +1,7 @@
 # 🧪 Authentication System Testing Guide
 
 ## Prerequisites
+
 1. ✅ Add `SUPABASE_SERVICE_ROLE_KEY` to `.env.local`
 2. ✅ Configure Google OAuth redirect URL in Supabase dashboard: `http://localhost:3000/auth/callback`
 3. ✅ Restart development server: `npm run dev`
@@ -8,6 +9,7 @@
 ## Test Plan: Email/Password Authentication
 
 ### Test 1: New User Signup
+
 ```bash
 # Expected Flow:
 1. Navigate to auth modal/page
@@ -27,10 +29,11 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ```
 
 ### Test 2: Existing User Sign In
+
 ```bash
 # Expected Flow:
 1. Use same credentials from Test 1
-2. Click "Sign In" 
+2. Click "Sign In"
 
 # Expected Results:
 ✅ Successful authentication
@@ -39,6 +42,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ```
 
 ### Test 3: Session Persistence
+
 ```bash
 # Expected Flow:
 1. Sign in successfully
@@ -54,6 +58,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ## Test Plan: Google OAuth Authentication
 
 ### Test 4: Google OAuth Flow
+
 ```bash
 # Expected Flow:
 1. Click "Sign in with Google" button
@@ -76,6 +81,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ```
 
 ### Test 5: Google Account Linking
+
 ```bash
 # Test with existing email:
 1. Create account with email/password first
@@ -90,6 +96,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ## Test Plan: Error Handling
 
 ### Test 6: Invalid Credentials
+
 ```bash
 # Test wrong password:
 1. Enter correct email, wrong password
@@ -102,6 +109,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ```
 
 ### Test 7: Network Issues
+
 ```bash
 # Simulate offline:
 1. Disconnect internet
@@ -116,6 +124,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ## Test Plan: Session Management
 
 ### Test 8: Sign Out
+
 ```bash
 # Expected Flow:
 1. Sign in successfully
@@ -129,6 +138,7 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ```
 
 ### Test 9: Concurrent Sessions
+
 ```bash
 # Expected Flow:
 1. Sign in on Browser A
@@ -143,27 +153,29 @@ console.log(localStorage.getItem('supabase.auth.token'))  // Should show token
 ## Debugging Commands
 
 ### Browser Console Testing
+
 ```javascript
 // Check current auth state
-await supabase.auth.getUser()
+await supabase.auth.getUser();
 
 // Check session
-await supabase.auth.getSession()
+await supabase.auth.getSession();
 
 // Test sign out
-await supabase.auth.signOut()
+await supabase.auth.signOut();
 
 // Check local storage
-localStorage.getItem('supabase.auth.token')
+localStorage.getItem("supabase.auth.token");
 
 // Listen to auth changes
 supabase.auth.onAuthStateChange((event, session) => {
-  console.log('Auth event:', event)
-  console.log('Session:', session)
-})
+  console.log("Auth event:", event);
+  console.log("Session:", session);
+});
 ```
 
 ### Server Logs to Monitor
+
 ```bash
 # Development console should show:
 ✅ No "Invalid API Key" errors
@@ -175,8 +187,9 @@ supabase.auth.onAuthStateChange((event, session) => {
 ## Success Criteria
 
 **All tests pass when:**
+
 1. ✅ Email/password signup works without "Invalid API Key" error
-2. ✅ Google OAuth completes without "404 Not Found" error  
+2. ✅ Google OAuth completes without "404 Not Found" error
 3. ✅ Sessions persist across page reloads
 4. ✅ Sign out properly clears authentication state
 5. ✅ Error messages are clear and actionable

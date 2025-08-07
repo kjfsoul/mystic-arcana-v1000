@@ -1,7 +1,9 @@
 # Astrology Implementation - Real Astronomical Calculations
 
 ## Overview
+
 This implementation uses the exact tools specified in your requirements:
+
 - **PySwisseph** - NASA JPL ephemeris data for accurate planetary positions
 - **Kerykeion** - Professional SVG chart generation
 - **GeoPy + TimezoneFinder** - Location and timezone services
@@ -10,6 +12,7 @@ This implementation uses the exact tools specified in your requirements:
 ## Architecture
 
 ### Database-First Approach
+
 As you correctly identified, this is primarily a database concern:
 
 1. **Ephemeris Cache** - Pre-calculated planetary positions
@@ -18,6 +21,7 @@ As you correctly identified, this is primarily a database concern:
 4. **Horoscope Cache** - Generated daily horoscopes
 
 ### Python + TypeScript Hybrid
+
 - Python services handle all astronomical calculations
 - TypeScript API routes bridge to Python
 - Results cached in Supabase for performance
@@ -25,21 +29,26 @@ As you correctly identified, this is primarily a database concern:
 ## Setup Instructions
 
 1. **Install Python Dependencies**:
+
    ```bash
    npm run astrology:setup
    ```
+
    This will:
    - Create Python virtual environment
    - Install PySwisseph, Kerykeion, GeoPy, etc.
    - Download ephemeris data files from astro.com
 
 2. **Run Database Migrations**:
+
    ```bash
    npx supabase db push
    ```
+
    This creates all caching tables.
 
 3. **Set Environment Variables**:
+
    ```env
    PYTHON_PATH=/path/to/venv-astrology/bin/python
    ```
@@ -52,14 +61,15 @@ As you correctly identified, this is primarily a database concern:
 ## API Usage
 
 ### Calculate Birth Chart
+
 ```typescript
-import AstrologyService from '@/services/astrology/AstrologyService';
+import AstrologyService from "@/services/astrology/AstrologyService";
 
 const chart = await AstrologyService.calculateBirthChart(
-  'John Doe',
-  new Date('1990-06-15T10:30:00'),
-  'New York',
-  'USA'
+  "John Doe",
+  new Date("1990-06-15T10:30:00"),
+  "New York",
+  "USA",
 );
 
 // Returns:
@@ -70,10 +80,11 @@ const chart = await AstrologyService.calculateBirthChart(
 ```
 
 ### Calculate Synastry
+
 ```typescript
 const synastry = await AstrologyService.calculateSynastry(
   person1Data,
-  person2Data
+  person2Data,
 );
 
 // Returns:
@@ -83,6 +94,7 @@ const synastry = await AstrologyService.calculateSynastry(
 ```
 
 ### Get Current Transits
+
 ```typescript
 const transits = await AstrologyService.getCurrentTransits();
 // Real-time planetary positions
@@ -91,6 +103,7 @@ const transits = await AstrologyService.getCurrentTransits();
 ## Validation
 
 The system includes validation scripts that compare calculations with:
+
 - Astro.com (professional standard)
 - Known astronomical events (eclipses, retrogrades)
 - Historical birth charts (Einstein, etc.)
@@ -110,14 +123,16 @@ The system includes validation scripts that compare calculations with:
 ## Accuracy Guarantee
 
 This implementation provides:
+
 - **Swiss Ephemeris**: ±0.001 arcsecond precision
 - **House Systems**: Placidus, Koch, Equal supported
 - **Time Zones**: Historical timezone data via Olson DB
 - **Aspects**: Exact calculations with configurable orbs
 
 ## Cost Analysis
+
 - **Swiss Ephemeris**: Free (AGPL license)
-- **Kerykeion**: Free (MIT license)  
+- **Kerykeion**: Free (MIT license)
 - **GeoPy**: Free (Nominatim backend)
 - **Supabase**: Free tier sufficient
 - **Total**: $0 for core functionality
@@ -125,11 +140,13 @@ This implementation provides:
 ## Next Steps
 
 1. **Run Setup**:
+
    ```bash
    npm run astrology:setup
    ```
 
 2. **Test Calculations**:
+
    ```bash
    npm run astrology:test
    ```

@@ -1,10 +1,15 @@
 /**
  * Coordinate Transformation Utilities for Mystic Arcana
- * 
+ *
  * Provides high-precision coordinate transformations between
  * different astronomical coordinate systems.
  */
-import type { GeoLocation, EquatorialCoordinates, HorizontalCoordinates, ScreenCoordinates } from '../../types/astronomical';
+import type {
+  GeoLocation,
+  EquatorialCoordinates,
+  HorizontalCoordinates,
+  ScreenCoordinates,
+} from "../../types/astronomical";
 export class CoordinateTransforms {
   /**
    * Convert Julian Day to Greenwich Mean Sidereal Time
@@ -12,8 +17,11 @@ export class CoordinateTransforms {
   static julianDayToGMST(jd: number): number {
     const T = (jd - 2451545.0) / 36525.0;
     // GMST at 0h UT
-    let gmst = 280.46061837 + 360.98564736629 * (jd - 2451545.0) +
-      0.000387933 * T * T - T * T * T / 38710000.0;
+    let gmst =
+      280.46061837 +
+      360.98564736629 * (jd - 2451545.0) +
+      0.000387933 * T * T -
+      (T * T * T) / 38710000.0;
     // Normalize to 0-360 degrees
     gmst = gmst % 360;
     if (gmst < 0) gmst += 360;
@@ -34,29 +42,31 @@ export class CoordinateTransforms {
   static equatorialToHorizontal(
     coords: EquatorialCoordinates,
     location: GeoLocation,
-    jd: number
+    jd: number,
   ): HorizontalCoordinates {
     const { ra, dec } = coords;
     const latitude = location.latitude;
     const longitude = location.longitude;
     // Convert to radians
-    const raRad = ra * Math.PI / 180; // Degrees to radians
-    const decRad = dec * Math.PI / 180;
-    const lat = latitude * Math.PI / 180;
+    const raRad = (ra * Math.PI) / 180; // Degrees to radians
+    const decRad = (dec * Math.PI) / 180;
+    const lat = (latitude * Math.PI) / 180;
     // Calculate Local Sidereal Time
     const gmst = this.julianDayToGMST(jd);
     const lst = this.gmstToLST(gmst, longitude);
-    const lstRad = lst * Math.PI / 180;
+    const lstRad = (lst * Math.PI) / 180;
     // Calculate Hour Angle
     const ha = lstRad - raRad;
     // Calculate altitude
-    const sinAlt = Math.sin(decRad) * Math.sin(lat) +
+    const sinAlt =
+      Math.sin(decRad) * Math.sin(lat) +
       Math.cos(decRad) * Math.cos(lat) * Math.cos(ha);
-    const altitude = Math.asin(sinAlt) * 180 / Math.PI;
+    const altitude = (Math.asin(sinAlt) * 180) / Math.PI;
     // Calculate azimuth
-    const cosAz = (Math.sin(decRad) - Math.sin(lat) * sinAlt) /
+    const cosAz =
+      (Math.sin(decRad) - Math.sin(lat) * sinAlt) /
       (Math.cos(lat) * Math.cos(Math.asin(sinAlt)));
-    let azimuth = Math.acos(Math.max(-1, Math.min(1, cosAz))) * 180 / Math.PI;
+    let azimuth = (Math.acos(Math.max(-1, Math.min(1, cosAz))) * 180) / Math.PI;
     // Determine correct quadrant for azimuth
     if (Math.sin(ha) > 0) {
       azimuth = 360 - azimuth;
@@ -70,7 +80,7 @@ export class CoordinateTransforms {
     horizontal: HorizontalCoordinates,
     canvasWidth: number,
     canvasHeight: number,
-    projection: 'stereographic' | 'orthographic' | 'mercator' = 'stereographic'
+    projection: "stereographic" | "orthographic" | "mercator" = "stereographic",
   ): ScreenCoordinates {
     const { azimuth, altitude } = horizontal;
     // Check if object is above horizon
@@ -80,21 +90,61 @@ export class CoordinateTransforms {
     }
     let x: number, y: number;
     switch (projection) {
-      case 'stereographic':
-        x = this.stereographicProjection(azimuth, altitude, canvasWidth, canvasHeight).x;
-        y = this.stereographicProjection(azimuth, altitude, canvasWidth, canvasHeight).y;
+      case "stereographic":
+        x = this.stereographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).x;
+        y = this.stereographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).y;
         break;
-      case 'orthographic':
-        x = this.orthographicProjection(azimuth, altitude, canvasWidth, canvasHeight).x;
-        y = this.orthographicProjection(azimuth, altitude, canvasWidth, canvasHeight).y;
+      case "orthographic":
+        x = this.orthographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).x;
+        y = this.orthographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).y;
         break;
-      case 'mercator':
-        x = this.mercatorProjection(azimuth, altitude, canvasWidth, canvasHeight).x;
-        y = this.mercatorProjection(azimuth, altitude, canvasWidth, canvasHeight).y;
+      case "mercator":
+        x = this.mercatorProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).x;
+        y = this.mercatorProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).y;
         break;
       default:
-        x = this.stereographicProjection(azimuth, altitude, canvasWidth, canvasHeight).x;
-        y = this.stereographicProjection(azimuth, altitude, canvasWidth, canvasHeight).y;
+        x = this.stereographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).x;
+        y = this.stereographicProjection(
+          azimuth,
+          altitude,
+          canvasWidth,
+          canvasHeight,
+        ).y;
     }
     return { x, y, visible };
   }
@@ -105,10 +155,10 @@ export class CoordinateTransforms {
     azimuth: number,
     altitude: number,
     width: number,
-    height: number
+    height: number,
   ): { x: number; y: number } {
-    const azRad = azimuth * Math.PI / 180;
-    const altRad = altitude * Math.PI / 180;
+    const azRad = (azimuth * Math.PI) / 180;
+    const altRad = (altitude * Math.PI) / 180;
     // Project onto plane
     const k = 2 / (1 + Math.sin(altRad));
     const x = k * Math.cos(altRad) * Math.sin(azRad);
@@ -119,7 +169,7 @@ export class CoordinateTransforms {
     const scale = Math.min(width, height) / 4;
     return {
       x: centerX + x * scale,
-      y: centerY - y * scale // Flip Y axis
+      y: centerY - y * scale, // Flip Y axis
     };
   }
   /**
@@ -129,10 +179,10 @@ export class CoordinateTransforms {
     azimuth: number,
     altitude: number,
     width: number,
-    height: number
+    height: number,
   ): { x: number; y: number } {
-    const azRad = azimuth * Math.PI / 180;
-    const altRad = altitude * Math.PI / 180;
+    const azRad = (azimuth * Math.PI) / 180;
+    const altRad = (altitude * Math.PI) / 180;
     const x = Math.cos(altRad) * Math.sin(azRad);
     const y = Math.cos(altRad) * Math.cos(azRad);
     const centerX = width / 2;
@@ -140,7 +190,7 @@ export class CoordinateTransforms {
     const scale = Math.min(width, height) / 2.2;
     return {
       x: centerX + x * scale,
-      y: centerY - y * scale
+      y: centerY - y * scale,
     };
   }
   /**
@@ -150,15 +200,15 @@ export class CoordinateTransforms {
     azimuth: number,
     altitude: number,
     width: number,
-    height: number
+    height: number,
   ): { x: number; y: number } {
-    const azRad = azimuth * Math.PI / 180;
-    const altRad = altitude * Math.PI / 180;
+    const azRad = (azimuth * Math.PI) / 180;
+    const altRad = (altitude * Math.PI) / 180;
     const x = azRad / (2 * Math.PI);
     const y = Math.log(Math.tan(Math.PI / 4 + altRad / 2)) / (2 * Math.PI);
     return {
       x: x * width,
-      y: height / 2 - y * height
+      y: height / 2 - y * height,
     };
   }
   /**
@@ -167,7 +217,7 @@ export class CoordinateTransforms {
   static applyRefraction(altitude: number): number {
     if (altitude < -0.5) return altitude;
     // Simple refraction model (more accurate models available)
-    const altRad = altitude * Math.PI / 180;
+    const altRad = (altitude * Math.PI) / 180;
     const refraction = 1.02 / Math.tan(altRad + 10.3 / (altRad + 5.11)) / 60;
     return altitude + refraction;
   }
@@ -177,35 +227,43 @@ export class CoordinateTransforms {
   static applyPrecession(
     coords: EquatorialCoordinates,
     fromEpoch: number,
-    toEpoch: number
+    toEpoch: number,
   ): EquatorialCoordinates {
     const T = (fromEpoch - 2000.0) / 100.0;
     const t = (toEpoch - fromEpoch) / 100.0;
     // Precession constants (simplified)
-    const zeta = (2306.2181 + 1.39656 * T - 0.000139 * T * T) * t +
-      (0.30188 - 0.000344 * T) * t * t + 0.017998 * t * t * t;
-    const z = (2306.2181 + 1.39656 * T - 0.000139 * T * T) * t +
-      (1.09468 + 0.000066 * T) * t * t + 0.018203 * t * t * t;
-    const theta = (2004.3109 - 0.85330 * T - 0.000217 * T * T) * t -
-      (0.42665 + 0.000217 * T) * t * t - 0.041833 * t * t * t;
+    const zeta =
+      (2306.2181 + 1.39656 * T - 0.000139 * T * T) * t +
+      (0.30188 - 0.000344 * T) * t * t +
+      0.017998 * t * t * t;
+    const z =
+      (2306.2181 + 1.39656 * T - 0.000139 * T * T) * t +
+      (1.09468 + 0.000066 * T) * t * t +
+      0.018203 * t * t * t;
+    const theta =
+      (2004.3109 - 0.8533 * T - 0.000217 * T * T) * t -
+      (0.42665 + 0.000217 * T) * t * t -
+      0.041833 * t * t * t;
     // Convert to radians
-    const zetaRad = zeta * Math.PI / (180 * 3600);
-    const zRad = z * Math.PI / (180 * 3600);
-    const thetaRad = theta * Math.PI / (180 * 3600);
+    const zetaRad = (zeta * Math.PI) / (180 * 3600);
+    const zRad = (z * Math.PI) / (180 * 3600);
+    const thetaRad = (theta * Math.PI) / (180 * 3600);
     // Original coordinates in radians
-    const ra0 = coords.ra * Math.PI / 180; // Already in degrees
-    const dec0 = coords.dec * Math.PI / 180;
+    const ra0 = (coords.ra * Math.PI) / 180; // Already in degrees
+    const dec0 = (coords.dec * Math.PI) / 180;
     // Apply precession transformation
     const A = Math.cos(dec0) * Math.sin(ra0 + zetaRad);
-    const B = Math.cos(thetaRad) * Math.cos(dec0) * Math.cos(ra0 + zetaRad) -
+    const B =
+      Math.cos(thetaRad) * Math.cos(dec0) * Math.cos(ra0 + zetaRad) -
       Math.sin(thetaRad) * Math.sin(dec0);
-    const C = Math.sin(thetaRad) * Math.cos(dec0) * Math.cos(ra0 + zetaRad) +
+    const C =
+      Math.sin(thetaRad) * Math.cos(dec0) * Math.cos(ra0 + zetaRad) +
       Math.cos(thetaRad) * Math.sin(dec0);
     const ra = Math.atan2(A, B) + zRad;
     const dec = Math.asin(C);
     return {
-      ra: ra * 180 / Math.PI, // Convert back to degrees
-      dec: dec * 180 / Math.PI
+      ra: (ra * 180) / Math.PI, // Convert back to degrees
+      dec: (dec * 180) / Math.PI,
     };
   }
   /**
@@ -221,8 +279,14 @@ export class CoordinateTransforms {
     const a = Math.floor((14 - month) / 12);
     const y = year + 4800 - a;
     const m = month + 12 * a - 3;
-    const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y +
-      Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+    const jdn =
+      day +
+      Math.floor((153 * m + 2) / 5) +
+      365 * y +
+      Math.floor(y / 4) -
+      Math.floor(y / 100) +
+      Math.floor(y / 400) -
+      32045;
     const jd = jdn + (hour - 12) / 24 + minute / 1440 + second / 86400;
     return jd;
   }
@@ -243,13 +307,15 @@ export class CoordinateTransforms {
     const hours = (fractionalDay % 1) * 24;
     const minutes = (hours % 1) * 60;
     const seconds = (minutes % 1) * 60;
-    return new Date(Date.UTC(
-      year,
-      month - 1,
-      day,
-      Math.floor(hours),
-      Math.floor(minutes),
-      Math.floor(seconds)
-    ));
+    return new Date(
+      Date.UTC(
+        year,
+        month - 1,
+        day,
+        Math.floor(hours),
+        Math.floor(minutes),
+        Math.floor(seconds),
+      ),
+    );
   }
 }

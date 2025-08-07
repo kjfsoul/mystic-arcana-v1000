@@ -111,11 +111,11 @@
   .container {
     padding: 1.5rem;
   }
-  
+
   .title {
     font-size: 1.5rem;
   }
-  
+
   .deckGrid {
     grid-template-columns: 1fr;
   }

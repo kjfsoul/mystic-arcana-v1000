@@ -1,10 +1,10 @@
-'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Card } from '../../ui/Card/Card';
-import { CardAnimations } from '../../animations/CardAnimations/CardAnimations';
-import { useCosmicWeather } from '../../../utils/cosmic-weather/useCosmicWeather';
-import styles from './TarotPanel.module.css';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import { Card } from "../../ui/Card/Card";
+import { CardAnimations } from "../../animations/CardAnimations/CardAnimations";
+import { useCosmicWeather } from "../../../utils/cosmic-weather/useCosmicWeather";
+import styles from "./TarotPanel.module.css";
 interface TarotPanelProps {
   isActive: boolean;
   onActivate: () => void;
@@ -12,23 +12,23 @@ interface TarotPanelProps {
 interface TarotCard {
   id: string;
   name: string;
-  arcana: 'major' | 'minor';
-  suit?: 'wands' | 'cups' | 'swords' | 'pentacles';
+  arcana: "major" | "minor";
+  suit?: "wands" | "cups" | "swords" | "pentacles";
   number?: number;
   image: string;
   meaning: {
     upright: string;
     reversed: string;
     keywords?: string[];
-  meaning_reversed?: string;
-  meaning_upright?: string;
-  arcana_type?: string;
-  card_number?: number;
-};
+    meaning_reversed?: string;
+    meaning_upright?: string;
+    arcana_type?: string;
+    card_number?: number;
+  };
 }
 /**
  * TarotPanel Component
- * 
+ *
  * Handles tarot card selection, spreads, and readings.
  * Features:
  * - Interactive card deck with shuffle animations
@@ -36,20 +36,25 @@ interface TarotCard {
  * - Card interpretations with cosmic weather influence
  * - Accessibility features for screen readers
  */
-export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) => {
+export const TarotPanel: React.FC<TarotPanelProps> = ({
+  isActive,
+  onActivate,
+}) => {
   const [selectedCards] = useState<TarotCard[]>([]);
-  const [currentSpread, setCurrentSpread] = useState<'three-card' | 'celtic-cross' | 'single'>('three-card');
+  const [currentSpread, setCurrentSpread] = useState<
+    "three-card" | "celtic-cross" | "single"
+  >("three-card");
   const [isShuffling, setIsShuffling] = useState(false);
   const { cosmicInfluence } = useCosmicWeather();
   const handleShuffle = async () => {
     setIsShuffling(true);
     // Shuffle animation and logic
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsShuffling(false);
   };
   return (
     <div
-      className={`${styles.panel} ${isActive ? styles.active : ''}`}
+      className={`${styles.panel} ${isActive ? styles.active : ""}`}
       onClick={onActivate}
       role="tabpanel"
       aria-label="Tarot reading interface"
@@ -67,11 +72,17 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
           <select
             id="spread-type"
             value={currentSpread}
-            onChange={(e) => setCurrentSpread(e.target.value as 'three-card' | 'celtic-cross' | 'single')}
+            onChange={(e) =>
+              setCurrentSpread(
+                e.target.value as "three-card" | "celtic-cross" | "single",
+              )
+            }
             aria-label="Select tarot spread type"
           >
             <option value="single">Single Card</option>
-            <option value="three-card">Three Card (Past, Present, Future)</option>
+            <option value="three-card">
+              Three Card (Past, Present, Future)
+            </option>
             <option value="celtic-cross">Celtic Cross</option>
           </select>
         </div>
@@ -86,7 +97,7 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
                   className={styles.shuffleButton}
                   aria-label="Shuffle tarot deck"
                 >
-                  {isShuffling ? 'Shuffling...' : 'Shuffle & Draw'}
+                  {isShuffling ? "Shuffling..." : "Shuffle & Draw"}
                 </button>
               </div>
             ) : (
@@ -98,7 +109,12 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
                     role="img"
                     aria-label={`${card.name} card in position ${index + 1}`}
                   >
-                    <Image src={card.image} alt={card.name} width={200} height={300} />
+                    <Image
+                      src={card.image}
+                      alt={card.name}
+                      width={200}
+                      height={300}
+                    />
                     <div className={styles.cardInfo}>
                       <h3>{card.name}</h3>
                       <p>{card.meaning.upright}</p>
@@ -111,11 +127,18 @@ export const TarotPanel: React.FC<TarotPanelProps> = ({ isActive, onActivate }) 
         </div>
         {/* Interpretation area */}
         {selectedCards.length > 0 && (
-          <div className={styles.interpretation} role="region" aria-label="Card interpretation">
+          <div
+            className={styles.interpretation}
+            role="region"
+            aria-label="Card interpretation"
+          >
             <h3>Your Reading</h3>
             <div className={styles.readingText}>
               {/* Dynamic interpretation based on cards and cosmic weather */}
-              <p>The cards reveal a path influenced by {cosmicInfluence.planetaryAlignment}...</p>
+              <p>
+                The cards reveal a path influenced by{" "}
+                {cosmicInfluence.planetaryAlignment}...
+              </p>
             </div>
           </div>
         )}

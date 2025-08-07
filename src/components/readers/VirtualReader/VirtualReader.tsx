@@ -1,20 +1,20 @@
-'use client';
- 
-import React, { useRef, useEffect, useState } from 'react';
-import styles from './VirtualReader.module.css';
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
+import styles from "./VirtualReader.module.css";
 interface VirtualReaderProps {
-  mood: 'neutral' | 'mystical' | 'contemplative';
+  mood: "neutral" | "mystical" | "contemplative";
   isTyping: boolean;
   // eslint-disable-next-line no-unused-vars
-  onMoodChange: (mood: 'neutral' | 'mystical' | 'contemplative') => void;
+  onMoodChange: (mood: "neutral" | "mystical" | "contemplative") => void;
   className?: string;
 }
 /**
  * VirtualReader Component
- * 
+ *
  * Animated avatar representing the AI reader with personality expressions.
  * Features mood changes, typing animations, and cosmic particle effects.
- * 
+ *
  * Could be enhanced with:
  * - 3D avatar using Three.js or Ready Player Me
  * - Voice synthesis integration
@@ -25,16 +25,16 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
   mood,
   isTyping,
   onMoodChange: _onMoodChange,
-  className = ''
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const [eyeBlinkTimer, setEyeBlinkTimer] = useState(0);
- 
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
     canvas.width = 200;
     canvas.height = 200;
@@ -43,9 +43,9 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       // Draw cosmic aura based on mood
       const auraColors = {
-        neutral: ['rgba(147, 112, 219, 0.3)', 'rgba(138, 43, 226, 0.1)'],
-        mystical: ['rgba(255, 215, 0, 0.4)', 'rgba(255, 140, 0, 0.2)'],
-        contemplative: ['rgba(75, 0, 130, 0.4)', 'rgba(25, 25, 112, 0.2)']
+        neutral: ["rgba(147, 112, 219, 0.3)", "rgba(138, 43, 226, 0.1)"],
+        mystical: ["rgba(255, 215, 0, 0.4)", "rgba(255, 140, 0, 0.2)"],
+        contemplative: ["rgba(75, 0, 130, 0.4)", "rgba(25, 25, 112, 0.2)"],
       };
       const gradient = ctx.createRadialGradient(100, 100, 30, 100, 100, 80);
       gradient.addColorStop(0, auraColors[mood][0]);
@@ -53,7 +53,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       // Draw face outline
-      ctx.strokeStyle = '#9370DB';
+      ctx.strokeStyle = "#9370DB";
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(100, 100, 60, 0, Math.PI * 2);
@@ -63,7 +63,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
       const leftEyeX = 85;
       const rightEyeX = 115;
       const eyeSize = eyeBlinkTimer > 0 ? 2 : 8;
-      ctx.fillStyle = '#FFD700';
+      ctx.fillStyle = "#FFD700";
       ctx.beginPath();
       ctx.arc(leftEyeX, eyeY, eyeSize, 0, Math.PI * 2);
       ctx.fill();
@@ -71,13 +71,13 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
       ctx.arc(rightEyeX, eyeY, eyeSize, 0, Math.PI * 2);
       ctx.fill();
       // Draw mouth based on mood
-      ctx.strokeStyle = '#9370DB';
+      ctx.strokeStyle = "#9370DB";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      if (mood === 'mystical') {
+      if (mood === "mystical") {
         // Slight smile
         ctx.arc(100, 115, 15, 0.2, Math.PI - 0.2);
-      } else if (mood === 'contemplative') {
+      } else if (mood === "contemplative") {
         // Neutral line
         ctx.moveTo(90, 120);
         ctx.lineTo(110, 120);
@@ -104,7 +104,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
         setEyeBlinkTimer(10);
       }
       if (eyeBlinkTimer > 0) {
-        setEyeBlinkTimer(prev => prev - 1);
+        setEyeBlinkTimer((prev) => prev - 1);
       }
     };
     const animate = () => {
@@ -129,24 +129,24 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
         {/* Mood indicators */}
         <div className={styles.moodIndicators}>
           <button
-            onClick={() => _onMoodChange('neutral')}
-            className={`${styles.moodButton} ${mood === 'neutral' ? styles.active : ''}`}
+            onClick={() => _onMoodChange("neutral")}
+            className={`${styles.moodButton} ${mood === "neutral" ? styles.active : ""}`}
             aria-label="Set reader to neutral mood"
             title="Neutral"
           >
             ⚪
           </button>
           <button
-            onClick={() => _onMoodChange('mystical')}
-            className={`${styles.moodButton} ${mood === 'mystical' ? styles.active : ''}`}
+            onClick={() => _onMoodChange("mystical")}
+            className={`${styles.moodButton} ${mood === "mystical" ? styles.active : ""}`}
             aria-label="Set reader to mystical mood"
             title="Mystical"
           >
             ✨
           </button>
           <button
-            onClick={() => _onMoodChange('contemplative')}
-            className={`${styles.moodButton} ${mood === 'contemplative' ? styles.active : ''}`}
+            onClick={() => _onMoodChange("contemplative")}
+            className={`${styles.moodButton} ${mood === "contemplative" ? styles.active : ""}`}
             aria-label="Set reader to contemplative mood"
             title="Contemplative"
           >
@@ -164,7 +164,12 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
             <div
               className={styles.energyFill}
               style={{
-                width: mood === 'mystical' ? '90%' : mood === 'contemplative' ? '70%' : '50%'
+                width:
+                  mood === "mystical"
+                    ? "90%"
+                    : mood === "contemplative"
+                      ? "70%"
+                      : "50%",
               }}
             />
           </div>

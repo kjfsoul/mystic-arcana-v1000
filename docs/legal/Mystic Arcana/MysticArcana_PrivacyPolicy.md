@@ -1,5 +1,6 @@
-# Mystic Arcana Privacy Policy  
-*Effective Date: [Insert Date]*
+# Mystic Arcana Privacy Policy
+
+_Effective Date: [Insert Date]_
 
 ---
 
@@ -9,8 +10,8 @@ This document was created using Mystic Arcana’s Master System Prompt. It is st
 **Compliance Checklist:**  
 | Standard | Covered? |
 |----------|----------|
-| GDPR     | ✅       |
-| CCPA     | ✅       |
+| GDPR | ✅ |
+| CCPA | ✅ |
 | COPPA Disclaimer | ✅ |
 | PCI DSS (Stripe) | ✅ |
 
@@ -20,14 +21,14 @@ This document was created using Mystic Arcana’s Master System Prompt. It is st
 
 To guide your path, we collect the following types of information:
 
-| Data Type | Examples | Purpose |
-|----------|----------|---------|
-| **Identity & Profile** | Name, email, birth date, age, gender, profession, interests | To personalize your readings and birth chart |
-| **Astrological Details** | Birth location, current location | To generate accurate astrology insights |
-| **Behavioral Data** | Interactions with cards, spreads, and journal entries | To tailor AI-generated guidance over time |
-| **Communication Logs** | Comments, messages, Q&A participation | To support community connection and safety |
-| **Payment Info** | Billing address, transaction history (via Stripe) | To manage subscriptions and purchases |
-| **Device & Usage** | IP address, browser, device ID | To improve performance, security, and analytics |
+| Data Type                | Examples                                                    | Purpose                                         |
+| ------------------------ | ----------------------------------------------------------- | ----------------------------------------------- |
+| **Identity & Profile**   | Name, email, birth date, age, gender, profession, interests | To personalize your readings and birth chart    |
+| **Astrological Details** | Birth location, current location                            | To generate accurate astrology insights         |
+| **Behavioral Data**      | Interactions with cards, spreads, and journal entries       | To tailor AI-generated guidance over time       |
+| **Communication Logs**   | Comments, messages, Q&A participation                       | To support community connection and safety      |
+| **Payment Info**         | Billing address, transaction history (via Stripe)           | To manage subscriptions and purchases           |
+| **Device & Usage**       | IP address, browser, device ID                              | To improve performance, security, and analytics |
 
 ---
 
@@ -35,12 +36,12 @@ To guide your path, we collect the following types of information:
 
 We use your data to:
 
-- Deliver personalized tarot, astrology, and journaling experiences  
-- Interpret planetary influences based on your birth chart  
-- Offer relevant spreads, decks, and recommendations  
-- Analyze usage patterns to evolve our platform’s wisdom  
-- Send optional updates, horoscopes, and event invitations (if opted in)  
-- Process secure payments and subscriptions  
+- Deliver personalized tarot, astrology, and journaling experiences
+- Interpret planetary influences based on your birth chart
+- Offer relevant spreads, decks, and recommendations
+- Analyze usage patterns to evolve our platform’s wisdom
+- Send optional updates, horoscopes, and event invitations (if opted in)
+- Process secure payments and subscriptions
 - Prevent abuse and ensure community safety
 
 ---
@@ -49,11 +50,11 @@ We use your data to:
 
 We only share your data with trusted service providers:
 
-- **Supabase** – secure data storage and user authentication  
-- **Stripe** – payment processing  
-- **Google Analytics** – anonymous usage metrics  
-- **Netlify** – website deployment  
-- **Affiliates** – with clear link disclosure  
+- **Supabase** – secure data storage and user authentication
+- **Stripe** – payment processing
+- **Google Analytics** – anonymous usage metrics
+- **Netlify** – website deployment
+- **Affiliates** – with clear link disclosure
 - **Legal authorities** – only if legally required
 
 We do not sell your personal information.
@@ -64,9 +65,9 @@ We do not sell your personal information.
 
 We use cookies and local storage to:
 
-- Remember login sessions  
-- Store spread and reading preferences  
-- Analyze user behavior anonymously  
+- Remember login sessions
+- Store spread and reading preferences
+- Analyze user behavior anonymously
 - Support affiliate referrals
 
 [Add cookie banner functionality here.]
@@ -75,13 +76,13 @@ We use cookies and local storage to:
 
 ## 5. Your Rights & Choices
 
-| Right | What You Can Do |
-|-------|------------------|
-| **Access** | Request a copy of your personal data |
-| **Correction** | Update or fix your data |
-| **Erasure** | Delete your account and data |
-| **Portability** | Export your data |
-| **Opt Out** | Control email/marketing preferences |
+| Right           | What You Can Do                      |
+| --------------- | ------------------------------------ |
+| **Access**      | Request a copy of your personal data |
+| **Correction**  | Update or fix your data              |
+| **Erasure**     | Delete your account and data         |
+| **Portability** | Export your data                     |
+| **Opt Out**     | Control email/marketing preferences  |
 
 Use the [Manage My Data] link or contact privacy@mysticarcana.com.
 
@@ -97,9 +98,9 @@ Content is for spiritual entertainment only and is not a substitute for professi
 
 ## 7. Data Storage & Retention
 
-- Stored securely via Supabase and encrypted  
-- Retained while account is active  
-- Anonymized data may be used for research and AI training  
+- Stored securely via Supabase and encrypted
+- Retained while account is active
+- Anonymized data may be used for research and AI training
 - Deleted upon request unless retention is required by law
 
 ---

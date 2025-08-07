@@ -12,7 +12,7 @@ const TAROT_API_URL =
 /**
  * Draws a three-card tarot spread from the specified API.
  * Each card is randomly assigned an orientation: Upright or Reversed.
- * 
+ *
  * Returns: Promise<Array<{...card, position: "Upright" | "Reversed"}>>
  */
 async function drawSpread() {

@@ -1,10 +1,10 @@
-#  # Mystic Arcana — MCP Server Suite Spec & Coding Scaffold
+# # Mystic Arcana — MCP Server Suite Spec & Coding Scaffold
 
 ## 1. MCP (Model Context Protocol) Server Overview
 
-* **Purpose:** Modular, pluggable agentic server endpoints implementing Anthropic-style MCP to expose tools, data, and workflows to AI agents and the frontend (via AGUI/CopilotKit).
-* **Each MCP server covers a specialized domain/tool** as listed in Mystic NotebookLM doc (tarot engine, astrology engine, birth chart, Q\&A, rituals, journal analysis, user memory, feedback, personalization, third-party APIs, etc.).
-* **All MCPs are event-driven and compatible with AGUI.**
+- **Purpose:** Modular, pluggable agentic server endpoints implementing Anthropic-style MCP to expose tools, data, and workflows to AI agents and the frontend (via AGUI/CopilotKit).
+- **Each MCP server covers a specialized domain/tool** as listed in Mystic NotebookLM doc (tarot engine, astrology engine, birth chart, Q\&A, rituals, journal analysis, user memory, feedback, personalization, third-party APIs, etc.).
+- **All MCPs are event-driven and compatible with AGUI.**
 
 ## 2. Directory/File Structure
 
@@ -23,22 +23,21 @@
   ... (add more as identified in NotebookLM doc)
 ```
 
-* **Each file is a standalone MCP server module.**
-* **Unified plugin registry** (optional): `/backend/agents/mcp/pluginRegistry.ts`
-* **Master MCP router** (optional): `/backend/agents/mcp/masterMCPRouter.ts` — routes requests to the correct MCP.
+- **Each file is a standalone MCP server module.**
+- **Unified plugin registry** (optional): `/backend/agents/mcp/pluginRegistry.ts`
+- **Master MCP router** (optional): `/backend/agents/mcp/masterMCPRouter.ts` — routes requests to the correct MCP.
 
 ## 3. MCP Server Coding Pattern (for Claude, Gemini, or dev agent):
 
-* **Each server should:**
-
-  * Export an AGUI/MCP-compatible API endpoint (e.g., `/api/mcp/tarot`)
-  * Register tools (functions) for its domain (e.g., drawCards, getSpread, interpretCard, etc.)
-  * Accept agent/user events and tool calls as per MCP spec
-  * Emit responses, tool results, and status events (AGUI standard)
-  * Be fully annotated with types/interfaces (TypeScript)
-  * Include plugin registration for master router (optional)
-  * Connect to any DB/API required (Supabase, NASA, ephemeris, etc.)
-  * Document each tool/plugin at top of file
+- **Each server should:**
+  - Export an AGUI/MCP-compatible API endpoint (e.g., `/api/mcp/tarot`)
+  - Register tools (functions) for its domain (e.g., drawCards, getSpread, interpretCard, etc.)
+  - Accept agent/user events and tool calls as per MCP spec
+  - Emit responses, tool results, and status events (AGUI standard)
+  - Be fully annotated with types/interfaces (TypeScript)
+  - Include plugin registration for master router (optional)
+  - Connect to any DB/API required (Supabase, NASA, ephemeris, etc.)
+  - Document each tool/plugin at top of file
 
 ## 4. MCP Server Prompt Template (for Claude/Gemini)
 
@@ -55,24 +54,24 @@ You are building a modular MCP (Model Context Protocol) server for Mystic Arcana
 - Document tool registry at top of file
 </instructions>
 
-\<output\_format>
+\<output_format>
 /backend/agents/mcp/\[domain]MCPServer.ts
 
-* Tool registry and plugin interface
-* Main handler (event logic, tool calls, result emission)
-* TypeScript interfaces/types for all tool inputs/outputs
-* Example events (tool call, result, error)
-* Export for master MCP router (if used)
-  \</output\_format>
+- Tool registry and plugin interface
+- Main handler (event logic, tool calls, result emission)
+- TypeScript interfaces/types for all tool inputs/outputs
+- Example events (tool call, result, error)
+- Export for master MCP router (if used)
+  \</output_format>
 
 ---
 
 ## 5. **How to Use This in Cursor/Claude**
 
-* For each MCP server needed, copy the prompt template, fill in \[DOMAIN] and \[tools], and submit to Claude/Gemini.
-* Attach NotebookLM doc and relevant reference files.
-* Claude/Gemini will generate fully annotated TS files for each MCP server, ready to be plugged into your agentic backend.
-* Update master router/plugin registry as new MCPs are created.
+- For each MCP server needed, copy the prompt template, fill in \[DOMAIN] and \[tools], and submit to Claude/Gemini.
+- Attach NotebookLM doc and relevant reference files.
+- Claude/Gemini will generate fully annotated TS files for each MCP server, ready to be plugged into your agentic backend.
+- Update master router/plugin registry as new MCPs are created.
 
 ---
 
@@ -85,6 +84,4 @@ You are building a modular MCP (Model Context Protocol) server for Mystic Arcana
 
 ---
 
-*This spec is now saved as your source of truth for MCP server coding and agentic modularization. Update for each server, tool, or plugin as project evolves!*
-
-
+_This spec is now saved as your source of truth for MCP server coding and agentic modularization. Update for each server, tool, or plugin as project evolves!_

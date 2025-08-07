@@ -146,7 +146,7 @@ module.exports = nextConfig;
     nextConfig = nextConfig.replace(
       /module\.exports = {/,
       `module.exports = {
-  transpilePackages: ['swisseph-v2'],`
+  transpilePackages: ['swisseph-v2'],`,
     );
   }
 
@@ -178,13 +178,13 @@ function addEslintSuppressions(): void {
         if (
           i > 0 &&
           !lines[i - 1].includes(
-            "eslint-disable-next-line react-hooks/exhaustive-deps"
+            "eslint-disable-next-line react-hooks/exhaustive-deps",
           )
         ) {
           newLines.splice(
             newLines.length - 1,
             0,
-            "// eslint-disable-next-line react-hooks/exhaustive-deps"
+            "// eslint-disable-next-line react-hooks/exhaustive-deps",
           );
         }
       }
@@ -289,7 +289,7 @@ function updateInterfaces(): void {
     for (const [interfaceName, properties] of Object.entries(typeExtensions)) {
       const interfaceRegex = new RegExp(
         `interface ${interfaceName} {([^}]*)}`,
-        "gs"
+        "gs",
       );
       const match = interfaceRegex.exec(content);
 
@@ -347,7 +347,7 @@ function fixImportPaths(): void {
 
     newContent = newContent.replace(
       /from ['"]@\/types\/astrology['"]/g,
-      "from '../../types/astrology'"
+      "from '../../types/astrology'",
     );
 
     if (newContent !== content) {
@@ -395,7 +395,7 @@ function main(): void {
   console.log("🎯 Automation complete!");
   console.log("📋 Summary of changes:");
   console.log(
-    "  - Updated tsconfig.json with proper path aliases and exclusions"
+    "  - Updated tsconfig.json with proper path aliases and exclusions",
   );
   console.log("  - Updated next.config.js with transpilePackages");
   console.log("  - Created missing type definitions");

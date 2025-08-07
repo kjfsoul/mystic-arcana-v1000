@@ -12,31 +12,32 @@
 ### Code Audit
 
 **`src/agents/sophia.ts`**
+
 ```typescript
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from "@/lib/supabase/server";
 // ...
 export class SophiaAgent {
   private supabase = createClient();
 
-  async getReading(
+  async getReading() // ...
+  {
     // ...
-  ) {
-    // ...
-        const { data: interpretationData, error } = await this.supabase
-          .from('tarot_interpretations')
-          .select('*')
-          .eq('card_name', card.name)
-          .eq('spread_type', spreadType)
-          .eq('position_name', positionName)
-          .single();
+    const { data: interpretationData, error } = await this.supabase
+      .from("tarot_interpretations")
+      .select("*")
+      .eq("card_name", card.name)
+      .eq("spread_type", spreadType)
+      .eq("position_name", positionName)
+      .single();
     // ...
   }
 }
 ```
 
 **`src/agents/PersonaLearner.ts`**
+
 ```typescript
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 // ...
 export class PersonaLearnerAgent {
   // ...
@@ -44,8 +45,8 @@ export class PersonaLearnerAgent {
     try {
       // ...
       const result = execSync(`python3 ${pythonScriptPath}`, {
-        encoding: 'utf-8',
-        timeout: 30000 // 30 second timeout
+        encoding: "utf-8",
+        timeout: 30000, // 30 second timeout
       });
       // ...
     } catch (error) {
@@ -56,40 +57,58 @@ export class PersonaLearnerAgent {
 ```
 
 **`src/components/tarot/InteractiveReadingSurface.tsx`**
+
 ```typescript
-import { SophiaAgent, SophiaReading } from '@/agents/sophia';
-import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
+import { SophiaAgent, SophiaReading } from "@/agents/sophia";
+import { PersonaLearnerAgent } from "@/agents/PersonaLearner";
 // ...
-export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps> = ({ // ...
-}) => {
+export const InteractiveReadingSurface: React.FC<
+  InteractiveReadingSurfaceProps
+> = (
+  {
+    // ...
+  },
+) => {
   // ...
   const sophiaAgent = new SophiaAgent();
   const personaLearner = new PersonaLearnerAgent();
   // ...
-  const handleSaveReading = useCallback(async (journalEntry?: string, userFeedback?: any) => {
-    // ...
-    if (sophiaReading && user?.id) {
-      try {
-        await personaLearner.logInteraction(
-          user.id,
-          sophiaReading,
-          userFeedback
-        );
-        // ...
-      } catch (error) {
-        // ...
+  const handleSaveReading = useCallback(
+    async (journalEntry?: string, userFeedback?: any) => {
+      // ...
+      if (sophiaReading && user?.id) {
+        try {
+          await personaLearner.logInteraction(
+            user.id,
+            sophiaReading,
+            userFeedback,
+          );
+          // ...
+        } catch (error) {
+          // ...
+        }
       }
-    }
-    // ...
-  }, [currentSession, cardInterpretations, drawnCards, isAuthenticated, user, onReadingComplete, sophiaReading, personaLearner]);
+      // ...
+    },
+    [
+      currentSession,
+      cardInterpretations,
+      drawnCards,
+      isAuthenticated,
+      user,
+      onReadingComplete,
+      sophiaReading,
+      personaLearner,
+    ],
+  );
 
   const generateSophiaReading = async () => {
     // ...
-      const reading = await sophiaAgent.getReading(
-        drawnCards,
-        selectedSpread,
-        readingContext
-      );
+    const reading = await sophiaAgent.getReading(
+      drawnCards,
+      selectedSpread,
+      readingContext,
+    );
     // ...
   };
   // ...
@@ -138,11 +157,13 @@ Total Tests: 7
 **BLOCKER:** The validation process was blocked due to a persistent issue with the Docker daemon not running. This prevented the Supabase services from starting correctly, which in turn made it impossible to run the necessary database migrations to create the `tarot_interpretations` table. As a result, both the Live Data Integrity Check and the Memory Persistence Verification could not be performed.
 
 **Last command attempted:**
+
 ```
 /Applications/Docker.app/Contents/MacOS/Docker & sleep 30 && docker version
 ```
 
 **Output:**
+
 ```
 Client:
  Version:           28.2.2

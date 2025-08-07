@@ -5,13 +5,7 @@
     "element": "Fire",
     "modality": "Cardinal",
     "rulingPlanet": "Mars",
-    "keywords": [
-      "initiative",
-      "courage",
-      "leadership",
-      "pioneering",
-      "action"
-    ],
+    "keywords": ["initiative", "courage", "leadership", "pioneering", "action"],
     "basicMeaning": "The pioneer and initiator of the zodiac",
     "positiveTraits": [
       "courageous",
@@ -27,33 +21,15 @@
       "impulsive",
       "hot-tempered"
     ],
-    "bodyParts": [
-      "head",
-      "brain",
-      "eyes"
-    ],
-    "colors": [
-      "red",
-      "orange"
-    ],
-    "stones": [
-      "diamond",
-      "ruby"
-    ],
+    "bodyParts": ["head", "brain", "eyes"],
+    "colors": ["red", "orange"],
+    "stones": ["diamond", "ruby"],
     "dates": "March 21 - April 19",
     "degree": "0° - 29°",
     "mythology": "The Ram, associated with the Golden Fleece",
     "compatibility": {
-      "bestMatches": [
-        "Leo",
-        "Sagittarius",
-        "Gemini",
-        "Aquarius"
-      ],
-      "challenges": [
-        "Cancer",
-        "Capricorn"
-      ]
+      "bestMatches": ["Leo", "Sagittarius", "Gemini", "Aquarius"],
+      "challenges": ["Cancer", "Capricorn"]
     }
   },
   "taurus": {
@@ -70,13 +46,7 @@
       "beauty"
     ],
     "basicMeaning": "The builder and maintainer of material security",
-    "positiveTraits": [
-      "reliable",
-      "patient",
-      "practical",
-      "devoted",
-      "stable"
-    ],
+    "positiveTraits": ["reliable", "patient", "practical", "devoted", "stable"],
     "challengingTraits": [
       "stubborn",
       "possessive",
@@ -84,33 +54,15 @@
       "lazy",
       "indulgent"
     ],
-    "bodyParts": [
-      "neck",
-      "throat",
-      "thyroid"
-    ],
-    "colors": [
-      "green",
-      "pink"
-    ],
-    "stones": [
-      "emerald",
-      "rose quartz"
-    ],
+    "bodyParts": ["neck", "throat", "thyroid"],
+    "colors": ["green", "pink"],
+    "stones": ["emerald", "rose quartz"],
     "dates": "April 20 - May 20",
     "degree": "30° - 59°",
     "mythology": "The Bull, Zeus in disguise when he abducted Europa",
     "compatibility": {
-      "bestMatches": [
-        "Virgo",
-        "Capricorn",
-        "Cancer",
-        "Pisces"
-      ],
-      "challenges": [
-        "Leo",
-        "Aquarius"
-      ]
+      "bestMatches": ["Virgo", "Capricorn", "Cancer", "Pisces"],
+      "challenges": ["Leo", "Aquarius"]
     }
   },
   "gemini": {
@@ -141,34 +93,15 @@
       "scattered",
       "gossipy"
     ],
-    "bodyParts": [
-      "hands",
-      "arms",
-      "lungs",
-      "nervous system"
-    ],
-    "colors": [
-      "yellow",
-      "silver"
-    ],
-    "stones": [
-      "agate",
-      "citrine"
-    ],
+    "bodyParts": ["hands", "arms", "lungs", "nervous system"],
+    "colors": ["yellow", "silver"],
+    "stones": ["agate", "citrine"],
     "dates": "May 21 - June 20",
     "degree": "60° - 89°",
     "mythology": "The Twins, Castor and Pollux",
     "compatibility": {
-      "bestMatches": [
-        "Libra",
-        "Aquarius",
-        "Aries",
-        "Leo"
-      ],
-      "challenges": [
-        "Virgo",
-        "Pisces"
-      ]
+      "bestMatches": ["Libra", "Aquarius", "Aries", "Leo"],
+      "challenges": ["Virgo", "Pisces"]
     }
   },
   "cancer": {
@@ -200,34 +133,15 @@
       "pessimistic",
       "manipulative"
     ],
-    "bodyParts": [
-      "chest",
-      "breasts",
-      "stomach"
-    ],
-    "colors": [
-      "white",
-      "silver",
-      "sea green"
-    ],
-    "stones": [
-      "moonstone",
-      "pearl"
-    ],
+    "bodyParts": ["chest", "breasts", "stomach"],
+    "colors": ["white", "silver", "sea green"],
+    "stones": ["moonstone", "pearl"],
     "dates": "June 21 - July 22",
     "degree": "90° - 119°",
     "mythology": "The Crab, sent by Hera to distract Hercules",
     "compatibility": {
-      "bestMatches": [
-        "Scorpio",
-        "Pisces",
-        "Taurus",
-        "Virgo"
-      ],
-      "challenges": [
-        "Aries",
-        "Libra"
-      ]
+      "bestMatches": ["Scorpio", "Pisces", "Taurus", "Virgo"],
+      "challenges": ["Aries", "Libra"]
     }
   },
   "leo": {
@@ -259,34 +173,15 @@
       "domineering",
       "vain"
     ],
-    "bodyParts": [
-      "heart",
-      "spine",
-      "back"
-    ],
-    "colors": [
-      "gold",
-      "orange",
-      "yellow"
-    ],
-    "stones": [
-      "ruby",
-      "peridot"
-    ],
+    "bodyParts": ["heart", "spine", "back"],
+    "colors": ["gold", "orange", "yellow"],
+    "stones": ["ruby", "peridot"],
     "dates": "July 23 - August 22",
     "degree": "120° - 149°",
     "mythology": "The Lion, the Nemean Lion slain by Hercules",
     "compatibility": {
-      "bestMatches": [
-        "Aries",
-        "Sagittarius",
-        "Gemini",
-        "Libra"
-      ],
-      "challenges": [
-        "Taurus",
-        "Scorpio"
-      ]
+      "bestMatches": ["Aries", "Sagittarius", "Gemini", "Libra"],
+      "challenges": ["Taurus", "Scorpio"]
     }
   },
   "virgo": {
@@ -318,34 +213,15 @@
       "shy",
       "overly cautious"
     ],
-    "bodyParts": [
-      "digestive system",
-      "intestines",
-      "spleen"
-    ],
-    "colors": [
-      "navy blue",
-      "grey",
-      "brown"
-    ],
-    "stones": [
-      "sapphire",
-      "carnelian"
-    ],
+    "bodyParts": ["digestive system", "intestines", "spleen"],
+    "colors": ["navy blue", "grey", "brown"],
+    "stones": ["sapphire", "carnelian"],
     "dates": "August 23 - September 22",
     "degree": "150° - 179°",
     "mythology": "The Virgin, associated with harvest goddess",
     "compatibility": {
-      "bestMatches": [
-        "Taurus",
-        "Capricorn",
-        "Cancer",
-        "Scorpio"
-      ],
-      "challenges": [
-        "Gemini",
-        "Sagittarius"
-      ]
+      "bestMatches": ["Taurus", "Capricorn", "Cancer", "Scorpio"],
+      "challenges": ["Gemini", "Sagittarius"]
     }
   },
   "libra": {
@@ -376,33 +252,15 @@
       "carries grudges",
       "self-pity"
     ],
-    "bodyParts": [
-      "kidneys",
-      "lower back",
-      "buttocks"
-    ],
-    "colors": [
-      "blue",
-      "pastel shades"
-    ],
-    "stones": [
-      "opal",
-      "lapis lazuli"
-    ],
+    "bodyParts": ["kidneys", "lower back", "buttocks"],
+    "colors": ["blue", "pastel shades"],
+    "stones": ["opal", "lapis lazuli"],
     "dates": "September 23 - October 22",
     "degree": "180° - 209°",
     "mythology": "The Scales, representing justice and balance",
     "compatibility": {
-      "bestMatches": [
-        "Gemini",
-        "Aquarius",
-        "Leo",
-        "Sagittarius"
-      ],
-      "challenges": [
-        "Cancer",
-        "Capricorn"
-      ]
+      "bestMatches": ["Gemini", "Aquarius", "Leo", "Sagittarius"],
+      "challenges": ["Cancer", "Capricorn"]
     }
   },
   "scorpio": {
@@ -435,34 +293,15 @@
       "obsessive",
       "suspicious"
     ],
-    "bodyParts": [
-      "reproductive organs",
-      "pelvis",
-      "urinary system"
-    ],
-    "colors": [
-      "deep red",
-      "black",
-      "maroon"
-    ],
-    "stones": [
-      "topaz",
-      "obsidian"
-    ],
+    "bodyParts": ["reproductive organs", "pelvis", "urinary system"],
+    "colors": ["deep red", "black", "maroon"],
+    "stones": ["topaz", "obsidian"],
     "dates": "October 23 - November 21",
     "degree": "210° - 239°",
     "mythology": "The Scorpion, sent to kill Orion",
     "compatibility": {
-      "bestMatches": [
-        "Cancer",
-        "Pisces",
-        "Virgo",
-        "Capricorn"
-      ],
-      "challenges": [
-        "Leo",
-        "Aquarius"
-      ]
+      "bestMatches": ["Cancer", "Pisces", "Virgo", "Capricorn"],
+      "challenges": ["Leo", "Aquarius"]
     }
   },
   "sagittarius": {
@@ -493,33 +332,15 @@
       "very direct",
       "careless"
     ],
-    "bodyParts": [
-      "hips",
-      "thighs",
-      "liver"
-    ],
-    "colors": [
-      "purple",
-      "turquoise"
-    ],
-    "stones": [
-      "turquoise",
-      "amethyst"
-    ],
+    "bodyParts": ["hips", "thighs", "liver"],
+    "colors": ["purple", "turquoise"],
+    "stones": ["turquoise", "amethyst"],
     "dates": "November 22 - December 21",
     "degree": "240° - 269°",
     "mythology": "The Archer, Centaur with bow and arrow",
     "compatibility": {
-      "bestMatches": [
-        "Aries",
-        "Leo",
-        "Libra",
-        "Aquarius"
-      ],
-      "challenges": [
-        "Virgo",
-        "Pisces"
-      ]
+      "bestMatches": ["Aries", "Leo", "Libra", "Aquarius"],
+      "challenges": ["Virgo", "Pisces"]
     }
   },
   "capricorn": {
@@ -550,34 +371,15 @@
       "condescending",
       "expecting the worst"
     ],
-    "bodyParts": [
-      "bones",
-      "joints",
-      "knees"
-    ],
-    "colors": [
-      "brown",
-      "black",
-      "dark green"
-    ],
-    "stones": [
-      "garnet",
-      "onyx"
-    ],
+    "bodyParts": ["bones", "joints", "knees"],
+    "colors": ["brown", "black", "dark green"],
+    "stones": ["garnet", "onyx"],
     "dates": "December 22 - January 19",
     "degree": "270° - 299°",
     "mythology": "The Sea-Goat, half goat half fish",
     "compatibility": {
-      "bestMatches": [
-        "Taurus",
-        "Virgo",
-        "Scorpio",
-        "Pisces"
-      ],
-      "challenges": [
-        "Aries",
-        "Libra"
-      ]
+      "bestMatches": ["Taurus", "Virgo", "Scorpio", "Pisces"],
+      "challenges": ["Aries", "Libra"]
     }
   },
   "aquarius": {
@@ -609,34 +411,15 @@
       "uncompromising",
       "aloof"
     ],
-    "bodyParts": [
-      "circulatory system",
-      "ankles",
-      "shins"
-    ],
-    "colors": [
-      "blue",
-      "silver",
-      "aqua"
-    ],
-    "stones": [
-      "amethyst",
-      "garnet"
-    ],
+    "bodyParts": ["circulatory system", "ankles", "shins"],
+    "colors": ["blue", "silver", "aqua"],
+    "stones": ["amethyst", "garnet"],
     "dates": "January 20 - February 18",
     "degree": "300° - 329°",
     "mythology": "The Water Bearer, Ganymede serving the gods",
     "compatibility": {
-      "bestMatches": [
-        "Gemini",
-        "Libra",
-        "Aries",
-        "Sagittarius"
-      ],
-      "challenges": [
-        "Taurus",
-        "Scorpio"
-      ]
+      "bestMatches": ["Gemini", "Libra", "Aries", "Sagittarius"],
+      "challenges": ["Taurus", "Scorpio"]
     }
   },
   "pisces": {
@@ -670,34 +453,15 @@
       "desire to escape reality",
       "victim"
     ],
-    "bodyParts": [
-      "feet",
-      "toes",
-      "lymphatic system"
-    ],
-    "colors": [
-      "sea green",
-      "lavender",
-      "purple"
-    ],
-    "stones": [
-      "aquamarine",
-      "bloodstone"
-    ],
+    "bodyParts": ["feet", "toes", "lymphatic system"],
+    "colors": ["sea green", "lavender", "purple"],
+    "stones": ["aquamarine", "bloodstone"],
     "dates": "February 19 - March 20",
     "degree": "330° - 359°",
     "mythology": "The Fish, Aphrodite and Eros escaping Typhon",
     "compatibility": {
-      "bestMatches": [
-        "Cancer",
-        "Scorpio",
-        "Taurus",
-        "Capricorn"
-      ],
-      "challenges": [
-        "Gemini",
-        "Sagittarius"
-      ]
+      "bestMatches": ["Cancer", "Scorpio", "Taurus", "Capricorn"],
+      "challenges": ["Gemini", "Sagittarius"]
     }
   }
 }

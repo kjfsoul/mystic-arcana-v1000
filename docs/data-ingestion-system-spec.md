@@ -85,11 +85,11 @@ class WebScraper:
         self.rate_limit_delay = rate_limit_delay
         self.respect_robots_txt = respect_robots_txt
         self.session = requests.Session()
-        
+
     def scrape_url(self, url: str) -> Dict[str, Any]:
         """Scrape content from a URL using BeautifulSoup"""
         # Implementation details...
-        
+
     def scrape_multiple(self, urls: List[str]) -> List[Dict[str, Any]]:
         """Scrape multiple URLs with rate limiting"""
         # Implementation details...
@@ -117,11 +117,11 @@ class WebScraper:
 class YouTubeProcessor:
     def __init__(self):
         pass
-        
+
     def get_transcript(self, video_id: str) -> List[Dict[str, Any]]:
         """Get transcript for a YouTube video"""
         # Implementation details...
-        
+
     def get_video_metadata(self, video_id: str) -> Dict[str, Any]:
         """Get metadata for a YouTube video"""
         # Implementation details...
@@ -151,15 +151,15 @@ class YouTubeProcessor:
 class ContentProcessor:
     def __init__(self, model_name="en_core_web_sm"):
         self.nlp = spacy.load(model_name)
-        
+
     def extract_entities(self, text: str) -> List[Dict[str, Any]]:
         """Extract named entities from text"""
         # Implementation details...
-        
+
     def extract_keywords(self, text: str, num_keywords: int = 10) -> List[str]:
         """Extract important keywords from text"""
         # Implementation details...
-        
+
     def summarize(self, text: str, ratio: float = 0.3) -> str:
         """Generate text summary"""
         # Implementation details...
@@ -183,11 +183,11 @@ class ContentProcessor:
 class DataValidator:
     def __init__(self):
         pass
-        
+
     def validate_content(self, content: Dict[str, Any]) -> Dict[str, Any]:
         """Validate content quality and completeness"""
         # Implementation details...
-        
+
     def check_duplicates(self, content: Dict[str, Any], existing_data: List[Dict[str, Any]]) -> bool:
         """Check if content is a duplicate"""
         # Implementation details...
@@ -214,11 +214,11 @@ class IngestionPipeline:
         self.youtube_processor = YouTubeProcessor()
         self.content_processor = ContentProcessor()
         self.validator = DataValidator()
-        
+
     def ingest_source(self, source_config: Dict[str, Any]) -> Dict[str, Any]:
         """Ingest data from a specific source"""
         # Implementation details...
-        
+
     def process_content(self, raw_content: Dict[str, Any]) -> Dict[str, Any]:
         """Process raw content through the pipeline"""
         # Implementation details...
@@ -249,11 +249,11 @@ class IngestionPipeline:
 class GraphBuilder:
     def __init__(self, uri: str, username: str, password: str):
         self.driver = GraphDatabase.driver(uri, auth=(username, password))
-        
+
     def create_entity(self, entity_data: Dict[str, Any]) -> str:
         """Create entity node in graph"""
         # Implementation details...
-        
+
     def create_relationship(self, source_id: str, target_id: str, relationship_type: str, properties: Dict[str, Any] = None):
         """Create relationship between entities"""
         # Implementation details...
@@ -276,7 +276,7 @@ class GraphBuilder:
 class EntityExtractor:
     def __init__(self):
         pass
-        
+
     def extract_entities_and_relationships(self, processed_content: Dict[str, Any]) -> Dict[str, Any]:
         """Extract entities and relationships from processed content"""
         # Implementation details...
@@ -332,11 +332,11 @@ Integration with existing session utilities for agent/LLM context reading:
 class SessionContextManager:
     def __init__(self):
         pass
-        
+
     def get_user_context(self, user_id: str) -> Dict[str, Any]:
         """Get user context for personalized ingestion"""
         # Implementation details...
-        
+
     def log_interaction(self, interaction_data: Dict[str, Any]) -> None:
         """Log ingestion interaction for learning"""
         # Implementation details...
@@ -352,11 +352,11 @@ The system will integrate with the existing A-mem agentic memory system:
 class MemorySync:
     def __init__(self):
         pass
-        
+
     def sync_to_a_mem(self, content_data: Dict[str, Any]) -> str:
         """Sync processed content to A-mem system"""
         # Implementation details...
-        
+
     def get_memory_context(self, query: str) -> Dict[str, Any]:
         """Get relevant memory context for ingestion"""
         # Implementation details...
@@ -370,7 +370,7 @@ The system will maintain compatibility with existing logging requirements:
 class ClaudeLogger:
     def __init__(self):
         pass
-        
+
     def log_operation(self, operation: str, details: Dict[str, Any]) -> None:
         """Log operation for Claude.md compliance"""
         # Implementation details...

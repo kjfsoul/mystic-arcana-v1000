@@ -7,7 +7,7 @@
   border-radius: 12px;
   backdrop-filter: blur(10px);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .header {
@@ -42,7 +42,7 @@
   margin: 0 0 12px 0;
   font-size: 16px;
   font-weight: 500;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .toggleGroup {
@@ -73,7 +73,7 @@
 }
 
 .slider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -85,7 +85,7 @@
 }
 
 .toggle input[type="checkbox"]:checked + .slider {
-  background: #FFD700;
+  background: #ffd700;
 }
 
 .toggle input[type="checkbox"]:checked + .slider::before {
@@ -121,7 +121,7 @@
 
 .select:focus {
   outline: none;
-  border-color: #FFD700;
+  border-color: #ffd700;
   box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
@@ -154,7 +154,7 @@
   appearance: none;
   width: 18px;
   height: 18px;
-  background: #FFD700;
+  background: #ffd700;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -162,7 +162,7 @@
 .inputGroup input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
-  background: #FFD700;
+  background: #ffd700;
   border-radius: 50%;
   cursor: pointer;
   border: none;
@@ -186,7 +186,7 @@
 .checkbox input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #FFD700;
+  accent-color: #ffd700;
   cursor: pointer;
 }
 
@@ -196,7 +196,7 @@
   border-radius: 6px;
   padding: 12px;
   font-size: 14px;
-  color: #FFA500;
+  color: #ffa500;
   margin-bottom: 16px;
 }
 
@@ -210,7 +210,7 @@
 .info h4 {
   margin: 0 0 8px 0;
   font-size: 14px;
-  color: #87CEEB;
+  color: #87ceeb;
 }
 
 .info p {
@@ -226,12 +226,12 @@
     padding: 16px;
     margin: 16px;
   }
-  
+
   .toggleGroup {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .toggle {
     width: 100%;
   }

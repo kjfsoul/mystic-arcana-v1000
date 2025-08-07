@@ -1,5 +1,6 @@
-#  Claude Init Prompts
-# CLAUDE\_INIT\_PROMPTS.md
+# Claude Init Prompts
+
+# CLAUDE_INIT_PROMPTS.md
 
 ## Initial Claude Prompts and Instructions for Mystic Arcana
 
@@ -27,11 +28,11 @@ This file provides a chronological library of prompts for onboarding Claude (Cla
 
 > Please ingest the following documentation from `/docs`:
 >
-> * `PROJECT_OVERVIEW.md`
-> * `TECHNICAL_ARCHITECTURE.md`
-> * `TOOLS_SERVICES_OVERVIEW.md`
-> * `ARCHITECTURE_DIAGRAM_ANNOTATED.md`
-> * `COMPETITIVE_ANALYSIS.md` (or equivalent)
+> - `PROJECT_OVERVIEW.md`
+> - `TECHNICAL_ARCHITECTURE.md`
+> - `TOOLS_SERVICES_OVERVIEW.md`
+> - `ARCHITECTURE_DIAGRAM_ANNOTATED.md`
+> - `COMPETITIVE_ANALYSIS.md` (or equivalent)
 >
 > Use these to understand the project vision, unique features, UI/UX requirements, and critical competitive differentiators. When in doubt, reference these docs before answering.
 
@@ -43,9 +44,9 @@ This file provides a chronological library of prompts for onboarding Claude (Cla
 
 > Read and reference the following:
 >
-> * Knowledge graph/crawler design specs (list file names)
-> * Any MCP/AGUI protocol documentation
-> * Legal/compliance docs in `/docs/legal`.
+> - Knowledge graph/crawler design specs (list file names)
+> - Any MCP/AGUI protocol documentation
+> - Legal/compliance docs in `/docs/legal`.
 >
 > Be prepared to generate Python code for scrapers, data pipelines, and knowledge graph population. Ensure compliance with all relevant ethical/data privacy requirements.
 
@@ -57,9 +58,9 @@ This file provides a chronological library of prompts for onboarding Claude (Cla
 
 > Please use the following:
 >
-> * `public/images/Mystic Arcana Logo.png` (or attach/export if required)
-> * Color palette and visual style notes (paste sample palette, image, or theme description)
-> * UI/UX references in docs (e.g., wireframes, user flows, onboarding specs)
+> - `public/images/Mystic Arcana Logo.png` (or attach/export if required)
+> - Color palette and visual style notes (paste sample palette, image, or theme description)
+> - UI/UX references in docs (e.g., wireframes, user flows, onboarding specs)
 >
 > Build UI with a galaxy/starfield backdrop, left-side tarot deck, right-side astrology, interactive overlays, and seamless onboarding modals as described in docs.
 
@@ -71,9 +72,9 @@ This file provides a chronological library of prompts for onboarding Claude (Cla
 
 > For each coding task, specify:
 >
-> * File(s) to be created/edited
-> * Brief description of desired outcome
-> * Any reference implementations (cite docs, code, or competitor features)
+> - File(s) to be created/edited
+> - Brief description of desired outcome
+> - Any reference implementations (cite docs, code, or competitor features)
 >
 > Ask Claude to break down large tasks, show architectural choices, and offer refactoring/review as needed.
 
@@ -85,15 +86,14 @@ This file provides a chronological library of prompts for onboarding Claude (Cla
 
 > All generated code or docs should:
 >
-> * Reference core vision docs
-> * Adhere to project-specific folder structure
-> * Solicit feedback after each major block ("Is this accurate? If not, what needs revision?")
-> * Update doc files (`PROJECT_OVERVIEW.md`, `TECHNICAL_ARCHITECTURE.md`, etc.) with all material changes.
+> - Reference core vision docs
+> - Adhere to project-specific folder structure
+> - Solicit feedback after each major block ("Is this accurate? If not, what needs revision?")
+> - Update doc files (`PROJECT_OVERVIEW.md`, `TECHNICAL_ARCHITECTURE.md`, etc.) with all material changes.
 
 ---
 
 **Tip:**
 
-* Store these prompt templates in `/docs/CLAUDE_INIT_PROMPTS.md`.
-* Use as a checklist for onboarding any new Claude instance or for bootstrapping in Cursor, VS Code, or web-based AI IDEs.
-
+- Store these prompt templates in `/docs/CLAUDE_INIT_PROMPTS.md`.
+- Use as a checklist for onboarding any new Claude instance or for bootstrapping in Cursor, VS Code, or web-based AI IDEs.

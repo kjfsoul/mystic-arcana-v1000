@@ -23,7 +23,5 @@
     "src/lib/supabase/server.ts",
     "src/types/tarot.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

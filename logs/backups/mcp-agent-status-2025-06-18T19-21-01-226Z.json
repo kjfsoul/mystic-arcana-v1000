@@ -5,10 +5,7 @@
     "project": "Mystic Arcana",
     "environment": "development",
     "reportingAgent": "Augment Agent",
-    "targetAgents": [
-      "Augment Agent",
-      "Claude Code"
-    ],
+    "targetAgents": ["Augment Agent", "Claude Code"],
     "logLevel": "INFO"
   },
   "mcpServers": {
@@ -25,11 +22,7 @@
         "lastWorking": null,
         "repairAttempts": 0,
         "priority": "HIGH",
-        "capabilities": [
-          "file_operations",
-          "directory_listing",
-          "file_search"
-        ],
+        "capabilities": ["file_operations", "directory_listing", "file_search"],
         "dockerAlternative": "modelcontextprotocol/filesystem-server:latest"
       },
       "git": {
@@ -346,9 +339,7 @@
   "nextSteps": {
     "assignedTo": "Claude Code",
     "dueBy": "2025-06-18T20:19:52.347Z",
-    "tasks": [
-      "Fix MCP SDK TypeError and activate server ecosystem"
-    ],
+    "tasks": ["Fix MCP SDK TypeError and activate server ecosystem"],
     "handoffId": "2025-06-18T19:19:52.347Z"
   },
   "sessionSummary": {

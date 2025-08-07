@@ -145,7 +145,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.8;
   }
   50% {
@@ -234,7 +235,11 @@
 }
 
 .overallInterpretation {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(75, 0, 130, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.15),
+    rgba(75, 0, 130, 0.1)
+  );
   border: 1px solid rgba(138, 43, 226, 0.3);
   border-radius: 16px;
   padding: 2rem;

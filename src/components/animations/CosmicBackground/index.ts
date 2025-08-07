@@ -1,1 +1,1 @@
-export { CosmicBackground } from './CosmicBackground';
+export { CosmicBackground } from "./CosmicBackground";

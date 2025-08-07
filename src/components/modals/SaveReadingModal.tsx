@@ -1,9 +1,9 @@
-'use client';
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Feather, Scroll, Check, Save } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { TarotReading } from '@/lib/tarot/TarotEngine';
+"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Feather, Scroll, Check, Save } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { TarotReading } from "@/lib/tarot/TarotEngine";
 interface SaveReadingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,25 +12,41 @@ interface SaveReadingModalProps {
   onSave: (notes: string, isPublic: boolean) => Promise<void>;
 }
 const quillStyles = [
-  { name: 'Classic', icon: '🪶', color: 'from-gray-600 to-gray-800' },
-  { name: 'Phoenix', icon: '🔥', color: 'from-orange-500 to-red-600' },
-  { name: 'Mystic', icon: '✨', color: 'from-purple-500 to-pink-600' },
-  { name: 'Ocean', icon: '🌊', color: 'from-blue-500 to-teal-600' },
+  { name: "Classic", icon: "🪶", color: "from-gray-600 to-gray-800" },
+  { name: "Phoenix", icon: "🔥", color: "from-orange-500 to-red-600" },
+  { name: "Mystic", icon: "✨", color: "from-purple-500 to-pink-600" },
+  { name: "Ocean", icon: "🌊", color: "from-blue-500 to-teal-600" },
 ];
 const scrollStyles = [
-  { name: 'Ancient', icon: '📜', texture: 'bg-gradient-to-br from-yellow-100 to-amber-200' },
-  { name: 'Starlight', icon: '⭐', texture: 'bg-gradient-to-br from-indigo-100 to-purple-200' },
-  { name: 'Moon', icon: '🌙', texture: 'bg-gradient-to-br from-gray-100 to-blue-200' },
-  { name: 'Rose', icon: '🌹', texture: 'bg-gradient-to-br from-pink-100 to-rose-200' },
+  {
+    name: "Ancient",
+    icon: "📜",
+    texture: "bg-gradient-to-br from-yellow-100 to-amber-200",
+  },
+  {
+    name: "Starlight",
+    icon: "⭐",
+    texture: "bg-gradient-to-br from-indigo-100 to-purple-200",
+  },
+  {
+    name: "Moon",
+    icon: "🌙",
+    texture: "bg-gradient-to-br from-gray-100 to-blue-200",
+  },
+  {
+    name: "Rose",
+    icon: "🌹",
+    texture: "bg-gradient-to-br from-pink-100 to-rose-200",
+  },
 ];
 export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
   isOpen,
   onClose,
   reading,
-  onSave
+  onSave,
 }) => {
   const { user } = useAuth();
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [selectedQuill, setSelectedQuill] = useState(0);
   const [selectedScroll, setSelectedScroll] = useState(0);
@@ -39,7 +55,7 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
   const [saveSuccess, setSaveSuccess] = useState(false);
   const handleSave = async () => {
     if (!user) {
-      setSaveError('Please sign in to save your reading');
+      setSaveError("Please sign in to save your reading");
       return;
     }
     setSaving(true);
@@ -51,8 +67,10 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
         onClose();
       }, 1500);
     } catch (error) {
-      console.error('Save error:', error);
-      setSaveError(error instanceof Error ? error.message : 'Failed to save reading');
+      console.error("Save error:", error);
+      setSaveError(
+        error instanceof Error ? error.message : "Failed to save reading",
+      );
     } finally {
       setSaving(false);
     }
@@ -72,7 +90,7 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: 'spring', damping: 20 }}
+          transition={{ type: "spring", damping: 20 }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
@@ -83,9 +101,13 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
             >
               <X className="w-5 h-5 text-white" />
             </button>
-            
-            <h2 className="text-2xl font-bold text-white mb-2">Save Your Reading</h2>
-            <p className="text-purple-100">Preserve this moment of cosmic wisdom in your personal journal</p>
+
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Save Your Reading
+            </h2>
+            <p className="text-purple-100">
+              Preserve this moment of cosmic wisdom in your personal journal
+            </p>
           </div>
           {/* Content */}
           <div className="p-6 space-y-6">
@@ -101,12 +123,14 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                     key={style.name}
                     onClick={() => setSelectedScroll(index)}
                     className={`relative p-4 rounded-lg border-2 transition-all ${
-                      selectedScroll === index 
-                        ? 'border-purple-400 shadow-lg shadow-purple-400/30' 
-                        : 'border-gray-700 hover:border-gray-600'
+                      selectedScroll === index
+                        ? "border-purple-400 shadow-lg shadow-purple-400/30"
+                        : "border-gray-700 hover:border-gray-600"
                     }`}
                   >
-                    <div className={`w-full h-20 rounded ${style.texture} mb-2 flex items-center justify-center text-3xl`}>
+                    <div
+                      className={`w-full h-20 rounded ${style.texture} mb-2 flex items-center justify-center text-3xl`}
+                    >
                       {style.icon}
                     </div>
                     <span className="text-xs text-gray-300">{style.name}</span>
@@ -135,12 +159,14 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                     key={style.name}
                     onClick={() => setSelectedQuill(index)}
                     className={`relative p-4 rounded-lg border-2 transition-all ${
-                      selectedQuill === index 
-                        ? 'border-purple-400 shadow-lg shadow-purple-400/30' 
-                        : 'border-gray-700 hover:border-gray-600'
+                      selectedQuill === index
+                        ? "border-purple-400 shadow-lg shadow-purple-400/30"
+                        : "border-gray-700 hover:border-gray-600"
                     }`}
                   >
-                    <div className={`w-full h-20 rounded bg-gradient-to-br ${style.color} mb-2 flex items-center justify-center text-3xl`}>
+                    <div
+                      className={`w-full h-20 rounded bg-gradient-to-br ${style.color} mb-2 flex items-center justify-center text-3xl`}
+                    >
                       {style.icon}
                     </div>
                     <span className="text-xs text-gray-300">{style.name}</span>
@@ -159,8 +185,12 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
             </div>
             {/* Notes Section */}
             <div>
-              <h3 className="text-lg font-semibold text-purple-300 mb-3">Personal Reflections</h3>
-              <div className={`relative rounded-lg ${scrollStyles[selectedScroll].texture} p-1`}>
+              <h3 className="text-lg font-semibold text-purple-300 mb-3">
+                Personal Reflections
+              </h3>
+              <div
+                className={`relative rounded-lg ${scrollStyles[selectedScroll].texture} p-1`}
+              >
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
@@ -168,8 +198,8 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                   className="w-full h-32 p-4 bg-gray-900/90 rounded-lg resize-none text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-400"
                   style={{
                     backgroundImage: `linear-gradient(to right, transparent 0%, transparent 2%, rgba(255,255,255,0.05) 2%, rgba(255,255,255,0.05) 2.5%, transparent 2.5%)`,
-                    backgroundSize: '100% 1.5rem',
-                    lineHeight: '1.5rem'
+                    backgroundSize: "100% 1.5rem",
+                    lineHeight: "1.5rem",
                   }}
                 />
                 <div className="absolute bottom-3 right-3 text-4xl opacity-50">
@@ -180,19 +210,23 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
             {/* Privacy Toggle */}
             <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
               <div>
-                <h4 className="font-medium text-gray-200">Share with Community</h4>
-                <p className="text-sm text-gray-400">Allow others to find inspiration in your reading</p>
+                <h4 className="font-medium text-gray-200">
+                  Share with Community
+                </h4>
+                <p className="text-sm text-gray-400">
+                  Allow others to find inspiration in your reading
+                </p>
               </div>
               <button
                 onClick={() => setIsPublic(!isPublic)}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  isPublic ? 'bg-purple-600' : 'bg-gray-600'
+                  isPublic ? "bg-purple-600" : "bg-gray-600"
                 }`}
               >
                 <motion.div
                   className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full"
                   animate={{ x: isPublic ? 24 : 0 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 />
               </button>
             </div>
@@ -213,7 +247,9 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
                 animate={{ opacity: 1, scale: 1 }}
                 className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg"
               >
-                <p className="text-green-400 text-center">✨ Reading saved to your journal!</p>
+                <p className="text-green-400 text-center">
+                  ✨ Reading saved to your journal!
+                </p>
               </motion.div>
             )}
             {/* Action Buttons */}
@@ -245,7 +281,16 @@ export const SaveReadingModal: React.FC<SaveReadingModalProps> = ({
             </div>
             {!user && (
               <p className="text-center text-sm text-gray-400">
-                Please <button onClick={() => {/* trigger auth modal */}} className="text-purple-400 hover:text-purple-300 underline">sign in</button> to save your readings
+                Please{" "}
+                <button
+                  onClick={() => {
+                    /* trigger auth modal */
+                  }}
+                  className="text-purple-400 hover:text-purple-300 underline"
+                >
+                  sign in
+                </button>{" "}
+                to save your readings
               </p>
             )}
           </div>

@@ -1,8 +1,17 @@
-'use client';
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Heart, Zap, Star, Moon, Crown, Wand2, Play } from 'lucide-react';
-import { SpreadType } from './EnhancedTarotSpreadLayouts';
+"use client";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Sparkles,
+  Heart,
+  Zap,
+  Star,
+  Moon,
+  Crown,
+  Wand2,
+  Play,
+} from "lucide-react";
+import { SpreadType } from "./EnhancedTarotSpreadLayouts";
 // TODO: Implement TarotCard type for card previews
 // import { TarotCard } from '@/types/tarot';
 interface SpreadConfig {
@@ -10,7 +19,7 @@ interface SpreadConfig {
   title: string;
   icon: React.ComponentType<any>;
   description: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  difficulty: "beginner" | "intermediate" | "advanced";
   timeEstimate: string;
   preview: string[];
   keywords: string[];
@@ -25,9 +34,9 @@ interface CardSelectionSpreadUIProps {
 export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   onSpreadSelected,
   onReadingStart,
-  selectedSpread = 'three-card',
+  selectedSpread = "three-card",
   isAuthenticated = false,
-  className = ''
+  className = "",
 }) => {
   const [hoveredSpread, setHoveredSpread] = useState<SpreadType | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -35,133 +44,159 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
   // const [showPreview, setShowPreview] = useState(false);
   // Enhanced spread configurations with detailed metadata
   const spreadConfigs: Record<SpreadType, SpreadConfig> = {
-    'single': {
+    single: {
       cardCount: 1,
-      title: 'Single Card Guidance',
+      title: "Single Card Guidance",
       icon: Star,
-      description: 'Quick cosmic insight for immediate clarity',
-      difficulty: 'beginner',
-      timeEstimate: '2 min',
-      preview: ['Present Situation'],
-      keywords: ['clarity', 'guidance', 'focus', 'immediate']
+      description: "Quick cosmic insight for immediate clarity",
+      difficulty: "beginner",
+      timeEstimate: "2 min",
+      preview: ["Present Situation"],
+      keywords: ["clarity", "guidance", "focus", "immediate"],
     },
-    'three-card': {
+    "three-card": {
       cardCount: 3,
-      title: 'Past-Present-Future',
+      title: "Past-Present-Future",
       icon: Sparkles,
-      description: 'Timeline reading revealing your path',
-      difficulty: 'beginner',
-      timeEstimate: '5 min',
-      preview: ['Past Foundation', 'Present Moment', 'Future Potential'],
-      keywords: ['timeline', 'journey', 'progression', 'clarity']
+      description: "Timeline reading revealing your path",
+      difficulty: "beginner",
+      timeEstimate: "5 min",
+      preview: ["Past Foundation", "Present Moment", "Future Potential"],
+      keywords: ["timeline", "journey", "progression", "clarity"],
     },
-    'celtic-cross': {
+    "celtic-cross": {
       cardCount: 10,
-      title: 'Celtic Cross',
+      title: "Celtic Cross",
       icon: Zap,
-      description: 'Comprehensive life analysis and deep insight',
-      difficulty: 'advanced',
-      timeEstimate: '15 min',
-      preview: ['Present', 'Challenge', 'Past', 'Future', 'Crown', 'Foundation', 'Self', 'Environment', 'Hopes/Fears', 'Outcome'],
-      keywords: ['comprehensive', 'detailed', 'life-path', 'transformation']
+      description: "Comprehensive life analysis and deep insight",
+      difficulty: "advanced",
+      timeEstimate: "15 min",
+      preview: [
+        "Present",
+        "Challenge",
+        "Past",
+        "Future",
+        "Crown",
+        "Foundation",
+        "Self",
+        "Environment",
+        "Hopes/Fears",
+        "Outcome",
+      ],
+      keywords: ["comprehensive", "detailed", "life-path", "transformation"],
     },
-    'horseshoe': {
+    horseshoe: {
       cardCount: 5,
-      title: 'Horseshoe Spread',
+      title: "Horseshoe Spread",
       icon: Moon,
-      description: 'Balanced perspective on current situation',
-      difficulty: 'intermediate',
-      timeEstimate: '8 min',
-      preview: ['Past Influences', 'Present', 'Hidden Factors', 'Advice', 'Likely Outcome'],
-      keywords: ['balance', 'perspective', 'guidance', 'practical']
+      description: "Balanced perspective on current situation",
+      difficulty: "intermediate",
+      timeEstimate: "8 min",
+      preview: [
+        "Past Influences",
+        "Present",
+        "Hidden Factors",
+        "Advice",
+        "Likely Outcome",
+      ],
+      keywords: ["balance", "perspective", "guidance", "practical"],
     },
-    'relationship': {
+    relationship: {
       cardCount: 5,
-      title: 'Relationship Reading',
+      title: "Relationship Reading",
       icon: Heart,
-      description: 'Love, connection, and partnership insights',
-      difficulty: 'intermediate',
-      timeEstimate: '10 min',
-      preview: ['You', 'Them', 'Connection', 'Challenges', 'Potential'],
-      keywords: ['love', 'partnership', 'connection', 'harmony']
+      description: "Love, connection, and partnership insights",
+      difficulty: "intermediate",
+      timeEstimate: "10 min",
+      preview: ["You", "Them", "Connection", "Challenges", "Potential"],
+      keywords: ["love", "partnership", "connection", "harmony"],
     },
-    'custom': {
+    custom: {
       cardCount: 7,
-      title: 'Custom Spread',
+      title: "Custom Spread",
       icon: Crown,
-      description: 'Personalized layout for specific questions',
-      difficulty: 'advanced',
-      timeEstimate: '12 min',
-      preview: ['Custom Position 1', 'Custom Position 2', '...'],
-      keywords: ['personalized', 'flexible', 'specific', 'tailored']
-    }
+      description: "Personalized layout for specific questions",
+      difficulty: "advanced",
+      timeEstimate: "12 min",
+      preview: ["Custom Position 1", "Custom Position 2", "..."],
+      keywords: ["personalized", "flexible", "specific", "tailored"],
+    },
   };
   // Handle spread selection with smooth animations
- 
-  const handleSpreadSelect = useCallback((spreadType: SpreadType) => {
-    if (isAnimating) return;
-    
-    setIsAnimating(true);
-    onSpreadSelected(spreadType);
-    
-    // Reset animation after completion
-    setTimeout(() => setIsAnimating(false), 800);
-  }, [isAnimating, onSpreadSelected]);
+
+  const handleSpreadSelect = useCallback(
+    (spreadType: SpreadType) => {
+      if (isAnimating) return;
+
+      setIsAnimating(true);
+      onSpreadSelected(spreadType);
+
+      // Reset animation after completion
+      setTimeout(() => setIsAnimating(false), 800);
+    },
+    [isAnimating, onSpreadSelected],
+  );
   // Handle reading start with cosmic effects
- 
+
   const handleStartReading = useCallback(() => {
     if (!selectedSpread || isAnimating) return;
-    
+
     setIsAnimating(true);
     onReadingStart(selectedSpread);
   }, [selectedSpread, isAnimating, onReadingStart]);
   // Keyboard navigation support
- 
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!selectedSpread) return;
-      
+
       const spreads = Object.keys(spreadConfigs) as SpreadType[];
       const currentIndex = spreads.indexOf(selectedSpread);
-      
+
       switch (event.key) {
-        case 'ArrowLeft':
-        case 'ArrowUp': {
+        case "ArrowLeft":
+        case "ArrowUp": {
           event.preventDefault();
-          const prevIndex = currentIndex > 0 ? currentIndex - 1 : spreads.length - 1;
+          const prevIndex =
+            currentIndex > 0 ? currentIndex - 1 : spreads.length - 1;
           handleSpreadSelect(spreads[prevIndex]);
           break;
         }
-        case 'ArrowRight':
-        case 'ArrowDown': {
+        case "ArrowRight":
+        case "ArrowDown": {
           event.preventDefault();
-          const nextIndex = currentIndex < spreads.length - 1 ? currentIndex + 1 : 0;
+          const nextIndex =
+            currentIndex < spreads.length - 1 ? currentIndex + 1 : 0;
           handleSpreadSelect(spreads[nextIndex]);
           break;
         }
-        case 'Enter':
-        case ' ':
+        case "Enter":
+        case " ":
           event.preventDefault();
           handleStartReading();
           break;
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedSpread, handleSpreadSelect, handleStartReading]);
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'beginner': return 'text-green-400 bg-green-500/20';
-      case 'intermediate': return 'text-yellow-400 bg-yellow-500/20';
-      case 'advanced': return 'text-red-400 bg-red-500/20';
-      default: return 'text-purple-400 bg-purple-500/20';
+      case "beginner":
+        return "text-green-400 bg-green-500/20";
+      case "intermediate":
+        return "text-yellow-400 bg-yellow-500/20";
+      case "advanced":
+        return "text-red-400 bg-red-500/20";
+      default:
+        return "text-purple-400 bg-purple-500/20";
     }
   };
   const getAuthenticationRequirement = (spreadType: SpreadType) => {
     if (isAuthenticated) return null;
-    
-    const guestAllowed = ['single'];
-    return guestAllowed.includes(spreadType) ? null : 'authentication';
+
+    const guestAllowed = ["single"];
+    return guestAllowed.includes(spreadType) ? null : "authentication";
   };
   return (
     <div className={`relative w-full max-w-6xl mx-auto p-6 ${className}`}>
@@ -172,10 +207,10 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <motion.h2 
+        <motion.h2
           className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-3"
           animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
           }}
           transition={{ duration: 3, repeat: Infinity }}
         >
@@ -191,38 +226,46 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
           const Icon = config.icon;
           const isSelected = selectedSpread === type;
           const isHovered = hoveredSpread === type;
-          const authRequirement = getAuthenticationRequirement(type as SpreadType);
-          const isLocked = authRequirement === 'authentication';
-          
+          const authRequirement = getAuthenticationRequirement(
+            type as SpreadType,
+          );
+          const isLocked = authRequirement === "authentication";
+
           return (
             <motion.div
               key={type}
-              className={`relative group cursor-pointer ${isLocked ? 'opacity-60' : ''}`}
+              className={`relative group cursor-pointer ${isLocked ? "opacity-60" : ""}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               onHoverStart={() => setHoveredSpread(type as SpreadType)}
               onHoverEnd={() => setHoveredSpread(null)}
-              onClick={() => !isLocked && handleSpreadSelect(type as SpreadType)}
+              onClick={() =>
+                !isLocked && handleSpreadSelect(type as SpreadType)
+              }
             >
               {/* Card Container */}
               <motion.div
                 className={`relative p-6 rounded-2xl border-2 transition-all duration-300 overflow-hidden ${
                   isSelected
-                    ? 'border-purple-400 bg-purple-500/20 shadow-2xl shadow-purple-500/30'
+                    ? "border-purple-400 bg-purple-500/20 shadow-2xl shadow-purple-500/30"
                     : isHovered
-                    ? 'border-purple-500/60 bg-purple-500/10 shadow-lg shadow-purple-500/20'
-                    : 'border-purple-600/30 bg-purple-900/20 hover:border-purple-500/50'
+                      ? "border-purple-500/60 bg-purple-500/10 shadow-lg shadow-purple-500/20"
+                      : "border-purple-600/30 bg-purple-900/20 hover:border-purple-500/50"
                 }`}
                 whileHover={{ scale: 1.02, y: -4 }}
                 whileTap={{ scale: 0.98 }}
-                animate={isSelected ? {
-                  boxShadow: [
-                    '0 0 20px rgba(139, 92, 246, 0.3)',
-                    '0 0 40px rgba(139, 92, 246, 0.5)',
-                    '0 0 20px rgba(139, 92, 246, 0.3)'
-                  ]
-                } : {}}
+                animate={
+                  isSelected
+                    ? {
+                        boxShadow: [
+                          "0 0 20px rgba(139, 92, 246, 0.3)",
+                          "0 0 40px rgba(139, 92, 246, 0.5)",
+                          "0 0 20px rgba(139, 92, 246, 0.3)",
+                        ],
+                      }
+                    : {}
+                }
                 transition={isSelected ? { duration: 2, repeat: Infinity } : {}}
               >
                 {/* Lock Overlay */}
@@ -239,25 +282,33 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                 {/* Background Glow Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10 rounded-2xl"
-                  animate={isSelected ? { opacity: [0.1, 0.3, 0.1] } : { opacity: 0.1 }}
+                  animate={
+                    isSelected ? { opacity: [0.1, 0.3, 0.1] } : { opacity: 0.1 }
+                  }
                   transition={{ duration: 2, repeat: Infinity }}
                 />
                 {/* Header */}
                 <div className="relative z-20 flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <motion.div
-                      className={`p-2 rounded-lg ${isSelected ? 'bg-purple-500/30' : 'bg-purple-600/20'}`}
+                      className={`p-2 rounded-lg ${isSelected ? "bg-purple-500/30" : "bg-purple-600/20"}`}
                       animate={isSelected ? { rotate: [0, 10, -10, 0] } : {}}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      <Icon className={`w-6 h-6 ${isSelected ? 'text-purple-300' : 'text-purple-400'}`} />
+                      <Icon
+                        className={`w-6 h-6 ${isSelected ? "text-purple-300" : "text-purple-400"}`}
+                      />
                     </motion.div>
                     <div>
-                      <h3 className={`font-semibold text-lg ${isSelected ? 'text-white' : 'text-purple-300'}`}>
+                      <h3
+                        className={`font-semibold text-lg ${isSelected ? "text-white" : "text-purple-300"}`}
+                      >
                         {config.title}
                       </h3>
                       <div className="flex items-center space-x-2 mt-1">
-                        <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(config.difficulty)}`}>
+                        <span
+                          className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(config.difficulty)}`}
+                        >
                           {config.difficulty}
                         </span>
                         <span className="text-purple-400 text-xs">
@@ -266,22 +317,25 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Card Count Badge */}
                   <motion.div
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      isSelected 
-                        ? 'bg-purple-400 text-white' 
-                        : 'bg-purple-600/30 text-purple-300'
+                      isSelected
+                        ? "bg-purple-400 text-white"
+                        : "bg-purple-600/30 text-purple-300"
                     }`}
                     animate={isSelected ? { scale: [1, 1.1, 1] } : {}}
                     transition={{ duration: 1, repeat: Infinity }}
                   >
-                    {config.cardCount} {config.cardCount === 1 ? 'card' : 'cards'}
+                    {config.cardCount}{" "}
+                    {config.cardCount === 1 ? "card" : "cards"}
                   </motion.div>
                 </div>
                 {/* Description */}
-                <p className={`text-sm mb-4 ${isSelected ? 'text-purple-200' : 'text-purple-400'}`}>
+                <p
+                  className={`text-sm mb-4 ${isSelected ? "text-purple-200" : "text-purple-400"}`}
+                >
                   {config.description}
                 </p>
                 {/* Keywords */}
@@ -290,9 +344,9 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                     <span
                       key={i}
                       className={`text-xs px-2 py-1 rounded-full ${
-                        isSelected 
-                          ? 'bg-cyan-500/20 text-cyan-300' 
-                          : 'bg-purple-500/20 text-purple-400'
+                        isSelected
+                          ? "bg-cyan-500/20 text-cyan-300"
+                          : "bg-purple-500/20 text-purple-400"
                       }`}
                     >
                       #{keyword}
@@ -305,11 +359,13 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                     <motion.div
                       className="border-t border-purple-500/30 pt-4 mt-4"
                       initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
+                      animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <h4 className="text-xs font-medium text-purple-300 mb-2">Position Preview:</h4>
+                      <h4 className="text-xs font-medium text-purple-300 mb-2">
+                        Position Preview:
+                      </h4>
                       <div className="space-y-1">
                         {config.preview.slice(0, 3).map((position, i) => (
                           <motion.div
@@ -366,7 +422,7 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                   ))}
                 </div>
               </div>
-              
+
               {/* Start Reading Button */}
               <motion.button
                 className="bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-2xl shadow-purple-500/30 flex items-center space-x-3 group"
@@ -376,10 +432,10 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   background: [
-                    'linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4)',
-                    'linear-gradient(45deg, #ec4899, #06b6d4, #8b5cf6)',
-                    'linear-gradient(45deg, #06b6d4, #8b5cf6, #ec4899)'
-                  ]
+                    "linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4)",
+                    "linear-gradient(45deg, #ec4899, #06b6d4, #8b5cf6)",
+                    "linear-gradient(45deg, #06b6d4, #8b5cf6, #ec4899)",
+                  ],
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >

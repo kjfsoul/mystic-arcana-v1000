@@ -1,9 +1,9 @@
-'use client';
- 
+"use client";
+
 import { AuthError, AuthResponse, Session, User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from '../lib/supabase/client';
-import { profileService, UserProfile } from '../services/profileService';
+import { supabase } from "../lib/supabase/client";
+import { profileService, UserProfile } from "../services/profileService";
 /* eslint-disable no-unused-vars */
 interface AuthContextType {
   user: User | null;
@@ -12,7 +12,7 @@ interface AuthContextType {
   signUp: (
     email: string,
     password: string,
-    profileData?: UserProfile
+    profileData?: UserProfile,
   ) => Promise<AuthResponse>;
   signIn: (email: string, password: string) => Promise<AuthResponse>;
   signInWithGoogle: () => Promise<{
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signUp = async (
     email: string,
     password: string,
-    profileData?: UserProfile
+    profileData?: UserProfile,
   ): Promise<AuthResponse> => {
     const authResponse = await supabase.auth.signUp({
       email,
@@ -89,7 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
           await profileService.createProfile(
             authResponse.data.user.id,
-            profileData
+            profileData,
           );
           console.log("✅ Profile created successfully");
         } catch (profileError) {

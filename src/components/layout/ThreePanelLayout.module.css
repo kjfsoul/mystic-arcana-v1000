@@ -8,7 +8,11 @@
   overflow: hidden;
   background: linear-gradient(135deg, #0a0015 0%, #1a0030 50%, #0f001a 100%);
   color: #e6d7ff;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* Loading States */
@@ -32,8 +36,10 @@
   margin: 0 auto 20px;
   border-radius: 50%;
   background: radial-gradient(circle, #ffd700 0%, #ff6b9d 50%, #9c88ff 100%);
-  animation: pulse 2s ease-in-out infinite, rotate 4s linear infinite;
-  box-shadow: 
+  animation:
+    pulse 2s ease-in-out infinite,
+    rotate 4s linear infinite;
+  box-shadow:
     0 0 20px rgba(255, 215, 0, 0.5),
     0 0 40px rgba(255, 107, 157, 0.3),
     0 0 60px rgba(156, 136, 255, 0.2);
@@ -79,7 +85,12 @@
   left: 0;
   right: 0;
   height: 80px;
-  background: linear-gradient(180deg, transparent 0%, rgba(26, 0, 48, 0.95) 20%, rgba(26, 0, 48, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(26, 0, 48, 0.95) 20%,
+    rgba(26, 0, 48, 1) 100%
+  );
   backdrop-filter: blur(20px);
   display: flex;
   justify-content: space-around;
@@ -113,7 +124,11 @@
 
 .navButton.active {
   color: #ffd700;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 157, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 107, 157, 0.1)
+  );
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
 }
 
@@ -160,18 +175,30 @@
 
 .tarotPanel {
   border-right: 1px solid rgba(255, 215, 0, 0.2);
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), rgba(156, 136, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 157, 0.05),
+    rgba(156, 136, 255, 0.05)
+  );
 }
 
 .readerPanel {
   border-left: 1px solid rgba(255, 215, 0, 0.2);
   border-right: 1px solid rgba(255, 215, 0, 0.2);
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 107, 157, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.05),
+    rgba(255, 107, 157, 0.05)
+  );
 }
 
 .astrologyPanel {
   border-left: 1px solid rgba(255, 215, 0, 0.2);
-  background: linear-gradient(135deg, rgba(156, 136, 255, 0.05), rgba(255, 215, 0, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(156, 136, 255, 0.05),
+    rgba(255, 215, 0, 0.05)
+  );
 }
 
 .activePanel {
@@ -195,7 +222,11 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 157, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 107, 157, 0.2)
+  );
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 215, 0, 0.3);
   color: #ffd700;
@@ -212,7 +243,11 @@
   transform: scale(1.1);
   box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
   outline: none;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 107, 157, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.3),
+    rgba(255, 107, 157, 0.3)
+  );
 }
 
 /* Cosmic Weather */
@@ -248,23 +283,44 @@
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes glow {
-  0%, 100% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
-  50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
 }
 
 /* Responsive Design */
@@ -272,14 +328,14 @@
   .desktopLayout {
     display: none;
   }
-  
+
   .quickActions {
     top: 20px;
     right: 20px;
     transform: none;
     flex-direction: row;
   }
-  
+
   .quickButton {
     width: 40px;
     height: 40px;
@@ -292,18 +348,18 @@
     top: 10px;
     left: 10px;
   }
-  
+
   .weatherIndicator {
     padding: 6px 12px;
     font-size: 0.75rem;
   }
-  
+
   .quickActions {
     top: 10px;
     right: 10px;
     gap: 8px;
   }
-  
+
   .quickButton {
     width: 36px;
     height: 36px;
@@ -319,7 +375,7 @@
   .navButton {
     animation: none;
   }
-  
+
   .quickButton:hover,
   .navButton:hover {
     transform: none;
@@ -345,11 +401,11 @@
     background: #000;
     color: #fff;
   }
-  
+
   .panel {
     border: 2px solid #fff;
   }
-  
+
   .navButton,
   .quickButton {
     border: 2px solid #fff;

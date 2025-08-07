@@ -1,22 +1,22 @@
 /**
  * ValidationRunnerAgent - Astrological Accuracy Validator and Test Suite Manager
- * 
+ *
  * Creates comprehensive test suites for astrological calculations with regression testing,
  * ephemeris validation, and accuracy verification against trusted sources.
  */
-import { Agent } from '@/lib/ag-ui/agent';
+import { Agent } from "@/lib/ag-ui/agent";
 // TODO: Import @log_invocation decorator when Python integration is available
 // import { log_invocation } from '@/utils/a_mem_logger';
 export interface ValidationTestCase {
   id: string;
   name: string;
   description: string;
-  testType: 'ephemeris' | 'aspect' | 'house' | 'chart' | 'transit';
+  testType: "ephemeris" | "aspect" | "house" | "chart" | "transit";
   inputData: any;
   expectedOutput: any;
   tolerance?: number;
   source: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: "high" | "medium" | "low";
 }
 export interface ValidationResult {
   testId: string;
@@ -43,7 +43,7 @@ export class ValidationRunnerAgent extends Agent {
   private referenceData: Map<string, any>;
   private lastResults: Map<string, ValidationResult>;
   constructor() {
-    super('validation-runner', 'ValidationRunnerAgent');
+    super("validation-runner", "ValidationRunnerAgent");
     this.testSuite = new Map();
     this.referenceData = new Map();
     this.lastResults = new Map();
@@ -57,92 +57,92 @@ export class ValidationRunnerAgent extends Agent {
     // Test cases for planetary positions
     const planetaryTests: ValidationTestCase[] = [
       {
-        id: 'sun_position_1987_03_14',
-        name: 'Sun Position March 14, 1987',
-        description: 'Validate Sun position calculation for known date',
-        testType: 'ephemeris',
+        id: "sun_position_1987_03_14",
+        name: "Sun Position March 14, 1987",
+        description: "Validate Sun position calculation for known date",
+        testType: "ephemeris",
         inputData: {
-          date: '1987-03-14T12:00:00Z',
-          planet: 'sun',
-          coordinates: { lat: 40.7128, lon: -74.0060 }
+          date: "1987-03-14T12:00:00Z",
+          planet: "sun",
+          coordinates: { lat: 40.7128, lon: -74.006 },
         },
         expectedOutput: {
           longitude: 353.5, // degrees in Pisces
           latitude: 0.0,
-          distance: 0.99 // AU
+          distance: 0.99, // AU
         },
         tolerance: 0.1,
-        source: 'Swiss Ephemeris',
-        priority: 'high'
+        source: "Swiss Ephemeris",
+        priority: "high",
       },
       {
-        id: 'moon_position_2000_01_01',
-        name: 'Moon Position Y2K',
-        description: 'Validate Moon position at millennium',
-        testType: 'ephemeris',
+        id: "moon_position_2000_01_01",
+        name: "Moon Position Y2K",
+        description: "Validate Moon position at millennium",
+        testType: "ephemeris",
         inputData: {
-          date: '2000-01-01T00:00:00Z',
-          planet: 'moon',
-          coordinates: { lat: 51.5074, lon: -0.1278 }
+          date: "2000-01-01T00:00:00Z",
+          planet: "moon",
+          coordinates: { lat: 51.5074, lon: -0.1278 },
         },
         expectedOutput: {
           longitude: 163.0, // degrees in Virgo
           latitude: -2.1,
-          distance: 0.00257 // AU
+          distance: 0.00257, // AU
         },
         tolerance: 0.5,
-        source: 'NASA JPL',
-        priority: 'high'
-      }
+        source: "NASA JPL",
+        priority: "high",
+      },
     ];
     // Test cases for aspect calculations
     const aspectTests: ValidationTestCase[] = [
       {
-        id: 'conjunction_mars_venus_1987',
-        name: 'Mars-Venus Conjunction 1987',
-        description: 'Validate exact conjunction calculation',
-        testType: 'aspect',
+        id: "conjunction_mars_venus_1987",
+        name: "Mars-Venus Conjunction 1987",
+        description: "Validate exact conjunction calculation",
+        testType: "aspect",
         inputData: {
-          date: '1987-03-14T12:00:00Z',
-          planet1: 'mars',
-          planet2: 'venus'
+          date: "1987-03-14T12:00:00Z",
+          planet1: "mars",
+          planet2: "venus",
         },
         expectedOutput: {
-          aspect: 'conjunction',
+          aspect: "conjunction",
           orb: 2.3,
-          exactDate: '1987-03-14T15:42:00Z'
+          exactDate: "1987-03-14T15:42:00Z",
         },
         tolerance: 0.5,
-        source: 'Astrodienst',
-        priority: 'medium'
-      }
+        source: "Astrodienst",
+        priority: "medium",
+      },
     ];
     // Test cases for house calculations
     const houseTests: ValidationTestCase[] = [
       {
-        id: 'placidus_houses_london',
-        name: 'Placidus Houses London',
-        description: 'Validate Placidus house system calculation',
-        testType: 'house',
+        id: "placidus_houses_london",
+        name: "Placidus Houses London",
+        description: "Validate Placidus house system calculation",
+        testType: "house",
         inputData: {
-          date: '1987-03-14T12:00:00Z',
+          date: "1987-03-14T12:00:00Z",
           coordinates: { lat: 51.5074, lon: -0.1278 },
-          houseSystem: 'placidus'
+          houseSystem: "placidus",
         },
         expectedOutput: {
           houses: [
-            { cusp: 1, sign: 'gemini', degree: 15.2 },
-            { cusp: 2, sign: 'cancer', degree: 8.7 },
+            { cusp: 1, sign: "gemini", degree: 15.2 },
+            { cusp: 2, sign: "cancer", degree: 8.7 },
             // ... other house cusps
-          ]
+          ],
         },
         tolerance: 1.0,
-        source: 'Solar Fire',
-        priority: 'medium'
-      }
+        source: "Solar Fire",
+        priority: "medium",
+      },
     ];
     // Store all test cases
-    [...planetaryTests, ...aspectTests, ...houseTests].forEach(test => {
+    [...planetaryTests, ...aspectTests, ...houseTests].forEach((test) => {
       this.testSuite.set(test.id, test);
     });
   }
@@ -150,18 +150,20 @@ export class ValidationRunnerAgent extends Agent {
    * Create comprehensive validation test file
    */
   // @log_invocation(event_type="test_file_creation", user_id="system")
-  async createValidationTestFile(outputPath: string = 'tests/astrology/validation.ts'): Promise<boolean> {
+  async createValidationTestFile(
+    outputPath: string = "tests/astrology/validation.ts",
+  ): Promise<boolean> {
     try {
       // const testFileContent = this.generateTestFileContent();
-      
+
       // TODO: Write test file to specified path
       // TODO: Ensure proper Jest configuration
       // TODO: Include helper functions and mock data
-      
+
       console.log(`Validation test file created at ${outputPath}`);
       return true;
     } catch (error) {
-      console.error('ValidationRunnerAgent: Test file creation failed:', error);
+      console.error("ValidationRunnerAgent: Test file creation failed:", error);
       return false;
     }
   }
@@ -173,7 +175,7 @@ export class ValidationRunnerAgent extends Agent {
     try {
       // const startTime = Date.now();
       const results: ValidationResult[] = [];
-      
+
       // Run all test cases
       for (const [testId, testCase] of this.testSuite) {
         void testId; // Indicate intentional unused variable
@@ -181,8 +183,8 @@ export class ValidationRunnerAgent extends Agent {
         results.push(result);
       }
       // Analyze results
-      const passed = results.filter(r => r.passed).length;
-      const failed = results.filter(r => !r.passed).length;
+      const passed = results.filter((r) => r.passed).length;
+      const failed = results.filter((r) => !r.passed).length;
       const accuracy = passed / results.length;
       // Detect regressions (newly failing tests)
       const regressions = this.detectRegressions(results);
@@ -194,18 +196,18 @@ export class ValidationRunnerAgent extends Agent {
         failed,
         skipped: 0,
         accuracy,
-        failedTests: results.filter(r => !r.passed),
+        failedTests: results.filter((r) => !r.passed),
         regressions,
-        improvements
+        improvements,
       };
       // Update last results for future comparison
-      results.forEach(result => {
+      results.forEach((result) => {
         this.lastResults.set(result.testId, result);
       });
       return report;
     } catch (error) {
-      console.error('ValidationRunnerAgent: Regression testing failed:', error);
-      throw new Error('Failed to run regression tests');
+      console.error("ValidationRunnerAgent: Regression testing failed:", error);
+      throw new Error("Failed to run regression tests");
     }
   }
   /**
@@ -213,60 +215,85 @@ export class ValidationRunnerAgent extends Agent {
    */
   // @log_invocation(event_type="ephemeris_validation", user_id="system")
   async validateEphemerisAccuracy(
-    date: string, 
-    coordinates: { lat: number; lon: number }
+    date: string,
+    coordinates: { lat: number; lon: number },
   ): Promise<ValidationResult[]> {
     try {
       const results: ValidationResult[] = [];
-      
+
       // Test all planets
-      const planets = ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
-      
+      const planets = [
+        "sun",
+        "moon",
+        "mercury",
+        "venus",
+        "mars",
+        "jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+        "pluto",
+      ];
+
       for (const planet of planets) {
         const testCase: ValidationTestCase = {
-          id: `${planet}_${date.replace(/[^0-9]/g, '')}`,
+          id: `${planet}_${date.replace(/[^0-9]/g, "")}`,
           name: `${planet} position validation`,
           description: `Validate ${planet} position for ${date}`,
-          testType: 'ephemeris',
+          testType: "ephemeris",
           inputData: { date, planet, coordinates },
-          expectedOutput: await this.getReferencePosition(planet, date, coordinates),
+          expectedOutput: await this.getReferencePosition(
+            planet,
+            date,
+            coordinates,
+          ),
           tolerance: this.getToleranceForPlanet(planet),
-          source: 'Swiss Ephemeris',
-          priority: 'high'
+          source: "Swiss Ephemeris",
+          priority: "high",
         };
         const result = await this.executeTestCase(testCase);
         results.push(result);
       }
       return results;
     } catch (error) {
-      console.error('ValidationRunnerAgent: Ephemeris validation failed:', error);
-      throw new Error('Failed to validate ephemeris accuracy');
+      console.error(
+        "ValidationRunnerAgent: Ephemeris validation failed:",
+        error,
+      );
+      throw new Error("Failed to validate ephemeris accuracy");
     }
   }
   /**
    * Execute individual test case
    */
-  private async executeTestCase(testCase: ValidationTestCase): Promise<ValidationResult> {
+  private async executeTestCase(
+    testCase: ValidationTestCase,
+  ): Promise<ValidationResult> {
     const startTime = Date.now();
-    
+
     try {
       // TODO: Import and call actual calculation functions
       // TODO: Handle different test types (ephemeris, aspect, house, etc.)
       // const actualOutput = await this.performCalculation(testCase);
-      
+
       // Mock calculation for now
       const actualOutput = testCase.expectedOutput; // This would be replaced with real calculation
-      
-      const deviation = this.calculateDeviation(actualOutput, testCase.expectedOutput);
-      const passed = testCase.tolerance ? deviation <= testCase.tolerance : 
-                    JSON.stringify(actualOutput) === JSON.stringify(testCase.expectedOutput);
+
+      const deviation = this.calculateDeviation(
+        actualOutput,
+        testCase.expectedOutput,
+      );
+      const passed = testCase.tolerance
+        ? deviation <= testCase.tolerance
+        : JSON.stringify(actualOutput) ===
+          JSON.stringify(testCase.expectedOutput);
       return {
         testId: testCase.id,
         passed,
         actualOutput,
         expectedOutput: testCase.expectedOutput,
         deviation,
-        executionTime: Date.now() - startTime
+        executionTime: Date.now() - startTime,
       };
     } catch (error) {
       return {
@@ -274,8 +301,8 @@ export class ValidationRunnerAgent extends Agent {
         passed: false,
         actualOutput: null,
         expectedOutput: testCase.expectedOutput,
-        errorMessage: error instanceof Error ? error.message : 'Unknown error',
-        executionTime: Date.now() - startTime
+        errorMessage: error instanceof Error ? error.message : "Unknown error",
+        executionTime: Date.now() - startTime,
       };
     }
   }
@@ -290,21 +317,21 @@ describe('Astrological Calculations Validation', () => {
   const calculator = new AstronomicalCalculator();
   describe('Planetary Positions', () => {
     ${Array.from(this.testSuite.values())
-      .filter(test => test.testType === 'ephemeris')
-      .map(test => this.generateTestCode(test))
-      .join('\n\n')}
+      .filter((test) => test.testType === "ephemeris")
+      .map((test) => this.generateTestCode(test))
+      .join("\n\n")}
   });
   describe('Aspect Calculations', () => {
     ${Array.from(this.testSuite.values())
-      .filter(test => test.testType === 'aspect')
-      .map(test => this.generateTestCode(test))
-      .join('\n\n')}
+      .filter((test) => test.testType === "aspect")
+      .map((test) => this.generateTestCode(test))
+      .join("\n\n")}
   });
   describe('House Systems', () => {
     ${Array.from(this.testSuite.values())
-      .filter(test => test.testType === 'house')
-      .map(test => this.generateTestCode(test))
-      .join('\n\n')}
+      .filter((test) => test.testType === "house")
+      .map((test) => this.generateTestCode(test))
+      .join("\n\n")}
   });
 });
 `;
@@ -322,7 +349,11 @@ describe('Astrological Calculations Validation', () => {
     expect(result).toBeCloseTo(expected, ${testCase.tolerance || 0});
   });`;
   }
-  private async getReferencePosition(planet: string, date: string, coordinates: any): Promise<any> {
+  private async getReferencePosition(
+    planet: string,
+    date: string,
+    coordinates: any,
+  ): Promise<any> {
     void planet; // Indicate intentional unused variable
     void date; // Indicate intentional unused variable
     void coordinates; // Indicate intentional unused variable
@@ -340,7 +371,7 @@ describe('Astrological Calculations Validation', () => {
       saturn: 0.02,
       uranus: 0.01,
       neptune: 0.01,
-      pluto: 0.01
+      pluto: 0.01,
     };
     return tolerances[planet] || 0.1;
   }
@@ -368,17 +399,19 @@ describe('Astrological Calculations Validation', () => {
       agentId: this.id,
       active: false, // Will be activated when implementation is complete
       capabilities: [
-        'automated_testing',
-        'accuracy_verification', 
-        'regression_detection',
-        'ephemeris_validation',
-        'test_suite_management'
+        "automated_testing",
+        "accuracy_verification",
+        "regression_detection",
+        "ephemeris_validation",
+        "test_suite_management",
       ],
       testSuite: {
         totalTests: this.testSuite.size,
-        testTypes: Array.from(new Set(Array.from(this.testSuite.values()).map(t => t.testType))),
-        lastRunResults: this.lastResults.size
-      }
+        testTypes: Array.from(
+          new Set(Array.from(this.testSuite.values()).map((t) => t.testType)),
+        ),
+        lastRunResults: this.lastResults.size,
+      },
     };
   }
 }

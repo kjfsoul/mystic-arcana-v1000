@@ -1,5 +1,6 @@
-# Mystic Arcana Affiliate Disclosure  
-*Effective Date: [Insert Date]*
+# Mystic Arcana Affiliate Disclosure
+
+_Effective Date: [Insert Date]_
 
 ---
 
@@ -28,14 +29,14 @@ We value your trust. We only feature affiliate products and services that align 
 
 Affiliate content may be labeled in one or more of the following ways:
 
-| Label | Placement Context |
-|-------|--------------------|
-| **[Mystic Picks]** | Curated by Mystic Arcana team (e.g. shop page) |
-| **[Blessed Link]** | Playful tone for toolkits, spells, or rituals |
-| **[Supported Link]** | Subtle and neutral label for reviews or comparisons |
-| **[Affiliate Link]** | Formal label used in footers or disclaimers |
-| **[Curated Energy]** | For products used in readings, decks, or moon kits |
-| Tooltip on hover: *“This is an affiliate link”* | Product cards or deck suggestions |
+| Label                                           | Placement Context                                   |
+| ----------------------------------------------- | --------------------------------------------------- |
+| **[Mystic Picks]**                              | Curated by Mystic Arcana team (e.g. shop page)      |
+| **[Blessed Link]**                              | Playful tone for toolkits, spells, or rituals       |
+| **[Supported Link]**                            | Subtle and neutral label for reviews or comparisons |
+| **[Affiliate Link]**                            | Formal label used in footers or disclaimers         |
+| **[Curated Energy]**                            | For products used in readings, decks, or moon kits  |
+| Tooltip on hover: _“This is an affiliate link”_ | Product cards or deck suggestions                   |
 
 ---
 

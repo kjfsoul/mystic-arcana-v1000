@@ -36,7 +36,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
+  background-image:
     radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
     radial-gradient(2px 2px at 40px 70px, #ffd700, transparent),
     radial-gradient(1px 1px at 90px 40px, #e6d7ff, transparent),
@@ -59,9 +59,9 @@
   width: 100%;
   height: 100%;
   background: radial-gradient(
-    ellipse at center, 
-    rgba(255, 215, 0, 0.02) 0%, 
-    rgba(255, 107, 157, 0.01) 50%, 
+    ellipse at center,
+    rgba(255, 215, 0, 0.02) 0%,
+    rgba(255, 107, 157, 0.01) 50%,
     transparent 100%
   );
 }
@@ -85,9 +85,9 @@
   height: 100%;
   background: linear-gradient(
     45deg,
-    transparent 48%, 
-    rgba(255, 71, 87, 0.1) 49%, 
-    rgba(255, 71, 87, 0.1) 51%, 
+    transparent 48%,
+    rgba(255, 71, 87, 0.1) 49%,
+    rgba(255, 71, 87, 0.1) 51%,
     transparent 52%
   );
   background-size: 20px 20px;
@@ -96,11 +96,21 @@
 }
 
 @keyframes glitchMove {
-  0% { transform: translateX(0px); }
-  25% { transform: translateX(1px); }
-  50% { transform: translateX(0px); }
-  75% { transform: translateX(-1px); }
-  100% { transform: translateX(0px); }
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(1px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
 /* Disable glitch animation for users who prefer reduced motion */
@@ -128,11 +138,12 @@
 }
 
 @keyframes moonPulse {
-  0%, 100% { 
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.6;
   }
-  50% { 
+  50% {
     transform: scale(1.2);
     opacity: 0.9;
   }
@@ -151,7 +162,7 @@
 }
 
 .eclipseRing::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -164,8 +175,12 @@
 }
 
 @keyframes eclipseRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Conjunction Aura */
@@ -188,8 +203,12 @@
 }
 
 @keyframes conjunctionSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* Responsive adjustments */
@@ -200,24 +219,24 @@
     top: 5%;
     right: 10%;
   }
-  
+
   .eclipseRing {
     width: 150px;
     height: 150px;
     top: 15%;
     left: 25%;
   }
-  
+
   .eclipseRing::before {
     width: 90px;
     height: 90px;
   }
-  
+
   .conjunctionAura {
     width: 200px;
     height: 200px;
   }
-  
+
   .staticStars {
     background-size: 300px 150px;
   }
@@ -239,7 +258,7 @@
   .conjunctionAura {
     animation: none;
   }
-  
+
   .staticStars {
     opacity: 0.4;
   }
@@ -250,15 +269,15 @@
   .staticBackground {
     background: #000000;
   }
-  
+
   .staticStars {
-    background-image: 
+    background-image:
       radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
       radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
       radial-gradient(1px 1px at 90px 40px, #ffffff, transparent);
     opacity: 1;
   }
-  
+
   .weatherOverlay {
     display: none;
   }

@@ -25,20 +25,20 @@ export class PersonaLearnerAgentClient {
     // This would typically call an API endpoint that handles the actual analysis
     return {
       currentLevel: 1,
-      levelName: 'Cosmic Seeker',
+      levelName: "Cosmic Seeker",
       metrics: {
         completedReadings: 0,
         conversationTurns: 0,
         questionsAnswered: 0,
-        sessionCount: 1
+        sessionCount: 1,
       },
       nextThreshold: {
         level: 2,
         readings: 3,
         turns: 10,
-        questions: 5
+        questions: 5,
       },
-      progressToNext: 0
+      progressToNext: 0,
     };
   }
 }

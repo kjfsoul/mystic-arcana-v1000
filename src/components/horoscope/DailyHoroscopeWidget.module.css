@@ -28,8 +28,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Shimmer loading styles */
@@ -38,8 +43,14 @@
   overflow: hidden;
 }
 
-.shimmerLine, .shimmerCircle {
-  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 75%);
+.shimmerLine,
+.shimmerCircle {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
@@ -254,19 +265,19 @@
     max-width: 100%;
     padding: 1rem;
   }
-  
+
   .title {
     font-size: 1rem;
   }
-  
+
   .overview {
     font-size: 0.9rem;
   }
-  
+
   .luckyNumbers {
     flex-wrap: wrap;
   }
-  
+
   .luckyLabel {
     min-width: auto;
     width: 100%;

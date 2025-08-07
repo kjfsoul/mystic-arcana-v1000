@@ -35,13 +35,17 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2));
+  background: radial-gradient(
+    circle,
+    rgba(102, 126, 234, 0.3),
+    rgba(118, 75, 162, 0.2)
+  );
   border: 2px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(102, 126, 234, 0.3),
     inset 0 0 20px rgba(255, 255, 255, 0.1);
 }
@@ -155,7 +159,11 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2));
+  background: radial-gradient(
+    circle,
+    rgba(102, 126, 234, 0.3),
+    rgba(118, 75, 162, 0.2)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,35 +183,35 @@
   .container {
     min-height: 300px;
   }
-  
+
   .centralDisplay {
     width: 220px;
     height: 220px;
   }
-  
+
   .mainOrb {
     width: 120px;
     height: 120px;
   }
-  
+
   .orbEmoji {
     font-size: 2rem;
   }
-  
+
   .orbitalRing {
     width: 220px;
     height: 220px;
   }
-  
+
   .orbitalElement {
     transform: translateX(90px);
   }
-  
+
   .weatherIndicators {
     bottom: -40px;
     min-width: 180px;
   }
-  
+
   .aspectIndicator {
     padding: 0.4rem 0.8rem;
     font-size: 0.75rem;

@@ -13,11 +13,11 @@ const TarotCard: React.FC<TarotCardProps> = ({
 }) => {
   return (
     <div className={styles.tarotcard}>
-      <Image 
-        src={cardImage} 
-        alt={cardName} 
-        width={200} 
-        height={300} 
+      <Image
+        src={cardImage}
+        alt={cardName}
+        width={200}
+        height={300}
         className={styles.cardImage}
       />
       <h3>{cardName}</h3>

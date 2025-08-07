@@ -1,9 +1,9 @@
 /**
  * Browser-Compatible Swiss Ephemeris Bridge for Mystic Arcana
- * 
+ *
  * Provides astronomical calculations using mock data for development
  * and API endpoints for production deployment.
- * 
+ *
  * Features:
  * - Browser-compatible implementation
  * - Mock data for development
@@ -15,16 +15,13 @@ import type {
   GeoLocation,
   AspectData,
   RetrogradeData,
-  CosmicInfluenceData
-} from '../../types/astronomical';
-import {
-  Planet,
-  ZodiacSign
-} from '../../types/astronomical';
+  CosmicInfluenceData,
+} from "../../types/astronomical";
+import { Planet, ZodiacSign } from "../../types/astronomical";
 export interface SwissEphemerisConfig {
   apiEndpoint?: string;
   timeout?: number;
-  precision?: 'low' | 'medium' | 'high' | 'ultra';
+  precision?: "low" | "medium" | "high" | "ultra";
   useMockData?: boolean;
 }
 export interface PlanetaryCalculationRequest {
@@ -48,14 +45,15 @@ export interface SwissEphemerisResponse {
 export class SwissEphemerisBridge {
   private config: Required<SwissEphemerisConfig>;
   private isInitialized: boolean = false;
-  private calculationCache: Map<string, { data: unknown; timestamp: number }> = new Map();
+  private calculationCache: Map<string, { data: unknown; timestamp: number }> =
+    new Map();
   private readonly CACHE_TTL = 60000; // 1 minute cache
   constructor(config: SwissEphemerisConfig = {}) {
     this.config = {
-      apiEndpoint: config.apiEndpoint || '/api/ephemeris',
+      apiEndpoint: config.apiEndpoint || "/api/ephemeris",
       timeout: config.timeout || 30000,
-      precision: config.precision || 'high',
-      useMockData: config.useMockData ?? true // Default to mock data for development
+      precision: config.precision || "high",
+      useMockData: config.useMockData ?? true, // Default to mock data for development
     };
   }
   /**
@@ -64,39 +62,41 @@ export class SwissEphemerisBridge {
   async initialize(): Promise<boolean> {
     try {
       if (this.config.useMockData) {
-        console.log('🌟 Swiss Ephemeris bridge initialized with mock data');
+        console.log("🌟 Swiss Ephemeris bridge initialized with mock data");
         this.isInitialized = true;
         return true;
       }
       // In production, validate API endpoint
       const response = await fetch(`${this.config.apiEndpoint}/health`, {
-        method: 'GET',
-        signal: AbortSignal.timeout(this.config.timeout)
+        method: "GET",
+        signal: AbortSignal.timeout(this.config.timeout),
       });
       if (response.ok) {
         this.isInitialized = true;
-        console.log('🌟 Swiss Ephemeris bridge initialized with API endpoint');
+        console.log("🌟 Swiss Ephemeris bridge initialized with API endpoint");
         return true;
       } else {
         throw new Error(`API endpoint validation failed: ${response.status}`);
       }
     } catch (error) {
-      console.error('Failed to initialize Swiss Ephemeris bridge:', error);
+      console.error("Failed to initialize Swiss Ephemeris bridge:", error);
       // Fall back to mock data
       this.config.useMockData = true;
       this.isInitialized = true;
-      console.log('🌟 Falling back to mock data');
+      console.log("🌟 Falling back to mock data");
       return true;
     }
   }
   /**
    * Calculate precise planetary positions
    */
-  async calculatePlanetaryPositions(request: PlanetaryCalculationRequest): Promise<PlanetaryData[]> {
+  async calculatePlanetaryPositions(
+    request: PlanetaryCalculationRequest,
+  ): Promise<PlanetaryData[]> {
     if (!this.isInitialized) {
-      throw new Error('Swiss Ephemeris bridge not initialized');
+      throw new Error("Swiss Ephemeris bridge not initialized");
     }
-    const cacheKey = this.generateCacheKey('planets', request);
+    const cacheKey = this.generateCacheKey("planets", request);
     const cached = this.getFromCache<PlanetaryData[]>(cacheKey);
     if (cached) return cached;
     try {
@@ -105,10 +105,10 @@ export class SwissEphemerisBridge {
         planets = this.generateMockPlanetaryData(request);
       } else {
         const response = await fetch(`${this.config.apiEndpoint}/planets`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(request),
-          signal: AbortSignal.timeout(this.config.timeout)
+          signal: AbortSignal.timeout(this.config.timeout),
         });
         if (!response.ok) {
           throw new Error(`API request failed: ${response.status}`);
@@ -119,7 +119,7 @@ export class SwissEphemerisBridge {
       this.setCache(cacheKey, planets);
       return planets;
     } catch (error) {
-      console.error('Planetary position calculation error:', error);
+      console.error("Planetary position calculation error:", error);
       // Fall back to mock data
       const planets = this.generateMockPlanetaryData(request);
       this.setCache(cacheKey, planets);
@@ -129,35 +129,41 @@ export class SwissEphemerisBridge {
   /**
    * Generate mock planetary data for development
    */
-  private generateMockPlanetaryData(request: PlanetaryCalculationRequest): PlanetaryData[] {
+  private generateMockPlanetaryData(
+    request: PlanetaryCalculationRequest,
+  ): PlanetaryData[] {
     const now = Date.now();
-    const dayOfYear = Math.floor((now - new Date(new Date().getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-    
+    const dayOfYear = Math.floor(
+      (now - new Date(new Date().getFullYear(), 0, 0).getTime()) /
+        (1000 * 60 * 60 * 24),
+    );
+
     return request.planets.map((planetName, index) => {
       // Generate realistic-looking positions based on time and planet
       const baseAngle = (dayOfYear + index * 30) % 360;
       const ra = (baseAngle + Math.sin(now / 1000000) * 10) % 360;
-      const dec = Math.sin((baseAngle + index * 45) * Math.PI / 180) * 23.5; // Ecliptic range
-      
+      const dec = Math.sin(((baseAngle + index * 45) * Math.PI) / 180) * 23.5; // Ecliptic range
+
       const zodiacSign = this.getZodiacSign(baseAngle);
-      
+
       return {
         planet: this.getPlanetEnum(planetName),
         name: planetName,
         symbol: this.getPlanetSymbol(planetName),
         coordinates: {
           ra: ra,
-          dec: dec
+          dec: dec,
         },
         position: {
-          ra: ra, 
-          dec: dec
+          ra: ra,
+          dec: dec,
         },
         eclipticLongitude: baseAngle,
-        eclipticLatitude: Math.sin((baseAngle + index * 15) * Math.PI / 180) * 5,
+        eclipticLatitude:
+          Math.sin(((baseAngle + index * 15) * Math.PI) / 180) * 5,
         distance: 1 + Math.random() * 10, // AU
         magnitude: -2 + Math.random() * 8,
-        phase: planetName === 'moon' ? (dayOfYear % 29.5) / 29.5 : 1,
+        phase: planetName === "moon" ? (dayOfYear % 29.5) / 29.5 : 1,
         angularDiameter: 10 + Math.random() * 50, // arcseconds
         angularSize: 10 + Math.random() * 50, // Compatibility field
         speed: 0.5 + Math.random() * 2, // degrees per day
@@ -166,7 +172,7 @@ export class SwissEphemerisBridge {
         zodiacSign: zodiacSign, // Compatibility field
         degree: baseAngle % 30,
         zodiacDegree: baseAngle % 30, // Compatibility field
-        house: Math.floor(Math.random() * 12) + 1
+        house: Math.floor(Math.random() * 12) + 1,
       };
     });
   }
@@ -175,27 +181,36 @@ export class SwissEphemerisBridge {
    */
   private getPlanetSymbol(planetName: string): string {
     const symbols: { [key: string]: string } = {
-      sun: '☉',
-      moon: '☽',
-      mercury: '☿',
-      venus: '♀',
-      mars: '♂',
-      jupiter: '♃',
-      saturn: '♄',
-      uranus: '♅',
-      neptune: '♆',
-      pluto: '♇'
+      sun: "☉",
+      moon: "☽",
+      mercury: "☿",
+      venus: "♀",
+      mars: "♂",
+      jupiter: "♃",
+      saturn: "♄",
+      uranus: "♅",
+      neptune: "♆",
+      pluto: "♇",
     };
-    return symbols[planetName.toLowerCase()] || '●';
+    return symbols[planetName.toLowerCase()] || "●";
   }
   /**
    * Get zodiac sign from ecliptic longitude
    */
   private getZodiacSign(longitude: number): string {
     const signs = [
-      'Aries', 'Taurus', 'Gemini', 'Cancer',
-      'Leo', 'Virgo', 'Libra', 'Scorpio',
-      'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces",
     ];
     return signs[Math.floor(longitude / 30)];
   }
@@ -204,18 +219,18 @@ export class SwissEphemerisBridge {
    */
   private getZodiacSignEnum(sign: string): ZodiacSign {
     const signMap: { [key: string]: ZodiacSign } = {
-      'Aries': ZodiacSign.ARIES,
-      'Taurus': ZodiacSign.TAURUS,
-      'Gemini': ZodiacSign.GEMINI,
-      'Cancer': ZodiacSign.CANCER,
-      'Leo': ZodiacSign.LEO,
-      'Virgo': ZodiacSign.VIRGO,
-      'Libra': ZodiacSign.LIBRA,
-      'Scorpio': ZodiacSign.SCORPIO,
-      'Sagittarius': ZodiacSign.SAGITTARIUS,
-      'Capricorn': ZodiacSign.CAPRICORN,
-      'Aquarius': ZodiacSign.AQUARIUS,
-      'Pisces': ZodiacSign.PISCES
+      Aries: ZodiacSign.ARIES,
+      Taurus: ZodiacSign.TAURUS,
+      Gemini: ZodiacSign.GEMINI,
+      Cancer: ZodiacSign.CANCER,
+      Leo: ZodiacSign.LEO,
+      Virgo: ZodiacSign.VIRGO,
+      Libra: ZodiacSign.LIBRA,
+      Scorpio: ZodiacSign.SCORPIO,
+      Sagittarius: ZodiacSign.SAGITTARIUS,
+      Capricorn: ZodiacSign.CAPRICORN,
+      Aquarius: ZodiacSign.AQUARIUS,
+      Pisces: ZodiacSign.PISCES,
     };
     return signMap[sign] || ZodiacSign.ARIES;
   }
@@ -224,19 +239,19 @@ export class SwissEphemerisBridge {
    */
   private getPlanetEnum(planetName: string): Planet {
     const planetMap: { [key: string]: Planet } = {
-      'sun': Planet.SUN,
-      'moon': Planet.MOON,
-      'mercury': Planet.MERCURY,
-      'venus': Planet.VENUS,
-      'mars': Planet.MARS,
-      'jupiter': Planet.JUPITER,
-      'saturn': Planet.SATURN,
-      'uranus': Planet.URANUS,
-      'neptune': Planet.NEPTUNE,
-      'pluto': Planet.PLUTO,
-      'chiron': Planet.CHIRON,
-      'north node': Planet.NORTH_NODE,
-      'south node': Planet.SOUTH_NODE
+      sun: Planet.SUN,
+      moon: Planet.MOON,
+      mercury: Planet.MERCURY,
+      venus: Planet.VENUS,
+      mars: Planet.MARS,
+      jupiter: Planet.JUPITER,
+      saturn: Planet.SATURN,
+      uranus: Planet.URANUS,
+      neptune: Planet.NEPTUNE,
+      pluto: Planet.PLUTO,
+      chiron: Planet.CHIRON,
+      "north node": Planet.NORTH_NODE,
+      "south node": Planet.SOUTH_NODE,
     };
     return planetMap[planetName.toLowerCase()] || Planet.SUN;
   }
@@ -253,11 +268,11 @@ export class SwissEphemerisBridge {
         symbol: p.symbol as string,
         coordinates: {
           ra: p.ra as number,
-          dec: p.dec as number
+          dec: p.dec as number,
         },
         position: {
           ra: p.ra as number,
-          dec: p.dec as number
+          dec: p.dec as number,
         },
         eclipticLongitude: p.longitude as number,
         eclipticLatitude: p.latitude as number,
@@ -272,7 +287,7 @@ export class SwissEphemerisBridge {
         zodiacSign: zodiacSign,
         degree: p.zodiac_degree as number,
         zodiacDegree: p.zodiac_degree as number,
-        house: p.house as number
+        house: p.house as number,
       };
     });
   }
@@ -291,7 +306,7 @@ export class SwissEphemerisBridge {
   private setCache(key: string, data: unknown): void {
     this.calculationCache.set(key, {
       data,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
   }
   /**
@@ -307,7 +322,7 @@ export class SwissEphemerisBridge {
     return {
       cacheSize: this.calculationCache.size,
       isInitialized: this.isInitialized,
-      config: this.config
+      config: this.config,
     };
   }
   /**
@@ -324,13 +339,13 @@ export class SwissEphemerisBridge {
   }
   async calculateMoonPhase() {
     return {
-      phase: 'waxing_crescent',
+      phase: "waxing_crescent",
       illumination: 0.5,
       age: 7,
       distance: 384400,
       angularSize: 1800,
       nextNewMoon: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      nextFullMoon: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
+      nextFullMoon: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
     };
   }
   async getObliquity(date: Date): Promise<number> {

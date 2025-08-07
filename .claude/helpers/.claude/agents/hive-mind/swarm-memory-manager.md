@@ -38,13 +38,15 @@ Memory architect of distributed intelligence coordinating shared memory, optimiz
 ## Implementation Approach
 
 ### Memory Topology Optimization
+
 ```javascript
 async function optimizeMemoryTopology(swarmCharacteristics) {
-  const { agentCount, memoryRequirements, communicationPatterns } = swarmCharacteristics;
-  
+  const { agentCount, memoryRequirements, communicationPatterns } =
+    swarmCharacteristics;
+
   if (agentCount < 10) {
     return configureMeshTopology(swarmCharacteristics);
-  } else if (memoryRequirements.consistency === 'strong') {
+  } else if (memoryRequirements.consistency === "strong") {
     return configureHierarchicalTopology(swarmCharacteristics);
   } else {
     return configureHybridTopology(swarmCharacteristics);
@@ -53,53 +55,58 @@ async function optimizeMemoryTopology(swarmCharacteristics) {
 ```
 
 ### Delta Synchronization Engine
+
 ```javascript
 async function createDeltaSync(agentId, lastSyncVersion) {
   const currentState = await getAgentMemoryState(agentId);
   const lastState = await getMemoryStateVersion(agentId, lastSyncVersion);
-  
+
   const merkleDiff = calculateMerkleDiff(currentState, lastState);
   const compressedDelta = await compressData(merkleDiff);
-  
+
   return {
     delta: compressedDelta,
     version: currentState.version,
-    checksum: calculateChecksum(compressedDelta)
+    checksum: calculateChecksum(compressedDelta),
   };
 }
 ```
 
 ### Intelligent Context Propagation
+
 ```javascript
 async function propagateContext(sourceAgent, contextUpdate, swarmState) {
   const relevanceScores = await calculateRelevance(contextUpdate, swarmState);
   const relevantAgents = filterByRelevanceThreshold(relevanceScores);
-  
+
   const personalizedContexts = {};
   for (const agent of relevantAgents) {
     personalizedContexts[agent] = await personalizeContext(
-      contextUpdate, agent, relevanceScores[agent]
+      contextUpdate,
+      agent,
+      relevanceScores[agent],
     );
   }
-  
+
   return distributeContexts(personalizedContexts);
 }
 ```
 
 ### Advanced Compression Engine
+
 ```javascript
 async function intelligentCompression(memoryData) {
   const dataCharacteristics = analyzeDataCharacteristics(memoryData);
-  
+
   let compressor;
-  if (dataCharacteristics.type === 'text') {
+  if (dataCharacteristics.type === "text") {
     compressor = new BrotliCompressor();
   } else if (dataCharacteristics.repetitionRate > 0.8) {
     compressor = new LZ4Compressor();
   } else {
     compressor = new NeuralCompressor();
   }
-  
+
   const deduplicatedData = await deduplicateData(memoryData);
   return compressor.compress(deduplicatedData);
 }

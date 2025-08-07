@@ -12,7 +12,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Aries charm is particularly magnetic today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Mars trine Jupiter", "Sun sextile Mercury", "Venus conjunction Moon"],
+      "keyTransits": [
+        "Mars trine Jupiter",
+        "Sun sextile Mercury",
+        "Venus conjunction Moon"
+      ],
       "advice": "Embrace opportunities that align with your natural Aries gifts. Trust your instincts and take confident action.",
       "rating": {
         "overall": 4.2,
@@ -32,7 +36,11 @@
       "loveInsight": "Love flows naturally when you embrace your true Taurus nature. Be authentic in all romantic interactions.",
       "energy": "Moderate",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Venus trine Saturn", "Moon opposition Mars", "Mercury square Pluto"],
+      "keyTransits": [
+        "Venus trine Saturn",
+        "Moon opposition Mars",
+        "Mercury square Pluto"
+      ],
       "advice": "Balance is key today. Honor your Taurus nature while remaining flexible to cosmic currents and new possibilities.",
       "rating": {
         "overall": 3.7,
@@ -52,7 +60,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Gemini wit is particularly charming today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Mercury conjunction Sun", "Jupiter trine Neptune", "Mars sextile Venus"],
+      "keyTransits": [
+        "Mercury conjunction Sun",
+        "Jupiter trine Neptune",
+        "Mars sextile Venus"
+      ],
       "advice": "Embrace opportunities that align with your natural Gemini gifts. Trust your instincts and communicate with confidence.",
       "rating": {
         "overall": 4.1,
@@ -72,7 +84,11 @@
       "loveInsight": "Emotional intensity is heightened today. Express your authentic feelings and be open to deeper connections with loved ones.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Moon trine Neptune", "Cancer Sun opposition Capricorn", "Venus square Mars"],
+      "keyTransits": [
+        "Moon trine Neptune",
+        "Cancer Sun opposition Capricorn",
+        "Venus square Mars"
+      ],
       "advice": "Embrace your Cancer strengths while remaining flexible to new opportunities and growth.",
       "rating": {
         "overall": 4.0,
@@ -92,7 +108,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Leo magnetism is particularly powerful today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Sun conjunction Venus", "Leo Moon trine Sagittarius", "Jupiter sextile Mars"],
+      "keyTransits": [
+        "Sun conjunction Venus",
+        "Leo Moon trine Sagittarius",
+        "Jupiter sextile Mars"
+      ],
       "advice": "Embrace opportunities that align with your natural Leo gifts. Trust your instincts and shine with confidence.",
       "rating": {
         "overall": 4.4,
@@ -112,7 +132,11 @@
       "loveInsight": "Love flows naturally when you embrace your true Virgo nature. Be authentic and practical in all romantic interactions.",
       "energy": "Moderate",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Mercury trine Saturn", "Virgo aspects Earth signs", "Moon square Mercury"],
+      "keyTransits": [
+        "Mercury trine Saturn",
+        "Virgo aspects Earth signs",
+        "Moon square Mercury"
+      ],
       "advice": "Balance is key today. Honor your Virgo nature while remaining flexible to cosmic currents and new possibilities.",
       "rating": {
         "overall": 3.8,
@@ -132,7 +156,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Libra charm is particularly harmonious today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Venus trine Jupiter", "Libra Moon aspects Air signs", "Mercury sextile Venus"],
+      "keyTransits": [
+        "Venus trine Jupiter",
+        "Libra Moon aspects Air signs",
+        "Mercury sextile Venus"
+      ],
       "advice": "Embrace opportunities that align with your natural Libra gifts. Trust your instincts and create harmony with confidence.",
       "rating": {
         "overall": 4.3,
@@ -152,7 +180,11 @@
       "loveInsight": "Relationship reflection brings clarity. Use your wisdom to heal past wounds and create space for renewed love.",
       "energy": "Moderate",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Mars square Pluto", "Scorpio depth aspects", "Moon opposition Sun"],
+      "keyTransits": [
+        "Mars square Pluto",
+        "Scorpio depth aspects",
+        "Moon opposition Sun"
+      ],
       "advice": "Navigate challenges with your characteristic Scorpio strength. Patience and persistence will lead to breakthrough moments.",
       "rating": {
         "overall": 3.6,
@@ -172,7 +204,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Sagittarius optimism is particularly inspiring today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Jupiter trine Sun", "Sagittarius Moon aspects Fire signs", "Venus sextile Jupiter"],
+      "keyTransits": [
+        "Jupiter trine Sun",
+        "Sagittarius Moon aspects Fire signs",
+        "Venus sextile Jupiter"
+      ],
       "advice": "Embrace opportunities that align with your natural Sagittarius gifts. Trust your instincts and explore with confidence.",
       "rating": {
         "overall": 4.5,
@@ -192,7 +228,11 @@
       "loveInsight": "Love flows naturally when you embrace your true Capricorn nature. Be authentic and committed in all romantic interactions.",
       "energy": "Moderate",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Saturn trine Mercury", "Capricorn aspects Earth signs", "Moon conjunction Saturn"],
+      "keyTransits": [
+        "Saturn trine Mercury",
+        "Capricorn aspects Earth signs",
+        "Moon conjunction Saturn"
+      ],
       "advice": "Balance is key today. Honor your Capricorn nature while remaining flexible to cosmic currents and new opportunities.",
       "rating": {
         "overall": 3.9,
@@ -212,7 +252,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Aquarius uniqueness is particularly attractive today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Uranus trine Moon", "Aquarius aspects Air signs", "Mercury conjunction Uranus"],
+      "keyTransits": [
+        "Uranus trine Moon",
+        "Aquarius aspects Air signs",
+        "Mercury conjunction Uranus"
+      ],
       "advice": "Embrace opportunities that align with your natural Aquarius gifts. Trust your instincts and innovate with confidence.",
       "rating": {
         "overall": 4.2,
@@ -232,7 +276,11 @@
       "loveInsight": "Growing romantic energy supports new connections and strengthening existing bonds. Your Pisces sensitivity is particularly healing today.",
       "energy": "High",
       "moonPhase": "waxing_gibbous",
-      "keyTransits": ["Neptune trine Venus", "Pisces Moon aspects Water signs", "Jupiter sextile Neptune"],
+      "keyTransits": [
+        "Neptune trine Venus",
+        "Pisces Moon aspects Water signs",
+        "Jupiter sextile Neptune"
+      ],
       "advice": "Embrace opportunities that align with your natural Pisces gifts. Trust your instincts and flow with compassionate confidence.",
       "rating": {
         "overall": 4.1,
@@ -245,7 +293,13 @@
   "metadata": {
     "moonPhase": "waxing_gibbous",
     "moonSign": "Aquarius",
-    "keyTransits": ["Mars trine Jupiter", "Venus conjunction Moon", "Mercury sextile Neptune", "Sun square Saturn", "Jupiter trine Neptune"],
+    "keyTransits": [
+      "Mars trine Jupiter",
+      "Venus conjunction Moon",
+      "Mercury sextile Neptune",
+      "Sun square Saturn",
+      "Jupiter trine Neptune"
+    ],
     "generatedAt": "2025-07-24T12:00:00.000Z"
   }
 }

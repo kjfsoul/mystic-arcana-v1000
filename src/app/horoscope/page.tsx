@@ -1,36 +1,38 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, User, Globe } from 'lucide-react';
-import CosmicCalendar from './calendar';
-import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
-import { useAuth } from '@/contexts/AuthContext';
-import { BirthData } from '../../types/astrology';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Calendar, User, Globe } from "lucide-react";
+import CosmicCalendar from "./calendar";
+import { InteractiveBirthChart } from "@/components/astrology/InteractiveBirthChart";
+import { useAuth } from "@/contexts/AuthContext";
+import { BirthData } from "../../types/astrology";
 export default function HoroscopePage() {
   const { user } = useAuth();
-  const [activeTab, setActiveTab] = useState<'today' | 'calendar' | 'chart'>('today');
+  const [activeTab, setActiveTab] = useState<"today" | "calendar" | "chart">(
+    "today",
+  );
   const [birthData, setBirthData] = useState<BirthData | null>(null);
   const [showTransits, setShowTransits] = useState(false);
   // Load user's birth data if available
- 
+
   useEffect(() => {
     if (user) {
       // This would typically come from user profile/database
       // For demo, we'll use sample data if user is logged in
       setBirthData({
-        birthDate: '1990-06-15',
-        birthTime: '14:30',
+        birthDate: "1990-06-15",
+        birthTime: "14:30",
         latitude: 40.7128,
-        longitude: -74.0060,
-        timezone: 'America/New_York'
+        longitude: -74.006,
+        timezone: "America/New_York",
       });
     }
   }, [user]);
   const tabs = [
-    { id: 'today', label: 'Today', icon: Globe },
-    { id: 'calendar', label: 'Calendar', icon: Calendar },
-    { id: 'chart', label: 'Birth Chart', icon: User }
+    { id: "today", label: "Today", icon: Globe },
+    { id: "calendar", label: "Calendar", icon: Calendar },
+    { id: "chart", label: "Birth Chart", icon: User },
   ];
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
@@ -71,7 +73,8 @@ export default function HoroscopePage() {
               Cosmic Transit Engine
             </h1>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Real-time planetary movements with personalized insights and astronomical accuracy
+              Real-time planetary movements with personalized insights and
+              astronomical accuracy
             </p>
           </motion.div>
           {/* Navigation Tabs */}
@@ -86,8 +89,8 @@ export default function HoroscopePage() {
                       onClick={() => setActiveTab(tab.id as any)}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                         activeTab === tab.id
-                          ? 'bg-purple-600 text-white shadow-lg'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                          ? "bg-purple-600 text-white shadow-lg"
+                          : "text-gray-400 hover:text-white hover:bg-gray-800"
                       }`}
                     >
                       <IconComponent className="w-4 h-4" />
@@ -99,7 +102,7 @@ export default function HoroscopePage() {
             </div>
           </div>
           {/* Settings Toggle for Chart View */}
-          {activeTab === 'chart' && birthData && (
+          {activeTab === "chart" && birthData && (
             <motion.div
               className="flex justify-center mb-6"
               initial={{ opacity: 0 }}
@@ -116,12 +119,16 @@ export default function HoroscopePage() {
                       onChange={(e) => setShowTransits(e.target.checked)}
                       className="sr-only"
                     />
-                    <div className={`w-12 h-6 rounded-full transition-colors ${
-                      showTransits ? 'bg-purple-600' : 'bg-gray-600'
-                    }`}>
-                      <div className={`w-5 h-5 bg-white rounded-full transition-transform transform ${
-                        showTransits ? 'translate-x-6' : 'translate-x-0.5'
-                      } mt-0.5`} />
+                    <div
+                      className={`w-12 h-6 rounded-full transition-colors ${
+                        showTransits ? "bg-purple-600" : "bg-gray-600"
+                      }`}
+                    >
+                      <div
+                        className={`w-5 h-5 bg-white rounded-full transition-transform transform ${
+                          showTransits ? "translate-x-6" : "translate-x-0.5"
+                        } mt-0.5`}
+                      />
                     </div>
                   </div>
                 </label>
@@ -136,26 +143,31 @@ export default function HoroscopePage() {
             transition={{ duration: 0.5 }}
             className="max-w-6xl mx-auto"
           >
-            {activeTab === 'today' && (
-              <CosmicCalendar 
+            {activeTab === "today" && (
+              <CosmicCalendar
                 birthData={birthData || undefined}
                 className="bg-gray-900/70 backdrop-blur-sm border border-purple-500/30"
               />
             )}
-            {activeTab === 'calendar' && (
-              <CosmicCalendar 
+            {activeTab === "calendar" && (
+              <CosmicCalendar
                 birthData={birthData || undefined}
                 className="bg-gray-900/70 backdrop-blur-sm border border-purple-500/30"
               />
             )}
-            {activeTab === 'chart' && (
+            {activeTab === "chart" && (
               <div className="space-y-6">
                 {!birthData ? (
                   <div className="bg-gray-900/70 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 text-center">
                     <div className="text-gray-400 mb-4">
                       <User className="w-16 h-16 mx-auto mb-4" />
-                      <h3 className="text-xl font-semibold mb-2">Birth Chart Unavailable</h3>
-                      <p>Please sign up and add your birth information to view your personalized birth chart with current transits.</p>
+                      <h3 className="text-xl font-semibold mb-2">
+                        Birth Chart Unavailable
+                      </h3>
+                      <p>
+                        Please sign up and add your birth information to view
+                        your personalized birth chart with current transits.
+                      </p>
                     </div>
                     {!user && (
                       <div className="flex gap-4 justify-center mt-6">
@@ -172,16 +184,17 @@ export default function HoroscopePage() {
                   <div className="bg-gray-900/70 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
                     <div className="mb-4 text-center">
                       <h3 className="text-xl font-semibold text-purple-300 mb-2">
-                        {showTransits ? 'Birth Chart with Current Transits' : 'Natal Birth Chart'}
+                        {showTransits
+                          ? "Birth Chart with Current Transits"
+                          : "Natal Birth Chart"}
                       </h3>
                       <p className="text-gray-400 text-sm">
-                        {showTransits 
-                          ? 'Your birth chart with current planetary positions overlaid. Transit planets appear in the outer ring with aspect lines showing current influences.'
-                          : 'Your personal birth chart calculated from exact birth time and location. Click planets, houses, or signs for detailed information.'
-                        }
+                        {showTransits
+                          ? "Your birth chart with current planetary positions overlaid. Transit planets appear in the outer ring with aspect lines showing current influences."
+                          : "Your personal birth chart calculated from exact birth time and location. Click planets, houses, or signs for detailed information."}
                       </p>
                     </div>
-                    
+
                     <div className="flex justify-center">
                       <InteractiveBirthChart
                         birthData={birthData}
@@ -193,7 +206,9 @@ export default function HoroscopePage() {
                     {showTransits && (
                       <div className="mt-6 grid md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-gray-800/50 rounded-lg p-4">
-                          <h4 className="font-semibold text-purple-300 mb-2">Transit Legend</h4>
+                          <h4 className="font-semibold text-purple-300 mb-2">
+                            Transit Legend
+                          </h4>
                           <div className="space-y-1 text-gray-300">
                             <div>● Natal planets (inner)</div>
                             <div>○ Transit planets (outer)</div>
@@ -211,22 +226,27 @@ export default function HoroscopePage() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="bg-gray-800/50 rounded-lg p-4">
-                          <h4 className="font-semibold text-purple-300 mb-2">Aspect Strength</h4>
+                          <h4 className="font-semibold text-purple-300 mb-2">
+                            Aspect Strength
+                          </h4>
                           <div className="space-y-1 text-gray-300">
                             <div>Strong: 0-1° orb</div>
                             <div>Moderate: 1-3° orb</div>
                             <div>Weak: 3-6° orb</div>
                             <div className="mt-2 text-xs">
-                              Dashed lines = applying<br/>
+                              Dashed lines = applying
+                              <br />
                               Solid lines = separating
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="bg-gray-800/50 rounded-lg p-4">
-                          <h4 className="font-semibold text-purple-300 mb-2">How to Use</h4>
+                          <h4 className="font-semibold text-purple-300 mb-2">
+                            How to Use
+                          </h4>
                           <div className="space-y-1 text-gray-300 text-xs">
                             <div>• Click any planet for details</div>
                             <div>• Transit aspects show current influences</div>

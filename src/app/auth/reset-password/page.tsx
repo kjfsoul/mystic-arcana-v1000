@@ -1,11 +1,14 @@
-'use client';
-import { useState } from 'react';
-import { supabase } from '@/lib/supabase/client';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
+import Link from "next/link";
 export default function ResetPasswordPage() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -15,16 +18,16 @@ export default function ResetPasswordPage() {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
       if (error) {
-        setMessage({ type: 'error', text: error.message });
+        setMessage({ type: "error", text: error.message });
       } else {
-        setMessage({ 
-          type: 'success', 
-          text: 'Check your email for the password reset link!' 
+        setMessage({
+          type: "success",
+          text: "Check your email for the password reset link!",
         });
-        setEmail('');
+        setEmail("");
       }
     } catch {
-      setMessage({ type: 'error', text: 'An unexpected error occurred' });
+      setMessage({ type: "error", text: "An unexpected error occurred" });
     } finally {
       setLoading(false);
     }
@@ -36,10 +39,13 @@ export default function ResetPasswordPage() {
           <h1 className="text-2xl font-bold text-white text-center mb-6">
             Reset Your Password
           </h1>
-          
+
           <form onSubmit={handleResetPassword} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-purple-200 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-purple-200 mb-1"
+              >
                 Email Address
               </label>
               <input
@@ -53,11 +59,13 @@ export default function ResetPasswordPage() {
               />
             </div>
             {message && (
-              <div className={`p-3 rounded-lg text-sm ${
-                message.type === 'success' 
-                  ? 'bg-green-500/20 border border-green-500/30 text-green-300'
-                  : 'bg-red-500/20 border border-red-500/30 text-red-300'
-              }`}>
+              <div
+                className={`p-3 rounded-lg text-sm ${
+                  message.type === "success"
+                    ? "bg-green-500/20 border border-green-500/30 text-green-300"
+                    : "bg-red-500/20 border border-red-500/30 text-red-300"
+                }`}
+              >
                 {message.text}
               </div>
             )}
@@ -66,12 +74,12 @@ export default function ResetPasswordPage() {
               disabled={loading}
               className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Sending...' : 'Send Reset Email'}
+              {loading ? "Sending..." : "Send Reset Email"}
             </button>
           </form>
           <div className="mt-6 text-center">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-purple-300 hover:text-purple-200 text-sm transition-colors"
             >
               ← Back to Home

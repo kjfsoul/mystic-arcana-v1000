@@ -1,33 +1,35 @@
-'use client';
-import { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase/client';
+"use client";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase/client";
 export default function TestAuthPage() {
   const { user, session, isGuest } = useAuth();
-  const [testResult, setTestResult] = useState<string>('');
+  const [testResult, setTestResult] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const testSignUp = async () => {
     setLoading(true);
     const testEmail = `test${Date.now()}@example.com`;
-    const testPassword = 'TestPassword123!';
-    
+    const testPassword = "TestPassword123!";
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email: testEmail,
         password: testPassword,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`
-        }
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
       });
-      
+
       if (error) {
         setTestResult(`❌ Signup Error: ${error.message}`);
       } else if (data.user && !data.session) {
-        setTestResult(`📧 Success! Email confirmation required for: ${testEmail}`);
+        setTestResult(
+          `📧 Success! Email confirmation required for: ${testEmail}`,
+        );
       } else if (data.session) {
         setTestResult(`✅ Success! Auto-logged in as: ${testEmail}`);
       } else {
-        setTestResult('⚠️ Unexpected response');
+        setTestResult("⚠️ Unexpected response");
       }
     } catch (err) {
       setTestResult(`❌ Exception: ${err}`);
@@ -39,10 +41,10 @@ export default function TestAuthPage() {
     setLoading(true);
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: 'test@example.com',
-        password: 'password'
+        email: "test@example.com",
+        password: "password",
       });
-      
+
       if (error) {
         setTestResult(`❌ SignIn Error: ${error.message}`);
       } else if (data.session) {
@@ -58,12 +60,12 @@ export default function TestAuthPage() {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
-        }
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
       });
-      
+
       if (error) {
         setTestResult(`❌ OAuth Error: ${error.message}`);
       } else {
@@ -78,16 +80,20 @@ export default function TestAuthPage() {
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-3xl font-bold mb-8">Authentication Test Page</h1>
-      
+
       <div className="mb-8 p-4 bg-gray-900 rounded">
         <h2 className="text-xl mb-4">Current Auth State:</h2>
         <pre className="text-sm">
-          {JSON.stringify({
-            isGuest,
-            user: user?.email || null,
-            session: !!session,
-            userId: user?.id || null
-          }, null, 2)}
+          {JSON.stringify(
+            {
+              isGuest,
+              user: user?.email || null,
+              session: !!session,
+              userId: user?.id || null,
+            },
+            null,
+            2,
+          )}
         </pre>
       </div>
       <div className="space-y-4 mb-8">
@@ -98,7 +104,7 @@ export default function TestAuthPage() {
         >
           Test Sign Up
         </button>
-        
+
         <button
           onClick={testSignIn}
           disabled={loading}
@@ -106,7 +112,7 @@ export default function TestAuthPage() {
         >
           Test Sign In
         </button>
-        
+
         <button
           onClick={testGoogleOAuth}
           disabled={loading}

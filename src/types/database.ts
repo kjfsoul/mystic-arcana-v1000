@@ -1,5 +1,5 @@
-import { SpreadType } from './tarot'; // Corrected path
-import { ArcanaType } from '@/constants/EventTypes';
+import { SpreadType } from "./tarot"; // Corrected path
+import { ArcanaType } from "@/constants/EventTypes";
 
 export interface Database {
   tarotCards: {

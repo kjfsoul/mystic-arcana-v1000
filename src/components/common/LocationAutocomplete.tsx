@@ -1,8 +1,8 @@
-'use client';
- 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Search, X } from 'lucide-react';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Search, X } from "lucide-react";
 interface LocationSuggestion {
   display_name: string;
   lat: string;
@@ -15,7 +15,11 @@ interface LocationAutocompleteProps {
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
-  onLocationSelect?: (location: { name: string; lat: number; lon: number }) => void;
+  onLocationSelect?: (location: {
+    name: string;
+    lat: number;
+    lon: number;
+  }) => void;
 }
 /* eslint-enable no-unused-vars */
 export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
@@ -23,7 +27,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   onChange,
   placeholder = "City, State/Country",
   className = "",
-  onLocationSelect
+  onLocationSelect,
 }) => {
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +36,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   // Debounced search
- 
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (value.length >= 3) {
@@ -45,26 +49,29 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
     return () => clearTimeout(timeoutId);
   }, [value]);
   // Handle clicks outside to close suggestions
- 
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setShowSuggestions(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   const searchLocations = async (query: string) => {
     try {
       setIsLoading(true);
-      
+
       // Use Nominatim (OpenStreetMap) API for geocoding
       const response = await fetch(
         `https://nominatim.openstreetmap.org/search?` +
-        `q=${encodeURIComponent(query)}&format=json&limit=5&addressdetails=1`
+          `q=${encodeURIComponent(query)}&format=json&limit=5&addressdetails=1`,
       );
-      
+
       if (response.ok) {
         const results: LocationSuggestion[] = await response.json();
         setSuggestions(results);
@@ -72,7 +79,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
         setSelectedIndex(-1);
       }
     } catch (error) {
-      console.error('Error searching locations:', error);
+      console.error("Error searching locations:", error);
       setSuggestions([]);
       setShowSuggestions(false);
     } finally {
@@ -84,45 +91,49 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
     onChange(newValue);
   };
   const handleSuggestionClick = (suggestion: LocationSuggestion) => {
-    const locationName = suggestion.display_name.split(',').slice(0, 3).join(',').trim();
+    const locationName = suggestion.display_name
+      .split(",")
+      .slice(0, 3)
+      .join(",")
+      .trim();
     onChange(locationName);
     setShowSuggestions(false);
-    
+
     if (onLocationSelect) {
       onLocationSelect({
         name: locationName,
         lat: parseFloat(suggestion.lat),
-        lon: parseFloat(suggestion.lon)
+        lon: parseFloat(suggestion.lon),
       });
     }
   };
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions) return;
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        setSelectedIndex(prev => 
-          prev < suggestions.length - 1 ? prev + 1 : prev
+        setSelectedIndex((prev) =>
+          prev < suggestions.length - 1 ? prev + 1 : prev,
         );
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
-        setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
           handleSuggestionClick(suggestions[selectedIndex]);
         }
         break;
-      case 'Escape':
+      case "Escape":
         setShowSuggestions(false);
         setSelectedIndex(-1);
         break;
     }
   };
   const clearInput = () => {
-    onChange('');
+    onChange("");
     setShowSuggestions(false);
     inputRef.current?.focus();
   };
@@ -132,21 +143,23 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
         <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-400">
           <MapPin className="w-4 h-4" />
         </div>
-        
+
         <input
           ref={inputRef}
           type="text"
           value={value}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          onFocus={() => value.length >= 3 && setShowSuggestions(suggestions.length > 0)}
+          onFocus={() =>
+            value.length >= 3 && setShowSuggestions(suggestions.length > 0)
+          }
           placeholder={placeholder}
           className={`w-full pl-10 pr-10 py-3 bg-purple-900/30 border border-purple-500/30 
             rounded-lg text-white placeholder-purple-400 focus:border-purple-400 
             focus:ring-2 focus:ring-purple-400/20 transition-all duration-300`}
           autoComplete="off"
         />
-        
+
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
           {isLoading && (
             <motion.div
@@ -157,7 +170,7 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
               <Search className="w-4 h-4" />
             </motion.div>
           )}
-          
+
           {value && !isLoading && (
             <button
               onClick={clearInput}
@@ -184,17 +197,22 @@ export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
                 key={suggestion.place_id}
                 onClick={() => handleSuggestionClick(suggestion)}
                 className={`w-full text-left px-4 py-3 text-sm transition-colors border-b border-purple-500/20 last:border-b-0
-                  ${index === selectedIndex 
-                    ? 'bg-purple-700/50 text-white' 
-                    : 'text-purple-200 hover:bg-purple-800/30'
+                  ${
+                    index === selectedIndex
+                      ? "bg-purple-700/50 text-white"
+                      : "text-purple-200 hover:bg-purple-800/30"
                   }`}
-                whileHover={{ backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+                whileHover={{ backgroundColor: "rgba(139, 92, 246, 0.2)" }}
                 type="button"
               >
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-3 h-3 text-purple-400 flex-shrink-0" />
                   <span className="truncate">
-                    {suggestion.display_name.split(',').slice(0, 3).join(',').trim()}
+                    {suggestion.display_name
+                      .split(",")
+                      .slice(0, 3)
+                      .join(",")
+                      .trim()}
                   </span>
                 </div>
               </motion.button>

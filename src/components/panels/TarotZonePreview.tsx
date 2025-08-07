@@ -1,23 +1,31 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 interface TarotZonePreviewProps {
   // eslint-disable-next-line no-unused-vars
   onSelectReading?: (type: string) => void;
 }
 export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
-  onSelectReading: _onSelectReading
+  onSelectReading: _onSelectReading,
 }) => {
   const readings = [
-    { id: 'single', name: 'Single Card', description: 'Quick insight' },
-    { id: 'three-card', name: 'Three Card', description: 'Past, Present, Future' },
-    { id: 'celtic-cross', name: 'Celtic Cross', description: 'Deep exploration' }
+    { id: "single", name: "Single Card", description: "Quick insight" },
+    {
+      id: "three-card",
+      name: "Three Card",
+      description: "Past, Present, Future",
+    },
+    {
+      id: "celtic-cross",
+      name: "Celtic Cross",
+      description: "Deep exploration",
+    },
   ];
   return (
     <div className="h-full p-6 lg:p-8 flex flex-col text-white/90 overflow-y-auto">
       <h2 className="text-2xl lg:text-3xl font-light text-center mb-6 lg:mb-8 tracking-wider drop-shadow-[0_2px_10px_rgba(138,43,226,0.5)]">
         🔮 Tarot Portal
       </h2>
-      
+
       <div className="bg-purple-500/5 border border-purple-500/20 rounded-xl p-4 lg:p-6 mb-6 lg:mb-8 text-center">
         <h3 className="text-lg lg:text-xl font-medium text-white/90 mb-2">
           🌙 Rider-Waite Deck
@@ -31,7 +39,7 @@ export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
           Select Reading Type
         </h3>
         <div className="flex flex-col gap-3">
-          {readings.map(reading => (
+          {readings.map((reading) => (
             <button
               key={reading.id}
               className="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4 lg:p-5 text-left transition-all duration-300 hover:bg-indigo-900/40 hover:border-indigo-700/70 hover:translate-x-1 hover:shadow-lg hover:shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"

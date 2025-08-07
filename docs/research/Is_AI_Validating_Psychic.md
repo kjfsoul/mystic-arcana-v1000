@@ -76,9 +76,9 @@ Boyz II Men, Alicia Keys, Destiny’s Child, Vanessa Williams, En Vogue, Chaka K
 
 Now I kinda wish I had the backbone to ask if I could take some photos of the engineer’s setup, you know, that station in front of the glassed-in studio space with all the colorful levers and buttons. =) But it seemed like his space and I didn’t want to intrude. So, womp, womp, sad face, no impressive sound-engineer’s-giant-keyboard pics for my social media. (Do blogs even count as social media anymore?)
 
-This was my first time in a recording studio,* and certainly my first time recording my voice narrating my own book. I left the experience with a lot of admiration for professional voice actors and audiobook narrators. Like the voice actor we chose for narrating the I Ching audiobook — he sounds like one of those National Geographic or History channel voiceover guys! It’s a skill, and maybe dare say even a talent.
+This was my first time in a recording studio,\* and certainly my first time recording my voice narrating my own book. I left the experience with a lot of admiration for professional voice actors and audiobook narrators. Like the voice actor we chose for narrating the I Ching audiobook — he sounds like one of those National Geographic or History channel voiceover guys! It’s a skill, and maybe dare say even a talent.
 
-* Technically, I’ve been in a recording studio before, with an entire symphony, as one violinist in a sea of violinists in the violin section of said symphony. But for sure this was my first time in a recording studio for totally-me reasons.
+\* Technically, I’ve been in a recording studio before, with an entire symphony, as one violinist in a sea of violinists in the violin section of said symphony. But for sure this was my first time in a recording studio for totally-me reasons.
 
 Just because you wrote the Thing doesn’t mean you can competently read the Thing aloud, especially since I would not call my writing style “conversational.” So when you read it aloud and your writing style departs from your personal “conversational” style of speaking, it comes across as awkward.
 
@@ -754,13 +754,13 @@ This is going to be a multi-part series of personal reflections on my life exper
 
 On  By In
 
-This is going to be a multi-part series of personal reflections on my life experiences and interactions with having mainland Chinese in-laws and the cultural clashes that have ensued. I’m Taiwanese American, and politically my family has been as far Green* as it gets. The Taiwanese and Chinese have a longstanding history of animosity toward one another, an animosity that has often played out at the interpersonal level.
+This is going to be a multi-part series of personal reflections on my life experiences and interactions with having mainland Chinese in-laws and the cultural clashes that have ensued. I’m Taiwanese American, and politically my family has been as far Green\* as it gets. The Taiwanese and Chinese have a longstanding history of animosity toward one another, an animosity that has often played out at the interpersonal level.
 
 Part I will begin with my late mother-in-law.
 
-____
+---
 
-* “Green” is an international political marker and movement that prioritizes participatory grassroots democracy, social justice, social progressivism, ecopolitics, and localism. Here it also relates to the Taiwan independence movement.
+\* “Green” is an international political marker and movement that prioritizes participatory grassroots democracy, social justice, social progressivism, ecopolitics, and localism. Here it also relates to the Taiwan independence movement.
 
 On  By In
 

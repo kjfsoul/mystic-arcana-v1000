@@ -152,7 +152,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Essential Commands
 
 - `npm run dev` - Start development server (port 3000)
-- `npm run build` - Build production application  
+- `npm run build` - Build production application
 - `npm run lint` - Run ESLint
 - `npm run test` - Run Jest tests
 - `npm run test:e2e` - Run Playwright E2E tests
@@ -263,7 +263,7 @@ npx claude-flow@alpha hooks session-end --export-metrics true
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.
 ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files unless explicitly requested.
+NEVER proactively create documentation files (\*.md) or README files unless explicitly requested.
 
 ## Astrology Manifest Verification - 2025-08-07T14:52:18.634Z
 
@@ -343,7 +343,7 @@ Based on the comprehensive documentation analysis, the Agentic Memory Framework 
 mystic-arcana-v1000/
 ├── A-mem/                                    # Agentic Memory module (project root)
 │   ├── agentic_memory/                      # Core memory classes
-│   │   ├── memory_system/                   
+│   │   ├── memory_system/
 │   │   │   └── log_invocation.py           # Python decorator
 │   │   └── retrievers/
 │   └── scripts/
@@ -470,20 +470,20 @@ No further astrology feature work is permitted until:
 ```typescript
 // 1. Create src/lib/astrology/nasaFallbackHandler.ts
 export function handleNasaFallback(error: any) {
-  console.error('NASA API fallback triggered:', error);
-  throw new Error('NOT IMPLEMENTED: NASA fallback handler');
+  console.error("NASA API fallback triggered:", error);
+  throw new Error("NOT IMPLEMENTED: NASA fallback handler");
 }
 
-// 2. Create src/lib/astrology/geoResolver.ts  
+// 2. Create src/lib/astrology/geoResolver.ts
 export function resolveGeoLocation(location: string) {
-  console.error('Geo resolver not implemented');
-  throw new Error('NOT IMPLEMENTED: Geo resolver');
+  console.error("Geo resolver not implemented");
+  throw new Error("NOT IMPLEMENTED: Geo resolver");
 }
 
 // 3. Fix src/services/astrology/AstrologyService.ts
 export class AstrologyService {
   constructor() {
-    throw new Error('NOT IMPLEMENTED: AstrologyService');
+    throw new Error("NOT IMPLEMENTED: AstrologyService");
   }
 }
 ```
@@ -572,7 +572,7 @@ npm run build && npm test -- --testPathPattern=astrology
 ### Impact
 
 - ✅ Full Firecrawl integration testing capability
-- ✅ Proper error handling and retry logic validation  
+- ✅ Proper error handling and retry logic validation
 - ✅ Archetype detection system fully tested
 - ✅ Caching system validated
 - ✅ Multi-URL processing tested

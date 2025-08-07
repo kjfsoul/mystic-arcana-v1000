@@ -3,7 +3,10 @@
   "timestamp": "2025-06-19T05:20:00.000Z",
   "project_state": {
     "active_agents": 6,
-    "pending_tasks": ["Fix mobile responsiveness", "Consolidate layout systems"],
+    "pending_tasks": [
+      "Fix mobile responsiveness",
+      "Consolidate layout systems"
+    ],
     "recent_completions": [],
     "critical_issues": [
       "Fix mobile responsiveness in three-panel layout",
@@ -17,7 +20,10 @@
   "todos": {
     "high_priority": ["Fix mobile responsiveness in src/app/page.tsx"],
     "in_progress": [],
-    "pending": ["Consolidate 4 different layout systems", "Implement mobile-first responsive design"]
+    "pending": [
+      "Consolidate 4 different layout systems",
+      "Implement mobile-first responsive design"
+    ]
   },
   "initialization_status": "complete"
 }

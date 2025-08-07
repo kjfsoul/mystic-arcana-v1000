@@ -126,7 +126,11 @@
 }
 
 .activeTab {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(72, 61, 139, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.3),
+    rgba(72, 61, 139, 0.2)
+  );
   border-color: rgba(138, 43, 226, 0.6);
   color: white;
   box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
@@ -141,8 +145,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Overview Section */
@@ -159,7 +169,11 @@
 }
 
 .overviewContent {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(72, 61, 139, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1),
+    rgba(72, 61, 139, 0.05)
+  );
   backdrop-filter: blur(20px);
   border: 1px solid rgba(138, 43, 226, 0.2);
   border-radius: 20px;
@@ -215,7 +229,9 @@
 }
 
 /* Strengths Section */
-.strengthsSection, .challengesSection, .pathsSection {
+.strengthsSection,
+.challengesSection,
+.pathsSection {
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -243,7 +259,11 @@
 }
 
 .strengthCard {
-  background: linear-gradient(135deg, rgba(76, 205, 196, 0.1), rgba(138, 43, 226, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(76, 205, 196, 0.1),
+    rgba(138, 43, 226, 0.05)
+  );
   backdrop-filter: blur(20px);
   border: 1px solid rgba(76, 205, 196, 0.2);
   border-radius: 16px;
@@ -271,7 +291,8 @@
   font-size: 1.2rem;
 }
 
-.strengthRating, .compatibilityRating {
+.strengthRating,
+.compatibilityRating {
   display: flex;
   gap: 0.2rem;
   align-items: center;
@@ -301,7 +322,11 @@
 }
 
 .challengeCard {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(138, 43, 226, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.1),
+    rgba(138, 43, 226, 0.05)
+  );
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 107, 107, 0.2);
   border-radius: 16px;
@@ -367,7 +392,11 @@
 }
 
 .pathCard {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(138, 43, 226, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1),
+    rgba(138, 43, 226, 0.05)
+  );
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 215, 0, 0.2);
   border-radius: 16px;
@@ -435,57 +464,60 @@
   .container {
     padding: 1rem 0.5rem;
   }
-  
+
   .backButton {
     top: 1rem;
     left: 1rem;
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
-  
+
   .content {
     padding-top: 3rem;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: 1rem;
   }
-  
+
   .tabNavigation {
     gap: 0.5rem;
   }
-  
+
   .tabButton {
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
   }
-  
+
   .overviewContent {
     padding: 1.5rem;
   }
-  
+
   .placementsGrid {
     grid-template-columns: 1fr;
   }
-  
-  .strengthsGrid, .challengesGrid {
+
+  .strengthsGrid,
+  .challengesGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .pathsGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .pathHeader {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .strengthCard, .challengeCard, .pathCard {
+
+  .strengthCard,
+  .challengeCard,
+  .pathCard {
     padding: 1.5rem;
   }
 }

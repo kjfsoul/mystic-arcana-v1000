@@ -11,9 +11,7 @@
       "expected_output": "Task completed successfully",
       "context": {
         "astrology_guru_mission": true,
-        "target_files": [
-          "/src/lib/astro-calc/planetaryPositions.ts"
-        ],
+        "target_files": ["/src/lib/astro-calc/planetaryPositions.ts"],
         "validation_required": true
       },
       "dependencies": [],
@@ -24,11 +22,7 @@
       "max_retries": 3,
       "escalation_agent": "QualityGuardian",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "critical",
-        "accuracy_enforcement"
-      ],
+      "tags": ["astrology_guru", "critical", "accuracy_enforcement"],
       "estimated_duration": null
     },
     "f7ef4115-d91a-4bfc-8145-273313d81382": {
@@ -62,11 +56,7 @@
       "max_retries": 3,
       "escalation_agent": "UIEnchanter",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "critical",
-        "fix_placeholders"
-      ],
+      "tags": ["astrology_guru", "critical", "fix_placeholders"],
       "estimated_duration": null
     },
     "967cfb3b-1439-47b2-9536-682db80fc280": {
@@ -91,11 +81,7 @@
       "max_retries": 3,
       "escalation_agent": "Orion",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "critical",
-        "career_completion"
-      ],
+      "tags": ["astrology_guru", "critical", "career_completion"],
       "estimated_duration": null
     },
     "e3810ba4-053e-4467-bd99-6aabc664c5f5": {
@@ -120,11 +106,7 @@
       "max_retries": 3,
       "escalation_agent": "Orion",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "critical",
-        "compatibility_completion"
-      ],
+      "tags": ["astrology_guru", "critical", "compatibility_completion"],
       "estimated_duration": null
     },
     "774aa5b9-5373-4350-9ccb-787e0b9bc932": {
@@ -163,11 +145,7 @@
       "max_retries": 3,
       "escalation_agent": "AstroCalculus",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "critical",
-        "validation"
-      ],
+      "tags": ["astrology_guru", "critical", "validation"],
       "estimated_duration": null
     },
     "c6eca610-56f2-4840-94cd-bc68f6f2646f": {
@@ -192,11 +170,7 @@
       "max_retries": 3,
       "escalation_agent": "PersonaLearner",
       "output_file": null,
-      "tags": [
-        "astrology_guru",
-        "memory_logging",
-        "documentation"
-      ],
+      "tags": ["astrology_guru", "memory_logging", "documentation"],
       "estimated_duration": null
     }
   },

@@ -191,12 +191,12 @@
     gap: 0.5rem;
     padding: 0.5rem;
   }
-  
+
   .centerPanel {
     order: -1;
     min-height: 200px;
   }
-  
+
   .panel {
     min-height: 250px;
   }
@@ -206,12 +206,12 @@
   .roomTitle {
     font-size: 2rem;
   }
-  
+
   .immersiveContent {
     padding: 1.5rem;
     margin: 0 1rem;
   }
-  
+
   .backButton {
     top: 1rem;
     left: 1rem;
@@ -231,11 +231,11 @@
   .backButton {
     transition: none;
   }
-  
+
   .panel:hover {
     transform: none;
   }
-  
+
   .backButton:hover {
     transform: none;
   }
@@ -243,7 +243,7 @@
 
 /* Enhanced visual effects */
 .panel::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

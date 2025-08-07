@@ -19,7 +19,6 @@ Our project introduces an innovative **Agentic Memory** system that revolutioniz
 
 For more details, please refer to our paper: [A-MEM: Agentic Memory for LLM Agents](https://arxiv.org/pdf/2502.12110)
 
-
 ## Key Features ✨
 
 - 🔄 Dynamic memory organization based on Zettelkasten principles
@@ -40,6 +39,7 @@ For more details, please refer to our paper: [A-MEM: Agentic Memory for LLM Agen
 ## How It Works 🛠️
 
 When a new memory is added to the system:
+
 1. Generates comprehensive notes with structured attributes
 2. Creates contextual descriptions and tags
 3. Analyzes historical memories for relevant connections
@@ -53,23 +53,28 @@ Empirical experiments conducted on six foundation models demonstrate superior pe
 ## Getting Started 🚀
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/agiresearch/A-mem.git
 cd A-mem
 ```
 
 2. Install dependencies:
-Create and activate a virtual environment (recommended):
+   Create and activate a virtual environment (recommended):
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows, use: .venv\Scripts\activate
 ```
 
 Install the package:
+
 ```bash
 pip install .
 ```
+
 For development, you can install it in editable mode:
+
 ```bash
 pip install -e .
 ```

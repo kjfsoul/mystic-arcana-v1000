@@ -1,62 +1,70 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import styles from './CelestialEventsCarousel.module.css';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import styles from "./CelestialEventsCarousel.module.css";
 interface CelestialEvent {
   id: string;
-  type: 'moon-phase' | 'retrograde' | 'eclipse' | 'conjunction' | 'meteor-shower' | 'solstice';
+  type:
+    | "moon-phase"
+    | "retrograde"
+    | "eclipse"
+    | "conjunction"
+    | "meteor-shower"
+    | "solstice";
   title: string;
   description: string;
   date: Date;
-  impact: 'high' | 'medium' | 'low';
+  impact: "high" | "medium" | "low";
   zodiacSigns?: string[];
 }
 interface CelestialEventsCarouselProps {
   onClick?: () => void;
 }
-export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = ({ onClick }) => {
+export const CelestialEventsCarousel: React.FC<
+  CelestialEventsCarouselProps
+> = ({ onClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [events] = useState<CelestialEvent[]>([
     {
-      id: '1',
-      type: 'moon-phase',
-      title: 'New Moon in Capricorn',
-      description: 'A powerful time for setting intentions and new beginnings',
+      id: "1",
+      type: "moon-phase",
+      title: "New Moon in Capricorn",
+      description: "A powerful time for setting intentions and new beginnings",
       date: new Date(Date.now() + 86400000 * 2),
-      impact: 'high',
-      zodiacSigns: ['Capricorn', 'Cancer']
+      impact: "high",
+      zodiacSigns: ["Capricorn", "Cancer"],
     },
     {
-      id: '2',
-      type: 'retrograde',
-      title: 'Mercury Retrograde Ends',
-      description: 'Communication clears, technology stabilizes',
+      id: "2",
+      type: "retrograde",
+      title: "Mercury Retrograde Ends",
+      description: "Communication clears, technology stabilizes",
       date: new Date(Date.now() + 86400000 * 7),
-      impact: 'high',
-      zodiacSigns: ['Gemini', 'Virgo']
+      impact: "high",
+      zodiacSigns: ["Gemini", "Virgo"],
     },
     {
-      id: '3',
-      type: 'conjunction',
-      title: 'Venus-Jupiter Conjunction',
-      description: 'Expansion in love and abundance',
+      id: "3",
+      type: "conjunction",
+      title: "Venus-Jupiter Conjunction",
+      description: "Expansion in love and abundance",
       date: new Date(Date.now() + 86400000 * 14),
-      impact: 'medium',
-      zodiacSigns: ['Taurus', 'Libra', 'Pisces']
+      impact: "medium",
+      zodiacSigns: ["Taurus", "Libra", "Pisces"],
     },
     {
-      id: '4',
-      type: 'eclipse',
-      title: 'Lunar Eclipse in Scorpio',
-      description: 'Deep transformation and emotional release',
+      id: "4",
+      type: "eclipse",
+      title: "Lunar Eclipse in Scorpio",
+      description: "Deep transformation and emotional release",
       date: new Date(Date.now() + 86400000 * 30),
-      impact: 'high',
-      zodiacSigns: ['Scorpio', 'Taurus']
-    }
+      impact: "high",
+      zodiacSigns: ["Scorpio", "Taurus"],
+    },
   ]);
   // Auto-rotate carousel
- 
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % events.length);
@@ -69,40 +77,45 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % events.length);
   };
-  const getEventIcon = (type: CelestialEvent['type']) => {
+  const getEventIcon = (type: CelestialEvent["type"]) => {
     const icons = {
-      'moon-phase': '🌙',
-      'retrograde': '♂️',
-      'eclipse': '🌒',
-      'conjunction': '✨',
-      'meteor-shower': '☄️',
-      'solstice': '☀️'
+      "moon-phase": "🌙",
+      retrograde: "♂️",
+      eclipse: "🌒",
+      conjunction: "✨",
+      "meteor-shower": "☄️",
+      solstice: "☀️",
     };
-    return icons[type] || '⭐';
+    return icons[type] || "⭐";
   };
-  const getImpactColor = (impact: CelestialEvent['impact']) => {
+  const getImpactColor = (impact: CelestialEvent["impact"]) => {
     const colors = {
-      high: 'var(--color-impact-high)',
-      medium: 'var(--color-impact-medium)',
-      low: 'var(--color-impact-low)'
+      high: "var(--color-impact-high)",
+      medium: "var(--color-impact-medium)",
+      low: "var(--color-impact-low)",
     };
     return colors[impact];
   };
   const formatDate = (date: Date) => {
-    const days = Math.ceil((date.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    if (days === 0) return 'Today';
-    if (days === 1) return 'Tomorrow';
+    const days = Math.ceil(
+      (date.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
+    );
+    if (days === 0) return "Today";
+    if (days === 1) return "Tomorrow";
     if (days < 7) return `In ${days} days`;
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
   return (
     <div className={styles.carouselContainer} onClick={onClick}>
       <h2 className={styles.title}>Cosmic Events</h2>
-      
+
       <div className={styles.carousel}>
-        <button 
-          className={styles.navButton} 
-          onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
+        <button
+          className={styles.navButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrevious();
+          }}
           aria-label="Previous event"
         >
           ←
@@ -120,16 +133,14 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
               <span className={styles.eventIcon}>
                 {getEventIcon(events[currentIndex].type)}
               </span>
-              <span 
+              <span
                 className={styles.eventDate}
                 style={{ color: getImpactColor(events[currentIndex].impact) }}
               >
                 {formatDate(events[currentIndex].date)}
               </span>
             </div>
-            <h3 className={styles.eventTitle}>
-              {events[currentIndex].title}
-            </h3>
+            <h3 className={styles.eventTitle}>{events[currentIndex].title}</h3>
             <p className={styles.eventDescription}>
               {events[currentIndex].description}
             </p>
@@ -138,14 +149,21 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
                 <span className={styles.zodiacLabel}>Affects:</span>
                 {events[currentIndex].zodiacSigns.map((sign, index) => (
                   <span key={sign} className={styles.zodiacSign}>
-                    {sign}{index < events[currentIndex].zodiacSigns!.length - 1 ? ', ' : ''}
+                    {sign}
+                    {index < events[currentIndex].zodiacSigns!.length - 1
+                      ? ", "
+                      : ""}
                   </span>
                 ))}
               </div>
             )}
-            <div 
+            <div
               className={styles.impactIndicator}
-              style={{ '--impact-color': getImpactColor(events[currentIndex].impact) } as React.CSSProperties}
+              style={
+                {
+                  "--impact-color": getImpactColor(events[currentIndex].impact),
+                } as React.CSSProperties
+              }
             >
               <span className={styles.impactDot} />
               <span className={styles.impactLabel}>
@@ -154,9 +172,12 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
             </div>
           </motion.div>
         </AnimatePresence>
-        <button 
-          className={styles.navButton} 
-          onClick={(e) => { e.stopPropagation(); handleNext(); }}
+        <button
+          className={styles.navButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
           aria-label="Next event"
         >
           →
@@ -166,13 +187,16 @@ export const CelestialEventsCarousel: React.FC<CelestialEventsCarouselProps> = (
         {events.map((_, index) => (
           <button
             key={index}
-            className={`${styles.indicator} ${index === currentIndex ? styles.active : ''}`}
-            onClick={(e) => { e.stopPropagation(); setCurrentIndex(index); }}
+            className={`${styles.indicator} ${index === currentIndex ? styles.active : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentIndex(index);
+            }}
             aria-label={`Go to event ${index + 1}`}
           />
         ))}
       </div>
-      <motion.div 
+      <motion.div
         className={styles.clickHint}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -1,1 +1,1 @@
-export { CardAnimations } from './CardAnimations';
+export { CardAnimations } from "./CardAnimations";

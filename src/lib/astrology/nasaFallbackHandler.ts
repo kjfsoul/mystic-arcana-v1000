@@ -1,4 +1,4 @@
-import type { BirthData, PlanetPosition } from './AstronomicalCalculator';
+import type { BirthData, PlanetPosition } from "./AstronomicalCalculator";
 
 /**
  * NASA API Fallback Handler
@@ -8,16 +8,30 @@ export class NasaFallbackHandler {
   /**
    * Handle NASA API failure and provide fallback planet positions
    */
-  async handleApiFailure(error: any, birthData: BirthData): Promise<PlanetPosition[]> {
-    if (!birthData || !(birthData.birthDate instanceof Date) || isNaN(birthData.birthDate.getTime())) {
-      throw new Error("Invalid or undefined birthDate in birthData provided to handleApiFailure.");
+  async handleApiFailure(
+    error: any,
+    birthData: BirthData,
+  ): Promise<PlanetPosition[]> {
+    if (
+      !birthData ||
+      !(birthData.birthDate instanceof Date) ||
+      isNaN(birthData.birthDate.getTime())
+    ) {
+      throw new Error(
+        "Invalid or undefined birthDate in birthData provided to handleApiFailure.",
+      );
     }
-    console.warn('NASA API failed, using fallback calculations:', error.message);
-    
+    console.warn(
+      "NASA API failed, using fallback calculations:",
+      error.message,
+    );
+
     // Generate basic fallback positions
-    const fallbackPlanets = this.generateBasicPlanetPositions(birthData.birthDate);
-    
-    this.logFallbackUsage('NASA_API_ERROR', birthData);
+    const fallbackPlanets = this.generateBasicPlanetPositions(
+      birthData.birthDate,
+    );
+
+    this.logFallbackUsage("NASA_API_ERROR", birthData);
     return fallbackPlanets;
   }
 
@@ -26,13 +40,15 @@ export class NasaFallbackHandler {
    */
   private generateBasicPlanetPositions(birthDate: Date): PlanetPosition[] {
     if (!(birthDate instanceof Date) || isNaN(birthDate.getTime())) {
-      throw new Error("Invalid or undefined birthDate provided to generateBasicPlanetPositions.");
+      throw new Error(
+        "Invalid or undefined birthDate provided to generateBasicPlanetPositions.",
+      );
     }
     const dayOfYear = this.getDayOfYear(birthDate);
-    
+
     return [
       {
-        planet: 'Sun',
+        planet: "Sun",
         longitude: this.calculateSunPosition(dayOfYear),
         latitude: 0,
         distance: 1.0,
@@ -42,7 +58,7 @@ export class NasaFallbackHandler {
         retrograde: false,
       },
       {
-        planet: 'Moon',
+        planet: "Moon",
         longitude: this.calculateMoonPosition(birthDate),
         latitude: 0,
         distance: 0.00257,
@@ -59,7 +75,9 @@ export class NasaFallbackHandler {
   }
 
   private calculateMoonPosition(birthDate: Date): number {
-    const daysSinceEpoch = (birthDate.getTime() - new Date(2000, 0, 1).getTime()) / (1000 * 60 * 60 * 24);
+    const daysSinceEpoch =
+      (birthDate.getTime() - new Date(2000, 0, 1).getTime()) /
+      (1000 * 60 * 60 * 24);
     return (daysSinceEpoch * 13.2) % 360;
   }
 
@@ -71,18 +89,28 @@ export class NasaFallbackHandler {
 
   private getZodiacSign(longitude: number): string {
     const signs = [
-      'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces",
     ];
-    return signs[Math.floor(longitude / 30)] || 'Aries';
+    return signs[Math.floor(longitude / 30)] || "Aries";
   }
 
   private logFallbackUsage(reason: string, birthData: BirthData): void {
-    console.warn('NASA Fallback activated:', {
+    console.warn("NASA Fallback activated:", {
       reason,
       birthDate: birthData.birthDate?.toISOString(),
       location: birthData.location,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 }

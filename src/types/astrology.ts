@@ -1,7 +1,11 @@
 /**
  * Core astrology type definitions
  */
-import { AspectType, HouseSystem, Planet } from '@/constants/AstrologyConstants';
+import {
+  AspectType,
+  HouseSystem,
+  Planet,
+} from "@/constants/AstrologyConstants";
 
 /**
  * Birth data required for astrological calculations

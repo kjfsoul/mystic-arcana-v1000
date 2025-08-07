@@ -12,16 +12,8 @@
         "description": "AI and technology themed tarot deck for modern digital workers",
         "visualStyle": {
           "colorPalette": {
-            "primary": [
-              "#00FFFF",
-              "#8A2BE2",
-              "#00FF00"
-            ],
-            "secondary": [
-              "#C0C0C0",
-              "#0A0A0A",
-              "#FFFFFF"
-            ]
+            "primary": ["#00FFFF", "#8A2BE2", "#00FF00"],
+            "secondary": ["#C0C0C0", "#0A0A0A", "#FFFFFF"]
           },
           "aesthetic": "cyberpunk-mysticism",
           "effects": [
@@ -65,11 +57,7 @@
           "10": {
             "name": "The Release Cycle",
             "concept": "Development cycles",
-            "elements": [
-              "spinning-wheel",
-              "version-numbers",
-              "ci-integration"
-            ]
+            "elements": ["spinning-wheel", "version-numbers", "ci-integration"]
           },
           "11": {
             "name": "The Code Review",
@@ -110,20 +98,12 @@
           "15": {
             "name": "The Technical Debt",
             "concept": "Accumulated shortcuts",
-            "elements": [
-              "code-chains",
-              "debt-metrics",
-              "refactoring-light"
-            ]
+            "elements": ["code-chains", "debt-metrics", "refactoring-light"]
           },
           "16": {
             "name": "The Production Incident",
             "concept": "System failure response",
-            "elements": [
-              "alert-storms",
-              "cascading-failures",
-              "response-teams"
-            ]
+            "elements": ["alert-storms", "cascading-failures", "response-teams"]
           },
           "17": {
             "name": "The Open Source Project",
@@ -137,29 +117,17 @@
           "18": {
             "name": "The Staging Environment",
             "concept": "Mysterious reflection",
-            "elements": [
-              "mirrored-data",
-              "test-doubles",
-              "phantom-bugs"
-            ]
+            "elements": ["mirrored-data", "test-doubles", "phantom-bugs"]
           },
           "19": {
             "name": "The Production Release",
             "concept": "Successful deployment",
-            "elements": [
-              "green-lights",
-              "satisfaction-rays",
-              "success-metrics"
-            ]
+            "elements": ["green-lights", "satisfaction-rays", "success-metrics"]
           },
           "20": {
             "name": "The Retrospective",
             "concept": "Team reflection",
-            "elements": [
-              "feedback-loops",
-              "learning-spirals",
-              "team-evolution"
-            ]
+            "elements": ["feedback-loops", "learning-spirals", "team-evolution"]
           },
           "21": {
             "name": "The Complete Product",
@@ -173,11 +141,7 @@
           "00": {
             "name": "The New Developer",
             "concept": "Beginning journey in tech",
-            "elements": [
-              "laptop",
-              "holographic-backpack",
-              "binary-streams"
-            ]
+            "elements": ["laptop", "holographic-backpack", "binary-streams"]
           },
           "01": {
             "name": "The AI Orchestrator",
@@ -191,11 +155,7 @@
           "02": {
             "name": "The Data Oracle",
             "concept": "Keeper of knowledge",
-            "elements": [
-              "data-crystals",
-              "encrypted-locks",
-              "neural-crown"
-            ]
+            "elements": ["data-crystals", "encrypted-locks", "neural-crown"]
           },
           "03": {
             "name": "The Creative Generator",
@@ -766,12 +726,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Release Cycle represents transformation and growth in the digital realm."
           },
@@ -785,12 +740,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Code Review represents transformation and growth in the digital realm."
           },
@@ -804,12 +754,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Debugging Session represents transformation and growth in the digital realm."
           },
@@ -823,12 +768,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Legacy Migration represents transformation and growth in the digital realm."
           },
@@ -842,12 +782,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The A/B Test represents transformation and growth in the digital realm."
           },
@@ -861,12 +796,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Technical Debt represents transformation and growth in the digital realm."
           },
@@ -880,12 +810,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Production Incident represents transformation and growth in the digital realm."
           },
@@ -899,12 +824,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Open Source Project represents transformation and growth in the digital realm."
           },
@@ -918,12 +838,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Staging Environment represents transformation and growth in the digital realm."
           },
@@ -937,12 +852,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Production Release represents transformation and growth in the digital realm."
           },
@@ -956,12 +866,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Retrospective represents transformation and growth in the digital realm."
           },
@@ -975,12 +880,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Complete Product represents transformation and growth in the digital realm."
           },
@@ -1032,12 +932,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Data Oracle represents transformation and growth in the digital realm."
           },
@@ -1051,12 +946,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Creative Generator represents transformation and growth in the digital realm."
           },
@@ -1070,12 +960,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The System Administrator represents transformation and growth in the digital realm."
           },
@@ -1089,12 +974,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Lead Architect represents transformation and growth in the digital realm."
           },
@@ -1108,12 +988,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The API Connection represents transformation and growth in the digital realm."
           },
@@ -1127,12 +1002,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Deployment Pipeline represents transformation and growth in the digital realm."
           },
@@ -1146,12 +1016,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Load Balancer represents transformation and growth in the digital realm."
           },
@@ -1165,12 +1030,7 @@
             "meaning": {
               "upright": "Positive technological progress, system harmony, digital growth",
               "reversed": "Technical challenges, system conflicts, digital obstacles",
-              "keywords": [
-                "technology",
-                "progress",
-                "systems",
-                "digital"
-              ]
+              "keywords": ["technology", "progress", "systems", "digital"]
             },
             "description": "The Solo Contributor represents transformation and growth in the digital realm."
           },
@@ -1716,12 +1576,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1735,12 +1590,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1754,12 +1604,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1773,12 +1618,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1792,12 +1632,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1811,12 +1646,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1830,12 +1660,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1849,12 +1674,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1868,12 +1688,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1887,12 +1702,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1906,12 +1716,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1925,12 +1730,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1944,12 +1744,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1963,12 +1758,7 @@
             "meaning": {
               "upright": "Clean algorithms, logical thinking, problem-solving, code clarity",
               "reversed": "Technical debt, buggy logic, overcomplicated solutions, code confusion",
-              "keywords": [
-                "logic",
-                "algorithms",
-                "problem-solving",
-                "clarity"
-              ]
+              "keywords": ["logic", "algorithms", "problem-solving", "clarity"]
             },
             "description": "This card embodies logic, algorithms, and the mental clarity needed to solve complex problems."
           },
@@ -1982,12 +1772,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2001,12 +1786,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2020,12 +1800,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2039,12 +1814,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2058,12 +1828,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2077,12 +1842,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2096,12 +1856,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2115,12 +1870,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2134,12 +1884,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2153,12 +1898,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2172,12 +1912,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2191,12 +1926,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2210,12 +1940,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           },
@@ -2229,12 +1954,7 @@
             "meaning": {
               "upright": "Data insights, information security, storage optimization, knowledge management",
               "reversed": "Data loss, security breaches, poor organization, information overload",
-              "keywords": [
-                "data",
-                "insights",
-                "security",
-                "foundation"
-              ]
+              "keywords": ["data", "insights", "security", "foundation"]
             },
             "description": "This card signifies information, insights, and the foundational knowledge that drives decisions."
           }

@@ -7,12 +7,14 @@ The Mystic Arcana Autonomous Crew is a self-operating AI system that continuousl
 ## 🤖 Autonomous Features
 
 ### **Continuous Operation**
+
 - **24/7 autonomous execution** with scheduled task generation
 - **Health monitoring** every 5 minutes with automated recovery
 - **Content generation** based on astrological timing
 - **Intelligent task scheduling** using real-time context
 
 ### **Scheduled Content Generation**
+
 - **Daily Content** (6 AM onwards): Astrological overview, zodiac guidance, manifestation focus
 - **Weekly Wisdom** (Sundays): Deep spiritual insights for the upcoming week
 - **Timing Analysis** (Mon/Wed/Fri): Strategic astrological guidance for decision-making
@@ -21,18 +23,21 @@ The Mystic Arcana Autonomous Crew is a self-operating AI system that continuousl
 ### **Intelligent Agents**
 
 #### **Core Spiritual Agents**
+
 - **Sophia** - Mystic Oracle & Primary Tarot Interpreter
 - **Orion** - Cosmic Strategist & Astrological Life Coach
 - **Luna** - Emotional Healer & Relationship Guide
 - **Sol** - Shadow Integration Specialist
 
 #### **Technical Agents**
+
 - **ContentAlchemist** - Automated content generation specialist
 - **AstroCalculus** - Astronomical calculations and ephemeris data
 - **CardWeaver** - Adaptive tarot logic engine
 - **PersonaLearner** - User personalization and learning
 
 #### **Development Agents**
+
 - **DataOracle** - Spiritual data architecture
 - **CommunityShaman** - Social integration manager
 - **UIEnchanter** - Mystical interface designer
@@ -41,6 +46,7 @@ The Mystic Arcana Autonomous Crew is a self-operating AI system that continuousl
 ## 🚀 Quick Start
 
 ### **Prerequisites**
+
 ```bash
 # Required API Keys
 export ANTHROPIC_API_KEY="your-anthropic-api-key"
@@ -48,6 +54,7 @@ export PERPLEXITY_API_KEY="your-perplexity-api-key"  # Optional but recommended
 ```
 
 ### **Autonomous Mode (Recommended)**
+
 ```bash
 # Start continuous autonomous operation
 ./start_autonomous.sh
@@ -58,6 +65,7 @@ python main.py
 ```
 
 ### **Demonstration Mode**
+
 ```bash
 # Run demonstration tasks
 ./start_demo.sh
@@ -68,6 +76,7 @@ python main.py
 ```
 
 ### **Manual Mode**
+
 ```bash
 # Initialize crew without running tasks
 python main.py
@@ -91,16 +100,17 @@ mystic-tarot-crew/
 
 ### **Environment Variables**
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `AUTONOMOUS_MODE` | No | `false` | Enable continuous autonomous operation |
-| `RUN_DEMONSTRATION` | No | `false` | Run demonstration tasks |
-| `ANTHROPIC_API_KEY` | Yes | - | Anthropic Claude API key for agents |
-| `PERPLEXITY_API_KEY` | No | - | Perplexity API key for research tasks |
+| Variable             | Required | Default | Description                            |
+| -------------------- | -------- | ------- | -------------------------------------- |
+| `AUTONOMOUS_MODE`    | No       | `false` | Enable continuous autonomous operation |
+| `RUN_DEMONSTRATION`  | No       | `false` | Run demonstration tasks                |
+| `ANTHROPIC_API_KEY`  | Yes      | -       | Anthropic Claude API key for agents    |
+| `PERPLEXITY_API_KEY` | No       | -       | Perplexity API key for research tasks  |
 
 ### **Scheduling Configuration**
 
 The autonomous system uses intelligent scheduling based on:
+
 - **Time of day** (morning content generation)
 - **Day of week** (weekly wisdom on Sundays)
 - **Astrological timing** (content aligned with cosmic events)
@@ -109,12 +119,14 @@ The autonomous system uses intelligent scheduling based on:
 ## 🔍 Monitoring & Health Checks
 
 ### **Automatic Health Monitoring**
+
 - **Health checks** every 5 minutes
 - **Execution monitoring** with success/failure tracking
 - **Memory logging** of all autonomous activities
 - **Error recovery** with automatic retry mechanisms
 
 ### **Health Check Data**
+
 ```json
 {
   "timestamp": "2025-01-31T12:00:00",
@@ -126,6 +138,7 @@ The autonomous system uses intelligent scheduling based on:
 ```
 
 ### **Viewing Logs**
+
 ```bash
 # Real-time autonomous operation logs
 tail -f crew_operations.log
@@ -142,6 +155,7 @@ ls output/
 ### **Common Issues**
 
 1. **API Key Errors**
+
    ```bash
    # Verify API keys are set
    echo $ANTHROPIC_API_KEY
@@ -149,6 +163,7 @@ ls output/
    ```
 
 2. **Permission Errors**
+
    ```bash
    # Make scripts executable
    chmod +x start_autonomous.sh
@@ -156,16 +171,18 @@ ls output/
    ```
 
 3. **Dependency Issues**
+
    ```bash
    # Reinstall dependencies
    pip install -r requirements.txt --upgrade
    ```
 
 4. **Memory/Performance Issues**
+
    ```bash
    # Check memory usage
    ps aux | grep python
-   
+
    # Restart autonomous mode
    pkill -f "python main.py"
    ./start_autonomous.sh
@@ -183,12 +200,14 @@ If autonomous mode encounters issues:
 ## 📊 Performance Metrics
 
 ### **Execution Tracking**
+
 - **Task completion rate**: Tracked in execution history
 - **Execution time**: Monitored for performance optimization
 - **Success/failure ratio**: Health monitoring with alerts
 - **Content generation volume**: Daily/weekly output tracking
 
 ### **Memory Management**
+
 - **Execution history**: Last 100 operations stored
 - **Log rotation**: Automatic cleanup of old logs
 - **Memory efficiency**: Optimized for long-running operation
@@ -196,18 +215,21 @@ If autonomous mode encounters issues:
 ## 🔮 Spiritual AI Integration
 
 ### **Astrological Timing**
+
 - Content generation aligned with **lunar phases**
 - **Planetary transit** awareness for timing recommendations
 - **Seasonal themes** incorporated into spiritual guidance
 - **Cosmic event** integration for special content
 
 ### **Personalization Engine**
+
 - **User behavior analysis** for content adaptation
 - **Spiritual development tracking** over time
 - **Preference learning** for reading styles
 - **Synchronicity pattern** recognition
 
 ### **Ethical Guidelines**
+
 - **Trauma-informed** approach to emotional content
 - **Cultural sensitivity** in spiritual practices
 - **Boundary respect** in personal guidance
@@ -216,12 +238,14 @@ If autonomous mode encounters issues:
 ## 🚀 Advanced Usage
 
 ### **Custom Task Injection**
+
 ```python
 # Add custom tasks to autonomous cycle
 crew_manager.crew.tasks.append(custom_task)
 ```
 
 ### **Agent Customization**
+
 ```python
 # Access specific agents
 sophia = crew_manager.agents['sophia']
@@ -229,6 +253,7 @@ orion = crew_manager.agents['orion']
 ```
 
 ### **Content Pipeline Integration**
+
 ```python
 # Hook into content generation
 def custom_content_processor(content):
@@ -253,4 +278,4 @@ def custom_content_processor(content):
 
 ---
 
-*This autonomous system represents the convergence of artificial intelligence and spiritual wisdom, creating a continuously evolving oracle for the digital age.* ✨🔮
+_This autonomous system represents the convergence of artificial intelligence and spiritual wisdom, creating a continuously evolving oracle for the digital age._ ✨🔮

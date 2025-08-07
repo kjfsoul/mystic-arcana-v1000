@@ -1,57 +1,57 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GalaxyBackground } from '../components/effects/GalaxyBackground/GalaxyBackground';
-import { TarotZonePreview } from '../components/panels/TarotZonePreview';
-import { AstrologyZonePreview } from '../components/panels/AstrologyZonePreview';
-import { CelestialEventsCarousel } from '../components/cosmic/CelestialEventsCarousel';
-import { UnifiedTarotPanelV2 } from '../components/tarot/UnifiedTarotPanelV2';
-import { AstrologyReadingRoom } from '../components/astrology/AstrologyReadingRoom';
-import { Header } from '../components/layout/Header';
-import { AuthDebug } from '../components/debug/AuthDebug';
-export type ViewMode = 'lobby' | 'tarot-room' | 'astrology-room' | 'awe-view';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GalaxyBackground } from "../components/effects/GalaxyBackground/GalaxyBackground";
+import { TarotZonePreview } from "../components/panels/TarotZonePreview";
+import { AstrologyZonePreview } from "../components/panels/AstrologyZonePreview";
+import { CelestialEventsCarousel } from "../components/cosmic/CelestialEventsCarousel";
+import { UnifiedTarotPanelV2 } from "../components/tarot/UnifiedTarotPanelV2";
+import { AstrologyReadingRoom } from "../components/astrology/AstrologyReadingRoom";
+import { Header } from "../components/layout/Header";
+import { AuthDebug } from "../components/debug/AuthDebug";
+export type ViewMode = "lobby" | "tarot-room" | "astrology-room" | "awe-view";
 export default function Home() {
-  const [viewMode, setViewMode] = useState<ViewMode>('lobby');
+  const [viewMode, setViewMode] = useState<ViewMode>("lobby");
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.7);
- 
+
   useEffect(() => {
     // Adjust galaxy intensity based on view mode
     switch (viewMode) {
-      case 'lobby':
+      case "lobby":
         setGalaxyIntensity(0.7);
         break;
-      case 'awe-view':
+      case "awe-view":
         setGalaxyIntensity(1.0);
         break;
-      case 'tarot-room':
+      case "tarot-room":
         setGalaxyIntensity(1.2); // More dramatic for tarot immersion
         break;
-      case 'astrology-room':
+      case "astrology-room":
         setGalaxyIntensity(0.9);
         break;
     }
   }, [viewMode]);
   const handleEnterTarotRoom = () => {
-    setViewMode('tarot-room');
+    setViewMode("tarot-room");
   };
   const handleEnterAstrologyRoom = () => {
-    setViewMode('astrology-room');
+    setViewMode("astrology-room");
   };
   const handleEnterAweView = () => {
-    setViewMode('awe-view');
+    setViewMode("awe-view");
   };
   const handleBackToLobby = () => {
-    setViewMode('lobby');
+    setViewMode("lobby");
   };
   return (
     <main className="relative min-h-screen w-full overflow-hidden pt-20 perspective-[1200px] preserve-3d">
       {/* Header with Authentication */}
       <Header />
-      
+
       {/* Debug Component - Remove in production */}
       <AuthDebug />
-      
+
       {/* Galaxy Background - Always Present */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <GalaxyBackground
@@ -61,7 +61,7 @@ export default function Home() {
         />
       </div>
       <AnimatePresence mode="wait">
-        {viewMode === 'lobby' && (
+        {viewMode === "lobby" && (
           <CosmicLobby
             key="lobby"
             onEnterTarot={handleEnterTarotRoom}
@@ -69,23 +69,14 @@ export default function Home() {
             onEnterAweView={handleEnterAweView}
           />
         )}
-        {viewMode === 'tarot-room' && (
-          <TarotReadingRoom
-            key="tarot-room"
-            onBack={handleBackToLobby}
-          />
+        {viewMode === "tarot-room" && (
+          <TarotReadingRoom key="tarot-room" onBack={handleBackToLobby} />
         )}
-        {viewMode === 'astrology-room' && (
-          <AstrologyRoom
-            key="astrology-room"
-            onBack={handleBackToLobby}
-          />
+        {viewMode === "astrology-room" && (
+          <AstrologyRoom key="astrology-room" onBack={handleBackToLobby} />
         )}
-        {viewMode === 'awe-view' && (
-          <AweView
-            key="awe-view"
-            onBack={handleBackToLobby}
-          />
+        {viewMode === "awe-view" && (
+          <AweView key="awe-view" onBack={handleBackToLobby} />
         )}
       </AnimatePresence>
     </main>
@@ -129,7 +120,7 @@ const CosmicLobby: React.FC<{
         role="button"
         tabIndex={0}
         aria-label="Enter Tarot Reading Room"
-        onKeyDown={(e) => e.key === 'Enter' && onEnterTarot()}
+        onKeyDown={(e) => e.key === "Enter" && onEnterTarot()}
       >
         <div className="h-full min-h-[400px] lg:min-h-[600px] backdrop-blur-xl bg-gradient-to-br from-purple-900/20 via-indigo-900/15 to-black/20 border border-purple-500/30 rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/30 hover:border-purple-500/50 transition-all duration-300">
           <TarotZonePreview />
@@ -146,7 +137,7 @@ const CosmicLobby: React.FC<{
         role="button"
         tabIndex={0}
         aria-label="Enter Astrology Reading Room"
-        onKeyDown={(e) => e.key === 'Enter' && onEnterAstrology()}
+        onKeyDown={(e) => e.key === "Enter" && onEnterAstrology()}
       >
         <div className="h-full min-h-[400px] lg:min-h-[600px] backdrop-blur-xl bg-gradient-to-br from-amber-900/20 via-orange-900/15 to-black/20 border border-amber-500/30 rounded-2xl overflow-hidden shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500/50 transition-all duration-300">
           <AstrologyZonePreview />
@@ -203,13 +194,17 @@ const AstrologyRoom: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 };
 // Awe View Component
 const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const [currentView, setCurrentView] = useState<'earth' | 'moon' | 'mars' | 'deep-space'>('earth');
+  const [currentView, setCurrentView] = useState<
+    "earth" | "moon" | "mars" | "deep-space"
+  >("earth");
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const handleViewChange = async (newView: 'earth' | 'moon' | 'mars' | 'deep-space') => {
+  const handleViewChange = async (
+    newView: "earth" | "moon" | "mars" | "deep-space",
+  ) => {
     if (isTransitioning || newView === currentView) return;
-    
+
     setIsTransitioning(true);
-    
+
     // Simulate camera transition delay
     setTimeout(() => {
       setCurrentView(newView);
@@ -218,25 +213,25 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   };
   const viewConfig = {
     earth: {
-      title: 'Earth View',
-      description: 'Your home perspective in the cosmic dance',
-      emoji: '🌍'
+      title: "Earth View",
+      description: "Your home perspective in the cosmic dance",
+      emoji: "🌍",
     },
     moon: {
-      title: 'Lunar Perspective',
-      description: 'See Earth from our celestial companion',
-      emoji: '🌙'
+      title: "Lunar Perspective",
+      description: "See Earth from our celestial companion",
+      emoji: "🌙",
     },
     mars: {
-      title: 'Martian Vista',
-      description: 'The red planet\'s unique cosmic viewpoint',
-      emoji: '♂️'
+      title: "Martian Vista",
+      description: "The red planet's unique cosmic viewpoint",
+      emoji: "♂️",
     },
-    'deep-space': {
-      title: 'Deep Space Explorer',
-      description: 'Journey beyond our solar system',
-      emoji: '🌌'
-    }
+    "deep-space": {
+      title: "Deep Space Explorer",
+      description: "Journey beyond our solar system",
+      emoji: "🌌",
+    },
   };
   return (
     <motion.div
@@ -257,10 +252,10 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <motion.div
             className="absolute top-1/2 left-1/2 w-0.5 h-8 lg:h-10 bg-gradient-to-t from-transparent to-amber-500 origin-bottom -ml-px -mt-8 lg:-mt-10"
             animate={{ rotate: 360 }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity, 
-              ease: "linear" 
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "linear",
             }}
           />
           <div className="relative z-10">
@@ -306,9 +301,9 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             </p>
           </motion.div>
         </AnimatePresence>
-        
+
         {/* Interactive Controls */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 justify-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -318,23 +313,33 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             <motion.button
               key={viewKey}
               className={`relative bg-black/40 backdrop-blur-xl border rounded-2xl text-white px-4 py-6 lg:px-6 lg:py-8 text-sm lg:text-base font-medium transition-all duration-300 flex flex-col items-center gap-2 lg:gap-3 overflow-hidden ${
-                currentView === viewKey 
-                  ? 'bg-blue-600/30 border-blue-500/50 shadow-lg shadow-blue-500/20' 
-                  : 'border-white/10 hover:bg-black/60 hover:border-white/30 hover:shadow-xl hover:-translate-y-1'
-              } ${isTransitioning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              onClick={() => handleViewChange(viewKey as 'earth' | 'moon' | 'mars' | 'deep-space')}
-              whileHover={!isTransitioning ? { 
-                scale: 1.05, 
-                y: -2,
-                boxShadow: '0 12px 40px rgba(102, 126, 234, 0.3)'
-              } : {}}
+                currentView === viewKey
+                  ? "bg-blue-600/30 border-blue-500/50 shadow-lg shadow-blue-500/20"
+                  : "border-white/10 hover:bg-black/60 hover:border-white/30 hover:shadow-xl hover:-translate-y-1"
+              } ${isTransitioning ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+              onClick={() =>
+                handleViewChange(
+                  viewKey as "earth" | "moon" | "mars" | "deep-space",
+                )
+              }
+              whileHover={
+                !isTransitioning
+                  ? {
+                      scale: 1.05,
+                      y: -2,
+                      boxShadow: "0 12px 40px rgba(102, 126, 234, 0.3)",
+                    }
+                  : {}
+              }
               whileTap={!isTransitioning ? { scale: 0.95 } : {}}
               disabled={isTransitioning}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + (0.1 * index) }}
+              transition={{ delay: 0.1 + 0.1 * index }}
             >
-              <span className="text-2xl lg:text-3xl drop-shadow-[0_0_10px_currentColor]">{config.emoji}</span>
+              <span className="text-2xl lg:text-3xl drop-shadow-[0_0_10px_currentColor]">
+                {config.emoji}
+              </span>
               <span className="font-semibold tracking-wide">
                 {config.title}
               </span>
@@ -366,7 +371,9 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 >
                   🌌
                 </motion.div>
-                <p className="text-lg lg:text-xl opacity-80">Transitioning to cosmic perspective...</p>
+                <p className="text-lg lg:text-xl opacity-80">
+                  Transitioning to cosmic perspective...
+                </p>
               </div>
             </motion.div>
           )}
@@ -377,11 +384,15 @@ const AweView: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         className="absolute bottom-4 lg:bottom-8 right-4 lg:right-8 z-10"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2, type: 'spring' }}
+        transition={{ delay: 2, type: "spring" }}
       >
         <div className="bg-black/80 backdrop-blur-2xl border border-amber-500/30 rounded-2xl p-4 lg:p-6 max-w-xs text-center text-white">
-          <h3 className="text-base lg:text-lg mb-2 text-amber-400 font-semibold">✨ Cosmic Reading Bundle</h3>
-          <p className="text-sm lg:text-base mb-4 opacity-80 leading-relaxed">Unlock personalized insights from every perspective</p>
+          <h3 className="text-base lg:text-lg mb-2 text-amber-400 font-semibold">
+            ✨ Cosmic Reading Bundle
+          </h3>
+          <p className="text-sm lg:text-base mb-4 opacity-80 leading-relaxed">
+            Unlock personalized insights from every perspective
+          </p>
           <button className="w-full bg-gradient-to-r from-amber-500 to-red-500 hover:from-amber-400 hover:to-red-400 text-white rounded-lg px-4 py-2 text-sm lg:text-base font-semibold transform hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
             Explore Premium
           </button>

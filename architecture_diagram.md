@@ -1,4 +1,4 @@
-#  # ARCHITECTURE\_DIAGRAM\_ANNOTATED.md
+# # ARCHITECTURE_DIAGRAM_ANNOTATED.md
 
 ## Mystic Arcana — Architecture Diagram (with Paid/Free Tool Tagging)
 
@@ -82,12 +82,10 @@ graph TD
 
 **Legend:**
 
-* 🔷 = Procured/Paid tool or service
-* ◻️ = Open source or free (self-hosted or community tier)
+- 🔷 = Procured/Paid tool or service
+- ◻️ = Open source or free (self-hosted or community tier)
 
 **Instructions:**
 
-* Update this diagram as new tools/services are added or swapped.
-* Use this annotated view for onboarding, compliance, and cost reviews.
-
-
+- Update this diagram as new tools/services are added or swapped.
+- Use this annotated view for onboarding, compliance, and cost reviews.

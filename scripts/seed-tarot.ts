@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { config } from "dotenv";
-import { fileURLToPath } from 'url';
-import { resolve } from 'path';
+import { fileURLToPath } from "url";
+import { resolve } from "path";
 
 // Load environment variables first
 config({ path: ".env.local" });
@@ -969,7 +969,8 @@ async function seedTarotCards() {
 
 // Run the seeding if this file is executed directly
 const __filename = fileURLToPath(import.meta.url);
-const isMainModule = process.argv[1] === __filename || process.argv[1] === resolve(__filename);
+const isMainModule =
+  process.argv[1] === __filename || process.argv[1] === resolve(__filename);
 
 if (isMainModule) {
   seedTarotCards()

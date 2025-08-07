@@ -1,30 +1,42 @@
-'use client';
-import React, { useState, lazy, Suspense } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import React, { useState, lazy, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 // Lazy load the heavy GalaxyBackground component to prevent blocking main page load
-const GalaxyBackground = lazy(() => import('../effects/GalaxyBackground/GalaxyBackground').then(m => ({ default: m.GalaxyBackground })));
-import { AstrologyReadingRoom } from '../astrology/AstrologyReadingRoom';
-import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
-import { MercuryRetrogradeBanner } from '../astrology/MercuryRetrogradeBanner';
-import { Header } from './Header';
-import { useRouter } from 'next/navigation';
-import styles from './CosmicHub.module.css';
+const GalaxyBackground = lazy(() =>
+  import("../effects/GalaxyBackground/GalaxyBackground").then((m) => ({
+    default: m.GalaxyBackground,
+  })),
+);
+import { AstrologyReadingRoom } from "../astrology/AstrologyReadingRoom";
+import { UnifiedTarotPanelV2 } from "../tarot/UnifiedTarotPanelV2";
+import { MercuryRetrogradeBanner } from "../astrology/MercuryRetrogradeBanner";
+import { Header } from "./Header";
+import { useRouter } from "next/navigation";
+import styles from "./CosmicHub.module.css";
 // Lazy load the horoscope widget to prevent blocking main page load
-const DailyHoroscopeWidget = lazy(() => import('../horoscope/DailyHoroscopeWidget').then(m => ({ default: m.DailyHoroscopeWidget })));
+const DailyHoroscopeWidget = lazy(() =>
+  import("../horoscope/DailyHoroscopeWidget").then((m) => ({
+    default: m.DailyHoroscopeWidget,
+  })),
+);
 // Lazy load the Daily Oracle Display component
-const DailyOracleDisplay = lazy(() => import('../oracle/DailyOracleDisplay').then(m => ({ default: m.DailyOracleDisplay })));
-export type ViewMode = 'hub' | 'tarot' | 'astrology';
+const DailyOracleDisplay = lazy(() =>
+  import("../oracle/DailyOracleDisplay").then((m) => ({
+    default: m.DailyOracleDisplay,
+  })),
+);
+export type ViewMode = "hub" | "tarot" | "astrology";
 export const CosmicHub: React.FC = () => {
-  const [currentView, setCurrentView] = useState<ViewMode>('hub');
+  const [currentView, setCurrentView] = useState<ViewMode>("hub");
   const router = useRouter();
   const handleReturnToHub = () => {
-    setCurrentView('hub');
+    setCurrentView("hub");
   };
   const handleEnterTarot = () => {
-    setCurrentView('tarot');
+    setCurrentView("tarot");
   };
   const handleEnterAstrology = () => {
-    setCurrentView('astrology');
+    setCurrentView("astrology");
   };
   const renderHub = () => (
     <motion.div
@@ -44,7 +56,7 @@ export const CosmicHub: React.FC = () => {
         >
           ✨ Welcome to Mystic Arcana ✨
         </motion.h1>
-        
+
         <motion.p
           className={styles.hubSubtitle}
           initial={{ opacity: 0, y: -20 }}
@@ -60,7 +72,9 @@ export const CosmicHub: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <MercuryRetrogradeBanner onMarketplaceClick={() => router.push('/marketplace')} />
+          <MercuryRetrogradeBanner
+            onMarketplaceClick={() => router.push("/marketplace")}
+          />
         </motion.div>
         <div className={styles.realmCards}>
           {/* Tarot Realm Card */}
@@ -69,10 +83,10 @@ export const CosmicHub: React.FC = () => {
             initial={{ opacity: 0, x: -100, rotateY: -15 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            whileHover={{ 
-              scale: 1.05, 
+            whileHover={{
+              scale: 1.05,
               rotateY: 5,
-              boxShadow: '0 20px 40px rgba(255, 107, 107, 0.3)'
+              boxShadow: "0 20px 40px rgba(255, 107, 107, 0.3)",
             }}
             onClick={handleEnterTarot}
           >
@@ -87,7 +101,8 @@ export const CosmicHub: React.FC = () => {
             <div className={styles.cardContent}>
               <h2 className={styles.cardTitle}>Enter the Tarot Realm</h2>
               <p className={styles.cardDescription}>
-                Unveil the mysteries of your past, present, and future through the ancient wisdom of tarot cards
+                Unveil the mysteries of your past, present, and future through
+                the ancient wisdom of tarot cards
               </p>
               <div className={styles.cardFeatures}>
                 <span>• Single Card Insights</span>
@@ -102,10 +117,10 @@ export const CosmicHub: React.FC = () => {
             initial={{ opacity: 0, x: 100, rotateY: 15 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            whileHover={{ 
-              scale: 1.05, 
+            whileHover={{
+              scale: 1.05,
               rotateY: -5,
-              boxShadow: '0 20px 40px rgba(255, 215, 0, 0.3)'
+              boxShadow: "0 20px 40px rgba(255, 215, 0, 0.3)",
             }}
             onClick={handleEnterAstrology}
           >
@@ -120,7 +135,8 @@ export const CosmicHub: React.FC = () => {
             <div className={styles.cardContent}>
               <h2 className={styles.cardTitle}>Enter the Astrology Cosmos</h2>
               <p className={styles.cardDescription}>
-                Explore the celestial influences shaping your destiny through personalized astrological insights
+                Explore the celestial influences shaping your destiny through
+                personalized astrological insights
               </p>
               <div className={styles.cardFeatures}>
                 <span>• Birth Chart Analysis</span>
@@ -137,11 +153,13 @@ export const CosmicHub: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.8 }}
         >
-          <Suspense fallback={
-            <div className="text-center text-purple-300 p-4">
-              <div className="animate-pulse">Loading cosmic insights...</div>
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="text-center text-purple-300 p-4">
+                <div className="animate-pulse">Loading cosmic insights...</div>
+              </div>
+            }
+          >
             <DailyHoroscopeWidget />
           </Suspense>
         </motion.div>
@@ -152,11 +170,15 @@ export const CosmicHub: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}
         >
-          <Suspense fallback={
-            <div className="text-center text-purple-300 p-4">
-              <div className="animate-pulse">Consulting the cosmic oracle...</div>
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="text-center text-purple-300 p-4">
+                <div className="animate-pulse">
+                  Consulting the cosmic oracle...
+                </div>
+              </div>
+            }
+          >
             <DailyOracleDisplay />
           </Suspense>
         </motion.div>
@@ -165,9 +187,9 @@ export const CosmicHub: React.FC = () => {
   );
   const renderContent = () => {
     switch (currentView) {
-      case 'hub':
+      case "hub":
         return renderHub();
-      case 'tarot':
+      case "tarot":
         return (
           <motion.div
             key="tarot"
@@ -190,12 +212,10 @@ export const CosmicHub: React.FC = () => {
                 ← Back to Hub
               </motion.button>
             </div>
-            <UnifiedTarotPanelV2 
-              className={styles.tarotPanel}
-            />
+            <UnifiedTarotPanelV2 className={styles.tarotPanel} />
           </motion.div>
         );
-      case 'astrology':
+      case "astrology":
         return (
           <motion.div
             key="astrology"
@@ -215,23 +235,27 @@ export const CosmicHub: React.FC = () => {
   return (
     <div className={styles.cosmicHub}>
       {/* Header with Return to Hub functionality */}
-      <Header onHomeClick={currentView !== 'hub' ? handleReturnToHub : undefined} />
-      
+      <Header
+        onHomeClick={currentView !== "hub" ? handleReturnToHub : undefined}
+      />
+
       {/* Galaxy Background - Lazy Loaded */}
       <div className={styles.galaxyLayer}>
-        <Suspense fallback={
-          <div className="fixed inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black opacity-80" />
-        }>
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black opacity-80" />
+          }
+        >
           <GalaxyBackground
-            intensity={currentView === 'hub' ? 0.6 : 0.3}
-            showMilkyWay={currentView === 'hub'}
+            intensity={currentView === "hub" ? 0.6 : 0.3}
+            showMilkyWay={currentView === "hub"}
             animated={false}
-            starCount={currentView === 'hub' ? 50 : 25}
+            starCount={currentView === "hub" ? 50 : 25}
           />
         </Suspense>
       </div>
       {/* Return to Main Menu Button (visible on non-hub views) */}
-      {currentView !== 'hub' && (
+      {currentView !== "hub" && (
         <motion.button
           className={styles.returnButton}
           onClick={handleReturnToHub}
@@ -246,9 +270,7 @@ export const CosmicHub: React.FC = () => {
       )}
       {/* Main Content Area */}
       <div className={styles.contentArea}>
-        <AnimatePresence mode="wait">
-          {renderContent()}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
       </div>
     </div>
   );

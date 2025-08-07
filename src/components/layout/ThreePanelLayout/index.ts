@@ -1,1 +1,1 @@
-export { ThreePanelLayout } from './ThreePanelLayout';
+export { ThreePanelLayout } from "./ThreePanelLayout";

@@ -12,11 +12,11 @@ C e le s t ia l Bod y
 
 Ene r gies
 
-Zod ia c  S ign
+Zod ia c S ign
 
 **HOW**
 
-Manne r  of Mani fes tation
+Manne r of Mani fes tation
 
 Ho us e
 
@@ -32,9 +32,9 @@ M oda lit y
 
 Sun
 
-Self,  W ill, P ater
+Self, W ill, P ater
 
-Ad ult ho o d ,  Ma tur atio n
+Ad ult ho o d , Ma tur atio n
 
 **LEO**
 
@@ -50,9 +50,9 @@ s
 
 1
 
-Self,  I d entit y
+Self, I d entit y
 
-,  T hesis
+, T hesis
 
 Fir e
 
@@ -64,15 +64,15 @@ I nitiati ve
 
 Moon
 
-E mo tive,  Ma ter
+E mo tive, Ma ter
 
-Chi ld ho o d ,  P ast Life
+Chi ld ho o d , P ast Life
 
 **C ANC ER**
 
 Taurus
 
-Acq uisit io ns,  Dr i ve
+Acq uisit io ns, Dr i ve
 
 **VENU S**
 
@@ -82,7 +82,7 @@ W ea lth
 
 ; Livel iho o d
 
-Acq uisit io ns,  F ina nce s
+Acq uisit io ns, F ina nce s
 
 Wat er
 
@@ -94,19 +94,19 @@ Or d er
 
 Me rc ury
 
-I ntellect,  I n fl uence
+I ntellect, I n fl uence
 
 T ho ught P r o ce ss
 
 GEM IN I (d) |
 
-V IR GO  ( n)
+V IR GO ( n)
 
 Gem i ni
 
 P er suasio n
 
-,  C har m
+, C har m
 
 **M ER C UR Y**
 
@@ -140,7 +140,7 @@ P r o gr ess
 
 Venus
 
-Ro ma nce ,  Allia nce s
+Ro ma nce , Allia nce s
 
 Co mi n g
 
@@ -156,7 +156,7 @@ LI BR A (d ) | T AUR U S ( n)
 
 Cancer
 
-Nur tur i n g,  E mo ti ve
+Nur tur i n g, E mo ti ve
 
 **M OO N**
 
@@ -172,7 +172,7 @@ Reso ur ce s
 
 Mar s
 
-Dr ive,  Amb it io n,  I mp u lse
+Dr ive, Amb it io n, I mp u lse
 
 Age 4 0
 
@@ -184,23 +184,23 @@ AR I E S (d) | SC OR PIO ( n)
 
 Leo
 
-P assio n,  Fo r titud e
+P assio n, Fo r titud e
 
 **SUN**
 
 5
 
-Rec r ea tio n,  Ho b b ies
+Rec r ea tio n, Ho b b ies
 
 P r o cr eatio n
 
-,  Fer tilit y
+, Fer tilit y
 
-Di urnal , Noct urnal  Sec t
+Di urnal , Noct urnal Sec t
 
 Jupi ter
 
-L uck,  S ucc es s
+L uck, S ucc es s
 
 Age 6 0
 
@@ -212,7 +212,7 @@ S AGI TT AR IUS ( d) | P ISC ES ( n)
 
 Vi rgo
 
-Deta ils,  I ntel lect
+Deta ils, I ntel lect
 
 **M ER C UR Y**
 
@@ -228,7 +228,7 @@ to
 
 Da y J o b ;
 
-Hea lth a nd  W ellnes s
+Hea lth a nd W ellnes s
 
 Diur nal
 
@@ -244,7 +244,7 @@ Wind fa ll
 
 Saturn
 
-Dut y,  Li mi tatio n s
+Dut y, Li mi tatio n s
 
 T wil ig ht Y ea r s
 
@@ -252,7 +252,7 @@ AQU AR IUS ( d) | C APR IC OR N ( n)
 
 Li bra
 
-Dip lo mac y,  B alance
+Dip lo mac y, B alance
 
 **VENU S**
 
@@ -282,7 +282,7 @@ Neu t ra l
 
 Uranus
 
-Cr ea tivi t y,  Up hea val s
+Cr ea tivi t y, Up hea val s
 
 Cul tur al P ul se o f E r a
 
@@ -324,13 +324,13 @@ C ha llen ge
 
 Nept une
 
-I ntui tio n,  I n sp ir atio n
+I ntui tio n, I n sp ir atio n
 
-I nfl ue nce  o f Ge ner atio n
+I nfl ue nce o f Ge ner atio n
 
 Sagitt ari us
 
-P er ip atetic,  Op po r tunities
+P er ip atetic, Op po r tunities
 
 **J UPIT ER**
 
@@ -364,7 +364,7 @@ Up hea val i n Ho u se
 
 Capri corn
 
-Statu s,  P r ag mati s m
+Statu s, P r ag mati s m
 
 **S ATUR N**
 
@@ -374,29 +374,29 @@ Statu s,  P r ag mati s m
 
 Car ee r
 
-,  So cial Statu s
+, So cial Statu s
 
 Ne w Mo o n
 
 :
 
-Op p ortu ni t y,  New
+Op p ortu ni t y, New
 
-B egi n nin g,  Sowi n g
+B egi n nin g, Sowi n g
 
 W axi ng Mo o n
 
 :
 
-Gr o wt h ,  Amb it i on,
+Gr o wt h , Amb it i on,
 
-Lov e,  In c rea se,
+Lov e, In c rea se,
 
 Ga i n s
 
 Nort hern Node
 
-Ke y to  Hap p ines s
+Ke y to Hap p ines s
 
 Gr o wt h P o tential
 
@@ -422,23 +422,23 @@ F ul l Moo n
 
 Amp li f y,
 
-Emp ower,  Def en d
+Emp ower, Def en d
 
 W a ni ng Moo n
 
 :
 
-Ha rvest ,  R elea se,
+Ha rvest , R elea se,
 
 B an i sh , R emove,
 
-C essat i on ,  Sever
+C essat i on , Sever
 
 Sout hern Node
 
 Desire s; W ea k nes ses
 
-Ob stacle s to  S ucc ess
+Ob stacle s to S ucc ess
 
 Pis ces
 
@@ -450,7 +450,7 @@ Cha meleo n
 
 Chal len ges
 
-,  Lo ss,
+, Lo ss,
 
 E ne mies; S u ffer i n g
 
@@ -478,7 +478,7 @@ Sign C hange
 
 Moon
 
-: Em oti ons;  S ubconscious In fluenc es;
+: Em oti ons; S ubconscious In fluenc es;
 
 Mot her.
 
@@ -490,7 +490,7 @@ Mer cu ry
 
 : C omm unicati ons, Intelle ct,
 
-Thought P roc ess;  Mone y and Co mm erce;
+Thought P roc ess; Mone y and Co mm erce;
 
 Ne goti ati ng Business De als.
 
@@ -504,7 +504,7 @@ Sign C hange
 
 Ven u s
 
-: Love, Alli anc es,  R omance, F ashion  &
+: Love, Alli anc es, R omance, F ashion &
 
 Beaut y.
 
@@ -546,7 +546,7 @@ Sign C hange
 
 S atu rn
 
-: Duti es & Obligations;  Discipl
+: Duti es & Obligations; Discipl
 
 ine,
 
@@ -578,7 +578,7 @@ Nep tun e
 
 : Intui ti on, Insp irati on, Dream er,
 
-P oetr y, Musi c, S ensit ivi ty,  C ompassion.
+P oetr y, Musi c, S ensit ivi ty, C ompassion.
 
 Sign
 
@@ -608,13 +608,13 @@ consi dered a planet.
 
 **NODES**
 
-Northern  Node
+Northern Node
 
 : K e y to Happiness; Growth
 
 P otential
 
-S ou thern  Node
+S ou thern Node
 
 : Desires ; W eaknesses;
 
@@ -646,7 +646,7 @@ Ceres
 
 : R esour ces f rom Environment for
 
-S uccess;  C omm unit y Act ivi sm.
+S uccess; C omm unit y Act ivi sm.
 
 Sign C hange
 
@@ -660,13 +660,13 @@ approx . 3
 
 L il ith
 
-: Female Empowerment;  R ebell ion;
+: Female Empowerment; R ebell ion;
 
 S ubversive B ehavior
 
 Vesta
 
-: S ex  and S ex uali ty;  S ex ual Heali n g.
+: S ex and S ex uali ty; S ex ual Heali n g.
 
 Sign C hange
 
@@ -682,11 +682,11 @@ QU IC K R E FE R ENC E SHEE T
 
 **F IRE**
 
-Mo tivated .  Cr ea ti ve.  Gr ea t e x ec uti ve p o tential. St ub b o r n.  An intr ac tab le p er so nali t y.  W ill f ul.
+Mo tivated . Cr ea ti ve. Gr ea t e x ec uti ve p o tential. St ub b o r n. An intr ac tab le p er so nali t y. W ill f ul.
 
 Op p o r tuni stic.
 
-Op inio nated .  I n sp ir atio nal.  Co nf id ent. T akes c o ntr o l. E nt hu s iastic.  E xp lo r er s.  T r ailb laze r s.
+Op inio nated . I n sp ir atio nal. Co nf id ent. T akes c o ntr o l. E nt hu s iastic. E xp lo r er s. T r ailb laze r s.
 
 **A**
 
@@ -708,7 +708,7 @@ Leader s. Goal
 
 -
 
-or ient ed.T akes  char ge. Ini t i ates  order . Acti ve.
+or ient ed.T akes char ge. Ini t i ates order . Acti ve.
 
 Sel f , Identi t y,
 
@@ -730,7 +730,7 @@ Fix ed
 
 **E**
 
-nj oyment  . GO
+nj oyment . GO
 
 **OD DEEDS. CH ILD REN |**
 
@@ -762,31 +762,31 @@ Jo
 
 ur ney.K ING. D IV INAT ION. MYST IC |
 
-Proa ct i ve. Progr es si ve. Seeks out  cha nge.
+Proa ct i ve. Progr es si ve. Seeks out cha nge.
 
 Pione er s.
 
 Cosmopol it an, Res tl essne ss, Per i pateti c, Advent ur e.
 
-Spi rit ual it y, Longer  Voyages ;
+Spi rit ual it y, Longer Voyages ;
 
 Cont i nued Educat i on
 
 **WATER**
 
-Sens iti ve.  Char i s matic.  Stro n g  p eo p le skills.  E mp at hetic.  I nt uiti ve.  I nte nsel y e mo t io nal.  T end er hea r ted  and  the kind e st
+Sens iti ve. Char i s matic. Stro n g p eo p le skills. E mp at hetic. I nt uiti ve. I nte nsel y e mo t io nal. T end er hea r ted and the kind e st
 
-o f the fo ur  ele menta l p er so nas .  I ntuiti ve.  Ar tis tic.  P s ych ic.
+o f the fo ur ele menta l p er so nas . I ntuiti ve. Ar tis tic. P s ych ic.
 
 S elf
 
 -
 
-p r o tective.  Sel f
+p r o tective. Sel f
 
 -
 
-sac r i ficial fo r  gr ea ter  go o d .
+sac r i ficial fo r gr ea ter go o d .
 
 **C**
 
@@ -812,7 +812,7 @@ Le ade rs. Goal
 
 or i ent ed.T akes cha r ge. Ini t iat es
 
-or der . Acti ve. Fami l y;  Roots;  Home
+or der . Acti ve. Fami l y; Roots; Home
 
 .
 
@@ -824,7 +824,7 @@ Sensi ti vi t y, Int ui t i on, Moodi nes s.
 
 **C OR P IO**
 
-**OCT  2 3**
+**OCT 2 3**
 
 **NOV 2 1**
 
@@ -842,7 +842,7 @@ s, Endings
 
 **ISC ES**
 
-**FEB  1 9**
+**FEB 1 9**
 
 **MAR 2 0**
 
@@ -852,7 +852,7 @@ Secl usi on.SUFFER ING, DA NGERS
 
 |
 
-Proa ct i ve. Progr es si ve. See ks out  change. Pi onee rs.
+Proa ct i ve. Progr es si ve. See ks out change. Pi onee rs.
 
 Sel f
 
@@ -870,15 +870,15 @@ Suff er ing
 
 **AIR**
 
-Anal ytical.  I nq uisit ive.  Ma y a p p ea r  d etac hed  or  d isp assio nat e to  o ther s.  Can b e cr uel.  Cap r icio us.  I ntel lectua lizes
+Anal ytical. I nq uisit ive. Ma y a p p ea r d etac hed or d isp assio nat e to o ther s. Can b e cr uel. Cap r icio us. I ntel lectua lizes
 
-e mo tio n s.  So cial.  Anal ytical.  I nd ec isi ve.  Nee d s to  shar e and  exp r ess t ho u ght s wit h t he wo r l d . T hinker s.
+e mo tio n s. So cial. Anal ytical. I nd ec isi ve. Nee d s to shar e and exp r ess t ho u ght s wit h t he wo r l d . T hinker s.
 
 **L**
 
 **IB R A**
 
-**SEP T  2 3**
+**SEP T 2 3**
 
 **OCT 2 2**
 
@@ -890,9 +890,9 @@ Lead er s. Goal
 
 -
 
-or i ent ed.Takes  char ge. Ini t i at es
+or i ent ed.Takes char ge. Ini t i at es
 
-or der . Acti ve. Love, Rel at ionships, Busi ness  Par tners
+or der . Acti ve. Love, Rel at ionships, Busi ness Par tners
 
 .
 
@@ -910,7 +910,7 @@ Indec i si vene ss , Di pl omac y
 
 **J AN 2 0**
 
-**FEB  18**
+**FEB 18**
 
 Fix ed
 
@@ -922,7 +922,7 @@ Rea cti ve. Nurt ur er s. Buil der s. See ks t o
 
 mai nt ai n or der .
 
-Ecce nt ri c, unconvent ional , humani tari an, soci al i nvol vement . Friends;  Hopes;  Gi ft s
+Ecce nt ri c, unconvent ional , humani tari an, soci al i nvol vement . Friends; Hopes; Gi ft s
 
 **G**
 
@@ -942,13 +942,13 @@ P r oact i ve. Progr es si ve. See ks out cha nge.
 
 Pione er s.
 
-Dual it y, Communi ca t i ons,T hought  Pl ane.
+Dual it y, Communi ca t i ons,T hought Pl ane.
 
 Char isma, Per suas i veness , Int ell ect ,Wit .
 
 **EARTH**
 
-Lo yal,  met ho d ical,  p r ag matic.  Do wn
+Lo yal, met ho d ical, p r ag matic. Do wn
 
 -
 
@@ -956,21 +956,21 @@ to
 
 -
 
-ea r t h and  mo st
+ea r t h and mo st
 
-r elia b le o f the fo ur  ele me ntal p er so nas. Util itar ian,  b ut te nd enc y
+r elia b le o f the fo ur ele me ntal p er so nas. Util itar ian, b ut te nd enc y
 
-to  b e mater iali stic.
+to b e mater iali stic.
 
-Stab le,  p r ag ma tic.  Go al
-
--
-
-o r ien ted .  Ma ter ialist. Ca n b e sho r t
+Stab le, p r ag ma tic. Go al
 
 -
 
-si gh ted .  Ri gid ,  stub b o r n.
+o r ien ted . Ma ter ialist. Ca n b e sho r t
+
+-
+
+si gh ted . Ri gid , stub b o r n.
 
 **C**
 
@@ -990,7 +990,7 @@ Leader s. Goal
 
 or i ent ed.T akes cha r ge.
 
-Ini t i at es order . Acti ve. Car eer , Soci al  Stat us
+Ini t i at es order . Acti ve. Car eer , Soci al Stat us
 
 .
 
@@ -1030,7 +1030,7 @@ Dr i ve, Acqui si ti ons, St ubbor nnes s, Posses si vene ss , Reli abi li t y
 
 **AU G 2 3**
 
-**SEPT  2 2**
+**SEPT 2 2**
 
 M ut abl e
 
@@ -1046,7 +1046,7 @@ to
 
 -
 
-Day J ob;  Heal t hand
+Day J ob; Heal t hand
 
 We ll nes s. Pr oact i ve.
 
@@ -1088,7 +1088,7 @@ Ge min i
 
 C harisma,
 
-P ersuasiveness, Intelle ct,  W it
+P ersuasiveness, Intelle ct, W it
 
 .
 

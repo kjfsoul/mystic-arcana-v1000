@@ -17,10 +17,9 @@ Identifier: DB_ENTRY_072625: tarot_ace_of_cups_ten_of_swords_position_healing_sp
 
 - **Position (“Healing”):** In the Healing spot, this pairing invites you to acknowledge past wounds (Ten of Swords) so you can receive the restorative gift of self-love and emotional rebirth (Ace of Cups).
 - **Illustrative Surrounding Cards:**
-    - *Four of Pentacles* (indicating protective boundaries still held too tight) tempers the Ace’s openness, suggesting gentle release rather than plunging in without discernment.
-    - *Star* (a beacon of hope) amplifies the Ten of Swords’ promise that from the darkest night emerges luminous renewal.
+  - _Four of Pentacles_ (indicating protective boundaries still held too tight) tempers the Ace’s openness, suggesting gentle release rather than plunging in without discernment.
+  - _Star_ (a beacon of hope) amplifies the Ten of Swords’ promise that from the darkest night emerges luminous renewal.
 - **Hypothetical Current Transit:** Under a **Venus sextile Neptune** transit, your capacity for compassionate self-forgiveness is heightened, smoothing the transition from hurt to healing.
-
 
 ## D. Personalization Hooks \& Conditional Logic
 
@@ -64,7 +63,6 @@ In a Self-Care Spread, the Healing spot asks: “What must be released so true c
 - **Journal Prompt:** Write a letter to yourself acknowledging the pain, then turn the page and write an affirmation of your heart’s resilience.
 - **Meditation:** Use the “Calm Waters” guided audio in-app, envisioning a cup overflowing into a tranquil lake of self-compassion.
 
-
 ## Mystic Arcana Integration
 
 Discover how the “Inner Waters” spread can support deeper self-inquiry [Link to Mystic Arcana ‘Inner Waters’ Spread Feature]. Join our community thread to share your ritual experiences and find support from kindred spirits.
@@ -78,21 +76,21 @@ Even the darkest chapter holds the promise of dawn. As you release the final sha
 ## Visual Prompts for Content Piece
 
 1. **Header/Featured Image (16:9):**
-Prompt: “A serene chalice overflowing with luminous water under a dawn sky, subtle broken swords lying at its base—symbolizing emotional renewal.”
-Caption: “Emotional rebirth through the Ace of Cups and Ten of Swords.”
-Filename: header_ace10s.png
+   Prompt: “A serene chalice overflowing with luminous water under a dawn sky, subtle broken swords lying at its base—symbolizing emotional renewal.”
+   Caption: “Emotional rebirth through the Ace of Cups and Ten of Swords.”
+   Filename: header_ace10s.png
 2. **In-Content Illustration (Tarot Archetype):**
-Prompt: “Detailed watercolor of the Ace of Cups and Ten of Swords side by side, surrounded by soft peonies and rippling water.”
-Caption: “The sacred interplay of ending and beginning.”
-Filename: arcana_combo1.png
+   Prompt: “Detailed watercolor of the Ace of Cups and Ten of Swords side by side, surrounded by soft peonies and rippling water.”
+   Caption: “The sacred interplay of ending and beginning.”
+   Filename: arcana_combo1.png
 3. **Symbolic Diagram (Astro-Tarot Resonance):**
-Prompt: “A circular diagram with a chalice in the center, ten crossed swords fading outward, overlaid by a faint Venus-Neptune symbol.”
-Caption: “Venus-Neptune transit amplifying compassionate healing.”
-Filename: astro_tarot_diagram.png
+   Prompt: “A circular diagram with a chalice in the center, ten crossed swords fading outward, overlaid by a faint Venus-Neptune symbol.”
+   Caption: “Venus-Neptune transit amplifying compassionate healing.”
+   Filename: astro_tarot_diagram.png
 4. **Inspirational Quote Graphic:**
-Prompt: “Elegant script reading ‘From Ruin to Renewal’ against a misty lotus pond at dawn.”
-Caption: “In every ending lies a new beginning.”
-Filename: quote_renewal.png
+   Prompt: “Elegant script reading ‘From Ruin to Renewal’ against a misty lotus pond at dawn.”
+   Caption: “In every ending lies a new beginning.”
+   Filename: quote_renewal.png
 
 ---
 
@@ -115,7 +113,6 @@ Filename: quote_renewal.png
 9. Hopes/Fears – Three of Wands (Upright)
 10. Outcome – The Hermit (Upright)
 
-
 # A. Element Identification
 
 **Identifier:**
@@ -123,7 +120,6 @@ Filename: quote_renewal.png
 - DB_ENTRY_072625: tarot_daily_draw_ace_of_wands_reversed
 - DB_ENTRY_072625: tarot_3card_past_justice_present_5ofcups_reversed_future_kingofswords
 - DB_ENTRY_072625: tarot_celtic_cross_empress_upright
-
 
 ## B. Base Meanings \& Archetypal Energies
 
@@ -136,7 +132,6 @@ Filename: quote_renewal.png
 - **Past: Justice (Upright):** Fairness prevailed; lessons in truth, balance, accountability set the foundation for your current situation.
 - **Present: Five of Cups (Reversed):** Turning the heart toward healing, beginning to see the gifts among the losses, tentative hope blooms after sorrow.
 - **Future: King of Swords (Upright):** Clarity and wisdom gained, using logic and integrity to chart your next course—a leader emerging from self-understanding.
-
 
 ### Celtic Cross Spread
 
@@ -151,7 +146,6 @@ Filename: quote_renewal.png
 - **Hopes/Fears: Three of Wands (Upright):** Anticipation of progress and reward, mixed with anxiety about outcomes.
 - **Outcome: The Hermit (Upright):** Wisdom gained through reflection; a period to seek truth within, not without.
 
-
 ## C. Contextual Nuances \& Modifiers
 
 ### Daily Draw Context (Ace of Wands Reversed)
@@ -159,19 +153,16 @@ Filename: quote_renewal.png
 - **Reversal emphasizes**: The fire is dampened not extinguished; creative block may come from exhaustion, self-doubt, or situational hurdles like workplace tension or unsupportive relationships.
 - **Hypothetical Surrounding Influence**: Under a current Mars opposite Neptune transit, dreams may feel hard to ground—focus on rest and gentle inspiration, not forcing breakthroughs.
 
-
 ### Three-Card Spread Context
 
 - **Justice’s legacy:** Past choices still radiate out, but present healing is now possible (5 of Cups Reversed)—perhaps due to apology given/received or new perspective.
 - **King of Swords in the future**: If a personal project or conflict resolves, expect to gain respect and insight, possibly mentoring others as a result.
-
 
 ### Celtic Cross Modifiers
 
 - **Empress + Seven of Pentacles Reversed:** Nurture yourself instead of relentlessly pushing; sometimes pausing yields growth.
 - **Eight of Swords Reversed as future:** Breaking a limiting belief (maybe inherited from family/The Devil Reversed external card); liberation is a process, not an event.
 - **Queen of Cups Advice + Hermit Outcome:** Soulful listening and emotional honesty open a path to inner wisdom; solitude can feel healing, not isolating.
-
 
 ## D. Personalization Hooks \& Conditional Logic
 
@@ -184,12 +175,11 @@ Filename: quote_renewal.png
 ## E. Actionable Reflections / Gentle Guidance
 
 - **Daily Draw Reflection:**
-“Where does my creative spark need gentle tending rather than pressure or expectation?”
+  “Where does my creative spark need gentle tending rather than pressure or expectation?”
 - **Three-Card Spread Prompt:**
-“How am I growing kinder to myself—what truth from my past can help heal my present, and how can wise discernment guide my next step?”
+  “How am I growing kinder to myself—what truth from my past can help heal my present, and how can wise discernment guide my next step?”
 - **Celtic Cross Ritual:**
-Light a candle, list aloud old stories you are ready to release (Eight of Swords Reversed), then spend five minutes in silence (Hermit), listening for new wisdom arising in the quiet.
-
+  Light a candle, list aloud old stories you are ready to release (Eight of Swords Reversed), then spend five minutes in silence (Hermit), listening for new wisdom arising in the quiet.
 
 ## F. Database Tagging Keywords
 
@@ -237,7 +227,6 @@ Today’s spread traces a journey from Creation (Empress) through Challenge (Sev
 - Consult the “Inner Mentor” feature for guidance if the Hermit’s invitation to reflection feels daunting.
 - Share your journey on the app forum: your breakthroughs may light the way for another.
 
-
 ## Empowering Conclusion \& Gentle Invitation
 
 Tarot gently reminds us: every blocked path, every echo of regret, is but one season in a long migration home to self. Allow yourself grace in process, trust slow rebirth, and celebrate the wisdom that unfolds not in crashing thunder, but in quiet dawns. May today’s spreads return you to your own luminous nature, one insight at a time.
@@ -247,21 +236,21 @@ Tarot gently reminds us: every blocked path, every echo of regret, is but one se
 ## Visual Prompts for Content Piece
 
 1. **Featured Header Image (16:9):**
-Prompt: “A mystical hand holding a reversed Ace of Wands with ember-like sparks, under a dawn sky, soft golden light infusing the scene.”
-Caption: “The Ace of Wands reversed: Nurturing the spark within.”
-Filename: header_acewands_reversed.png
+   Prompt: “A mystical hand holding a reversed Ace of Wands with ember-like sparks, under a dawn sky, soft golden light infusing the scene.”
+   Caption: “The Ace of Wands reversed: Nurturing the spark within.”
+   Filename: header_acewands_reversed.png
 2. **In-Content Tarot Spread Illustration:**
-Prompt: “Three tarot cards laid on velvet: Justice upright, Five of Cups reversed, and King of Swords upright. Ethereal mist links their landscapes.”
-Caption: “Past, Present, Future—A journey from reckoning to hope to wisdom.”
-Filename: three_card_spread0726.png
+   Prompt: “Three tarot cards laid on velvet: Justice upright, Five of Cups reversed, and King of Swords upright. Ethereal mist links their landscapes.”
+   Caption: “Past, Present, Future—A journey from reckoning to hope to wisdom.”
+   Filename: three_card_spread0726.png
 3. **Celtic Cross Visual Map:**
-Prompt: “Top-down diagram of the Celtic Cross layout with 10 detailed cards; some upright, some reversed. Flashes of color highlight the Empress, Eight of Swords reversed, and The Hermit.”
-Caption: “The unfolding story of your day, mapped through the Celtic Cross.”
-Filename: celtic_cross_0726.png
+   Prompt: “Top-down diagram of the Celtic Cross layout with 10 detailed cards; some upright, some reversed. Flashes of color highlight the Empress, Eight of Swords reversed, and The Hermit.”
+   Caption: “The unfolding story of your day, mapped through the Celtic Cross.”
+   Filename: celtic_cross_0726.png
 4. **Inspiring Quote Graphic:**
-Prompt: “Soft sunrise mist over a tranquil field, with quote in shimmering script: ‘Your wisdom grows each time you listen within.’”
-Caption: “Quiet reflection reveals deep truth.”
-Filename: quote_hermitwisdom.png
+   Prompt: “Soft sunrise mist over a tranquil field, with quote in shimmering script: ‘Your wisdom grows each time you listen within.’”
+   Caption: “Quiet reflection reveals deep truth.”
+   Filename: quote_hermitwisdom.png
 
 ---
 
@@ -279,7 +268,7 @@ Deliver comprehensive interpretations for each of three core spread types, each 
 - **Three-Card Spread (Past-Present-Future)**
 - **Celtic Cross Spread (10 Cards, with Position, Upright/Reversed State)**
 
-*Cycle daily through different cards, card combinations, and reversal states to ensure every variant appears within a thoughtful, non-repeating sequence.*
+_Cycle daily through different cards, card combinations, and reversal states to ensure every variant appears within a thoughtful, non-repeating sequence._
 
 ## A. Element Identification – For Database and Indexing
 
@@ -287,10 +276,9 @@ For each spread, clearly log the date, spread type, and each card name \& orient
 
 Example:
 
-- Identifier: DB_ENTRY_MMDDYY_draw_[CardName_orientation]
-- Identifier: DB_ENTRY_MMDDYY_3card_[PastCard_orientation]_[PresentCard_orientation]_[FutureCard_orientation]
-- Identifier: DB_ENTRY_MMDDYY_celticcross_[1-Present_Card_orientation]...[10-Outcome_Card_orientation]
-
+- Identifier: DB*ENTRY_MMDDYY_draw*[CardName_orientation]
+- Identifier: DB*ENTRY_MMDDYY_3card*[PastCard_orientation]_[PresentCard_orientation]_[FutureCard_orientation]
+- Identifier: DB*ENTRY_MMDDYY_celticcross*[1-Present_Card_orientation]...[10-Outcome_Card_orientation]
 
 ## B. Base Meaning \& Archetypal Energy (For Each Card)
 
@@ -298,20 +286,18 @@ Example:
 - Provide a nuanced reversed meaning.
 - For each card in a spread, distill the **context-independent energy** before integrating the positional dynamics.
 
-
 ## C. Contextual Nuances \& Spread Modifiers
 
 - **One Card Draw:**
-    - Reflect on the card as a “theme” or lens for the day.
-    - Offer both upright and reversed guidance rooted in the user's present possibilities.
+  - Reflect on the card as a “theme” or lens for the day.
+  - Offer both upright and reversed guidance rooted in the user's present possibilities.
 - **Three Card Spread:**
-    - Explain how each card embodies the Past, Present, or Future, and elaborate on narrative arcs formed by their combination.
-    - For each, show how being upright or reversed colors the interpretation and creates interplay or resolution across time.
+  - Explain how each card embodies the Past, Present, or Future, and elaborate on narrative arcs formed by their combination.
+  - For each, show how being upright or reversed colors the interpretation and creates interplay or resolution across time.
 - **Celtic Cross:**
-    - For each card, provide a position-specific meaning (e.g., present, challenge, subconscious), again considering upright and reversed traits.
-    - Highlight key links/syntheses, especially between present, challenge, advice, and outcome cards.
-    - Where especially significant, mention a hypothetical astrological transit or external energy that might flavor the reading.
-
+  - For each card, provide a position-specific meaning (e.g., present, challenge, subconscious), again considering upright and reversed traits.
+  - Highlight key links/syntheses, especially between present, challenge, advice, and outcome cards.
+  - Where especially significant, mention a hypothetical astrological transit or external energy that might flavor the reading.
 
 ## D. Personalization Hooks \& Conditional Logic
 
@@ -322,29 +308,26 @@ For **each spread**, provide at least 2-3 specific, actionable personalization n
 - If recent readings show [pattern or card], this spread's message shifts toward [context].
 - Offer specific Mystic Arcana app features or community tools that could deepen engagement with this reading.
 
-
 ## E. Actionable Reflection \& Daily Practice
 
 - Frame a meaningful reflection prompt or gentle ritual rooted in the combined energies.
 - Suggest a daily practice, meditation, or journaling step that takes the guidance from concept to lived experience.
 
-
 ## F. Robust Tagging (For Each Spread/Card)
 
 - List 5-9 granular, searchable keywords for indexing, e.g.:
-tarot_[cardname]_[upright/reversed], spread_[type], position_[slot], archetype_[theme], etc.
-
+  tarot*[cardname]*[upright/reversed], spread*[type], position*[slot], archetype\_[theme], etc.
 
 ## G. Ready-to-Publish Content
 
 - Compose a full in-app article or blog post (≥700 words) synthesizing the day’s spreads, their deeper wisdom, and practical application for the user.
 - Include:
-    - Empathetic introduction addressing potential user mindset.
-    - In-depth exploration—inviting awareness of how each spread weaves today's narrative.
-    - Concrete journaling/ritual/practical tips for self-inquiry.
-    - Seamless mention of Mystic Arcana app features and/or community spaces to further support reflection.
-    - Empowering conclusion and gentle CTA.
-    - 5-7 SEO keywords.
+  - Empathetic introduction addressing potential user mindset.
+  - In-depth exploration—inviting awareness of how each spread weaves today's narrative.
+  - Concrete journaling/ritual/practical tips for self-inquiry.
+  - Seamless mention of Mystic Arcana app features and/or community spaces to further support reflection.
+  - Empowering conclusion and gentle CTA.
+  - 5-7 SEO keywords.
 - Visual prompts (minimum 3): for featured image, at least one illustrative in-article visual, and at least one symbolic, inspirational quote or diagram graphic; all must be detailed and tailored to each day’s specific cards and themes.
 
 **Guiding Principles:** Maintain radical empathy, ethical empowerment, and deep personalization in all interpretations. Explicitly avoid deterministic, fatalistic, or stereotypical language—always foreground user agency, context, and the open-ended potential for growth and healing.
@@ -357,7 +340,7 @@ tarot_[cardname]_[upright/reversed], spread_[type], position_[slot], archetype_[
 - **Three Card Past-Present-Future:** Past – “Temperance” (Upright), Present – “Eight of Swords” (Reversed), Future – “Page of Cups” (Upright)
 - **Celtic Cross:** 1. Present – “Four of Wands” (Upright), 2. Challenge – “Hanged Man” (Reversed), 3. Past – “Ten of Cups” (Upright), etc.
 
-*Use this prompt to fully automate and structure the daily generation of exhaustive, user-tailored Mystic Arcana database and content entries for seamless deployment.*
+_Use this prompt to fully automate and structure the daily generation of exhaustive, user-tailored Mystic Arcana database and content entries for seamless deployment._
 
 If you need a full, worked example in this format for today, let me know!
 
@@ -373,7 +356,6 @@ Certainly! Here’s a comprehensive and highly structured daily prompt, seamless
 - Special exploration of today’s notable planetary and intergalactic celestial alignments
 - Enhanced database structure for advanced personalization, contextual hooks, and engaging, publishable articles
 
-
 # Mystic Arcana Daily Oracle Enrichment Prompt – Tarot \& Astrology Synergy
 
 ## SYSTEMATIC FOCUS (Cycle Daily Across All Cards, Spreads, Signs, and Celestial Configurations)
@@ -386,7 +368,6 @@ Deliver full daily database entries for each of the following:
 - Three Card Past–Present–Future
 - Celtic Cross (10 Cards, Upright/Reversed, All Positions Detailed)
 
-
 ### 2. Astrology Core Elements
 
 - Complete daily written horoscope for each of the 12 zodiac sun signs
@@ -394,32 +375,28 @@ Deliver full daily database entries for each of the following:
 - One featured **challenge/negative compatibility** pairing (Tension area and guidance, always framed responsibly)
 - Advanced “Cosmic Focus” on notable planetary alignments, intergalactic positions, and special celestial configurations for the day (e.g., rare transits, retrogrades, planetary alignments, lunar nodes, etc.)
 
-
 ## A. Element Identification — For Structured Database Indexing
 
 For each section, generate precise, unique identifiers for archiving:
 
-- Tarot: e.g., DB_ENTRY_072625_draw_[Card_orientation]; DB_ENTRY_072625_celticcross_[1-Card_orientation...]
-- Astrology: DB_ENTRY_072625_horoscope_[zodiacsign]; DB_ENTRY_072625_compatibility_[signA_signB]; DB_ENTRY_072625_cosmic_focus
-
+- Tarot: e.g., DB*ENTRY_072625_draw*[Card_orientation]; DB*ENTRY_072625_celticcross*[1-Card_orientation...]
+- Astrology: DB*ENTRY_072625_horoscope*[zodiacsign]; DB*ENTRY_072625_compatibility*[signA_signB]; DB_ENTRY_072625_cosmic_focus
 
 ## B. Core Meanings \& Archetypal Energies
 
 **Tarot:**
 
 - Each card: Brief upright and reversed meanings specific to its position in each spread
-**Astrology:**
+  **Astrology:**
 - Each sun sign: Daily horoscope rooted in today’s planetary transits
 - Compatibility: Interpret the elemental, archetypal resonance (or disharmony), citing how today’s alignments modify outcomes
 - Cosmic Alignments: Explain the base energy of the main planetary transit, intergalactic alignment, or celestial phenomenon
 
-
 ## C. Contextual Nuances \& Cross-Links
 
 - Tarot: For each spread/card, reflect on how position, reversal, and surrounding cards alter meaning (with practical and symbolic notes)
-- Astrology: For each sign, spotlight *how* today’s sky shapes love, career, mood, and self-growth; for compatibilities, explain how the day's alignment amplifies harmony or friction
+- Astrology: For each sign, spotlight _how_ today’s sky shapes love, career, mood, and self-growth; for compatibilities, explain how the day's alignment amplifies harmony or friction
 - Cosmic Focus: For the highlighted celestial event, show how it may influence collective or individual awareness, opportunities, and challenges—invite the user to reflect on its deeper significance
-
 
 ## D. Personalization Hooks \& Conditional Logic
 
@@ -429,7 +406,6 @@ For every spread, sign, compatibility, and cosmic event, add 2–3 personalizati
 - “FOR users journaling ‘restlessness’ today and have Moon in Pisces, interpret the Three of Swords in Present as...”
 - “IF user has recently logged [keyword/track record/etc.], suggest linking today’s cosmic event to [feature, ritual, forum discussion].”
 
-
 ## E. Actionable Reflections \& Guided Practices
 
 For each principal meaning/context in tarot and astrology, deliver:
@@ -437,46 +413,41 @@ For each principal meaning/context in tarot and astrology, deliver:
 - An empowering reflection prompt or mindful ritual
 - A suggested practice (journaling, meditation, micro-action) uniquely tailored to the day's energies
 
-
 ## F. Tagging \& Metadata (For Seamless Indexing)
 
 For each section, specify 5–9 granular, searchable keywords:
 
-- tarot_[card]_[upright/reversed], spread_[type], astrology_daily_horoscope_[sign], astrology_compatibility_[signA_signB]_[positive/challenge], cosmic_event_[type], [celestial_body], etc.
-
+- tarot*[card]*[upright/reversed], spread*[type], astrology_daily_horoscope*[sign], astrology*compatibility*[signA_signB]_[positive/challenge], cosmic_event_[type], [celestial_body], etc.
 
 ## G. Ready-to-Publish Content Piece
 
 - Compose a full-length, in-app article (≥700 words), integrating the day’s tarot and astrology themes, weaving them together for holistic guidance
 - Structure:
-    - Gentle, resonant introduction addressing user’s daily mindset and curiosity about cosmic patterns
-    - Thorough exploration of tarot and horoscope energies, linking where they harmonize or contrast
-    - Compatibility section—storytelling approach for both pairs
-    - In-depth cosmic alignment explanation—mythopoetic, symbolic, scientific, and practical angles
-    - Concrete daily practices/journal invitations
-    - Seamless Mystic Arcana product integration for readings, horoscope tools, community features, etc.
-    - Empowering conclusion and final CTA
-    - 5–7 SEO keywords
-
+  - Gentle, resonant introduction addressing user’s daily mindset and curiosity about cosmic patterns
+  - Thorough exploration of tarot and horoscope energies, linking where they harmonize or contrast
+  - Compatibility section—storytelling approach for both pairs
+  - In-depth cosmic alignment explanation—mythopoetic, symbolic, scientific, and practical angles
+  - Concrete daily practices/journal invitations
+  - Seamless Mystic Arcana product integration for readings, horoscope tools, community features, etc.
+  - Empowering conclusion and final CTA
+  - 5–7 SEO keywords
 
 ## H. Visual Prompts — For Rich Content and Illustration
 
 - Header/featured image (evocative, symbolic of the day’s leading theme; 16:9 format)
 - At least two in-article visuals, such as:
-    - Detailed illustration/diagram of the current planetary/celestial alignment
-    - Artistic tarot card cluster for today's pulls
-    - Inspirational quote art blending tarot-astrology motifs
+  - Detailed illustration/diagram of the current planetary/celestial alignment
+  - Artistic tarot card cluster for today's pulls
+  - Inspirational quote art blending tarot-astrology motifs
 - Each with a unique, descriptive prompt, caption, and filename
-
 
 ## GUIDING PRINCIPLES
 
-- *Radical Empathy*: Frame all interpretations with compassion, hope, empowerment, and respect for user agency and free will
-- *Strategic Personalization*: Use explicit logic, journal links, and feature prompts so each user’s experience grows richer over time
-- *Ethical Alignment*: Avoid fatalism or stereotypes; every pairing, challenge, and celestial message must offer perspective and healthy choices
-- *Serendipitous Interconnection*: Highlight how tarot, zodiac, and cosmic events weave a deeper story, inviting synchronicity and reflection
-- *Plug-and-Play Readiness*: All sections must be exhaustive, richly detailed, and instantly deployable for app or web publication with no further editing needed
-
+- _Radical Empathy_: Frame all interpretations with compassion, hope, empowerment, and respect for user agency and free will
+- _Strategic Personalization_: Use explicit logic, journal links, and feature prompts so each user’s experience grows richer over time
+- _Ethical Alignment_: Avoid fatalism or stereotypes; every pairing, challenge, and celestial message must offer perspective and healthy choices
+- _Serendipitous Interconnection_: Highlight how tarot, zodiac, and cosmic events weave a deeper story, inviting synchronicity and reflection
+- _Plug-and-Play Readiness_: All sections must be exhaustive, richly detailed, and instantly deployable for app or web publication with no further editing needed
 
 ## EXAMPLE FOCUS – [For Today, 07/26/25]
 
@@ -487,5 +458,4 @@ For each section, specify 5–9 granular, searchable keywords:
 - Compatibility: Leo + Sagittarius (positive), Taurus + Aquarius (challenge)
 - Cosmic Focus: Saturn trine Uranus with Venus conjunct the Galactic Center—(interpret the scientific, mythic, and practical meaning for the day!)
 
-If you’d like today’s *fully worked example* in this format, just say the word!
-
+If you’d like today’s _fully worked example_ in this format, just say the word!

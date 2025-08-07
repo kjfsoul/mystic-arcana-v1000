@@ -1,10 +1,10 @@
 // src/utils/logger.ts
- 
+
 export enum LogLevel {
-  DEBUG = 'DEBUG',
-  INFO = 'INFO',
-  WARN = 'WARN',
-  ERROR = 'ERROR',
+  DEBUG = "DEBUG",
+  INFO = "INFO",
+  WARN = "WARN",
+  ERROR = "ERROR",
 }
 export interface LogEntry {
   timestamp: string;
@@ -31,7 +31,7 @@ class Logger {
     userId?: string,
     metadata?: Record<string, unknown>,
     message?: string,
-    error?: Error
+    error?: Error,
   ) {
     const entry: LogEntry = {
       timestamp: new Date().toISOString(),
@@ -57,7 +57,7 @@ class Logger {
     action: string,
     userId?: string,
     metadata?: Record<string, unknown>,
-    message?: string
+    message?: string,
   ) {
     this.log(LogLevel.DEBUG, action, userId, metadata, message);
   }
@@ -65,7 +65,7 @@ class Logger {
     action: string,
     userId?: string,
     metadata?: Record<string, unknown>,
-    message?: string
+    message?: string,
   ) {
     this.log(LogLevel.INFO, action, userId, metadata, message);
   }
@@ -73,7 +73,7 @@ class Logger {
     action: string,
     userId?: string,
     metadata?: Record<string, unknown>,
-    message?: string
+    message?: string,
   ) {
     this.log(LogLevel.WARN, action, userId, metadata, message);
   }
@@ -82,7 +82,7 @@ class Logger {
     userId?: string,
     metadata?: Record<string, unknown>,
     error?: Error,
-    message?: string
+    message?: string,
   ) {
     this.log(LogLevel.ERROR, action, userId, metadata, message, error);
   }

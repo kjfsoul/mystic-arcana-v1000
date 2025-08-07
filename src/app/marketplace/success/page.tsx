@@ -1,15 +1,15 @@
-'use client';
- 
-import React, { useEffect, useState, Suspense } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+"use client";
+
+import React, { useEffect, useState, Suspense } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 function SuccessPageContent() {
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get('session_id');
+  const sessionId = searchParams.get("session_id");
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     if (sessionId) {
       // In a real implementation, you'd fetch order details from your backend
@@ -17,9 +17,9 @@ function SuccessPageContent() {
       setTimeout(() => {
         setOrderDetails({
           id: sessionId,
-          status: 'succeeded',
-          amount: '$89.00',
-          product: 'RETROGRADE Fashion Drop – Vintage Cosmic Collection'
+          status: "succeeded",
+          amount: "$89.00",
+          product: "RETROGRADE Fashion Drop – Vintage Cosmic Collection",
         });
         setLoading(false);
       }, 1000);
@@ -30,13 +30,15 @@ function SuccessPageContent() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
           <div className="text-6xl mb-4">🌟</div>
-          <h1 className="text-2xl font-bold text-white mb-4">Confirming Your Cosmic Order</h1>
+          <h1 className="text-2xl font-bold text-white mb-4">
+            Confirming Your Cosmic Order
+          </h1>
           <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto" />
         </motion.div>
       </div>
@@ -44,7 +46,7 @@ function SuccessPageContent() {
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-6">
-      <motion.div 
+      <motion.div
         className="max-w-md w-full bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 text-center"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -66,7 +68,7 @@ function SuccessPageContent() {
             🎉
           </motion.div>
         </motion.div>
-        <motion.h1 
+        <motion.h1
           className="text-3xl font-bold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,35 +76,43 @@ function SuccessPageContent() {
         >
           Cosmic Order Complete!
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="text-white/80 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          Your mystical treasures are being prepared for their journey to you. 
+          Your mystical treasures are being prepared for their journey to you.
           The universe has aligned to deliver cosmic magic to your doorstep.
         </motion.p>
         {orderDetails && (
-          <motion.div 
+          <motion.div
             className="bg-white/5 rounded-lg p-4 mb-6 text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">Order Summary</h3>
+            <h3 className="text-lg font-semibold text-purple-300 mb-3">
+              Order Summary
+            </h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-white/60">Order ID:</span>
-                <span className="text-white font-mono">#{orderDetails.id.slice(-8).toUpperCase()}</span>
+                <span className="text-white font-mono">
+                  #{orderDetails.id.slice(-8).toUpperCase()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-white/60">Product:</span>
-                <span className="text-white text-right">{orderDetails.product}</span>
+                <span className="text-white text-right">
+                  {orderDetails.product}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-white/60">Total:</span>
-                <span className="text-green-300 font-semibold">{orderDetails.amount}</span>
+                <span className="text-green-300 font-semibold">
+                  {orderDetails.amount}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-white/60">Status:</span>
@@ -111,33 +121,34 @@ function SuccessPageContent() {
             </div>
           </motion.div>
         )}
-        <motion.div 
+        <motion.div
           className="space-y-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
         >
           <p className="text-white/70 text-sm">
-            📧 A confirmation email with tracking details will be sent to you shortly.
+            📧 A confirmation email with tracking details will be sent to you
+            shortly.
           </p>
-          
+
           <p className="text-white/70 text-sm">
             🚚 Expected delivery: 5-10 business days
           </p>
         </motion.div>
-        <motion.div 
+        <motion.div
           className="flex flex-col sm:flex-row gap-3 mt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <Link 
+          <Link
             href="/marketplace"
             className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 text-center"
           >
             Continue Shopping
           </Link>
-          <Link 
+          <Link
             href="/"
             className="flex-1 px-6 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-200 text-center"
           >
@@ -174,19 +185,23 @@ function SuccessPageContent() {
 }
 export default function SuccessPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-        >
-          <div className="text-6xl mb-4">🌟</div>
-          <h1 className="text-2xl font-bold text-white mb-4">Loading Order Details</h1>
-          <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto" />
-        </motion.div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <div className="text-6xl mb-4">🌟</div>
+            <h1 className="text-2xl font-bold text-white mb-4">
+              Loading Order Details
+            </h1>
+            <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto" />
+          </motion.div>
+        </div>
+      }
+    >
       <SuccessPageContent />
     </Suspense>
   );

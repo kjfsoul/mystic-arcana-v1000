@@ -12,10 +12,7 @@
       "life path guidance",
       "talent identification"
     ],
-    "limitations": [
-      "requires accurate birth time",
-      "interpretive skill needed"
-    ]
+    "limitations": ["requires accurate birth time", "interpretive skill needed"]
   },
   "transit_analysis": {
     "name": "Transit Analysis",
@@ -48,10 +45,7 @@
       "understanding dynamics",
       "working through challenges"
     ],
-    "limitations": [
-      "both birth times needed",
-      "complex interpretation"
-    ]
+    "limitations": ["both birth times needed", "complex interpretation"]
   },
   "solar_return": {
     "name": "Solar Return Charts",
@@ -66,10 +60,7 @@
       "understanding yearly themes",
       "birthday guidance"
     ],
-    "limitations": [
-      "one-year timeframe",
-      "general themes only"
-    ]
+    "limitations": ["one-year timeframe", "general themes only"]
   },
   "horary_astrology": {
     "name": "Horary Astrology",
@@ -84,9 +75,6 @@
       "finding lost objects",
       "decision making"
     ],
-    "limitations": [
-      "requires specific question format",
-      "complex rules"
-    ]
+    "limitations": ["requires specific question format", "complex rules"]
   }
 }

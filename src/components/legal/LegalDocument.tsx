@@ -1,5 +1,5 @@
 "use client";
- 
+
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -16,7 +16,7 @@ export const LegalDocument: React.FC<LegalDocumentProps> = ({
     Array<{ left: number; top: number; duration: number; delay: number }>
   >([]);
   const [mounted, setMounted] = useState(false);
- 
+
   useEffect(() => {
     // Generate star positions only on client side to avoid hydration mismatch
     const starData = Array.from({ length: 50 }, () => ({

@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         undefined,
         { email },
         error,
-        `Login failed for email: ${email}.`
+        `Login failed for email: ${email}.`,
       );
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       "auth_login_success",
       data.user?.id,
       { email },
-      `User ${data.user?.id} logged in successfully.`
+      `User ${data.user?.id} logged in successfully.`,
     );
     return NextResponse.json(data);
   } catch (error) {
@@ -33,11 +33,11 @@ export async function POST(request: NextRequest) {
       undefined,
       {},
       error as Error,
-      "Internal server error during login."
+      "Internal server error during login.",
     );
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

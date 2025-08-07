@@ -14,6 +14,7 @@
 Add these URLs to the "Redirect URLs" field:
 
 **Development:**
+
 ```
 http://localhost:3000/auth/callback
 http://localhost:3001/auth/callback
@@ -21,6 +22,7 @@ http://localhost:3002/auth/callback
 ```
 
 **Production:**
+
 ```
 https://yourdomain.com/auth/callback
 https://www.yourdomain.com/auth/callback
@@ -39,6 +41,7 @@ https://www.yourdomain.com/auth/callback
 ### 4. Add Google Credentials to Supabase
 
 Back in Supabase Dashboard:
+
 1. Paste your Google Client ID
 2. Paste your Google Client Secret
 3. Save the configuration
@@ -61,6 +64,7 @@ Back in Supabase Dashboard:
 ### Current Application Configuration
 
 The application is configured to use:
+
 - Redirect URL: `${window.location.origin}/auth/callback`
 - This dynamically adapts to your current domain
 - OAuth handler: `/src/app/auth/callback/route.ts`

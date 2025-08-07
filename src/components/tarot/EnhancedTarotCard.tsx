@@ -1,16 +1,16 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { TarotCard as TarotCardType } from '@/types/tarot';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { TarotCard as TarotCardType } from "@/types/tarot";
 interface EnhancedTarotCardProps {
   card: TarotCardType;
   isFlipped?: boolean;
   isReversed?: boolean;
   onFlip?: () => void;
   disabled?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   showBioluminescence?: boolean;
   delay?: number;
   className?: string;
@@ -21,30 +21,32 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   isReversed = false,
   onFlip,
   disabled = false,
-  size = 'medium',
+  size = "medium",
   showBioluminescence = true,
   delay = 0,
-  className = ''
+  className = "",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [glowIntensity, setGlowIntensity] = useState(0);
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; delay: number }>
+  >([]);
   // Size configurations
   const sizeConfig = {
-    small: { width: 120, height: 180, fontSize: '12px' },
-    medium: { width: 160, height: 240, fontSize: '14px' },
-    large: { width: 200, height: 300, fontSize: '16px' }
+    small: { width: 120, height: 180, fontSize: "12px" },
+    medium: { width: 160, height: 240, fontSize: "14px" },
+    large: { width: 200, height: 300, fontSize: "16px" },
   };
   const config = sizeConfig[size];
   // Generate bioluminescent particles
- 
+
   useEffect(() => {
     if (showBioluminescence && (isHovered || isFlipped)) {
       const newParticles = Array.from({ length: 8 }, (_, i) => ({
         id: i,
         x: Math.random() * config.width,
         y: Math.random() * config.height,
-        delay: Math.random() * 2
+        delay: Math.random() * 2,
       }));
       setParticles(newParticles);
     } else {
@@ -52,11 +54,11 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
     }
   }, [isHovered, isFlipped, showBioluminescence, config.width, config.height]);
   // Dynamic glow effect
- 
+
   useEffect(() => {
     if (isHovered || isFlipped) {
       const interval = setInterval(() => {
-        setGlowIntensity(prev => (prev + 0.1) % 1);
+        setGlowIntensity((prev) => (prev + 0.1) % 1);
       }, 100);
       return () => clearInterval(interval);
     } else {
@@ -70,11 +72,11 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
   // Bioluminescent colors that shift
   const getBioluminescentGlow = () => {
     const colors = [
-      'rgba(0, 255, 255, 0.3)', // Cyan
-      'rgba(127, 255, 212, 0.3)', // Aquamarine  
-      'rgba(173, 216, 230, 0.3)', // Light blue
-      'rgba(144, 238, 144, 0.3)', // Light green
-      'rgba(221, 160, 221, 0.3)'  // Plum
+      "rgba(0, 255, 255, 0.3)", // Cyan
+      "rgba(127, 255, 212, 0.3)", // Aquamarine
+      "rgba(173, 216, 230, 0.3)", // Light blue
+      "rgba(144, 238, 144, 0.3)", // Light green
+      "rgba(221, 160, 221, 0.3)", // Plum
     ];
     const colorIndex = Math.floor(glowIntensity * colors.length);
     return colors[colorIndex] || colors[0];
@@ -83,7 +85,7 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
     hidden: {
       rotateY: 180,
       scale: 0.8,
-      opacity: 0
+      opacity: 0,
     },
     visible: {
       rotateY: isFlipped ? 0 : 180,
@@ -92,11 +94,11 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
       transition: {
         delay,
         duration: 0.8,
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
   return (
     <motion.div
@@ -117,17 +119,17 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
           className="absolute inset-0 rounded-lg pointer-events-none"
           style={{
             background: `radial-gradient(circle, ${getBioluminescentGlow()} 0%, transparent 70%)`,
-            filter: 'blur(8px)',
-            transform: 'scale(1.2)'
+            filter: "blur(8px)",
+            transform: "scale(1.2)",
           }}
           animate={{
             opacity: [0.3, 0.7, 0.3],
-            scale: [1.1, 1.3, 1.1]
+            scale: [1.1, 1.3, 1.1],
           }}
           transition={{
             duration: 2,
             repeat: Infinity,
-            ease: 'easeInOut'
+            ease: "easeInOut",
           }}
         />
       )}
@@ -137,21 +139,22 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{
           duration: 0.8,
-          type: 'spring',
+          type: "spring",
           stiffness: 100,
-          damping: 15
+          damping: 15,
         }}
-        style={{ transformStyle: 'preserve-3d' }}
+        style={{ transformStyle: "preserve-3d" }}
       >
         {/* Card Back */}
         <div
           className="absolute inset-0 w-full h-full backface-hidden rounded-lg overflow-hidden border-2 border-purple-500/30"
           style={{
-            backfaceVisibility: 'hidden',
-            background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)',
-            boxShadow: isHovered 
-              ? '0 0 20px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)'
-              : '0 0 10px rgba(139, 92, 246, 0.3)'
+            backfaceVisibility: "hidden",
+            background:
+              "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)",
+            boxShadow: isHovered
+              ? "0 0 20px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)"
+              : "0 0 10px rgba(139, 92, 246, 0.3)",
           }}
         >
           <Image
@@ -161,7 +164,7 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
             className="object-cover"
             sizes={`${config.width}px`}
           />
-          
+
           {/* Mystical pattern overlay */}
           <div
             className="absolute inset-0 opacity-30"
@@ -170,7 +173,7 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
                 radial-gradient(circle at 25% 25%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
                 linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%)
-              `
+              `,
             }}
           />
         </div>
@@ -178,36 +181,37 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
         <div
           className="absolute inset-0 w-full h-full backface-hidden rounded-lg overflow-hidden border-2 border-amber-500/50"
           style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+            background:
+              "linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)",
             boxShadow: isFlipped
-              ? '0 0 30px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.3)'
-              : '0 0 15px rgba(251, 191, 36, 0.4)'
+              ? "0 0 30px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.3)"
+              : "0 0 15px rgba(251, 191, 36, 0.4)",
           }}
         >
           <div
             className="relative w-full h-full"
             style={{
-              transform: isReversed ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 0.3s ease-in-out'
+              transform: isReversed ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s ease-in-out",
             }}
           >
             <Image
               src={card.frontImage}
-              alt={`${card.name}${isReversed ? ' (Reversed)' : ''}`}
+              alt={`${card.name}${isReversed ? " (Reversed)" : ""}`}
               fill
               className="object-cover"
               sizes={`${config.width}px`}
             />
-            
+
             {/* Reversed indicator */}
             {isReversed && (
               <div
                 className="absolute top-2 right-2 bg-red-600/90 text-white px-2 py-1 rounded text-xs font-bold z-10"
                 style={{
-                  transform: 'rotate(180deg)',
-                  fontSize: '10px'
+                  transform: "rotate(180deg)",
+                  fontSize: "10px",
                 }}
               >
                 REVERSED
@@ -216,52 +220,54 @@ export const EnhancedTarotCard: React.FC<EnhancedTarotCardProps> = ({
           </div>
           {/* Card name overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-            <h3 
+            <h3
               className="text-white font-semibold text-center"
               style={{ fontSize: config.fontSize }}
             >
               {card.name}
-              {isReversed && ' (R)'}
+              {isReversed && " (R)"}
             </h3>
           </div>
         </div>
       </motion.div>
       {/* Bioluminescent particles */}
       <AnimatePresence>
-        {showBioluminescence && particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute pointer-events-none w-2 h-2 rounded-full"
-            style={{
-              left: particle.x,
-              top: particle.y,
-              background: 'radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, transparent 70%)',
-              filter: 'blur(1px)'
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
-              y: [0, -50]
-            }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{
-              duration: 3,
-              delay: particle.delay,
-              repeat: Infinity,
-              ease: 'easeOut'
-            }}
-          />
-        ))}
+        {showBioluminescence &&
+          particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute pointer-events-none w-2 h-2 rounded-full"
+              style={{
+                left: particle.x,
+                top: particle.y,
+                background:
+                  "radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, transparent 70%)",
+                filter: "blur(1px)",
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+                y: [0, -50],
+              }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{
+                duration: 3,
+                delay: particle.delay,
+                repeat: Infinity,
+                ease: "easeOut",
+              }}
+            />
+          ))}
       </AnimatePresence>
       {/* Mobile touch feedback */}
       {!disabled && (
         <motion.div
           className="absolute inset-0 pointer-events-none rounded-lg"
           initial={{ opacity: 0 }}
-          animate={{ 
+          animate={{
             opacity: isHovered ? 0.1 : 0,
-            background: isHovered ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+            background: isHovered ? "rgba(255, 255, 255, 0.1)" : "transparent",
           }}
           transition={{ duration: 0.2 }}
         />

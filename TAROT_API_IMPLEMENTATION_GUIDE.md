@@ -1,23 +1,27 @@
 # Enhanced Tarot API Implementation Guide
 
 ## Overview
+
 This guide provides complete implementation for enhanced tarot API endpoints with AstrologyGuru integration, including hybrid readings that combine tarot wisdom with astrological insights.
 
 ## 🎯 Key Enhancements
 
 ### 1. **POST /api/tarot/draw** - Enhanced with Astrology
+
 - Default spread type changed to '3-card' as requested
 - Integrates real-time planetary positions via Swiss Ephemeris
 - Provides cosmic timing advice for each card
 - Supports birth data for personalized readings
 
 ### 2. **POST /api/tarot/shuffle** - Cosmic Randomization
+
 - New algorithms: 'cosmic-fisher-yates' and 'quantum'
 - Uses planetary positions for entropy seed
 - Stores shuffle state for consistent draws
 - Preview includes cosmic messages
 
 ### 3. **POST /api/tarot/save-reading** - Hybrid Storage
+
 - Comprehensive validation with Zod schema
 - Stores astrological insights alongside tarot data
 - User quota management (50/day, 500/month)
@@ -30,46 +34,65 @@ This guide provides complete implementation for enhanced tarot API endpoints wit
 ```typescript
 // File: /src/app/api/tarot/draw/route.ts
 
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-import Logger from '@/utils/logger';
-import { AstrologyGuruAgent } from '@/src/agents/astrology-guru';
-import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import Logger from "@/utils/logger";
+import { AstrologyGuruAgent } from "@/src/agents/astrology-guru";
+import { SwissEphemerisShim } from "@/lib/astrology/SwissEphemerisShim";
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
-  const logger = new Logger('tarot-api-enhanced');
+  const logger = new Logger("tarot-api-enhanced");
 
   try {
     const body = await request.json();
-    const { 
-      spread_type = '3-card', // Changed default to 3-card as requested
+    const {
+      spread_type = "3-card", // Changed default to 3-card as requested
       user_id,
-      deckId = '00000000-0000-0000-0000-000000000001',
+      deckId = "00000000-0000-0000-0000-000000000001",
       allowReversed = true,
       includeAstrology = true, // New: Include astrological insights
-      birthData = null // Optional: User's birth data for personalized readings
+      birthData = null, // Optional: User's birth data for personalized readings
     } = body;
 
     // Validate spread_type
-    const validSpreads = ['single', '3-card', 'celtic-cross', '5-card', '7-card'];
+    const validSpreads = [
+      "single",
+      "3-card",
+      "celtic-cross",
+      "5-card",
+      "7-card",
+    ];
     if (!validSpreads.includes(spread_type)) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid spread_type. Must be one of: ' + validSpreads.join(', '),
-        code: 'INVALID_SPREAD_TYPE'
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Invalid spread_type. Must be one of: " + validSpreads.join(", "),
+          code: "INVALID_SPREAD_TYPE",
+        },
+        { status: 400 },
+      );
     }
 
     // [Rest of implementation continues as in JSON file...]
   } catch (error) {
-    logger.error('tarot_draw_enhanced_error', undefined, {}, error as Error, 'Enhanced draw failed');
-    return NextResponse.json({
-      success: false,
-      error: 'Internal server error',
-      code: 'INTERNAL_ERROR',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    logger.error(
+      "tarot_draw_enhanced_error",
+      undefined,
+      {},
+      error as Error,
+      "Enhanced draw failed",
+    );
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Internal server error",
+        code: "INTERNAL_ERROR",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
   }
 }
 ```
@@ -77,6 +100,7 @@ export async function POST(request: NextRequest) {
 ### Sample Request/Response
 
 **Request:**
+
 ```json
 POST /api/tarot/draw
 {
@@ -92,6 +116,7 @@ POST /api/tarot/draw
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -181,13 +206,13 @@ CREATE INDEX idx_tarot_readings_created_at ON tarot_readings(created_at DESC);
 ALTER TABLE tarot_readings ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies
-CREATE POLICY users_can_view_own_readings ON tarot_readings 
+CREATE POLICY users_can_view_own_readings ON tarot_readings
   FOR SELECT USING (auth.uid() = user_id);
 
-CREATE POLICY users_can_view_public_readings ON tarot_readings 
+CREATE POLICY users_can_view_public_readings ON tarot_readings
   FOR SELECT USING (is_public = true);
 
-CREATE POLICY users_can_insert_own_readings ON tarot_readings 
+CREATE POLICY users_can_insert_own_readings ON tarot_readings
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 ```
 
@@ -196,6 +221,7 @@ CREATE POLICY users_can_insert_own_readings ON tarot_readings
 ### Collection Setup
 
 1. **Variables:**
+
    ```
    base_url: http://localhost:3000
    user_id: your-test-user-id
@@ -210,36 +236,37 @@ CREATE POLICY users_can_insert_own_readings ON tarot_readings
    - Retrieve saved readings with pagination
 
 ### Example Test Script
+
 ```javascript
 // Postman Test for Draw Endpoint
 pm.test("Status is 200", function () {
-    pm.response.to.have.status(200);
+  pm.response.to.have.status(200);
 });
 
 pm.test("Response has required fields", function () {
-    const jsonData = pm.response.json();
-    pm.expect(jsonData).to.have.property('success', true);
-    pm.expect(jsonData.data).to.have.property('cards');
-    pm.expect(jsonData.data.cards).to.be.an('array');
-    
-    if (jsonData.data.astrology) {
-        pm.expect(jsonData.data.astrology).to.have.property('insights');
-        pm.expect(jsonData.data.astrology).to.have.property('planetaryInfluences');
-    }
+  const jsonData = pm.response.json();
+  pm.expect(jsonData).to.have.property("success", true);
+  pm.expect(jsonData.data).to.have.property("cards");
+  pm.expect(jsonData.data.cards).to.be.an("array");
+
+  if (jsonData.data.astrology) {
+    pm.expect(jsonData.data.astrology).to.have.property("insights");
+    pm.expect(jsonData.data.astrology).to.have.property("planetaryInfluences");
+  }
 });
 
 pm.test("Card count matches spread type", function () {
-    const jsonData = pm.response.json();
-    const spreadType = pm.request.body.spread_type || '3-card';
-    const expectedCounts = {
-        'single': 1,
-        '3-card': 3,
-        '5-card': 5,
-        '7-card': 7,
-        'celtic-cross': 10
-    };
-    
-    pm.expect(jsonData.data.cards.length).to.equal(expectedCounts[spreadType]);
+  const jsonData = pm.response.json();
+  const spreadType = pm.request.body.spread_type || "3-card";
+  const expectedCounts = {
+    single: 1,
+    "3-card": 3,
+    "5-card": 5,
+    "7-card": 7,
+    "celtic-cross": 10,
+  };
+
+  pm.expect(jsonData.data.cards.length).to.equal(expectedCounts[spreadType]);
 });
 ```
 
@@ -256,10 +283,12 @@ pm.test("Card count matches spread type", function () {
       "type": "n8n-nodes-base.cron",
       "parameters": {
         "triggerTimes": {
-          "item": [{
-            "hour": 2,
-            "minute": 0
-          }]
+          "item": [
+            {
+              "hour": 2,
+              "minute": 0
+            }
+          ]
         }
       }
     },
@@ -321,7 +350,7 @@ pm.test("Card count matches spread type", function () {
 const readings = items[0].json.readings;
 const userJourneys = {};
 
-readings.forEach(reading => {
+readings.forEach((reading) => {
   const userId = reading.user_id;
   if (!userJourneys[userId]) {
     userJourneys[userId] = {
@@ -329,27 +358,34 @@ readings.forEach(reading => {
       spreadsUsed: new Set(),
       hasUsedAstrology: false,
       firstReading: reading.created_at,
-      lastReading: reading.created_at
+      lastReading: reading.created_at,
     };
   }
-  
+
   userJourneys[userId].readingCount++;
   userJourneys[userId].spreadsUsed.add(reading.spread_type);
-  userJourneys[userId].hasUsedAstrology = userJourneys[userId].hasUsedAstrology || reading.reading_type === 'hybrid';
+  userJourneys[userId].hasUsedAstrology =
+    userJourneys[userId].hasUsedAstrology || reading.reading_type === "hybrid";
   userJourneys[userId].lastReading = reading.created_at;
 });
 
 // Convert Sets to Arrays for JSON
-Object.keys(userJourneys).forEach(userId => {
-  userJourneys[userId].spreadsUsed = Array.from(userJourneys[userId].spreadsUsed);
+Object.keys(userJourneys).forEach((userId) => {
+  userJourneys[userId].spreadsUsed = Array.from(
+    userJourneys[userId].spreadsUsed,
+  );
 });
 
 return Object.entries(userJourneys).map(([userId, journey]) => ({
   json: {
     userId,
     ...journey,
-    journeyDuration: Math.floor((new Date(journey.lastReading) - new Date(journey.firstReading)) / (1000 * 60 * 60 * 24)) + ' days'
-  }
+    journeyDuration:
+      Math.floor(
+        (new Date(journey.lastReading) - new Date(journey.firstReading)) /
+          (1000 * 60 * 60 * 24),
+      ) + " days",
+  },
 }));
 ```
 
@@ -368,25 +404,27 @@ return Object.entries(userJourneys).map(([userId, journey]) => ({
 ## 📊 Performance Metrics
 
 ### Expected Performance
+
 - Draw endpoint: < 200ms average
-- Shuffle endpoint: < 100ms average  
+- Shuffle endpoint: < 100ms average
 - Save reading: < 150ms average
 - Astrological calculations: < 500ms overhead
 
 ### Monitoring
+
 ```javascript
 // Add to each endpoint
 const performanceMetrics = {
-  endpoint: '/api/tarot/draw',
+  endpoint: "/api/tarot/draw",
   duration: Date.now() - startTime,
   includesAstrology: includeAstrology,
   cardCount: drawnCards.length,
   userId: user_id,
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 };
 
 // Log to monitoring service
-logger.metric('api_performance', performanceMetrics);
+logger.metric("api_performance", performanceMetrics);
 ```
 
 ## 🔐 Security Considerations
@@ -400,6 +438,7 @@ logger.metric('api_performance', performanceMetrics);
 ## 📝 Summary
 
 The enhanced tarot API now provides:
+
 - ✅ Hybrid tarot-astrology readings
 - ✅ Cosmic shuffle algorithms
 - ✅ Comprehensive data persistence

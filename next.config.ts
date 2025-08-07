@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     // Disable caching to fix build issues
     config.cache = false;
-    
+
     // Exclude problematic native modules from client-side bundle
     if (!isServer) {
       config.resolve.fallback = {
@@ -23,11 +23,11 @@ const nextConfig: NextConfig = {
         buffer: false,
       };
     }
-    
+
     return config;
   },
   // External packages for server components
-  serverExternalPackages: ['swisseph-v2'],
+  serverExternalPackages: ["swisseph-v2"],
 };
 
 export default nextConfig;

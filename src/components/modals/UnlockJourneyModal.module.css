@@ -10,7 +10,7 @@
   max-width: 600px;
   width: 90%;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.6),
     0 0 40px rgba(102, 126, 234, 0.2);
 }
@@ -110,13 +110,18 @@
 }
 
 .primaryButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -178,25 +183,25 @@
     margin: 1rem;
     border-radius: 20px;
   }
-  
+
   .headline {
     font-size: 1.5rem;
   }
-  
+
   .description {
     font-size: 1rem;
   }
-  
+
   .feature {
     font-size: 0.9rem;
     padding-left: 0.75rem;
   }
-  
+
   .primaryButton {
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .actions {
     gap: 0.75rem;
   }
@@ -213,7 +218,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {

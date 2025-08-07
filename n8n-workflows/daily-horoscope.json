@@ -31,28 +31,28 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "INSERT INTO horoscopes (date, data) VALUES ($1, $2)", 
+        "query": "INSERT INTO horoscopes (date, data) VALUES ($1, $2)",
         "values": [
           "{{$node[\"Generate Horoscopes\"].json[\"date\"]}}",
           "{{$node[\"Generate Horoscopes\"].json}}"
         ]
       },
       "name": "Store to Supabase",
-      "type": "n8n-nodes-base.postgres", 
+      "type": "n8n-nodes-base.postgres",
       "typeVersion": 1
     },
     {
       "parameters": {
         "resource": "search",
-        "query": "latest tarot trends 2025 + horoscope insights" 
+        "query": "latest tarot trends 2025 + horoscope insights"
       },
       "name": "Trend Scout",
-      "type": "n8n-nodes-base.webSearch", 
+      "type": "n8n-nodes-base.webSearch",
       "typeVersion": 1
     },
     {
       "parameters": {
-        "jsCode": "const horo = items[0].json; const trends = items[1].json.results.slice(0,3); return horo.horoscopes.map(sign => ({ json: { caption: `${sign.horoscope} #MysticArcana #TarotTrends: ${trends[0].title}`, platform: 'Instagram', imagePrompt: `Bioluminescent ${sign.sign} zodiac symbol` } }));" 
+        "jsCode": "const horo = items[0].json; const trends = items[1].json.results.slice(0,3); return horo.horoscopes.map(sign => ({ json: { caption: `${sign.horoscope} #MysticArcana #TarotTrends: ${trends[0].title}`, platform: 'Instagram', imagePrompt: `Bioluminescent ${sign.sign} zodiac symbol` } }));"
       },
       "name": "Format Posts",
       "type": "n8n-nodes-base.code",
@@ -61,7 +61,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.instagram.com/post", 
+        "url": "https://api.instagram.com/post",
         "authentication": "genericCredentialType",
         "credentialType": "instagramApi"
       },

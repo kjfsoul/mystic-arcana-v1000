@@ -1,11 +1,11 @@
 /**
  * WebGL Star Renderer for Mystic Arcana
- * 
+ *
  * High-performance WebGL-based renderer capable of displaying
  * 100,000+ stars at 60fps with realistic brightness, color,
  * and twinkling effects.
  */
-import { Star } from './types';
+import { Star } from "./types";
 // StarVertex interface removed - using direct Float32Array manipulation
 export class WebGLStarRenderer {
   private canvas: HTMLCanvasElement;
@@ -24,9 +24,10 @@ export class WebGLStarRenderer {
   private attributes: { [key: string]: number } = {};
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    const gl =
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     if (!gl) {
-      throw new Error('WebGL not supported');
+      throw new Error("WebGL not supported");
     }
     this.gl = gl as WebGLRenderingContext;
     this.initializeWebGL();
@@ -130,11 +131,17 @@ export class WebGLStarRenderer {
         gl_FragColor = vec4(color, alpha);
       }
     `;
-    const vertexShader = this.compileShader(vertexShaderSource, gl.VERTEX_SHADER);
-    const fragmentShader = this.compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+    const vertexShader = this.compileShader(
+      vertexShaderSource,
+      gl.VERTEX_SHADER,
+    );
+    const fragmentShader = this.compileShader(
+      fragmentShaderSource,
+      gl.FRAGMENT_SHADER,
+    );
     this.program = gl.createProgram();
     if (!this.program) {
-      throw new Error('Failed to create shader program');
+      throw new Error("Failed to create shader program");
     }
     gl.attachShader(this.program, vertexShader);
     gl.attachShader(this.program, fragmentShader);
@@ -144,20 +151,38 @@ export class WebGLStarRenderer {
       throw new Error(`Shader program linking failed: ${error}`);
     }
     // Get attribute and uniform locations
-    this.attributes.position = gl.getAttribLocation(this.program, 'a_position');
-    this.attributes.magnitude = gl.getAttribLocation(this.program, 'a_magnitude');
-    this.attributes.colorIndex = gl.getAttribLocation(this.program, 'a_colorIndex');
-    this.attributes.twinklePhase = gl.getAttribLocation(this.program, 'a_twinklePhase');
-    this.uniforms.projectionMatrix = gl.getUniformLocation(this.program, 'u_projectionMatrix');
-    this.uniforms.viewMatrix = gl.getUniformLocation(this.program, 'u_viewMatrix');
-    this.uniforms.time = gl.getUniformLocation(this.program, 'u_time');
-    this.uniforms.pixelRatio = gl.getUniformLocation(this.program, 'u_pixelRatio');
+    this.attributes.position = gl.getAttribLocation(this.program, "a_position");
+    this.attributes.magnitude = gl.getAttribLocation(
+      this.program,
+      "a_magnitude",
+    );
+    this.attributes.colorIndex = gl.getAttribLocation(
+      this.program,
+      "a_colorIndex",
+    );
+    this.attributes.twinklePhase = gl.getAttribLocation(
+      this.program,
+      "a_twinklePhase",
+    );
+    this.uniforms.projectionMatrix = gl.getUniformLocation(
+      this.program,
+      "u_projectionMatrix",
+    );
+    this.uniforms.viewMatrix = gl.getUniformLocation(
+      this.program,
+      "u_viewMatrix",
+    );
+    this.uniforms.time = gl.getUniformLocation(this.program, "u_time");
+    this.uniforms.pixelRatio = gl.getUniformLocation(
+      this.program,
+      "u_pixelRatio",
+    );
   }
   private compileShader(source: string, type: number): WebGLShader {
     const { gl } = this;
     const shader = gl.createShader(type);
     if (!shader) {
-      throw new Error('Failed to create shader');
+      throw new Error("Failed to create shader");
     }
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
@@ -173,7 +198,7 @@ export class WebGLStarRenderer {
     this.vertexBuffer = gl.createBuffer();
     this.indexBuffer = gl.createBuffer();
     if (!this.vertexBuffer || !this.indexBuffer) {
-      throw new Error('Failed to create buffers');
+      throw new Error("Failed to create buffers");
     }
   }
   public loadStars(stars: Star[]): void {
@@ -190,8 +215,8 @@ export class WebGLStarRenderer {
       const star = this.stars[i];
       const baseIndex = i * 6;
       // Convert RA/Dec to 3D position on unit sphere
-      const ra = (star.ra ?? 0) * Math.PI / 180; // Convert degrees to radians
-      const dec = (star.dec ?? 0) * Math.PI / 180; // Convert degrees to radians
+      const ra = ((star.ra ?? 0) * Math.PI) / 180; // Convert degrees to radians
+      const dec = ((star.dec ?? 0) * Math.PI) / 180; // Convert degrees to radians
       const x = Math.cos(dec) * Math.cos(ra);
       const y = Math.cos(dec) * Math.sin(ra);
       const z = Math.sin(dec);
@@ -214,7 +239,10 @@ export class WebGLStarRenderer {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.indices, gl.STATIC_DRAW);
   }
-  public render(viewMatrix: Float32Array, projectionMatrix: Float32Array): void {
+  public render(
+    viewMatrix: Float32Array,
+    projectionMatrix: Float32Array,
+  ): void {
     const { gl } = this;
     if (!this.program || !this.vertexBuffer || !this.indexBuffer) {
       return;
@@ -230,16 +258,41 @@ export class WebGLStarRenderer {
     gl.vertexAttribPointer(this.attributes.position, 3, gl.FLOAT, false, 24, 0);
     // Magnitude attribute
     gl.enableVertexAttribArray(this.attributes.magnitude);
-    gl.vertexAttribPointer(this.attributes.magnitude, 1, gl.FLOAT, false, 24, 12);
+    gl.vertexAttribPointer(
+      this.attributes.magnitude,
+      1,
+      gl.FLOAT,
+      false,
+      24,
+      12,
+    );
     // Color index attribute
     gl.enableVertexAttribArray(this.attributes.colorIndex);
-    gl.vertexAttribPointer(this.attributes.colorIndex, 1, gl.FLOAT, false, 24, 16);
+    gl.vertexAttribPointer(
+      this.attributes.colorIndex,
+      1,
+      gl.FLOAT,
+      false,
+      24,
+      16,
+    );
     // Twinkle phase attribute
     gl.enableVertexAttribArray(this.attributes.twinklePhase);
-    gl.vertexAttribPointer(this.attributes.twinklePhase, 1, gl.FLOAT, false, 24, 20);
+    gl.vertexAttribPointer(
+      this.attributes.twinklePhase,
+      1,
+      gl.FLOAT,
+      false,
+      24,
+      20,
+    );
     // Set uniforms
     gl.uniformMatrix4fv(this.uniforms.viewMatrix, false, viewMatrix);
-    gl.uniformMatrix4fv(this.uniforms.projectionMatrix, false, projectionMatrix);
+    gl.uniformMatrix4fv(
+      this.uniforms.projectionMatrix,
+      false,
+      projectionMatrix,
+    );
     gl.uniform1f(this.uniforms.time, Date.now() - this.startTime);
     gl.uniform1f(this.uniforms.pixelRatio, window.devicePixelRatio || 1.0);
     // Draw the stars

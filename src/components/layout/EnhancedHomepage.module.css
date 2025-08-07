@@ -176,7 +176,11 @@
   left: 50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 70%
+  );
   transform: translate(-50%, -50%) scale(0.8);
   opacity: 0;
   transition: all 0.4s ease;
@@ -235,7 +239,7 @@
     grid-template-columns: 1fr;
     max-width: 500px;
   }
-  
+
   .title {
     font-size: 3rem;
   }
@@ -245,43 +249,43 @@
   .mainContent {
     padding: 1rem;
   }
-  
+
   .title {
     font-size: 2.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
-  
+
   .panel {
     padding: 2rem 1.5rem;
     min-height: 250px;
   }
-  
+
   .panel h2 {
     font-size: 1.5rem;
   }
-  
+
   .panel p {
     font-size: 1rem;
   }
-  
+
   .panelIcon {
     font-size: 3rem;
   }
-  
+
   .backButton {
     top: 1rem;
     left: 1rem;
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
   }
-  
+
   .roomHeader h1 {
     font-size: 2.5rem;
   }
-  
+
   .roomHeader p {
     font-size: 1rem;
   }
@@ -291,23 +295,23 @@
   .panelsContainer {
     gap: 2rem;
   }
-  
+
   .panel {
     padding: 1.5rem 1rem;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .welcomeHeader {
     margin-bottom: 3rem;
   }
-  
+
   .panelFeatures {
     gap: 0.3rem;
   }
-  
+
   .panelFeatures span {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
@@ -320,7 +324,7 @@
     border-width: 3px;
     background: rgba(0, 0, 0, 0.8);
   }
-  
+
   .title,
   .panel h2 {
     color: #ffffff;
@@ -334,11 +338,11 @@
   .backButton {
     transition: none;
   }
-  
+
   .panel:hover {
     transform: none;
   }
-  
+
   .panelGlow {
     display: none;
   }

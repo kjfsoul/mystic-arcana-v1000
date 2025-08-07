@@ -1,6 +1,7 @@
-# Mystic Arcana Terms & Conditions (Terms of Use)  
-*Effective Date: [Insert Date]*  
-*Version 1.1*
+# Mystic Arcana Terms & Conditions (Terms of Use)
+
+_Effective Date: [Insert Date]_  
+_Version 1.1_
 
 ---
 
@@ -31,6 +32,7 @@ Thank you for joining us on this spiritual journey. Mystic Arcana is a personali
 ## 2. Eligibility & Age Requirement
 
 Mystic Arcana is intended for users **age 16 and older**. By using our platform, you confirm that:
+
 - You are at least 16 years old
 - If under 18, you have legal guardian consent
 - You understand this platform is intended for spiritual entertainment only
@@ -40,6 +42,7 @@ Mystic Arcana is intended for users **age 16 and older**. By using our platform,
 ## 3. Account Creation & Responsibilities
 
 To access personalized features, you must create an account. You agree to:
+
 - Provide truthful, accurate info
 - Keep login credentials secure
 - Be responsible for all activity under your account
@@ -64,6 +67,7 @@ You agree not to hold us liable for any decisions or outcomes resulting from you
 Premium features may require payment. All transactions are securely processed via Stripe.
 
 You agree to:
+
 - Pay fees in full
 - Understand subscriptions auto-renew unless canceled
 - Refer to our [Refund Policy] (coming soon) for eligibility
@@ -77,6 +81,7 @@ All Mystic Arcana content (including card art, text, branding, and AI-generated 
 You may not copy, reproduce, or reuse our intellectual property without permission.
 
 User-submitted content (like journal entries) remains your property, but:
+
 - You grant us a non-exclusive license to store, analyze, and learn from this content
 - We will not publish it without your consent
 
@@ -85,9 +90,10 @@ User-submitted content (like journal entries) remains your property, but:
 ## 7. Acceptable Use
 
 You agree to:
-- Use the platform respectfully and ethically  
-- Avoid harassment, spam, or misinformation  
-- Refrain from reverse-engineering, scraping, or manipulating site code  
+
+- Use the platform respectfully and ethically
+- Avoid harassment, spam, or misinformation
+- Refrain from reverse-engineering, scraping, or manipulating site code
 - Respect the spiritual nature of the space
 
 Violations may result in suspension or removal.
@@ -115,6 +121,7 @@ Mystic Arcana is provided **“as is” with no warranties of uninterrupted serv
 ## 10. Termination
 
 You may close your account at any time. We may suspend or terminate access for:
+
 - Terms violations
 - Abusive behavior
 - Malicious activity
@@ -125,7 +132,8 @@ Upon termination, your access to data and services may end immediately.
 
 ## 11. No Warranty / No Guarantee
 
-Mystic Arcana offers no guarantee of outcomes, accuracy, or interpretation.  
+Mystic Arcana offers no guarantee of outcomes, accuracy, or interpretation.
+
 > All services are provided **“as is” and without any warranties**—express or implied.
 
 You agree to use the platform at your own risk and discretion.
@@ -151,7 +159,8 @@ For questions, support, or legal inquiries:
 ---
 
 ## Implementation Notes
-- Onboarding: Accept before use  
-- Footer: Always visible  
-- Profile: Linked in settings  
+
+- Onboarding: Accept before use
+- Footer: Always visible
+- Profile: Linked in settings
 - Checkout: Display before purchase

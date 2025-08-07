@@ -1,56 +1,55 @@
-'use client';
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import styles from './MobileTarotSpreadSelector.module.css';
-export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
+"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import styles from "./MobileTarotSpreadSelector.module.css";
+export type SpreadType = "single" | "three-card" | "celtic-cross";
 interface Spread {
   id: SpreadType;
   name: string;
   description: string;
   cardCount: number;
   duration: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  difficulty: "beginner" | "intermediate" | "advanced";
 }
 interface MobileTarotSpreadSelectorProps {
   onSelectSpread: (_spread: SpreadType) => void;
   className?: string;
 }
-export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps> = ({
-  onSelectSpread,
-  className = ''
-}) => {
+export const MobileTarotSpreadSelector: React.FC<
+  MobileTarotSpreadSelectorProps
+> = ({ onSelectSpread, className = "" }) => {
   const [selectedSpread, setSelectedSpread] = useState<SpreadType | null>(null);
   const spreads: Spread[] = [
     {
-      id: 'single',
-      name: 'Single Card',
-      description: 'Quick insight',
+      id: "single",
+      name: "Single Card",
+      description: "Quick insight",
       cardCount: 1,
-      duration: '2-3 min',
-      difficulty: 'beginner'
+      duration: "2-3 min",
+      difficulty: "beginner",
     },
     {
-      id: 'three-card',
-      name: 'Three Card',
-      description: 'Past, Present, Future',
+      id: "three-card",
+      name: "Three Card",
+      description: "Past, Present, Future",
       cardCount: 3,
-      duration: '5-10 min',
-      difficulty: 'intermediate'
+      duration: "5-10 min",
+      difficulty: "intermediate",
     },
     {
-      id: 'celtic-cross',
-      name: 'Celtic Cross',
-      description: 'Deep exploration',
+      id: "celtic-cross",
+      name: "Celtic Cross",
+      description: "Deep exploration",
       cardCount: 10,
-      duration: '15-20 min',
-      difficulty: 'advanced'
-    }
+      duration: "15-20 min",
+      difficulty: "advanced",
+    },
   ];
-  const getDifficultyColor = (difficulty: Spread['difficulty']) => {
+  const getDifficultyColor = (difficulty: Spread["difficulty"]) => {
     const colors = {
-      beginner: '#4ecdc4',
-      intermediate: '#ffd700',
-      advanced: '#ff6b6b'
+      beginner: "#4ecdc4",
+      intermediate: "#ffd700",
+      advanced: "#ff6b6b",
     };
     return colors[difficulty];
   };
@@ -64,7 +63,9 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
     <div className={`${styles.container} ${className}`}>
       <div className={styles.header}>
         <h2 className={styles.title}>Choose Your Spread</h2>
-        <p className={styles.subtitle}>Select a reading type that resonates with you</p>
+        <p className={styles.subtitle}>
+          Select a reading type that resonates with you
+        </p>
       </div>
       <div className={styles.spreadsContainer}>
         <AnimatePresence mode="wait">
@@ -72,7 +73,7 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
             <motion.button
               key={spread.id}
               className={`${styles.spreadCard} ${
-                selectedSpread === spread.id ? styles.selected : ''
+                selectedSpread === spread.id ? styles.selected : ""
               }`}
               onClick={() => handleSelectSpread(spread.id)}
               initial={{ opacity: 0, y: 20 }}
@@ -84,7 +85,7 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
             >
               <div className={styles.spreadHeader}>
                 <h3 className={styles.spreadName}>{spread.name}</h3>
-                <span 
+                <span
                   className={styles.difficulty}
                   style={{ color: getDifficultyColor(spread.difficulty) }}
                 >
@@ -95,7 +96,9 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
               <div className={styles.spreadMeta}>
                 <div className={styles.metaItem}>
                   <span className={styles.metaIcon}>🃏</span>
-                  <span className={styles.metaText}>{spread.cardCount} cards</span>
+                  <span className={styles.metaText}>
+                    {spread.cardCount} cards
+                  </span>
                 </div>
                 <div className={styles.metaItem}>
                   <span className={styles.metaIcon}>⏱️</span>
@@ -104,19 +107,19 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
               </div>
               {/* Visual representation of card layout */}
               <div className={styles.cardPreview}>
-                {spread.id === 'single' && (
+                {spread.id === "single" && (
                   <div className={styles.singleCard}>
                     <div className={styles.card} />
                   </div>
                 )}
-                {spread.id === 'three-card' && (
+                {spread.id === "three-card" && (
                   <div className={styles.threeCards}>
                     <div className={styles.card} />
                     <div className={styles.card} />
                     <div className={styles.card} />
                   </div>
                 )}
-                {spread.id === 'celtic-cross' && (
+                {spread.id === "celtic-cross" && (
                   <div className={styles.celticCross}>
                     <div className={styles.crossCenter}>
                       <div className={styles.card} />
@@ -131,11 +134,11 @@ export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps>
                   </div>
                 )}
               </div>
-              <motion.div 
+              <motion.div
                 className={styles.selectIndicator}
                 initial={{ scale: 0 }}
                 animate={{ scale: selectedSpread === spread.id ? 1 : 0 }}
-                transition={{ type: 'spring', stiffness: 300 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 ✓
               </motion.div>

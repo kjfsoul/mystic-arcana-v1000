@@ -5,10 +5,10 @@
  * Manages automated email notifications
  */
 
-import { emailNotifier } from '../src/agents/email-notifier';
-import { readFileSync, appendFileSync } from 'fs';
-import { join } from 'path';
-import { spawn } from 'child_process';
+import { emailNotifier } from "../src/agents/email-notifier";
+import { readFileSync, appendFileSync } from "fs";
+import { join } from "path";
+import { spawn } from "child_process";
 
 class EmailScheduler {
   private isRunning = false;
@@ -17,7 +17,12 @@ class EmailScheduler {
   private logPath: string;
 
   constructor() {
-    this.logPath = join(process.cwd(), 'logs', 'agent-activity', `${new Date().toISOString().split('T')[0]}.log`);
+    this.logPath = join(
+      process.cwd(),
+      "logs",
+      "agent-activity",
+      `${new Date().toISOString().split("T")[0]}.log`,
+    );
   }
 
   private log(message: string) {
@@ -25,9 +30,12 @@ class EmailScheduler {
     const logEntry = `${timestamp} [EMAIL_SCHEDULER] ${message}`;
     console.log(logEntry);
     try {
-      appendFileSync(this.logPath, logEntry + '\n');
+      appendFileSync(this.logPath, logEntry + "\n");
     } catch (error) {
-      console.warn('Warning: Could not write to log file:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Warning: Could not write to log file:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
   }
 
@@ -36,12 +44,12 @@ class EmailScheduler {
    */
   public start() {
     if (this.isRunning) {
-      this.log('Email scheduler already running');
+      this.log("Email scheduler already running");
       return;
     }
 
     this.isRunning = true;
-    this.log('Starting email scheduler...');
+    this.log("Starting email scheduler...");
 
     // Schedule daily report at 9 AM
     this.scheduleDailyReport();
@@ -50,10 +58,10 @@ class EmailScheduler {
     this.scheduleUrgentChecks();
 
     // Handle graceful shutdown
-    process.on('SIGINT', () => this.stop());
-    process.on('SIGTERM', () => this.stop());
+    process.on("SIGINT", () => this.stop());
+    process.on("SIGTERM", () => this.stop());
 
-    this.log('Email scheduler started successfully');
+    this.log("Email scheduler started successfully");
   }
 
   /**
@@ -64,18 +72,18 @@ class EmailScheduler {
       return;
     }
 
-    this.log('Stopping email scheduler...');
-    
+    this.log("Stopping email scheduler...");
+
     if (this.dailyReportTimeout) {
       clearTimeout(this.dailyReportTimeout);
     }
-    
+
     if (this.urgentCheckInterval) {
       clearInterval(this.urgentCheckInterval);
     }
 
     this.isRunning = false;
-    this.log('Email scheduler stopped');
+    this.log("Email scheduler stopped");
   }
 
   /**
@@ -93,21 +101,28 @@ class EmailScheduler {
 
     const msUntilNineAM = nextNineAM.getTime() - now.getTime();
 
-    this.log(`Daily report scheduled for ${nextNineAM.toLocaleString()} (in ${Math.round(msUntilNineAM / 1000 / 60)} minutes)`);
+    this.log(
+      `Daily report scheduled for ${nextNineAM.toLocaleString()} (in ${Math.round(msUntilNineAM / 1000 / 60)} minutes)`,
+    );
 
     this.dailyReportTimeout = setTimeout(async () => {
       try {
-        this.log('Sending daily email report...');
+        this.log("Sending daily email report...");
         await emailNotifier.sendReport();
-        this.log('Daily email report sent successfully');
-        
+        this.log("Daily email report sent successfully");
+
         // Schedule next day's report
         this.scheduleDailyReport();
       } catch (error) {
-        this.log(`Error sending daily report: ${error instanceof Error ? error.message : 'Unknown error'}`);
-        
+        this.log(
+          `Error sending daily report: ${error instanceof Error ? error.message : "Unknown error"}`,
+        );
+
         // Retry in 1 hour
-        this.dailyReportTimeout = setTimeout(() => this.scheduleDailyReport(), 60 * 60 * 1000);
+        this.dailyReportTimeout = setTimeout(
+          () => this.scheduleDailyReport(),
+          60 * 60 * 1000,
+        );
       }
     }, msUntilNineAM);
   }
@@ -116,15 +131,20 @@ class EmailScheduler {
    * Check for urgent notifications every 15 minutes
    */
   private scheduleUrgentChecks() {
-    this.log('Starting urgent notification checks every 15 minutes');
-    
-    this.urgentCheckInterval = setInterval(async () => {
-      try {
-        await this.checkForUrgentNotifications();
-      } catch (error) {
-        this.log(`Error during urgent check: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      }
-    }, 15 * 60 * 1000); // 15 minutes
+    this.log("Starting urgent notification checks every 15 minutes");
+
+    this.urgentCheckInterval = setInterval(
+      async () => {
+        try {
+          await this.checkForUrgentNotifications();
+        } catch (error) {
+          this.log(
+            `Error during urgent check: ${error instanceof Error ? error.message : "Unknown error"}`,
+          );
+        }
+      },
+      15 * 60 * 1000,
+    ); // 15 minutes
 
     // Run initial check
     this.checkForUrgentNotifications();
@@ -138,34 +158,44 @@ class EmailScheduler {
 
     try {
       // Check for failed agents
-      const registryPath = join(process.cwd(), 'agents', 'registry.json');
-      const registry = JSON.parse(readFileSync(registryPath, 'utf-8'));
-      
-      const failedAgents = Object.values(registry.agents).filter((a: any) => a.status === 'failed');
+      const registryPath = join(process.cwd(), "agents", "registry.json");
+      const registry = JSON.parse(readFileSync(registryPath, "utf-8"));
+
+      const failedAgents = Object.values(registry.agents).filter(
+        (a: any) => a.status === "failed",
+      );
       if (failedAgents.length > 0) {
-        urgentConditions.push(`${failedAgents.length} agents have failed and require attention`);
+        urgentConditions.push(
+          `${failedAgents.length} agents have failed and require attention`,
+        );
       }
 
       // Check for high priority todos that have been pending too long
-      const todoPath = join(process.cwd(), 'temp', 'todos.json');
+      const todoPath = join(process.cwd(), "temp", "todos.json");
       try {
-        const todos = JSON.parse(readFileSync(todoPath, 'utf-8'));
-        const criticalTodos = todos.filter((t: any) => 
-          t.priority === 'high' && 
-          t.status === 'pending' && 
-          new Date(t.created_at || '2025-01-01') < new Date(Date.now() - 24 * 60 * 60 * 1000)
+        const todos = JSON.parse(readFileSync(todoPath, "utf-8"));
+        const criticalTodos = todos.filter(
+          (t: any) =>
+            t.priority === "high" &&
+            t.status === "pending" &&
+            new Date(t.created_at || "2025-01-01") <
+              new Date(Date.now() - 24 * 60 * 60 * 1000),
         );
-        
+
         if (criticalTodos.length > 0) {
-          urgentConditions.push(`${criticalTodos.length} high-priority todos have been pending for over 24 hours`);
+          urgentConditions.push(
+            `${criticalTodos.length} high-priority todos have been pending for over 24 hours`,
+          );
         }
       } catch (e) {
         // Todo file might not exist
       }
 
       // Check system health
-      if (registry.system_health?.mcp_connectivity === '0/5 online') {
-        urgentConditions.push('All MCP servers are offline - system integration compromised');
+      if (registry.system_health?.mcp_connectivity === "0/5 online") {
+        urgentConditions.push(
+          "All MCP servers are offline - system integration compromised",
+        );
       }
 
       // Send urgent notifications if needed
@@ -175,11 +205,12 @@ class EmailScheduler {
       }
 
       if (urgentConditions.length === 0) {
-        this.log('Urgent check completed - no critical issues found');
+        this.log("Urgent check completed - no critical issues found");
       }
-
     } catch (error) {
-      this.log(`Error checking urgent conditions: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      this.log(
+        `Error checking urgent conditions: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   }
 
@@ -187,12 +218,14 @@ class EmailScheduler {
    * Send test email
    */
   public async sendTestEmail() {
-    this.log('Sending test email...');
+    this.log("Sending test email...");
     try {
       await emailNotifier.sendReport();
-      this.log('Test email sent successfully');
+      this.log("Test email sent successfully");
     } catch (error) {
-      this.log(`Test email failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      this.log(
+        `Test email failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
       throw error;
     }
   }
@@ -207,31 +240,31 @@ if (require.main === module) {
   const command = args[0];
 
   switch (command) {
-    case 'start':
+    case "start":
       scheduler.start();
-      console.log('Email scheduler running. Press Ctrl+C to stop.');
+      console.log("Email scheduler running. Press Ctrl+C to stop.");
       break;
-      
-    case 'test':
+
+    case "test":
       scheduler.sendTestEmail().catch(console.error);
       break;
-      
-    case 'urgent': {
-      const message = args.slice(1).join(' ');
+
+    case "urgent": {
+      const message = args.slice(1).join(" ");
       if (!message) {
-        console.error('Usage: email-scheduler urgent <message>');
+        console.error("Usage: email-scheduler urgent <message>");
         process.exit(1);
       }
       emailNotifier.sendUrgentNotification(message).catch(console.error);
       break;
     }
-      
+
     default:
-      console.log('Email Scheduler');
-      console.log('Usage:');
-      console.log('  start          - Start the email scheduler service');
-      console.log('  test           - Send a test email report');
-      console.log('  urgent <msg>   - Send urgent notification');
+      console.log("Email Scheduler");
+      console.log("Usage:");
+      console.log("  start          - Start the email scheduler service");
+      console.log("  test           - Send a test email report");
+      console.log("  urgent <msg>   - Send urgent notification");
       break;
   }
 }

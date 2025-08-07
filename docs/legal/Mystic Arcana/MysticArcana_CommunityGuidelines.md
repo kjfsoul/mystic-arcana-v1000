@@ -1,5 +1,6 @@
-# Mystic Arcana Community Guidelines  
-*Version 1.0 | Effective Date: [Insert Date]*
+# Mystic Arcana Community Guidelines
+
+_Version 1.0 | Effective Date: [Insert Date]_
 
 ---
 
@@ -19,10 +20,11 @@ We honor individual paths—and believe all users deserve safety, compassion, an
 ## 1. Respectful Communication is Required
 
 You agree to:
-- Speak with compassion, not contempt  
-- Ask with curiosity, not assumption  
-- Avoid personal attacks, sarcasm, or judgmental commentary  
-- Uplift marginalized voices and experiences  
+
+- Speak with compassion, not contempt
+- Ask with curiosity, not assumption
+- Avoid personal attacks, sarcasm, or judgmental commentary
+- Uplift marginalized voices and experiences
 - Use inclusive language in gender, identity, belief, and neurodiversity
 
 ---
@@ -31,22 +33,23 @@ You agree to:
 
 The following are not allowed in any part of the Mystic Arcana ecosystem:
 
-| Behavior | Examples |
-|----------|----------|
-| **Harassment** | Bullying, intimidation, or repetitive unwanted contact |
-| **Hate Speech** | Racist, sexist, anti-LGBTQ+, antisemitic, ableist remarks |
-| **Spiritual Exploitation** | Claiming to curse, hex, heal, or "guarantee" outcomes |
-| **Misinformation** | Sharing conspiracies, medical advice, or false claims as fact |
-| **Promotion Without Permission** | Spamming services, links, or self-promotion |
-| **Impersonation** | Pretending to be Mystic Arcana staff, readers, or others |
+| Behavior                         | Examples                                                      |
+| -------------------------------- | ------------------------------------------------------------- |
+| **Harassment**                   | Bullying, intimidation, or repetitive unwanted contact        |
+| **Hate Speech**                  | Racist, sexist, anti-LGBTQ+, antisemitic, ableist remarks     |
+| **Spiritual Exploitation**       | Claiming to curse, hex, heal, or "guarantee" outcomes         |
+| **Misinformation**               | Sharing conspiracies, medical advice, or false claims as fact |
+| **Promotion Without Permission** | Spamming services, links, or self-promotion                   |
+| **Impersonation**                | Pretending to be Mystic Arcana staff, readers, or others      |
 
 ---
 
 ## 3. When Sharing Your Story
 
 You are encouraged to express your truth—but please:
-- Avoid sharing content that may be triggering without warning (e.g., trauma, violence)  
-- Understand that Mystic Arcana is a spiritual reflection space, not a crisis service  
+
+- Avoid sharing content that may be triggering without warning (e.g., trauma, violence)
+- Understand that Mystic Arcana is a spiritual reflection space, not a crisis service
 - Be mindful of tone and audience, especially in public forums or shared spreads
 
 ---
@@ -62,8 +65,8 @@ Flag content you believe is harmful or abusive—we review all flagged reports.
 
 ## 5. AI Reader + Human Guide Boundaries
 
-- AI responses are programmed to reject inappropriate or abusive prompts  
-- Human guides/readers may end sessions if disrespected or endangered  
+- AI responses are programmed to reject inappropriate or abusive prompts
+- Human guides/readers may end sessions if disrespected or endangered
 - Sessions may be monitored for abuse patterns (with anonymity preserved)
 
 ---
@@ -71,9 +74,10 @@ Flag content you believe is harmful or abusive—we review all flagged reports.
 ## 6. Enforcement & Reporting
 
 Violating these guidelines may result in:
-- Content removal  
-- Warning  
-- Temporary suspension  
+
+- Content removal
+- Warning
+- Temporary suspension
 - Permanent ban
 
 Repeat offenders or those committing serious harm will be removed permanently and may be reported to proper authorities.
@@ -95,8 +99,8 @@ To set the tone across your platform, use light message cues like:
 
 ## Implementation Notes
 
-- App Settings > “Community Guidelines”  
-- Footer and Help/Support Pages  
-- Onboarding: Show and require acknowledgment  
-- Discord or forum: Pin and enforce via moderators  
+- App Settings > “Community Guidelines”
+- Footer and Help/Support Pages
+- Onboarding: Show and require acknowledgment
+- Discord or forum: Pin and enforce via moderators
 - Reader Agreements: Attach to partner/guide contracts

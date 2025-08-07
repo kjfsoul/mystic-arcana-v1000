@@ -44,7 +44,7 @@
   height: 120px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.4),
     0 0 40px rgba(138, 43, 226, 0.2);
   transform-style: preserve-3d;
@@ -73,12 +73,7 @@
 .cardBack {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    #1a1a2e 0%,
-    #16213e 50%,
-    #0f3460 100%
-  );
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,8 +84,12 @@
 .cardBackPattern {
   width: 60%;
   height: 60%;
-  background-image: 
-    radial-gradient(circle at center, rgba(138, 43, 226, 0.3) 0%, transparent 70%),
+  background-image:
+    radial-gradient(
+      circle at center,
+      rgba(138, 43, 226, 0.3) 0%,
+      transparent 70%
+    ),
     repeating-linear-gradient(
       45deg,
       transparent,
@@ -99,14 +98,15 @@
       rgba(138, 43, 226, 0.1) 20px
     );
   border-radius: 50%;
-  box-shadow: 
+  box-shadow:
     inset 0 0 20px rgba(138, 43, 226, 0.3),
     0 0 30px rgba(138, 43, 226, 0.2);
   animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
@@ -247,7 +247,7 @@
   .cardBackPattern {
     animation: none;
   }
-  
+
   .cardWrapper {
     transition: none;
   }

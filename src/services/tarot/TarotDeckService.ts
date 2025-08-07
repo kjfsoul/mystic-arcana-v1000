@@ -1,5 +1,5 @@
-import { TarotCard } from '@/types/tarot';
-const RIDER_WAITE_DECK_ID = '00000000-0000-0000-0000-000000000001';
+import { TarotCard } from "@/types/tarot";
+const RIDER_WAITE_DECK_ID = "00000000-0000-0000-0000-000000000001";
 export interface DeckResponse {
   deck: {
     id: string;
@@ -33,25 +33,25 @@ export class TarotDeckService {
   async getDeck(deckId: string = RIDER_WAITE_DECK_ID): Promise<DeckResponse> {
     // Check cache first
     if (this.deckCache.has(deckId)) {
-      console.log('🎴 Returning cached deck');
+      console.log("🎴 Returning cached deck");
       return this.deckCache.get(deckId)!;
     }
     try {
-      console.log('🎴 Fetching deck from API:', deckId);
+      console.log("🎴 Fetching deck from API:", deckId);
       const response = await fetch(`/api/tarot/deck/${deckId}`);
-      
+
       if (!response.ok) {
         throw new Error(`Failed to fetch deck: ${response.statusText}`);
       }
       const data: DeckResponse = await response.json();
-      
+
       // Cache the deck data
       this.deckCache.set(deckId, data);
-      
+
       console.log(`🎴 Loaded ${data.cards.length} cards`);
       return data;
     } catch (error) {
-      console.error('❌ Error fetching deck:', error);
+      console.error("❌ Error fetching deck:", error);
       throw error;
     }
   }
@@ -83,7 +83,7 @@ export class TarotDeckService {
     return {
       past: drawn[0],
       present: drawn[1],
-      future: drawn[2]
+      future: drawn[2],
     };
   }
   drawCelticCross(cards: TarotCard[]): {
@@ -109,7 +109,7 @@ export class TarotDeckService {
       approach: drawn[6],
       influences: drawn[7],
       hopes: drawn[8],
-      outcome: drawn[9]
+      outcome: drawn[9],
     };
   }
 }

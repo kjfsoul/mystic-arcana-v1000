@@ -22,6 +22,7 @@ npm install
 ### 3. Environment Configuration
 
 1. Copy the environment template:
+
    ```bash
    cp .env.local.example .env.local
    ```
@@ -40,6 +41,7 @@ npm install
 ### 5. Authentication Configuration (Optional)
 
 To enable Google OAuth:
+
 1. Go to Authentication → Providers in Supabase
 2. Enable Google provider
 3. Configure your OAuth app in Google Cloud Console
@@ -56,24 +58,28 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 ## Features Implemented
 
 ### ✅ Authentication System
+
 - Email/password signup and login
 - Google OAuth integration
 - Guest user support
 - Secure session management
 
 ### ✅ Tarot Reading Engine
+
 - Three spread types: Daily Card, Past/Present/Future, Celtic Cross
 - 3D card flip animations
 - Mock tarot deck with beautiful SVG cards
 - Cosmic influence integration
 
 ### ✅ User Experience
+
 - **Guest Flow**: Free Daily Card reading with signup prompt
 - **Registered Flow**: Full access to all spreads with saved readings
 - Responsive design with mobile support
 - Accessibility features (WCAG 2.2+ compliant)
 
 ### ✅ Database Integration
+
 - Automatic reading saving for registered users
 - User profiles and preferences
 - Reading history and statistics
@@ -81,11 +87,11 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 ## What Works Right Now
 
 1. **Homepage**: Beautiful galaxy background with interactive panels
-2. **Guest Experience**: 
+2. **Guest Experience**:
    - Click "Tarot Reading Room" → Enter Tarot Realm
    - Select "Daily Card" → Draw Cards → Experience card flip
    - After reading completion, signup prompt appears
-3. **Authentication**: 
+3. **Authentication**:
    - Signup/login modal with email or Google
    - Session persistence across browser sessions
 4. **Registered Experience**:
@@ -113,15 +119,18 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 ## Troubleshooting
 
 ### "Supabase client not configured"
+
 - Ensure `.env.local` has correct Supabase credentials
 - Restart development server after adding environment variables
 
 ### Authentication not working
+
 - Check Supabase dashboard for user creation
 - Verify RLS policies are properly configured
 - Check browser console for authentication errors
 
 ### Cards not flipping
+
 - Ensure images are loading properly
 - Check browser console for JavaScript errors
 - Verify Framer Motion is installed

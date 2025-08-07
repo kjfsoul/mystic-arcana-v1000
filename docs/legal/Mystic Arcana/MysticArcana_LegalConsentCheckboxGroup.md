@@ -1,5 +1,6 @@
 // components/LegalConsentCheckboxGroup.tsx
 export const LegalConsentCheckboxGroup = ({ values, onChange }) => (
+
   <div className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
     <label>
       <input type="checkbox" value="terms" checked={values.terms} onChange={onChange} />

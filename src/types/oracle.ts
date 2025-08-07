@@ -1,9 +1,13 @@
 /**
  * Daily Oracle type definitions
  */
-import { BirthData } from './astrology';
-import { ArcanaType, DailySpreadType, EnergyLevel } from '@/constants/EventTypes';
-import { ZodiacSign, MoonPhase, Planet } from '@/constants/AstrologyConstants';
+import { BirthData } from "./astrology";
+import {
+  ArcanaType,
+  DailySpreadType,
+  EnergyLevel,
+} from "@/constants/EventTypes";
+import { ZodiacSign, MoonPhase, Planet } from "@/constants/AstrologyConstants";
 
 export interface DailyOracleRequest {
   birthData: BirthData;
@@ -68,19 +72,19 @@ export interface DailyOracleData {
   userId?: string;
   date: string;
   timestamp: string;
-  
+
   // Core components
   dailySpread: DailySpread;
   horoscope: HoroscopeOracleData;
   cosmicFocus: CosmicFocusData;
   compatibility: CompatibilityInsight;
-  
+
   // Summary and guidance
   overallTheme: string;
   keyMessage: string;
   actionableAdvice: string[];
   affirmation: string;
-  
+
   // Metadata
   generatedFromBirthChart: boolean;
   isUnavailable?: boolean;

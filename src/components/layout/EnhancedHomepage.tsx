@@ -1,21 +1,21 @@
-'use client';
- 
+"use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { AccessibilityProvider } from "../accessibility/AccessibilityProvider";
 import { CelestialEventsCarousel } from "../astronomical/CelestialEventsCarousel";
-import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
+import { GalaxyBackground } from "../effects/GalaxyBackground/GalaxyBackground";
 import { AstrologyPanel } from "../panels/AstrologyPanel";
 import { ApiDrivenTarotPanel } from "../tarot/ApiDrivenTarotPanel";
-import styles from './EnhancedHomepage.module.css';
-export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
+import styles from "./EnhancedHomepage.module.css";
+export type ReadingMode = "home" | "tarot-room" | "astrology-room";
 interface EnhancedHomepageProps {
   className?: string;
 }
 /**
  * Enhanced Homepage with improved galaxy background visibility and API-driven tarot system
- * 
+ *
  * Features:
  * - Fixed galaxy background visibility issues
  * - API-driven tarot data (replaces hardcoded arrays)
@@ -24,33 +24,33 @@ interface EnhancedHomepageProps {
  * - Enhanced accessibility
  */
 export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
-  className = ''
+  className = "",
 }) => {
-  const [readingMode, setReadingMode] = useState<ReadingMode>('home');
+  const [readingMode, setReadingMode] = useState<ReadingMode>("home");
   const [galaxyIntensity, setGalaxyIntensity] = useState(0.8);
   // Adjust galaxy intensity based on reading mode
- 
+
   useEffect(() => {
     switch (readingMode) {
-      case 'home':
+      case "home":
         setGalaxyIntensity(0.8);
         break;
-      case 'tarot-room':
+      case "tarot-room":
         setGalaxyIntensity(0.6); // Dimmer for better card visibility
         break;
-      case 'astrology-room':
+      case "astrology-room":
         setGalaxyIntensity(1.0); // Full intensity for cosmic feel
         break;
     }
   }, [readingMode]);
-  const handleTarotClick = () => setReadingMode('tarot-room');
-  const handleAstrologyClick = () => setReadingMode('astrology-room');
-  const handleBackToHome = () => setReadingMode('home');
+  const handleTarotClick = () => setReadingMode("tarot-room");
+  const handleAstrologyClick = () => setReadingMode("astrology-room");
+  const handleBackToHome = () => setReadingMode("home");
   return (
     <AccessibilityProvider>
       <div className={`${styles.container} ${className}`}>
         {/* Enhanced Galaxy Background - Always Visible */}
-        <GalaxyBackground 
+        <GalaxyBackground
           className={styles.galaxyBackground}
           intensity={galaxyIntensity}
           showMilkyWay={true}
@@ -59,27 +59,21 @@ export const EnhancedHomepage: React.FC<EnhancedHomepageProps> = ({
         {/* Main Content */}
         <div className={styles.mainContent}>
           <AnimatePresence mode="wait">
-            {readingMode === 'home' ? (
-              <HomeView 
+            {readingMode === "home" ? (
+              <HomeView
                 key="home"
                 onTarotClick={handleTarotClick}
                 onAstrologyClick={handleAstrologyClick}
               />
-            ) : readingMode === 'tarot-room' ? (
-              <TarotRoom 
-                key="tarot"
-                onBack={handleBackToHome}
-              />
+            ) : readingMode === "tarot-room" ? (
+              <TarotRoom key="tarot" onBack={handleBackToHome} />
             ) : (
-              <AstrologyRoom 
-                key="astrology"
-                onBack={handleBackToHome}
-              />
+              <AstrologyRoom key="astrology" onBack={handleBackToHome} />
             )}
           </AnimatePresence>
         </div>
         {/* Floating Navigation */}
-        {readingMode !== 'home' && (
+        {readingMode !== "home" && (
           <motion.button
             className={styles.backButton}
             onClick={handleBackToHome}
@@ -101,7 +95,10 @@ interface HomeViewProps {
   onTarotClick: () => void;
   onAstrologyClick: () => void;
 }
-const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) => {
+const HomeView: React.FC<HomeViewProps> = ({
+  onTarotClick,
+  onAstrologyClick,
+}) => {
   const { user, isGuest } = useAuth();
   return (
     <motion.div
@@ -127,10 +124,9 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          {isGuest 
+          {isGuest
             ? "Discover your cosmic destiny through AI-powered readings"
-            : `Welcome back, ${user?.email}. The stars await your return.`
-          }
+            : `Welcome back, ${user?.email}. The stars await your return.`}
         </motion.p>
       </div>
       {/* Main Panels */}
@@ -147,7 +143,10 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           <div className={styles.panelContent}>
             <div className={styles.panelIcon}>🃏</div>
             <h2>Tarot Readings</h2>
-            <p>Unlock the mysteries of your path with AI-guided tarot interpretations</p>
+            <p>
+              Unlock the mysteries of your path with AI-guided tarot
+              interpretations
+            </p>
             <div className={styles.panelFeatures}>
               <span>✨ Daily Card</span>
               <span>🔮 Past, Present, Future</span>
@@ -168,7 +167,10 @@ const HomeView: React.FC<HomeViewProps> = ({ onTarotClick, onAstrologyClick }) =
           <div className={styles.panelContent}>
             <div className={styles.panelIcon}>⭐</div>
             <h2>Astrology</h2>
-            <p>Explore your cosmic blueprint through personalized astrological insights</p>
+            <p>
+              Explore your cosmic blueprint through personalized astrological
+              insights
+            </p>
             <div className={styles.panelFeatures}>
               <span>🌙 Birth Chart</span>
               <span>🪐 Planetary Transits</span>
@@ -207,11 +209,11 @@ const TarotRoom: React.FC<TarotRoomProps> = () => {
         <h1>🃏 Tarot Reading Room</h1>
         <p>Connect with the ancient wisdom of the cards</p>
       </div>
-      
-      <ApiDrivenTarotPanel 
+
+      <ApiDrivenTarotPanel
         className={styles.tarotPanel}
         onReadingComplete={(reading) => {
-          console.log('Reading completed:', reading);
+          console.log("Reading completed:", reading);
         }}
       />
     </motion.div>
@@ -234,7 +236,7 @@ const AstrologyRoom: React.FC<AstrologyRoomProps> = () => {
         <h1>⭐ Astrology Chamber</h1>
         <p>Discover your cosmic blueprint and celestial influences</p>
       </div>
-      
+
       <AstrologyPanel className={styles.astrologyPanel} />
     </motion.div>
   );

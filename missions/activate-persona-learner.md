@@ -13,10 +13,10 @@ The Knowledge Pool is populated with 390+ tarot interpretations, and the Tarot R
 ## EXECUTION PLAN (BATCH COMMANDS)
 
 **// 1. Spawn and configure the necessary agents.**
-mcp__claude-flow__agent_spawn { "type": "validator", "name": "StrategicGuardian" }
-mcp__claude-flow__agent_spawn { "type": "coder", "name": "PersonaImplementer" }
-mcp__claude-flow__agent_spawn { "type": "tester", "name": "QAValidator" }
-mcp__claude-flow__memory_store { "key": "mission/objective", "value": "Activate PersonaLearner & Sophia" }
+mcp**claude-flow**agent_spawn { "type": "validator", "name": "StrategicGuardian" }
+mcp**claude-flow**agent_spawn { "type": "coder", "name": "PersonaImplementer" }
+mcp**claude-flow**agent_spawn { "type": "tester", "name": "QAValidator" }
+mcp**claude-flow**memory_store { "key": "mission/objective", "value": "Activate PersonaLearner & Sophia" }
 
 **// 2. Read all relevant context files in a single batch.**
 Read { "file_path": "IMPLEMENTATION_MICROTASKS.md" }
@@ -27,16 +27,16 @@ Read { "file_path": "src/lib/memory/a-mem/memory_system.py" }
 Read { "file_path": "src/components/tarot/InteractiveReadingSurface.tsx" }
 
 **// 3. Create microtasks for the mission after strategic approval.**
-mcp__claude-flow__task_create { "name": "Strategic Alignment Check", "parent": "main" }
-mcp__claude-flow__task_create { "name": "Enhance Sophia Agent with Knowledge Pool", "parent": "main", "dependencies": ["Strategic Alignment Check"] }
-mcp__claude-flow__task_create { "name": "Enhance PersonaLearner with a-mem Hook", "parent": "main", "dependencies": ["Strategic Alignment Check"] }
-mcp__claude-flow__task_create { "name": "Integrate Agents into Reading UI", "parent": "main", "dependencies": ["Enhance Sophia Agent with Knowledge Pool", "Enhance PersonaLearner with a-mem Hook"] }
-mcp__claude-flow__task_create { "name": "Create End-to-End Validation Test", "parent": "main", "dependencies": ["Integrate Agents into Reading UI"] }
+mcp**claude-flow**task_create { "name": "Strategic Alignment Check", "parent": "main" }
+mcp**claude-flow**task_create { "name": "Enhance Sophia Agent with Knowledge Pool", "parent": "main", "dependencies": ["Strategic Alignment Check"] }
+mcp**claude-flow**task_create { "name": "Enhance PersonaLearner with a-mem Hook", "parent": "main", "dependencies": ["Strategic Alignment Check"] }
+mcp**claude-flow**task_create { "name": "Integrate Agents into Reading UI", "parent": "main", "dependencies": ["Enhance Sophia Agent with Knowledge Pool", "Enhance PersonaLearner with a-mem Hook"] }
+mcp**claude-flow**task_create { "name": "Create End-to-End Validation Test", "parent": "main", "dependencies": ["Integrate Agents into Reading UI"] }
 
 **// 4. Assign tasks and provide instructions.**
-mcp__claude-flow__agent_communicate { "to": "PersonaImplementer", "message": "First, update the `sophia.ts` agent. Its `getReading` method must now query the new `tarot_interpretations` table in Supabase using the provided card and spread position to fetch real interpretations from the Knowledge Pool. The method should then synthesize these interpretations into a soulful, narrative response. Second, update the `PersonaLearner.ts` agent. Its `logInteraction` method must take the user ID and the final reading from Sophia and create a new, structured `MemoryNote` in the `a-mem` system via its Python script. Third, modify `InteractiveReadingSurface.tsx` to call the `sophia.getReading` method to display the interpretation, and upon completion, call `PersonaLearner.logInteraction`." }
+mcp**claude-flow**agent_communicate { "to": "PersonaImplementer", "message": "First, update the `sophia.ts` agent. Its `getReading` method must now query the new `tarot_interpretations` table in Supabase using the provided card and spread position to fetch real interpretations from the Knowledge Pool. The method should then synthesize these interpretations into a soulful, narrative response. Second, update the `PersonaLearner.ts` agent. Its `logInteraction` method must take the user ID and the final reading from Sophia and create a new, structured `MemoryNote` in the `a-mem` system via its Python script. Third, modify `InteractiveReadingSurface.tsx` to call the `sophia.getReading` method to display the interpretation, and upon completion, call `PersonaLearner.logInteraction`." }
 
-mcp__claude-flow__agent_communicate { "to": "QAValidator", "message": "Create a new test script `scripts/test-persona-learning-loop.ts`. This test must simulate a user completing a reading, verify that the interpretation text received on the frontend contains keywords present in the Supabase Knowledge Pool (proving it's not mock data), and then check the `a-mem` log file to confirm that a new memory note for that specific reading was successfully created and persisted." }
+mcp**claude-flow**agent_communicate { "to": "QAValidator", "message": "Create a new test script `scripts/test-persona-learning-loop.ts`. This test must simulate a user completing a reading, verify that the interpretation text received on the frontend contains keywords present in the Supabase Knowledge Pool (proving it's not mock data), and then check the `a-mem` log file to confirm that a new memory note for that specific reading was successfully created and persisted." }
 
 ## DELIVERABLES
 

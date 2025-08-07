@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * Test Complete Deck Loading and Validation
- * 
+ *
  * This script validates that the complete 78-card Rider-Waite deck
  * is properly loaded and structured correctly.
  */
 
-import { RIDER_WAITE_DECK } from '../src/lib/tarot/RiderWaiteDeck.js';
-import { TarotCardData } from '../src/types/tarot.js';
-import { fileURLToPath } from 'url';
+import { RIDER_WAITE_DECK } from "../src/lib/tarot/RiderWaiteDeck.js";
+import { TarotCardData } from "../src/types/tarot.js";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -36,11 +36,11 @@ function validateCompleteDeck(): ValidationResult {
       totalCards: RIDER_WAITE_DECK.length,
       majorArcana: 0,
       minorArcana: 0,
-      suits: { cups: 0, pentacles: 0, swords: 0, wands: 0 }
-    }
+      suits: { cups: 0, pentacles: 0, swords: 0, wands: 0 },
+    },
   };
 
-  console.log('🔍 Starting complete deck validation...\n');
+  console.log("🔍 Starting complete deck validation...\n");
 
   // 1. Check total count (should be 78)
   if (RIDER_WAITE_DECK.length !== 78) {
@@ -51,7 +51,7 @@ function validateCompleteDeck(): ValidationResult {
   // 2. Validate each card structure and count arcana types
   const cardIds = new Set<string>();
   const cardNames = new Set<string>();
-  
+
   for (const card of RIDER_WAITE_DECK) {
     // Check for duplicate IDs
     if (cardIds.has(card.id)) {
@@ -69,16 +69,18 @@ function validateCompleteDeck(): ValidationResult {
 
     // Validate required fields
     if (!card.name || !card.id || !card.arcana || !card.frontImage) {
-      result.errors.push(`Missing required fields for card: ${card.name || card.id}`);
+      result.errors.push(
+        `Missing required fields for card: ${card.name || card.id}`,
+      );
       result.isValid = false;
     }
 
     // Count arcana types
-    if (card.arcana === 'major') {
+    if (card.arcana === "major") {
       result.stats.majorArcana++;
-    } else if (card.arcana === 'minor') {
+    } else if (card.arcana === "minor") {
       result.stats.minorArcana++;
-      
+
       // Count suits for minor arcana
       if (card.suit && card.suit in result.stats.suits) {
         result.stats.suits[card.suit]++;
@@ -86,8 +88,10 @@ function validateCompleteDeck(): ValidationResult {
     }
 
     // Validate image paths
-    if (!card.frontImage.startsWith('/tarot/deck-rider-waite/')) {
-      result.warnings.push(`Non-standard image path for ${card.name}: ${card.frontImage}`);
+    if (!card.frontImage.startsWith("/tarot/deck-rider-waite/")) {
+      result.warnings.push(
+        `Non-standard image path for ${card.name}: ${card.frontImage}`,
+      );
     }
 
     // Validate meanings structure
@@ -103,13 +107,17 @@ function validateCompleteDeck(): ValidationResult {
 
   // 3. Check Major Arcana count (should be 22)
   if (result.stats.majorArcana !== 22) {
-    result.errors.push(`Expected 22 Major Arcana cards, found ${result.stats.majorArcana}`);
+    result.errors.push(
+      `Expected 22 Major Arcana cards, found ${result.stats.majorArcana}`,
+    );
     result.isValid = false;
   }
 
   // 4. Check Minor Arcana count (should be 56)
   if (result.stats.minorArcana !== 56) {
-    result.errors.push(`Expected 56 Minor Arcana cards, found ${result.stats.minorArcana}`);
+    result.errors.push(
+      `Expected 56 Minor Arcana cards, found ${result.stats.minorArcana}`,
+    );
     result.isValid = false;
   }
 
@@ -122,9 +130,11 @@ function validateCompleteDeck(): ValidationResult {
   }
 
   // 6. Validate Major Arcana numbering (0-21)
-  const majorCards = RIDER_WAITE_DECK.filter(card => card.arcana === 'major');
-  const majorNumbers = majorCards.map(card => card.number).sort((a, b) => a - b);
-  
+  const majorCards = RIDER_WAITE_DECK.filter((card) => card.arcana === "major");
+  const majorNumbers = majorCards
+    .map((card) => card.number)
+    .sort((a, b) => a - b);
+
   for (let i = 0; i <= 21; i++) {
     if (!majorNumbers.includes(i)) {
       result.errors.push(`Missing Major Arcana card number ${i}`);
@@ -134,11 +144,13 @@ function validateCompleteDeck(): ValidationResult {
 
   // 7. Validate Minor Arcana structure (Ace through King for each suit)
   const expectedMinorNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  
-  for (const suit of ['cups', 'pentacles', 'swords', 'wands']) {
-    const suitCards = RIDER_WAITE_DECK.filter(card => card.suit === suit);
-    const suitNumbers = suitCards.map(card => card.number).sort((a, b) => a - b);
-    
+
+  for (const suit of ["cups", "pentacles", "swords", "wands"]) {
+    const suitCards = RIDER_WAITE_DECK.filter((card) => card.suit === suit);
+    const suitNumbers = suitCards
+      .map((card) => card.number)
+      .sort((a, b) => a - b);
+
     for (const expectedNum of expectedMinorNumbers) {
       if (!suitNumbers.includes(expectedNum)) {
         result.errors.push(`Missing ${suit} card number ${expectedNum}`);
@@ -154,55 +166,59 @@ function validateCompleteDeck(): ValidationResult {
  * Test deck loading performance
  */
 function testDeckLoadingPerformance(): void {
-  console.log('⚡ Testing deck loading performance...\n');
-  
+  console.log("⚡ Testing deck loading performance...\n");
+
   const startTime = performance.now();
-  
+
   // Load deck multiple times to test performance
   for (let i = 0; i < 1000; i++) {
     const deck = RIDER_WAITE_DECK;
     if (deck.length !== 78) break;
   }
-  
+
   const endTime = performance.now();
   const loadTime = endTime - startTime;
-  
+
   console.log(`📊 Loaded deck 1000 times in ${loadTime.toFixed(2)}ms`);
-  console.log(`📊 Average load time: ${(loadTime / 1000).toFixed(4)}ms per load\n`);
+  console.log(
+    `📊 Average load time: ${(loadTime / 1000).toFixed(4)}ms per load\n`,
+  );
 }
 
 /**
  * Generate detailed deck report
  */
 function generateDeckReport(result: ValidationResult): void {
-  console.log('📋 DECK VALIDATION REPORT');
-  console.log('=' .repeat(50));
-  
-  console.log('\n📊 STATISTICS:');
+  console.log("📋 DECK VALIDATION REPORT");
+  console.log("=".repeat(50));
+
+  console.log("\n📊 STATISTICS:");
   console.log(`Total Cards: ${result.stats.totalCards}/78`);
   console.log(`Major Arcana: ${result.stats.majorArcana}/22`);
   console.log(`Minor Arcana: ${result.stats.minorArcana}/56`);
-  console.log('\nSuit Breakdown:');
+  console.log("\nSuit Breakdown:");
   for (const [suit, count] of Object.entries(result.stats.suits)) {
-    console.log(`  ${suit.charAt(0).toUpperCase() + suit.slice(1)}: ${count}/14`);
+    console.log(
+      `  ${suit.charAt(0).toUpperCase() + suit.slice(1)}: ${count}/14`,
+    );
   }
 
   if (result.errors.length > 0) {
-    console.log('\n❌ ERRORS:');
-    result.errors.forEach(error => console.log(`  • ${error}`));
+    console.log("\n❌ ERRORS:");
+    result.errors.forEach((error) => console.log(`  • ${error}`));
   }
 
   if (result.warnings.length > 0) {
-    console.log('\n⚠️  WARNINGS:');
-    result.warnings.forEach(warning => console.log(`  • ${warning}`));
+    console.log("\n⚠️  WARNINGS:");
+    result.warnings.forEach((warning) => console.log(`  • ${warning}`));
   }
 
-  console.log('\n' + '=' .repeat(50));
-  
+  console.log("\n" + "=".repeat(50));
+
   if (result.isValid) {
-    console.log('✅ DECK VALIDATION PASSED - Complete 78-card deck ready!');
+    console.log("✅ DECK VALIDATION PASSED - Complete 78-card deck ready!");
   } else {
-    console.log('❌ DECK VALIDATION FAILED - Issues found that need fixing');
+    console.log("❌ DECK VALIDATION FAILED - Issues found that need fixing");
   }
 }
 
@@ -210,23 +226,22 @@ function generateDeckReport(result: ValidationResult): void {
  * Main test execution
  */
 function main(): void {
-  console.log('🎴 COMPLETE TAROT DECK VALIDATION TEST\n');
-  
+  console.log("🎴 COMPLETE TAROT DECK VALIDATION TEST\n");
+
   try {
     // Run validation
     const validationResult = validateCompleteDeck();
-    
+
     // Test performance
     testDeckLoadingPerformance();
-    
+
     // Generate report
     generateDeckReport(validationResult);
-    
+
     // Exit with appropriate code
     process.exit(validationResult.isValid ? 0 : 1);
-    
   } catch (error) {
-    console.error('💥 Test execution failed:', error);
+    console.error("💥 Test execution failed:", error);
     process.exit(1);
   }
 }

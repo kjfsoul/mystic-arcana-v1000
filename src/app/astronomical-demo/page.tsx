@@ -1,35 +1,39 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 // Temporarily disabled to fix build issues
 // import { CosmicBackground } from '../../components/animations/CosmicBackground/CosmicBackground';
 // import { AstronomicalSettings } from '../../components/settings/AstronomicalSettings/AstronomicalSettings';
-import { RenderConfig, CalculationConfig, Star } from '../../types/astronomical';
-import styles from './page.module.css';
+import {
+  RenderConfig,
+  CalculationConfig,
+  Star,
+} from "../../types/astronomical";
+import styles from "./page.module.css";
 /**
  * Astronomical Demo Page
- * 
+ *
  * Demonstrates the difference between decorative and real star fields.
  * Allows users to toggle settings and see the astronomical accuracy in action.
  */
 export default function AstronomicalDemoPage() {
   const [useRealStars] = useState(false);
   const [renderConfig] = useState<RenderConfig>({
-    starCatalog: 'hipparcos',
+    starCatalog: "hipparcos",
     maxStars: 25000,
     minMagnitude: 5.5,
     showConstellations: true,
     showPlanets: true,
     showDeepSky: false,
-    coordinateSystem: 'horizontal',
-    projection: 'stereographic'
+    coordinateSystem: "horizontal",
+    projection: "stereographic",
   });
   const [calculationConfig] = useState<CalculationConfig>({
-    ephemerisAccuracy: 'medium',
+    ephemerisAccuracy: "medium",
     updateInterval: 1000,
     precessionCorrection: true,
     nutationCorrection: true,
     aberrationCorrection: true,
-    refractionCorrection: true
+    refractionCorrection: true,
   });
   const [selectedStar, setSelectedStar] = useState<Star | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -52,17 +56,24 @@ export default function AstronomicalDemoPage() {
       {/* Header */}
       <header className={styles.header}>
         <h1>🌟 Astronomical Accuracy Demo</h1>
-        <p>Experience the difference between decorative and factually accurate star fields</p>
+        <p>
+          Experience the difference between decorative and factually accurate
+          star fields
+        </p>
         <div className={styles.headerControls}>
           <button
             onClick={() => setShowSettings(!showSettings)}
             className={styles.settingsButton}
           >
-            ⚙️ {showSettings ? 'Hide' : 'Show'} Settings
+            ⚙️ {showSettings ? "Hide" : "Show"} Settings
           </button>
           <div className={styles.modeIndicator}>
-            <span className={`${styles.indicator} ${useRealStars ? styles.real : styles.decorative}`}>
-              {useRealStars ? '🔬 Real Astronomical Data' : '🎨 Decorative Mode'}
+            <span
+              className={`${styles.indicator} ${useRealStars ? styles.real : styles.decorative}`}
+            >
+              {useRealStars
+                ? "🔬 Real Astronomical Data"
+                : "🎨 Decorative Mode"}
             </span>
           </div>
         </div>
@@ -78,7 +89,9 @@ export default function AstronomicalDemoPage() {
       {/* Main Star Field Display */}
       <main className={styles.mainDisplay}>
         <div className={styles.starField}>
-          <p>Cosmic background temporarily disabled during build optimization</p>
+          <p>
+            Cosmic background temporarily disabled during build optimization
+          </p>
         </div>
         {/* Information Overlay */}
         <div className={styles.infoOverlay}>
@@ -87,7 +100,9 @@ export default function AstronomicalDemoPage() {
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <strong>Mode:</strong>
-                <span>{useRealStars ? 'Real Astronomical Data' : 'Decorative Stars'}</span>
+                <span>
+                  {useRealStars ? "Real Astronomical Data" : "Decorative Stars"}
+                </span>
               </div>
               {useRealStars && (
                 <>
@@ -105,7 +120,9 @@ export default function AstronomicalDemoPage() {
                   </div>
                   <div className={styles.infoItem}>
                     <strong>Accuracy:</strong>
-                    <span>{calculationConfig.ephemerisAccuracy.toUpperCase()}</span>
+                    <span>
+                      {calculationConfig.ephemerisAccuracy.toUpperCase()}
+                    </span>
                   </div>
                 </>
               )}
@@ -185,14 +202,14 @@ export default function AstronomicalDemoPage() {
           <p>
             <strong>Status:</strong>
             {useRealStars
-              ? ' Real astronomical calculations active. Star positions are factually accurate for your location and time.'
-              : ' Decorative mode active. Stars are randomly generated for visual appeal only.'
-            }
+              ? " Real astronomical calculations active. Star positions are factually accurate for your location and time."
+              : " Decorative mode active. Stars are randomly generated for visual appeal only."}
           </p>
           {useRealStars && (
             <p className={styles.disclaimer}>
-              <strong>Note:</strong> Real astronomical data requires Claude Opus 4&apos;s calculation algorithms.
-              Currently showing placeholder implementation.
+              <strong>Note:</strong> Real astronomical data requires Claude Opus
+              4&apos;s calculation algorithms. Currently showing placeholder
+              implementation.
             </p>
           )}
         </div>

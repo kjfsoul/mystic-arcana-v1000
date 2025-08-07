@@ -1,22 +1,36 @@
-'use client';
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import { HighPerformanceStarField } from '../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField';
-import { GalaxyBackground } from '../../components/effects/GalaxyBackground/GalaxyBackground';
-import styles from './page.module.css';
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { HighPerformanceStarField } from "../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField";
+import { GalaxyBackground } from "../../components/effects/GalaxyBackground/GalaxyBackground";
+import styles from "./page.module.css";
 export default function GalaxyView() {
   const router = useRouter();
-  const [viewPerspective, setViewPerspective] = useState<'earth' | 'moon' | 'mars' | 'deep-space'>('earth');
+  const [viewPerspective, setViewPerspective] = useState<
+    "earth" | "moon" | "mars" | "deep-space"
+  >("earth");
   const [showStarField, setShowStarField] = useState(true);
   const handleBackToLobby = () => {
-    router.push('/');
+    router.push("/");
   };
   const perspectives = [
-    { id: 'earth', name: '🌍 Earth View', description: 'Your current perspective' },
-    { id: 'moon', name: '🌙 Moon View', description: 'Lunar perspective' },
-    { id: 'mars', name: '♂️ Mars Perspective', description: 'The red planet view' },
-    { id: 'deep-space', name: '🌌 Deep Space', description: 'Beyond the solar system' }
+    {
+      id: "earth",
+      name: "🌍 Earth View",
+      description: "Your current perspective",
+    },
+    { id: "moon", name: "🌙 Moon View", description: "Lunar perspective" },
+    {
+      id: "mars",
+      name: "♂️ Mars Perspective",
+      description: "The red planet view",
+    },
+    {
+      id: "deep-space",
+      name: "🌌 Deep Space",
+      description: "Beyond the solar system",
+    },
   ];
   return (
     <div className={styles.container}>
@@ -24,13 +38,13 @@ export default function GalaxyView() {
       <div className={styles.backgroundLayer}>
         <GalaxyBackground intensity={1.0} showMilkyWay={true} animated={true} />
       </div>
-      
+
       {showStarField && (
         <div className={styles.starFieldLayer}>
-          <HighPerformanceStarField 
+          <HighPerformanceStarField
             renderConfig={{
-              maxStars: viewPerspective === 'deep-space' ? 200000 : 100000,
-              minMagnitude: viewPerspective === 'deep-space' ? 7.0 : 6.5
+              maxStars: viewPerspective === "deep-space" ? 200000 : 100000,
+              minMagnitude: viewPerspective === "deep-space" ? 7.0 : 6.5,
             }}
           />
         </div>
@@ -55,10 +69,12 @@ export default function GalaxyView() {
           className={styles.header}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7, type: 'spring' }}
+          transition={{ delay: 0.7, type: "spring" }}
         >
           <h1 className={styles.title}>Cosmic Explorer</h1>
-          <p className={styles.subtitle}>Journey through the celestial realms</p>
+          <p className={styles.subtitle}>
+            Journey through the celestial realms
+          </p>
         </motion.div>
         {/* Perspective Controls */}
         <motion.div
@@ -73,14 +89,22 @@ export default function GalaxyView() {
               <motion.button
                 key={perspective.id}
                 className={`${styles.perspectiveButton} ${
-                  viewPerspective === perspective.id ? styles.active : ''
+                  viewPerspective === perspective.id ? styles.active : ""
                 }`}
-                onClick={() => setViewPerspective(perspective.id as 'earth' | 'moon' | 'mars' | 'deep-space')}
+                onClick={() =>
+                  setViewPerspective(
+                    perspective.id as "earth" | "moon" | "mars" | "deep-space",
+                  )
+                }
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className={styles.perspectiveName}>{perspective.name}</span>
-                <span className={styles.perspectiveDesc}>{perspective.description}</span>
+                <span className={styles.perspectiveName}>
+                  {perspective.name}
+                </span>
+                <span className={styles.perspectiveDesc}>
+                  {perspective.description}
+                </span>
               </motion.button>
             ))}
           </div>
@@ -106,7 +130,7 @@ export default function GalaxyView() {
           className={styles.specialOffer}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 3, type: 'spring', stiffness: 200 }}
+          transition={{ delay: 3, type: "spring", stiffness: 200 }}
           whileHover={{ scale: 1.1 }}
         >
           <span className={styles.offerIcon}>✨</span>

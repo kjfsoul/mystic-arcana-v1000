@@ -1,47 +1,47 @@
-'use client';
- 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext';
-import styles from './AuthModal.module.css';
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "../../contexts/AuthContext";
+import styles from "./AuthModal.module.css";
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  mode?: 'signin' | 'signup';
+  mode?: "signin" | "signup";
   title?: string;
   subtitle?: string;
 }
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
-  mode: initialMode = 'signin',
-  title = 'Welcome to Mystic Arcana',
-  subtitle = 'Sign in to unlock your personalized journey'
+  mode: initialMode = "signin",
+  title = "Welcome to Mystic Arcana",
+  subtitle = "Sign in to unlock your personalized journey",
 }) => {
-  const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
-  
+  const [mode, setMode] = useState<"signin" | "signup">(initialMode);
+
   // Sync internal mode with prop when modal opens
- 
+
   React.useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
-      setEmail('');
-      setPassword('');
-      setBirthDate('');
-      setBirthTime('');
-      setBirthLocation('');
+      setEmail("");
+      setPassword("");
+      setBirthDate("");
+      setBirthTime("");
+      setBirthLocation("");
       setError(null);
     }
   }, [isOpen, initialMode]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [birthTime, setBirthTime] = useState('');
-  const [birthLocation, setBirthLocation] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [birthTime, setBirthTime] = useState("");
+  const [birthLocation, setBirthLocation] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  
+
   const { signIn, signUp, signInWithGoogle } = useAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     setError(null);
     setSuccess(null);
     try {
-      if (mode === 'signin') {
+      if (mode === "signin") {
         const { error } = await signIn(email, password);
         if (error) {
           setError(error.message);
@@ -62,25 +62,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         if (birthDate) profileData.birth_date = birthDate;
         if (birthTime) profileData.birth_time = birthTime;
         if (birthLocation) profileData.birth_location = birthLocation;
-        
+
         const { data, error } = await signUp(email, password, profileData);
         if (error) {
           setError(error.message);
         } else if (data?.user && !data.session) {
           // Email confirmation required
-          setSuccess('Check your email to confirm your account!');
-          setEmail('');
-          setPassword('');
-          setBirthDate('');
-          setBirthTime('');
-          setBirthLocation('');
+          setSuccess("Check your email to confirm your account!");
+          setEmail("");
+          setPassword("");
+          setBirthDate("");
+          setBirthTime("");
+          setBirthLocation("");
         } else if (data?.session) {
           // Auto-logged in after signup
           onClose();
         }
       }
     } catch {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -94,13 +94,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         setError(error.message);
       }
     } catch {
-      setError('Failed to sign in with Google');
+      setError("Failed to sign in with Google");
     } finally {
       setLoading(false);
     }
   };
   const toggleMode = () => {
-    setMode(mode === 'signin' ? 'signup' : 'signin');
+    setMode(mode === "signin" ? "signup" : "signin");
     setError(null);
   };
   return (
@@ -124,7 +124,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -168,7 +168,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   minLength={6}
                 />
               </div>
-              {mode === 'signup' && (
+              {mode === "signup" && (
                 <>
                   <div className={styles.inputGroup}>
                     <label htmlFor="birthDate" className={styles.label}>
@@ -225,7 +225,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 className={styles.submitButton}
                 disabled={loading || !!success}
               >
-                {loading ? 'Loading...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
+                {loading
+                  ? "Loading..."
+                  : mode === "signin"
+                    ? "Sign In"
+                    : "Sign Up"}
               </button>
             </form>
             <div className={styles.divider}>
@@ -241,10 +245,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               Continue with Google
             </button>
             <div className={styles.footer}>
-              {mode === 'signin' ? (
+              {mode === "signin" ? (
                 <>
                   <p>
-                    Don&apos;t have an account?{' '}
+                    Don&apos;t have an account?{" "}
                     <button
                       type="button"
                       onClick={toggleMode}
@@ -254,14 +258,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     </button>
                   </p>
                   <p className={styles.forgotPassword}>
-                    <a href="/auth/reset-password" className={styles.linkButton}>
+                    <a
+                      href="/auth/reset-password"
+                      className={styles.linkButton}
+                    >
                       Forgot your password?
                     </a>
                   </p>
                 </>
               ) : (
                 <p>
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                   <button
                     type="button"
                     onClick={toggleMode}

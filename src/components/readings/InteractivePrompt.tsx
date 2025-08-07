@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { InteractionPrompt, UserResponse } from '@/types/UserInteraction';
-import { memoryLogger } from '@/lib/mem/memoryLogger';
-import { MessageCircle, ChevronRight, Sparkles } from 'lucide-react';
-import { PromptType } from '@/constants/EventTypes';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { InteractionPrompt, UserResponse } from "@/types/UserInteraction";
+import { memoryLogger } from "@/lib/mem/memoryLogger";
+import { MessageCircle, ChevronRight, Sparkles } from "lucide-react";
+import { PromptType } from "@/constants/EventTypes";
 
 interface InteractivePromptProps {
   prompt: InteractionPrompt;
@@ -24,13 +24,13 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
   readerId,
   onResponse,
   onComplete,
-  className = ''
+  className = "",
 }) => {
-  const [response, setResponse] = useState<string | number | boolean>('');
+  const [response, setResponse] = useState<string | number | boolean>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showThinking, setShowThinking] = useState(false);
   const startTime = useRef(Date.now());
-  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
   useEffect(() => {
     startTime.current = Date.now();
@@ -41,7 +41,7 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
 
     setIsSubmitting(true);
     const responseTime = Date.now() - startTime.current;
-    
+
     const userResponse: UserResponse = {
       promptId: prompt.id,
       userId,
@@ -50,12 +50,12 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
       response: selectedOption || response,
       responseTime,
       timestamp: new Date().toISOString(),
-      metadata: prompt.metadata
+      metadata: prompt.metadata,
     };
 
     try {
       await memoryLogger.logInteraction(userResponse);
-      
+
       if (onResponse) {
         onResponse(userResponse);
       }
@@ -68,7 +68,7 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
         }
       }, 1500);
     } catch (error) {
-      console.error('Failed to log interaction:', error);
+      console.error("Failed to log interaction:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -115,9 +115,11 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
           }}
           disabled={isSubmitting}
           className={`w-full p-4 text-left rounded-lg transition-all duration-300
-                      ${selectedOption === option.value 
-                        ? 'bg-purple-600/30 border-purple-400' 
-                        : 'bg-black/30 border-purple-500/30 hover:bg-purple-900/20'}
+                      ${
+                        selectedOption === option.value
+                          ? "bg-purple-600/30 border-purple-400"
+                          : "bg-black/30 border-purple-500/30 hover:bg-purple-900/20"
+                      }
                       border backdrop-blur-sm disabled:opacity-50`}
         >
           <span className="text-white">{option.label}</span>
@@ -129,7 +131,7 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
   const renderScalePrompt = () => {
     const min = prompt.minValue || 1;
     const max = prompt.maxValue || 10;
-    const value = response as number || min;
+    const value = (response as number) || min;
 
     return (
       <div className="space-y-4">
@@ -221,7 +223,8 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
         {!showThinking ? (
           <>
             {prompt.type === PromptType.REFLECTION && renderReflectionPrompt()}
-            {prompt.type === PromptType.MULTIPLE_CHOICE && renderMultipleChoice()}
+            {prompt.type === PromptType.MULTIPLE_CHOICE &&
+              renderMultipleChoice()}
             {prompt.type === PromptType.SCALE && renderScalePrompt()}
             {prompt.type === PromptType.BINARY && renderBinaryPrompt()}
           </>
@@ -233,7 +236,9 @@ export const InteractivePromptComponent: React.FC<InteractivePromptProps> = ({
           >
             <div className="flex items-center gap-2 text-purple-300">
               <Sparkles className="w-5 h-5 animate-pulse" />
-              <span className="text-sm">Sophia is contemplating your response...</span>
+              <span className="text-sm">
+                Sophia is contemplating your response...
+              </span>
             </div>
           </motion.div>
         )}

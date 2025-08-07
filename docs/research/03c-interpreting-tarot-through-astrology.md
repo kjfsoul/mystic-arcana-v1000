@@ -12,11 +12,11 @@
 
 **UPP LEMENT**
 
-Thi s text i s offered a s a  suppl ement to
+Thi s text i s offered a s a suppl ement to
 
-Hol isti c Ta ro t:  An Integ rativ e Ap p ro a ch  to  Using  Ta ro t f o r Persona l  Growth
+Hol isti c Ta ro t: An Integ rativ e Ap p ro a ch to Using Ta ro t f o r Persona l Growth
 
-(N orth Atla ntic  Books,  201 5 )by Benebell  Wen.
+(N orth Atla ntic Books, 201 5 )by Benebell Wen.
 
 Inter pre ti ngTa r ot
 
@@ -54,9 +54,9 @@ P lanetar y
 
 Mercur y
 
-Idea s, T hought  Pr ocess ,
+Idea s, T hought Pr ocess ,
 
-Soci al  Inf l uence ,
+Soci al Inf l uence ,
 
 Int el l i genc e,
 
@@ -64,13 +64,13 @@ Communi ca t i on
 
 Key
 
-2: T h e Hi gh  Priest ess
+2: T h e Hi gh Priest ess
 
 P lanetar y
 
 Moon
 
-Spiri t ual  Li fe,
+Spiri t ual Li fe,
 
 Connec ti vi t y t ot he
 
@@ -186,7 +186,7 @@ Wi se, Commi t t ed
 
 Key 10: Wh
 
-eel of  For tun e
+eel of For tun e
 
 P lanetar y
 
@@ -212,7 +212,7 @@ Har mony, Appea si ng,
 
 Del i ber at ion
 
-Key 12: T h e Han ged  M an
+Key 12: T h e Han ged M an
 
 Elemental
 
@@ -282,7 +282,7 @@ Ego, Dr i ve, Conquest ,
 
 Aggr es si on, Impul se ,
 
-Survi val  Inst i nct, Fight
+Survi val Inst i nct, Fight
 
 Key 17: T h e S ta r
 
@@ -318,7 +318,7 @@ S un
 
 Aspi rati ons,Mat uri t y
 
-of  t he Sel f , Ext er nal
+of t he Sel f , Ext er nal
 
 Lif e,Ki ngdom
 
@@ -344,7 +344,7 @@ P lanetar y
 
 S aturn
 
-Soci al  Str uct ur e,
+Soci al Str uct ur e,
 
 Res ponsi bi li t y, Fat her
 
@@ -376,7 +376,7 @@ Time, W i sdom Gai ned
 
 **C**
 
-O R R ES PO ND ENC ES  I N
+O R R ES PO ND ENC ES I N
 
 **T**
 
@@ -392,7 +392,7 @@ Glyp h Ref erence
 
 Attrib utio ns
 
-Ace of  Wan d s
+Ace of Wan d s
 
 Fire
 
@@ -404,7 +404,7 @@ Char isma, W i ll ,
 
 Oppor t unit ies
 
-T w o of  Wand s
+T w o of Wand s
 
 Mars in Aries
 
@@ -418,7 +418,7 @@ st at us quo, advance
 
 f or war d; act i on
 
-T h ree of  Wan d s
+T h ree of Wan d s
 
 S un in Aries
 
@@ -434,19 +434,19 @@ Impat i ence, St r ong
 
 Wil l power
 
-Fou r of  Wan d s
+Fou r of Wan d s
 
 Venus i n Aries
 
-Innoce nt  l ove,
+Innoce nt l ove,
 
 Bal ance bet wee n
 
-per sonal wi ll  and
+per sonal wi ll and
 
 r elati onshi ps
 
-Five of  Wan d s
+Five of Wan d s
 
 S aturn in Leo
 
@@ -466,7 +466,7 @@ hea r d
 
 confi dence
 
-S ix of  Wan d s
+S ix of Wan d s
 
 J upiter in Leo
 
@@ -476,7 +476,7 @@ At t rac ti ng Good
 
 Fort une, Pri de
 
-S even  of  Wan d s
+S even of Wan d s
 
 Mars in Leo
 
@@ -484,9 +484,9 @@ Sta ndi ng Up For
 
 Your sel f;
 
-Forgi vene ss  Iss ues
+Forgi vene ss Iss ues
 
-E igh t of  Wan d s
+E igh t of Wan d s
 
 Mercur y in S a git tarius
 
@@ -498,7 +498,7 @@ Communi ca t i ons;
 
 Enthusi asm
 
-Nin e of  Wan ds
+Nin e of Wan ds
 
 Moon i n S agit tarius
 
@@ -510,7 +510,7 @@ Lacki ng
 
 Commi t ment
 
-T en  of  Wand s
+T en of Wand s
 
 S aturn in S agit tarius
 
@@ -528,7 +528,7 @@ r den
 
 ed Lif e
 
-Page of  Wan d s
+Page of Wan d s
 
 Fire
 
@@ -566,7 +566,7 @@ cr eati vi t y
 
 4
 
-Kn igh t of  Wan d s
+Kn igh t of Wan d s
 
 Fire
 
@@ -584,9 +584,9 @@ knowl edge
 
 i n area s
 
-of  wor k or  cr eati vi t y
+of wor k or cr eati vi t y
 
-Qu een  of  Wand s
+Qu een of Wand s
 
 Fire
 
@@ -604,11 +604,11 @@ st age bef ore
 
 ac hievi ng suc ce ss in
 
-ar ea of  wor k or
+ar ea of wor k or
 
 cr eat i vit y
 
-Kin g of  Wan d s
+Kin g of Wan d s
 
 Fire
 
@@ -636,7 +636,7 @@ Glyp h Ref erence
 
 Attrib utio ns
 
-Ace of  Cup s
+Ace of Cup s
 
 W ater
 
@@ -650,7 +650,7 @@ Empat hy,
 
 Senti ment ali t y
 
-T w o of  Cup s
+T w o of Cup s
 
 Venus i n Cance r
 
@@ -666,7 +666,7 @@ i ve
 
 Par t ner
 
-T h ree of  Cup s
+T h ree of Cup s
 
 Mercur y in C an cer
 
@@ -678,9 +678,9 @@ Emot i ons
 
 T hought s
 
-of  Home a nd Hea rt h
+of Home a nd Hea rt h
 
-Fou r of  Cup s
+Fou r of Cup s
 
 Mo
 
@@ -704,7 +704,7 @@ eki ng
 
 Sta bi li t y
 
-Five of  Cup s
+Five of Cup s
 
 Mars in S corpio
 
@@ -712,9 +712,9 @@ Chal lenge, Int ens it y;
 
 Emot i ona
 
-l  Conf li ct s
+l Conf li ct s
 
-S ix of  Cup s
+S ix of Cup s
 
 S un in S corpio
 
@@ -726,7 +726,7 @@ Cr ea ti ve Wi ll power ,
 
 Regene r ati on
 
-S even  of  Cup s
+S even of Cup s
 
 Venus i n S corpio
 
@@ -736,7 +736,7 @@ Obse ssi on,
 
 Mir ages ,
 
-Iss ues  of  Contr ol
+Iss ues of Contr ol
 
 **P**
 
@@ -764,7 +764,7 @@ Iss ues  of  Contr ol
 
 **C**
 
-O R R ES PO ND ENC ES  I N
+O R R ES PO ND ENC ES I N
 
 **T**
 
@@ -772,7 +772,7 @@ O R R ES PO ND ENC ES  I N
 
 5
 
-E igh t of  Cup s
+E igh t of Cup s
 
 S aturn in P isces
 
@@ -788,7 +788,7 @@ Fai th;
 
 Sensit i vit y
 
-Nin e of  Cup s
+Nin e of Cup s
 
 J upiter in P isces
 
@@ -800,7 +800,7 @@ pl i shment ,
 
 Abundance
 
-T en  of  Cup s
+T en of Cup s
 
 Mars in P isces
 
@@ -808,9 +808,9 @@ Dr i ve a nd Conquest
 
 i n Cr eati ve M at ter s
 
-or  Relati onshi ps
+or Relati onshi ps
 
-Page of  Cup s
+Page of Cup s
 
 W ater
 
@@ -826,9 +826,9 @@ of
 
 emot i onal or
 
-spi rit ual  i nt er est
+spi rit ual i nt er est
 
-Kn igh t of  Cup s
+Kn igh t of Cup s
 
 W ater
 
@@ -848,9 +848,9 @@ of
 
 emot i onal or
 
-spi rit ual  i nt er est
+spi rit ual i nt er est
 
-Qu een  of  Cups
+Qu een of Cups
 
 W ater
 
@@ -868,13 +868,13 @@ of
 
 emot i onal or
 
-spi rit ual  i nt er est
+spi rit ual i nt er est
 
 ;
 
 Ma ter nal ca re
 
-Kin g of  Cup s
+Kin g of Cup s
 
 W ater
 
@@ -890,13 +890,13 @@ and domi nance in
 
 area o f
 
-e mot i onal  or
+e mot i onal or
 
-spi rit ual  i nt er est
+spi rit ual i nt er est
 
 ;
 
-Pat er nal  car e
+Pat er nal car e
 
 Ca rd
 
@@ -906,7 +906,7 @@ Glyp h Ref erence
 
 Attrib utio ns
 
-Ace of  S w ord s
+Ace of S w ord s
 
 Air
 
@@ -920,7 +920,7 @@ Di al ecti c
 
 , Rhet or ic
 
-T w o of  Sw ord s
+T w o of Sw ord s
 
 Moon i n Libra
 
@@ -930,27 +930,27 @@ Subconsci ous
 
 Inf l uenc es
 
-T h ree of  S w ord s
+T h ree of S w ord s
 
 S aturn in Libra
 
-Di sc onnect  or
+Di sc onnect or
 
-Det ac hment  wi t h
+Det ac hment wi t h
 
-Ot hers;  Ennui
+Ot hers; Ennui
 
-Fou r of  S w ord s
+Fou r of S w ord s
 
 J upiter in Libr a
 
-Nee d f or  Bal ance;
+Nee d f or Bal ance;
 
-Gr ea ter  Need for
+Gr ea ter Need for
 
 Har mony
 
-;  Succe ss
+; Succe ss
 
 i n Relati onshi ps
 
@@ -970,7 +970,7 @@ i n Relati onshi ps
 
 6
 
-Five of  S w ord s
+Five of S w ord s
 
 Venus i n Aquarius
 
@@ -980,7 +980,7 @@ Rel at i onships;
 
 Mi nd
 
-Over  Love;
+Over Love;
 
 Unemot i onal
 
@@ -996,7 +996,7 @@ Lacki ng Focus,
 
 Int el l ect ual i zi ng
 
-S even  of  Sw ord s
+S even of Sw ord s
 
 Moon i n Aquariu
 
@@ -1022,7 +1022,7 @@ c
 
 i rcumst anc es
 
-Nin e of  Sw ord s
+Nin e of Sw ord s
 
 Mars in Gemi ni
 
@@ -1034,7 +1034,7 @@ Res tl essne ss;
 
 Ner vous e ner gy
 
-T en  of  Sw ord s
+T en of Sw ord s
 
 S un in Gemi ni
 
@@ -1044,9 +1044,9 @@ Changes ;
 
 Mental
 
-agi l it y;  Ambi t i on
+agi l it y; Ambi t i on
 
-Page of  S w ord s
+Page of S w ord s
 
 Air
 
@@ -1056,11 +1056,11 @@ Earth
 
 Wor ki ng har dat an
 
-i ntell ect ual  pur sui t;
+i ntell ect ual pur sui t;
 
 yout hf ul ambi t i on
 
-Kn igh t of  Sw ord s
+Kn igh t of Sw ord s
 
 Air
 
@@ -1074,13 +1074,13 @@ Air
 
 Ques t f or hi gher
 
-knowl edge;  war ri or
+knowl edge; war ri or
 
 se eki ng c
 
 onquest
 
-Qu een  of  Sw ord s
+Qu een of Sw ord s
 
 Air
 
@@ -1104,9 +1104,9 @@ knowl edge
 
 an
 
-advoca t eor  counsel
+advoca t eor counsel
 
-Kin g of  Sw ord s
+Kin g of Sw ord s
 
 Air
 
@@ -1122,7 +1122,7 @@ and domi nance in
 
 int ell ectual
 
-pursuit;  achieving
+pursuit; achieving
 
 one
 
@@ -1158,7 +1158,7 @@ s
 
 **C**
 
-O R R ES PO ND ENC ES  I N
+O R R ES PO ND ENC ES I N
 
 **T**
 
@@ -1174,7 +1174,7 @@ Glyp h Ref erence
 
 Attrib utio ns
 
-Ace of  Pen tacles
+Ace of Pen tacles
 
 Earth
 
@@ -1186,33 +1186,31 @@ Conse r vati sm,
 
 Res ource ful nes s
 
-T w o of  Pen tacles
+T w o of Pen tacles
 
 J upiter in C apricorn
 
 Ma teri al Succes s;
 
-Sta bi li t y;  Result
+Sta bi li t y; Result
 
 s
 
--
-
-**O**
+- **O**
 
 r
 
 i ent ed
 
-T h ree of  Pen ta cles
+T h ree of Pen ta cles
 
 Mars in C
 
 apricorn
 
-Cont r ol  Over
+Cont r ol Over
 
-Per sonal  Ener gi es
+Per sonal Ener gi es
 
 and Fo
 
@@ -1222,7 +1220,7 @@ St ar ti ng
 
 A mbi t i ous Proj ects
 
-Fou r of  Pen tacles
+Fou r of Pen tacles
 
 S un in C apricorn
 
@@ -1238,7 +1236,7 @@ Loneli ness
 
 Res ource ful nes s
 
-Five of  Pen tacl es
+Five of Pen tacl es
 
 Mercur y in T aurus
 
@@ -1250,17 +1248,17 @@ Need
 
 Dedi cat ion;
 
-S ix of  Pen tacles
+S ix of Pen tacles
 
 Moon i n Taurus
 
-Emot i onal  St abi li t y;
+Emot i onal St abi li t y;
 
 Compas si on wit h
 
 Ma teri alT hi ngs
 
-S even  of  Pen tacles
+S even of Pen tacles
 
 S aturn in Taurus
 
@@ -1270,7 +1268,7 @@ Change;
 
 Cr avi ng
 
-Securi t y;  Har d
+Securi t y; Har d
 
 Wor k a
 
@@ -1278,7 +1276,7 @@ nd
 
 Dedi cat ion
 
-E igh t of  Pen tacles
+E igh t of Pen tacles
 
 S un in Virgo
 
@@ -1292,13 +1290,13 @@ Dedi cat ion or
 
 Commi
 
-t ment  t o a
+t ment t o a
 
 Per sonal
 
 Pr oj ect
 
-Nin e of  Pen tacles
+Nin e of Pen tacles
 
 Venus i n Vir go
 
@@ -1318,7 +1316,7 @@ Inse cur i t y
 
 Te
 
-n  of  Pen tacles
+n of Pen tacles
 
 Mercur y in Vir go
 
@@ -1328,7 +1326,7 @@ Str ong Capa bi lit y t o
 
 Ma nif est Wil l
 
-Page of  Pen ta cles
+Page of Pen ta cles
 
 Earth
 
@@ -1342,7 +1340,7 @@ ach
 
 iee vi ng f ut ur e
 
-mat er i al  succ ess
+mat er i al succ ess
 
 **H**
 
@@ -1380,7 +1378,7 @@ and
 
 pl anni ng f or
 
-mat er i al  st abi li t y
+mat er i al st abi li t y
 
 ;
 
@@ -1388,7 +1386,7 @@ i ndust ri ousne
 
 ss
 
-Qu een  of  Pen tacles
+Qu een of Pen tacles
 
 Earth
 
@@ -1406,11 +1404,11 @@ devel opment al stage
 
 i n a
 
-r ea  of  commer ce
+r ea of commer ce
 
-or  i ndust r y
+or i ndust r y
 
-Kin g of  Pen tacles
+Kin g of Pen tacles
 
 Earth
 

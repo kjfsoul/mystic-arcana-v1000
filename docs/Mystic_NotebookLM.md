@@ -402,11 +402,11 @@ Goal: Ensure the application builds and deploys correctly on Netlify from GitHub
 
 ▪
 
-Prompt Strategy: Ask Claude Code to generate the necessary configuration files (_redirects, netlify.toml)3.... Instruct it on the desired redirects, including forcing HTTPS and forwarding the bare domain and netlify.app subdomain to the custom domain, and redirecting / to /eclipse16....
+Prompt Strategy: Ask Claude Code to generate the necessary configuration files (\_redirects, netlify.toml)3.... Instruct it on the desired redirects, including forcing HTTPS and forwarding the bare domain and netlify.app subdomain to the custom domain, and redirecting / to /eclipse16....
 
 ▪
 
-Example Prompt: "Finalize the Netlify deployment. Create the _redirects file in the root of the client directory. Include rules to: 1. Force HTTPS for all traffic. 2. Redirect www.mysticarcana.com/* to https://mysticarcana.com/:splat. 3. Redirect mysticarcana.netlify.app/* to https://mysticarcana.com/:splat. 4. For the launch, redirect the root path (/) to /eclipse with a 302 temporary redirect. Also, ensure netlify.toml is correctly configured for building the Vite/React project from the client directory and handling environment variables822. Provide the content for both files."3...
+Example Prompt: "Finalize the Netlify deployment. Create the \_redirects file in the root of the client directory. Include rules to: 1. Force HTTPS for all traffic. 2. Redirect www.mysticarcana.com/_ to https://mysticarcana.com/:splat. 3. Redirect mysticarcana.netlify.app/_ to https://mysticarcana.com/:splat. 4. For the launch, redirect the root path (/) to /eclipse with a 302 temporary redirect. Also, ensure netlify.toml is correctly configured for building the Vite/React project from the client directory and handling environment variables822. Provide the content for both files."3...
 
 ▪
 

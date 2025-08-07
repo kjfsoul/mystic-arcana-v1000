@@ -165,17 +165,17 @@
   .headerContent {
     padding: 0 1rem;
   }
-  
+
   .logoText {
     font-size: 1.2rem;
   }
-  
+
   .authButton {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
     min-height: 44px;
   }
-  
+
   .welcomeText {
     display: none;
   }

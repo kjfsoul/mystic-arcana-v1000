@@ -1,44 +1,48 @@
-'use client';
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Save, BookOpen } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { TarotReading } from '@/lib/tarot/TarotEngine';
-import { TarotService } from '@/services/TarotService';
-import { SaveReadingModal } from '@/components/modals/SaveReadingModal';
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Save, BookOpen } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { TarotReading } from "@/lib/tarot/TarotEngine";
+import { TarotService } from "@/services/TarotService";
+import { SaveReadingModal } from "@/components/modals/SaveReadingModal";
 interface TarotPanelWithSaveModalProps {
   reading: TarotReading | null;
   onReadingComplete?: () => void;
 }
-export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = ({
-  reading,
-  onReadingComplete: _onReadingComplete
-}) => {
+export const TarotPanelWithSaveModal: React.FC<
+  TarotPanelWithSaveModalProps
+> = ({ reading, onReadingComplete: _onReadingComplete }) => {
   const { user, isGuest } = useAuth();
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [_isSaving, _setSaving] = useState(false);
   const handleSaveReading = async (notes: string, isPublic: boolean) => {
     if (!reading || !user) {
-      throw new Error('Cannot save reading without user authentication');
+      throw new Error("Cannot save reading without user authentication");
     }
     _setSaving(true);
-    
+
     try {
       // Add notes to the reading
       const readingWithNotes = {
         ...reading,
         notes,
         isPublic,
-        tags: ['manual-save', new Date().toISOString().split('T')[0]]
+        tags: ["manual-save", new Date().toISOString().split("T")[0]],
       };
-      const { error } = await TarotService.saveReading(readingWithNotes, user.id);
-      
+      const { error } = await TarotService.saveReading(
+        readingWithNotes,
+        user.id,
+      );
+
       if (error) {
-        throw new Error(typeof error === 'string' ? error : 'Failed to save reading');
+        throw new Error(
+          typeof error === "string" ? error : "Failed to save reading",
+        );
       }
       // Success - the modal will handle closing itself
     } catch (error) {
-      console.error('Save reading error:', error);
+      console.error("Save reading error:", error);
       throw error;
     } finally {
       _setSaving(false);
@@ -61,9 +65,11 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
           >
             <div className="flex items-center gap-3">
               <Save className="w-6 h-6 text-white" />
-              <span className="text-lg font-semibold text-white">Save to Journal</span>
+              <span className="text-lg font-semibold text-white">
+                Save to Journal
+              </span>
             </div>
-            
+
             {/* Pulse animation to draw attention */}
             <motion.div
               className="absolute inset-0 rounded-full bg-white opacity-20"
@@ -91,8 +97,12 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
           >
             <BookOpen className="w-6 h-6 text-purple-400" />
             <div className="text-left">
-              <div className="text-lg font-semibold text-white">Save This Reading</div>
-              <div className="text-sm text-gray-400">Preserve your cosmic insights</div>
+              <div className="text-lg font-semibold text-white">
+                Save This Reading
+              </div>
+              <div className="text-sm text-gray-400">
+                Preserve your cosmic insights
+              </div>
             </div>
           </button>
         </div>

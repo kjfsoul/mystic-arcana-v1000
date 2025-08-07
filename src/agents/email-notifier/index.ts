@@ -3,17 +3,17 @@
  * Email Notification Agent
  * Sends automated email updates to kjfsoul@gmail.com
  */
-import * as nodemailer from 'nodemailer';
-import { readFileSync, existsSync, writeFileSync, appendFileSync } from 'fs';
-import { join } from 'path';
-import { execSync } from 'child_process';
-import { EnergyLevel } from '@/constants/EventTypes';
+import * as nodemailer from "nodemailer";
+import { readFileSync, existsSync, writeFileSync, appendFileSync } from "fs";
+import { join } from "path";
+import { execSync } from "child_process";
+import { EnergyLevel } from "@/constants/EventTypes";
 
 interface CompletedTask {
   agent_name: string;
   task_description: string;
   timestamp: string;
-  status: 'started' | 'completed' | 'failed';
+  status: "started" | "completed" | "failed";
 }
 interface AgentStatus {
   total: number;
@@ -28,14 +28,17 @@ interface SystemHealth {
 }
 interface TodoItem {
   priority: EnergyLevel;
-  status: 'in_progress' | 'completed' | 'pending';
+  status: "in_progress" | "completed" | "pending";
   content: string;
 }
 interface AgentRegistry {
-  agents: Record<string, {
-    status: string;
-    [key: string]: unknown;
-  }>;
+  agents: Record<
+    string,
+    {
+      status: string;
+      [key: string]: unknown;
+    }
+  >;
   system_health?: {
     mcp_connectivity?: string;
   };
@@ -58,7 +61,7 @@ interface EmailReport {
   system_health: SystemHealth;
 }
 class EmailNotificationAgent {
-  private recipient = 'kjfsoul@gmail.com';
+  private recipient = "kjfsoul@gmail.com";
   private transporter: nodemailer.Transporter;
   private logPath: string;
   private lastReportPath: string;
@@ -67,20 +70,25 @@ class EmailNotificationAgent {
   private messageBusPath: string;
   constructor() {
     const baseDir = process.cwd();
-    this.logPath = join(baseDir, 'logs', 'agent-activity', `${new Date().toISOString().split('T')[0]}.log`);
-    this.lastReportPath = join(baseDir, 'temp', 'last-email-report.json');
-    this.registryPath = join(baseDir, 'agents', 'registry.json');
-    this.todoPath = join(baseDir, 'temp', 'todos.json');
-    this.taskLogPath = join(baseDir, 'logs', 'agent-tasks.jsonl');
-    this.messageBusPath = join(baseDir, 'temp', 'agent-messages.json');
+    this.logPath = join(
+      baseDir,
+      "logs",
+      "agent-activity",
+      `${new Date().toISOString().split("T")[0]}.log`,
+    );
+    this.lastReportPath = join(baseDir, "temp", "last-email-report.json");
+    this.registryPath = join(baseDir, "agents", "registry.json");
+    this.todoPath = join(baseDir, "temp", "todos.json");
+    this.taskLogPath = join(baseDir, "logs", "agent-tasks.jsonl");
+    this.messageBusPath = join(baseDir, "temp", "agent-messages.json");
     // Configure email transporter
     // Using Gmail SMTP - you'll need to set up app password
     this.transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER || 'mystic.arcana.notifications@gmail.com',
-        pass: process.env.EMAIL_PASS || '' // App password required
-      }
+        user: process.env.EMAIL_USER || "mystic.arcana.notifications@gmail.com",
+        pass: process.env.EMAIL_PASS || "", // App password required
+      },
     });
   }
   private log(message: string) {
@@ -88,9 +96,12 @@ class EmailNotificationAgent {
     const logEntry = `${timestamp} [EMAIL_NOTIFIER] ${message}`;
     console.log(logEntry);
     try {
-      appendFileSync(this.logPath, logEntry + '\n');
+      appendFileSync(this.logPath, logEntry + "\n");
     } catch (error) {
-      console.warn('Warning: Could not write to log file:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Warning: Could not write to log file:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
   }
   /**
@@ -103,7 +114,7 @@ class EmailNotificationAgent {
       todos: {
         high_priority: [],
         in_progress: [],
-        pending: []
+        pending: [],
       },
       challenges: [],
       urgent_needs: [],
@@ -111,42 +122,66 @@ class EmailNotificationAgent {
       system_health: {
         uptime: process.uptime(),
         memory_usage: process.memoryUsage(),
-        active_processes: 1
-      }
+        active_processes: 1,
+      },
     };
     try {
       // 1. Get completed tasks from task log
       if (existsSync(this.taskLogPath)) {
-        const lines = readFileSync(this.taskLogPath, 'utf-8').split('\n').filter(l => l.trim());
+        const lines = readFileSync(this.taskLogPath, "utf-8")
+          .split("\n")
+          .filter((l) => l.trim());
         const lastReportTime = this.getLastReportTime();
-        
+
         for (const line of lines) {
           try {
             const task = JSON.parse(line);
-            if (new Date(task.timestamp) > lastReportTime && task.status === 'completed') {
+            if (
+              new Date(task.timestamp) > lastReportTime &&
+              task.status === "completed"
+            ) {
               report.completed_tasks.push(task);
             }
           } catch (error) {
             // Skip invalid JSON lines in task log
-            console.warn('Invalid JSON line in task log:', error instanceof Error ? error.message : 'Unknown error');
+            console.warn(
+              "Invalid JSON line in task log:",
+              error instanceof Error ? error.message : "Unknown error",
+            );
           }
         }
       }
       // 2. Get current todos
       if (existsSync(this.todoPath)) {
-        const todos = JSON.parse(readFileSync(this.todoPath, 'utf-8')) as TodoItem[];
-        report.todos.high_priority = todos.filter((t) => t.priority === EnergyLevel.HIGH && t.status !== 'completed').map((t) => t.content);
-        report.todos.in_progress = todos.filter((t) => t.status === 'in_progress').map((t) => t.content);
-        report.todos.pending = todos.filter((t) => t.status === 'pending').map((t) => t.content);
+        const todos = JSON.parse(
+          readFileSync(this.todoPath, "utf-8"),
+        ) as TodoItem[];
+        report.todos.high_priority = todos
+          .filter(
+            (t) => t.priority === EnergyLevel.HIGH && t.status !== "completed",
+          )
+          .map((t) => t.content);
+        report.todos.in_progress = todos
+          .filter((t) => t.status === "in_progress")
+          .map((t) => t.content);
+        report.todos.pending = todos
+          .filter((t) => t.status === "pending")
+          .map((t) => t.content);
       }
       // 3. Get agent status
       if (existsSync(this.registryPath)) {
-        const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
+        const registry = JSON.parse(
+          readFileSync(this.registryPath, "utf-8"),
+        ) as AgentRegistry;
         report.agent_status = {
           total: Object.keys(registry.agents).length,
-          active: Object.values(registry.agents).filter((a) => a.status === 'active').length,
-          failed: Object.values(registry.agents).filter((a) => a.status === 'failed').length,
-          system_health: registry.system_health
+          active: Object.values(registry.agents).filter(
+            (a) => a.status === "active",
+          ).length,
+          failed: Object.values(registry.agents).filter(
+            (a) => a.status === "failed",
+          ).length,
+          system_health: registry.system_health,
         };
       }
       // 4. Identify challenges and urgent needs
@@ -155,7 +190,9 @@ class EmailNotificationAgent {
       // 5. Get system health metrics
       report.system_health = await this.getSystemHealth();
     } catch (error) {
-      this.log(`Error collecting updates: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      this.log(
+        `Error collecting updates: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
     return report;
   }
@@ -165,11 +202,16 @@ class EmailNotificationAgent {
   private getLastReportTime(): Date {
     if (existsSync(this.lastReportPath)) {
       try {
-        const lastReport = JSON.parse(readFileSync(this.lastReportPath, 'utf-8'));
+        const lastReport = JSON.parse(
+          readFileSync(this.lastReportPath, "utf-8"),
+        );
         return new Date(lastReport.timestamp);
       } catch (error) {
         // Failed to parse last report timestamp, defaulting to 24 hours ago
-        console.warn('Could not parse last report timestamp:', error instanceof Error ? error.message : 'Unknown error');
+        console.warn(
+          "Could not parse last report timestamp:",
+          error instanceof Error ? error.message : "Unknown error",
+        );
       }
     }
     return new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -181,28 +223,42 @@ class EmailNotificationAgent {
     const challenges: string[] = [];
     // Check for failed agents
     try {
-      const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
-      const failedAgents = Object.values(registry.agents).filter((a) => a.status === 'failed');
+      const registry = JSON.parse(
+        readFileSync(this.registryPath, "utf-8"),
+      ) as AgentRegistry;
+      const failedAgents = Object.values(registry.agents).filter(
+        (a) => a.status === "failed",
+      );
       if (failedAgents.length > 0) {
         challenges.push(`${failedAgents.length} agents are in failed state`);
       }
     } catch (error) {
       // Failed to read registry for agent status
-      console.warn('Could not read agent registry:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Could not read agent registry:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
     // Check for pending messages
     try {
-      const messages = JSON.parse(readFileSync(this.messageBusPath, 'utf-8')) as MessageData;
+      const messages = JSON.parse(
+        readFileSync(this.messageBusPath, "utf-8"),
+      ) as MessageData;
       if (messages.messages.length > 10) {
-        challenges.push(`${messages.messages.length} unprocessed messages in queue`);
+        challenges.push(
+          `${messages.messages.length} unprocessed messages in queue`,
+        );
       }
     } catch (error) {
       // Failed to read message bus
-      console.warn('Could not read message bus:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Could not read message bus:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
     // Known critical issues
-    challenges.push('Mobile responsiveness broken in three-panel layout');
-    challenges.push('4 competing layout systems need consolidation');
+    challenges.push("Mobile responsiveness broken in three-panel layout");
+    challenges.push("4 competing layout systems need consolidation");
     return challenges;
   }
   /**
@@ -213,25 +269,38 @@ class EmailNotificationAgent {
     // Check todos for high priority items
     if (existsSync(this.todoPath)) {
       try {
-        const todos = JSON.parse(readFileSync(this.todoPath, 'utf-8'));
-        const highPriority = todos.filter((t: TodoItem) => t.priority === EnergyLevel.HIGH && t.status !== 'completed');
+        const todos = JSON.parse(readFileSync(this.todoPath, "utf-8"));
+        const highPriority = todos.filter(
+          (t: TodoItem) =>
+            t.priority === EnergyLevel.HIGH && t.status !== "completed",
+        );
         if (highPriority.length > 0) {
           urgent.push(`${highPriority.length} high-priority tasks pending`);
         }
       } catch (error) {
         // Failed to parse todos file
-        console.warn('Could not parse todos file:', error instanceof Error ? error.message : 'Unknown error');
+        console.warn(
+          "Could not parse todos file:",
+          error instanceof Error ? error.message : "Unknown error",
+        );
       }
     }
     // Check for MCP server connectivity
     try {
-      const registry = JSON.parse(readFileSync(this.registryPath, 'utf-8')) as AgentRegistry;
-      if (registry.system_health?.mcp_connectivity === '0/5 online') {
-        urgent.push('All MCP servers are offline - external integrations unavailable');
+      const registry = JSON.parse(
+        readFileSync(this.registryPath, "utf-8"),
+      ) as AgentRegistry;
+      if (registry.system_health?.mcp_connectivity === "0/5 online") {
+        urgent.push(
+          "All MCP servers are offline - external integrations unavailable",
+        );
       }
     } catch (error) {
       // Failed to read registry for MCP connectivity check
-      console.warn('Could not check MCP connectivity:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Could not check MCP connectivity:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
     return urgent;
   }
@@ -242,25 +311,35 @@ class EmailNotificationAgent {
     const health: SystemHealth = {
       uptime: process.uptime(),
       memory_usage: process.memoryUsage(),
-      active_processes: 0
+      active_processes: 0,
     };
     try {
       // Count active processes
-      const psCount = execSync('ps aux | grep -E "(tsx|node)" | grep -v grep | wc -l', { encoding: 'utf-8' });
+      const psCount = execSync(
+        'ps aux | grep -E "(tsx|node)" | grep -v grep | wc -l',
+        { encoding: "utf-8" },
+      );
       health.active_processes = parseInt(psCount.trim());
     } catch (error) {
       // Failed to count active processes
-      console.warn('Could not count active processes:', error instanceof Error ? error.message : 'Unknown error');
+      console.warn(
+        "Could not count active processes:",
+        error instanceof Error ? error.message : "Unknown error",
+      );
     }
     return health;
   }
   /**
    * Format email content
    */
-  private formatEmailContent(report: EmailReport): { subject: string; html: string; text: string } {
+  private formatEmailContent(report: EmailReport): {
+    subject: string;
+    html: string;
+    text: string;
+  } {
     const urgentCount = report.urgent_needs.length;
     const completedCount = report.completed_tasks.length;
-    
+
     const subject = `Mystic Arcana Daily Report - ${urgentCount} Urgent Items, ${completedCount} Completed Tasks`;
     const html = `
 <!DOCTYPE html>
@@ -283,58 +362,85 @@ class EmailNotificationAgent {
   <h1>🔮 Mystic Arcana Daily Report</h1>
   <p><strong>Generated:</strong> ${new Date(report.timestamp).toLocaleString()}</p>
   
-  ${report.urgent_needs.length > 0 ? `
+  ${
+    report.urgent_needs.length > 0
+      ? `
   <div class="section urgent">
     <h2>🚨 Urgent Needs (${report.urgent_needs.length})</h2>
     <ul>
-      ${report.urgent_needs.map(need => `<li>${need}</li>`).join('')}
+      ${report.urgent_needs.map((need) => `<li>${need}</li>`).join("")}
     </ul>
   </div>
-  ` : ''}
+  `
+      : ""
+  }
   
   <div class="section">
     <h2>✅ Completed Tasks (${report.completed_tasks.length})</h2>
-    ${report.completed_tasks.length > 0 ? `
+    ${
+      report.completed_tasks.length > 0
+        ? `
     <ul>
-      ${report.completed_tasks.map(task => 
-        `<li><strong>${task.agent_name}:</strong> ${task.task_description} - ${new Date(task.timestamp).toLocaleTimeString()}</li>`
-      ).join('')}
+      ${report.completed_tasks
+        .map(
+          (task) =>
+            `<li><strong>${task.agent_name}:</strong> ${task.task_description} - ${new Date(task.timestamp).toLocaleTimeString()}</li>`,
+        )
+        .join("")}
     </ul>
-    ` : '<p>No tasks completed since last report.</p>'}
+    `
+        : "<p>No tasks completed since last report.</p>"
+    }
   </div>
   
   <div class="section">
     <h2>📋 Current Todos</h2>
-    ${report.todos.high_priority.length > 0 ? `
+    ${
+      report.todos.high_priority.length > 0
+        ? `
     <h3>⚡ High Priority (${report.todos.high_priority.length})</h3>
     <ul>
-      ${report.todos.high_priority.map(todo => `<li>${todo}</li>`).join('')}
+      ${report.todos.high_priority.map((todo) => `<li>${todo}</li>`).join("")}
     </ul>
-    ` : ''}
+    `
+        : ""
+    }
     
-    ${report.todos.in_progress.length > 0 ? `
+    ${
+      report.todos.in_progress.length > 0
+        ? `
     <h3>🔄 In Progress (${report.todos.in_progress.length})</h3>
     <ul>
-      ${report.todos.in_progress.map(todo => `<li>${todo}</li>`).join('')}
+      ${report.todos.in_progress.map((todo) => `<li>${todo}</li>`).join("")}
     </ul>
-    ` : ''}
+    `
+        : ""
+    }
     
-    ${report.todos.pending.length > 0 ? `
+    ${
+      report.todos.pending.length > 0
+        ? `
     <h3>⏳ Pending (${report.todos.pending.length})</h3>
     <ul>
-      ${report.todos.pending.map(todo => `<li>${todo}</li>`).join('')}
+      ${report.todos.pending.map((todo) => `<li>${todo}</li>`).join("")}
     </ul>
-    ` : ''}
+    `
+        : ""
+    }
   </div>
   
-  ${report.challenges.length > 0 ? `
+  ${
+    report.challenges.length > 0
+      ? `
   <div class="section challenge">
     <h2>⚠️ Current Challenges (${report.challenges.length})</h2>
     <ul>
-      ${report.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+      ${report.challenges.map((challenge) => `<li>${challenge}</li>`).join("")}
     </ul>
   </div>
-  ` : ''}
+  `
+      : ""
+  }
   
   <div class="section">
     <h2>📊 System Status</h2>
@@ -355,27 +461,53 @@ class EmailNotificationAgent {
     const text = `
 MYSTIC ARCANA DAILY REPORT
 Generated: ${new Date(report.timestamp).toLocaleString()}
-${report.urgent_needs.length > 0 ? `URGENT NEEDS (${report.urgent_needs.length}):
-${report.urgent_needs.map(need => `- ${need}`).join('\n')}
-` : ''}
+${
+  report.urgent_needs.length > 0
+    ? `URGENT NEEDS (${report.urgent_needs.length}):
+${report.urgent_needs.map((need) => `- ${need}`).join("\n")}
+`
+    : ""
+}
 COMPLETED TASKS (${report.completed_tasks.length}):
-${report.completed_tasks.length > 0 ? 
-  report.completed_tasks.map(task => 
-    `- ${task.agent_name}: ${task.task_description} - ${new Date(task.timestamp).toLocaleTimeString()}`
-  ).join('\n') : 'No tasks completed since last report.'}
+${
+  report.completed_tasks.length > 0
+    ? report.completed_tasks
+        .map(
+          (task) =>
+            `- ${task.agent_name}: ${task.task_description} - ${new Date(task.timestamp).toLocaleTimeString()}`,
+        )
+        .join("\n")
+    : "No tasks completed since last report."
+}
 CURRENT TODOS:
-${report.todos.high_priority.length > 0 ? `High Priority (${report.todos.high_priority.length}):
-${report.todos.high_priority.map(todo => `- ${todo}`).join('\n')}
-` : ''}
-${report.todos.in_progress.length > 0 ? `In Progress (${report.todos.in_progress.length}):
-${report.todos.in_progress.map(todo => `- ${todo}`).join('\n')}
-` : ''}
-${report.todos.pending.length > 0 ? `Pending (${report.todos.pending.length}):
-${report.todos.pending.map(todo => `- ${todo}`).join('\n')}
-` : ''}
-${report.challenges.length > 0 ? `CURRENT CHALLENGES (${report.challenges.length}):
-${report.challenges.map(challenge => `- ${challenge}`).join('\n')}
-` : ''}
+${
+  report.todos.high_priority.length > 0
+    ? `High Priority (${report.todos.high_priority.length}):
+${report.todos.high_priority.map((todo) => `- ${todo}`).join("\n")}
+`
+    : ""
+}
+${
+  report.todos.in_progress.length > 0
+    ? `In Progress (${report.todos.in_progress.length}):
+${report.todos.in_progress.map((todo) => `- ${todo}`).join("\n")}
+`
+    : ""
+}
+${
+  report.todos.pending.length > 0
+    ? `Pending (${report.todos.pending.length}):
+${report.todos.pending.map((todo) => `- ${todo}`).join("\n")}
+`
+    : ""
+}
+${
+  report.challenges.length > 0
+    ? `CURRENT CHALLENGES (${report.challenges.length}):
+${report.challenges.map((challenge) => `- ${challenge}`).join("\n")}
+`
+    : ""
+}
 SYSTEM STATUS:
 - Active Agents: ${report.agent_status.active}/${report.agent_status.total}
 - Failed Agents: ${report.agent_status.failed}
@@ -388,18 +520,24 @@ This is an automated report from the Mystic Arcana development system.
    * Send email report
    */
   public async sendReport() {
-    this.log('Generating email report...');
-    
+    this.log("Generating email report...");
+
     try {
       const report = await this.collectUpdates();
       const { subject, html, text } = this.formatEmailContent(report);
       // Check if email credentials are configured
       if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        this.log('Email credentials not configured. Set EMAIL_USER and EMAIL_PASS environment variables.');
-        this.log('Report generated but not sent. Saving to file...');
-        
+        this.log(
+          "Email credentials not configured. Set EMAIL_USER and EMAIL_PASS environment variables.",
+        );
+        this.log("Report generated but not sent. Saving to file...");
+
         // Save report to file instead
-        const reportPath = join(process.cwd(), 'temp', `email-report-${Date.now()}.html`);
+        const reportPath = join(
+          process.cwd(),
+          "temp",
+          `email-report-${Date.now()}.html`,
+        );
         writeFileSync(reportPath, html);
         this.log(`Report saved to: ${reportPath}`);
         return;
@@ -409,14 +547,19 @@ This is an automated report from the Mystic Arcana development system.
         to: this.recipient,
         subject,
         text,
-        html
+        html,
       };
       const info = await this.transporter.sendMail(mailOptions);
       this.log(`Email sent successfully: ${info.messageId}`);
       // Save last report timestamp
-      writeFileSync(this.lastReportPath, JSON.stringify({ timestamp: report.timestamp }));
+      writeFileSync(
+        this.lastReportPath,
+        JSON.stringify({ timestamp: report.timestamp }),
+      );
     } catch (error) {
-      this.log(`Error sending email report: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      this.log(
+        `Error sending email report: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
       throw error;
     }
   }
@@ -425,10 +568,10 @@ This is an automated report from the Mystic Arcana development system.
    */
   public async sendUrgentNotification(message: string) {
     this.log(`Sending urgent notification: ${message}`);
-    
+
     try {
       if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        this.log('Email credentials not configured for urgent notification.');
+        this.log("Email credentials not configured for urgent notification.");
         return;
       }
       const mailOptions = {
@@ -442,12 +585,14 @@ This is an automated report from the Mystic Arcana development system.
             <p><strong>${message}</strong></p>
             <p style="color: #666;">Timestamp: ${new Date().toISOString()}</p>
           </div>
-        `
+        `,
       };
       await this.transporter.sendMail(mailOptions);
-      this.log('Urgent notification sent successfully');
+      this.log("Urgent notification sent successfully");
     } catch (error) {
-      this.log(`Error sending urgent notification: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      this.log(
+        `Error sending urgent notification: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   }
 }
@@ -458,25 +603,25 @@ if (require.main === module) {
   const args = process.argv.slice(2);
   const command = args[0];
   switch (command) {
-    case 'send':
+    case "send":
       emailNotifier.sendReport().catch(console.error);
       break;
-      
-    case 'urgent': {
-      const message = args.slice(1).join(' ');
+
+    case "urgent": {
+      const message = args.slice(1).join(" ");
       if (!message) {
-        console.error('Usage: email-notifier urgent <message>');
+        console.error("Usage: email-notifier urgent <message>");
         process.exit(1);
       }
       emailNotifier.sendUrgentNotification(message).catch(console.error);
       break;
     }
-      
+
     default:
-      console.log('Email Notification Agent');
-      console.log('Usage:');
-      console.log('  send           - Send daily report');
-      console.log('  urgent <msg>   - Send urgent notification');
+      console.log("Email Notification Agent");
+      console.log("Usage:");
+      console.log("  send           - Send daily report");
+      console.log("  urgent <msg>   - Send urgent notification");
       break;
   }
 }

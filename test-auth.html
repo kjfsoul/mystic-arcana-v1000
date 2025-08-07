@@ -1,37 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Test Auth Callback</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Auth Callback Test</h1>
     <p>Testing if the callback route exists...</p>
-    
+
     <button onclick="testCallback()">Test Callback Route</button>
     <button onclick="testGoogleAuth()">Test Google Auth</button>
-    
+
     <div id="result"></div>
 
     <script>
-        async function testCallback() {
-            try {
-                const response = await fetch('http://localhost:3000/auth/callback', {
-                    method: 'GET',
-                    headers: { 'Accept': 'text/html' }
-                });
-                document.getElementById('result').innerHTML = 
-                    `Status: ${response.status} ${response.statusText}<br>` +
-                    `URL: ${response.url}<br>` +
-                    `Redirected: ${response.redirected}`;
-            } catch (error) {
-                document.getElementById('result').innerHTML = `Error: ${error.message}`;
-            }
+      async function testCallback() {
+        try {
+          const response = await fetch("http://localhost:3000/auth/callback", {
+            method: "GET",
+            headers: { Accept: "text/html" },
+          });
+          document.getElementById("result").innerHTML =
+            `Status: ${response.status} ${response.statusText}<br>` +
+            `URL: ${response.url}<br>` +
+            `Redirected: ${response.redirected}`;
+        } catch (error) {
+          document.getElementById("result").innerHTML =
+            `Error: ${error.message}`;
         }
-        
-        async function testGoogleAuth() {
-            // This simulates what happens when Google redirects back
-            window.location.href = 'http://localhost:3000/auth/callback?code=test-code';
-        }
+      }
+
+      async function testGoogleAuth() {
+        // This simulates what happens when Google redirects back
+        window.location.href =
+          "http://localhost:3000/auth/callback?code=test-code";
+      }
     </script>
-</body>
+  </body>
 </html>

@@ -1,21 +1,21 @@
-'use client';
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GalaxyBackground } from '../effects/GalaxyBackground/GalaxyBackground';
-import { TarotPanel } from '../panels/TarotPanel';
-import { UnifiedTarotPanelV2 } from '../tarot/UnifiedTarotPanelV2';
-import { AstrologyPanel } from '../panels/AstrologyPanel';
-import { CelestialEventsCarousel } from '../astronomical/CelestialEventsCarousel';
-import { AccessibilityProvider } from '../accessibility/AccessibilityProvider';
-import styles from './RefactoredHomepage.module.css';
-export type ReadingMode = 'home' | 'tarot-room' | 'astrology-room';
+"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GalaxyBackground } from "../effects/GalaxyBackground/GalaxyBackground";
+import { TarotPanel } from "../panels/TarotPanel";
+import { UnifiedTarotPanelV2 } from "../tarot/UnifiedTarotPanelV2";
+import { AstrologyPanel } from "../panels/AstrologyPanel";
+import { CelestialEventsCarousel } from "../astronomical/CelestialEventsCarousel";
+import { AccessibilityProvider } from "../accessibility/AccessibilityProvider";
+import styles from "./RefactoredHomepage.module.css";
+export type ReadingMode = "home" | "tarot-room" | "astrology-room";
 interface ReadingRoomProps {
   mode: ReadingMode;
   onBack: () => void;
 }
 /**
  * Refactored Homepage Component
- * 
+ *
  * Features the refined UI vision:
  * - Prominent GalaxyBackground as primary visual element
  * - Two-panel layout: Tarot (left) + Astrology (right)
@@ -23,35 +23,35 @@ interface ReadingRoomProps {
  * - Splash page transitions to immersive reading rooms
  */
 export const RefactoredHomepage: React.FC = () => {
-  const [readingMode, setReadingMode] = useState<ReadingMode>('home');
+  const [readingMode, setReadingMode] = useState<ReadingMode>("home");
   const handleTarotClick = () => {
-    setReadingMode('tarot-room');
+    setReadingMode("tarot-room");
   };
   const handleAstrologyClick = () => {
-    setReadingMode('astrology-room');
+    setReadingMode("astrology-room");
   };
   const handleBackToHome = () => {
-    setReadingMode('home');
+    setReadingMode("home");
   };
   return (
     <AccessibilityProvider>
       <div className={styles.container}>
         {/* Galaxy Background - Always Present */}
-        <GalaxyBackground 
+        <GalaxyBackground
           className={styles.galaxyBg}
-          intensity={readingMode === 'home' ? 0.7 : 1.0}
+          intensity={readingMode === "home" ? 0.7 : 1.0}
           showMilkyWay={true}
           animated={true}
         />
         <AnimatePresence mode="wait">
-          {readingMode === 'home' ? (
-            <HomeView 
+          {readingMode === "home" ? (
+            <HomeView
               key="home"
               onTarotClick={handleTarotClick}
               onAstrologyClick={handleAstrologyClick}
             />
           ) : (
-            <ReadingRoom 
+            <ReadingRoom
               key={readingMode}
               mode={readingMode}
               onBack={handleBackToHome}
@@ -75,7 +75,7 @@ const HomeView: React.FC<{
       transition={{ duration: 0.8 }}
     >
       {/* Left Panel - Tarot */}
-      <motion.section 
+      <motion.section
         className={`${styles.panel} ${styles.tarotPanel}`}
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -85,7 +85,7 @@ const HomeView: React.FC<{
         role="button"
         tabIndex={0}
         aria-label="Enter Tarot Reading Room"
-        onKeyDown={(e) => e.key === 'Enter' && onTarotClick()}
+        onKeyDown={(e) => e.key === "Enter" && onTarotClick()}
       >
         <div className={styles.panelContent}>
           <TarotPanel />
@@ -96,7 +96,7 @@ const HomeView: React.FC<{
         </div>
       </motion.section>
       {/* Center - Celestial Events Carousel */}
-      <motion.section 
+      <motion.section
         className={`${styles.panel} ${styles.centerPanel}`}
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -106,7 +106,7 @@ const HomeView: React.FC<{
         <CelestialEventsCarousel />
       </motion.section>
       {/* Right Panel - Astrology */}
-      <motion.section 
+      <motion.section
         className={`${styles.panel} ${styles.astrologyPanel}`}
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -116,7 +116,7 @@ const HomeView: React.FC<{
         role="button"
         tabIndex={0}
         aria-label="Enter Astrology Reading Room"
-        onKeyDown={(e) => e.key === 'Enter' && onAstrologyClick()}
+        onKeyDown={(e) => e.key === "Enter" && onAstrologyClick()}
       >
         <div className={styles.panelContent}>
           <AstrologyPanel />
@@ -156,14 +156,14 @@ const ReadingRoom: React.FC<ReadingRoomProps> = ({ mode, onBack }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        {mode === 'tarot-room' && (
+        {mode === "tarot-room" && (
           <div className={styles.tarotRoom}>
             <div className={styles.immersiveContent}>
               <UnifiedTarotPanelV2 />
             </div>
           </div>
         )}
-        {mode === 'astrology-room' && (
+        {mode === "astrology-room" && (
           <div className={styles.astrologyRoom}>
             <h1 className={styles.roomTitle}>✨ Astrology Reading Room</h1>
             <div className={styles.immersiveContent}>

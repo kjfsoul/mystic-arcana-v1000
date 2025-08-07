@@ -1,9 +1,9 @@
-'use client';
- 
-import React, { useState, useEffect } from 'react';
-import { GalaxyShader } from '../../effects/GalaxyShader/GalaxyShader';
-import { useCosmicWeather } from '../../../utils/cosmic-weather/useCosmicWeather';
-import styles from './AstrologyPanel.module.css';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { GalaxyShader } from "../../effects/GalaxyShader/GalaxyShader";
+import { useCosmicWeather } from "../../../utils/cosmic-weather/useCosmicWeather";
+import styles from "./AstrologyPanel.module.css";
 interface AstrologyPanelProps {
   isActive: boolean;
   onActivate: () => void;
@@ -17,10 +17,10 @@ interface PlanetaryPosition {
 }
 /**
  * AstrologyPanel Component
- * 
+ *
  * Displays astrological charts, planetary positions, and cosmic weather.
  * Features interactive natal charts, transit overlays, and real-time updates.
- * 
+ *
  * Features:
  * - Interactive natal chart visualization with WebGL shaders
  * - Real-time planetary positions and transits
@@ -29,12 +29,20 @@ interface PlanetaryPosition {
  * - Aspect patterns and configurations
  * - Integration with tarot for cosmic timing
  */
-export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActivate }) => {
-  const [chartType, setChartType] = useState<'natal' | 'transit' | 'synastry'>('natal');
+export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({
+  isActive,
+  onActivate,
+}) => {
+  const [chartType, setChartType] = useState<"natal" | "transit" | "synastry">(
+    "natal",
+  );
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
-  const [planetaryPositions, setPlanetaryPositions] = useState<PlanetaryPosition[]>([]);
-  const { cosmicWeather, currentTransits, updateCosmicWeather } = useCosmicWeather();
- 
+  const [planetaryPositions, setPlanetaryPositions] = useState<
+    PlanetaryPosition[]
+  >([]);
+  const { cosmicWeather, currentTransits, updateCosmicWeather } =
+    useCosmicWeather();
+
   useEffect(() => {
     // Update cosmic weather every minute
     const interval = setInterval(() => {
@@ -43,16 +51,58 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
     return () => clearInterval(interval);
   }, [updateCosmicWeather]);
   // Sample planetary data (would be calculated from ephemeris in production)
- 
+
   useEffect(() => {
     setPlanetaryPositions([
-      { planet: 'Sun', sign: 'Sagittarius', degree: 15.5, retrograde: false, house: 9 },
-      { planet: 'Moon', sign: 'Cancer', degree: 22.3, retrograde: false, house: 4 },
-      { planet: 'Mercury', sign: 'Sagittarius', degree: 8.7, retrograde: true, house: 9 },
-      { planet: 'Venus', sign: 'Scorpio', degree: 28.1, retrograde: false, house: 8 },
-      { planet: 'Mars', sign: 'Aries', degree: 3.9, retrograde: false, house: 1 },
-      { planet: 'Jupiter', sign: 'Taurus', degree: 11.2, retrograde: false, house: 2 },
-      { planet: 'Saturn', sign: 'Pisces', degree: 5.6, retrograde: false, house: 12 },
+      {
+        planet: "Sun",
+        sign: "Sagittarius",
+        degree: 15.5,
+        retrograde: false,
+        house: 9,
+      },
+      {
+        planet: "Moon",
+        sign: "Cancer",
+        degree: 22.3,
+        retrograde: false,
+        house: 4,
+      },
+      {
+        planet: "Mercury",
+        sign: "Sagittarius",
+        degree: 8.7,
+        retrograde: true,
+        house: 9,
+      },
+      {
+        planet: "Venus",
+        sign: "Scorpio",
+        degree: 28.1,
+        retrograde: false,
+        house: 8,
+      },
+      {
+        planet: "Mars",
+        sign: "Aries",
+        degree: 3.9,
+        retrograde: false,
+        house: 1,
+      },
+      {
+        planet: "Jupiter",
+        sign: "Taurus",
+        degree: 11.2,
+        retrograde: false,
+        house: 2,
+      },
+      {
+        planet: "Saturn",
+        sign: "Pisces",
+        degree: 5.6,
+        retrograde: false,
+        house: 12,
+      },
     ]);
   }, []);
   const handlePlanetClick = (planet: string) => {
@@ -60,7 +110,7 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
   };
   return (
     <div
-      className={`${styles.panel} ${isActive ? styles.active : ''}`}
+      className={`${styles.panel} ${isActive ? styles.active : ""}`}
       onClick={onActivate}
       role="tabpanel"
       aria-label="Astrology chart and cosmic weather panel"
@@ -69,23 +119,23 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
         <h2>Celestial Map</h2>
         <div className={styles.chartControls}>
           <button
-            onClick={() => setChartType('natal')}
-            className={chartType === 'natal' ? styles.active : ''}
-            aria-pressed={chartType === 'natal'}
+            onClick={() => setChartType("natal")}
+            className={chartType === "natal" ? styles.active : ""}
+            aria-pressed={chartType === "natal"}
           >
             Natal
           </button>
           <button
-            onClick={() => setChartType('transit')}
-            className={chartType === 'transit' ? styles.active : ''}
-            aria-pressed={chartType === 'transit'}
+            onClick={() => setChartType("transit")}
+            className={chartType === "transit" ? styles.active : ""}
+            aria-pressed={chartType === "transit"}
           >
             Transits
           </button>
           <button
-            onClick={() => setChartType('synastry')}
-            className={chartType === 'synastry' ? styles.active : ''}
-            aria-pressed={chartType === 'synastry'}
+            onClick={() => setChartType("synastry")}
+            className={chartType === "synastry" ? styles.active : ""}
+            aria-pressed={chartType === "synastry"}
           >
             Synastry
           </button>
@@ -102,9 +152,30 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
             aria-label="Astrological chart"
           >
             {/* Chart wheel */}
-            <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-            <circle cx="250" cy="250" r="150" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-            <circle cx="250" cy="250" r="100" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+            <circle
+              cx="250"
+              cy="250"
+              r="200"
+              fill="none"
+              stroke="rgba(255,255,255,0.2)"
+              strokeWidth="2"
+            />
+            <circle
+              cx="250"
+              cy="250"
+              r="150"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="1"
+            />
+            <circle
+              cx="250"
+              cy="250"
+              r="100"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="1"
+            />
             {/* Houses */}
             {[...Array(12)].map((_, i) => {
               const angle = (i * 30 - 90) * (Math.PI / 180);
@@ -115,8 +186,10 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
               return (
                 <line
                   key={i}
-                  x1={x1} y1={y1}
-                  x2={x2} y2={y2}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
                   stroke="rgba(255,255,255,0.1)"
                   strokeWidth="1"
                 />
@@ -124,7 +197,9 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
             })}
             {/* Planetary positions */}
             {planetaryPositions.map((pos) => {
-              const angle = ((pos.house - 1) * 30 + (pos.degree / 30) * 30 - 90) * (Math.PI / 180);
+              const angle =
+                ((pos.house - 1) * 30 + (pos.degree / 30) * 30 - 90) *
+                (Math.PI / 180);
               const x = 250 + 175 * Math.cos(angle);
               const y = 250 + 175 * Math.sin(angle);
               return (
@@ -133,7 +208,7 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
                     cx={x}
                     cy={y}
                     r="8"
-                    fill={selectedPlanet === pos.planet ? '#FFD700' : '#9370DB'}
+                    fill={selectedPlanet === pos.planet ? "#FFD700" : "#9370DB"}
                     onClick={() => handlePlanetClick(pos.planet)}
                     className={styles.planetMarker}
                     role="button"
@@ -178,12 +253,16 @@ export const AstrologyPanel: React.FC<AstrologyPanelProps> = ({ isActive, onActi
             <div className={styles.weatherCard}>
               <h4>{selectedPlanet} Details</h4>
               {planetaryPositions
-                .filter(p => p.planet === selectedPlanet)
-                .map(p => (
+                .filter((p) => p.planet === selectedPlanet)
+                .map((p) => (
                   <div key={p.planet}>
-                    <p>{p.sign} {p.degree.toFixed(1)}°</p>
+                    <p>
+                      {p.sign} {p.degree.toFixed(1)}°
+                    </p>
                     <p>House {p.house}</p>
-                    {p.retrograde && <p className={styles.retrograde}>Retrograde</p>}
+                    {p.retrograde && (
+                      <p className={styles.retrograde}>Retrograde</p>
+                    )}
                   </div>
                 ))}
             </div>

@@ -1,7 +1,7 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+"use client";
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 export const Footer: React.FC = () => {
   return (
     <footer className="relative z-10 bg-black/20 backdrop-blur-sm border-t border-white/10 mt-auto">
@@ -18,8 +18,9 @@ export const Footer: React.FC = () => {
                 Mystic Arcana
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                Your AI-powered gateway to tarot wisdom and astrological insights. 
-                Discover the cosmic patterns that guide your journey through the stars.
+                Your AI-powered gateway to tarot wisdom and astrological
+                insights. Discover the cosmic patterns that guide your journey
+                through the stars.
               </p>
               <div className="flex space-x-4">
                 <motion.div
@@ -51,17 +52,26 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold mb-4">Explore</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
+                <Link
+                  href="/"
+                  className="text-gray-300 hover:text-amber-400 transition-colors text-sm"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/galaxy-view" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
+                <Link
+                  href="/galaxy-view"
+                  className="text-gray-300 hover:text-amber-400 transition-colors text-sm"
+                >
                   Galaxy View
                 </Link>
               </li>
               <li>
-                <Link href="/astronomical-demo" className="text-gray-300 hover:text-amber-400 transition-colors text-sm">
+                <Link
+                  href="/astronomical-demo"
+                  className="text-gray-300 hover:text-amber-400 transition-colors text-sm"
+                >
                   Astronomical Demo
                 </Link>
               </li>
@@ -72,8 +82,8 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <Link 
-                  href="/legal/privacy" 
+                <Link
+                  href="/legal/privacy"
                   className="text-gray-300 hover:text-amber-400 transition-colors text-sm flex items-center"
                 >
                   <span className="mr-2">🔒</span>
@@ -81,8 +91,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/legal/terms" 
+                <Link
+                  href="/legal/terms"
                   className="text-gray-300 hover:text-purple-400 transition-colors text-sm flex items-center"
                 >
                   <span className="mr-2">📜</span>
@@ -90,8 +100,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/legal/cookies" 
+                <Link
+                  href="/legal/cookies"
                   className="text-gray-300 hover:text-cyan-400 transition-colors text-sm flex items-center"
                 >
                   <span className="mr-2">🍪</span>
@@ -99,8 +109,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/legal/disclaimer" 
+                <Link
+                  href="/legal/disclaimer"
                   className="text-gray-300 hover:text-rose-400 transition-colors text-sm flex items-center"
                 >
                   <span className="mr-2">⚠️</span>

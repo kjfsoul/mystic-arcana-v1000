@@ -1,6 +1,7 @@
 # 🔮 MCP Memory Server Setup Guide for Mystic Arcana
 
 ## 🎯 **Current Issue**
+
 The MCP memory commands (`mcp__memory__create_entities`, `mcp__memory__search_nodes`, etc.) are not working in Claude sessions, preventing proper project memory management.
 
 ## 🔧 **Updated MCP Configuration**
@@ -12,7 +13,11 @@ Your `.cursor/mcp.json` has been updated with the correct modern MCP server form
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/kfitz/mystic-arcana-v1000"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/kfitz/mystic-arcana-v1000"
+      ],
       "env": {}
     },
     "git": {
@@ -48,12 +53,14 @@ Your `.cursor/mcp.json` has been updated with the correct modern MCP server form
 ## 🚀 **Setup Steps**
 
 ### **1. Run the Setup Script**
+
 ```bash
 cd /Users/kfitz/mystic-arcana-v1000
 ./setup-mcp-memory.sh
 ```
 
 ### **2. Manual Installation (if script fails)**
+
 ```bash
 # Install MCP servers globally
 npm install -g @modelcontextprotocol/server-memory
@@ -65,6 +72,7 @@ mkdir -p /Users/kfitz/mystic-arcana-v1000/.cursor/mcp-memory
 ```
 
 ### **3. Restart Cursor**
+
 - **Complete restart** of Cursor application
 - **Reload the project** to pick up new MCP configuration
 - **Start a new Claude session** to test memory commands
@@ -75,17 +83,19 @@ Once setup is complete, test these commands in a new Claude session:
 
 ```javascript
 // Test basic memory functionality
-mcp__memory__read_graph()
+mcp__memory__read_graph();
 
 // Search for existing entries
-mcp__memory__search_nodes("test")
+mcp__memory__search_nodes("test");
 
 // Create a test entity
-mcp__memory__create_entities([{
-  name: "MCP Test Entry",
-  entityType: "System Test",
-  observations: ["Memory system is working correctly"]
-}])
+mcp__memory__create_entities([
+  {
+    name: "MCP Test Entry",
+    entityType: "System Test",
+    observations: ["Memory system is working correctly"],
+  },
+]);
 ```
 
 ## 🎯 **Commands to Execute After Memory is Working**
@@ -94,47 +104,55 @@ Once the memory system is functional, run these commands to record our achieveme
 
 ```javascript
 // Record Privacy Policy Implementation
-mcp__memory__create_entities([{
-  name: "Privacy Policy Implementation Complete",
-  entityType: "Technical Milestone",
-  observations: [
-    "Created comprehensive privacy policy page at /legal/privacy",
-    "Fixed hydration errors in LegalDocument component",
-    "Added responsive footer with legal links",
-    "Implemented complete legal framework",
-    "Resolved 500 internal server errors",
-    "Added react-markdown and remark-gfm dependencies"
-  ]
-}])
+mcp__memory__create_entities([
+  {
+    name: "Privacy Policy Implementation Complete",
+    entityType: "Technical Milestone",
+    observations: [
+      "Created comprehensive privacy policy page at /legal/privacy",
+      "Fixed hydration errors in LegalDocument component",
+      "Added responsive footer with legal links",
+      "Implemented complete legal framework",
+      "Resolved 500 internal server errors",
+      "Added react-markdown and remark-gfm dependencies",
+    ],
+  },
+]);
 
 // Update project status
-mcp__memory__add_observations([{
-  entityName: "Mystic Arcana Project",
-  contents: [
-    "Privacy policy implementation completed January 2025",
-    "Legal framework fully operational",
-    "Mobile responsiveness issues identified as next priority"
-  ]
-}])
+mcp__memory__add_observations([
+  {
+    entityName: "Mystic Arcana Project",
+    contents: [
+      "Privacy policy implementation completed January 2025",
+      "Legal framework fully operational",
+      "Mobile responsiveness issues identified as next priority",
+    ],
+  },
+]);
 
 // Record mobile layout issues
-mcp__memory__create_entities([{
-  name: "Mobile Layout Issues",
-  entityType: "Technical Issue",
-  observations: [
-    "Three-panel layout breaks on mobile devices",
-    "Content gets cut off on small screens",
-    "Multiple competing layout systems need consolidation",
-    "Requires responsive Tailwind CSS implementation"
-  ]
-}])
+mcp__memory__create_entities([
+  {
+    name: "Mobile Layout Issues",
+    entityType: "Technical Issue",
+    observations: [
+      "Three-panel layout breaks on mobile devices",
+      "Content gets cut off on small screens",
+      "Multiple competing layout systems need consolidation",
+      "Requires responsive Tailwind CSS implementation",
+    ],
+  },
+]);
 
 // Create relations
-mcp__memory__create_relations([{
-  from: "Privacy Policy Implementation Complete",
-  to: "Mystic Arcana Project",
-  relationType: "completed_as_part_of"
-}])
+mcp__memory__create_relations([
+  {
+    from: "Privacy Policy Implementation Complete",
+    to: "Mystic Arcana Project",
+    relationType: "completed_as_part_of",
+  },
+]);
 ```
 
 ## 🚨 **Troubleshooting**
@@ -147,18 +165,21 @@ mcp__memory__create_relations([{
    - Ensure MCP is enabled
 
 2. **Verify Node.js Installation**
+
    ```bash
    node --version
    npm --version
    ```
 
 3. **Check File Permissions**
+
    ```bash
    ls -la /Users/kfitz/mystic-arcana-v1000/.cursor/
    chmod 755 /Users/kfitz/mystic-arcana-v1000/.cursor/mcp-memory
    ```
 
 4. **Test MCP Server Manually**
+
    ```bash
    npx -y @modelcontextprotocol/server-memory --help
    ```
@@ -173,6 +194,7 @@ mcp__memory__create_relations([{
 ## 📋 **Current Status**
 
 ### **✅ Completed**
+
 - Updated MCP configuration with modern server format
 - Created setup script for automated installation
 - Updated agent registry with legal compliance achievements
@@ -180,6 +202,7 @@ mcp__memory__create_relations([{
 - Updated CLAUDE.md with recent achievements
 
 ### **🔄 Next Steps**
+
 1. Run setup script and restart Cursor
 2. Test memory commands in new Claude session
 3. Execute memory recording commands for recent achievements
@@ -188,6 +211,7 @@ mcp__memory__create_relations([{
 ## 🎉 **Success Criteria**
 
 You'll know the memory system is working when:
+
 - ✅ `mcp__memory__read_graph()` returns project memory data
 - ✅ `mcp__memory__search_nodes("privacy")` finds our legal implementation
 - ✅ `mcp__memory__create_entities()` successfully creates new entries

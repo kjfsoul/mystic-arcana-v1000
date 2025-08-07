@@ -4,12 +4,7 @@
     "name": "Ascendant/Rising",
     "naturalSign": "Aries",
     "naturalRuler": "Mars",
-    "keywords": [
-      "identity",
-      "appearance",
-      "first impressions",
-      "personality"
-    ],
+    "keywords": ["identity", "appearance", "first impressions", "personality"],
     "basicMeaning": "Personal identity, appearance, and how others see you",
     "lifeAreas": [
       "self-image",
@@ -18,83 +13,40 @@
       "approach to life"
     ],
     "angularSuccedentCadent": "Angular",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_2": {
     "number": 2,
     "name": "Values and Resources",
     "naturalSign": "Taurus",
     "naturalRuler": "Venus",
-    "keywords": [
-      "money",
-      "possessions",
-      "values",
-      "self-worth"
-    ],
+    "keywords": ["money", "possessions", "values", "self-worth"],
     "basicMeaning": "Personal resources, values, and material security",
-    "lifeAreas": [
-      "income",
-      "possessions",
-      "self-esteem",
-      "material values"
-    ],
+    "lifeAreas": ["income", "possessions", "self-esteem", "material values"],
     "angularSuccedentCadent": "Succedent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_3": {
     "number": 3,
     "name": "Communication and Learning",
     "naturalSign": "Gemini",
     "naturalRuler": "Mercury",
-    "keywords": [
-      "communication",
-      "siblings",
-      "short trips",
-      "learning"
-    ],
+    "keywords": ["communication", "siblings", "short trips", "learning"],
     "basicMeaning": "Communication, learning, and immediate environment",
-    "lifeAreas": [
-      "siblings",
-      "neighbors",
-      "short journeys",
-      "early education"
-    ],
+    "lifeAreas": ["siblings", "neighbors", "short journeys", "early education"],
     "angularSuccedentCadent": "Cadent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_4": {
     "number": 4,
     "name": "Home and Family",
     "naturalSign": "Cancer",
     "naturalRuler": "Moon",
-    "keywords": [
-      "home",
-      "family",
-      "roots",
-      "emotions",
-      "foundation"
-    ],
+    "keywords": ["home", "family", "roots", "emotions", "foundation"],
     "basicMeaning": "Home, family, emotional foundations, and origins",
-    "lifeAreas": [
-      "family",
-      "home",
-      "real estate",
-      "emotional security"
-    ],
+    "lifeAreas": ["family", "home", "real estate", "emotional security"],
     "angularSuccedentCadent": "Angular",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_5": {
     "number": 5,
@@ -117,47 +69,25 @@
       "speculation"
     ],
     "angularSuccedentCadent": "Succedent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_6": {
     "number": 6,
     "name": "Health and Service",
     "naturalSign": "Virgo",
     "naturalRuler": "Mercury",
-    "keywords": [
-      "health",
-      "work",
-      "service",
-      "routine",
-      "pets"
-    ],
+    "keywords": ["health", "work", "service", "routine", "pets"],
     "basicMeaning": "Health, daily work, service, and routine",
-    "lifeAreas": [
-      "health",
-      "daily work",
-      "service to others",
-      "pets"
-    ],
+    "lifeAreas": ["health", "daily work", "service to others", "pets"],
     "angularSuccedentCadent": "Cadent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_7": {
     "number": 7,
     "name": "Partnerships and Marriage",
     "naturalSign": "Libra",
     "naturalRuler": "Venus",
-    "keywords": [
-      "marriage",
-      "partnerships",
-      "open enemies",
-      "cooperation"
-    ],
+    "keywords": ["marriage", "partnerships", "open enemies", "cooperation"],
     "basicMeaning": "Partnerships, marriage, and one-on-one relationships",
     "lifeAreas": [
       "marriage",
@@ -166,10 +96,7 @@
       "legal matters"
     ],
     "angularSuccedentCadent": "Angular",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_8": {
     "number": 8,
@@ -192,10 +119,7 @@
       "transformation"
     ],
     "angularSuccedentCadent": "Succedent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_9": {
     "number": 9,
@@ -216,10 +140,7 @@
       "publishing"
     ],
     "angularSuccedentCadent": "Cadent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_10": {
     "number": 10,
@@ -234,30 +155,16 @@
       "achievement"
     ],
     "basicMeaning": "Career, reputation, and public standing",
-    "lifeAreas": [
-      "career",
-      "reputation",
-      "authority figures",
-      "public image"
-    ],
+    "lifeAreas": ["career", "reputation", "authority figures", "public image"],
     "angularSuccedentCadent": "Angular",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_11": {
     "number": 11,
     "name": "Friendships and Aspirations",
     "naturalSign": "Aquarius",
     "naturalRuler": "Uranus",
-    "keywords": [
-      "friends",
-      "groups",
-      "hopes",
-      "wishes",
-      "humanitarian causes"
-    ],
+    "keywords": ["friends", "groups", "hopes", "wishes", "humanitarian causes"],
     "basicMeaning": "Friendships, groups, hopes, and aspirations",
     "lifeAreas": [
       "friends",
@@ -266,10 +173,7 @@
       "humanitarian causes"
     ],
     "angularSuccedentCadent": "Succedent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   },
   "house_12": {
     "number": 12,
@@ -291,9 +195,6 @@
       "institutions"
     ],
     "angularSuccedentCadent": "Cadent",
-    "sources": [
-      "Traditional House System",
-      "Modern Psychological Astrology"
-    ]
+    "sources": ["Traditional House System", "Modern Psychological Astrology"]
   }
 }

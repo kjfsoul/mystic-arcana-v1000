@@ -1,5 +1,6 @@
-# Mystic Arcana – Client Agreement Template  
-*Version: 1.0 | Effective: [Insert Date]*
+# Mystic Arcana – Client Agreement Template
+
+_Version: 1.0 | Effective: [Insert Date]_
 
 ---
 
@@ -8,15 +9,15 @@ This template is designed for personalization and reuse across Mystic Arcana’s
 
 **Compliance & Risk Safeguards Checklist**
 
-| Element | Included? |
-|---------|-----------|
-| Interpretation/No Guarantee | ✅ |
-| Legal Disclaimer | ✅ |
-| Client Code of Conduct | ✅ |
-| Session Format Flexibility | ✅ |
-| Confidentiality & AI Data Use | ✅ |
-| Refund/Cancellation Terms | ✅ |
-| Consent to Participate | ✅ |
+| Element                       | Included? |
+| ----------------------------- | --------- |
+| Interpretation/No Guarantee   | ✅        |
+| Legal Disclaimer              | ✅        |
+| Client Code of Conduct        | ✅        |
+| Session Format Flexibility    | ✅        |
+| Confidentiality & AI Data Use | ✅        |
+| Refund/Cancellation Terms     | ✅        |
+| Consent to Participate        | ✅        |
 
 ---
 
@@ -40,23 +41,23 @@ No guarantee is made regarding the outcome of your session.
 
 ## 3. Session Scope
 
-| Feature | Customizable? |
-|--------|----------------|
-| Length of session | [30 / 60 / 90 minutes] |
-| Delivery format | [Live video / audio / chat / email / app AI] |
-| Deck or system used | [Client's choice or Reader's intuitive pick] |
-| Recordings | [Allowed / Not Allowed / Available after session] |
-| Notes provided? | [Yes – PDF summary / Optional / No] |
+| Feature             | Customizable?                                     |
+| ------------------- | ------------------------------------------------- |
+| Length of session   | [30 / 60 / 90 minutes]                            |
+| Delivery format     | [Live video / audio / chat / email / app AI]      |
+| Deck or system used | [Client's choice or Reader's intuitive pick]      |
+| Recordings          | [Allowed / Not Allowed / Available after session] |
+| Notes provided?     | [Yes – PDF summary / Optional / No]               |
 
-> *Use this table to configure offerings per service type.*
+> _Use this table to configure offerings per service type._
 
 ---
 
 ## 4. Booking, Payment & Cancellation
 
-- Payment is due at time of booking via [Stripe / In-app system]  
-- You may reschedule up to [X hours] in advance  
-- Missed sessions are considered forfeit unless otherwise arranged  
+- Payment is due at time of booking via [Stripe / In-app system]
+- You may reschedule up to [X hours] in advance
+- Missed sessions are considered forfeit unless otherwise arranged
 - Refunds are not guaranteed but may be requested via support@mysticarcana.com
 
 ---
@@ -64,10 +65,11 @@ No guarantee is made regarding the outcome of your session.
 ## 5. Client Responsibilities
 
 Clients agree to:
-- Approach sessions with openness and respect  
-- Treat guidance as interpretive insight, not directive fact  
-- Refrain from recording sessions without permission  
-- Not ask for diagnosis, prescription, or legal/financial outcomes  
+
+- Approach sessions with openness and respect
+- Treat guidance as interpretive insight, not directive fact
+- Refrain from recording sessions without permission
+- Not ask for diagnosis, prescription, or legal/financial outcomes
 - Maintain respect for Reader or guide’s boundaries and practice
 
 Mystic Arcana reserves the right to end any session if inappropriate or abusive behavior occurs.
@@ -86,8 +88,9 @@ Sessions may be reviewed anonymously or via AI for training and quality purposes
 ## 7. AI & Data Use Clause
 
 By participating, you consent to:
-- Secure logging of session type, time, and general theme  
-- Optionally storing summaries or notes  
+
+- Secure logging of session type, time, and general theme
+- Optionally storing summaries or notes
 - Anonymized AI recommendations to enhance your journey
 
 No personally identifiable readings will be made public.
@@ -99,9 +102,10 @@ No personally identifiable readings will be made public.
 All services are provided **“as is”** without warranties of any kind.
 
 You agree not to hold Mystic Arcana or affiliated guides liable for:
-- Emotional outcomes  
-- Decisions made based on a session  
-- Missed opportunities  
+
+- Emotional outcomes
+- Decisions made based on a session
+- Missed opportunities
 - Health, financial, or relationship consequences
 
 ---
@@ -116,7 +120,7 @@ For questions, email **support@mysticarcana.com**
 
 ## Implementation Notes
 
-- Attach to all service checkout pages  
-- Include in pre-session email confirmations  
-- Embed as checkbox modal in app-based reader/session flows  
+- Attach to all service checkout pages
+- Include in pre-session email confirmations
+- Embed as checkbox modal in app-based reader/session flows
 - Reusable in third-party reader partnerships and B2B-style coaching contracts

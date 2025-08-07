@@ -1,12 +1,12 @@
-'use client';
- 
+"use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useMemo, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useTarotDeck } from "../../hooks/useTarotDeck";
 import { TarotEngine, TarotReading } from "../../lib/tarot/TarotEngine";
 import { TarotService } from "../../services/TarotService";
-import styles from './ApiDrivenTarotPanel.module.css';
+import styles from "./ApiDrivenTarotPanel.module.css";
 import { TarotCard } from "./TarotCard";
 interface ApiDrivenTarotPanelProps {
   className?: string;
@@ -15,7 +15,7 @@ interface ApiDrivenTarotPanelProps {
 }
 /**
  * Enhanced Tarot Panel using the Tarot Data Engine API
- * 
+ *
  * Features:
  * - API-driven card data (replaces hardcoded arrays)
  * - Loading states and error handling
@@ -24,74 +24,96 @@ interface ApiDrivenTarotPanelProps {
  * - Automatic reading persistence
  */
 export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
-  className = '',
+  className = "",
   deckId,
-  onReadingComplete
+  onReadingComplete,
 }) => {
   const { user, isGuest } = useAuth();
   const { cards, deck, loading, error, refetch } = useTarotDeck(deckId);
-  
-  const [selectedSpread, setSelectedSpread] = useState<'single' | 'three-card' | 'celtic-cross'>('single');
-  const [currentReading, setCurrentReading] = useState<TarotReading | null>(null);
+
+  const [selectedSpread, setSelectedSpread] = useState<
+    "single" | "three-card" | "celtic-cross"
+  >("single");
+  const [currentReading, setCurrentReading] = useState<TarotReading | null>(
+    null,
+  );
   const [isPerformingReading, setIsPerformingReading] = useState(false);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showAuthModal, setShowAuthModal] = useState(false);
   // Initialize tarot engine with API-driven data
- 
-  const tarotEngine = useMemo(() => new TarotEngine({
-    isGuest,
-    deckId
-  }), [isGuest, deckId]);
+
+  const tarotEngine = useMemo(
+    () =>
+      new TarotEngine({
+        isGuest,
+        deckId,
+      }),
+    [isGuest, deckId],
+  );
   const availableSpreads = tarotEngine.getAvailableSpreadTypes();
- 
-  const handleSpreadSelection = useCallback((spreadType: 'single' | 'three-card' | 'celtic-cross') => {
-    if (isGuest && spreadType !== 'single') {
-      setShowAuthModal(true);
-      return;
-    }
-    
-    setSelectedSpread(spreadType);
-    setCurrentReading(null);
-    setFlippedCards(new Set());
-  }, [isGuest]);
- 
+
+  const handleSpreadSelection = useCallback(
+    (spreadType: "single" | "three-card" | "celtic-cross") => {
+      if (isGuest && spreadType !== "single") {
+        setShowAuthModal(true);
+        return;
+      }
+
+      setSelectedSpread(spreadType);
+      setCurrentReading(null);
+      setFlippedCards(new Set());
+    },
+    [isGuest],
+  );
+
   const performReading = useCallback(async () => {
     if (loading || error) {
-      console.warn('Cannot perform reading: deck not loaded');
+      console.warn("Cannot perform reading: deck not loaded");
       return;
     }
     setIsPerformingReading(true);
     setFlippedCards(new Set());
-    
+
     try {
       const reading = await tarotEngine.performReading(selectedSpread);
       setCurrentReading(reading);
-      
+
       // Save reading for registered users
       if (!isGuest && user) {
         try {
-          const { error: saveError } = await TarotService.saveReading(reading, user.id);
+          const { error: saveError } = await TarotService.saveReading(
+            reading,
+            user.id,
+          );
           if (saveError) {
-            console.warn('Failed to save reading:', saveError);
+            console.warn("Failed to save reading:", saveError);
           }
         } catch (saveError) {
-          console.warn('Error saving reading:', saveError);
+          console.warn("Error saving reading:", saveError);
         }
       }
-      
+
       // Notify parent component
       if (onReadingComplete) {
         onReadingComplete(reading);
       }
     } catch (error) {
-      console.error('Error performing reading:', error);
+      console.error("Error performing reading:", error);
     } finally {
       setIsPerformingReading(false);
     }
-  }, [selectedSpread, isGuest, tarotEngine, user, loading, error, onReadingComplete]);
- 
+  }, [
+    selectedSpread,
+    isGuest,
+    tarotEngine,
+    user,
+    loading,
+    error,
+    onReadingComplete,
+  ]);
+
   const handleCardFlip = useCallback((cardIndex: number) => {
-    setFlippedCards(prev => new Set([...prev, cardIndex]));
+    setFlippedCards((prev) => new Set([...prev, cardIndex]));
   }, []);
   // Loading state
   if (loading) {
@@ -119,10 +141,7 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           <div className={styles.errorIcon}>⚠️</div>
           <h3>Unable to Load Tarot Deck</h3>
           <p>{error}</p>
-          <button 
-            onClick={refetch}
-            className={styles.retryButton}
-          >
+          <button onClick={refetch} className={styles.retryButton}>
             Try Again
           </button>
         </div>
@@ -148,24 +167,31 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           {availableSpreads.map((spread) => (
             <button
               key={spread.id}
-              onClick={() => handleSpreadSelection(spread.id as 'single' | 'three-card' | 'celtic-cross')}
+              onClick={() =>
+                handleSpreadSelection(
+                  spread.id as "single" | "three-card" | "celtic-cross",
+                )
+              }
               className={`${styles.spreadButton} ${
-                selectedSpread === spread.id ? styles.active : ''
-              } ${
-                isGuest && spread.id !== 'single' ? styles.locked : ''
-              }`}
-              disabled={isGuest && spread.id !== 'single'}
+                selectedSpread === spread.id ? styles.active : ""
+              } ${isGuest && spread.id !== "single" ? styles.locked : ""}`}
+              disabled={isGuest && spread.id !== "single"}
             >
               <div className={styles.spreadIcon}>
-                {spread.id === 'single' ? '🃏' : 
-                 spread.id === 'three-card' ? '🃏🃏🃏' : '🃏✨🃏'}
+                {spread.id === "single"
+                  ? "🃏"
+                  : spread.id === "three-card"
+                    ? "🃏🃏🃏"
+                    : "🃏✨🃏"}
               </div>
               <div className={styles.spreadDetails}>
                 <h4>{spread.name}</h4>
                 <p>{spread.description}</p>
-                <span className={styles.cardCount}>{spread.cardCount} cards</span>
+                <span className={styles.cardCount}>
+                  {spread.cardCount} cards
+                </span>
               </div>
-              {isGuest && spread.id !== 'single' && (
+              {isGuest && spread.id !== "single" && (
                 <div className={styles.lockIcon}>🔒</div>
               )}
             </button>
@@ -185,7 +211,11 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
                 <>
                   <motion.span
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   >
                     ✨
                   </motion.span>
@@ -198,14 +228,16 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
           </div>
         ) : (
           <AnimatePresence>
-            <motion.div 
+            <motion.div
               className={styles.cardsContainer}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
               {/* Cards Display */}
-              <div className={`${styles.cardsLayout} ${styles[selectedSpread]}`}>
+              <div
+                className={`${styles.cardsLayout} ${styles[selectedSpread]}`}
+              >
                 {currentReading.cards.map((card, index) => (
                   <motion.div
                     key={`${currentReading.id}-${card.id}-${index}`}
@@ -239,7 +271,7 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
                 >
                   <h3>Your Reading</h3>
                   <p>{currentReading.interpretation}</p>
-                  
+
                   {/* New Reading Button */}
                   <button
                     onClick={performReading}
@@ -256,13 +288,22 @@ export const ApiDrivenTarotPanel: React.FC<ApiDrivenTarotPanelProps> = ({
       </div>
       {/* Auth Modal for Guests */}
       {showAuthModal && (
-        <div className={styles.modalOverlay} onClick={() => setShowAuthModal(false)}>
-          <div className={styles.authModal} onClick={e => e.stopPropagation()}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowAuthModal(false)}
+        >
+          <div
+            className={styles.authModal}
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3>🔮 Unlock Full Readings</h3>
-            <p>Create an account to access advanced spreads and save your readings!</p>
+            <p>
+              Create an account to access advanced spreads and save your
+              readings!
+            </p>
             <div className={styles.modalButtons}>
               <button className={styles.signUpButton}>Sign Up</button>
-              <button 
+              <button
                 className={styles.cancelButton}
                 onClick={() => setShowAuthModal(false)}
               >

@@ -15,9 +15,9 @@ export interface PlanetPosition {
     latitude: number;
     distance: number;
     sign?: string;
-  house?: number;
-  symbol?: string;
-};
+    house?: number;
+    symbol?: string;
+  };
 }
 export interface BirthChart {
   subjectData: {
@@ -68,7 +68,7 @@ export interface LocationData {
   country: string;
 }
 export class AstrologyService {
-  private apiEndpoint = '/api/astrology';
+  private apiEndpoint = "/api/astrology";
   /**
    * Calculate a complete birth chart
    */
@@ -76,28 +76,30 @@ export class AstrologyService {
     name: string,
     birthDate: Date,
     city: string,
-    country?: string
+    country?: string,
   ): Promise<BirthChart> {
     const response = await fetch(this.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        action: 'calculate-birth-chart',
+        action: "calculate-birth-chart",
         data: {
           name,
           birthDate: birthDate.toISOString(),
           city,
-          country
-        }
-      })
+          country,
+        },
+      }),
     });
     if (!response.ok) {
-      throw new Error(`Failed to calculate birth chart: ${response.statusText}`);
+      throw new Error(
+        `Failed to calculate birth chart: ${response.statusText}`,
+      );
     }
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to calculate birth chart');
+      throw new Error(result.error || "Failed to calculate birth chart");
     }
     return result.data;
   }
@@ -124,23 +126,23 @@ export class AstrologyService {
       minute: number;
       city: string;
       country?: string;
-    }
+    },
   ): Promise<SynastryChart> {
     const response = await fetch(this.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        action: 'calculate-synastry',
-        data: { person1, person2 }
-      })
+        action: "calculate-synastry",
+        data: { person1, person2 },
+      }),
     });
     if (!response.ok) {
       throw new Error(`Failed to calculate synastry: ${response.statusText}`);
     }
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to calculate synastry');
+      throw new Error(result.error || "Failed to calculate synastry");
     }
     return result.data;
   }
@@ -149,19 +151,19 @@ export class AstrologyService {
    */
   async getCurrentTransits(): Promise<CurrentTransits> {
     const response = await fetch(this.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        action: 'get-current-transits'
-      })
+        action: "get-current-transits",
+      }),
     });
     if (!response.ok) {
       throw new Error(`Failed to get current transits: ${response.statusText}`);
     }
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to get current transits');
+      throw new Error(result.error || "Failed to get current transits");
     }
     return result.data;
   }
@@ -170,30 +172,34 @@ export class AstrologyService {
    */
   async geocodeLocation(city: string, country?: string): Promise<LocationData> {
     const response = await fetch(this.apiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        action: 'geocode-location',
-        data: { city, country }
-      })
+        action: "geocode-location",
+        data: { city, country },
+      }),
     });
     if (!response.ok) {
       throw new Error(`Failed to geocode location: ${response.statusText}`);
     }
     const result = await response.json();
-    
+
     if (!result.success) {
-      throw new Error(result.error || 'Failed to geocode location');
+      throw new Error(result.error || "Failed to geocode location");
     }
     return result.data;
   }
   /**
    * Format planet position for display
    */
-  formatPosition(position: { zodiacSign: string; zodiacDegree: number; retrograde: boolean }): string {
+  formatPosition(position: {
+    zodiacSign: string;
+    zodiacDegree: number;
+    retrograde: boolean;
+  }): string {
     const degree = Math.floor(position.zodiacDegree);
     const minute = Math.floor((position.zodiacDegree - degree) * 60);
-    const retrograde = position.retrograde ? ' ℞' : '';
+    const retrograde = position.retrograde ? " ℞" : "";
     return `${position.zodiacSign} ${degree}°${minute}'${retrograde}`;
   }
   /**
@@ -201,18 +207,18 @@ export class AstrologyService {
    */
   getZodiacSymbol(sign: string): string {
     const symbols: Record<string, string> = {
-      'Aries': '♈',
-      'Taurus': '♉',
-      'Gemini': '♊',
-      'Cancer': '♋',
-      'Leo': '♌',
-      'Virgo': '♍',
-      'Libra': '♎',
-      'Scorpio': '♏',
-      'Sagittarius': '♐',
-      'Capricorn': '♑',
-      'Aquarius': '♒',
-      'Pisces': '♓'
+      Aries: "♈",
+      Taurus: "♉",
+      Gemini: "♊",
+      Cancer: "♋",
+      Leo: "♌",
+      Virgo: "♍",
+      Libra: "♎",
+      Scorpio: "♏",
+      Sagittarius: "♐",
+      Capricorn: "♑",
+      Aquarius: "♒",
+      Pisces: "♓",
     };
     return symbols[sign] || sign;
   }
@@ -221,19 +227,19 @@ export class AstrologyService {
    */
   getPlanetSymbol(planet: string): string {
     const symbols: Record<string, string> = {
-      'sun': '☉',
-      'moon': '☽',
-      'mercury': '☿',
-      'venus': '♀',
-      'mars': '♂',
-      'jupiter': '♃',
-      'saturn': '♄',
-      'uranus': '♅',
-      'neptune': '♆',
-      'pluto': '♇',
-      'chiron': '⚷',
-      'north_node': '☊',
-      'south_node': '☋'
+      sun: "☉",
+      moon: "☽",
+      mercury: "☿",
+      venus: "♀",
+      mars: "♂",
+      jupiter: "♃",
+      saturn: "♄",
+      uranus: "♅",
+      neptune: "♆",
+      pluto: "♇",
+      chiron: "⚷",
+      north_node: "☊",
+      south_node: "☋",
     };
     return symbols[planet.toLowerCase()] || planet;
   }
@@ -242,11 +248,11 @@ export class AstrologyService {
    */
   getAspectSymbol(aspect: string): string {
     const symbols: Record<string, string> = {
-      'conjunction': '☌',
-      'sextile': '⚹',
-      'square': '□',
-      'trine': '△',
-      'opposition': '☍'
+      conjunction: "☌",
+      sextile: "⚹",
+      square: "□",
+      trine: "△",
+      opposition: "☍",
     };
     return symbols[aspect.toLowerCase()] || aspect;
   }

@@ -2,10 +2,15 @@
  * Transit Engine - Real-time planetary movement analysis
  * Uses Swiss Ephemeris for accurate astronomical calculations
  */
- 
-import { AstronomicalCalculator } from '@/lib/astrology/AstronomicalCalculator';
-import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
-import { BirthData, Planet, AspectType, HouseSystem } from '../../types/astrology';
+
+import { AstronomicalCalculator } from "@/lib/astrology/AstronomicalCalculator";
+import { SwissEphemerisShim } from "@/lib/astrology/SwissEphemerisShim";
+import {
+  BirthData,
+  Planet,
+  AspectType,
+  HouseSystem,
+} from "../../types/astrology";
 export interface PlanetaryPosition {
   planet: Planet;
   longitude: number;
@@ -24,19 +29,27 @@ export interface TransitAspect {
   exactDate: Date;
   applying: boolean;
   separating: boolean;
-  strength: 'strong' | 'moderate' | 'weak';
+  strength: "strong" | "moderate" | "weak";
 }
 export interface DailyTransit {
   date: Date;
   planetaryPositions: PlanetaryPosition[];
   majorAspects: TransitAspect[];
   lunarPhase: {
-    phase: 'new' | 'waxing_crescent' | 'first_quarter' | 'waxing_gibbous' | 'full' | 'waning_gibbous' | 'last_quarter' | 'waning_crescent';
+    phase:
+      | "new"
+      | "waxing_crescent"
+      | "first_quarter"
+      | "waxing_gibbous"
+      | "full"
+      | "waning_gibbous"
+      | "last_quarter"
+      | "waning_crescent";
     illumination: number;
     nextPhaseDate: Date;
   };
   cosmicWeather: {
-    energy: 'high' | 'medium' | 'low';
+    energy: "high" | "medium" | "low";
     focus: string[];
     challenges: string[];
     opportunities: string[];
@@ -69,17 +82,33 @@ export class TransitEngine {
   async getCurrentPlanetaryPositions(): Promise<PlanetaryPosition[]> {
     const today = new Date();
     const positions: PlanetaryPosition[] = [];
-    
+
     const planets: Planet[] = [
-      'sun', 'moon', 'mercury', 'venus', 'mars', 
-      'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'
+      "sun",
+      "moon",
+      "mercury",
+      "venus",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "pluto",
     ];
     for (const planet of planets) {
       try {
-        const position = await AstronomicalCalculator.calculatePlanetaryPosition(planet, today);
-        const speed = await this.calculatePlanetarySpeed(planet, today, position);
+        const position =
+          await AstronomicalCalculator.calculatePlanetaryPosition(
+            planet,
+            today,
+          );
+        const speed = await this.calculatePlanetarySpeed(
+          planet,
+          today,
+          position,
+        );
         const sign = this.getZodiacSign(position.longitude);
-        
+
         positions.push({
           planet,
           longitude: position.longitude,
@@ -87,7 +116,7 @@ export class TransitEngine {
           distance: position.distance,
           speed,
           sign,
-          retrograde: speed < 0
+          retrograde: speed < 0,
         });
       } catch (error) {
         console.warn(`Failed to get position for ${planet}:`, error);
@@ -100,30 +129,45 @@ export class TransitEngine {
   /**
    * Calculate planetary speed (degrees per day)
    */
-  private async calculatePlanetarySpeed(planet: Planet, date: Date, position?: { longitude: number; latitude: number; distance: number; speed?: number }): Promise<number> {
+  private async calculatePlanetarySpeed(
+    planet: Planet,
+    date: Date,
+    position?: {
+      longitude: number;
+      latitude: number;
+      distance: number;
+      speed?: number;
+    },
+  ): Promise<number> {
     // If position already includes speed, use it
-    if (position && typeof position.speed === 'number') {
+    if (position && typeof position.speed === "number") {
       return position.speed;
     }
-    
+
     try {
-      const today = await AstronomicalCalculator.calculatePlanetaryPosition(planet, date);
+      const today = await AstronomicalCalculator.calculatePlanetaryPosition(
+        planet,
+        date,
+      );
       // If the position includes speed, use it
-      if (typeof today.speed === 'number') {
+      if (typeof today.speed === "number") {
         return today.speed;
       }
-      
+
       // Otherwise calculate speed from positions
       const tomorrow = new Date(date);
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const nextDay = await AstronomicalCalculator.calculatePlanetaryPosition(planet, tomorrow);
-      
+      const nextDay = await AstronomicalCalculator.calculatePlanetaryPosition(
+        planet,
+        tomorrow,
+      );
+
       let speed = nextDay.longitude - today.longitude;
-      
+
       // Handle crossing 0° Aries
       if (speed < -300) speed += 360;
       if (speed > 300) speed -= 360;
-      
+
       return speed;
     } catch (error) {
       // Fallback average speeds (degrees per day)
@@ -137,7 +181,7 @@ export class TransitEngine {
         saturn: 0.033,
         uranus: 0.011,
         neptune: 0.006,
-        pluto: 0.004
+        pluto: 0.004,
       };
       return averageSpeeds[planet] || 0.5;
     }
@@ -147,21 +191,35 @@ export class TransitEngine {
    */
   private getZodiacSign(longitude: number): string {
     const signs = [
-      'Aries', 'Taurus', 'Gemini', 'Cancer', 
-      'Leo', 'Virgo', 'Libra', 'Scorpio',
-      'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces",
     ];
     const signIndex = Math.floor(longitude / 30);
-    return signs[signIndex] || 'Aries';
+    return signs[signIndex] || "Aries";
   }
   /**
    * Calculate transits to natal chart
    */
-  async calculateTransits(birthData: BirthData, targetDate: Date = new Date()): Promise<TransitAspect[]> {
+  async calculateTransits(
+    birthData: BirthData,
+    targetDate: Date = new Date(),
+  ): Promise<TransitAspect[]> {
     try {
       const transitPositions = await this.getCurrentPlanetaryPositions();
       // Use SwissEphemerisShim instead since AstronomicalCalculator doesn't have calculateBirthChart
-      const SwissEphemerisShim = (await import('@/lib/astrology/SwissEphemerisShim')).SwissEphemerisShim;
+      const SwissEphemerisShim = (
+        await import("@/lib/astrology/SwissEphemerisShim")
+      ).SwissEphemerisShim;
       const natalChart = await SwissEphemerisShim.calculateFullChart(birthData);
       const aspects: TransitAspect[] = [];
       for (const transitPos of transitPositions) {
@@ -169,22 +227,33 @@ export class TransitEngine {
         for (const planetData of natalChart.planets) {
           const natalLongitude = planetData?.longitude;
           if (natalLongitude === undefined) continue;
-          
+
           const natalPlanet = planetData.name as Planet;
-          const aspect = this.calculateAspect(transitPos.longitude, natalLongitude);
+          const aspect = this.calculateAspect(
+            transitPos.longitude,
+            natalLongitude,
+          );
           if (aspect) {
-            const orb = this.calculateOrb(transitPos.longitude, natalLongitude, aspect.type);
-            
+            const orb = this.calculateOrb(
+              transitPos.longitude,
+              natalLongitude,
+              aspect.type,
+            );
+
             if (orb <= this.getMaxOrb(aspect.type)) {
               aspects.push({
                 transitPlanet: transitPos.planet,
                 natalPlanet,
                 aspect: aspect.type,
                 orb,
-                exactDate: this.calculateExactAspectDate(transitPos, natalLongitude, aspect.type),
+                exactDate: this.calculateExactAspectDate(
+                  transitPos,
+                  natalLongitude,
+                  aspect.type,
+                ),
                 applying: transitPos.speed > 0 ? orb > 0 : orb < 0,
                 separating: transitPos.speed > 0 ? orb < 0 : orb > 0,
-                strength: orb <= 1 ? 'strong' : orb <= 3 ? 'moderate' : 'weak'
+                strength: orb <= 1 ? "strong" : orb <= 3 ? "moderate" : "weak",
               });
             }
           }
@@ -192,22 +261,25 @@ export class TransitEngine {
       }
       return aspects.sort((a, b) => a.orb - b.orb);
     } catch (error) {
-      console.warn('Failed to calculate transits:', error);
+      console.warn("Failed to calculate transits:", error);
       return [];
     }
   }
   /**
    * Calculate aspect between two planetary positions
    */
-  private calculateAspect(longitude1: number, longitude2: number): { type: AspectType; angle: number } | null {
+  private calculateAspect(
+    longitude1: number,
+    longitude2: number,
+  ): { type: AspectType; angle: number } | null {
     let diff = Math.abs(longitude1 - longitude2);
     if (diff > 180) diff = 360 - diff;
     const aspects = [
-      { type: 'conjunction' as AspectType, angle: 0, orb: 8 },
-      { type: 'sextile' as AspectType, angle: 60, orb: 4 },
-      { type: 'square' as AspectType, angle: 90, orb: 6 },
-      { type: 'trine' as AspectType, angle: 120, orb: 6 },
-      { type: 'opposition' as AspectType, angle: 180, orb: 8 }
+      { type: "conjunction" as AspectType, angle: 0, orb: 8 },
+      { type: "sextile" as AspectType, angle: 60, orb: 4 },
+      { type: "square" as AspectType, angle: 90, orb: 6 },
+      { type: "trine" as AspectType, angle: 120, orb: 6 },
+      { type: "opposition" as AspectType, angle: 180, orb: 8 },
     ];
     for (const aspect of aspects) {
       if (Math.abs(diff - aspect.angle) <= aspect.orb) {
@@ -219,7 +291,11 @@ export class TransitEngine {
   /**
    * Calculate orb (exactness) of aspect
    */
-  private calculateOrb(longitude1: number, longitude2: number, aspectType: AspectType): number {
+  private calculateOrb(
+    longitude1: number,
+    longitude2: number,
+    aspectType: AspectType,
+  ): number {
     let diff = longitude1 - longitude2;
     if (diff > 180) diff -= 360;
     if (diff < -180) diff += 360;
@@ -228,7 +304,7 @@ export class TransitEngine {
       sextile: 60,
       square: 90,
       trine: 120,
-      opposition: 180
+      opposition: 180,
     };
     const targetAngle = aspectAngles[aspectType];
     return Math.abs(Math.abs(diff) - targetAngle);
@@ -242,20 +318,24 @@ export class TransitEngine {
       sextile: 4,
       square: 6,
       trine: 6,
-      opposition: 8
+      opposition: 8,
     };
     return orbs[aspectType] || 3;
   }
   /**
    * Calculate exact date when aspect becomes exact
    */
-  private calculateExactAspectDate(transitPos: PlanetaryPosition, natalLongitude: number, aspectType: AspectType): Date {
+  private calculateExactAspectDate(
+    transitPos: PlanetaryPosition,
+    natalLongitude: number,
+    aspectType: AspectType,
+  ): Date {
     const aspectAngles = {
       conjunction: 0,
       sextile: 60,
       square: 90,
       trine: 120,
-      opposition: 180
+      opposition: 180,
     };
     const targetAngle = aspectAngles[aspectType];
     let diff = transitPos.longitude - natalLongitude;
@@ -280,7 +360,7 @@ export class TransitEngine {
       planetaryPositions,
       majorAspects: [], // Will be populated when natal chart is available
       lunarPhase,
-      cosmicWeather
+      cosmicWeather,
     };
   }
   /**
@@ -288,37 +368,45 @@ export class TransitEngine {
    */
   private async calculateLunarPhase(date: Date) {
     try {
-      const sunPos = await AstronomicalCalculator.calculatePlanetaryPosition('sun', date);
-      const moonPos = await AstronomicalCalculator.calculatePlanetaryPosition('moon', date);
-      
+      const sunPos = await AstronomicalCalculator.calculatePlanetaryPosition(
+        "sun",
+        date,
+      );
+      const moonPos = await AstronomicalCalculator.calculatePlanetaryPosition(
+        "moon",
+        date,
+      );
+
       let diff = moonPos.longitude - sunPos.longitude;
       if (diff < 0) diff += 360;
       const phases = [
-        { name: 'new', min: 0, max: 22.5 },
-        { name: 'waxing_crescent', min: 22.5, max: 67.5 },
-        { name: 'first_quarter', min: 67.5, max: 112.5 },
-        { name: 'waxing_gibbous', min: 112.5, max: 157.5 },
-        { name: 'full', min: 157.5, max: 202.5 },
-        { name: 'waning_gibbous', min: 202.5, max: 247.5 },
-        { name: 'last_quarter', min: 247.5, max: 292.5 },
-        { name: 'waning_crescent', min: 292.5, max: 337.5 },
-        { name: 'new', min: 337.5, max: 360 }
+        { name: "new", min: 0, max: 22.5 },
+        { name: "waxing_crescent", min: 22.5, max: 67.5 },
+        { name: "first_quarter", min: 67.5, max: 112.5 },
+        { name: "waxing_gibbous", min: 112.5, max: 157.5 },
+        { name: "full", min: 157.5, max: 202.5 },
+        { name: "waning_gibbous", min: 202.5, max: 247.5 },
+        { name: "last_quarter", min: 247.5, max: 292.5 },
+        { name: "waning_crescent", min: 292.5, max: 337.5 },
+        { name: "new", min: 337.5, max: 360 },
       ];
-      const currentPhase = phases.find(phase => diff >= phase.min && diff < phase.max) || phases[0];
-      const illumination = (1 - Math.cos(diff * Math.PI / 180)) / 2;
+      const currentPhase =
+        phases.find((phase) => diff >= phase.min && diff < phase.max) ||
+        phases[0];
+      const illumination = (1 - Math.cos((diff * Math.PI) / 180)) / 2;
       // Calculate next phase date (simplified)
       const nextPhaseDate = new Date(date);
       nextPhaseDate.setDate(nextPhaseDate.getDate() + 7);
       return {
         phase: currentPhase.name as any,
         illumination: Math.round(illumination * 100) / 100,
-        nextPhaseDate
+        nextPhaseDate,
       };
     } catch (error) {
       return {
-        phase: 'new' as any,
+        phase: "new" as any,
         illumination: 0.5,
-        nextPhaseDate: new Date()
+        nextPhaseDate: new Date(),
       };
     }
   }
@@ -326,63 +414,79 @@ export class TransitEngine {
    * Analyze cosmic weather patterns
    */
   private analyzeCosmicWeather(positions: PlanetaryPosition[]) {
-    const retrogradeCount = positions.filter(p => p.retrograde).length;
-    const fastMovingPlanets = positions.filter(p => Math.abs(p.speed) > 1).length;
-    
-    let energy: 'high' | 'medium' | 'low' = 'medium';
+    const retrogradeCount = positions.filter((p) => p.retrograde).length;
+    const fastMovingPlanets = positions.filter(
+      (p) => Math.abs(p.speed) > 1,
+    ).length;
+
+    let energy: "high" | "medium" | "low" = "medium";
     const focus: string[] = [];
     const challenges: string[] = [];
     const opportunities: string[] = [];
     // Analyze energy level
-    if (fastMovingPlanets >= 3) energy = 'high';
-    if (retrogradeCount >= 3) energy = 'low';
+    if (fastMovingPlanets >= 3) energy = "high";
+    if (retrogradeCount >= 3) energy = "low";
     // Analyze retrograde effects
     if (retrogradeCount > 0) {
-      challenges.push('Retrograde energy calls for patience and reflection');
-      focus.push('Review and revision');
+      challenges.push("Retrograde energy calls for patience and reflection");
+      focus.push("Review and revision");
     }
     // Analyze planetary positions
-    const fireSignPlanets = positions.filter(p => ['Aries', 'Leo', 'Sagittarius'].includes(p.sign)).length;
-    const earthSignPlanets = positions.filter(p => ['Taurus', 'Virgo', 'Capricorn'].includes(p.sign)).length;
-    const airSignPlanets = positions.filter(p => ['Gemini', 'Libra', 'Aquarius'].includes(p.sign)).length;
-    const waterSignPlanets = positions.filter(p => ['Cancer', 'Scorpio', 'Pisces'].includes(p.sign)).length;
+    const fireSignPlanets = positions.filter((p) =>
+      ["Aries", "Leo", "Sagittarius"].includes(p.sign),
+    ).length;
+    const earthSignPlanets = positions.filter((p) =>
+      ["Taurus", "Virgo", "Capricorn"].includes(p.sign),
+    ).length;
+    const airSignPlanets = positions.filter((p) =>
+      ["Gemini", "Libra", "Aquarius"].includes(p.sign),
+    ).length;
+    const waterSignPlanets = positions.filter((p) =>
+      ["Cancer", "Scorpio", "Pisces"].includes(p.sign),
+    ).length;
     if (fireSignPlanets >= 3) {
-      focus.push('Action and initiative');
-      opportunities.push('Leadership opportunities');
+      focus.push("Action and initiative");
+      opportunities.push("Leadership opportunities");
     }
     if (earthSignPlanets >= 3) {
-      focus.push('Practical matters');
-      opportunities.push('Material progress');
+      focus.push("Practical matters");
+      opportunities.push("Material progress");
     }
     if (airSignPlanets >= 3) {
-      focus.push('Communication and ideas');
-      opportunities.push('Networking and learning');
+      focus.push("Communication and ideas");
+      opportunities.push("Networking and learning");
     }
     if (waterSignPlanets >= 3) {
-      focus.push('Emotions and intuition');
-      opportunities.push('Spiritual insights');
+      focus.push("Emotions and intuition");
+      opportunities.push("Spiritual insights");
     }
     return {
       energy,
       focus,
       challenges,
-      opportunities
+      opportunities,
     };
   }
   /**
    * Generate personalized horoscope
    */
-  async generatePersonalizedHoroscope(birthData: BirthData, date: Date = new Date()): Promise<PersonalizedHoroscope> {
+  async generatePersonalizedHoroscope(
+    birthData: BirthData,
+    date: Date = new Date(),
+  ): Promise<PersonalizedHoroscope> {
     const transits = await this.calculateTransits(birthData, date);
     const dailyTransit = await this.getDailyTransit(date);
-    
+
     // Select key transits (most exact and significant)
     const keyTransits = transits
-      .filter(t => t.strength === 'strong' || t.strength === 'moderate')
+      .filter((t) => t.strength === "strong" || t.strength === "moderate")
       .slice(0, 3);
     // Generate guidance based on transits
-    const guidance = this.generateGuidanceFromTransits(keyTransits, dailyTransit);
-    
+    const guidance = this.generateGuidanceFromTransits(
+      keyTransits,
+      dailyTransit,
+    );
+
     return {
       date,
       overallTheme: this.generateOverallTheme(keyTransits, dailyTransit),
@@ -390,58 +494,74 @@ export class TransitEngine {
       dailyGuidance: guidance,
       luckyNumbers: this.generateLuckyNumbers(date, birthData),
       affirmation: this.generateAffirmation(keyTransits),
-      bestTimeOfDay: this.getBestTimeOfDay(dailyTransit)
+      bestTimeOfDay: this.getBestTimeOfDay(dailyTransit),
     };
   }
   /**
    * Generate overall theme for the day
    */
-  private generateOverallTheme(transits: TransitAspect[], dailyTransit: DailyTransit): string {
+  private generateOverallTheme(
+    transits: TransitAspect[],
+    dailyTransit: DailyTransit,
+  ): string {
     if (transits.length === 0) {
-      return `A day of ${dailyTransit.cosmicWeather.energy} cosmic energy. Focus on ${dailyTransit.cosmicWeather.focus[0] || 'personal growth'}.`;
+      return `A day of ${dailyTransit.cosmicWeather.energy} cosmic energy. Focus on ${dailyTransit.cosmicWeather.focus[0] || "personal growth"}.`;
     }
     const majorTransit = transits[0];
     const themes = {
-      conjunction: 'new beginnings and focused energy',
-      sextile: 'harmonious opportunities and easy flow',
-      square: 'challenges that catalyze growth',
-      trine: 'natural talents and favorable conditions',
-      opposition: 'balance and integration of opposites'
+      conjunction: "new beginnings and focused energy",
+      sextile: "harmonious opportunities and easy flow",
+      square: "challenges that catalyze growth",
+      trine: "natural talents and favorable conditions",
+      opposition: "balance and integration of opposites",
     };
-    return `${majorTransit.transitPlanet} ${majorTransit.aspect} ${majorTransit.natalPlanet} brings ${themes[majorTransit.aspect]}. ${dailyTransit.cosmicWeather.energy === 'high' ? 'High energy day' : dailyTransit.cosmicWeather.energy === 'low' ? 'Reflective day' : 'Balanced energy'}.`;
+    return `${majorTransit.transitPlanet} ${majorTransit.aspect} ${majorTransit.natalPlanet} brings ${themes[majorTransit.aspect]}. ${dailyTransit.cosmicWeather.energy === "high" ? "High energy day" : dailyTransit.cosmicWeather.energy === "low" ? "Reflective day" : "Balanced energy"}.`;
   }
   /**
    * Generate daily guidance from transits
    */
-  private generateGuidanceFromTransits(transits: TransitAspect[], dailyTransit: DailyTransit) {
+  private generateGuidanceFromTransits(
+    transits: TransitAspect[],
+    dailyTransit: DailyTransit,
+  ) {
     const defaultGuidance = {
-      love: 'Open your heart to unexpected connections and deeper understanding.',
-      career: 'Focus on your long-term goals and take practical steps forward.',
-      health: 'Listen to your body and prioritize rest and nourishment.',
-      spiritual: 'Trust your intuition and seek moments of quiet reflection.'
+      love: "Open your heart to unexpected connections and deeper understanding.",
+      career: "Focus on your long-term goals and take practical steps forward.",
+      health: "Listen to your body and prioritize rest and nourishment.",
+      spiritual: "Trust your intuition and seek moments of quiet reflection.",
     };
     if (transits.length === 0) return defaultGuidance;
     const guidance = { ...defaultGuidance };
-    
+
     for (const transit of transits) {
-      if (transit.transitPlanet === 'venus' || transit.natalPlanet === 'venus') {
-        guidance.love = transit.aspect === 'conjunction' || transit.aspect === 'trine' ?
-          'Love energy is heightened. Express affection and enjoy beautiful moments.' :
-          'Relationship dynamics may need attention. Practice patience and understanding.';
+      if (
+        transit.transitPlanet === "venus" ||
+        transit.natalPlanet === "venus"
+      ) {
+        guidance.love =
+          transit.aspect === "conjunction" || transit.aspect === "trine"
+            ? "Love energy is heightened. Express affection and enjoy beautiful moments."
+            : "Relationship dynamics may need attention. Practice patience and understanding.";
       }
-      
-      if (transit.transitPlanet === 'mars' || transit.natalPlanet === 'mars') {
-        guidance.career = transit.aspect === 'conjunction' || transit.aspect === 'trine' ?
-          'Dynamic energy supports bold career moves and leadership.' :
-          'Channel competitive energy constructively. Avoid conflicts at work.';
+
+      if (transit.transitPlanet === "mars" || transit.natalPlanet === "mars") {
+        guidance.career =
+          transit.aspect === "conjunction" || transit.aspect === "trine"
+            ? "Dynamic energy supports bold career moves and leadership."
+            : "Channel competitive energy constructively. Avoid conflicts at work.";
       }
-      
-      if (transit.transitPlanet === 'moon' || transit.natalPlanet === 'moon') {
-        guidance.health = 'Pay attention to emotional well-being. Your feelings are especially important today.';
+
+      if (transit.transitPlanet === "moon" || transit.natalPlanet === "moon") {
+        guidance.health =
+          "Pay attention to emotional well-being. Your feelings are especially important today.";
       }
-      
-      if (transit.transitPlanet === 'jupiter' || transit.natalPlanet === 'jupiter') {
-        guidance.spiritual = 'Opportunities for growth and expansion. Stay open to new perspectives.';
+
+      if (
+        transit.transitPlanet === "jupiter" ||
+        transit.natalPlanet === "jupiter"
+      ) {
+        guidance.spiritual =
+          "Opportunities for growth and expansion. Stay open to new perspectives.";
       }
     }
     return guidance;
@@ -454,14 +574,14 @@ export class TransitEngine {
     const month = date.getMonth() + 1;
     const birthDay = new Date(birthData.birthDate).getDate();
     const birthMonth = new Date(birthData.birthDate).getMonth() + 1;
-    
+
     return [
       day,
       month,
       birthDay,
       birthMonth,
-      (day + birthDay) % 9 + 1,
-      (month + birthMonth) % 9 + 1
+      ((day + birthDay) % 9) + 1,
+      ((month + birthMonth) % 9) + 1,
     ].slice(0, 6);
   }
   /**
@@ -469,24 +589,24 @@ export class TransitEngine {
    */
   private generateAffirmation(transits: TransitAspect[]): string {
     const affirmations = [
-      'I trust the perfect timing of the universe.',
-      'I am aligned with my highest purpose.',
-      'I embrace change as an opportunity for growth.',
-      'I am open to the abundance flowing into my life.',
-      'I trust my intuition to guide me forward.',
-      'I radiate love and attract positive experiences.',
-      'I am exactly where I need to be in this moment.'
+      "I trust the perfect timing of the universe.",
+      "I am aligned with my highest purpose.",
+      "I embrace change as an opportunity for growth.",
+      "I am open to the abundance flowing into my life.",
+      "I trust my intuition to guide me forward.",
+      "I radiate love and attract positive experiences.",
+      "I am exactly where I need to be in this moment.",
     ];
     if (transits.length === 0) {
       return affirmations[Math.floor(Math.random() * affirmations.length)];
     }
     const majorTransit = transits[0];
-    if (majorTransit.aspect === 'conjunction') {
-      return 'I embrace new beginnings with confidence and clarity.';
-    } else if (majorTransit.aspect === 'trine') {
-      return 'I am in harmony with the natural flow of life.';
-    } else if (majorTransit.aspect === 'square') {
-      return 'I transform challenges into opportunities for growth.';
+    if (majorTransit.aspect === "conjunction") {
+      return "I embrace new beginnings with confidence and clarity.";
+    } else if (majorTransit.aspect === "trine") {
+      return "I am in harmony with the natural flow of life.";
+    } else if (majorTransit.aspect === "square") {
+      return "I transform challenges into opportunities for growth.";
     } else {
       return affirmations[Math.floor(Math.random() * affirmations.length)];
     }
@@ -495,14 +615,20 @@ export class TransitEngine {
    * Determine best time of day based on cosmic weather
    */
   private getBestTimeOfDay(dailyTransit: DailyTransit): string {
-    const times = ['Early morning', 'Late morning', 'Afternoon', 'Evening', 'Night'];
-    
-    if (dailyTransit.cosmicWeather.energy === 'high') {
-      return 'Late morning';
-    } else if (dailyTransit.cosmicWeather.energy === 'low') {
-      return 'Evening';
+    const times = [
+      "Early morning",
+      "Late morning",
+      "Afternoon",
+      "Evening",
+      "Night",
+    ];
+
+    if (dailyTransit.cosmicWeather.energy === "high") {
+      return "Late morning";
+    } else if (dailyTransit.cosmicWeather.energy === "low") {
+      return "Evening";
     } else {
-      return 'Afternoon';
+      return "Afternoon";
     }
   }
   /**
@@ -520,7 +646,7 @@ export class TransitEngine {
       saturn: (date.getFullYear() % 29) * 12.4,
       uranus: (date.getFullYear() % 84) * 4.3,
       neptune: (date.getFullYear() % 165) * 2.2,
-      pluto: (date.getFullYear() % 248) * 1.5
+      pluto: (date.getFullYear() % 248) * 1.5,
     };
     const longitude = approximatePositions[planet] || 0;
     return {
@@ -528,7 +654,7 @@ export class TransitEngine {
       longitude,
       speed: 0.5,
       sign: this.getZodiacSign(longitude),
-      retrograde: false
+      retrograde: false,
     };
   }
 }

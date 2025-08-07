@@ -5,14 +5,16 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, 
-    rgba(138, 43, 226, 0.15) 0%, 
-    rgba(75, 0, 130, 0.15) 50%, 
-    rgba(25, 25, 112, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.15) 0%,
+    rgba(75, 0, 130, 0.15) 50%,
+    rgba(25, 25, 112, 0.15) 100%
+  );
   border: 2px solid rgba(138, 43, 226, 0.3);
   border-radius: 20px;
   backdrop-filter: blur(20px);
-  box-shadow: 
+  box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 0 20px rgba(138, 43, 226, 0.2);
@@ -22,14 +24,14 @@
 }
 
 @keyframes oracleGlow {
-  0% { 
-    box-shadow: 
+  0% {
+    box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 0 20px rgba(138, 43, 226, 0.2);
   }
-  100% { 
-    box-shadow: 
+  100% {
+    box-shadow:
       0 15px 40px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       0 0 30px rgba(138, 43, 226, 0.4);
@@ -38,10 +40,12 @@
 
 .container.expanded {
   max-width: 1400px;
-  background: linear-gradient(135deg, 
-    rgba(138, 43, 226, 0.2) 0%, 
-    rgba(75, 0, 130, 0.2) 50%, 
-    rgba(25, 25, 112, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.2) 0%,
+    rgba(75, 0, 130, 0.2) 50%,
+    rgba(25, 25, 112, 0.2) 100%
+  );
 }
 
 /* Header Styles */
@@ -92,7 +96,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(255, 107, 107, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.8) 0%,
+    rgba(255, 107, 107, 0.8) 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   font-size: 1.5rem;
@@ -107,7 +115,11 @@
 
 .expandButton:hover {
   transform: scale(1.1) rotate(90deg);
-  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 1) 0%,
+    rgba(255, 107, 107, 1) 100%
+  );
   box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
 }
 
@@ -143,9 +155,19 @@
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-5px); }
-  60% { transform: translateY(-3px); }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
 }
 
 /* Expanded Content Styles */
@@ -184,21 +206,25 @@
 
 .tab.activeTab {
   color: white;
-  background: linear-gradient(135deg, 
-    rgba(138, 43, 226, 0.3) 0%, 
-    rgba(255, 107, 107, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.3) 0%,
+    rgba(255, 107, 107, 0.3) 100%
+  );
 }
 
 .tab.activeTab::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, 
-    rgba(138, 43, 226, 1) 0%, 
-    rgba(255, 107, 107, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(138, 43, 226, 1) 0%,
+    rgba(255, 107, 107, 1) 100%
+  );
 }
 
 .tabIcon {
@@ -247,9 +273,11 @@
 .affirmation {
   text-align: center;
   padding: 1.5rem;
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 107, 0.1) 0%, 
-    rgba(138, 43, 226, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.1) 0%,
+    rgba(138, 43, 226, 0.1) 100%
+  );
   border-radius: 15px;
   border: 1px solid rgba(255, 107, 107, 0.3);
 }
@@ -342,9 +370,11 @@
 }
 
 .tarotCard {
-  background: linear-gradient(135deg, 
-    rgba(138, 43, 226, 0.1) 0%, 
-    rgba(75, 0, 130, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1) 0%,
+    rgba(75, 0, 130, 0.1) 100%
+  );
   border: 2px solid rgba(138, 43, 226, 0.3);
   border-radius: 15px;
   padding: 1.5rem;
@@ -430,9 +460,11 @@
 
 .horoscopeSection {
   padding: 1.5rem;
-  background: linear-gradient(135deg, 
-    rgba(255, 215, 0, 0.1) 0%, 
-    rgba(75, 0, 130, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(75, 0, 130, 0.1) 100%
+  );
   border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 15px;
   text-align: center;
@@ -520,9 +552,11 @@
 
 .aspect {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, 
-    rgba(100, 200, 255, 0.2) 0%, 
-    rgba(138, 43, 226, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(100, 200, 255, 0.2) 0%,
+    rgba(138, 43, 226, 0.2) 100%
+  );
   border: 1px solid rgba(100, 200, 255, 0.3);
   border-radius: 20px;
   font-size: 0.9rem;
@@ -561,9 +595,11 @@
 
 .compatibilityContent {
   padding: 1.5rem;
-  background: linear-gradient(135deg, 
-    rgba(255, 107, 107, 0.1) 0%, 
-    rgba(255, 20, 147, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.1) 0%,
+    rgba(255, 20, 147, 0.1) 100%
+  );
   border: 2px solid rgba(255, 107, 107, 0.3);
   border-radius: 15px;
 }
@@ -588,7 +624,8 @@
   gap: 1rem;
 }
 
-.bestMatch, .challengingMatch {
+.bestMatch,
+.challengingMatch {
   padding: 1rem;
   border-radius: 10px;
   text-align: center;
@@ -628,21 +665,24 @@
   text-transform: capitalize;
 }
 
-.relationshipAdvice, .communicationTips {
+.relationshipAdvice,
+.communicationTips {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.relationshipTitle, .communicationTitle {
+.relationshipTitle,
+.communicationTitle {
   font-size: 1.1rem;
   font-weight: 600;
   color: rgba(255, 107, 107, 0.9);
   margin: 0 0 0.75rem 0;
 }
 
-.relationshipText, .communicationText {
+.relationshipText,
+.communicationText {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.5;
@@ -655,11 +695,17 @@
 }
 
 @keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
 }
 
-.shimmerLine, .shimmerCircle, .shimmerCard {
+.shimmerLine,
+.shimmerCircle,
+.shimmerCard {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.05) 0%,
@@ -691,9 +737,11 @@
 }
 
 .error {
-  background: linear-gradient(135deg, 
-    rgba(244, 67, 54, 0.1) 0%, 
-    rgba(156, 39, 176, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(244, 67, 54, 0.1) 0%,
+    rgba(156, 39, 176, 0.1) 100%
+  );
   border-color: rgba(244, 67, 54, 0.3);
 }
 
@@ -727,7 +775,11 @@
 }
 
 .signInButton {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.8) 0%, rgba(255, 107, 107, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.8) 0%,
+    rgba(255, 107, 107, 0.8) 100%
+  );
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: white;
   padding: 0.75rem 1.5rem;
@@ -740,7 +792,11 @@
 }
 
 .signInButton:hover {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 1) 0%, rgba(255, 107, 107, 1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 1) 0%,
+    rgba(255, 107, 107, 1) 100%
+  );
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
 }
@@ -750,32 +806,32 @@
   .header {
     padding: 1rem 1.5rem;
   }
-  
+
   .title {
     font-size: 1.5rem;
   }
-  
+
   .tabs {
     flex-direction: column;
   }
-  
+
   .tab {
     padding: 0.75rem;
   }
-  
+
   .tabContent {
     padding: 1.5rem;
     min-height: 300px;
   }
-  
+
   .tarotCards {
     grid-template-columns: 1fr;
   }
-  
+
   .matchSection {
     grid-template-columns: 1fr;
   }
-  
+
   .cosmicDetails {
     grid-template-columns: 1fr;
   }
@@ -785,23 +841,23 @@
   .container {
     margin: 0 1rem;
   }
-  
+
   .header {
     padding: 1rem;
   }
-  
+
   .title {
     font-size: 1.3rem;
   }
-  
+
   .tabContent {
     padding: 1rem;
   }
-  
+
   .compactPreview {
     padding: 1rem;
   }
-  
+
   .previewText {
     font-size: 1rem;
   }

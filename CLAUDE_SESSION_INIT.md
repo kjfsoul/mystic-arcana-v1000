@@ -5,6 +5,7 @@
 ✅ Scope: Tarot, Astrology, Virtual Readers, Personalization
 
 Required Files for Load:
+
 - `adaptive_personalization.md`
 - `technical_architecture.md`
 - `claude.md`

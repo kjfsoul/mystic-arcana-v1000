@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
         "tarot_get_reading_unauthenticated",
         undefined,
         undefined,
-        "Attempted to get reading without authentication."
+        "Attempted to get reading without authentication.",
       );
       return NextResponse.json(
         {
@@ -93,7 +93,7 @@ export async function GET(request: NextRequest) {
           error: "Authentication required",
           code: "UNAUTHENTICATED",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
     const userId = user.id;
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
     const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
     const limit = Math.min(
       100,
-      Math.max(1, parseInt(searchParams.get("limit") || "10"))
+      Math.max(1, parseInt(searchParams.get("limit") || "10")),
     );
     const sort = searchParams.get("sort") || "created_at";
     const order = searchParams.get("order") === "asc" ? "asc" : "desc";
@@ -128,7 +128,7 @@ export async function GET(request: NextRequest) {
               error: "Reading not found",
               code: "READING_NOT_FOUND",
             },
-            { status: 404 }
+            { status: 404 },
           );
         }
         console.error("Database fetch error:", error);
@@ -138,7 +138,7 @@ export async function GET(request: NextRequest) {
             error: "Failed to fetch reading",
             code: "FETCH_ERROR",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
       const formattedReading = formatReading(reading);
@@ -205,7 +205,7 @@ export async function GET(request: NextRequest) {
           code: "FETCH_ERROR",
           details: fetchError.message,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const formattedReadings = readings?.map(formatReading) || [];
@@ -234,7 +234,7 @@ export async function GET(request: NextRequest) {
         totalReadings: formattedReadings.length,
         queryId: id,
       },
-      `Fetched ${formattedReadings.length} readings.`
+      `Fetched ${formattedReadings.length} readings.`,
     );
     return NextResponse.json(response, {
       headers: {
@@ -252,7 +252,7 @@ export async function GET(request: NextRequest) {
         code: "INTERNAL_ERROR",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -313,7 +313,7 @@ export async function DELETE(request: NextRequest) {
           error: "Reading ID and User ID are required",
           code: "MISSING_PARAMETERS",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     // Delete reading (only if user owns it)
@@ -331,7 +331,7 @@ export async function DELETE(request: NextRequest) {
           error: "Failed to delete reading",
           code: "DELETE_ERROR",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     if (!data || data.length === 0) {
@@ -341,14 +341,14 @@ export async function DELETE(request: NextRequest) {
           error: "Reading not found or access denied",
           code: "NOT_FOUND_OR_FORBIDDEN",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
     logger.info(
       "tarot_reading_deleted",
       userId,
       { readingId: id },
-      `Reading ${id} deleted by user ${userId}.`
+      `Reading ${id} deleted by user ${userId}.`,
     );
     return NextResponse.json({
       success: true,
@@ -363,7 +363,7 @@ export async function DELETE(request: NextRequest) {
         error: "Internal server error",
         code: "INTERNAL_ERROR",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,35 +1,35 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext';
-import { AuthModal } from '../auth/AuthModal';
-import styles from './Header.module.css';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useAuth } from "../../contexts/AuthContext";
+import { AuthModal } from "../auth/AuthModal";
+import styles from "./Header.module.css";
 interface HeaderProps {
   onHomeClick?: () => void;
 }
 export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
   const { user, isGuest, signOut, loading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const handleSignOut = async () => {
     try {
       await signOut();
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error("Error signing out:", error);
     }
   };
   const handleShowSignIn = () => {
-    setAuthMode('signin');
+    setAuthMode("signin");
     setShowAuthModal(true);
   };
   const handleShowSignUp = () => {
-    setAuthMode('signup');
+    setAuthMode("signup");
     setShowAuthModal(true);
   };
   return (
     <>
-      <motion.header 
+      <motion.header
         className={styles.header}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ onHomeClick }) => {
             ) : (
               <div className={styles.userActions}>
                 <span className={styles.welcomeText}>
-                  Welcome, {user?.email?.split('@')[0] || 'Cosmic Traveler'}! ✨
+                  Welcome, {user?.email?.split("@")[0] || "Cosmic Traveler"}! ✨
                 </span>
                 <Link href="/profile" className={styles.profileLink}>
                   Profile

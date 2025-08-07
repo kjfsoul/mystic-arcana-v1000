@@ -244,10 +244,10 @@ import json
 def process_sources(sources):
     """Process multiple data sources and save results."""
     results = []
-    
+
     for source_type, urls in sources.items():
         print(f"Processing {source_type} sources...")
-        
+
         # Initialize appropriate scraper
         if source_type == 'tarot':
             scraper_instance = scraper.TarotScraper()
@@ -257,17 +257,17 @@ def process_sources(sources):
             scraper_instance = scraper.PsychologyScraper()
         else:
             scraper_instance = scraper.WebScraper()
-        
+
         # Process each URL
         for url in urls:
             try:
                 # Scrape data
                 scraped_data = scraper_instance.scrape_url(url)
-                
+
                 # Validate data
                 validator = data_validator.DataValidator()
                 validation_result = validator.validate_content(scraped_data)
-                
+
                 # Save valid data
                 if validation_result['is_valid']:
                     filename = f"{source_type}_{utils.generate_content_id(scraped_data)}.json"
@@ -278,14 +278,14 @@ def process_sources(sources):
                         'file': filename,
                         'quality_score': validation_result['quality_score']
                     })
-                    
+
             except Exception as e:
                 print(f"Error processing {url}: {e}")
-    
+
     # Save processing results
     with open('processing_results.json', 'w') as f:
         json.dump(results, f, indent=2)
-    
+
     return results
 
 # Example usage
@@ -349,12 +349,12 @@ from agents.data_ingestion import scraper
 try:
     web_scraper = scraper.WebScraper()
     result = web_scraper.scrape_url("https://example.com")
-    
+
     if 'error' in result:
         print(f"Scraping error: {result['error']}")
     else:
         print(f"Successfully scraped: {result['title']}")
-        
+
 except Exception as e:
     print(f"Unexpected error: {e}")
 ```

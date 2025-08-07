@@ -1,1 +1,1 @@
-export { DailyOracleDisplay } from './DailyOracleDisplay';
+export { DailyOracleDisplay } from "./DailyOracleDisplay";

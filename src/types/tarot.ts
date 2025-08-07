@@ -1,11 +1,11 @@
-import { ArcanaType, TarotCardPosition } from '@/constants/EventTypes';
+import { ArcanaType, TarotCardPosition } from "@/constants/EventTypes";
 
 export interface TarotCard {
   id: string;
   name: string;
   arcana: ArcanaType;
   arcana_type?: ArcanaType; // Compatibility alias
-  suit?: 'cups' | 'pentacles' | 'swords' | 'wands';
+  suit?: "cups" | "pentacles" | "swords" | "wands";
   number?: number;
   card_number?: number; // Compatibility alias
   frontImage: string;
@@ -24,7 +24,13 @@ export interface TarotCard {
   description: string;
   isReversed?: boolean;
 }
-export type SpreadType = 'single' | 'three-card' | 'celtic-cross' | 'horseshoe' | 'relationship' | 'custom';
+export type SpreadType =
+  | "single"
+  | "three-card"
+  | "celtic-cross"
+  | "horseshoe"
+  | "relationship"
+  | "custom";
 export interface TarotDeck {
   id: string;
   name: string;
@@ -35,7 +41,7 @@ export interface TarotDeck {
 }
 export interface TarotDeckFilter {
   id?: string;
-  type?: 'core' | 'seasonal';
+  type?: "core" | "seasonal";
   is_active?: boolean;
 }
 export interface TarotReading {

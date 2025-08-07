@@ -1,93 +1,106 @@
-import { createClient as _createClient } from '@/lib/supabase/server';
-import Logger from '@/utils/logger';
-import { NextRequest, NextResponse } from 'next/server';
+import { createClient as _createClient } from "@/lib/supabase/server";
+import Logger from "@/utils/logger";
+import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
-  const logger = new Logger('tarot-api');
+  const logger = new Logger("tarot-api");
   try {
     const body = await request.json();
-    const { 
-      count = 1, 
-      deckId = '00000000-0000-0000-0000-000000000001', 
-      spread = 'single', 
-      allowReversed = true, 
-      userId 
+    const {
+      count = 1,
+      deckId = "00000000-0000-0000-0000-000000000001",
+      spread = "single",
+      allowReversed = true,
+      userId,
     } = body;
     // Validate input parameters
     if (!Number.isInteger(count) || count < 1 || count > 10) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Invalid count parameter. Must be between 1 and 10.',
-          code: 'INVALID_COUNT'
+        {
+          success: false,
+          error: "Invalid count parameter. Must be between 1 and 10.",
+          code: "INVALID_COUNT",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    const validSpreads = ['single', 'three-card', 'celtic-cross'];
+    const validSpreads = ["single", "three-card", "celtic-cross"];
     if (!validSpreads.includes(spread)) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Invalid spread type.',
-          code: 'INVALID_SPREAD',
-          validSpreads
+        {
+          success: false,
+          error: "Invalid spread type.",
+          code: "INVALID_SPREAD",
+          validSpreads,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     // Initialize Supabase client
     const supabase = await _createClient();
     // Fetch deck data
     const { data: deckData, error: deckError } = await supabase
-      .from('decks')
-      .select('*')
-      .eq('id', deckId)
-      .eq('is_active', true)
+      .from("decks")
+      .select("*")
+      .eq("id", deckId)
+      .eq("is_active", true)
       .single();
     if (deckError || !deckData) {
-      logger.error('deck_fetch_error', userId, { deckId }, deckError || undefined, 'Failed to fetch deck data');
+      logger.error(
+        "deck_fetch_error",
+        userId,
+        { deckId },
+        deckError || undefined,
+        "Failed to fetch deck data",
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Deck not found or inactive',
-          code: 'DECK_NOT_FOUND'
+        {
+          success: false,
+          error: "Deck not found or inactive",
+          code: "DECK_NOT_FOUND",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
     // Fetch all cards for the deck
     const { data: cardData, error: cardError } = await supabase
-      .from('cards')
-      .select('*')
-      .eq('deck_id', deckId)
-      .order('card_number');
+      .from("cards")
+      .select("*")
+      .eq("deck_id", deckId)
+      .order("card_number");
     if (cardError || !cardData || cardData.length === 0) {
-      logger.error('cards_fetch_error', userId, { deckId }, cardError || undefined, 'Failed to fetch cards');
+      logger.error(
+        "cards_fetch_error",
+        userId,
+        { deckId },
+        cardError || undefined,
+        "Failed to fetch cards",
+      );
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'No cards found for deck',
-          code: 'NO_CARDS'
+        {
+          success: false,
+          error: "No cards found for deck",
+          code: "NO_CARDS",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     // Validate card count vs spread requirements
     const spreadRequirements = {
-      'single': 1,
-      'three-card': 3,
-      'celtic-cross': 10
+      single: 1,
+      "three-card": 3,
+      "celtic-cross": 10,
     };
-    const requiredCount = spreadRequirements[spread as keyof typeof spreadRequirements] || count;
+    const requiredCount =
+      spreadRequirements[spread as keyof typeof spreadRequirements] || count;
     if (cardData.length < requiredCount) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: `Insufficient cards in deck. Need ${requiredCount}, have ${cardData.length}`,
-          code: 'INSUFFICIENT_CARDS'
+          code: "INSUFFICIENT_CARDS",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     // Fisher-Yates shuffle algorithm
@@ -102,20 +115,20 @@ export async function POST(request: NextRequest) {
       // Get position name based on spread
       const getPositionName = (spread: string, index: number): string => {
         const positions: Record<string, string[]> = {
-          single: ['Present Situation'],
-          'three-card': ['Past', 'Present', 'Future'],
-          'celtic-cross': [
-            'Present Situation',
-            'Challenge/Cross',
-            'Distant Past/Foundation', 
-            'Recent Past',
-            'Possible Outcome',
-            'Immediate Future',
-            'Your Approach',
-            'External Influences',
-            'Inner Feelings',
-            'Final Outcome'
-          ]
+          single: ["Present Situation"],
+          "three-card": ["Past", "Present", "Future"],
+          "celtic-cross": [
+            "Present Situation",
+            "Challenge/Cross",
+            "Distant Past/Foundation",
+            "Recent Past",
+            "Possible Outcome",
+            "Immediate Future",
+            "Your Approach",
+            "External Influences",
+            "Inner Feelings",
+            "Final Outcome",
+          ],
         };
         const spreadPositions = positions[spread] || positions.single;
         return spreadPositions[index] || `Position ${index + 1}`;
@@ -132,9 +145,9 @@ export async function POST(request: NextRequest) {
         keywords: card.keywords,
         position: getPositionName(spread, index),
         isReversed,
-        description: card.description || '',
+        description: card.description || "",
         elemental_association: card.elemental_association,
-        astrological_association: card.astrological_association
+        astrological_association: card.astrological_association,
       };
     });
     const fetchTime = Date.now() - startTime;
@@ -153,44 +166,49 @@ export async function POST(request: NextRequest) {
           timestamp: new Date().toISOString(),
           cardCount: drawnCards.length,
           allowReversed,
-          userId: userId || null
+          userId: userId || null,
         },
         performance: {
           fetchTimeMs: fetchTime,
           cardsFetched: cardData.length,
-          cardsDrawn: drawnCards.length
-        }
-      }
+          cardsDrawn: drawnCards.length,
+        },
+      },
     };
-    logger.info('tarot_draw_success', userId, {
-      spread,
-      deckId,
-      drawId
-    }, `Drew ${drawnCards.length} cards`);
+    logger.info(
+      "tarot_draw_success",
+      userId,
+      {
+        spread,
+        deckId,
+        drawId,
+      },
+      `Drew ${drawnCards.length} cards`,
+    );
     return NextResponse.json(response, {
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'X-Draw-Time': fetchTime.toString(),
-        'X-Draw-ID': drawId,
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "X-Draw-Time": fetchTime.toString(),
+        "X-Draw-ID": drawId,
       },
     });
   } catch (error) {
     logger.error(
-      'tarot_draw_error',
+      "tarot_draw_error",
       undefined,
       {},
       error as Error,
-      'Failed to draw tarot cards.'
+      "Failed to draw tarot cards.",
     );
-    
+
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Internal server error',
-        code: 'INTERNAL_ERROR',
-        details: error instanceof Error ? error.message : 'Unknown error'
+      {
+        success: false,
+        error: "Internal server error",
+        code: "INTERNAL_ERROR",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

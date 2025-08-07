@@ -6,16 +6,15 @@
 - Moon: Libra, approx. 0° (ingress at 12:45AM UTC), Waxing Crescent phase (20.8% illuminated), source: The Nine Planets[^1_1], TheSkyLive[^1_2], Astrosofa[^1_3], Astro-Seek[^1_4]
 - Sun: Leo, degree not specified (Leo by tropical zodiac), source: Ask-Oracle[^1_5], Astrosofa[^1_3]
 - Aspects:
-    - Moon enters Libra: 12:45AM UTC (Astrosofa[^1_3])
-    - Moon trine Pluto: prominent (deep energy, transformative)[^1_6]
-    - Chiron retrograde begins: All day (spiritual healing, introspection)[^1_7]
+  - Moon enters Libra: 12:45AM UTC (Astrosofa[^1_3])
+  - Moon trine Pluto: prominent (deep energy, transformative)[^1_6]
+  - Chiron retrograde begins: All day (spiritual healing, introspection)[^1_7]
 - Special:
-    - No eclipses or lunations today (last was Mar 29, 2025; next not today)[^1_8][^1_9]
-    - Chiron station/retrograde begins[^1_7]
+  - No eclipses or lunations today (last was Mar 29, 2025; next not today)[^1_8][^1_9]
+  - Chiron station/retrograde begins[^1_7]
 - Numerology: 2025-07-29 → 2+0+2+5+0+7+2+9=27 → 2+7=9 (life path)[^1_5]
 - Tarot: Major Arcana IX – The Hermit (RWS; numerology/energy correlation)[^1_10]
 - Citations: [^1_1] https://nineplanets.org/moon/phase/7-29-2025/ [^1_5] https://www.ask-oracle.com/birthday/2025/07/29/ [^1_7] https://www.yourtango.com/2025388397/zodiac-signs-abundance-luck-july-29-2025 [^1_8] https://mooncalendar.astro-seek.com/solar-and-lunar-eclipses-2025 [^1_6] https://www.yourtango.com/2025387386/zodiac-signs-powerful-breakthrough-july-29-2025 [^1_9] https://www.almanac.com/eclipses [^1_10] https://www.astronumero.org/numerology-tarot-cards/ [^1_2] https://theskylive.com/moon/2025-07-29 [^1_3] https://www.astrosofa.com/horoscope/aspects/2025/7/29 [^1_4] https://mooncalendar.astro-seek.com/moon-phase-day-29-july-2025
-
 
 ## COSMIC CONTENT BATCH BLOCK
 
@@ -151,7 +150,7 @@ Let the night draw softly around you; know you are both journeyer and guide. Sop
 1. SDXL | Lone lantern under crescent moon, blue mist, wildflowers, 16:9
 2. SDXL | Libra scales balancing luminous orbs, cosmic backdrop, 1:1
 3. SDXL | Silhouette walking moonlit path, Hermit staff alight, golden/indigo, 4:5
-Variance: No faces, no distortion, batchable, overlay if: “Balance is a sacred journey.” If fallback, Sophia’s classic blog inspiration.
+   Variance: No faces, no distortion, batchable, overlay if: “Balance is a sacred journey.” If fallback, Sophia’s classic blog inspiration.
 
 ## BATCH JSON BLOCK
 
@@ -168,18 +167,42 @@ Variance: No faces, no distortion, batchable, overlay if: “Balance is a sacred
       "VOC": "not available",
       "source": "NinePlanets, TheSkyLive, Astrosofa, Astro-Seek"
     },
-    "sun": { "sign": "Leo", "degree": "not specified", "source": "Ask-Oracle, Astrosofa" },
+    "sun": {
+      "sign": "Leo",
+      "degree": "not specified",
+      "source": "Ask-Oracle, Astrosofa"
+    },
     "aspects": [
-      { "aspect": "Moon enters Libra", "utc": "12:45AM", "source": "Astrosofa" },
-      { "aspect": "Moon trine Pluto", "utc": "not specified", "source": "YourTango" },
-      { "aspect": "Chiron retrograde begins", "utc": "all day", "source": "YourTango" }
+      {
+        "aspect": "Moon enters Libra",
+        "utc": "12:45AM",
+        "source": "Astrosofa"
+      },
+      {
+        "aspect": "Moon trine Pluto",
+        "utc": "not specified",
+        "source": "YourTango"
+      },
+      {
+        "aspect": "Chiron retrograde begins",
+        "utc": "all day",
+        "source": "YourTango"
+      }
     ],
     "special": [
       { "event": "No eclipses", "source": "Astro-Seek, Almanac" },
       { "event": "Chiron station/retrograde", "source": "YourTango" }
     ],
-    "numerology": { "date": "20250729", "calculation": "2+0+2+5+0+7+2+9=27 → 2+7=9", "result": "9" },
-    "tarot": { "card": "The Hermit (IX)", "deck": "RWS", "source": "Astronumero" }
+    "numerology": {
+      "date": "20250729",
+      "calculation": "2+0+2+5+0+7+2+9=27 → 2+7=9",
+      "result": "9"
+    },
+    "tarot": {
+      "card": "The Hermit (IX)",
+      "deck": "RWS",
+      "source": "Astronumero"
+    }
   },
   "social_media": [
     {
@@ -275,7 +298,11 @@ Variance: No faces, no distortion, batchable, overlay if: “Balance is a sacred
       "video_prompt": "",
       "justification": "Refined theme suits LinkedIn’s professional/visual context.",
       "kpi_cta": "Link clicks, post interactions, toolkit downloads.",
-      "hashtags": ["#ConsciousLeadership", "#AstroBusiness", "#CosmicAlignment"],
+      "hashtags": [
+        "#ConsciousLeadership",
+        "#AstroBusiness",
+        "#CosmicAlignment"
+      ],
       "post_time": "8:30am local"
     }
   ],
@@ -346,4 +373,3 @@ If not, review and edit before posting.
 [^1_19]: https://www.tarotteachings.com/meaning-of-eight.html
 
 [^1_20]: https://www.yourtango.com/2025388539/zodiac-signs-tarot-horoscope-july-29-2025
-

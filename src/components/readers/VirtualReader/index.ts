@@ -1,1 +1,1 @@
-export { VirtualReader } from './VirtualReader';
+export { VirtualReader } from "./VirtualReader";

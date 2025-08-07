@@ -26,23 +26,31 @@
         "dockerAlternative": "modelcontextprotocol/filesystem-server:latest"
       },
       "git": {
-        "status": "BROKEN", 
+        "status": "BROKEN",
         "command": "mcp-server-git",
         "error": "Command not found in PATH",
         "lastWorking": null,
         "repairAttempts": 0,
         "priority": "HIGH",
-        "capabilities": ["git_operations", "commit_history", "branch_management"],
+        "capabilities": [
+          "git_operations",
+          "commit_history",
+          "branch_management"
+        ],
         "dockerAlternative": "modelcontextprotocol/git-server:latest"
       },
       "memory": {
         "status": "BROKEN",
-        "command": "mcp-server-memory", 
+        "command": "mcp-server-memory",
         "error": "Command not found in PATH",
         "lastWorking": null,
         "repairAttempts": 0,
         "priority": "MEDIUM",
-        "capabilities": ["persistent_memory", "context_storage", "session_management"],
+        "capabilities": [
+          "persistent_memory",
+          "context_storage",
+          "session_management"
+        ],
         "dockerAlternative": "modelcontextprotocol/memory-server:latest"
       }
     },
@@ -63,7 +71,7 @@
   },
   "registeredAgents": {
     "status": "ACTIVE",
-    "lastCheck": "2025-01-14T12:00:00Z", 
+    "lastCheck": "2025-01-14T12:00:00Z",
     "totalAgents": 9,
     "activeAgents": 6,
     "completedAgents": 1,
@@ -75,34 +83,50 @@
         "type": "tarot-astrology",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["tarot_reading", "astrology_chart_interpretation", "daily_horoscope"],
+        "capabilities": [
+          "tarot_reading",
+          "astrology_chart_interpretation",
+          "daily_horoscope"
+        ],
         "issues": []
       },
       "birthdayGen": {
         "id": "birthday-gen-agent",
-        "status": "ACTIVE", 
+        "status": "ACTIVE",
         "type": "birthday-astrology",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["birthday_reading", "solar_return_chart", "yearly_forecast"],
+        "capabilities": [
+          "birthday_reading",
+          "solar_return_chart",
+          "yearly_forecast"
+        ],
         "issues": []
       },
       "edmShuffle": {
         "id": "edm-shuffle-mystic",
         "status": "ACTIVE",
-        "type": "music-spirituality", 
+        "type": "music-spirituality",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["music_vibe_reading", "festival_astrology", "crowd_energy_prediction"],
+        "capabilities": [
+          "music_vibe_reading",
+          "festival_astrology",
+          "crowd_energy_prediction"
+        ],
         "issues": []
       },
       "animatedBackground": {
         "id": "animated-background-agent",
         "status": "ACTIVE",
         "type": "visual-effects",
-        "lastActivity": "2025-01-08T00:00:00Z", 
+        "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["cosmic_weather", "shader_compilation", "particle_systems"],
+        "capabilities": [
+          "cosmic_weather",
+          "shader_compilation",
+          "particle_systems"
+        ],
         "issues": []
       },
       "accessibilityChecker": {
@@ -110,8 +134,12 @@
         "status": "ACTIVE",
         "type": "compliance-testing",
         "lastActivity": "2025-01-08T00:00:00Z",
-        "health": "GOOD", 
-        "capabilities": ["wcag_auditing", "lighthouse_testing", "aria_validation"],
+        "health": "GOOD",
+        "capabilities": [
+          "wcag_auditing",
+          "lighthouse_testing",
+          "aria_validation"
+        ],
         "issues": []
       },
       "tarotUxTester": {
@@ -120,16 +148,24 @@
         "type": "ab-testing",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["spread_optimization", "interaction_tracking", "conversion_analysis"],
+        "capabilities": [
+          "spread_optimization",
+          "interaction_tracking",
+          "conversion_analysis"
+        ],
         "issues": []
       },
       "personaAnimator": {
-        "id": "persona-animation-engine", 
+        "id": "persona-animation-engine",
         "status": "ACTIVE",
         "type": "avatar-animation",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["emotion_synthesis", "gesture_generation", "personality_evolution"],
+        "capabilities": [
+          "emotion_synthesis",
+          "gesture_generation",
+          "personality_evolution"
+        ],
         "issues": []
       },
       "competitiveAnalyst": {
@@ -138,16 +174,24 @@
         "type": "research-analysis",
         "lastActivity": "2025-01-08T00:00:00Z",
         "health": "GOOD",
-        "capabilities": ["competitor_monitoring", "ux_benchmarking", "trend_analysis"],
+        "capabilities": [
+          "competitor_monitoring",
+          "ux_benchmarking",
+          "trend_analysis"
+        ],
         "issues": []
       },
       "astronomicalVisualization": {
         "id": "astronomical-visualization-agent",
         "status": "COMPLETED",
-        "type": "webgl-rendering", 
+        "type": "webgl-rendering",
         "lastActivity": "2024-12-19T20:30:00Z",
         "health": "EXCELLENT",
-        "capabilities": ["webgl2_star_rendering", "galaxy_background_generation", "performance_optimization"],
+        "capabilities": [
+          "webgl2_star_rendering",
+          "galaxy_background_generation",
+          "performance_optimization"
+        ],
         "achievements": {
           "stars_rendered": 100000,
           "target_fps": 60,
@@ -161,7 +205,7 @@
   "systemHealth": {
     "overall": "DEGRADED",
     "mcpConnectivity": "BROKEN",
-    "agentRegistry": "HEALTHY", 
+    "agentRegistry": "HEALTHY",
     "dockerAvailability": "UNKNOWN",
     "criticalIssues": [
       {
@@ -175,7 +219,7 @@
     "warnings": [
       {
         "id": "agent-activity-stale",
-        "severity": "MEDIUM", 
+        "severity": "MEDIUM",
         "description": "Most agents show last activity from 2025-01-08",
         "impact": "Agents may not be actively monitoring or responding",
         "recommendedAction": "Trigger agent health checks and activity updates"
@@ -192,7 +236,7 @@
       },
       {
         "action": "Install fallback MCP servers via npm",
-        "priority": "HIGH", 
+        "priority": "HIGH",
         "assignee": "Claude Code",
         "command": "npm install -g @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-git @modelcontextprotocol/server-memory"
       },
@@ -211,7 +255,7 @@
         "deliverable": "docker-compose.mcp.yml"
       },
       {
-        "action": "Implement agent health check system", 
+        "action": "Implement agent health check system",
         "priority": "MEDIUM",
         "assignee": "Claude Code",
         "deliverable": "scripts/agent-health-check.js"
@@ -227,8 +271,12 @@
       {
         "action": "Develop specialized MCP servers for Mystic Arcana",
         "priority": "LOW",
-        "assignee": "Claude Code", 
-        "deliverables": ["mcp-tarot-server", "mcp-astrology-server", "mcp-spiritual-content-server"]
+        "assignee": "Claude Code",
+        "deliverables": [
+          "mcp-tarot-server",
+          "mcp-astrology-server",
+          "mcp-spiritual-content-server"
+        ]
       },
       {
         "action": "Create agent orchestration system",

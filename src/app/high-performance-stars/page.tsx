@@ -1,11 +1,11 @@
-'use client';
- 
-import React, { useState, useCallback } from 'react';
-import { HighPerformanceStarField } from '../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField';
-import { AstronomicalSettings } from '../../components/settings/AstronomicalSettings/AstronomicalSettings';
-import { RenderConfig, CalculationConfig } from '../../types/astronomical';
-import { Star } from '../../lib/astronomy/types';
-import styles from './page.module.css';
+"use client";
+
+import React, { useState, useCallback } from "react";
+import { HighPerformanceStarField } from "../../components/astronomical/HighPerformanceStarField/HighPerformanceStarField";
+import { AstronomicalSettings } from "../../components/settings/AstronomicalSettings/AstronomicalSettings";
+import { RenderConfig, CalculationConfig } from "../../types/astronomical";
+import { Star } from "../../lib/astronomy/types";
+import styles from "./page.module.css";
 interface PerformanceStats {
   totalStars: number;
   visibleStars: number;
@@ -14,7 +14,7 @@ interface PerformanceStats {
 }
 /**
  * High-Performance Star Rendering Demo
- * 
+ *
  * Showcases the WebGL2 renderer with 100,000+ real stars
  * using Claude Opus 4's Swiss Ephemeris calculations.
  */
@@ -26,49 +26,56 @@ export default function HighPerformanceStarsPage() {
     totalStars: 0,
     visibleStars: 0,
     fps: 0,
-    renderTime: 0
+    renderTime: 0,
   });
   const [renderConfig, setRenderConfig] = useState<RenderConfig>({
-    starCatalog: 'hipparcos',
+    starCatalog: "hipparcos",
     maxStars: 100000,
     minMagnitude: 6.5,
     showConstellations: false,
     showPlanets: true,
     showDeepSky: false,
-    coordinateSystem: 'horizontal',
-    projection: 'stereographic'
+    coordinateSystem: "horizontal",
+    projection: "stereographic",
   });
-  const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>({
-    ephemerisAccuracy: 'high',
-    updateInterval: 1000,
-    precessionCorrection: true,
-    nutationCorrection: true,
-    aberrationCorrection: true,
-    refractionCorrection: true
-  });
- 
-  const handleSettingsChange = useCallback((settings: {
-    useRealStars: boolean;
-    renderConfig: RenderConfig;
-    calculationConfig: CalculationConfig;
-  }) => {
-    setUseRealStars(settings.useRealStars);
-    setRenderConfig(settings.renderConfig);
-    setCalculationConfig(settings.calculationConfig);
-  }, []);
- 
+  const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>(
+    {
+      ephemerisAccuracy: "high",
+      updateInterval: 1000,
+      precessionCorrection: true,
+      nutationCorrection: true,
+      aberrationCorrection: true,
+      refractionCorrection: true,
+    },
+  );
+
+  const handleSettingsChange = useCallback(
+    (settings: {
+      useRealStars: boolean;
+      renderConfig: RenderConfig;
+      calculationConfig: CalculationConfig;
+    }) => {
+      setUseRealStars(settings.useRealStars);
+      setRenderConfig(settings.renderConfig);
+      setCalculationConfig(settings.calculationConfig);
+    },
+    [],
+  );
+
   const handleStarClick = useCallback((star: Star) => {
     setSelectedStar(star);
   }, []);
- 
+
   const handlePerformanceUpdate = useCallback((stats: PerformanceStats) => {
     setPerformanceStats(stats);
   }, []);
-  const getPerformanceRating = (fps: number): { rating: string; color: string } => {
-    if (fps >= 55) return { rating: 'Excellent', color: '#00FF00' };
-    if (fps >= 45) return { rating: 'Good', color: '#FFD700' };
-    if (fps >= 30) return { rating: 'Fair', color: '#FFA500' };
-    return { rating: 'Poor', color: '#FF6B6B' };
+  const getPerformanceRating = (
+    fps: number,
+  ): { rating: string; color: string } => {
+    if (fps >= 55) return { rating: "Excellent", color: "#00FF00" };
+    if (fps >= 45) return { rating: "Good", color: "#FFD700" };
+    if (fps >= 30) return { rating: "Fair", color: "#FFA500" };
+    return { rating: "Poor", color: "#FF6B6B" };
   };
   const performanceRating = getPerformanceRating(performanceStats.fps);
   return (
@@ -77,20 +84,24 @@ export default function HighPerformanceStarsPage() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <h1>🚀 High-Performance Star Renderer</h1>
-          <p>WebGL2 rendering of 100,000+ real stars with Swiss Ephemeris precision</p>
+          <p>
+            WebGL2 rendering of 100,000+ real stars with Swiss Ephemeris
+            precision
+          </p>
           <div className={styles.headerControls}>
             <button
               onClick={() => setShowSettings(!showSettings)}
               className={styles.settingsButton}
             >
-              ⚙️ {showSettings ? 'Hide' : 'Show'} Settings
+              ⚙️ {showSettings ? "Hide" : "Show"} Settings
             </button>
             <div className={styles.performanceIndicator}>
               <span
                 className={styles.fpsIndicator}
                 style={{ color: performanceRating.color }}
               >
-                {performanceStats.fps.toFixed(1)} FPS - {performanceRating.rating}
+                {performanceStats.fps.toFixed(1)} FPS -{" "}
+                {performanceRating.rating}
               </span>
             </div>
           </div>
@@ -154,7 +165,11 @@ export default function HighPerformanceStarsPage() {
             <div className={styles.configGrid}>
               <div className={styles.configItem}>
                 <strong>Mode:</strong>
-                <span>{useRealStars ? '🔬 Real Astronomical Data' : '🎨 Procedural Stars'}</span>
+                <span>
+                  {useRealStars
+                    ? "🔬 Real Astronomical Data"
+                    : "🎨 Procedural Stars"}
+                </span>
               </div>
               {useRealStars && (
                 <>
@@ -172,7 +187,9 @@ export default function HighPerformanceStarsPage() {
                   </div>
                   <div className={styles.configItem}>
                     <strong>Accuracy:</strong>
-                    <span>{calculationConfig.ephemerisAccuracy.toUpperCase()}</span>
+                    <span>
+                      {calculationConfig.ephemerisAccuracy.toUpperCase()}
+                    </span>
                   </div>
                 </>
               )}
@@ -194,7 +211,7 @@ export default function HighPerformanceStarsPage() {
               </div>
               <div className={styles.starItem}>
                 <strong>Spectral Class:</strong>
-                <span>{selectedStar.spectralType || 'Unknown'}</span>
+                <span>{selectedStar.spectralType || "Unknown"}</span>
               </div>
               <div className={styles.starItem}>
                 <strong>Constellation:</strong>
@@ -202,11 +219,18 @@ export default function HighPerformanceStarsPage() {
               </div>
               <div className={styles.starItem}>
                 <strong>RA:</strong>
-                <span>{(selectedStar.ra ?? selectedStar.coordinates.ra).toFixed(4)}°</span>
+                <span>
+                  {(selectedStar.ra ?? selectedStar.coordinates.ra).toFixed(4)}°
+                </span>
               </div>
               <div className={styles.starItem}>
                 <strong>Dec:</strong>
-                <span>{(selectedStar.dec ?? selectedStar.coordinates.dec).toFixed(4)}°</span>
+                <span>
+                  {(selectedStar.dec ?? selectedStar.coordinates.dec).toFixed(
+                    4,
+                  )}
+                  °
+                </span>
               </div>
               {selectedStar.colorIndex !== undefined && (
                 <div className={styles.starItem}>
@@ -272,13 +296,12 @@ export default function HighPerformanceStarsPage() {
           <p>
             <strong>Status:</strong>
             {useRealStars
-              ? ' High-performance rendering with real astronomical data from Claude Opus 4\'s Swiss Ephemeris bridge.'
-              : ' High-performance rendering with procedural star generation for testing.'
-            }
+              ? " High-performance rendering with real astronomical data from Claude Opus 4's Swiss Ephemeris bridge."
+              : " High-performance rendering with procedural star generation for testing."}
           </p>
           <p className={styles.disclaimer}>
-            <strong>Performance:</strong> Optimized for modern GPUs.
-            Performance may vary based on hardware capabilities and star count settings.
+            <strong>Performance:</strong> Optimized for modern GPUs. Performance
+            may vary based on hardware capabilities and star count settings.
           </p>
         </div>
       </footer>

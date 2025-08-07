@@ -5,7 +5,11 @@
   height: 100%;
   padding: 24px;
   overflow-y: auto;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 107, 157, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.05),
+    rgba(255, 107, 157, 0.05)
+  );
   display: flex;
   flex-direction: column;
 }
@@ -64,7 +68,11 @@
 
 .readerCard.selected {
   border-color: #ffd700;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 157, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 107, 157, 0.1)
+  );
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
@@ -256,7 +264,11 @@
 }
 
 .userMessage .messageContent {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 157, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 107, 157, 0.1)
+  );
   border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
@@ -335,8 +347,12 @@
   animation: typingBounce 1.4s infinite ease-in-out;
 }
 
-.typingDots span:nth-child(1) { animation-delay: -0.32s; }
-.typingDots span:nth-child(2) { animation-delay: -0.16s; }
+.typingDots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.typingDots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
 
 /* Quick Questions */
 .quickQuestions {
@@ -415,7 +431,11 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 157, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 107, 157, 0.2)
+  );
   border: 1px solid rgba(255, 215, 0, 0.3);
   color: #ffd700;
   font-size: 1.2rem;
@@ -449,21 +469,24 @@
 
 /* Animations */
 @keyframes auralGlow {
-  0%, 100% { 
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.6;
   }
-  50% { 
+  50% {
     transform: translate(-50%, -50%) scale(1.2);
     opacity: 0.9;
   }
 }
 
 @keyframes typingBounce {
-  0%, 80%, 100% { 
+  0%,
+  80%,
+  100% {
     transform: scale(0);
   }
-  40% { 
+  40% {
     transform: scale(1);
   }
 }
@@ -473,19 +496,19 @@
   .container {
     padding: 16px;
   }
-  
+
   .readerGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .readerCard {
     padding: 10px;
   }
-  
+
   .messageList {
     max-height: 250px;
   }
-  
+
   .messageContent {
     max-width: 90%;
   }
@@ -498,7 +521,7 @@
   .typingDots span {
     animation: none;
   }
-  
+
   .readerCard:hover,
   .sendButton:hover {
     transform: none;

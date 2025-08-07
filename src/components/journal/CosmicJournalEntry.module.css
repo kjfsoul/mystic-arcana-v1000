@@ -25,7 +25,7 @@
   );
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 1.5rem;
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(139, 92, 246, 0.3),
     inset 0 0 30px rgba(139, 92, 246, 0.1);
 }
@@ -342,15 +342,15 @@
     max-width: 100%;
     margin: 0.5rem;
   }
-  
+
   .header {
     padding: 1.5rem;
   }
-  
+
   .content {
     padding: 1.5rem;
   }
-  
+
   .title {
     font-size: 1.25rem;
   }

@@ -1,10 +1,10 @@
-B E N E B E L L  W E N
+B E N E B E L L W E N
 
 1
 
 The Ast rolo gi cal Mo on
 
-Your  Moon Sign
+Your Moon Sign
 
 ................................
 
@@ -52,7 +52,7 @@ A Taur usMoon
 
 9
 
-A Gem i ni  Moon
+A Gem i ni Moon
 
 ................................
 
@@ -206,7 +206,7 @@ A Pis ces M oon
 
 21
 
-The Sect  Plac em ent  of  Your  Moon Sign
+The Sect Plac em ent of Your Moon Sign
 
 ................................
 
@@ -218,7 +218,7 @@ The Sect  Plac em ent  of  Your  Moon Sign
 
 22
 
-A Di ur nal  Moon
+A Di ur nal Moon
 
 ................................
 
@@ -248,7 +248,7 @@ A Noct ur nal Moon
 
 23
 
-House  Domi ci le of Your Moon
+House Domi ci le of Your Moon
 
 ................................
 
@@ -472,7 +472,7 @@ Mooni n House 12
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -480,7 +480,7 @@ Mooni n House 12
 
 2
 
-Pla net ar y Conj unct i ons with Your  Moon
+Pla net ar y Conj unct i ons with Your Moon
 
 ................................
 
@@ -492,7 +492,7 @@ Pla net ar y Conj unct i ons with Your  Moon
 
 31
 
-Moon Conj unct  Sun
+Moon Conj unct Sun
 
 ................................
 
@@ -506,7 +506,7 @@ Moon Conj unct  Sun
 
 31
 
-Moon Conj unct  Ascendant
+Moon Conj unct Ascendant
 
 ................................
 
@@ -550,7 +550,7 @@ nct Me rcur y
 
 33
 
-Moon Conj unct  Venus
+Moon Conj unct Venus
 
 ................................
 
@@ -594,7 +594,7 @@ Jupit er
 
 34
 
-Moon Conj unct  Sat ur n
+Moon Conj unct Sat ur n
 
 ................................
 
@@ -608,7 +608,7 @@ Moon Conj unct  Sat ur n
 
 35
 
-Moon Conj unct  Uranus
+Moon Conj unct Uranus
 
 ................................
 
@@ -622,7 +622,7 @@ Moon Conj unct  Uranus
 
 35
 
-Moon Conj unct  Nept une
+Moon Conj unct Nept une
 
 ................................
 
@@ -636,7 +636,7 @@ Moon Conj unct  Nept une
 
 35
 
-Moon Conj unct  Pl ut o
+Moon Conj unct Pl ut o
 
 ................................
 
@@ -650,7 +650,7 @@ Moon Conj unct  Pl ut o
 
 36
 
-Moon Conj unct  Chi r on
+Moon Conj unct Chi r on
 
 ................................
 
@@ -664,7 +664,7 @@ Moon Conj unct  Chi r on
 
 36
 
-Moon Conj unct  Juno
+Moon Conj unct Juno
 
 ................................
 
@@ -678,7 +678,7 @@ Moon Conj unct  Juno
 
 37
 
-Moon Conj unct  Hygei a
+Moon Conj unct Hygei a
 
 ................................
 
@@ -692,7 +692,7 @@ Moon Conj unct  Hygei a
 
 37
 
-Moon Conj unct  Vest a
+Moon Conj unct Vest a
 
 ................................
 
@@ -706,7 +706,7 @@ Moon Conj unct  Vest a
 
 37
 
-Moon Conj unct  Cer es
+Moon Conj unct Cer es
 
 ................................
 
@@ -720,7 +720,7 @@ Moon Conj unct  Cer es
 
 38
 
-Moon Conj unct  Nort her n Node
+Moon Conj unct Nort her n Node
 
 ................................
 
@@ -734,7 +734,7 @@ Moon Conj unct  Nort her n Node
 
 38
 
-Moon at t he Anar et i c Degree  29°
+Moon at t he Anar et i c Degree 29°
 
 ................................
 
@@ -764,7 +764,7 @@ on Si gn Decan Rul er
 
 39
 
-The Suni s Your  Lunar  Decan Ruler
+The Suni s Your Lunar Decan Ruler
 
 ................................
 
@@ -776,7 +776,7 @@ The Suni s Your  Lunar  Decan Ruler
 
 40
 
-The Moon i s Your  Lunar  Dec an Rul er
+The Moon i s Your Lunar Dec an Rul er
 
 ................................
 
@@ -788,7 +788,7 @@ The Moon i s Your  Lunar  Dec an Rul er
 
 40
 
-Me rcur yi s Your  Lunar  Decan Ruler
+Me rcur yi s Your Lunar Decan Ruler
 
 ................................
 
@@ -800,7 +800,7 @@ Me rcur yi s Your  Lunar  Decan Ruler
 
 40
 
-Venus  is Your Lunar  Dec an Rul er
+Venus is Your Lunar Dec an Rul er
 
 ................................
 
@@ -812,7 +812,7 @@ Venus  is Your Lunar  Dec an Rul er
 
 41
 
-Ma rs is Your Lunar  Dec anRul er
+Ma rs is Your Lunar Dec anRul er
 
 ................................
 
@@ -828,7 +828,7 @@ Ma rs is Your Lunar  Dec anRul er
 
 Ju
 
-pit er i s Your  Lunar  Decan Rul er
+pit er i s Your Lunar Decan Rul er
 
 ................................
 
@@ -852,7 +852,7 @@ Sat urn is Your Lunar Dec an Rul er
 
 42
 
-Moon Phas eat  Bi rt h
+Moon Phas eat Bi rt h
 
 ................................
 
@@ -896,7 +896,7 @@ Wa xing Cres cent Moon
 
 44
 
-Fir st  Quar ter Moon
+Fir st Quar ter Moon
 
 ................................
 
@@ -954,7 +954,7 @@ Wa ning Gi bbous( Di ssem inati ng) Moon
 
 45
 
-Last  Quart er ( or Thir d Quart er)  Moon
+Last Quart er ( or Thir d Quart er) Moon
 
 ................................
 
@@ -966,7 +966,7 @@ Last  Quart er ( or Thir d Quart er)  Moon
 
 45
 
-Wa ning Cres cent ( Balsam ic)  Moon
+Wa ning Cres cent ( Balsam ic) Moon
 
 ................................
 
@@ -1020,7 +1020,7 @@ Wa ning Cres cent ( Balsam ic)  Moon
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1030,9 +1030,9 @@ Wa ning Cres cent ( Balsam ic)  Moon
 
 You r M oo n Sig n
 
-On it s orbit around the e arth, the moon will  trave l through all  twelve sign s in approxim ately 28
+On it s orbit around the e arth, the moon will trave l through all twelve sign s in approxim ately 28
 
-days. Your moon sign is  which zodia c sign the moon was in on the d ay of your birth during it s
+days. Your moon sign is which zodia c sign the moon was in on the d ay of your birth during it s
 
 routine 28
 
@@ -1048,15 +1048,15 @@ The sun sign is central to who you strive to be and how you are perceived, where
 
 sign is who you reall y ar e at your co re
 
-being very good at, thou gh it  takes conscious wo rk on your p art to manif est these latent tal ents
+being very good at, thou gh it takes conscious wo rk on your p art to manif est these latent tal ents
 
 int o your physi cal world.
 
 When consi dering the influences of your biol ogical mot her on your nature,
 
-we will  look to the
+we will look to the
 
-li kely to exhibi t. The mo on chang es signs  ev ery 2  or so d ays, which  is wh y two people  with the
+li kely to exhibi t. The mo on chang es signs ev ery 2 or so d ays, which is wh y two people with the
 
 same sun sign can st il l be so different. Th e m
 
@@ -1092,7 +1092,7 @@ Pi sces
 
 nthechart. The
 
-in ne r rin g wit h the sec tors numbe red  1 throu gh 1 2 will  give you the  house numbe r.  Note
+in ne r rin g wit h the sec tors numbe red 1 throu gh 1 2 will give you the house numbe r. Note
 
 xä
 
@@ -1118,9 +1118,9 @@ is moon sign is S agitt arius (
 
 rt. H ere, inadd itiontoid en ti fyin gthezod ia csignan d housenumbe r,
 
-also know what other  ast rological feature is  close b y.  This hand b ook will  only co ver
+also know what other ast rological feature is close b y. This hand b ook will only co ver
 
-conj uncti ons,  or fea tures close b y to the  moon,  wit hin 10
+conj uncti ons, or fea tures close b y to the moon, wit hin 10
 
 °
 
@@ -1168,7 +1168,7 @@ of it .
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1176,7 +1176,7 @@ of it .
 
 4
 
-M oon in  S agittarius inH ouse 6
+M oon in S agittarius inH ouse 6
 
 **T**
 
@@ -1220,7 +1220,7 @@ M oon in  S agittarius inH ouse 6
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1246,7 +1246,7 @@ in House
 
 10.
 
-Next, consi der an y planetary  conjunctio ns, or other
+Next, consi der an y planetary conjunctio ns, or other
 
 astrologi cal featu res with in 10° of the moon. Note that the Mc
 
@@ -1258,7 +1258,7 @@ indi cati ons when the moon is anareti c, so if your
 
 moon sign is
 
-also at 29°, then re ad that  entry in t his m anual.
+also at 29°, then re ad that entry in t his m anual.
 
 **T**
 
@@ -1302,7 +1302,7 @@ also at 29°, then re ad that  entry in t his m anual.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1312,13 +1312,13 @@ also at 29°, then re ad that  entry in t his m anual.
 
 -
 
-ring, si nce the most  outer  ring i s subdi vided int o three
+ring, si nce the most outer ring i s subdi vided int o three
 
-n is Gemi ni and  his moon is in House
+n is Gemi ni and his moon is in House
 
 8.AlsonotehowheandF ridaKahlobothhavediur nalmoons .B ecausethereisonlya6°differ ence
 
-between his moon (at 14 °) and C eres (at 8 °), his m oon is  in conjunct wit h Ceres.
+between his moon (at 14 °) and C eres (at 8 °), his m oon is in conjunct wit h Ceres.
 
 The outer ring subdi vide d int o thi rds
 
@@ -1392,7 +1392,7 @@ and the sun betwe en
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1408,7 +1408,7 @@ in 10° (a conjunction). Finally, not e
 
 the decan ruler ov er he r moon.
 
-Here, h er moon sign is P isces in House 6, whi ch makes it  a nocturn al moon. Note also how sh e
+Here, h er moon sign is P isces in House 6, whi ch makes it a nocturn al moon. Note also how sh e
 
 hasanAn areti cMoonli k eFrid aKahlo.H ermoon i sinconjunctwithbothMarsandS aturn,so
 
@@ -1458,7 +1458,7 @@ over her moon.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1470,21 +1470,21 @@ An Ari es M o o n
 
 á
 
-ope nly acknowled ge.  An Arie s moon
+ope nly acknowled ge. An Arie s moon
 
-can  reveal an  in ne r yea rni ng to be the b est,  esp ecia lly
+can reveal an in ne r yea rni ng to be the b est, esp ecia lly
 
-as i t p ertai ns to a cademic a nd  p rofessi onal success.
+as i t p ertai ns to a cademic a nd p rofessi onal success.
 
-Those wit h an  Arie s moon may b e secret ly comp et it ive,  though outward ly,  would  den y that
+Those wit h an Arie s moon may b e secret ly comp et it ive, though outward ly, would den y that
 
 á
 
 d d lechild , ortheyounge rchild wit h
 
-an  Arie s moon te nd to harb or subconscious imp ulses to outp erform thei r sib lings b ecause
+an Arie s moon te nd to harb or subconscious imp ulses to outp erform thei r sib lings b ecause
 
-subconsciously,  they b eli eve d oing so is what will win  the most aff ect ions of M other or
+subconsciously, they b eli eve d oing so is what will win the most aff ect ions of M other or
 
 ä á
 
@@ -1492,27 +1492,27 @@ subconsciously,  they b eli eve d oing so is what will win  the most aff ect ion
 
 á
 
-sib lings over them.  Theeld est  child  in a family wit h an Arie s moon, onthe other han d, te nds
+sib lings over them. Theeld est child in a family wit h an Arie s moon, onthe other han d, te nds
 
-to shoulde r an  en o
+to shoulde r an en o
 
-rmo us amount  of  resp onsib ili ty wit hout an yone fr om the famil y asking
+rmo us amount of resp onsib ili ty wit hout an yone fr om the famil y asking
 
-them to,  b ecause  these  in d ivid uals tend  to feel a p rofound  moral obli g at ion to carry on t he
+them to, b ecause these in d ivid uals tend to feel a p rofound moral obli g at ion to carry on t he
 
 ò á ó
 
 legacy.
 
-An Arie s moon also reveals someone  wit h the p ote nt ia l to d evelop strong lea d ership  skills,
+An Arie s moon also reveals someone wit h the p ote nt ia l to d evelop strong lea d ership skills,
 
-to b e a p ionee r an d  inn ovat or.  To achie ve your life p urp ose,  you  must d evelop your
+to b e a p ionee r an d inn ovat or. To achie ve your life p urp ose, you must d evelop your
 
-lea d ership  skills,  your ab ili ty to moti vat e others,  an d  en trep ren euria l
+lea d ership skills, your ab ili ty to moti vat e others, an d en trep ren euria l
 
-skills.  Wit h Arie s as
+skills. Wit h Arie s as
 
-your moon sign,  you  c an  b e sp onta ne ous and  imp ulsive.  You migh t not thin k throu gh
+your moon sign, you c an b e sp onta ne ous and imp ulsive. You migh t not thin k throu gh
 
 p ote nt ia lconseq uence sb eforeyouta keact ion. M ostoftheti meit work soutwell(o rat lea st
 
@@ -1530,13 +1530,13 @@ rea lly, thoseweretheti mesthat rea llychan ged thin gs
 
 yourimp ulsive ne sslea d syouast ray
 
-an d  int o troubled  te rrit ory.  Try to make it  a p oin t to crea te a p ros and cons list  b efore you
+an d int o troubled te rrit ory. Try to make it a p oin t to crea te a p ros and cons list b efore you
 
 ä ó
 
-An Arie s moon  could  in d icat e a d omin eering or overbe aring mother. I t can  also in d icat e a
+An Arie s moon could in d icat e a d omin eering or overbe aring mother. I t can also in d icat e a
 
-reb ellious or willfu l p er sona lity d urin g child ho od ,  which can  b e mana g ed  an d  controlled  b y
+reb ellious or willfu l p er sona lity d urin g child ho od , which can b e mana g ed an d controlled b y
 
 youlat erin yourad u
 
@@ -1544,7 +1544,7 @@ lthood tob ecomethetraitsthat emp oweryouasacomp et en tlead eror
 
 p ione er.
 
-leni en cy on anyone  who tries to stop  you or obst ruct your p at h.  You p ossess enormous
+leni en cy on anyone who tries to stop you or obst ruct your p at h. You p ossess enormous
 
 **T**
 
@@ -1588,7 +1588,7 @@ leni en cy on anyone  who tries to stop  you or obst ruct your p at h.  You p os
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1600,27 +1600,27 @@ leni en cy on anyone  who tries to stop  you or obst ruct your p at h.  You p os
 
 -
 
-culti vat ed ,  you ca n lack wisd om
+culti vat ed , you ca n lack wisd om
 
-,  an d  so
+, an d so
 
 -
 
 aware en ough to
 
-und erstan d  why.  The Arie s moon sign is one who see ks consta nt  mo ti on forward ,  toward
+und erstan d why. The Arie s moon sign is one who see ks consta nt mo ti on forward , toward
 
 áá
 
 strive to
 
-move in  that  p articular d irecti on.  The Arie s moon is one wit h g rea t p ote nt ia l to acq uire
+move in that p articular d irecti on. The Arie s moon is one wit h g rea t p ote nt ia l to acq uire
 
 knowled gean d imp ressiveexp erien ces, b utthelifelonglessontolea rnhereishowtoacq uire
 
-wisd om an d  mod esty.
+wisd om an d mod esty.
 
-The en ergy an d  sp irit of Arie s is all
+The en ergy an d sp irit of Arie s is all
 
 ò
 
@@ -1636,13 +1636,13 @@ self that i s dist in ct from b oth He avenan d E arth. It i s self
 
 -
 
-awaren ess,  self
+awaren ess, self
 
 -
 
 acknowled gemen t,
 
-an d  the first e xercise  of self power.  A moon in  A rie s in d icates on e who embod ie s that
+an d the first e xercise of self power. A moon in A rie s in d icates on e who embod ie s that
 
 ò
 
@@ -1652,19 +1652,19 @@ an d  the first e xercise  of self power.  A moon in  A rie s in d icates on e w
 
 A Ta urus M o o n
 
-A Taurus moon reveals someone  wit h strong pote nt ia l in d esi gn, money mana gemen t, asset
+A Taurus moon reveals someone wit h strong pote nt ia l in d esi gn, money mana gemen t, asset
 
 a
 
-cquisi ti on,  or fashion.  The Taurus moon also mean s you exud e sen suality,  b ut may ne ed  to
+cquisi ti on, or fashion. The Taurus moon also mean s you exud e sen suality, b ut may ne ed to
 
-wan t to see k the en ergies of Taurus.  In Weste rn esot eric ta rot trad it ions,
+wan t to see k the en ergies of Taurus. In Weste rn esot eric ta rot trad it ions,
 
-a moon in  Taurus
+a moon in Taurus
 
-corresp ond s wit h the S ix of Coins,  an d  so there is a strong sen se of mate ria l gen erosit y to
+corresp ond s wit h the S ix of Coins, an d so there is a strong sen se of mate ria l gen erosit y to
 
-you too.  You en j oy giving to chariti es,  b ei ng a b en efactor,  and  using your resou rces to help
+you too. You en j oy giving to chariti es, b ei ng a b en efactor, and using your resou rces to help
 
 the und erprivileged
 
@@ -1674,19 +1674,19 @@ these a ll brin g you emotion al fulf
 
 illment .
 
-A Taurus m oon could  also in d icat e a child hood  where mate ria l thin gs were used  or reli ed
+A Taurus m oon could also in d icat e a child hood where mate ria l thin gs were used or reli ed
 
-upon  heavily as a form of exchan ge.  In other word s,  perhap s mate ria l goods were a maj or
+upon heavily as a form of exchan ge. In other word s, perhap s mate ria l goods were a maj or
 
 p artofyo urc hild hood orupb rin gin gin some w ay. Itcan in d icat eap rivileged c
 
 hild hood , one
 
-filled  wit h mate ria l comforts,  or it  can  in d icate  a child hood  centrally focused  on mate ria l
+filled wit h mate ria l comforts, or it can in d icate a child hood centrally focused on mate ria l
 
-goods.  E it her way,  it could  suggest  a more auste re,  regiment ed,  or p ressured  upb rin gin g,
+goods. E it her way, it could suggest a more auste re, regiment ed, or p ressured upb rin gin g,
 
-sid e,  given the matrilin ea l
+sid e, given the matrilin ea l
 
 corresp ond en ces
 
@@ -1734,7 +1734,7 @@ of themoon.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1742,7 +1742,7 @@ of themoon.
 
 10
 
-The for ce associa te d  wit h Taurus  is such  that  when your  moon is  in  Taurus,  you  te nd  to
+The for ce associa te d wit h Taurus is such that when your moon is in Taurus, you te nd to
 
 hesit at e, d oub t, over
 
@@ -1754,23 +1754,23 @@ overlyca utious
 
 tothep oint that youofte nmissrip eopp ortuni ti eswhentheycomeyou rwa y.
 
-too late  an d  miss theb oat .
+too late an d miss theb oat .
 
-Your moon sign reveal s what fulfills you emot iona lly,  ye
+Your moon sign reveal s what fulfills you emot iona lly, ye
 
-ope nly acknowled ge.  A Taurea n moon can  reveal an  inne r yea rning to ind ulge,  to be
+ope nly acknowled ge. A Taurea n moon can reveal an inne r yea rning to ind ulge, to be
 
-b ea utiful,  to b e see n and  p ercei ved  b y others as b ea utiful or allurin g,  a nd  to see k ep icurea n
+b ea utiful, to b e see n and p ercei ved b y others as b ea utiful or allurin g, a nd to see k ep icurea n
 
-p lea sures.  F rom a Taurea n moon can arise a  s
+p lea sures. F rom a Taurea n moon can arise a s
 
 ub conscious d esi re for fina ncia l success, to be
 
-recogni zed  for your fina ncia l or b usiness successe s,  to b e an en trep ren eur,  to culti vat e or
+recogni zed for your fina ncia l or b usiness successe s, to b e an en trep ren eur, to culti vat e or
 
 d eveloprea lest at e, tomana gep ortfolios, b usine sses, orp rope rti es, and ap en chan tforgood
 
-food  an d  win es.
+food an d win es.
 
 The T
 
@@ -1786,17 +1786,17 @@ likely to b e b en eficen t, well
 
 -
 
-liked ,  an d  p ossessa hea lthy emotion al q uoti en t.
+liked , an d p ossessa hea lthy emotion al q uoti en t.
 
 A Gem ini Mo o n
 
-A Gemini  moon reveal s someone  wit h the p ote nt ia l of b ei ng p ersuasive.  You must wor k
+A Gemini moon reveal s someone wit h the p ote nt ia l of b ei ng p ersuasive. You must wor k
 
-consciously at  d evelopi ng you r writ in g an d  rh et oric skills.  Consid er h i
+consciously at d evelopi ng you r writ in g an d rh et oric skills. Consid er h i
 
 gher ed ucat ion an d
 
-strive to succeed  in acad emics,  as these asse ts will help you achie ve your life p urp ose.  All
+strive to succeed in acad emics, as these asse ts will help you achie ve your life p urp ose. All
 
 áá òó
 
@@ -1804,25 +1804,25 @@ d isq uiet heart, shorte rat te nt ionspan forthemu nd an e,
 
 an d inn at eind ecisi ven essmean sone
 
-wit h a Gemini  moon,  while b orn wit h in cred ib le p ote nt ia l for high achie vemen t,  p ublic
+wit h a Gemini moon, while b orn wit h in cred ib le p ote nt ia l for high achie vemen t, p ublic
 
-success,  especia lly in the areas of med ia, b road casti ng,  communi cat ions, and  those
+success, especia lly in the areas of med ia, b road casti ng, communi cat ions, and those
 
 òó
 
-i moon is a lso j ust as likely to let  all those
+i moon is a lso j ust as likely to let all those
 
 ta lent s go to wast e.
 
-A Gemini  moon could  i nd icat e a person wit h many areas of in te rest  an d  ta lent,  p erhap s
+A Gemini moon could i nd icat e a person wit h many areas of in te rest an d ta lent, p erhap s
 
-in herit ed  from the b iological mother, an d  a d iverse child hood  where  you were given the
+in herit ed from the b iological mother, an d a d iverse child hood where you were given the
 
 opp ortuni ty to
 
-exp lore many areas of in te rest  an d  d ifferent  ta lent s.  Wit h too many opt ions,
+exp lore many areas of in te rest an d d ifferent ta lent s. Wit h too many opt ions,
 
-the Ge mini  moon may en d  up n ot choosing anyof the op ti ons at  all.
+the Ge mini moon may en d up n ot choosing anyof the op ti ons at all.
 
 **T**
 
@@ -1866,7 +1866,7 @@ the Ge mini  moon may en d  up n ot choosing anyof the op ti ons at  all.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -1874,17 +1874,17 @@ the Ge mini  moon may en d  up n ot choosing anyof the op ti ons at  all.
 
 11
 
-There can  b e a fren et ic en ergy around  one wit h a Gemini  moon.  There can  b e a te nd en cy to
+There can b e a fren et ic en ergy around one wit h a Gemini moon. There can b e a te nd en cy to
 
-b e hyp eractive,  to t
+b e hyp eractive, to t
 
-ry to d o too much all at  o nce,  and  lots of ambi tion wit hout ad eq uate
+ry to d o too much all at o nce, and lots of ambi tion wit hout ad eq uate
 
 follow
 
 -
 
-th roug h.  A Gemini  moon might also mean  that  you te nd  to hide your true feelin gs,  a
+th roug h. A Gemini moon might also mean that you te nd to hide your true feelin gs, a
 
 áä
 
@@ -1894,11 +1894,11 @@ Theforceassocia te d withGemini issuchthat whenyourmoonisin Gemini , youmi
 
 ghtnoti ce
 
-that  you te nd  to recei ve arbi trarily  harsher  crit ici sm than  others. What  is it  ab out yo u,
+that you te nd to recei ve arbi trarily harsher crit ici sm than others. What is it ab out yo u,
 
 á
 
-for d oing the same thing? To und erstan d  that,  we must und erst
+for d oing the same thing? To und erstan d that, we must und erst
 
 and
 
@@ -1918,7 +1918,7 @@ t
 
 he way you d o it challenges the vali dit y of
 
-thei r way.  S o they go on the d efensive and  you b ecome the ta rget  of crit ici sm. Why you?
+thei r way. S o they go on the d efensive and you b ecome the ta rget of crit ici sm. Why you?
 
 Gemini moonste nd tob emulti
 
@@ -1930,11 +1930,11 @@ ta lent ed , highly
 
 in te lligen t, wit ty, p ai redwit has harp ton gue,
 
-strong op in ions,  and  a strong
+strong op in ions, and a strong
 
-p rese nce.  That  can,  of course,  b e i nt imid ati ng.
+p rese nce. That can, of course, b e i nt imid ati ng.
 
-By the same token ,  however,  those wit h Ge mini  moons te nd  to be highly sen sit ive to
+By the same token , however, those wit h Ge mini moons te nd to be highly sen sit ive to
 
 -
 
@@ -1942,7 +1942,7 @@ you, youp ercei vethema
 
 scrit ici zin gyou. Gemini moonsaremoresuscep ti b letothene gat ive
 
-imp act s of crit icism. It b ecomes a lifelong lesson for Gemini  moons to grow thicker skin  an d
+imp act s of crit icism. It b ecomes a lifelong lesson for Gemini moons to grow thicker skin an d
 
 ä
 
@@ -1952,7 +1952,7 @@ sksofan xie ty, d ep ression, and defensi ven essinthefaceofcrit ici smwhenyouar
 
 moon.
 
-Those wit h Gemini  moon may come from child hood  exp erien ces where a mother or
+Those wit h Gemini moon may come from child hood exp erien ces where a mother or
 
 mate rna l
 
@@ -1964,37 +1964,37 @@ orkthro ugh,
 
 á
 
-messages of supp ort a nd  crit ici sm, an d  it is through  this mother  fig ure in  you r fo rmati ve
+messages of supp ort a nd crit ici sm, an d it is through this mother fig ure in you r fo rmati ve
 
-yea rs of youth that  res ulted  in  a grea te r d ifficulty fo r you  to p r
+yea rs of youth that res ulted in a grea te r d ifficulty fo r you to p r
 
 ocess crit ici sm. Wit h Gemini
 
-moons,  we might also see  one who had  a mother or p arent  who held  you to unrea list ically
+moons, we might also see one who had a mother or p arent who held you to unrea list ically
 
-high exp ect at ions,  and  that,  too,  could  have p layed  a p sychological rol e in  your rela ti onship
+high exp ect at ions, and that, too, could have p layed a p sychological rol e in your rela ti onship
 
-to crit ici sm and  achie vement .
+to crit ici sm and achie vement .
 
 Your moon sign
 
 á
 
-ope nly acknowled ge.  A Gemini  moon can  reveal an  in ne r yea rni ng to sp ea k an d  b e heard.
+ope nly acknowled ge. A Gemini moon can reveal an in ne r yea rni ng to sp ea k an d b e heard.
 
-Thin k F yod or Dostoyev sky,  F ran z Ka fka,  and  Haruki M urakami are all Gemini  moon signs.
+Thin k F yod or Dostoyev sky, F ran z Ka fka, and Haruki M urakami are all Gemini moon signs.
 
 Barack
 
-Obama has a Gemini  moon,  like you.  S o d oes M ussolini  and  Vlad imir Puti n.  Sigmund
+Obama has a Gemini moon, like you. S o d oes M ussolini and Vlad imir Puti n. Sigmund
 
-F reud  was a Gemini moon.  Barb ara Walte rs and  Gwyne th Pa trow are moon sign Gemini , as
+F reud was a Gemini moon. Barb ara Walte rs and Gwyne th Pa trow are moon sign Gemini , as
 
-is the rap p er 50 Cen t,  Nelly,  an d  the Quee n of Ja zz,  E lla F it zgerald .  Thin k fashion d esi g
+is the rap p er 50 Cen t, Nelly, an d the Quee n of Ja zz, E lla F it zgerald . Thin k fashion d esi g
 
 ne r
 
-Ka rl L agerfeld,  the tyco on John D.  Roc kefeller,  American  comed ia n George Ca rlin,  S te p hen
+Ka rl L agerfeld, the tyco on John D. Roc kefeller, American comed ia n George Ca rlin, S te p hen
 
 Colbert, sin gersBillyId olan d E nya
 
@@ -2002,13 +2002,13 @@ Colbert, sin gersBillyId olan d E nya
 
 consideringthetot ali tyofthese persona liti esand their
 
-p ublic d rives,  you can  g et  a sen se of what d rive s you,  too,  the Gemi
+p ublic d rives, you can g et a sen se of what d rive s you, too, the Gemi
 
-ni  moon.  You see k  to b e
+ni moon. You see k to b e
 
 äáä
 
-find  a lot of in d ivid uals who are socially or p oliti cally conscious, who have this ine xp licab le
+find a lot of in d ivid uals who are socially or p oliti cally conscious, who have this ine xp licab le
 
 **T**
 
@@ -2052,7 +2052,7 @@ find  a lot of in d ivid uals who are socially or p oliti cally conscious, who h
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2060,87 +2060,87 @@ find  a lot of in d ivid uals who are socially or p oliti cally conscious, who h
 
 12
 
-p ersona l concern for th e p ublic good,  p ublic
+p ersona l concern for th e p ublic good, p ublic
 
-welfare,  for societ y an d  sociological i ssues.  The
+welfare, for societ y an d sociological i ssues. The
 
 filmmakeran d alsota ro tauthoran d mysti cAlej an d roJod orowskyisals oaGemini moonlik e
 
 you.
 
-A Cancer  Mo o n
+A Cancer Mo o n
 
-A Can cer moon reveals  someone  who will feel  most at  home,  well,  at home.  To help you
+A Can cer moon reveals someone who will feel most at home, well, at home. To help you
 
-achie ve your life p ur p ose,  you will wan t to nurture your in tuit ive d evelopmen t and
+achie ve your life p ur p ose, you will wan t to nurture your in tuit ive d evelopmen t and
 
-clairvoyan ce.  A Can cer  moon mean s your so ul p urp ose is closely ti ed  to home,  family,
+clairvoyan ce. A Can cer moon mean s your so ul p urp ose is closely ti ed to home, family,
 
-child ren ,  the hea rth,  and  loved  ones .
+child ren , the hea rth, and loved ones .
 
-The moon is the rule rs hip  of Can cer,  so such a n a
+The moon is the rule rs hip of Can cer, so such a n a
 
-strological p lacemen t in  a b irth chart will
+strological p lacemen t in a b irth chart will
 
-b rin g strong int uiti on, heighte ne d  sen sit ivity,  empa thy,  and  a compa ssionat e n at ure.  Can cer
+b rin g strong int uiti on, heighte ne d sen sit ivity, empa thy, and a compa ssionat e n at ure. Can cer
 
 moons te nd to care d eep ly for the common good
 
 
 
-world ,  one soul at  a t ime,  through
+world , one soul at a t ime, through
 
-in ti mate ,  persona l human  to human conn ect ions
+in ti mate , persona l human to human conn ect ions
 
 
 
-an d  when t hey love,  they love with in te nsi ty.
+an d when t hey love, they love with in te nsi ty.
 
-A Can cer moon could  in d icate a d eep ly lovin g,  nurturin g mother, an d  d ee p emotion al
+A Can cer moon could in d icate a d eep ly lovin g, nurturin g mother, an d d ee p emotion al
 
-reli an ce that  goes b oth ways,  recip rocate d ,  b et wee n mother an d child .  A Can cer
+reli an ce that goes b oth ways, recip rocate d , b et wee n mother an d child . A Can cer
 
 moon
 
 child hood isoneexp ressed b yb ei ngclosetohome, havin gaverystron g, fixed sen seofhome,
 
-an d  mayb e e ven  a child who was sh y or in trove rte d .
+an d mayb e e ven a child who was sh y or in trove rte d .
 
 á
 
 ope nly ackn
 
-owled ge.  A Can ceria n moon can  revea l an  in ne r yea rning for family,  to b e close
+owled ge. A Can ceria n moon can revea l an in ne r yea rning for family, to b e close
 
-to family,  to have family b e a p romin en t feature in  your life.  The one wit h a moon in  Can cer
+to family, to have family b e a p romin en t feature in your life. The one wit h a moon in Can cer
 
-is also likely to b e more sp iritually d eveloped  than  most,  to p ossess a kee ne r sen se
+is also likely to b e more sp iritually d eveloped than most, to p ossess a kee ne r sen se
 
 of
 
-in tuit ion than  most.  Thus,  there will  b e an  eq uivale nt  in ne r yea rni ng to ad van ce that
+in tuit ion than most. Thus, there will b e an eq uivale nt in ne r yea rni ng to ad van ce that
 
-sp irituali ty or in tuit ion, even  if and  when i t runs again st t he grai n of mai nst rea m societ y.
+sp irituali ty or in tuit ion, even if and when i t runs again st t he grai n of mai nst rea m societ y.
 
-What  is often  overlooke d  ab out t hose who are a  moon sign Cancer is yo ur
+What is often overlooke d ab out t hose who are a moon sign Cancer is yo ur
 
-in na te  lea d ership
+in na te lea d ership
 
 q ualiti es. ThesignCan cerisacard in alsign, andasacard in alsign, isoneofthelea d ersofthe
 
-zod ia c.  The Can ceria n is a sp iritual lea d er,  an d thus wit h a moon in  Ca ncer,  lea d ership  in  a
+zod ia c. The Can ceria n is a sp iritual lea d er, an d thus wit h a moon in Ca ncer, lea d ership in a
 
-sp iritual or reli gious co mmunit y can  b rin g y
+sp iritual or reli gious co mmunit y can b rin g y
 
 ou a st rong sen se of fulfill ment .
 
-Can cer moons te nd  to b e a bit  of an  in trovert,  one who is more focused  on persona l or
+Can cer moons te nd to b e a bit of an in trovert, one who is more focused on persona l or
 
-in tuit ive d evelopment  than going out there in to the p ublic life to try to make a na me for
+in tuit ive d evelopment than going out there in to the p ublic life to try to make a na me for
 
-yourself.  You  are mo re in te rest ed  in  authent
+yourself. You are mo re in te rest ed in authent
 
-icit y than  you a re in  gl ory.  When  yo ur na ta l
+icit y than you a re in gl ory. When yo ur na ta l
 
 **T**
 
@@ -2184,7 +2184,7 @@ icit y than  you a re in  gl ory.  When  yo ur na ta l
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2194,13 +2194,13 @@ icit y than  you a re in  gl ory.  When  yo ur na ta l
 
 moonisin Can cer, youten d torej ect materiali sticorsupe rficialofferin gsan d in ste ad ,p ursue
 
-sp iritual subst an ce,  self
+sp iritual subst an ce, self
 
 -
 
-und erstan d ing, a nd  a strong sense  of family.
+und erstan d ing, a nd a strong sense of family.
 
-The force associa te d  w it h Can cer is such t
+The force associa te d w it h Can cer is such t
 
 á
 
@@ -2208,19 +2208,19 @@ The force associa te d  w it h Can cer is such t
 
 congrat ulatoryb yan ystretch
 
-of the word .  In fact,  yo u are
+of the word . In fact, yo u are
 
 
 
-if I ma y b e can d id  wit h you
+if I ma y b e can d id wit h you
 
 
 
-rat her in ep t at  p romotin g yo ur
+rat her in ep t at p romotin g yo ur
 
-own b est  q ualiti es.  You ne e
+own b est q ualiti es. You ne e
 
-d  some serious help wit h your co ver l et te rs,  resumes,  and
+d some serious help wit h your co ver l et te rs, resumes, and
 
 á
 
@@ -2236,19 +2236,19 @@ some
 
 b al
 
-an ce!  Be
+an ce! Be
 
 hon e st
 
 ä
 
-hid e a way in a  shell.
+hid e a way in a shell.
 
-All that  sai d,  when you see  someone  who is a moon sign Can cer,  the best  ad vice I can  give is
+All that sai d, when you see someone who is a moon sign Can cer, the best ad vice I can give is
 
-to ne ver underesti mate a moon sign Can cer. Pe ople  who
+to ne ver underesti mate a moon sign Can cer. Pe ople who
 
-underestimate  you
+underestimate you
 
 will d ese rve
 
@@ -2256,15 +2256,15 @@ will d ese rve
 
 
 
-you ta ke an d  you ta ke,  ta ke,  ta ke in
+you ta ke an d you ta ke, ta ke, ta ke in
 
 thep ressure, hold in git d own, kee p in git toget her, unti lthat fina lp oint , an d then youexp lode
 
-an d  those i n closest p roximit y,  b eware
+an d those i n closest p roximit y, b eware
 
 .
 
-A Leo  Mo o n
+A Leo Mo o n
 
 AL eomoonrevealsaself
 
@@ -2282,25 +2282,25 @@ orie nt ed, magna ni mouslea d er.To
 
 achie veyour lifep urp os e, d evelopyourlea d ership skillsan d your ab ili tytomoti vat eothers.
 
-A L eo moon will  make you mo re of a  go
+A L eo moon will make you mo re of a go
 
 -
 
 get te r than
 
-others wit h your  sun sign or ascen d an t
+others wit h your sun sign or ascen d an t
 
-sign.  The L eo M oon b rings grea t p ote nt ia l for achie vin g fame an d  p ub lic recogni ti on in  your
+sign. The L eo M oon b rings grea t p ote nt ia l for achie vin g fame an d p ub lic recogni ti on in your
 
 a p rese nt ation or spe ech.
 
-You thrive in  crea ti ve an d  artisti c en vironment s,  and  even if you yourself d o not b ecome
+You thrive in crea ti ve an d artisti c en vironment s, and even if you yourself d o not b ecome
 
-in volved  in  crea ti ve
+in volved in crea ti ve
 
 -
 
-artist ic end ea vors,  you w ill remai n a lifelong ad mirer an d  p at ron of
+artist ic end ea vors, you w ill remai n a lifelong ad mirer an d p at ron of
 
 crea ti ve
 
@@ -2308,17 +2308,17 @@ crea ti ve
 
 artist ic en dea vors.
 
-L eo moons are p eop le who wan t to shine .  They wa
+L eo moons are p eop le who wan t to shine . They wa
 
-nt  to sta nd  out.  They en j oy b ei ng
+nt to sta nd out. They en j oy b ei ng
 
 d ist in guished. F amelooksgoodonthem. WhileonewhoisaL eosunsignwould ap pea rmore
 
-d ramat ic,  more p opular,  an d more at tent ion
+d ramat ic, more p opular, an d more at tent ion
 
 -
 
-grab b in g,  the L eo moon sign is more subtle .
+grab b in g, the L eo moon sign is more subtle .
 
 it y, a nd yousti llliketob eat t en ti on
 
@@ -2326,7 +2326,7 @@ it y, a nd yousti llliketob eat t en ti on
 
 grab b in g, b ut
 
-unlike the L eo sun,  the L eo moon achie ves all that  wit hout
+unlike the L eo sun, the L eo moon achie ves all that wit hout
 
 a pp e arin g
 
@@ -2374,7 +2374,7 @@ to wan t d rama,
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2388,7 +2388,7 @@ suns
 
 a pp e ar
 
-to wan t d r ama,  p o
+to wan t d r ama, p o
 
 áá ä
 
@@ -2398,15 +2398,15 @@ a pp e a rin g
 
 towan t
 
-it .  They make it  look eff ortle ss.
+it . They make it look eff ortle ss.
 
-A L eo moon can  in d icate lea d ership  at a young age,  the eld est chi
+A L eo moon can in d icate lea d ership at a young age, the eld est chi
 
-ld  in  the family,  or p layin g
+ld in the family, or p layin g
 
 acen tral, d omin an trolewit hinyo urfamily. A L eomooncan also in d icat eab iologicalmothe r
 
-who craved  at te nt ion,  was very willf ul, wit h an  ind omit ab le sp irit,  who en j oyed  and  also
+who craved at te nt ion, was very willf ul, wit h an ind omit ab le sp irit, who en j oyed and also
 
 thrived in thesp otlight, an d thusind icat iv
 
@@ -2422,13 +2422,13 @@ whoma yin herit someofthose
 
 p ersona lity trai ts.
 
-The force  associa te d  wit h L eo is such that  w h en  your moon is in  L eo,  you secret ly  ne ed
+The force associa te d wit h L eo is such that w h en your moon is in L eo, you secret ly ne ed
 
 ää
 
 in
 
-L eo,  the worst thin g someone  could  d o to you is to ignore you.  Thos e wit h a moon in  L eo
+L eo, the worst thin g someone could d o to you is to ignore you. Thos e wit h a moon in L eo
 
 á
 
@@ -2436,19 +2436,19 @@ even concea led from thei r own self
 
 -
 
-awaren ess. Wit h a moon in Leo,  there c
+awaren ess. Wit h a moon in Leo, there c
 
-ould  have b een
+ould have b een
 
-ne glect or lack  of at te nt ion from yo ur m other  when you  were a ne w b orn,  which in  turn
+ne glect or lack of at te nt ion from yo ur m other when you were a ne w b orn, which in turn
 
 ä
 
-That  sen se that  b ecomes wired  in to us as ad ults,  and  then  as ad ul
+That sen se that b ecomes wired in to us as ad ults, and then as ad ul
 
-ts,  will see k
+ts, will see k
 
-accomp lishmen t,  accolad es,  and  glory as a mean s of at tracti ng the societ al at te ntion we
+accomp lishmen t, accolad es, and glory as a mean s of at tracti ng the societ al at te ntion we
 
 á
 
@@ -2460,13 +2460,13 @@ achie vers
 
 
 
-we could  even sa y ov erachie vers.
+we could even sa y ov erachie vers.
 
 Yo
 
 á
 
-ope nly acknowled ge.  A L eo moon can  reveal an  in ne r yea rni ng to b e bolde r ab out ste p pin g
+ope nly acknowled ge. A L eo moon can reveal an in ne r yea rni ng to b e bolde r ab out ste p pin g
 
 in tothep ublicsp otlight. L eomoonsfeelemotiona llysat ia ted whentheyhave
 
@@ -2474,7 +2474,7 @@ fans, ad mirers,
 
 an d areele vat ed toahighersocialsta tus. Theys ee kglor y, p ublicorsoci alrecogni ti on, towin
 
-accolad es,  and  p rai se for thei r achie vemen ts.  T hus,  L eo moons te nd  to b e overachie vers or
+accolad es, and p rai se for thei r achie vemen ts. T hus, L eo moons te nd to b e overachie vers or
 
 strive for high forms o f success
 
@@ -2484,17 +2484,17 @@ they wan t t
 
 heir glory to b e visib le.
 
-A Virgo  Mo o n
+A Virgo Mo o n
 
-A Virgo  moon reveals s omeone  who is a p erfect ioni st,  someone  who see ks p erfect ion.  To
+A Virgo moon reveals s omeone who is a p erfect ioni st, someone who see ks p erfect ion. To
 
 achie veyourlifep urp ose, youwillwan ttofurtherd evelopyourp ersona lfitn ess, knowled ge
 
-in  matt ers of health or holist ic health,  or knowled ge in  med ici ne.  Consid er h
+in matt ers of health or holist ic health, or knowled ge in med ici ne. Consid er h
 
 igher ed ucat ion
 
-an d  always pa y at te ntion t o d et ails.
+an d always pa y at te ntion t o d et ails.
 
 **T**
 
@@ -2538,7 +2538,7 @@ an d  always pa y at te ntion t o d et ails.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2546,15 +2546,15 @@ an d  always pa y at te ntion t o d et ails.
 
 15
 
-Virgo moons can  see m emotion ally unavaila ble.  You ap pea r d eta ched  and  whate ver the
+Virgo moons can see m emotion ally unavaila ble. You ap pea r d eta ched and whate ver the
 
 òáä
 
-The Virgo moon p ersona  i
+The Virgo moon p ersona i
 
-s attracti ve to others b ecause  you ap p ear unat ta in ab le, an d so
+s attracti ve to others b ecause you ap p ear unat ta in ab le, an d so
 
-p eop le try d esperate ly to at ta in .  Virgo moons are not p eop le p lease rs
+p eop le try d esperate ly to at ta in . Virgo moons are not p eop le p lease rs
 
 a n d
 
@@ -2562,21 +2562,21 @@ they are not ea sy
 
 to p lea se.
 
-A Virgo moon can  in d icat e a d eman din g or fussy,  exacti ng mother, one who exp ect ed
+A Virgo moon can in d icat e a d eman din g or fussy, exacti ng mother, one who exp ect ed
 
 p erfec
 
-ti on from her child ren . Could  also ind icat e a mother who was ei ther very health
+ti on from her child ren . Could also ind icat e a mother who was ei ther very health
 
 -
 
-conscious, in te rest ed  in holist ic health,  or was in a health
+conscious, in te rest ed in holist ic health, or was in a health
 
 -
 
-rela te d  p rofessi on.  A Virgo moon
+rela te d p rofessi on. A Virgo moon
 
-can  in d icate a high p ressure or rigoro us child hood ,  one where a chil d
+can in d icate a high p ressure or rigoro us child hood , one where a chil d
 
 
 
@@ -2584,53 +2584,53 @@ you
 
 
 
-d id  not
+d id not
 
 truly
 
-get  to en j oy the ca refree  asp ect s of child hood.
+get to en j oy the ca refree asp ect s of child hood.
 
 á
 
-ope nly acknowled ge.  A Virgo moon can  reveal an  in ne r yea rni ng to b e more sp iritual,  more
+ope nly acknowled ge. A Virgo moon can reveal an in ne r yea rni ng to b e more sp iritual, more
 
 p ublicorfo rthcomi
 
 nga b outyour own mysti calexp erien ces, ortob eah ea ler, d octor, en ergy
 
-worker,  or s omeone  wh o is in  service of others
+worker, or s omeone wh o is in service of others
 
 .
 
-A Libra  Mo o n
+A Libra Mo o n
 
 AL ib ramoonrevealsso meonewit hagrea teye forb ea uty an d d esi gn, and sotoachie veyour
 
-life p urp ose,  you
+life p urp ose, you
 
-must  d evelop skills in  d esi gn,  d ip lomacy,  an d  the arts an d  humani ti es.
+must d evelop skills in d esi gn, d ip lomacy, an d the arts an d humani ti es.
 
-These  trait s are crucia l  an d  p ivota l in  helpi ng you achie ve your  goals in  life.  A L ib ra moon
+These trait s are crucia l an d p ivota l in helpi ng you achie ve your goals in life. A L ib ra moon
 
-mean s your s oul p u rp ose is rela te d  to crea ti ng p ea ce,  harmony, an d  bala nce in  your world .
+mean s your s oul p u rp ose is rela te d to crea ti ng p ea ce, harmony, an d bala nce in your world .
 
 Th
 
-ose wit h L ib ra moons are also roman ti cs at  heart,  selfless,  giving,  gen erous,  and  grea t to
+ose wit h L ib ra moons are also roman ti cs at heart, selfless, giving, gen erous, and grea t to
 
-b e i n commit ted  rela ti onship s wit h.
+b e i n commit ted rela ti onship s wit h.
 
-A L ib ra moon can  in dicat e a kind ,  b en evolent,  non
+A L ib ra moon can in dicat e a kind , b en evolent, non
 
 -
 
-confronta ti onal,  and  congen ia l mother
+confronta ti onal, and congen ia l mother
 
-who was p roba b ly more of a b est  frie nd  t
+who was p roba b ly more of a b est frie nd t
 
-o you.  H owever,  in many resp ect s she may have
+o you. H owever, in many resp ect s she may have
 
-b ee n too d epen d ent  on others for  her o wn livel ihood ,  an d  seei ng that  as you were growin g
+b ee n too d epen d ent on others for her o wn livel ihood , an d seei ng that as you were growin g
 
 upcould havea p sychol ogicalimp act onho wy o uchooseto lea d your o wnlife. Itc ould cause
 
@@ -2642,15 +2642,15 @@ morewillful, in dep end en t, and self
 
 reli an t. AL ib ramooncan
 
-also in d icate a bea utiful, p rist in e child hood ,  one characte rized  b y p ea ce,  harmony, and
+also in d icate a bea utiful, p rist in e child hood , one characte rized b y p ea ce, harmony, and
 
 b ala nce.
 
-In Weste rn esot eric ta r ot trad it ions,  a moon in  L ib ra corresp ond s wit h the T wo o f S wo rd s,
+In Weste rn esot eric ta r ot trad it ions, a moon in L ib ra corresp ond s wit h the T wo o f S wo rd s,
 
 whic
 
-h calls to mind  cho ice,  and  a life p at h that is going to sp lit in  two d irecti ons,  come to a
+h calls to mind cho ice, and a life p at h that is going to sp lit in two d irecti ons, come to a
 
 **T**
 
@@ -2694,7 +2694,7 @@ h calls to mind  cho ice,  and  a life p at h that is going to sp lit in  two d 
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2704,25 +2704,25 @@ h calls to mind  cho ice,  and  a life p at h that is going to sp lit in  two d 
 
 crossroad s, an d req uireyoutomakeasp irituall ysignifican tchoice. Therewillb enorighto r
 
-wrong,  good or b ad , ausp ici ous or in auspicious.  Both p aths are of eq
+wrong, good or b ad , ausp ici ous or in auspicious. Both p aths are of eq
 
-ual wei ght,  b ut
+ual wei ght, b ut
 
-d ia metrically d ifferent . L ib ra n at al moons a re often  a si gn of a sp lit lifep at h.
+d ia metrically d ifferent . L ib ra n at al moons a re often a si gn of a sp lit lifep at h.
 
 á
 
-ope nly acknowled ge.  A L ib ra moon can  reveal an  in ne r yea rni ng fo
+ope nly acknowled ge. A L ib ra moon can reveal an in ne r yea rni ng fo
 
-r love an d  roman ce,  b ut
+r love an d roman ce, b ut
 
 moresp ecifica lly, an id ea lized formo fr oman ce. L ib ramoonste nd toid eali zelove, mar ria ge,
 
-an d  rela ti onship s,  and  even to frie nd ship s.  When you love
+an d rela ti onship s, and even to frie nd ship s. When you love
 
 
 
-no matter what kin d  of love,
+no matter what kin d of love,
 
 y love
 
@@ -2734,13 +2734,13 @@ p ed esta l. Youareloyaltoafault, gen eroustoafault, and formuchofyouryoungeryea
 
 òá
 
-would  call these t rai ts t h
+would call these t rai ts t h
 
-e hallmarks of  a b ea utiful soul.
+e hallmarks of a b ea utiful soul.
 
-A Scorpio  Mo o n
+A Scorpio Mo o n
 
-A S corp io moon reveals someone  wit h the p otent ia l to accomp lish greatn ess,  b ut who must
+A S corp io moon reveals someone wit h the p otent ia l to accomp lish greatn ess, b ut who must
 
 d evote grea teffort ton urturin ga strong wo rk et hic, theab ili tytofocu s, an d toharne ssyour
 
@@ -2752,17 +2752,17 @@ vep urp osesrat herthan self
 
 d est ructi ve. Toachie veyourlifep urp ose, you
 
-must d evelop a  stronge r sen se of pa ssion ,  trust your  in tuit ions more,  d evelop your  in tuit ive
+must d evelop a stronge r sen se of pa ssion , trust your in tuit ions more, d evelop your in tuit ive
 
-ab ili ty,  and  p ay atten ti on t o psychic d rea ms.
+ab ili ty, and p ay atten ti on t o psychic d rea ms.
 
-A S corp io moon can  in d icat e an in te nse c
+A S corp io moon can in d icat e an in te nse c
 
-hild hood,  mayb e one that had  more d rama than  a
+hild hood, mayb e one that had more d rama than a
 
-child hood  should have.  It can  also in dicat e a strong mate rna l p rese nce, p erhap s in  the form
+child hood should have. It can also in dicat e a strong mate rna l p rese nce, p erhap s in the form
 
-of an  ove rb ea rin g mot her or  a b iological  mo ther who  main ta in s a p ivota l role in  y our
+of an ove rb ea rin g mot her or a b iological mo ther who main ta in s a p ivota l role in y our
 
 emotion alfaculti es. Yourmother
 
@@ -2770,27 +2770,27 @@ waslikelyto h aveb ee nad riven, d et ermine d , orambi ti ous
 
 woman whoaccomp lis hed muchherself. Ther ecould alsob econtrolissuesb et wee nmother
 
-an d  child.
+an d child.
 
-Also,  wit h a S corp io moon sign,  you are likely to mani fest what ast rologers call a Plutoni an
+Also, wit h a S corp io moon sign, you are likely to mani fest what ast rologers call a Plutoni an
 
 p ers
 
 áá
 
-or occult.  H owever,  Plutoni an  p ersona litie s have a te nd ency to b uild  up huge,  p rote ctive
+or occult. H owever, Plutoni an p ersona litie s have a te nd ency to b uild up huge, p rote ctive
 
-walls around  themselve s,  an d  are hyp er
+walls around themselve s, an d are hyp er
 
 -
 
-d efensive an d  rea ctive toward  crit i
+d efensive an d rea ctive toward crit i
 
-cism.  They ta ke
+cism. They ta ke
 
-in  themselves or wh o t hey rea lly  are.  They fee l like they ha ve no id ea  who they  rea lly  are,
+in themselves or wh o t hey rea lly are. They fee l like they ha ve no id ea who they rea lly are,
 
-an d  subconsciously strike out at  others when others com
+an d subconsciously strike out at others when others com
 
 e even remotely close to revealin g
 
@@ -2842,7 +2842,7 @@ n ot
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -2858,19 +2858,19 @@ sen sit ive, wh ichisnotsogoodfor
 
 emotion al b ala nce b ut grea t for i
 
-nt uiti ve ab iliti es and  clairvoyan ce.  You te nd  to b e more
+nt uiti ve ab iliti es and clairvoyan ce. You te nd to b e more
 
-emotion ally vulnerable  than  others and  could  have an  in nate  tend ency toward  d ep ressi on,
+emotion ally vulnerable than others and could have an in nate tend ency toward d ep ressi on,
 
-melancholy,  an d  ap at hy that  you  have to c o nst an tly (and  consciously) kee p  in  check.
+melancholy, an d ap at hy that you have to c o nst an tly (and consciously) kee p in check.
 
-Plutoni an  p ersona liti es oft
+Plutoni an p ersona liti es oft
 
-en  lea d  unp red ictab le lives,  walkin g a life p at h riddled  wit h
+en lea d unp red ictab le lives, walkin g a life p at h riddled wit h
 
-uncerta in ti es.  Yet it  is exactly that  unp redict ab ili ty that  is one of your grea te st p ersona l
+uncerta in ti es. Yet it is exactly that unp redict ab ili ty that is one of your grea te st p ersona l
 
-asse ts,  and  what facili tate s you to achie ve grea t successes i n life.
+asse ts, and what facili tate s you to achie ve grea t successes i n life.
 
 Onewit haS corp iomoonisgoin
 
@@ -2882,7 +2882,7 @@ emotion alp lanecancrea te ahyper
 
 d efensi vepersona lity. Itmayb emored ifficultforyouto
 
-swallow crit ici sm. You  can  ta ke ever ythin g j ust a b it  too p ersona ll y.  You b uild  up wal ls
+swallow crit ici sm. You can ta ke ever ythin g j ust a b it too p ersona ll y. You b uild up wal ls
 
 around you
 
@@ -2892,31 +2892,31 @@ around you
 
 á
 
-ee  you r
+ee you r
 
-vulnerabi lity,  your frag ili ty,  and  to ta ke ad vanta ge of that  fragility.  These are the common
+vulnerabi lity, your frag ili ty, and to ta ke ad vanta ge of that fragility. These are the common
 
-subconscious und ercurren ts when  one b ea rs aS corp io moon.
+subconscious und ercurren ts when one b ea rs aS corp io moon.
 
 -
 
 see k
 
-er an d  as nob le as that sound s,  p rep are yourself fo r my exp lana ti on.  You ofte n see k the
+er an d as nob le as that sound s, p rep are yourself fo r my exp lana ti on. You ofte n see k the
 
-ofte n b eli eve there is an  in na te  darkne ss in  the human p syche or that  p eop
+ofte n b eli eve there is an in na te darkne ss in the human p syche or that p eop
 
-le are filled  wit h
+le are filled wit h
 
-ulterior moti ves an d  so  you will d ig an d  d ig un ti l you find  that  d arkne ss or have  effect ively
+ulterior moti ves an d so you will d ig an d d ig un ti l you find that d arkne ss or have effect ively
 
-convin ced  yourself of its p rese nce.  There is ofte n in nat e skepti cism that  figures of authorit y
+convin ced yourself of its p rese nce. There is ofte n in nat e skepti cism that figures of authorit y
 
 á
 
 and that thetruthp erpe tuallyremai nshid d en.
 
-You d ist rust the way history is writ te n.  You always try to rea d  b et ween  the lines and  get  at
+You d ist rust the way history is writ te n. You always try to rea d b et ween the lines and get at
 
 thesubte xt. Yousee consp iracies, b othrea lan d imagine d . And why?Attheheartofit isdeep
 
@@ -2924,51 +2924,51 @@ d ist rust of others. Y
 
 ä
 
-d evelope d  in  your subconscious ea rly on,  sourced  b ack to your mother. In some way,  you r
+d evelope d in your subconscious ea rly on, sourced b ack to your mother. In some way, you r
 
-mother embed d ed  that subconscious d ist rust of others in to you.
+mother embed d ed that subconscious d ist rust of others in to you.
 
 Yet S corp ioen d owsyou rmoon si
 
 gnwit h ag rea td ea lofp ower, an d S co rp ioisrep uted asthe
 
-most p owerful of  the twelve zod ia c signs.  Yet  the S corp io p ower d oes not always en d owed
+most p owerful of the twelve zod ia c signs. Yet the S corp io p ower d oes not always en d owed
 
-the na ti ve wit h an understa nd in g of how to wield  that  p ower,  so it  hurts more ofte n than  it
+the na ti ve wit h an understa nd in g of how to wield that p ower, so it hurts more ofte n than it
 
-helps .  S corp io
+helps . S corp io
 
-moons can  b ecome emotionally self
-
--
-
-d est ructi ve an d  self
+moons can b ecome emotionally self
 
 -
 
-d ep recat in g.  They
+d est ructi ve an d self
+
+-
+
+d ep recat in g. They
 
 á á
 
-loathe i t.  A S corp io moon gives you tremend ous p ower ofp ersuasi on over others.
+loathe i t. A S corp io moon gives you tremend ous p ower ofp ersuasi on over others.
 
 Your moo
 
 á
 
-ope nly acknowled ge.  A S corp io moon can  reveal an  in ner yea rni ng for acq uirin g p ower,
+ope nly acknowled ge. A S corp io moon can reveal an in ner yea rni ng for acq uirin g p ower,
 
-esp ecia lly p ower an d  control over others. No matt er what your sun s ign might b e an d  how
+esp ecia lly p ower an d control over others. No matt er what your sun s ign might b e an d how
 
 you might ap p ea r on the surface to others, the S corp io moon can en d ow one wit h a
 
-subconscious d esi re t oachie ve grea te r p ower than t hose a round  you.
+subconscious d esi re t oachie ve grea te r p ower than t hose a round you.
 
-The S corp io moon can  also b rin g a fascina ti ng  an d  in te nse ly sen sual na ture,  wit h uniq ue
+The S corp io moon can also b rin g a fascina ti ng an d in te nse ly sen sual na ture, wit h uniq ue
 
 id iosyncrasi es o
 
-r p referen ces when it  comes to p ersona l sexuali ty.  The S corp io moon also
+r p referen ces when it comes to p ersona l sexuali ty. The S corp io moon also
 
 in d icatesonewhohasan in vest igati vena tureand whoyea rsto
 
@@ -3018,7 +3018,7 @@ everythin g, whosee ks
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3030,7 +3030,7 @@ tounlockeverym yste ry , whosee kstoacq uireesotericknowled ge, tospecia lizein 
 
 t
 
-few others sp ecia lize or b ecome exp ert in , an d therefore someone  who see ks to b e se t ap art
+few others sp ecia lize or b ecome exp ert in , an d therefore someone who see ks to b e se t ap art
 
 from the p ack.
 
@@ -3044,57 +3044,57 @@ at get ti ngahead
 
 á
 
-und erstan d your own p riorit ie s an d goals,  and  then  focus on truly maste rin g one subject  or
+und erstan d your own p riorit ie s an d goals, and then focus on truly maste rin g one subject or
 
-area.  To help you achieve your life p urp ose,  though,  p
+area. To help you achieve your life p urp ose, though, p
 
-ursue higher educat ion,  seek p ersona l
+ursue higher educat ion, seek p ersona l
 
-sp iritual d evelopmen t, faith,  reli gion,  an d  b e a source of  in sp irati on to others. To feel
+sp iritual d evelopmen t, faith, reli gion, an d b e a source of in sp irati on to others. To feel
 
-conne cted  to your soul  p urp ose,  conne ct to a cause or mo vemen t grea te r than  you,  b eyond
+conne cted to your soul p urp ose, conne ct to a cause or mo vemen t grea te r than you, b eyond
 
-you,  that  you can  contribute  to.
+you, that you can contribute to.
 
-When  y
+When y
 
-the unfamili ar,  an  eclecti c in te rest  in all thin gs from d ifferent  cultures ,  d iffe
+the unfamili ar, an eclecti c in te rest in all thin gs from d ifferent cultures , d iffe
 
 ren t reli gions,
 
-d ifferent  mythologie s,  an d  b asi cally an ythin g that  is d ifferent  from you.
+d ifferent mythologie s, an d b asi cally an ythin g that is d ifferent from you.
 
 á
 
-ope nly acknowled ge.  A S agitt arius moon can  revea l an  in ne r yea rni ng for
+ope nly acknowled ge. A S agitt arius moon can revea l an in ne r yea rni ng for
 
-ad ven ture an d  to
+ad ven ture an d to
 
-b e see n as b eing cosmopolit an ,  all
+b e see n as b eing cosmopolit an , all
 
 -
 
-knowin g,  an d  wise .  You like to gi ve ad vice an d  p art of
+knowin g, an d wise . You like to gi ve ad vice an d p art of
 
 whatful fillsy ousp iritu allyistob eab letogivead vice, tocounse l, toin sp ireothers.H owever,
 
-there can  b e e moti onalrecklessne ss in  one wit h a
+there can b e e moti onalrecklessne ss in one wit h a
 
-S agitt arian  moon.
+S agitt arian moon.
 
-A S agitt arius moon co u ld  in d icate an  ab sen tee mother or  a mother  wh o was mo re foc used
+A S agitt arius moon co u ld in d icate an ab sen tee mother or a mother wh o was mo re foc used
 
-on her exte rna l sp here than her int ernal, d omesti c sphere,  mean in g you.  A S agitt arius moon
+on her exte rna l sp here than her int ernal, d omesti c sphere, mean in g you. A S agitt arius moon
 
 could b ein d icat iveofachild hood overseasora child hood
 
 that in volve d asignifican tamount
 
-of travel.  Yet  there are no hard  feelin gs b et ween  mother an d  child,  esp ecia lly if there are
+of travel. Yet there are no hard feelin gs b et ween mother an d child, esp ecia lly if there are
 
-harmoni ous asp ect s wit h the moon in  your chart.  M other and  child  can  have a grea t
+harmoni ous asp ect s wit h the moon in your chart. M other and child can have a grea t
 
-rela ti onship  irresp ect ive of how the mother ma
+rela ti onship irresp ect ive of how the mother ma
 
 y have chosen t o pa ren t i n your child hood .
 
@@ -3140,7 +3140,7 @@ y have chosen t o pa ren t i n your child hood .
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3148,17 +3148,17 @@ y have chosen t o pa ren t i n your child hood .
 
 19
 
-A Caprico rn  Mo o n
+A Caprico rn Mo o n
 
-A Cap ricorn moon reve als someone  who is cap ab le of scalin g grea t heights,  like the goat
+A Cap ricorn moon reve als someone who is cap ab le of scalin g grea t heights, like the goat
 
-scalin g the mounta in  te rrai n.  To help you achie ve your life p urp o se,  b e a scholar or
+scalin g the mounta in te rrai n. To help you achie ve your life p urp o se, b e a scholar or
 
-p hilosop her,  an d
+p hilosop her, an d
 
-p ursue acad emia  wit h gre at  care an d  d evoti on.  L ea rn p hilosop hy.  A
+p ursue acad emia wit h gre at care an d d evoti on. L ea rn p hilosop hy. A
 
-Cap ricorn moon has th e p ote nt ial for grea t m at erial success an d  wealth.  Cap ricorn moons
+Cap ricorn moon has th e p ote nt ial for grea t m at erial success an d wealth. Cap ricorn moons
 
 ä òá óá
 
@@ -3166,21 +3166,21 @@ thei r
 
 á
 
-communi ty is all ab out the core family unit  an d  mayb e a coup le of fri en d s who are so close
+communi ty is all ab out the core family unit an d mayb e a coup le of fri en d s who are so close
 
 ricorn moons
 
 áá
 
-sta b ili ty.  They wan t sa fety over glo ry.
+sta b ili ty. They wan t sa fety over glo ry.
 
-A Cap ricorn moon cou l d  also in d icat e a d riven,  workaholic  mother, or a mothe r w ho was
+A Cap ricorn moon cou l d also in d icat e a d riven, workaholic mother, or a mothe r w ho was
 
-very muc h focused  o
+very muc h focused o
 
-workaho licmother whe nyousee achild  wit ha Cap ricornmoonsign. A  Cap ricornmooncan
+workaho licmother whe nyousee achild wit ha Cap ricornmoonsign. A Cap ricornmooncan
 
-in d icate a child hood  characte rized  more b y work than  b y p lay.  Here is a child
+in d icate a child hood characte rized more b y work than b y p lay. Here is a child
 
 
 
@@ -3194,7 +3194,7 @@ d evote d muchof
 
 yo urc hild hood top rep aringforyou rf uturep at hof su ccessthan toen j oyin g
 
-your moment  of youth.  Your mother may have p ushed you to be an overachie ver.  Yet  a
+your moment of youth. Your mother may have p ushed you to be an overachie ver. Yet a
 
 Cap ricornmoonisexac tlywh yyou arep oised forsuccess. Thosewit ha Cap ricornmoonare
 
@@ -3202,25 +3202,25 @@ rarel
 
 ò
 
-b y the q uest for glor y a nd  success.
+b y the q uest for glor y a nd success.
 
-The force  associa te d  wit h Cap ricorn is su ch tha t when yo ur moon is in  Cap ricorn,  you see k
+The force associa te d wit h Cap ricorn is su ch tha t when yo ur moon is in Cap ricorn, you see k
 
 consta nt ,conti nualin tellectualan d emo
 
 ti onalsti mulat ion. Youne ed thingstob ehap pen in g.
 
-The worst t hing someo ne  can d o to one wit haCap ricorn moon is t o bore you.  F rom b irth or
+The worst t hing someo ne can d o to one wit haCap ricorn moon is t o bore you. F rom b irth or
 
 á
 
-ambi ti on would  have affect
+ambi ti on would have affect
 
-ed  your values,  so you come to val ue d rive,  ambi ti on,  and
+ed your values, so you come to val ue d rive, ambi ti on, and
 
-d ed icat ion to missions.  You wan t those aro und  you to  b e b usy ai ming at  a ta rget .  This can
+d ed icat ion to missions. You wan t those aro und you to b e b usy ai ming at a ta rget . This can
 
-affect  who  yo u fall  in  lo ve wit h an d  p ote nt ia l suitors.  If  a suitor  b ores you,  it  is the d ea th o f
+affect who yo u fall in lo ve wit h an d p ote nt ia l suitors. If a suitor b ores you, it is the d ea th o f
 
 that rela t
 
@@ -3240,9 +3240,9 @@ higherthan theoneyou wereb ornin to, toharb ord ee p
 
 sea ted secret feeli ngsofin ad eq uacy
 
-when it  comes to your p ercep ti on of your social sta tus or socioeconomic class.  Also,  those
+when it comes to your p ercep ti on of your social sta tus or socioeconomic class. Also, those
 
-wit haCap ricornmoon  d onotsit wellwit hcom in
+wit haCap ricornmoon d onotsit wellwit hcom in
 
 òtä óá
 
@@ -3288,7 +3288,7 @@ wit haCap ricornmoon  d onotsit wellwit hcom in
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3296,9 +3296,9 @@ wit haCap ricornmoon  d onotsit wellwit hcom in
 
 20
 
-comp et it ive nature,  though you ma y b e loathed  to ad mit it  to yourself.  There can  b e a
+comp et it ive nature, though you ma y b e loathed to ad mit it to yourself. There can b e a
 
-subconscious d rive to be the b est at everythin g you d o,  to outd o everyone you know,  an d  to
+subconscious d rive to be the b est at everythin g you d o, to outd o everyone you know, an d to
 
 always seek high achie v emen t.
 
@@ -3306,9 +3306,9 @@ The
 
 famouscomp an yyoukee p asaCap ricornmoonin clud eNap oleonI, GeorgeWashington,
 
-Ab raham Li ncoln,  an d  Ad olf H it ler.
+Ab raham Li ncoln, an d Ad olf H it ler.
 
-An Aquarius  Mo o n
+An Aquarius Mo o n
 
 AnAq uaria nmoonis so meonewhoiseccen tric, avant
 
@@ -3316,7 +3316,7 @@ AnAq uaria nmoonis so meonewhoiseccen tric, avant
 
 gard e, mysti cal, an d willwan ttota ke
 
-the road  less travele d  in life to achie ve your s oul p urp ose.  To help you achie ve in  life,  be
+the road less travele d in life to achie ve your s oul p urp ose. To help you achie ve in life, be
 
 sociallyin volved , sociallyconscious,an d p rogressi ve. Youcan bether
 
@@ -3324,9 +3324,9 @@ ebel. That willta keyou
 
 to where you will wan t to go.
 
-An Aq uarius moon co uld in d icate  an  unconven ti onal child hood  or an  unconven ti onal
+An Aq uarius moon co uld in d icate an unconven ti onal child hood or an unconven ti onal
 
-mother. There could  have b ee n a grea t d ea l of sp irituali ty,  New Age, or holist ic p ract ices in
+mother. There could have b ee n a grea t d ea l of sp irituali ty, New Age, or holist ic p ract ices in
 
 yourho me. Youp roba b ly
 
@@ -3338,7 +3338,7 @@ mind ed , p rogressi vep arent s. Theyen couraged you
 
 tob eafree sp irit. Theyen couraged youto mar chtotheb ea tofyour o wnd rum. AnAq uarius
 
-moon can  ind icat e a mother who gave a lot of free d om to her child
+moon can ind icat e a mother who gave a lot of free d om to her child
 
 
 
@@ -3352,49 +3352,49 @@ grea t world .
 
 **T**
 
-he for ce associa te d  wit h Aq uarius is  such  that  when your  moon is  in  Aq uarius,  your  mind
+he for ce associa te d wit h Aq uarius is such that when your moon is in Aq uarius, your mind
 
-an d  memory look like a curio shop ,  filled  to the b rim wit h kni ck
+an d memory look like a curio shop , filled to the b rim wit h kni ck
 
 -
 
-kna cks of many  variet ie s,
+kna cks of many variet ie s,
 
-from d iverse cultures,  b ack storie s,  or origins,  an d  a collection  of p aradoxi
+from d iverse cultures, b ack storie s, or origins, an d a collection of p aradoxi
 
-cal,  contrad ict in g,
+cal, contrad ict in g,
 
-an d  eclecti c thought.   You collect id ea s from an ywhere an d  everywhe re,  wit h litt le
+an d eclecti c thought. You collect id ea s from an ywhere an d everywhe re, wit h litt le
 
-d iscrimin at ion over whether the id ea is e ven  going to be  useful or not use ful to you.  You are
+d iscrimin at ion over whether the id ea is e ven going to be useful or not use ful to you. You are
 
-an  in te llectual hoard er of p hilosop hies.  Why? At the heart
+an in te llectual hoard er of p hilosop hies. Why? At the heart
 
-o f it ,  one w it h an  Aq uarius mo on
+o f it , one w it h an Aq uarius mo on
 
-is on the consta nt ,  rest less sea rch fo r a highe r p urp ose,  for  the mea ni ng of life.  F or you
+is on the consta nt , rest less sea rch fo r a highe r p urp ose, for the mea ni ng of life. F or you
 
 áá ò
 
-d esp erate to uncover that  mean in g b efore you
+d esp erate to uncover that mean in g b efore you
 
 á
 
-p ossib ili ties and  theorie s everywhere you go.  This can  b e b oth b en efici al an d  it  can b e a
+p ossib ili ties and theorie s everywhere you go. This can b e b oth b en efici al an d it can b e a
 
 -
 
-mind ed,  p rogress
+mind ed, p rogress
 
 -
 
-d riven,  and unb ia sed  to
+d riven, and unb ia sed to
 
-wit h a h ea d  filled  wit h so many d iffering an d  ofte n
+wit h a h ea d filled wit h so many d iffering an d ofte n
 
 ä
 
-Aq uaria n moon ofte n find s a t rue sen se of convict ion t o be  elusive.
+Aq uaria n moon ofte n find s a t rue sen se of convict ion t o be elusive.
 
 á
 
@@ -3442,7 +3442,7 @@ ope nlyacknowled ge. AnAq uaria nmooncan revealan in ne ryea rni ngtoope nlyp ra
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3450,25 +3450,25 @@ ope nlyacknowled ge. AnAq uaria nmooncan revealan in ne ryea rni ngtoope nlyp ra
 
 21
 
-sp irituali sm, to b e a Teacher, a Revolutiona ry L ea d er,  and  to achieve that
+sp irituali sm, to b e a Teacher, a Revolutiona ry L ea d er, and to achieve that
 
 which serves a
 
-grea te r good.  These  asp irati ons d rive you and  when accomp lished , b rin g you a sen se of
+grea te r good. These asp irati ons d rive you and when accomp lished , b rin g you a sen se of
 
 emotion al fulfillment .
 
-A Pisces  Mo o n
+A Pisces Mo o n
 
-Wit h a Pi sces moon, you are an ythin g that others wan t you to b e,  and that  might j ust b e the
+Wit h a Pi sces moon, you are an ythin g that others wan t you to b e, and that might j ust b e the
 
-grea te st source of  i
+grea te st source of i
 
-nn er conflict in  yo ur life.  The Pi sces moon mean s you wan t to p lea se
+nn er conflict in yo ur life. The Pi sces moon mean s you wan t to p lea se
 
-others, often  at t he expen se of who you rea lly are.  You area chameleon who will ta ke on t he
+others, often at t he expen se of who you rea lly are. You area chameleon who will ta ke on t he
 
-colors of your en viron ment .  F orget  whether others know who you tr uly are
+colors of your en viron ment . F orget whether others know who you tr uly are
 
 
 
@@ -3480,17 +3480,17 @@ even
 
 know? To
 
-achie ve you r  life p urp ose,  b e more ground ed ,  pay at te ntion to in tuitive d rea ms,
+achie ve you r life p urp ose, b e more ground ed , pay at te ntion to in tuitive d rea ms,
 
-p ursue sp irituali ty,  fai th,  an d  reli gion, an d  find yourself.
+p ursue sp irituali ty, fai th, an d reli gion, an d find yourself.
 
-That  b ei ng said , b ei ng a chamele on is why you are so successful,  an d bei ng that  chamele on
+That b ei ng said , b ei ng a chamele on is why you are so successful, an d bei ng that chamele on
 
 ishowyo uaccomp lishm
 
 an yofyo urgoals. S ocially, youknowho wtoc ond uctyourselfin an y
 
-sit uati on,  and  you know how to p ut on a  p erfect  p erformance  to get  you r goals achieved .
+sit uati on, and you know how to p ut on a p erfect p erformance to get you r goals achieved .
 
 APi scesmooncould sh owasen sit ivechild , onewhomayha vehad afra giled isp ositi on. Your
 
@@ -3500,23 +3500,23 @@ rwasp roba b lyagrea thumani ta ria n, someone d ee p lyin tuitive, crea ti ve, 
 
 agrea tsen seof imagina ti onan d visi on, an d shep asse d thosetrait sontoyou, which arenow
 
-lat en t in you and  can be mani fested  as grea t blessin gs should you choose t
+lat en t in you and can be mani fested as grea t blessin gs should you choose t
 
 o harne ss those
 
-gifts.  Those wit h a Pi sces moon may suffer  from the Cassa nd ra comp lex,  a p ersona l
+gifts. Those wit h a Pi sces moon may suffer from the Cassa nd ra comp lex, a p ersona l
 
-p sychological p henome non where those aroun d  you ofte n try  to d iscr ed it  your p rophe ti c
+p sychological p henome non where those aroun d you ofte n try to d iscr ed it your p rophe ti c
 
 ab ili ti esoryour hunche s. Youget a hunch ab outhow thin gsmi ghttu rno
 
 ut, rela ythat hunch
 
-to those around  you,  b ut are d ismissed  or not beli eved .  Then,  as i s almost always the result,
+to those around you, b ut are d ismissed or not beli eved . Then, as i s almost always the result,
 
-the si tuat ion t urns outexactly as your hunch s ai d  it  would  turn out.
+the si tuat ion t urns outexactly as your hunch s ai d it would turn out.
 
-When  the moon is in  Pisces,  much is hid den  from vie w,  kep t in  the d ark
+When the moon is in Pisces, much is hid den from vie w, kep t in the d ark
 
 recesse s of the
 
@@ -3530,9 +3530,9 @@ ad ulthood.
 
 ope nlyacknowled ge. APi scesmooncan revealasubconsciousyea rni ngtoward mart yrd om.
 
-The Pi scean  moon can  b rin g
+The Pi scean moon can b rin g
 
-unrea list ic exp ectat ions and  lofty d rea ms to a na ti ve. We see
+unrea list ic exp ectat ions and lofty d rea ms to a na ti ve. We see
 
 **T**
 
@@ -3576,7 +3576,7 @@ unrea list ic exp ectat ions and  lofty d rea ms to a na ti ve. We see
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3584,15 +3584,15 @@ unrea list ic exp ectat ions and  lofty d rea ms to a na ti ve. We see
 
 22
 
-someone  b y na ture sen sit ive,  comp assi onate ,  and  kin d ,  b ut p erhap s a b it  too na ïve for this
+someone b y na ture sen sit ive, comp assi onate , and kin d , b ut p erhap s a b it too na ïve for this
 
-harsh,  unrele nt in g worl d .
+harsh, unrele nt in g worl d .
 
-Th e Sect Plac ement of  Yo ur  M oo n Sign
+Th e Sect Plac ement of Yo ur M oo n Sign
 
-In H ell enist ic astrology, the sect of a planet or lum inary matters. S ect placement will  alt er the
+In H ell enist ic astrology, the sect of a planet or lum inary matters. S ect placement will alt er the
 
-quali ty of a planet or lum inary in your cha rt. The s ects ar e the two halves o f  the horoscopic ch art.
+quali ty of a planet or lum inary in your cha rt. The s ects ar e the two halves o f the horoscopic ch art.
 
 The
 
@@ -3602,15 +3602,15 @@ is the sout hern hemi spher e, fro m the m
 
 oment the sun ri ses in the e ast to just
 
-before it  sets i n the w est. The diurnal sect consi sts  of houses 7, 8, 9, 10, 11, and 12.
+before it sets i n the w est. The diurnal sect consi sts of houses 7, 8, 9, 10, 11, and 12.
 
 The
 
 n octurn al
 
-se ct is th e northe rn hemi sphe re, fr om the mom ent the sun  s ets below the  west ern
+se ct is th e northe rn hemi sphe re, fr om the mom ent the sun s ets below the west ern
 
-horizon to the mom ent it  rises
+horizon to the mom ent it rises
 
 again in th e east. Th e nocturnal s ect sp ans ac ross houses 1, 2, 3, 4,
 
@@ -3618,7 +3618,7 @@ again in th e east. Th e nocturnal s ect sp ans ac ross houses 1, 2, 3, 4,
 
 Id enti fy
 
-the s ect pl aceme nt of your  moon sign. If  your moon is in the  top h alf of  your birth cha rt,
+the s ect pl aceme nt of your moon sign. If your moon is in the top h alf of your birth cha rt,
 
 then you have a diurn al moon. If you r birth cha rt is located in the bott om
 
@@ -3626,15 +3626,15 @@ half of your ch art, then
 
 you would say that you have a no cturnal m oon.
 
-A Diurnal  Mo o n
+A Diurnal Mo o n
 
 A diurnal natal moon me ans that your moon sign trait s repres ent untapped, latent aspects of your
 
-inner pe rsonali ty that onl y comes to li ght and  man ifests  in physi cal fo rm w hen you wo rk at it .
+inner pe rsonali ty that onl y comes to li ght and man ifests in physi cal fo rm w hen you wo rk at it .
 
 In
 
-other words, you will  resonate more strongly with your sun si
+other words, you will resonate more strongly with your sun si
 
 gn and even ascendant (risi ng) sign
 
@@ -3646,7 +3646,7 @@ of your person ali ty unt il after your mid
 
 30s.
 
-han you will  on
+han you will on
 
 belongi ng. The indi cati ons of your moon sign (the zodiac sign that your m oon is domi cil ed in) is
 
@@ -3704,7 +3704,7 @@ the nocturnal se ct.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3716,27 +3716,27 @@ A Noctu rna l Mo o n
 
 A nocturnal natal moon is said to be an auspi cious placement, and wi
 
-ll  e ndow you with certain
+ll e ndow you with certain
 
-windfall s, or unexp ected  gains and good fortune in  the cours e of you r life p ath. Als o, the strength
+windfall s, or unexp ected gains and good fortune in the cours e of you r life p ath. Als o, the strength
 
 andinfluenceo fyourmo onsignwill bemorepro mi nentintheformationofyourinnerp ersonali ty.
 
-In trad it iona l ast rology,  a na
+In trad it iona l ast rology, a na
 
-p ositi on,  or is a command in g sign.  A nocturna l moon shows som eone  who may have
+p ositi on, or is a command in g sign. A nocturna l moon shows som eone who may have
 
-in herit ed  a more self
+in herit ed a more self
 
 -
 
-orie nt ed  p erspect ive from your mother, in  the sense that  you strive to
+orie nt ed p erspect ive from your mother, in the sense that you strive to
 
-acq uire a sset s,  achie vehi
+acq uire a sset s, achie vehi
 
-gh stat us,  or accomp li sh grea t t hings just so  y ou can  fee l a se nse  of
+gh stat us, or accomp li sh grea t t hings just so y ou can fee l a se nse of
 
-vali d at ion a nd  self
+vali d at ion a nd self
 
 -
 
@@ -3750,13 +3750,13 @@ worthb y
 
 á
 
-en surin g your o wn fina ncia l ind ep end en ce so you also main ta in  control.
+en surin g your o wn fina ncia l ind ep end en ce so you also main ta in control.
 
-Hou se Domic ile o f Yo ur  Moo n
+Hou se Domic ile o f Yo ur Moo n
 
 Theastrologi calhouseamoonsignisdomiciledinchangesev ery2to3hours.Gener all yspeaking,
 
-the house will  offer further insi ght int o which areas of li fe your moon sign is going to have the
+the house will offer further insi ght int o which areas of li fe your moon sign is going to have the
 
 most im pacton.Herewewill a
 
@@ -3776,7 +3776,7 @@ b irthchart.
 
 sá ä
 
-houses are imp orta nt .  They strike at  the core o f  who you  are.  H ouse 1 i s also the ascen d an t
+houses are imp orta nt . They strike at the core o f who you are. H ouse 1 i s also the ascen d an t
 
 **T**
 
@@ -3820,7 +3820,7 @@ houses are imp orta nt .  They strike at  the core o f  who you  are.  H ouse 1 
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3830,21 +3830,21 @@ houses are imp orta nt .  They strike at  the core o f  who you  are.  H ouse 1 
 
 house.
 
-Pla ne ts in  angular houses are going to factor in  more p romin en tly in  te rms of the
+Pla ne ts in angular houses are going to factor in more p romin en tly in te rms of the
 
 ó
 
-Those wit h a moon in  the ascen d ant  house may b e frai ler in  health an d  have a p aler
+Those wit h a moon in the ascen d ant house may b e frai ler in health an d have a p aler
 
-comp lexion.  Wit h a moon in  the asce
+comp lexion. Wit h a moon in the asce
 
 ò óä
 
 áá
 
-to occur  in  ad ult
+to occur in ad ult
 
-hood .  A moon in  the a scend an t house is a n i nd icat ion of one who  is a tt uned
+hood . A moon in the a scend an t house is a n i nd icat ion of one who is a tt uned
 
 á
 
@@ -3852,19 +3852,19 @@ rese mble your b iologic al mother, an d will ta ke your d omin an t trait s fro
 
 tr
 
-ad it iona l ast rology,  a moon in  the first house is in te rp ret ed  as a strong b ond  bet wee n
+ad it iona l ast rology, a moon in the first house is in te rp ret ed as a strong b ond bet wee n
 
-mother and  child .
+mother and child .
 
 Amoonin theascend anthousecan alsoind icatean in herita nceofint uiti veorp sychicab ili ty
 
-from the mate rna l line .  You are a roman ti c at  hea rt,  t
+from the mate rna l line . You are a roman ti c at hea rt, t
 
-hough,  and  ne ed  to ta ke care that  you
+hough, and ne ed to ta ke care that you
 
-d o not roman ti cize the rea l world .  Those wit h a moon in  the ascend an t house are grea t
+d o not roman ti cize the rea l world . Those wit h a moon in the ascend an t house are grea t
 
-storyte llers, wou ld writ ein te rest in gnovels, an d aregoingto b ehigh ly  tune d in tothei rown
+storyte llers, wou ld writ ein te rest in gnovels, an d aregoingto b ehigh ly tune d in tothei rown
 
 in tuit ions.
 
@@ -3872,51 +3872,51 @@ M o o n in Ho use 2
 
 The moo
 
-in d icat ors to asse ss how they thin k or how th ey will b ehave so we can  b est  na vigate  that
+in d icat ors to asse ss how they thin k or how th ey will b ehave so we can b est na vigate that
 
-social rela ti onship  to our own ad van ta ge.  The  moon go verns social i nt uiti on.  Where that
+social rela ti onship to our own ad van ta ge. The moon go verns social i nt uiti on. Where that
 
 lu
 
-mina ry is p ositi oned in  a na ta l chart will b ring social in tuit ion and  a stronger emotion al
+mina ry is p ositi oned in a na ta l chart will b ring social in tuit ion and a stronger emotion al
 
-in te lligen ce for that  area of life.
+in te lligen ce for that area of life.
 
-H ere,  in H ouse 2,  you have an  in nate  kna ck for mone y makin g an d  gatherin g resources.  A
+H ere, in H ouse 2, you have an in nate kna ck for mone y makin g an d gatherin g resources. A
 
 moonin thishouse coul d in d icatesomeon
 
 ewh owould d owellp layin g thestockma rket . You
 
-have a na tural,  inexp licab le in tuition for thin gs rela te d  to money,  wea lth,  and  in vest ments.
+have a na tural, inexp licab le in tuition for thin gs rela te d to money, wea lth, and in vest ments.
 
-You can  see  this in  suc h nota b le figures  as Th eod ore Roosevelt,  Ka rl M arx,  Vlad imir L en in ,
+You can see this in suc h nota b le figures as Th eod ore Roosevelt, Ka rl M arx, Vlad imir L en in ,
 
-Angela M erkel,  M artha
+Angela M erkel, M artha
 
-S te wart,  or the multi
+S te wart, or the multi
 
 -
 
-b i lliona ire an d  E nglish en trep ren eur Richard
+b i lliona ire an d E nglish en trep ren eur Richard
 
-Bran son,  who all are sai d  to have their moons in  the second  house, like you.  All of these
+Bran son, who all are sai d to have their moons in the second house, like you. All of these
 
-na med  figures have so methin g in  common:  an  in cred ib le command  over mone y  matt ers,
+na med figures have so methin g in common: an in cred ib le command over mone y matt ers,
 
-economics,  an d  we
+economics, an d we
 
 alt h.
 
-The moon in  the se cond  house is a lso a sign of workin g  wit h the lan d  an d  na tural resources,
+The moon in the se cond house is a lso a sign of workin g wit h the lan d an d na tural resources,
 
-such as through the scien ces,  chemistry,  understa nd in g the ea rth, animals,  or workin g in
+such as through the scien ces, chemistry, understa nd in g the ea rth, animals, or workin g in
 
-areas relat in g tothe e arth.  Thin k: M arie Curie , Jea n P aulS artre, a
+areas relat in g tothe e arth. Thin k: M arie Curie , Jea n P aulS artre, a
 
-nd Charles Darwin ,  who all
+nd Charles Darwin , who all
 
-have a  second  house moon.
+have a second house moon.
 
 **T**
 
@@ -3960,7 +3960,7 @@ have a  second  house moon.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -3970,29 +3970,29 @@ have a  second  house moon.
 
 M o o n in Ho use 3
 
-H ouse 3 is a cad en t house,  which in d icate s area s of lea rni ng for us,  areas where we must
+H ouse 3 is a cad en t house, which in d icate s area s of lea rni ng for us, areas where we must
 
-transform oursel ves,  gr ow,  imp rove,  an d  further d evelop from wea kn ess to strength. The
+transform oursel ves, gr ow, imp rove, an d further d evelop from wea kn ess to strength. The
 
-third house is r uled  b y M ercury an d  the ele me nt  Air. This is  the hous e of com muni cat ions
+third house is r uled b y M ercury an d the ele me nt Air. This is the hous e of com muni cat ions
 
-an d  in te llect.  It will  note  how you  thin k an d  th en  how you communi c at e what you  thin k to
+an d in te llect. It will note how you thin k an d th en how you communi c at e what you thin k to
 
-others. Trad it iona lly it  is also the house of sib lings and  ea rly child hood.
+others. Trad it iona lly it is also the house of sib lings and ea rly child hood.
 
 **A**
 
-moon in  the  third hou se b rin gs imagina ti on,  crea ti vit y,  an d  an  emotiona l te mpe ramen t to
+moon in the third hou se b rin gs imagina ti on, crea ti vit y, an d an emotiona l te mpe ramen t to
 
-your in te llecti ons.  There is also a p ositi ve,  healthy b ala nce b et wee n logic an d  emotion  here.
+your in te llecti ons. There is also a p ositi ve, healthy b ala nce b et wee n logic an d emotion here.
 
 â
 
 ma ke d ecisi ons
 
-swayed  exclusively b y e moti on.  You fin d  a harmoni zin g synt hesis of both.
+swayed exclusively b y e moti on. You fin d a harmoni zin g synt hesis of both.
 
-In trad it iona l ast rology,  the moon rep rese nt s the mother, or  mate rna l in fluence  on a child .
+In trad it iona l ast rology, the moon rep rese nt s the mother, or mate rna l in fluence on a child .
 
 Thethirdhouseistheh ouseofsib lings. Thus, w it hyourmo onin thethi
 
@@ -4008,35 +4008,35 @@ H ere, wealsosee amotherormotherfig urehe avilyin volved wit hyou rchild hood ed
 
 M o o n in Ho use 4
 
-In t rad it iona l ast rology,  a
+In t rad it iona l ast rology, a
 
-moon in  the fourth house was ti ed  to land  owne rship ,  est ates,  and
+moon in the fourth house was ti ed to land owne rship , est ates, and
 
-in herit an ces,  an d  so such an  in d ivid ual would  b e rea d  as one who d escend s from a line  of
+in herit an ces, an d so such an in d ivid ual would b e rea d as one who d escend s from a line of
 
-land lord s or land owners,  an d you would  have b ee n b orn i nt o a family of rat her well rep ute
+land lord s or land owners, an d you would have b ee n b orn i nt o a family of rat her well rep ute
 
-in  societ
+in societ
 
-y.  In mod ern d ay te rms, the fo urth ho use moon is rea d  as a strong in d icat or of a
+y. In mod ern d ay te rms, the fo urth ho use moon is rea d as a strong in d icat or of a
 
-sta b le, fulfillin g home.  You may b e one who is more in troverted , who en j oys to sta y home,
+sta b le, fulfillin g home. You may b e one who is more in troverted , who en j oys to sta y home,
 
-who values family ab ove everythin g else,  and who likely had  an emotion ally supp orti ve
+who values family ab ove everythin g else, and who likely had an emotion ally supp orti ve
 
 mother throu ghout yo u r child hood .
 
 Allthat b ei ngsai d , H ouse4isaWat erho use, an d themoonisassocia te d wit hWat eraswell.
 
-Thus,  there could  b e hei ghten ed emotion al sen sit ivity here. You were b orn wit h strong
+Thus, there could b e hei ghten ed emotion al sen sit ivity here. You were b orn wit h strong
 
-in tuit ive ab ili ties,  a sp irit ual na ture,
+in tuit ive ab ili ties, a sp irit ual na ture,
 
-an d  a very  kin d ,  comp assi onat e,  an d  emp at heti c heart.
+an d a very kin d , comp assi onat e, an d emp at heti c heart.
 
-Your rela ti onship  wit h your mother has allowe d  you to feel safe i n vulnerabi lity,  and  so you
+Your rela ti onship wit h your mother has allowe d you to feel safe i n vulnerabi lity, and so you
 
-are more li kely to b e e mbracin g of you r vu lne rab le,  sen sitive na ture.
+are more li kely to b e e mbracin g of you r vu lne rab le, sen sitive na ture.
 
 M o o n in Ho use 5
 
@@ -4044,13 +4044,13 @@ H ouse 5 is the hous
 
 ä
 
-The first way in  which a moon in  the fifth
+The first way in which a moon in the fifth
 
 mani festsisvit ali tyin physicalstrength.H ereissomeone whohasana t uralp red ilect
 
 ionfor
 
-at hleti cs,  sp orts,  fitne ss,  p hysical health an d  nutriti on,  and  matt ers rela ti ng to fine
+at hleti cs, sp orts, fitne ss, p hysical health an d nutriti on, and matt ers rela ti ng to fine
 
 -
 
@@ -4058,11 +4058,11 @@ tuni ng a
 
 p hysical b od y.
 
-The second  way in which a moon in  the fifth mani fests is vit ali ty in crea ti ve
+The second way in which a moon in the fifth mani fests is vit ali ty in crea ti ve
 
-strength. H ere is someone  who is lo ves the ar ts an d  cultur
+strength. H ere is someone who is lo ves the ar ts an d cultur
 
-e.  H ere is someone  who can  get
+e. H ere is someone who can get
 
 **T**
 
@@ -4106,7 +4106,7 @@ e.  H ere is someone  who can  get
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4116,15 +4116,15 @@ e.  H ere is someone  who can  get
 
 lostforhoursat an artmuseum, galleryofhist oricalreli cs, wholovesan d ap p recia tesallthat
 
-human i ngenuit y can  p rod uce.
+human i ngenuit y can p rod uce.
 
 Amoonin H ouse5can ofte nb ean in dicat orofap arent whohasmorethan onechild. (Inthe
 
 inc
 
-id en ces of a sin gle child ,  the mother may have had  an  ab orti on or lat e miscarria ge of a
+id en ces of a sin gle child , the mother may have had an ab orti on or lat e miscarria ge of a
 
-child  that  might otherwise  have b ee n carried  to te rm.) Whet her that  d escribes you as a
+child that might otherwise have b ee n carried to te rm.) Whet her that d escribes you as a
 
 á
 
@@ -4132,65 +4132,65 @@ d ivid uals
 
 wit h a fifth house moon .
 
-Also,  a fifth house moon  can  in d icate one  who has more t han one  child  or,  in  the a lte rna ti ve,
+Also, a fifth house moon can in d icate one who has more t han one child or, in the a lte rna ti ve,
 
 òóä
 
 Accord in g to ast rologer Willia m L i
 
-lly,  the nata l moon in  the fifth house was a sign of
+lly, the nata l moon in the fifth house was a sign of
 
-ferti lity/virility an d  frui tfulne ss for child
+ferti lity/virility an d frui tfulne ss for child
 
 -
 
 b ea rin g.
 
-to the concep t of romance.  It may take you some ti me t
+to the concep t of romance. It may take you some ti me t
 
 o red irect all the en ergy you funn el
 
-in to flee ti ng roman ti c r ela ti ons in to a more p rod ucti ve an d  crea ti ve outle t.  A moon in  the
+in to flee ti ng roman ti c r ela ti ons in to a more p rod ucti ve an d crea ti ve outle t. A moon in the
 
-fifth house is a strong  in d icat or of artist ic ab ility an d  crea ti vit y.  Pa ired  wit h that  roman ti c
+fifth house is a strong in d icat or of artist ic ab ility an d crea ti vit y. Pa ired wit h that roman ti c
 
-mind  an d  bea utiful imagina ti on a
+mind an d bea utiful imagina ti on a
 
-nd  you have the formula for an  i ncred ib le storyte ller,
+nd you have the formula for an i ncred ib le storyte ller,
 
-whether that  sto ryte lli ng will  b e d one throu g h music,  d an ce,  the vis ual arts,  or  w rit in g.  A
+whether that sto ryte lli ng will b e d one throu g h music, d an ce, the vis ual arts, or w rit in g. A
 
-moon in  the fifth hou se can  also suggest  one who b ecomes cod ep en den t in  roman tic
+moon in the fifth hou se can also suggest one who b ecomes cod ep en den t in roman tic
 
 rela ti ons
 
 
 
-your p artne rs rat her than  allow them to g row at  thei r own will.
+your p artne rs rat her than allow them to g row at thei r own will.
 
 M o o n in Ho use 6
 
-The sixth house is r uled  b y M ercury an d  the ele ment  ea rth.  It is the house that  b est  d en ote s
+The sixth house is r uled b y M ercury an d the ele ment ea rth. It is the house that b est d en ote s
 
 ourever yd aylife, them und an e, ourd ai lywo rk, ourlab ors, an d our j ob. Thisis
 
 alsotheho use
 
-that  offers in sights in to our p hysical health,  b od y,  an d  wellne ss.  A moon in  the sixth house
+that offers in sights in to our p hysical health, b od y, an d wellne ss. A moon in the sixth house
 
-can  p lace a lot of emotional stress on your d ai ly life,  so ment al wellness is ofte n a concern
+can p lace a lot of emotional stress on your d ai ly life, so ment al wellness is ofte n a concern
 
-can  b e a tenden cy toward  an xie ty,
+can b e a tenden cy toward an xie ty,
 
-d ep ressi on,  melancholy,  feelin gs of en nui,  social isolat ion,  or und ue emotion al stress wit h a
+d ep ressi on, melancholy, feelin gs of en nui, social isolat ion, or und ue emotion al stress wit h a
 
-moon in  the si xth,  so these  are areas t o be  mind ful of.
+moon in the si xth, so these are areas t o be mind ful of.
 
 xá
 
 figure, wesee someone growin gupwit hei therasin glemother,workin gmother,oramother
 
-so in volved  in  meni al,  lab orious,  d ai ly work o f some na ture that  she might not
+so in volved in meni al, lab orious, d ai ly work o f some na ture that she might not
 
 have had
 
@@ -4202,15 +4202,15 @@ p erson. Youtriedhard tob eofservicetoyourf amily. This
 
 lea d syoutob ecomean ad ultwho
 
-tries to service e veryo ne  everywhe re,  in  ever y asp ect  of your  life,  w hether it  is w ork  an d
+tries to service e veryo ne everywhe re, in ever y asp ect of your life, w hether it is w ork an d
 
-caree r or ho me an d  family.  A moon in  the sixt h house is ofte n an  in d icat or of someone  w ho
+caree r or ho me an d family. A moon in the sixt h house is ofte n an in d icat or of someone w ho
 
 istryin gtohaveit all. Youaretryin gt
 
 oohard tob etoomanythin gstotoomanyp eop le.You
 
-must lea rn t o say no,  asse rt yourself,  an d  sta nd your ground .
+must lea rn t o say no, asse rt yourself, an d sta nd your ground .
 
 **T**
 
@@ -4254,7 +4254,7 @@ must lea rn t o say no,  asse rt yourself,  an d  sta nd your ground .
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4272,23 +4272,23 @@ othersaresob usyalrea d ythat youmustkee p
 
 q uiet , notmakeagrea te rfuss, an d totrytob e
 
-helpful.  That  child hood  conscie nt iousness translat es in to ad ulthood passi ven ess,  however.
+helpful. That child hood conscie nt iousness translat es in to ad ulthood passi ven ess, however.
 
-You en d  up  let tin g p eop le trample  all over you,  especia lly in  the workp lace.  You must lea rn
+You en d up let tin g p eop le trample all over you, especia lly in the workp lace. You must lea rn
 
 to a ssert yourself if y ou
 
-see k p romotion s an d  advan cement s.
+see k p romotion s an d advan cement s.
 
 M o o n in Ho use 7
 
-H ouse 7 is the ho use of p artne rship s.  A moon in  the se ven th house i nd icat es on e who nee d s
+H ouse 7 is the ho use of p artne rship s. A moon in the se ven th house i nd icat es on e who nee d s
 
 tob ein arela tionship, nee d stofeelloved, tofeelwhole. Youareq uite reli an tonyourp artne r
 
-in  your d omes
+in your d omes
 
-ti c rela ti onship s.  This could  b e a trait  that  comes,  wh et her consciously o r
+ti c rela ti onship s. This could b e a trait that comes, wh et her consciously o r
 
 subconsciously
 
@@ -4300,31 +4300,31 @@ most l ikely subconsciously
 
 f rom your m other, who may have also b ee n
 
-q uite  reli an t and  d ep end en t in  her marria ge or rela ti onship s. M uch of your emotion al life
+q uite reli an t and d ep end en t in her marria ge or rela ti onship s. M uch of your emotion al life
 
 revolve
 
-s around  p artne rship s an d  how you rel at e t o pe ople on on  one.
+s around p artne rship s an d how you rel at e t o pe ople on on one.
 
-In trad it iona l ast rology,  men wit h a moon in House 7 are b eli eved to look for sp ouses who
+In trad it iona l ast rology, men wit h a moon in House 7 are b eli eved to look for sp ouses who
 
-remin d  them of thei r m others. Women  wit h a moon in  H ouse 7 te nd  t o ta ke on a m othering
+remin d them of thei r m others. Women wit h a moon in H ouse 7 te nd t o ta ke on a m othering
 
-role in  thei r s
+role in thei r s
 
-ocial a nd  roman ti c rela ti onship s,  and  are ofte n overly
+ocial a nd roman ti c rela ti onship s, and are ofte n overly
 
 -
 
-nurturin g an d  at tent ive.
+nurturin g an d at tent ive.
 
-Overall, a moon in  H ouse 7 is the sign of a d eep ly emp at hic rela ti onship  b et wee n you and
+Overall, a moon in H ouse 7 is the sign of a d eep ly emp at hic rela ti onship b et wee n you and
 
-your life p artne r.  You c an  feel an d  know what your p artne r is thin kin g.  Un fortuna te ly,
+your life p artne r. You c an feel an d know what your p artne r is thin kin g. Un fortuna te ly,
 
-it  is
+it is
 
-ofte n d ifficult for you t o sep arate  out what it  is your p artne r is feelin g an d  what it  is
+ofte n d ifficult for you t o sep arate out what it is your p artne r is feelin g an d what it is
 
 ï
 
@@ -4332,49 +4332,49 @@ feelin g
 
 
 
-b oth b ecome one an d  the same in sid e of you.  You  very  much  ab sorb  your p artne r
+b oth b ecome one an d the same in sid e of you. You very much ab sorb your p artne r
 
 in to your consciousnes s.
 
-If there are no opp ositi ons to the moon,  s
+If there are no opp ositi ons to the moon, s
 
 trong p rosp ect s for
 
-marria ge an d  social success.
+marria ge an d social success.
 
-H owever,  if there is an  opp ositi on to your moon,  mean in g a
+H owever, if there is an opp ositi on to your moon, mean in g a
 
-p lane t is p ositi oned  at exactly 180
+p lane t is p ositi oned at exactly 180
 
 °
 
-f rom you r  moon in  H ouse 7,  then you can  b e at risk of
+f rom you r moon in H ouse 7, then you can b e at risk of
 
 losing you r sen se of p ersona l id en ti ty whenever yo u en te r
 
-in to a d ee p ly committ ed  or
+in to a d ee p ly committ ed or
 
-in te nse  roman ti c rela tionship .
+in te nse roman ti c rela tionship .
 
 M o o n in Ho use 8
 
-They say that  those wi th a moon in  H ouse 8 are likely to exp erien c e p rofound  emotion al
+They say that those wi th a moon in H ouse 8 are likely to exp erien c e p rofound emotion al
 
-cat harsis at  significan t p oint s in your life.  We may see a more d ifficult an d  emotion ally
+cat harsis at significan t p oint s in your life. We may see a more d ifficult an d emotion ally
 
 i
 
 nt en sechild hood here. Therecan b eacomp licat ed rela ti onship wit hyourb iologicalm other.
 
-The mother may have  b ee n a n i nt en sely emotion al or emotion ally volat ile i nd ivid ual,  which
+The mother may have b ee n a n i nt en sely emotion al or emotion ally volat ile i nd ivid ual, which
 
-would  have a ffect ed  your p syche.
+would have a ffect ed your p syche.
 
-An ei ghth house moon can  ind icat e p erson
+An ei ghth house moon can ind icat e p erson
 
-al in securit y that  is hard to shake off d ue to
+al in securit y that is hard to shake off d ue to
 
-child hood  exp erien ces of not feelin g p rote cted  or ad eq uate ly nurtur ed .  Yet those wit h a
+child hood exp erien ces of not feelin g p rote cted or ad eq uate ly nurtur ed . Yet those wit h a
 
 moonin theei ghthhou semayexp erien ceap ositi veturni ngp oint in theirlivesaround thei r
 
@@ -4390,9 +4390,9 @@ lat e30sorea rly40s
 
 . Amoonin theeighthhousecan alsoind icateoccult, p aranormal,
 
-or supe rna tural exp erien ces,  traits,  or ab ili ties traced  through the mate rna l line  that  you
+or supe rna tural exp erien ces, traits, or ab ili ties traced through the mate rna l line that you
 
-d escend  from.
+d escend from.
 
 **T**
 
@@ -4436,7 +4436,7 @@ d escend  from.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4456,7 +4456,7 @@ in cline d toexp lore
 
 reli gion, p hilosop hy, an d
 
-mysti cism.  H ouse 9 moons have remarkab le p sychic or mysti cal exp erien ces or int uiti ve
+mysti cism. H ouse 9 moons have remarkab le p sychic or mysti cal exp erien ces or int uiti ve
 
 d rea ms,and sothat isworthexp lorin gfu rther. Whet herornotyoup u r suehighered ucat ion
 
@@ -4464,27 +4464,27 @@ through trad it iona l insti tuti ons, you are going to p
 
 ush yourself always to p ursue
 
-in d ep en den t stud y of the highest calib er.  You have a na tural in te rest  for lea rni ng ab out the
+in d ep en den t stud y of the highest calib er. You have a na tural in te rest for lea rni ng ab out the
 
-world  around  you  an d  will ofte n en gage in  m od es of self stud y to b et te r und erstan d  that
+world around you an d will ofte n en gage in m od es of self stud y to b et te r und erstan d that
 
 world .
 
-F or those wit h a moon in  H ouse 9,  con
+F or those wit h a moon in H ouse 9, con
 
 sid er overseas travel or the exp lorat ion of cultures
 
-very d ifferent  f rom yo ur own.  Doin g  so ofte n  b rin gs you  closer to  the opp ortuni ti es and
+very d ifferent f rom yo ur own. Doin g so ofte n b rin gs you closer to the opp ortuni ti es and
 
-mysti cal und erstan d ing that you seek.  Travel and  cultural exp lorat ionwill help  you gai n t he
+mysti cal und erstan d ing that you seek. Travel and cultural exp lorat ionwill help you gai n t he
 
 in tuit ive and sp iritua
 
-l insi ghts you see k.  Your p at h is going to be very much conne cted  to
+l insi ghts you see k. Your p at h is going to be very much conne cted to
 
-exp lorat ion a nd  expan sion.
+exp lorat ion a nd expan sion.
 
-In trad it iona l ast rology,  the moon rep resent s the mother an d  the ninth house is our values,
+In trad it iona l ast rology, the moon rep resent s the mother an d the ninth house is our values,
 
 b eli efs, an d convict ions.Thus, am oonin theni n thhousecan in d i
 
@@ -4494,41 +4494,41 @@ of
 
 your
 
-b eli ef syste ms an d  persona l gnosis through the mother. You r sp iritual vie w of the
+b eli ef syste ms an d persona l gnosis through the mother. You r sp iritual vie w of the
 
 ä
 
-A moon in  the ni nt h h ouse can  also in d icat e a m
+A moon in the ni nt h h ouse can also in d icat e a m
 
-other who  immigra te s from a d ifferent
+other who immigra te s from a d ifferent
 
-culture or societ y in to a  ne w one,  the culture or societ y you,  the n at ive, grows up i n.
+culture or societ y in to a ne w one, the culture or societ y you, the n at ive, grows up i n.
 
 M o o n in Ho use 1 0
 
 in d icat ors to asse ss how th
 
-ey thin k or how th ey will b ehave so we can  b est  na vigate  that
+ey thin k or how th ey will b ehave so we can b est na vigate that
 
-social rela ti onship  to our own ad van ta ge.  The  moon go verns social i nt uiti on.  Where that
+social rela ti onship to our own ad van ta ge. The moon go verns social i nt uiti on. Where that
 
-lumin ary is p ositi oned in  a na ta l chart will b ring social in tuit ion and  a stronger emotion al
+lumin ary is p ositi oned in a na ta l chart will b ring social in tuit ion and a stronger emotion al
 
 in te lligen ce
 
-for that  area of life.  H ere,  in H ouse 10,  the moon in dicat es strong p ote nt ia l for
+for that area of life. H ere, in H ouse 10, the moon in dicat es strong p ote nt ia l for
 
-using social in tuit ion in your p rofessi on or caree r p at h to make grea t strid es. When  makin g
+using social in tuit ion in your p rofessi on or caree r p at h to make grea t strid es. When makin g
 
-caree r or b usine ss d ecisions,  always trust you r in tuit ion.  Your gut feelin g will a
+caree r or b usine ss d ecisions, always trust you r in tuit ion. Your gut feelin g will a
 
 lways b e
 
-A moon in  H ouse 1 0 su ggest s a m other fi gure  who p lays  a fo rmati ve r ole in  you r caree r  an d
+A moon in H ouse 1 0 su ggest s a m other fi gure who p lays a fo rmati ve r ole in you r caree r an d
 
 p ersona l
 
-d evelopment . It can  ind icat e a biological mother or mate rna l line age d escend in g
+d evelopment . It can ind icat e a biological mother or mate rna l line age d escend in g
 
 fromhighsocialan d socioeconomicsta tusinyourfamilytree. Wesee amotherwhoislikely
 
@@ -4536,13 +4536,13 @@ tohaveastrongin fluenceoverthewayyoup rogressforwa rd an d makecaree rd ecisi
 
 onsfor
 
-yourself.  Pe rhap s subc onsciously,  the caree r c hoices you make are ai med  at  p lea sing your
+yourself. Pe rhap s subc onsciously, the caree r c hoices you make are ai med at p lea sing your
 
-mother, b ecause  you w an t t o live up  to her high exp ect at ions. Usually,  a moon sign in  H ouse
+mother, b ecause you w an t t o live up to her high exp ect at ions. Usually, a moon sign in H ouse
 
-10 can  in d icat e a mother figu re who was q uite  strict on you,  who p u
+10 can in d icat e a mother figu re who was q uite strict on you, who p u
 
-sh ed  you to b e the very
+sh ed you to b e the very
 
 **T**
 
@@ -4586,7 +4586,7 @@ sh ed  you to b e the very
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4594,79 +4594,79 @@ sh ed  you to b e the very
 
 29
 
-A moon in  H ouse 10  can  in d icat e a mother wh o had  a d omin an t p arent in g role in  fo rming
+A moon in H ouse 10 can in d icat e a mother wh o had a d omin an t p arent in g role in fo rming
 
-who you a re an d  your  f uture asp irati onal d evelopmen ts.
+who you a re an d your f uture asp irati onal d evelopmen ts.
 
 H ow you thin k ab out achie vemen t
 
-an d  success,  and  how y ou p ursue success is very muc h fo rmed  b y the gen et ic in herit an ce
+an d success, and how y ou p ursue success is very muc h fo rmed b y the gen et ic in herit an ce
 
-from your  mother. You  may also  find  that  subconsciously,  the way  y ou d efine  success fo r
+from your mother. You may also find that subconsciously, the way y ou d efine success fo r
 
-yourself is fo rmulat ed  very mu ch b y wan ti ng to p l
+yourself is fo rmulat ed very mu ch b y wan ti ng to p l
 
 ea se your mother figure or wan ti ng to
 
-d ist in guish yourself fro m her.  E it her way,  your d efini ti on of success is hea vily in fluence d  b y
+d ist in guish yourself fro m her. E it her way, your d efini ti on of success is hea vily in fluence d b y
 
-the mother fig ure.  H owever,  there is a sli gh t twist to this p lot,
+the mother fig ure. H owever, there is a sli gh t twist to this p lot,
 
-if an d  when there is an
+if an d when there is an
 
-opp ositi on to your moo n in  H ouse
+opp ositi on to your moo n in H ouse
 
-10,  i. e. ,  there is a p lane t sit uated  at  exactly 18 0
+10, i. e. , there is a p lane t sit uated at exactly 18 0
 
 °
 
 d irectly
 
-opp osite  of your moon.  If you ha ve an  opp osition to your moon,  then  this opp osition can
+opp osite of your moon. If you ha ve an opp osition to your moon, then this opp osition can
 
-in d icate a maj or caree r chan ge d urin g your ad ult life.  Pla ne tary opp osit ions to your moon
+in d icate a maj or caree r chan ge d urin g your ad ult life. Pla ne tary opp osit ions to your moon
 
-sign in  H ouse 10
+sign in H ouse 10
 
-will  th row a  wren ch  in  you r c areer p lans,  b ut even if you feel s haken  up at
+will th row a wren ch in you r c areer p lans, b ut even if you feel s haken up at
 
 ä ä
 
 M o o n in Ho use 1 1
 
-The moon in fluence s our emotion al in telligence .  F rom the p lacement of your moon,  we can
+The moon in fluence s our emotion al in telligence . F rom the p lacement of your moon, we can
 
-see  how you rela te  em
+see how you rela te em
 
-oti onally wit h others,  and  how you use your emotion al i ntelligence  to
+oti onally wit h others, and how you use your emotion al i ntelligence to
 
-na vigate  social rela ti onship s.  Trad it iona lly the moon also rela te s to the mother, an d  so the
+na vigate social rela ti onship s. Trad it iona lly the moon also rela te s to the mother, an d so the
 
-social in tuit ion you d evelop ofte n comes as a resp onse to your  rel at ionship  wit h your
+social in tuit ion you d evelop ofte n comes as a resp onse to your rel at ionship wit h your
 
 mother.
 
-Where the mo on is p ositi oned  in  a nat al chart will b rin g so cial in tuit ion and  a
+Where the mo on is p ositi oned in a nat al chart will b rin g so cial in tuit ion and a
 
-stronger emotion al in te lligen ce for that  area o f life.  H ere,  in  H ouse 11,  your in tuit ion allows
+stronger emotion al in te lligen ce for that area o f life. H ere, in H ouse 11, your in tuit ion allows
 
-you to na vigate  social rela ti onship s wit h immense  success. You can  gai n tremend
+you to na vigate social rela ti onship s wit h immense success. You can gai n tremend
 
 ous
 
-p opularity in  club s, societ ie s,  p olitics,  or notable in sti tuti ons.  You work well in  the group
+p opularity in club s, societ ie s, p olitics, or notable in sti tuti ons. You work well in the group
 
-set ti ng and  can rise up  to be come a n i nspirati ona l lead er wit hin a  collective.
+set ti ng and can rise up to be come a n i nspirati ona l lead er wit hin a collective.
 
 ss
 
 e word s an d
 
-sp ee ch to in fluence  p eop le an d  get  p eop le to feel the emotion s you wan t them to feel.  You
+sp ee ch to in fluence p eop le an d get p eop le to feel the emotion s you wan t them to feel. You
 
-would  make a n e xcellent ficti on writ er or storyteller. On t hed arker side,  wit h such ap ower,
+would make a n e xcellent ficti on writ er or storyteller. On t hed arker side, wit h such ap ower,
 
-you also wie ld  the ab ility to b e emotion ally mani p ulati ve,  w
+you also wie ld the ab ility to b e emotion ally mani p ulati ve, w
 
 hich is why there is d efini tely a
 
@@ -4674,37 +4674,37 @@ p artofyouthat wouldthrivein p olitics, whetheryouacknowled geit ornot. E ven if
 
 á
 
-the top  q uickly,  b ecause p eop
+the top q uickly, b ecause p eop
 
-le love you,  are emotion ally d rawn to you,  an d  find  you
+le love you, are emotion ally d rawn to you, an d find you
 
 charismati c.
 
 Also, thosewit hthei rna ta lmoonsin theele ven thhouse, asyoud o, mayb ecomeemotion ally
 
-ti ed to communi ty causes,  and  are ofte n fervent supp orte rs of a p articular social or p oliti ca
+ti ed to communi ty causes, and are ofte n fervent supp orte rs of a p articular social or p oliti ca
 
 l
 
 movemen t. Anata lmoonintheele venthhousemayin d icateoneti ed emoti onallytoact ivism,
 
-or one who b eli eves d eep ly in  imp orta nt  causes.  M artin L uther Kin g, Jr. ,  John F . Ke nn ed y,
+or one who b eli eves d eep ly in imp orta nt causes. M artin L uther Kin g, Jr. , John F . Ke nn ed y,
 
-Win ston Churchill,  John L en non,  an d Oprah are a few examp les of famous i
+Win ston Churchill, John L en non, an d Oprah are a few examp les of famous i
 
 nd ivid uals wit h
 
-thei r na ta l moons in  the ele ven th house.
+thei r na ta l moons in the ele ven th house.
 
-A moon in  the ele ven th house o ften  in d icates someone  who  is a b le to move  others
+A moon in the ele ven th house o ften in d icates someone who is a b le to move others
 
-emotion ally,  to in sp ire others toward  a ctivism,  toward  p rog ress,  an d  p ositive
+emotion ally, to in sp ire others toward a ctivism, toward p rog ress, an d p ositive
 
 transformati on b y kin d ling thei r emotio
 
-ns.  You in sp ire through emotion s.  You p ossess the
+ns. You in sp ire through emotion s. You p ossess the
 
-ab ili ty to in sp ire others to social c hange b y  mo vin g thei r emotion s.  Th e moon here  in  you r
+ab ili ty to in sp ire others to social c hange b y mo vin g thei r emotion s. Th e moon here in you r
 
 **T**
 
@@ -4748,7 +4748,7 @@ ab ili ty to in sp ire others to social c hange b y  mo vin g thei r emotion s. 
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4756,7 +4756,7 @@ ab ili ty to in sp ire others to social c hange b y  mo vin g thei r emotion s. 
 
 30
 
-ele ven th house gives y ou a nurtu rin g,  kin d ,  warm,  an d  gen tle  p rese nce,  an d  that  is what
+ele ven th house gives y ou a nurtu rin g, kin d , warm, an d gen tle p rese nce, an d that is what
 
 at tracts p eop le t oward you.
 
@@ -4772,39 +4772,39 @@ ir rori sad ivina ti onand scryin gtoolused b ysome
 
 occult p ract it ione rs to se e t he unsee n.
 
-When  the moon occup ie s the twelfth house,  i t act s as a b lack mir ro r,  for d ivina ti on and
+When the moon occup ie s the twelfth house, i t act s as a b lack mir ro r, for d ivina ti on and
 
 scryin g. H ere, wesee an in trovert, an d onewhote nd stoward seclusion.Yo
 
 up refersolitud e.
 
-You d o not look outwar d ,  b ut rat her, you look i nward ,  in to your in ne r b lack mirror,  scr yin g
+You d o not look outwar d , b ut rat her, you look i nward , in to your in ne r b lack mirror, scr yin g
 
-for truth throug h yours elf. A moon in the twelfth house can  ind icate  isolati on or solitude in
+for truth throug h yours elf. A moon in the twelfth house can ind icate isolati on or solitude in
 
-your child hood .  It can  in d icate lucid  or p rop heti c
+your child hood . It can in d icate lucid or p rop heti c
 
-d rea ms as child ,  though when you
+d rea ms as child , though when you
 
-communi cat ed  those drea ms to your p arent s, you were d iscred ited or shamed .  Thus, you
+communi cat ed those drea ms to your p arent s, you were d iscred ited or shamed . Thus, you
 
-lea rne d  to ret rea t i nward  an d  not revea l your in ne rmost revela ti ons.
+lea rne d to ret rea t i nward an d not revea l your in ne rmost revela ti ons.
 
-S in ce the moon rela tes to our mothe r,  your  rela ti onship  wit h you r m
+S in ce the moon rela tes to our mothe r, your rela ti onship wit h you r m
 
 other ma y have
 
-contrib uted  to your in troversion an d  p referen ce for seclusion.  Also,  there may b e
+contrib uted to your in troversion an d p referen ce for seclusion. Also, there may b e
 
-in  the twelfth house is in d icative of one who lives a p rivate life. I
+in the twelfth house is in d icative of one who lives a p rivate life. I
 
 t also suggest s p rophe ti c
 
-d rea ms as a child  that  were d iscouraged ,  an d  so you,  too,  may have l ea rne d  to consciously
+d rea ms as a child that were d iscouraged , an d so you, too, may have l ea rne d to consciously
 
 d iscourage such inn er scryin g.
 
-Cl ick o n  Hype rl in ke d Ban n er for  Cou rse  De scrip tion  an d En rol l  Today
+Cl ick o n Hype rl in ke d Ban n er for Cou rse De scrip tion an d En rol l Today
 
 **T**
 
@@ -4848,7 +4848,7 @@ Cl ick o n  Hype rl in ke d Ban n er for  Cou rse  De scrip tion  an d En rol l 
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -4856,29 +4856,29 @@ Cl ick o n  Hype rl in ke d Ban n er for  Cou rse  De scrip tion  an d En rol l 
 
 31
 
-Plan etary Co nj un ction s with  Yo ur
+Plan etary Co nj un ction s with Yo ur
 
 Moon
 
 A conjunction is when another planetary body is sidl ed right up close to your moon. S pecificall y,
 
-the degre e of  that other p lanetary body is withi n 10° o f your moon sign d e gree. Other astrologers
+the degre e of that other p lanetary body is withi n 10° o f your moon sign d e gree. Other astrologers
 
-get even mo re finicky  an d define a conjun cti on at just
+get even mo re finicky an d define a conjun cti on at just
 
-a 5° diffe renc e. In  y our birth cha rt, look to
+a 5° diffe renc e. In y our birth cha rt, look to
 
 see if there ar e any planets im mediately next to your moon. If yes, the planet(s) mi ght be in
 
 conjunctwithyourmoon.Toconfirm,checkthede greenumber.Dosim plesubt racti onandifthey
 
-are withi n a  10 ° ra
+are withi n a 10 ° ra
 
-When  there is a conj u ncti on b et wee n two p lane ts,  the en ergie s represe nt ed  b y the two
+When there is a conj u ncti on b et wee n two p lane ts, the en ergie s represe nt ed b y the two
 
-p lane ts are in  allia nce.
+p lane ts are in allia nce.
 
-There is harmony. That  harmony mani fests as areas of ea se in  your
+There is harmony. That harmony mani fests as areas of ea se in your
 
 áá
 
@@ -4892,15 +4892,15 @@ conjunct with
 
 aplanetisincazim i,itwill becomeinextricablyfusedwiththespiritofthatindi vidual.Whenthere
 
-is a conjunction b etwe en  your nat al sun and  moo n and thus you r moon is in cazim i, yo
+is a conjunction b etwe en your nat al sun and moo n and thus you r moon is in cazim i, yo
 
-u are  who
+u are who
 
-you say you are. What yo u see is what you get. Th ere is no  two
+you say you are. What yo u see is what you get. Th ere is no two
 
 -
 
-f acing wit h  you.
+f acing wit h you.
 
 -
 
@@ -4916,13 +4916,13 @@ shoot er th a n you may not be very
 
 adaptable or flexibl e to change. Le
 
-arning to dea l with change gracef ull y will  be one of your
+arning to dea l with change gracef ull y will be one of your
 
 li felong l essons .
 
-A moon in cazim i is als o said to indi c ate two  ot her condit ions
+A moon in cazim i is als o said to indi c ate two ot her condit ions
 
-your mot her and  f ather wer e
+your mot her and f ather wer e
 
 deeply in love with one another at the mom ent of your concepti on and you are karmicall y
 
@@ -4930,11 +4930,11 @@ bound
 
 to both of your parents by a li ne of fate preexist ing your birth, one that may extend back int o
 
-mul ti ple li feti mes (should you be so inclined to acc ept reinc arnati on as a  possi bil it y). You also
+mul ti ple li feti mes (should you be so inclined to acc ept reinc arnati on as a possi bil it y). You also
 
 repres ent a form of s alva ti on or profound blessin g to bo
 
-th your mot her a nd father,  one with f ar
+th your mot her a nd father, one with f ar
 
 deeper impl icati ons t han the ordinary.
 
@@ -4948,7 +4948,7 @@ Your subconscious matches your consciousn ess and you
 
 are emot ionally stable, much more so
 
-mot her more so t han youwill  your biol ogical father. It c an also i ndicate emot ional closeness wit h
+mot her more so t han youwill your biol ogical father. It c an also i ndicate emot ional closeness wit h
 
 the mother over the fath
 
@@ -4996,7 +4996,7 @@ e r.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5004,7 +5004,7 @@ e r.
 
 32
 
-An asc endant conjunct moon indi cates an  int ert wined fat e with the  biol ogical mot her, and your
+An asc endant conjunct moon indi cates an int ert wined fat e with the biol ogical mot her, and your
 
 li fe karmic ti es with the biol ogical mot her, often in the
 
@@ -5014,15 +5014,15 @@ unfinished busi ness in that relations hip that spil ls over int o the p resent 
 
 between mot her and chil d.
 
-The ascend ant conjunct moon in general suggests  karmic ti es between par ent and chil d.
+The ascend ant conjunct moon in general suggests karmic ti es between par ent and chil d.
 
-to say for su re whether  that manifests  as  compl ic ated r elations  betwe en y ou and your biol ogic al
+to say for su re whether that manifests as compl ic ated r elations betwe en y ou and your biol ogic al
 
-mot her or  betwe en you  and you r own  chil d. E it her way,  when  w e se e  an ascend ant sign in
+mot her or betwe en you and you r own chil d. E it her way, when w e se e an ascend ant sign in
 
-conjunction with a moon  sign, there  is a conjoi ning of f ates a
+conjunction with a moon sign, there is a conjoi ning of f ates a
 
-nd  fortun es that cre ate a compl ex,
+nd fortun es that cre ate a compl ex,
 
 nuanced w eb that ti es together mul ti ple gener ati ons. The ascend ant and moon conjunction can
 
@@ -5034,17 +5034,17 @@ M idhea v en
 
 When ther e is a lum ina ry conjunction with the mi dheaven, the im pli cat ions of that planet or
 
-lum inary become critical  to your higher pu rpose or opti mal car eer  path. A mi dheaven conjunct
+lum inary become critical to your higher pu rpose or opti mal car eer path. A mi dheaven conjunct
 
-moon is a sign to you th at the trait s o f your moo n sign are  the tr ait s
+moon is a sign to you th at the trait s o f your moo n sign are the tr ait s
 
-that will  most  support your
+that will most support your
 
 care ersuc cess.Youwill wanttohone,nurture,de velop,andfullyuti li zethequali ti esofyourmoon
 
 sign t o manifest you r higher purpose.
 
-The personali ty trait s an d gifts associated with your moon sign will  help you to opti mi ze career
+The personali ty trait s an d gifts associated with your moon sign will help you to opti mi ze career
 
 success. This angular as pect in a birth chart also shows that your care er v ery much defines your
 
@@ -5076,7 +5076,7 @@ Whenyou rmoonsignisi nconjunctwithyou rmi d heaven, Ialsoconsi de rth attomean y
 
 spire
 
-in the physi cal realm , those with an elevated  moon lead and inspi r e in the spirit ual and
+in the physi cal realm , those with an elevated moon lead and inspi r e in the spirit ual and
 
 Themoonisrelated toth ehighpri estessand divi nef emi nine.Ther eisas en setha
 
@@ -5086,7 +5086,7 @@ esoteric.You have agiftf ordivi nati on.Onthemun danelev el,youtendtopo ssessana
 
 for phil osophy, psychology, myt hology, and wo
 
-rld reli gions . These are the signs  of one with an
+rld reli gions . These are the signs of one with an
 
 elevated moon.
 
@@ -5094,7 +5094,7 @@ care er situations.
 
 Those with an elevated moon connect bett er int o the subconscious. They tend to have a stronger
 
-innate conn ecti on with t he coll e cti ve uncons ciou s, and the refo re  often  ex hibi t strong int uit ive or
+innate conn ecti on with t he coll e cti ve uncons ciou s, and the refo re often ex hibi t strong int uit ive or
 
 **T**
 
@@ -5138,7 +5138,7 @@ innate conn ecti on with t he coll e cti ve uncons ciou s, and the refo re  ofte
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5160,103 +5160,103 @@ lar (if not e xactl y the same) as a c ar eer path choen in a p revi ous l ifeti
 
 M o o n Conjunct M ercury
 
-A na ti ve wit h moon conj unct M ercury typi cally has a good memory,  or strong memor y
+A na ti ve wit h moon conj unct M ercury typi cally has a good memory, or strong memor y
 
-ret en ti on.  You can  remembe r the fine st of d et ai ls for yea rs.  A na ta l moo
+ret en ti on. You can remembe r the fine st of d et ai ls for yea rs. A na ta l moo
 
-n in  conj unct wit h
+n in conj unct wit h
 
 M ercuryalsob rin gsastrongan d act ivemind, one suited forin tellect ualp ursuits, ed ucat ion,
 
-acad emics,  who is goo d  at  te st
+acad emics, who is goo d at te st
 
 -
 
-ta kin g,  writ in g,  languages,  verba l s ki lls,  though  one wit h a
+ta kin g, writ in g, languages, verba l s ki lls, though one wit h a
 
 chan gea b le mind.
 
-H ere,  we also see  that  much of t
+H ere, we also see that much of t
 
-he wa y you th in k an d  p rocess in formati on will b e in herit ed
+he wa y you th in k an d p rocess in formati on will b e in herit ed
 
-your in te llect will come from your mate rna l line  an d also ab ili ty to p ick up ne w languages,
+your in te llect will come from your mate rna l line an d also ab ili ty to p ick up ne w languages,
 
 verba l skills,
 
-an d even sen se of entrep ren eurship  or b usine ss acumen will come from your
+an d even sen se of entrep ren eurship or b usine ss acumen will come from your
 
-mate rna l line .  A moon conj unct M ercury can  also in d icat ea mat ernal line  rela te d  to writ in g,
+mate rna l line . A moon conj unct M ercury can also in d icat ea mat ernal line rela te d to writ in g,
 
-p ublishin g,  lit eracy,  teachin g,  or acad emia .
+p ublishin g, lit eracy, teachin g, or acad emia .
 
 M o o n Conjunct Venus
 
 A moon conj unct Ven u
 
-s crea te s a p lea san t,  affab le d isp ositi on.  You get along wit h all type s
+s crea te s a p lea san t, affab le d isp ositi on. You get along wit h all type s
 
-of p eop le an d  rarely ha ve e ne mies.  The moon c onj unct Venus crea te s a likea b le p ersona lity,
+of p eop le an d rarely ha ve e ne mies. The moon c onj unct Venus crea te s a likea b le p ersona lity,
 
 one who is well
 
 -
 
-loved  b y many.  H owever,  there can  b e a tend en cy for selfishness or self
+loved b y many. H owever, there can b e a tend en cy for selfishness or self
 
 -
 
 in d ul
 
-gen ce. You te nd  to kee p  a very small and  ti ghtly
+gen ce. You te nd to kee p a very small and ti ghtly
 
 -
 
-kni t group  of loved  ones . A moon
+kni t group of loved ones . A moon
 
-conj unct Ven us can also in d icat e an  inn er,  often  litt le
-
--
-
-known love of the arts, culture,  and
-
-humani ti es.  It can  b ring artist ic ta lent  p ai red  wit h an  in cred ib le imagin at ion an
-
-d  sen se of
-
-visi on.  Post
+conj unct Ven us can also in d icat e an inn er, often litt le
 
 -
 
-Impressioni st p ai nt er H en ri Roussea u had  a moon c onj unct Ven us in  his  b irth
+known love of the arts, culture, and
+
+humani ti es. It can b ring artist ic ta lent p ai red wit h an in cred ib le imagin at ion an
+
+d sen se of
+
+visi on. Post
+
+-
+
+Impressioni st p ai nt er H en ri Roussea u had a moon c onj unct Ven us in his b irth
 
 chart.
 
-A moon conj unct Ven us can  also reveal the importa nce of love an d rela ti onship s in  this
+A moon conj unct Ven us can also reveal the importa nce of love an d rela ti onship s in this
 
-of persona l fulfillment .  When  you
+of persona l fulfillment . When you
 
 á
 
 whole. Thus, thosewit hamoonconj unctVen usne ed tolea rnhowtofeelemotion allywhole
 
-on thei r own,  in  thei r o wn in d ep end en ce
+on thei r own, in thei r o wn in d ep end en ce
 
-,  wit hout ne ed in g a lover o r a rela ti onship  to fill
+, wit hout ne ed in g a lover o r a rela ti onship to fill
 
 thei r sen se of id enti ty.
 
-In trad it iona l astrology ,  the moon rep rese nts the mother an d  mate rna l in fluence s.  Ven us
+In trad it iona l astrology , the moon rep rese nts the mother an d mate rna l in fluence s. Ven us
 
-rep rese nt s how we lov e.  When  they conj unct,  we see  a na ti ve whose  ap p roach to love an d
+rep rese nt s how we lov e. When they conj unct, we see a na ti ve whose ap p roach to love an d
 
 rom
 
-an ce is very much  in formed ,  even if subconsciously,  b y how
+an ce is very much in formed , even if subconsciously, b y how
 
 y ou
 
-obse rved  love an d
+obse rved love an d
 
 **T**
 
@@ -5300,7 +5300,7 @@ obse rved  love an d
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5308,27 +5308,27 @@ obse rved  love an d
 
 34
 
-roman ce in  the mother  figure.  You r mother has b ee n q uite  formati ve in  the way you  vie w
+roman ce in the mother figure. You r mother has b ee n q uite formati ve in the way you vie w
 
-love,  roman ti c rela ti ons,  an d  sexual at tracti on.
+love, roman ti c rela ti ons, an d sexual at tracti on.
 
 Note t hat w
 
 hen t he b irth chart i s
 
-cast for a mal e child ,  a moon conj unct Venus can i nd icat ea
+cast for a mal e child , a moon conj unct Venus can i nd icat ea
 
-son who will gro w up t o rese mble his mother in p ersona lity and  character,  more so t han his
+son who will gro w up t o rese mble his mother in p ersona lity and character, more so t han his
 
-father. A moon conj unc t Ven us can  also reveal very close rela ti onship  b et wee n mother and
+father. A moon conj unc t Ven us can also reveal very close rela ti onship b et wee n mother and
 
-son,  and  p ossib l
+son, and p ossib l
 
 y ap rote ctive mother over her son.
 
-When  the birth chart i s cast for a female
+When the birth chart i s cast for a female
 
-child ,  a moon conj unct Ven us can  ind icat e b eauty in sid e an d out.  Peop le find you p hysically
+child , a moon conj unct Ven us can ind icat e b eauty in sid e an d out. Peop le find you p hysically
 
 at tracti ve
 
@@ -5336,7 +5336,7 @@ at tracti ve
 
 **T**
 
-here is a charmin g,  win some ai r about you,  which rad ia te s from the in sid e
+here is a charmin g, win some ai r about you, which rad ia te s from the in sid e
 
 out.
 
@@ -5344,17 +5344,17 @@ out.
 
 
 
-they are in tuit in g somet hing b ea utiful that  resi d es
+they are in tuit in g somet hing b ea utiful that resi d es
 
-in sid e of you.  A moon conj unct Ven us in  a female  chart in d i
+in sid e of you. A moon conj unct Ven us in a female chart in d i
 
-cat es one  who rad ia te s wit h
+cat es one who rad ia te s wit h
 
 charisma.
 
 M o o n Conjunct M a rs
 
-If your  moon is in  conj unct wit h M ars, then  y
+If your moon is in conj unct wit h M ars, then y
 
 -
 
@@ -5366,9 +5366,9 @@ achild that
 
 ismorep rone toemotion. Therecanb esomep ersona ld ifficultywit hrei gni ngin
 
-your en erg y levels,  you r emotion s,  an d the a b ilit y to control your  moo d  an d te mpe r.
+your en erg y levels, you r emotion s, an d the a b ilit y to control your moo d an d te mpe r.
 
-On the p ositi ve sid e,  those wit h a moon conj unct M ars have strong in sti ncts an d  can rely
+On the p ositi ve sid e, those wit h a moon conj unct M ars have strong in sti ncts an d can rely
 
 on
 
@@ -5378,7 +5378,7 @@ thei rgutfo rd ecisi on
 
 makin gan d j ud gment s. Moreofte nthan notthei rfirstimp ressi onsare
 
-sp ot on.  H owever,  they also see m to know t his ab out themselves,  an d  are q uite  self
+sp ot on. H owever, they also see m to know t his ab out themselves, an d are q uite self
 
 -
 
@@ -5392,21 +5392,21 @@ confid en cewhenleftunchecked orim b
 
 ala nced. Thosewit h
 
-moon conj unct M ars m ay b e more  p rone to eg otism,  d ue in  some p art to the fact  they know
+moon conj unct M ars m ay b e more p rone to eg otism, d ue in some p art to the fact they know
 
-Th e M ars conj uncti on here can  ren d er you q uite  stub b orn.
+Th e M ars conj uncti on here can ren d er you q uite stub b orn.
 
 M o o n ConjunctJ upiter
 
-Wit h Jup it er in  such close p roximit y to yo ur moon,  you are likel y t o b e p opular,  have a
+Wit h Jup it er in such close p roximit y to yo ur moon, you are likel y t o b e p opular, have a
 
 confid en ce
 
 -
 
-in sp iring p rese nce,  and  so would  d o sell in  the p ublic sp he re.  H aving a caree r in
+in sp iring p rese nce, and so would d o sell in the p ublic sp he re. H aving a caree r in
 
-the p ublic limelight wo uld suit you well.  Wit h a moon conj unct Jup it er,  you
+the p ublic limelight wo uld suit you well. Wit h a moon conj unct Jup it er, you
 
 in tuit ive ab ili ty
 
@@ -5422,17 +5422,17 @@ hatemotional
 
 in tuit ivelevel, that
 
-allows p eop le t o fee l at ea se a round  you an d  therefore op en  up t o you.
+allows p eop le t o fee l at ea se a round you an d therefore op en up t o you.
 
-A moon conj unct Jup it er can  b e a classic sign of an  in troverted  extrovert,  someone  who
+A moon conj unct Jup it er can b e a classic sign of an in troverted extrovert, someone who
 
-strad d les bet wee n i nt roversion an d  extroversion.  M arilyn M on
+strad d les bet wee n i nt roversion an d extroversion. M arilyn M on
 
-roe and  Johnn y Carson had  a
+roe and Johnn y Carson had a
 
-moon conj unct Jup ite r in thei r b irth charts.  Whitn ey H ouston,  Angelina  Jolie,  Julia  Roberts
+moon conj unct Jup ite r in thei r b irth charts. Whitn ey H ouston, Angelina Jolie, Julia Roberts
 
-are sai d  to have a  moon conj unct J upi te r.
+are sai d to have a moon conj unct J upi te r.
 
 **T**
 
@@ -5476,7 +5476,7 @@ are sai d  to have a  moon conj unct J upi te r.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5490,41 +5490,41 @@ nd
 
 crea ti vit y, which willt r an slat ein tosuccess, giventhat strongsupp ort ofJup it erne arby. You
 
-see  this in  Willia m F aulkne r,  Jules Verne,  John Up d ike,  Alfred  H it chcock,  an d  Ant hony
+see this in Willia m F aulkne r, Jules Verne, John Up d ike, Alfred H it chcock, an d Ant hony
 
-Burgess,  to na me a fewwho d emonstrate  in cred ib le crea tive ta lent,  imag
+Burgess, to na me a fewwho d emonstrate in cred ib le crea tive ta lent, imag
 
 in at ion, an d visi on.
 
 M o o n Conjunct S a turn
 
-When  there is a moon conj unct S aturn asp ect in a b irth chart,  we see reveren ce of a father
+When there is a moon conj unct S aturn asp ect in a b irth chart, we see reveren ce of a father
 
-figure an d  strong  em otion al id en tificat ion wit h that  father figu r e.  In te rms of  you r
+figure an d strong em otion al id en tificat ion wit h that father figu r e. In te rms of you r
 
-o take a fter your b iological father more a nd  emotionally
+o take a fter your b iological father more a nd emotionally
 
 id en tify wit h you r fat her more so t han you r b iological mother.
 
-H owever,  in  tradit ional med ie val ast rology,  S at urn was see n as the p lane t that  b rings
+H owever, in tradit ional med ie val ast rology, S at urn was see n as the p lane t that b rings
 
-melancholy.  S in ce the moon is the p lanet of our
+melancholy. S in ce the moon is the p lanet of our
 
-emotion al rea lm,  a S at urn in such close
+emotion al rea lm, a S at urn in such close
 
 p roximit yofd egree swi ththemooncan b rin gamelancholicna ture, ors omeone whoismo re
 
 p rone t o d ep ression.
 
-d ep ressi on.  In wo
+d ep ressi on. In wo
 
-men whose b irth charts show a moon conj unct S aturn,  they may b e more
+men whose b irth charts show a moon conj unct S aturn, they may b e more
 
 p rone to p ost
 
 -
 
-p artum dep ressi on if and  when they give b irth, so that  is somet hing to wat ch
+p artum dep ressi on if and when they give b irth, so that is somet hing to wat ch
 
 out for.
 
@@ -5532,49 +5532,49 @@ M o o n Conjunct Ura nus
 
 Uranus casts unconvent iona lism over an y area it affect s. Your p a
 
-rticular child hood  has
+rticular child hood has
 
-nurtured  you in to one who vee rs  toward  the unconven ti onal.  You may have b ee n rat her
+nurtured you in to one who vee rs toward the unconven ti onal. You may have b ee n rat her
 
 á ò ó
 
-conj unct U ran us can  ind icat e a  willful,  ind ep end en t child.
+conj unct U ran us can ind icat e a willful, ind ep end en t child.
 
 **A**
 
-moon conj unct Uranus can  also in d icat e an  eccen tric or uncon ven ti onal mother, an d  that
+moon conj unct Uranus can also in d icat e an eccen tric or uncon ven ti onal mother, an d that
 
-mate rna l in fluence  results in  you  in herit in g s ome of those  q ualiti es.  Uranus can  b e malefic
+mate rna l in fluence results in you in herit in g s ome of those q ualiti es. Uranus can b e malefic
 
-on the health,  however,  an d  so when the moon, which symboli zes the mother fig
+on the health, however, an d so when the moon, which symboli zes the mother fig
 
-u re in  your
+u re in your
 
-life is in such close p roximit y wit h Uranus,  there can  b e a mother figure whose health
+life is in such close p roximit y wit h Uranus, there can b e a mother figure whose health
 
-cond it ion p lays a substan ti al role in  your own l ife.  Uranus is a lso rela te d  to the  scien ces a nd
+cond it ion p lays a substan ti al role in your own l ife. Uranus is a lso rela te d to the scien ces a nd
 
-scien ti fic in novat ion.  Agai n,  wit h it s closen ess to the moon,
+scien ti fic in novat ion. Agai n, wit h it s closen ess to the moon,
 
-it  can  in d icat e a mother or
+it can in d icat e a mother or
 
-mate rna l line age in  thescien ti fic professiona l field s.
+mate rna l line age in thescien ti fic professiona l field s.
 
 M o o n Conjunct Neptun e
 
-The moon rep rese nt s our in ne r san ctum,  the subconscious,  an d  that  part of who you are in
+The moon rep rese nt s our in ne r san ctum, the subconscious, an d that part of who you are in
 
-this lifeti me that  was also p art of who you wer e in  p ast li
+this lifeti me that was also p art of who you wer e in p ast li
 
-feti mes. Phrase d  an other way,  the
+feti mes. Phrase d an other way, the
 
 mooncan revealthat whichisembed d ed int oyourcellularmemor y, oryourgen et icmemory.
 
-Nep tune  is the p lane t of d rea mers an d  p sychics.  The strength of Nep tune  in  a chart is what
+Nep tune is the p lane t of d rea mers an d p sychics. The strength of Nep tune in a chart is what
 
-gives us our in tuit ion,  our crea ti vit y,  a
+gives us our in tuit ion, our crea ti vit y, a
 
-nd  how well we can  conne ct in to other non
+nd how well we can conne ct in to other non
 
 -
 
@@ -5622,7 +5622,7 @@ p hysical
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5632,7 +5632,7 @@ p hysical
 
 ormeta p hysicalrea lms. When themoonan d Nep tune aresideb ysid einyourb irthcha rt, we
 
-see  someone who has
+see someone who has
 
 
 
@@ -5644,11 +5644,11 @@ b ee n an in tuitive
 
 -
 
-crea ti ve for a very,  very long ti me.
+crea ti ve for a very, very long ti me.
 
-In other wo rd s,  I rea d  the
+In other wo rd s, I rea d the
 
-moon conj unct Nep tune as in d icatin g someone  who in  a p revious
+moon conj unct Nep tune as in d icatin g someone who in a p revious
 
 lifeti med eveloped aheighten ed conne ction tothatin tuit ive
 
@@ -5664,13 +5664,13 @@ p hysical, metap hysicalrea lms, an dthereforein yourp rese nt lifewillconti nue
 
 d evelo
 
-p ment  of that  spirit ual conn ect ion.
+p ment of that spirit ual conn ect ion.
 
 M o o n Conjunct P luto
 
-Astrologers ta l k ab out  a d arkne ss or occult i nfluen ce in  a na ti ve when we see  a moon
+Astrologers ta l k ab out a d arkne ss or occult i nfluen ce in a na ti ve when we see a moon
 
-conj unct Pluto. When  Pluto is in  conj uncti on wit h the moon, it colors the ton e of the moon.
+conj unct Pluto. When Pluto is in conj uncti on wit h the moon, it colors the ton e of the moon.
 
 Wecallthat ton eaH
 
@@ -5682,11 +5682,11 @@ c hartwas
 
 b orn und er a H ades moon.
 
-There can  b e p owerful  p oliti cal authorit y here.  There can  b e a lat ent conne ction  in to the
+There can b e p owerful p oliti cal authorit y here. There can b e a lat ent conne ction in to the
 
-und erworld  that  the nati ve may or may not b e conscious of.  In mund an
+und erworld that the nati ve may or may not b e conscious of. In mund an
 
-e te rms, it  b rin gs a
+e te rms, it b rin gs a
 
 ò
 
@@ -5694,19 +5694,19 @@ e te rms, it  b rin gs a
 
 moon conj unct Pluto is a fanta sti c comb ina ti on
 
-for one who see ks success in  market in g,
+for one who see ks success in market in g,
 
 ad vertisi ng, or p ublic rela ti ons, as it b rin gs an in exp licab le na tural gift for swaying p ublic
 
 opi ni on.
 
-It is sai d that  b rilliant  mind s will have a strongly p ositi oned  Pluto in  thei r charts.  A moon
+It is sai d that b rilliant mind s will have a strongly p ositi oned Pluto in thei r charts. A moon
 
 conj unct Pluto
 
-is consid ered  such a strong p ositi on.  Pluto here d oes color the moon sign,
+is consid ered such a strong p ositi on. Pluto here d oes color the moon sign,
 
-however,  an d  b rin gs a grea te r d ep th of emotional i nt en sit y to your moon sign.
+however, an d b rin gs a grea te r d ep th of emotional i nt en sit y to your moon sign.
 
 M o o n Conjunct Chiro n
 
@@ -5716,23 +5716,23 @@ syste mthat
 
 orb it sb et wee nS at urnand Uranus. Inast rology, Chirond en ote sourd eep est wound sand the
 
-efforts we exe rt to heal  those wound s.  It show s the areas we try to  o ver
+efforts we exe rt to heal those wound s. It show s the areas we try to o ver
 
 -
 
 comp en sat e as a
 
-result of p ast  hurt.  H owever,  it  also shows how  extraord in ary the
+result of p ast hurt. H owever, it also shows how extraord in ary the
 
-hum an  will is: what once
+hum an will is: what once
 
 hurtusb ecomesourgre at est strength.Chironr evealswhereou rgrea te sthealin gp owerlies.
 
-When  your moon is in  conj unct wit h Chiron,  your emotion s,  emotional p lane ,  and  who you
+When your moon is in conj unct wit h Chiron, your emotion s, emotional p lane , and who you
 
-are in  the soft sid e of your in ne r san ctum refle
+are in the soft sid e of your in ne r san ctum refle
 
-cts the spirit and  p ower of Chiron.  Chiron is
+cts the spirit and p ower of Chiron. Chiron is
 
 thewound ed heale rwh omakessac rificesof th eselffo rthesa keof oth ers.When you rmoon
 
@@ -5746,9 +5746,9 @@ an d thatp hrased escribes
 
 onewit hmonconj unctChiron. Youcanab sorb alotofp ainwit hout
 
-comp lai nt .  You have the b ones  in you for en d urin g grea t hard ship s.  In the Chine se culture,
+comp lai nt . You have the b ones in you for en d urin g grea t hard ship s. In the Chine se culture,
 
-this is see n as an  ad mirab le trait .  It mean s that you have in cred ib le p hysical an d  emotion al
+this is see n as an ad mirab le trait . It mean s that you have in cred ib le p hysical an d emotion al
 
 resi l
 
@@ -5796,7 +5796,7 @@ ie nce.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5806,9 +5806,9 @@ ie nce.
 
 M o o n ConjunctJ uno
 
-Jun o isan  aste roid that mod ern ast rologers rea d  for in sightsin to marriage,  civil union s, and
+Jun o isan aste roid that mod ern ast rologers rea d for in sightsin to marriage, civil union s, and
 
-that  one Grea t L ove.  Th ere are ofte n ka rmic im p licat ions when Jun o is in volved .  The moon
+that one Grea t L ove. Th ere are ofte n ka rmic im p licat ions when Jun o is in volved . The moon
 
 rela te stoyourmother,mate rna lin fluence s
 
@@ -5820,49 +5820,49 @@ wit h
 
 amoonconj unctJun o, wesee astrong m at ernalin fluence over
 
-your roman ti c p rosp ect s in  life.  Pe rhap s the life p artne r you choose is shaped  b y your
+your roman ti c p rosp ect s in life. Pe rhap s the life p artne r you choose is shaped b y your
 
-rela ti onship  wit h you r mot
+rela ti onship wit h you r mot
 
-her or  w hat you  b el ie ve your  mother  wou l d  thin k.  Pe rhap s your
+her or w hat you b el ie ve your mother wou l d thin k. Pe rhap s your
 
-mother or you r rela ti onship  wit h your mother is a d ete rmini ng factor in  your roman ti c
+mother or you r rela ti onship wit h your mother is a d ete rmini ng factor in your roman ti c
 
 rela ti onship s, even i fit hap p en s at the subconscious level.
 
-A moon  conj unct Jun o is also going to  rela te  t
+A moon conj unct Jun o is also going to rela te t
 
-o pa st life ast rology,  sin ce t he moon is  the first
+o pa st life ast rology, sin ce t he moon is the first
 
-p oint  of an alysis in  p ast life ast rology.  When  the moon conj uncts wit h Jun o,  who your life
+p oint of an alysis in p ast life ast rology. When the moon conj uncts wit h Jun o, who your life
 
-p artne r is in  your p rese nt  life,  that  one Grea t L ove for yo u,  is someone  you were wit h in  a
+p artne r is in your p rese nt life, that one Grea t L ove for yo u, is someone you were wit h in a
 
-p ast  life.  There is t h
+p ast life. There is t h
 
-is sense  of sta r
+is sense of sta r
 
 -
 
-crossed  lovers wit h a moon conj unct J uno.
+crossed lovers wit h a moon conj unct J uno.
 
 M o o n Conjunct Hy g eia
 
 H ygei a
 
-is an  ast eroid
+is an ast eroid
 
-,  which mod ern ast rolog ers rea d  as in dicat ive of health scien ces an d
+, which mod ern ast rolog ers rea d as in dicat ive of health scien ces an d
 
-your conne ction  to arch et yp al si tuat ions relat ing to hea lth,  wellne ss,  or vit ali ty.
+your conne ction to arch et yp al si tuat ions relat ing to hea lth, wellne ss, or vit ali ty.
 
 Amoonconj unctH ygei acan sug gest ap ast lifei ncarna ti onwhereyo uworked in occ upa ti ons
 
-or in  conn
+or in conn
 
-ect ion wit h health scien ces,  medici ne,  nursin g,  or even research in  med ical field s.
+ect ion wit h health scien ces, medici ne, nursin g, or even research in med ical field s.
 
-In other p ast  life mani festa ti ons of a moon c onj unct H ygei a,  we can  see  holist ic healin g,
+In other p ast life mani festa ti ons of a moon c onj unct H ygei a, we can see holist ic healin g,
 
 shamani sm,an d otherformsof trad it iona lmedici ne . H ere, Iwould saythereislik
 
@@ -5872,15 +5872,15 @@ b ee nap astlifeconne ctiontothep rofessi onofhealthan d med icin e, whetherthat
 
 trad it iona lormod erntone, in oneofyourp ast lifein carna ti ons, whichcan b ecomep revalent
 
-in  your p rese nt  life through inn at e t ale nt s,  na tural ski
+in your p rese nt life through inn at e t ale nt s, na tural ski
 
-lls,  or in clina ti ons.
+lls, or in clina ti ons.
 
 M o o n Conjunct Vesta
 
 Vest aisanast eroid b elieved torevealthep rimord ia lmatt erofourp lane tEarth.Inast rology,
 
-we rea d  Vest a to in dicate
+we rea d Vest a to in dicate
 
 d omest ic matters and
 
@@ -5890,9 +5890,9 @@ p ersona l sp iritualit y
 
 Pe rsona l sp irituali ty
 
-an d  exp osure to reli gio
+an d exp osure to reli gio
 
-n in  your life p at h,  esp ecially in  your co ming
+n in your life p at h, esp ecially in your co ming
 
 -
 
@@ -5900,11 +5900,11 @@ of
 
 -
 
-age an d  young ad ult
+age an d young ad ult
 
-yea rs,  is going to
+yea rs, is going to
 
-p lay a si gni ficant  role in  your emotion al hea lth an d persona l p sychology.
+p lay a si gni ficant role in your emotion al hea lth an d persona l p sychology.
 
 When it comestofaith, t hosewit hVest a
 
@@ -5916,19 +5916,19 @@ thei rreli giousp ract icesmorein te rna lized .
 
 Am oonconj unctVest acan alsob ein d icat ionsof
 
-in na te  ta lent in  trad it iona l a
+in na te ta lent in trad it iona l a
 
-rt,  music,
+rt, music,
 
 or
 
-p oetry.  Vest a in
+p oetry. Vest a in
 
 conj unct wit h the moon
 
 te nd s to
 
-d en ote  one who is more in tuit ive,  and
+d en ote one who is more in tuit ive, and
 
 who likely will p lace grea t p er
 
@@ -5978,7 +5978,7 @@ reli gious rit uals.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -5990,11 +5990,11 @@ M o o n Conjunct Ceres
 
 Thed warfp lane tCeres whenin conj unctwit ha nothe rmaj orp lane t(inthiscasealumin ary,
 
-your moon) will amp li fy that  conj oine d  p lane t.  H ere,  Ceres will am p lify the effect s an d
+your moon) will amp li fy that conj oine d p lane t. H ere, Ceres will am p lify the effect s an d
 
 rele van ce of
 
-your moon  sign
+your moon sign
 
 .
 
@@ -6010,31 +6010,31 @@ you follo w you r moon.
 
 Pa y closer at te nt ion to your moon sign
 
-w hen it  is in  conj unct wit h
+w hen it is in conj unct wit h
 
 Ceres
 
 , b ecauseyourgre at est giftsandcontrib utionstothisworld comefromyou rmoonsign.
 
-The a ssociat ions and  corresp ond en ces of
+The a ssociat ions and corresp ond en ces of
 
 your moon sign
 
 are most p re
 
-sen t a nd  most valued
+sen t a nd most valued
 
-in  you.
+in you.
 
-M o o n Conjunct No rthern  Node
+M o o n Conjunct No rthern Node
 
-The moon conj uncti on wit h your north lunar nod e is of particular inte rest .  It shows one
+The moon conj uncti on wit h your north lunar nod e is of particular inte rest . It shows one
 
 whoseemotion alp lane in yourp rese nt lifeisverymuchamirr orreflect ionofap reviouslife.
 
 We see
 
-strong karmic t ie s to a p ast  life where  you had  to p arse thro ugh maj or  themes of
+strong karmic t ie s to a p ast life where you had to p arse thro ugh maj or themes of
 
 motherhood, culti vat in gcrea ti vit y orin tuit ion. Them oonsignalso rel at estochild hood , an d
 
@@ -6058,11 +6058,11 @@ cell ular or geneti c memo ry, and that have psychosom ati call y become chron i
 
 that you now experien ce.
 
-In pa rticular, ther e could  be concerns r elating to the stom ach, digesti ve syst em, and lym phati c
+In pa rticular, ther e could be concerns r elating to the stom ach, digesti ve syst em, and lym phati c
 
-syst em as chroni c cond it ions that recur as a  r esult  of unresolv ed em oti onal trauma in the
+syst em as chroni c cond it ions that recur as a r esult of unresolv ed em oti onal trauma in the
 
-subconscious. Again, it  c an eit her b e from you r e arly chil dhood or it
+subconscious. Again, it c an eit her b e from you r e arly chil dhood or it
 
 has n othi ng to do with you
 
@@ -6070,7 +6070,7 @@ directl y,butissomethi ngyourbiol ogicalmot here nduredthatw assosigni fi cantth
 
 geneti c memory and was then passed on down to y ou.
 
-On the b right side, a mo on sign at 29 ° is a  sign o f an  indi vidual who can  t
+On the b right side, a mo on sign at 29 ° is a sign o f an indi vidual who can t
 
 hink futurist icall y, and
 
@@ -6082,13 +6082,13 @@ sconsi deredtobeonthecusp.L ookatthesubsequent
 
 house bordering your mo on sign.
 
-In many ways, y our moon sign will  influence you as if it  were
+In many ways, y our moon sign will influence you as if it were
 
-in that subsequent house, just  as much as your official moon house desig nati on. Likewise, the
+in that subsequent house, just as much as your official moon house desig nati on. Likewise, the
 
 zodiac sign r
 
-uli ng that s ubsequent house will  als o affe ct your moon. For exampl e, if your moon
+uli ng that s ubsequent house will als o affe ct your moon. For exampl e, if your moon
 
 **T**
 
@@ -6132,7 +6132,7 @@ uli ng that s ubsequent house will  als o affe ct your moon. For exampl e, if yo
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6150,15 +6150,15 @@ il lalsoberelev antto
 
 yourmoon astrology.
 
-Mo on  Sign  Decan Rul er
+Mo on Sign Decan Rul er
 
-In  tradit ional astrology, each zodiac  sign is rule d by a tripl icity of d ec a nates, or d ec ans. The
+In tradit ional astrology, each zodiac sign is rule d by a tripl icity of d ec a nates, or d ec ans. The
 
 decan ate
 
 withi n the zodiac sign that a planet fall s under in an astrologi cal chart can off er gre ate r
 
-insi ghts int o how that planet mi ght behave or  af fe ct that specific ar ea of yo ur li fe ( corr espondi ng
+insi ghts int o how that planet mi ght behave or af fe ct that specific ar ea of yo ur li fe ( corr espondi ng
 
 to t he house). Ther e ar e 3 6 tripl iciti es in t otal (3 decanates
 
@@ -6350,7 +6350,7 @@ M ars
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6360,17 +6360,17 @@ M ars
 
 The Sun
 
-is  Your Luna r Deca n Rul er
+is Your Luna r Deca n Rul er
 
-You p ossess a healthy emotion al q uoti ent (EQ),  effect ively d irect your p ersona l en ergie s
+You p ossess a healthy emotion al q uoti ent (EQ), effect ively d irect your p ersona l en ergie s
 
-outward  to mani fest success,  an d gen erally exp erien ce strong emoti onal
+outward to mani fest success, an d gen erally exp erien ce strong emoti onal
 
 health in your
 
-ad ulthood.  Your moon sign is a g rea t asse t to you,  an d  is a crit ical ke y to why  yo u succeed
+ad ulthood. Your moon sign is a g rea t asse t to you, an d is a crit ical ke y to why yo u succeed
 
-an d  achie ve.
+an d achie ve.
 
 The M o o n
 
@@ -6382,25 +6382,25 @@ sen sit ive. Youd irectyourp ersona len ergyin w ard , toward in trospect ion, s
 
 reflecti on, and
 
-te nd  to be more sp iritual.
+te nd to be more sp iritual.
 
-A moon sign und er the d ecan  rulership  of the moon is going to
+A moon sign und er the d ecan rulership of the moon is going to
 
-sp ark an  in te nse  amount  of crea ti ve
+sp ark an in te nse amount of crea ti ve
 
 -
 
-e,  curious,  an d
+e, curious, an d
 
 always seek to know th e unknowab le.
 
-Also,  the zod ia c sign of your na ta l moon an d  its d omici led house could b e karmically rela te d
+Also, the zod ia c sign of your na ta l moon an d its d omici led house could b e karmically rela te d
 
-to your  p ast  life in carn at ion.  We see  an  unb roken  chai n of life in carn at ions d edicat ed  to a
+to your p ast life in carn at ion. We see an unb roken chai n of life in carn at ions d edicat ed to a
 
-more sp irituali ty or re ligious orie nt ed  p at h.  We see  strong in ne r culti
+more sp irituali ty or re ligious orie nt ed p at h. We see strong in ne r culti
 
-vat ion an d  even a
+vat ion an d even a
 
 p en chan t for the met aphysical.
 
@@ -6410,31 +6410,31 @@ the mat ernal lin e or the line age from you r b iological mother.
 
 M ercury
 
-is Yo ur  Luna r Deca n Rul er
+is Yo ur Luna r Deca n Rul er
 
-ce reb ral an d  socially exp ressi ve than  others who sha re your m oon sign.  You
+ce reb ral an d socially exp ressi ve than others who sha re your m oon sign. You
 
-see k to comm unica te  an d  exchan ge id ea s.  You wan t your  voice to  b e heard .  L ife is an
+see k to comm unica te an d exchan ge id ea s. You wan t your voice to b e heard . L ife is an
 
-in te llectualized  exp erience for you.  In fact,  yo u te nd  to in te llectualize your o wn emotion s.
+in te llectualized exp erience for you. In fact, yo u te nd to in te llectualize your o wn emotion s.
 
 You
 
-te nd  to b e rat iona l an d  logic
+te nd to b e rat iona l an d logic
 
 -
 
-orie nt ed.  The p ositi ve sid e is a rat ionali sti c and  ground ed
+orie nt ed. The p ositi ve sid e is a rat ionali sti c and ground ed
 
-ap p roach to life,  where you cen te r your  d ecisi ons (and  even the feelin gs yo u allo w y ourself
+ap p roach to life, where you cen te r your d ecisi ons (and even the feelin gs yo u allo w y ourself
 
 ze emotion s are
 
 ä
 
-okay if you are j ust a little  b it b ia sed at  ti mes
+okay if you are j ust a little b it b ia sed at ti mes
 
-. In an y event,  you are so p ai nfully self
+. In an y event, you are so p ai nfully self
 
 -
 
@@ -6484,7 +6484,7 @@ aware
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6496,7 +6496,7 @@ There is a counse lor
 
 -
 
-teacher role that  you ofte n ta ke on.  You thrive in the world  of id ea s,
+teacher role that you ofte n ta ke on. You thrive in the world of id ea s,
 
 p hilosop hy, an dthecommerceofhumancivili
 
@@ -6508,9 +6508,9 @@ it hM ercuryasthed ecanrulerofyour
 
 -
 
-head ed  an d thoughtful,  b ut also run the risk of b ecoming an
+head ed an d thoughtful, b ut also run the risk of b ecoming an
 
-cereb ral.  Do not a lways try to merge t he
+cereb ral. Do not a lways try to merge t he
 
 two.
 
@@ -6528,19 +6528,19 @@ sen sin gap p roachtolifeand toget ti ngwhatyouwan t. Thereisasoft
 
 sp oken
 
-charm ab out you.  Your moon sig
+charm ab out you. Your moon sig
 
-n may p rove significan t in  your p rep ube scent  an d
+n may p rove significan t in your p rep ube scent an d
 
 ad olescent yea rs. Youvalueart, culture, thehu mani ti es, and exp ressi onsofb ea uty. Atheart,
 
 youareap ea cemaker. Youshirkfroma ggressi on, hosti leen vironmen ts, an d confronta ti ons.
 
-When  your moon sign
+When your moon sign
 
-i s und er a Ven us d ecan  rulership ,  we see  that  your moon sign an d  it s
+i s und er a Ven us d ecan rulership , we see that your moon sign an d it s
 
-corresp ond en ces will ta ke on a more p ro mine nt  role in  your  ad olescence ,  or those comin g
+corresp ond en ces will ta ke on a more p ro mine nt role in your ad olescence , or those comin g
 
 -
 
@@ -6548,39 +6548,39 @@ of
 
 -
 
-age yea rs.  Thus,  d urin g that  p eriod  of growin g in to young ad ul thood ,  you may find
+age yea rs. Thus, d urin g that p eriod of growin g in to young ad ul thood , you may find
 
 yourself id en t
 
-ifyin g mo re with you r moon sign than  your sun sign.
+ifyin g mo re with you r moon sign than your sun sign.
 
 M a rs
 
 is Yo ur Lu na r Deca n R uler
 
-in  you.  You wan t t o ad van ce b eyond  where othe rs have gone .
+in you. You wan t t o ad van ce b eyond where othe rs have gone .
 
 M ars as the l
 
-unar d ecan  ruler can  also in d icat e comp lex in ne r p sych ology or p at holo gical
+unar d ecan ruler can also in d icat e comp lex in ne r p sych ology or p at holo gical
 
 cond it ions.
 
-Wit h M ars p ullin g in  in fluence s of  Arie s an d  S corp io ont o you r moon,
+Wit h M ars p ullin g in in fluence s of Arie s an d S corp io ont o you r moon,
 
-p ossess high,  acute  self
+p ossess high, acute self
 
 -
 
-awaren ess,  b ut this also makes yo u more i mpa ti en t wit h other
+awaren ess, b ut this also makes yo u more i mpa ti en t wit h other
 
 p eop le
 
-more p ower than  you may rea lize,  esp ecia lly through y our yo ung ad ulthood.  And  so that
+more p ower than you may rea lize, esp ecia lly through y our yo ung ad ulthood. And so that
 
-p ower ofte n hurts you  more than  it  helps ,  esp ecia lly d urin g your  p r ep ube scent  yea r
+p ower ofte n hurts you more than it helps , esp ecia lly d urin g your p r ep ube scent yea r
 
-s.  It
+s. It
 
 r
 
@@ -6626,7 +6626,7 @@ s.  It
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6646,61 +6646,61 @@ in yourlifewillb etheuseofyourmoonsigncorr esp ond ences. Thecharactertrait semb
 
 b yyourmoonsignan d yourmothe rormate rn alline agearecrit icalfactorsthat supp ortyour
 
-future success an d  accomp lishmen ts.  A Jup ite r d ecan  ruler over your moon sign mean s you
+future success an d accomp lishmen ts. A Jup ite r d ecan ruler over your moon sign mean s you
 
-te nd  to be more p rogre ssive,  ope n
+te nd to be more p rogre ssive, ope n
 
 -
 
-mind ed ,  and  recep ti ve of di verse point s of vie w.
+mind ed , and recep ti ve of di verse point s of vie w.
 
-When your moonsi gni sund eraJup it erd ecan rulership , wesee that  y ourmoon sign
+When your moonsi gni sund eraJup it erd ecan rulership , wesee that y ourmoon sign
 
 an d it s
 
-corresp ond en ces will ta ke on a mo re p romin en t role b et wee n your  60s  an d  70s.  Thus,
+corresp ond en ces will ta ke on a mo re p romin en t role b et wee n your 60s an d 70s. Thus,
 
-b et wee n t he ages of 60 an d  70,  you may fin d  yo urself id en ti fyin g more wit h your  moon sign
+b et wee n t he ages of 60 an d 70, you may fin d yo urself id en ti fyin g more wit h your moon sign
 
-than  your sun sign.
+than your sun sign.
 
 Sa turn
 
 is Yo ur L una r Deca n Ruler
 
-know,  is a misnomer b ecause not many p eop le a ctually p ossess it .  You, however,  have q uite
+know, is a misnomer b ecause not many p eop le a ctually p ossess it . You, however, have q uite
 
-round ed  in  solid  rea sonin g in  everythin g
+round ed in solid rea sonin g in everythin g
 
-that  you d o,  an d  make slow,  yet  d eli b erate d ecisions.
+that you d o, an d make slow, yet d eli b erate d ecisions.
 
 Youcan b eab it moreresi sta nt tochan ge, orevenfearit , b ecause chan geb rin gsuncerta in ty,
 
-an d  you have b uilt y ou r wo rld  an d  life p hilosop hy around  certa in
+an d you have b uilt y ou r wo rld an d life p hilosop hy around certa in
 
-ty.  When  S at urn is the
+ty. When S at urn is the
 
-d ecan  ruler of your moon sign, you te nd tob ewise r than  others who share your same moon
+d ecan ruler of your moon sign, you te nd tob ewise r than others who share your same moon
 
-sign.  There is a  wisd om an d  maturit y ab out you that go beyond  your ac tual yea rs.
+sign. There is a wisd om an d maturit y ab out you that go beyond your ac tual yea rs.
 
-One concern when the moon sign is und er the d ecan  rulership  of
+One concern when the moon sign is und er the d ecan rulership of
 
 S aturn is ment al health.
 
-H ere we may  find  som eone  more p rone to d e p ressi on,  melancholy,  or en nui,  ofte n d ue to
+H ere we may find som eone more p rone to d e p ressi on, melancholy, or en nui, ofte n d ue to
 
-und erstan din g too much ab out t he world ,  or b ei ng world
+und erstan din g too much ab out t he world , or b ei ng world
 
 -
 
 wea r y.
 
-When  your moon sign i s und er a S at urnd ecan rulership ,  we se e t hat your moon sig
+When your moon sign i s und er a S at urnd ecan rulership , we se e t hat your moon sig
 
-n a nd  its
+n a nd its
 
-corresp ond en ces will take on a more p rominen t role in  your twilight yea rs,  age 70 and
+corresp ond en ces will take on a more p rominen t role in your twilight yea rs, age 70 and
 
 b eyond . Thus, in yourt wili ghtyea rs, youma yf in d yourselfid en ti fyin gmorewit hyour moon
 
@@ -6708,7 +6708,7 @@ sig
 
 n
 
-than  your sun sign.
+than your sun sign.
 
 **T**
 
@@ -6752,7 +6752,7 @@ than  your sun sign.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6760,7 +6760,7 @@ than  your sun sign.
 
 43
 
-Mo on  Ph aseat Birth
+Mo on Ph aseat Birth
 
 Thephase that
 
@@ -6788,11 +6788,11 @@ st for self
 
 -
 
-discovery. Waning moons  bring pensiveness, a
+discovery. Waning moons bring pensiveness, a
 
-more ce rebr al nature, and  phil osophi cal or ideologi cal t hought.
+more ce rebr al nature, and phil osophi cal or ideologi cal t hought.
 
-You can gaug e the moon phase at the ti me of your  birth by calculati ng the dist ance betwe en your
+You can gaug e the moon phase at the ti me of your birth by calculati ng the dist ance betwe en your
 
 sun and moon. Locate the sun in your b
 
@@ -6802,9 +6802,9 @@ irth chart and then locate your moon. Movi ng counter
 
 clockwise,countthedeg r eesbetwe enyoursunsignandmoonsign.Youcanthenassessyournatal
 
-moon phase based on the  following t able:
+moon phase based on the following t able:
 
-Deg r ee  d if f er en ce  b etwe en su n  an d m o o n
+Deg r ee d if f er en ce b etwe en su n an d m o o n
 
 Ph ase at b ir th
 
@@ -6814,7 +6814,7 @@ to
 
 44°
 
-New moon natal  phas e
+New moon natal phas e
 
 45°
 
@@ -6830,7 +6830,7 @@ to
 
 134°
 
-Fir st  quart er natal phase
+Fir st quart er natal phase
 
 135°
 
@@ -6862,7 +6862,7 @@ to
 
 314°
 
-Last  quart er  nat al
+Last quart er nat al
 
 phase
 
@@ -6872,43 +6872,43 @@ to
 
 360°
 
-Bal sami cm oon natal  phas e
+Bal sami cm oon natal phas e
 
 New Mo o n
 
 ä
 
-see kin g out n ew opp ortunit ie s and ne w ad ven tures.  They bore e asi lyand  lose thei r sense  of
+see kin g out n ew opp ortunit ie s and ne w ad ven tures. They bore e asi lyand lose thei r sense of
 
-selves when they b ecome ti ed  d own to monotony.  They te nd  to be ind ivid uals who
+selves when they b ecome ti ed d own to monotony. They te nd to be ind ivid uals who
 
 b eli eve
 
-very strong ly in  free  wil l an d  see  their own life p at h as b eing one  of limitle ss p ossibili ti es.
+very strong ly in free wil l an d see their own life p at h as b eing one of limitle ss p ossibili ti es.
 
-New moon b ab ie s can b e a b it  self
+New moon b ab ie s can b e a b it self
 
 -
 
-in volved , however,  an d  d o have a te nden cy toward
+in volved , however, an d d o have a te nden cy toward
 
-arrogan ce in  thei r yo uth.  Those b orn und er a ne w moon ofte n a ct on t heir int uiti on,  or thei r
+arrogan ce in thei r yo uth. Those b orn und er a ne w moon ofte n a ct on t heir int uiti on, or thei r
 
-hunches a nd  gut feelin g,  an d  na vigate  through  l ife wit hout road map s.  New moon b a
+hunches a nd gut feelin g, an d na vigate through l ife wit hout road map s. New moon b a
 
 b ie s are
 
 d rea mers.
 
-Your p urp ose is to try  to lea ve a last in g imp ressi on on humani ty.  You wan t to make a
+Your p urp ose is to try to lea ve a last in g imp ressi on on humani ty. You wan t to make a
 
-d ifference .  You nee d to know that  you matt er.  And  so you are d auntle ss,  and  ta ke on
+d ifference . You nee d to know that you matt er. And so you are d auntle ss, and ta ke on
 
 challen gin gta sksj usttop rovetoyourselfthat youcould d oit.
 
 òó
 
-en ough motivati on to g et  you to ta ke risks an d  try somet hing new.
+en ough motivati on to g et you to ta ke risks an d try somet hing new.
 
 **T**
 
@@ -6952,7 +6952,7 @@ en ough motivati on to g et  you to ta ke risks an d  try somet hing new.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -6960,29 +6960,29 @@ en ough motivati on to g et  you to ta ke risks an d  try somet hing new.
 
 44
 
-Wa xing  Cr escent  M o o n
+Wa xing Cr escent M o o n
 
-Those b orn und er a waxing crescen t moon are asse rti ve,  self
+Those b orn und er a waxing crescen t moon are asse rti ve, self
 
 -
 
-confident ,  and  always have
+confident , and always have
 
-thei r eyes on the futur e.  They d o not let  thei r
+thei r eyes on the futur e. They d o not let thei r
 
-p ast  or p hysical challen ges hold  them b ack.
+p ast or p hysical challen ges hold them b ack.
 
-They rise  to challenges when p rese nt ed,  b elie ve very strongl y in  free  will,  an d  have a  strong
+They rise to challenges when p rese nt ed, b elie ve very strongl y in free will, an d have a strong
 
-ne ed  to forge thei r own in d epen den ce.  They loat he to rely on others. Yet  as ad ults,  they are
+ne ed to forge thei r own in d epen den ce. They loat he to rely on others. Yet as ad ults, they are
 
 ofte n crea tures of hab it
 
-.  Though they go through many chan ges as a youth,  once you hit
+. Though they go through many chan ges as a youth, once you hit
 
 ä
 
-values,  an d  d o not b ud ge from the much once those convict ions an d  values have b ee n
+values, an d d o not b ud ge from the much once those convict ions an d values have b ee n
 
 formed .
 
@@ -6994,7 +6994,7 @@ Those b orn und er a first q uarte r moon are act ion
 
 -
 
-orie nt ed  wit h strong mana gemen t
+orie nt ed wit h strong mana gemen t
 
 -
 
@@ -7008,35 +7008,35 @@ others. Those b orn un d er a first q uarte r moo n are go
 
 -
 
-get te rs,  moti vat ed,  an d  hungry fo r
+get te rs, moti vat ed, an d hungry fo r
 
 growth.
 
-Wa xing  Gibbo us M o o n
+Wa xing Gibbo us M o o n
 
-Those b orn und er a  w axing gib
+Those b orn und er a w axing gib
 
-b ous moon  ar e act ion
+b ous moon ar e act ion
 
 -
 
-orie nt ed  wit h strong mana gemen t
+orie nt ed wit h strong mana gemen t
 
-cap ab ili tie s. They q uest for knowled ge an d  und erstan din g,  and  p ossess a sharp , an alyti cal
+cap ab ili tie s. They q uest for knowled ge an d und erstan din g, and p ossess a sharp , an alyti cal
 
 äá
 
-rely m uch on  faith.  Ch
+rely m uch on faith. Ch
 
-il d ren  b orn und er a waxi ng gib b ous moon  are c urious,  en erget ic,  an d
+il d ren b orn und er a waxi ng gib b ous moon are c urious, en erget ic, an d
 
 ò
 
-ne ed  to b e useful.  Ut ilit arian ism matters to you.  E ffici en cy matt ers.  L ea rn to b e more
+ne ed to b e useful. Ut ilit arian ism matters to you. E ffici en cy matt ers. L ea rn to b e more
 
 in tuit iv
 
-e,  however,  and consid er trustin g your i nt uiti on more.
+e, however, and consid er trustin g your i nt uiti on more.
 
 FullM o o n
 
@@ -7048,13 +7048,13 @@ d iscovery, an d yet outofever yone, theym aketa kethelongest
 
 toat ta init .Youte nd tofee lai mless, an dforalongti me, struggletounderstan d yourownlife
 
-universe.  Relat ionship s are imp orta nt  to you,  an d  you care a grea t  d
+universe. Relat ionship s are imp orta nt to you, an d you care a grea t d
 
 ea l ab out see kin g
 
-in ti macy.  Those b orn und er a full moon  m ay exp erien ce in sta b ility,  uncerta in ty,  and
+in ti macy. Those b orn und er a full moon m ay exp erien ce in sta b ility, uncerta in ty, and
 
-in securit ie s in  their lives.
+in securit ie s in their lives.
 
 **T**
 
@@ -7098,7 +7098,7 @@ in securit ie s in  their lives.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -7106,15 +7106,15 @@ in securit ie s in  their lives.
 
 45
 
-Wa ning  Gibbo us  (Dissemi na ting)  M o o n
+Wa ning Gibbo us (Dissemi na ting) M o o n
 
-Those b orn und er a w an in g gib b ous moon,  or a d isse mina ting moon,  are na tural b orn
+Those b orn und er a w an in g gib b ous moon, or a d isse mina ting moon, are na tural b orn
 
 commu
 
-ni cat ors.  They like to exp ress an d  share thei r knowled ge an d  exp erien ces.  They are
+ni cat ors. They like to exp ress an d share thei r knowled ge an d exp erien ces. They are
 
-thin kers first an d  foremost,  an d  then te achers,  writ ers, j ourna list s, rep orte rs,  p ublicist s,
+thin kers first an d foremost, an d then te achers, writ ers, j ourna list s, rep orte rs, p ublicist s,
 
 scholars, orp hilosop hers. Theyaregrea tat organ izin gthei rideas,arearticul
 
@@ -7122,17 +7122,17 @@ at e, thoughtful,
 
 an d areb ornwit hastrongmessagetosharewit htheworld . Amaj orp ar tofthei rlifep urp ose
 
-is d et ermin in g what that  message is an d  how they will b e com muni c at in g that  message to
+is d et ermin in g what that message is an d how they will b e com muni c at in g that message to
 
 the world .
 
-La st Qua rt er (o r  Third Qua rter ) M o o n
+La st Qua rt er (o r Third Qua rter ) M o o n
 
 Those b
 
-orn in  the last  q uarte r (or thi rd  q uarte r) of the moon p hase hol d  strong b eli efs an d
+orn in the last q uarte r (or thi rd q uarte r) of the moon p hase hol d strong b eli efs an d
 
-convict ions.  They arethe wisest  ofthem all, though they are also ofte nthe most i nflexib le in
+convict ions. They arethe wisest ofthem all, though they are also ofte nthe most i nflexib le in
 
 thei rways. Thoseb ornin thelast q uarte rknowwhotheyarean d knowwhat
 
@@ -7142,31 +7142,31 @@ theysta nd for,
 
 ä
 
-You could  b e an  in trov ert,  shy as a child ,  was an  only c
+You could b e an in trov ert, shy as a child , was an only c
 
 á òá ó
 
 likessolitud ean d contemplat ion. Thoseb orninthelast q uarte rarerecommen d ed tokeep a
 
-d rea m journa l,  as you often  have p rophe ti c or in tuit ive d rea ms.
+d rea m journa l, as you often have p rophe ti c or in tuit ive d rea ms.
 
-Wa ning  Crescen t (Ba lsa mic) Mo o n
+Wa ning Crescen t (Ba lsa mic) Mo o n
 
-Those b orn und er a wani ng crescen t moon,  or b alsamic moon,  are future
+Those b orn und er a wani ng crescen t moon, or b alsamic moon, are future
 
 -
 
-orie nt ed .  You feel
+orie nt ed . You feel
 
-you are p art of somet hing much b igger than  you,  and  you are. You feel that  dest in y and fate
+you are p art of somet hing much b igger than you, and you are. You feel that dest in y and fate
 
-p lay a significan t role in  shap in g your  life p at h.  You may p ossess in na te  g
+p lay a significan t role in shap in g your life p at h. You may p ossess in na te g
 
-ifts of  p rophe cy o r
+ifts of p rophe cy o r
 
 ää
 
-is very much linked  kar mically to you r p ast .
+is very much linked kar mically to you r p ast .
 
 òó á
 
@@ -7174,17 +7174,17 @@ very
 
 matureforthei rag e. Man yofyourloved ones closetoyouhavetraveled manylifeti mes
 
-wit h you,  an d  you p rob ab ly know them as so ul mate s.  Your grea te st st ren gth once you p ea k
+wit h you, an d you p rob ab ly know them as so ul mate s. Your grea te st st ren gth once you p ea k
 
-is your wisd om,  so a si gni ficant  p art of your life p at h is imp artin g that wisd
+is your wisd om, so a si gni ficant p art of your life p at h is imp artin g that wisd
 
 om on to others.
 
-In Weste rn esot ericism,  the wan ing crescen t moon is the moon of wit chcraft.  In E ast ern
+In Weste rn esot ericism, the wan ing crescen t moon is the moon of wit chcraft. In E ast ern
 
-esot ericism,  this is when  yin  en ergy is growi ng stronger,  an d  yin  ene rgy is the source o f
+esot ericism, this is when yin en ergy is growi ng stronger, an d yin ene rgy is the source o f
 
-p sychic p ower and  ne croman cy.
+p sychic p ower and ne croman cy.
 
 **T**
 
@@ -7228,7 +7228,7 @@ p sychic p ower and  ne croman cy.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -7240,7 +7240,7 @@ Ret urni ng to Albe rt E inste
 
 á 
 
-).  Then , going
+). Then , going
 
 count er
 
@@ -7252,13 +7252,13 @@ or l eft
 
 -
 
-ward ,  count  the d egree s unti l you  rea ch the moon (
+ward , count the d egree s unti l you rea ch the moon (
 
 ).
 
 E ach
 
-ast rological house  (the re are a tot al of  1 2 sect ors,  or 1 2 ho uses as nu mbe red  in  the in ner
+ast rological house (the re are a tot al of 1 2 sect ors, or 1 2 ho uses as nu mbe red in the in ner
 
 circle) is 30
 
@@ -7274,7 +7274,7 @@ is 261
 
 °
 
-.  Pe r the
+. Pe r the
 
 referen cechartp rovid ed , E in stei nwasb ornund erad isse mina ti ngmoon(orwan in ggib b ous
 
@@ -7336,7 +7336,7 @@ you find hi s moo n. 14
 
 °
 
-+  14
+- 14
 
 °
 
@@ -7354,7 +7354,7 @@ to
 
 44°
 
-New moon natal  phas e
+New moon natal phas e
 
 **T**
 
@@ -7398,7 +7398,7 @@ New moon natal  phas e
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -7408,7 +7408,7 @@ New moon natal  phas e
 
 **A**
 
-**S T ROL OGY  F OR**
+**S T ROL OGY F OR**
 
 **B**
 
@@ -7420,13 +7420,13 @@ is a self
 
 p aced
 
-in d ep en den t stud y course that  will te ach
+in d ep en den t stud y course that will te ach
 
-you ho w to rea d  b oth Pla cid us an d  Whole
+you ho w to rea d b oth Pla cid us an d Whole
 
-S igns,  Tropi cal an d  Sid ereal horoscop ic
+S igns, Tropi cal an d Sid ereal horoscop ic
 
-charts.  You will  lea rn b oth Trad it iona l an d
+charts. You will lea rn b oth Trad it iona l an d
 
 M od ern ast rology.
 
@@ -7440,23 +7440,23 @@ of
 
 wo rkb ooks
 
-,  d ozen s of p ract ice charts in
+, d ozen s of p ract ice charts in
 
-various cha rt syste ms ,  an d  hand outs to
+various cha rt syste ms , an d hand outs to
 
-crea te  your own a strolo gy g rimoire.
+crea te your own a strolo gy g rimoire.
 
-You will lea rn ab out the S acred  S even,
+You will lea rn ab out the S acred S even,
 
 mod ernp lanet s,in clud ingChiron, Jun o,and
 
-Ceres,  an d  p op ular ast eroid s.  L ea rn to read
+Ceres, an d p op ular ast eroid s. L ea rn to read
 
-a chart for love,  care
+a chart for love, care
 
-er,  health,  sp iritualit y,
+er, health, sp iritualit y,
 
-shad ow work,  an d  mor e.
+shad ow work, an d mor e.
 
 **ORDER THE CO URSE TOD AY**
 
@@ -7502,7 +7502,7 @@ shad ow work,  an d  mor e.
 
 **B**
 
-**E N E  B E L L**
+**E N E B E L L**
 
 **W**
 
@@ -7518,7 +7518,7 @@ Zodiac
 
 ):
 
-S ect  Place ment :
+S ect Place ment :
 
 H ouse Domici le of M oon:
 
@@ -7528,11 +7528,11 @@ ifa n y
 
 ):
 
-L unar Decan  Ruler:
+L unar Decan Ruler:
 
-M oon Phase  at  Birth:
+M oon Phase at Birth:
 
-**BE  N E  BE  L L   W  E N**
+**BE N E BE L L W E N**
 
 Web sit e for M ore F ree Download s:
 

@@ -17,11 +17,11 @@ A mystical, casino-style card shuffling animation component built with Framer Mo
 
 ```typescript
 interface MysticalShuffleAnimationProps {
-  onShuffleComplete?: () => void;      // Called when shuffle animation completes
-  onShuffleStart?: () => void;         // Called when shuffle starts
-  isShuffling: boolean;                // Current shuffle state
-  onTriggerShuffle: () => void;        // Function to trigger shuffle logic
-  className?: string;                  // Additional CSS classes
+  onShuffleComplete?: () => void; // Called when shuffle animation completes
+  onShuffleStart?: () => void; // Called when shuffle starts
+  isShuffling: boolean; // Current shuffle state
+  onTriggerShuffle: () => void; // Function to trigger shuffle logic
+  className?: string; // Additional CSS classes
   size?: "small" | "medium" | "large"; // Size variant (default: "medium")
 }
 ```
@@ -30,7 +30,7 @@ interface MysticalShuffleAnimationProps {
 
 1. **Initial State**: Deck glows subtly with hover instruction
 2. **Hover**: Enhanced glow, instruction changes to "Click to shuffle"
-3. **Click**: 
+3. **Click**:
    - Deck expands and starts rotating
    - 8 cards fan out in circular pattern
    - Cards rotate individually while orbiting
@@ -41,7 +41,7 @@ interface MysticalShuffleAnimationProps {
 ## Size Configurations
 
 - **Small** (Mobile): 32x44 deck, 80px fan radius
-- **Medium** (Tablet): 48x64 deck, 120px fan radius  
+- **Medium** (Tablet): 48x64 deck, 120px fan radius
 - **Large** (Desktop): 64x80 deck, 160px fan radius
 
 ## Usage Example

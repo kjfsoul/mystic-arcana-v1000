@@ -121,7 +121,7 @@
             "includeAstrology": true,
             "birthData": {
               "latitude": 40.7128,
-              "longitude": -74.0060,
+              "longitude": -74.006,
               "timezone": "America/New_York"
             }
           }
@@ -209,7 +209,14 @@
           "type": "PostgreSQL",
           "operation": "Insert",
           "table": "tarot_analytics",
-          "columns": ["date", "total_readings", "popular_spreads", "hybrid_adoption", "peak_hour", "cosmic_influence"]
+          "columns": [
+            "date",
+            "total_readings",
+            "popular_spreads",
+            "hybrid_adoption",
+            "peak_hour",
+            "cosmic_influence"
+          ]
         },
         {
           "name": "Notify Admin",

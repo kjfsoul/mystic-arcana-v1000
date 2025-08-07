@@ -3,7 +3,11 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.95),
+    rgba(22, 33, 62, 0.95)
+  );
   border-radius: 16px;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(138, 43, 226, 0.2);
@@ -22,10 +26,10 @@
 }
 
 .titleSection h3 {
-  color: #DDA0DD;
+  color: #dda0dd;
   font-size: 1.5rem;
   margin: 0 0 0.5rem 0;
-  background: linear-gradient(135deg, #DDA0DD, #FFB6C1);
+  background: linear-gradient(135deg, #dda0dd, #ffb6c1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -40,7 +44,7 @@
 
 .addButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #8A2BE2, #9370DB);
+  background: linear-gradient(135deg, #8a2be2, #9370db);
   color: white;
   border: none;
   border-radius: 8px;
@@ -51,7 +55,7 @@
 }
 
 .addButton:hover:not(:disabled) {
-  background: linear-gradient(135deg, #9370DB, #BA55D3);
+  background: linear-gradient(135deg, #9370db, #ba55d3);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
 }
@@ -63,7 +67,11 @@
 
 /* Event Form */
 .eventForm {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(147, 112, 219, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1),
+    rgba(147, 112, 219, 0.05)
+  );
   border: 1px solid rgba(138, 43, 226, 0.3);
   border-radius: 12px;
   padding: 1.5rem;
@@ -78,7 +86,7 @@
 }
 
 .formHeader h4 {
-  color: #DDA0DD;
+  color: #dda0dd;
   margin: 0;
   font-size: 1.1rem;
 }
@@ -139,7 +147,7 @@
 .formField select:focus,
 .formField textarea:focus {
   outline: none;
-  border-color: #8A2BE2;
+  border-color: #8a2be2;
   box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
   background: rgba(0, 0, 0, 0.4);
 }
@@ -214,7 +222,7 @@
 }
 
 .emptyState h4 {
-  color: #DDA0DD;
+  color: #dda0dd;
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
 }
@@ -226,7 +234,7 @@
 
 .addFirstButton {
   padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, #8A2BE2, #9370DB);
+  background: linear-gradient(135deg, #8a2be2, #9370db);
   color: white;
   border: none;
   border-radius: 8px;
@@ -236,7 +244,7 @@
 }
 
 .addFirstButton:hover {
-  background: linear-gradient(135deg, #9370DB, #BA55D3);
+  background: linear-gradient(135deg, #9370db, #ba55d3);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
 }
@@ -253,7 +261,8 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, 
+  background: linear-gradient(
+    to bottom,
     rgba(138, 43, 226, 0.3),
     rgba(221, 160, 221, 0.5),
     rgba(138, 43, 226, 0.3)
@@ -284,7 +293,11 @@
 
 .eventCard {
   width: calc(50% - 2rem);
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1),
+    rgba(0, 0, 0, 0.3)
+  );
   border: 1px solid rgba(138, 43, 226, 0.2);
   border-radius: 12px;
   padding: 1.5rem;
@@ -317,7 +330,7 @@
 
 .eventDate {
   font-size: 0.85rem;
-  color: #DDA0DD;
+  color: #dda0dd;
   font-weight: 500;
   background: rgba(221, 160, 221, 0.1);
   padding: 0.25rem 0.75rem;
@@ -403,13 +416,17 @@
 .timelineInsights {
   margin-top: 3rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1),
+    rgba(0, 0, 0, 0.2)
+  );
   border: 1px solid rgba(138, 43, 226, 0.2);
   border-radius: 12px;
 }
 
 .timelineInsights h4 {
-  color: #DDA0DD;
+  color: #dda0dd;
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
 }

@@ -1,6 +1,7 @@
 # MCP Server Consolidation Plan
 
 ## Current Issues
+
 1. **3 conflicting MCP config files** (.mcp.json, .roo/mcp.json, mcp.json)
 2. **Servers scattered across 3 directories** (/mcp/, /mcp-servers/, /src/agents/)
 3. **Duplicate server definitions** (filesystem, memory defined multiple times)
@@ -10,6 +11,7 @@
 ## Consolidation Strategy
 
 ### 1. Canonical Directory Structure
+
 ```
 /mcp-servers/
 ├── core/              # Official MCP servers (via npx)
@@ -24,6 +26,7 @@
 ```
 
 ### 2. Single Config Location
+
 - **Keep:** `.roo/mcp.json` (Roo's standard location)
 - **Archive:** `.mcp.json` → `.mcp.json.backup`
 - **Remove:** `mcp.json` (duplicate)
@@ -31,6 +34,7 @@
 ### 3. Server Consolidation
 
 #### Active Servers to Keep:
+
 1. **filesystem** - File operations
 2. **memory** - Knowledge graph
 3. **brave-search** - Web search
@@ -42,13 +46,16 @@
 9. **agent-orchestrator** - Agent coordination
 
 #### Servers to Remove:
+
 - sequential-thinking (unused)
 - MCP_DOCKER (not implemented)
 - claude-mystic (incorrect usage)
 - Duplicate filesystem/memory definitions
 
 ### 4. Environment Variables
+
 Create `.env.mcp` for sensitive keys:
+
 ```bash
 BRAVE_API_KEY=xxx
 GITHUB_PERSONAL_ACCESS_TOKEN=xxx
@@ -58,11 +65,13 @@ SUPABASE_ACCESS_TOKEN=xxx
 ```
 
 ### 5. Breaking Changes
+
 - Server paths will change
 - Config file location changes
 - Environment variable requirements
 
 ## Migration Steps
+
 1. Create new directory structure
 2. Move servers to canonical locations
 3. Update paths in .roo/mcp.json

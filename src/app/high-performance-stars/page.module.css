@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .header {
@@ -21,7 +21,7 @@
   margin: 0 0 8px 0;
   font-size: 32px;
   font-weight: 700;
-  background: linear-gradient(45deg, #FFD700, #FFA500);
+  background: linear-gradient(45deg, #ffd700, #ffa500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -44,9 +44,9 @@
 .settingsButton {
   padding: 12px 24px;
   background: rgba(255, 215, 0, 0.1);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 8px;
-  color: #FFD700;
+  color: #ffd700;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -71,7 +71,7 @@
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .settingsPanel {
@@ -120,7 +120,7 @@
 .configPanel h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .statsGrid,
@@ -144,9 +144,9 @@
 }
 
 .statValue {
-  color: #00FF00;
+  color: #00ff00;
   font-weight: 600;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .configItem strong {
@@ -165,7 +165,7 @@
   bottom: 20px;
   left: 20px;
   background: rgba(0, 0, 0, 0.9);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 8px;
   padding: 16px;
   backdrop-filter: blur(10px);
@@ -176,7 +176,7 @@
 .starInfoPanel h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .starDetails {
@@ -204,9 +204,9 @@
   width: 100%;
   padding: 8px;
   background: rgba(255, 215, 0, 0.1);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 4px;
-  color: #FFD700;
+  color: #ffd700;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -227,7 +227,7 @@
   text-align: center;
   margin: 0 0 32px 0;
   font-size: 24px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .techGrid {
@@ -246,7 +246,7 @@
 .techItem h3 {
   margin: 0 0 16px 0;
   font-size: 18px;
-  color: #87CEEB;
+  color: #87ceeb;
 }
 
 .techItem ul {
@@ -269,10 +269,10 @@
 }
 
 .techItem li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 0;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .footer {
@@ -295,7 +295,7 @@
 }
 
 .disclaimer {
-  color: #87CEEB !important;
+  color: #87ceeb !important;
   font-style: italic;
 }
 
@@ -304,12 +304,12 @@
   .header h1 {
     font-size: 24px;
   }
-  
+
   .headerControls {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .performanceOverlay {
     position: static;
     max-width: none;
@@ -317,23 +317,23 @@
     flex-direction: row;
     overflow-x: auto;
   }
-  
+
   .performancePanel,
   .configPanel {
     min-width: 250px;
   }
-  
+
   .starInfoPanel {
     position: static;
     max-width: none;
     margin: 16px;
   }
-  
+
   .techGrid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .mainDisplay {
     height: 50vh;
     min-height: 400px;
@@ -344,15 +344,15 @@
   .header {
     padding: 16px;
   }
-  
+
   .technicalInfo {
     padding: 32px 16px;
   }
-  
+
   .techItem {
     padding: 16px;
   }
-  
+
   .performanceOverlay {
     flex-direction: column;
   }

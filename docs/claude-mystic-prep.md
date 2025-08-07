@@ -2,61 +2,62 @@
 
 **Created:** 5/28/2025 22:44  
 **Updated:** 5/30/2025 9:16  
-**Exported:** 5/31/2025 0:04  
+**Exported:** 5/31/2025 0:04
 
 ## Prompt:
+
 Mystic Arcana Deep Competitive Research Prompt
 Objective
 Conduct a comprehensive, up-to-date, and critical analysis of leading competitors in the online tarot, astrology, and spiritual wellness app space. Provide actionable insights, detailed feature/architecture breakdowns, and UI/UX benchmarks so Mystic Arcana can match or surpass market leaders in design, functionality, security, and experience.
 Prompt (for AI/Research Agent)
 **Task:** Perform a deep-dive comparative analysis on at least five top competitors in the tarot, astrology, or digital spiritual wellness market (e.g., Co–Star, The Pattern, Sanctuary, Labyrinthos, Golden Thread, Chani, Astro-Seek, Keen, Kasamba, etc.).
 **Your analysis must:**
+
 1. Identify and profile each competitor’s platform (web & app if available). List:
-   * Name, target audience, business model, core value prop
-   * Recent product releases or notable UX changes
+   - Name, target audience, business model, core value prop
+   - Recent product releases or notable UX changes
 2. UI/UX Deep Dive
-   * Provide screenshots or descriptions of key screens (onboarding, dashboard, reading, astrology/chart view, e-commerce, etc.)
-   * Evaluate design quality, navigation flow, accessibility, and use of modern UX patterns
-   * Note innovative/unique UX features
+   - Provide screenshots or descriptions of key screens (onboarding, dashboard, reading, astrology/chart view, e-commerce, etc.)
+   - Evaluate design quality, navigation flow, accessibility, and use of modern UX patterns
+   - Note innovative/unique UX features
 3. API/Integration Research
-   * Determine if competitor offers a public or private API (for astrology, readings, account, e-comm, community)
-   * Analyze API endpoints (if possible): data models, security/auth flows, extensibility
-   * List known 3rd-party integrations (astrology data, payments, community, etc.)
+   - Determine if competitor offers a public or private API (for astrology, readings, account, e-comm, community)
+   - Analyze API endpoints (if possible): data models, security/auth flows, extensibility
+   - List known 3rd-party integrations (astrology data, payments, community, etc.)
 4. Likely Database & Backend Architecture
-   * Based on feature set and observed flows, hypothesize database structure: entities, relationships, user/session/content management
-   * Comment on use of cloud services, serverless, or managed backends
+   - Based on feature set and observed flows, hypothesize database structure: entities, relationships, user/session/content management
+   - Comment on use of cloud services, serverless, or managed backends
 5. Security & Privacy Assessment
-   * Review terms, privacy policy, and in-app behaviors for compliance (GDPR, CCPA, PCI-DSS)
-   * Document authentication flows (OAuth, SSO, multi-factor, data encryption at rest/in transit)
-   * Note user controls for privacy/export/delete data
+   - Review terms, privacy policy, and in-app behaviors for compliance (GDPR, CCPA, PCI-DSS)
+   - Document authentication flows (OAuth, SSO, multi-factor, data encryption at rest/in transit)
+   - Note user controls for privacy/export/delete data
 6. Feature/Functionality Breakdown
-   * List and rate each core feature (readings, astrology, journaling, e-comm, community, events, notifications, personalization, AI/bot usage)
-   * Highlight where Mystic Arcana can meaningfully differentiate or improve
+   - List and rate each core feature (readings, astrology, journaling, e-comm, community, events, notifications, personalization, AI/bot usage)
+   - Highlight where Mystic Arcana can meaningfully differentiate or improve
 7. Comparative Site Map & UI/UX Matrix
-   * Sketch/describe each competitor’s site/app map and major user flows
-   * Tabulate and compare against Mystic Arcana’s planned site map/screens
-   * Flag opportunities for streamlined, more engaging, or novel flows
+   - Sketch/describe each competitor’s site/app map and major user flows
+   - Tabulate and compare against Mystic Arcana’s planned site map/screens
+   - Flag opportunities for streamlined, more engaging, or novel flows
 8. Present Key Takeaways
-   * Summarize strengths and weaknesses of each competitor
-   * Offer specific, actionable recommendations to ensure Mystic Arcana matches or surpasses the best in:
-      * Visual/UI polish
-      * UX accessibility and onboarding
-      * Features and API integrations
-      * Database security/architecture
-      * Personalization and user engagement
-Output
-* Deliver a structured report, site map matrix, and UI/UX flow comparisons.
-* List actionable, high-value improvements for Mystic Arcana’s docs and roadmap.
-*Use live web search, screenshots, public documentation, and user reviews. Prioritize recent changes or feature launches (last 12 months). Tag all unconfirmed hypotheses as such.*
+   - Summarize strengths and weaknesses of each competitor
+   - Offer specific, actionable recommendations to ensure Mystic Arcana matches or surpasses the best in:
+     _ Visual/UI polish
+     _ UX accessibility and onboarding
+     _ Features and API integrations
+     _ Database security/architecture \* Personalization and user engagement
+     Output
 
-
+- Deliver a structured report, site map matrix, and UI/UX flow comparisons.
+- List actionable, high-value improvements for Mystic Arcana’s docs and roadmap.
+  _Use live web search, screenshots, public documentation, and user reviews. Prioritize recent changes or feature launches (last 12 months). Tag all unconfirmed hypotheses as such._
 
 ## Response:
+
 I'll help you conduct this comprehensive competitive analysis for Mystic Arcana. Since you've provided such a detailed research brief, I'll start diving into the research immediately to gather all the information you need about these spiritual wellness app competitors.
 
 **launch_extended_search_task**
 
-*Request*
+_Request_
 
 ```javascript
 {
@@ -64,13 +65,11 @@ I'll help you conduct this comprehensive competitive analysis for Mystic Arcana.
 }
 ```
 
-*Response*
+_Response_
 
 ```javascript
 {"task_id": "wf-915457e0-898e-45c4-b2ed-916f581240df"}
 ```
-
-
 
 Your competitive analysis of leading tarot, astrology & spiritual wellness apps is ready. It includes profiles of AI-powered platforms (Co-Star, The Pattern), marketplace models (Sanctuary, Keen, Kasamba), and educational platforms (Labyrinthos, Chani, Astro-Seek). The report contains UI/UX analysis, API & integration research, database architecture insights, security assessments, feature comparisons, and strategic recommendations for differentiation in this growing market.
 
@@ -88,6 +87,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### AI-Powered Astrology Leaders
 
 **Co-Star**
+
 - **Target Audience**: Gen Z/Young Millennials (25% of US women 18-25 have downloaded)
 - **Business Model**: Freemium with premium features
 - **Core Value Prop**: "AI meets NASA data" - using JPL ephemeris for hyper-accurate calculations
@@ -95,6 +95,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 - **Differentiation**: Brutally honest AI personality, social comparison features, minimalist design
 
 **The Pattern**
+
 - **Target Audience**: Psychology-minded millennials seeking self-discovery
 - **Business Model**: Freemium ($30 quarterly for Go Deeper+)
 - **Core Value Prop**: "Psychological astrology" removing mystical jargon
@@ -104,6 +105,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Human Expert Marketplaces
 
 **Sanctuary**
+
 - **Target Audience**: Users seeking human connection over algorithms
 - **Business Model**: Marketplace + subscription ($19.99/month includes one reading)
 - **Core Value Prop**: "Talkspace for astrology" - real astrologers on-demand
@@ -111,6 +113,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 - **Differentiation**: 24/7 human availability, $2.99/minute pricing, chat-first UX
 
 **Keen & Kasamba** (Established Players, Founded 1999)
+
 - **Target Audience**: Serious seekers willing to pay for quality readings
 - **Business Model**: Commission-based marketplace
 - **Core Value Prop**: Vetted professional psychics with satisfaction guarantees
@@ -120,6 +123,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Educational Platforms
 
 **Labyrinthos** (Merged with Golden Thread)
+
 - **Target Audience**: Tarot beginners to practitioners
 - **Business Model**: Freemium app + physical deck sales ($55)
 - **Core Value Prop**: "Learn tarot through gamification and beautiful design"
@@ -129,12 +133,14 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Emerging Innovators
 
 **Chani**
+
 - **Target Audience**: Progressive, inclusive spiritual seekers
 - **Business Model**: Subscription-based with social impact
 - **Core Value Prop**: Feminist, queer-led astrology with meditation integration
 - **Differentiation**: Rising sign focus, $2.5M donated to gender-based violence survivors
 
 **Astro-Seek**
+
 - **Target Audience**: Professional astrologers and technical users
 - **Business Model**: Free with optional premium features
 - **Core Value Prop**: 300+ technical calculators and open APIs
@@ -145,18 +151,21 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Design Quality Leaders
 
 **The Pattern** sets the standard with:
+
 - Clean, jargon-free interface using psychological language
 - Three-tier content architecture (Foundation, Development, Relationships)
 - Innovative "Connect" dating integration within main app
 - Audio-first content strategy with 360° immersive meditations
 
 **Co-Star** pioneered:
+
 - Minimalist black and white aesthetic
 - Brutally honest, meme-worthy daily updates
 - Social astrology with friend comparison features
 - NASA data visualization for planetary positions
 
 **Labyrinthos** excels through:
+
 - Gamified learning with 22 Major Arcana avatars
 - Level progression through "Fool's Journey"
 - 75+ spread templates with custom builder
@@ -165,6 +174,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Navigation Flow Innovations
 
 **Best-in-class patterns**:
+
 - **Onboarding**: Chani's rising sign calculator with location auto-detection
 - **Daily Content**: Sanctuary's chat bubble delivery mimicking texting
 - **Learning Paths**: Labyrinthos' progressive unlocking system
@@ -174,6 +184,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Accessibility Champions
 
 **Progressive Features**:
+
 - Dark mode standard across all modern apps
 - Voice navigation in emerging platforms
 - Multi-language support (Kasamba: 6+ languages)
@@ -185,11 +196,13 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Public API Availability
 
 **Open Platforms**:
+
 - **Astro-Seek**: Comprehensive calculation APIs, free tier available
 - **AstrologyAPI**: Commercial API service for developers
 - **Swiss Ephemeris**: Open-source astronomical calculations
 
 **Closed Ecosystems**:
+
 - Co-Star, The Pattern, Sanctuary: No public APIs
 - Keen/Kasamba: Partner APIs only
 - Labyrinthos: Internal APIs for cross-platform sync
@@ -197,16 +210,19 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Third-Party Integrations
 
 **Payment Processing**:
+
 - Stripe/PayPal standard across platforms
 - Apple Pay integration in premium apps
 - Cryptocurrency payments emerging (limited adoption)
 
 **Content & Data**:
+
 - NASA JPL ephemeris (Co-Star)
 - TimePassages engine (Sanctuary)
 - Swiss Ephemeris (technical platforms)
 
 **Communication**:
+
 - Twilio for SMS notifications
 - WebRTC for video readings (Keen/Kasamba)
 - Push notification services (Firebase, OneSignal)
@@ -216,6 +232,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Observed Architecture Patterns
 
 **AI-Powered Apps (Co-Star, The Pattern)**:
+
 - **User Data**: PostgreSQL for user profiles, preferences, social connections
 - **Astronomical Data**: Time-series databases for planetary positions
 - **Content Delivery**: CDN-backed static content for interpretations
@@ -223,6 +240,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 - **ML Pipeline**: TensorFlow/PyTorch for pattern recognition
 
 **Marketplace Platforms (Sanctuary, Keen)**:
+
 - **User/Advisor Management**: Relational databases with role-based access
 - **Session Management**: Real-time communication infrastructure
 - **Payment Processing**: Separate payment database with encryption
@@ -230,6 +248,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 - **Search Infrastructure**: Elasticsearch for advisor discovery
 
 **Educational Apps (Labyrinthos)**:
+
 - **Content Management**: Hierarchical CMS for lessons/quizzes
 - **Progress Tracking**: User state management with checkpoint system
 - **Multi-device Sync**: Cloud-based state synchronization
@@ -238,6 +257,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Cloud Infrastructure
 
 **Common Patterns**:
+
 - AWS dominance (S3, EC2, RDS)
 - Heroku for rapid deployment (Labyrinthos)
 - CloudFlare for CDN and DDoS protection
@@ -248,6 +268,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Authentication Standards
 
 **Industry Leaders**:
+
 - **The Pattern**: Email + Apple ID (discontinued Facebook)
 - **Chani**: OAuth 2.0 with biometric options
 - **Keen/Kasamba**: Two-factor authentication available
@@ -256,6 +277,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Data Protection
 
 **Best Practices Observed**:
+
 - SSL/TLS encryption standard across all platforms
 - PCI DSS compliance for payment processing
 - GDPR compliance with data portability options
@@ -265,6 +287,7 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 ### Privacy Controls
 
 **User Empowerment Features**:
+
 - Data export capabilities (The Pattern, Chani)
 - Account deletion with data removal
 - Granular privacy settings for social features
@@ -275,22 +298,23 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 
 ### Core Feature Comparison
 
-| Feature | Co-Star | Pattern | Sanctuary | Labyrinthos | Chani | Keen/Kasamba |
-|---------|---------|---------|-----------|-------------|-------|--------------|
-| AI Predictions | ✓✓✓ | ✓✓ | ✗ | ✓ | ✓✓ | ✗ |
-| Live Readings | ✗ | ✗ | ✓✓✓ | ✗ | ✗ | ✓✓✓ |
-| Birth Charts | ✓✓✓ | ✓✓✓ | ✓✓ | ✓ | ✓✓✓ | ✓ |
-| Social Features | ✓✓✓ | ✓✓ | ✗ | ✓ | ✓ | ✗ |
-| Learning Tools | ✓ | ✓ | ✓ | ✓✓✓ | ✓✓ | ✗ |
-| Meditation | ✗ | ✓✓ | ✗ | ✗ | ✓✓✓ | ✗ |
-| Dating Features | ✗ | ✓✓✓ | ✗ | ✗ | ✗ | ✗ |
-| Multiple Systems | ✓ | ✓ | ✓ | ✓✓ | ✓✓ | ✓✓✓ |
-| Tarot | ✗ | ✗ | ✓✓ | ✓✓✓ | ✓ | ✓✓✓ |
-| API Access | ✗ | ✗ | ✗ | ✗ | ✗ | Partner |
+| Feature          | Co-Star | Pattern | Sanctuary | Labyrinthos | Chani | Keen/Kasamba |
+| ---------------- | ------- | ------- | --------- | ----------- | ----- | ------------ |
+| AI Predictions   | ✓✓✓     | ✓✓      | ✗         | ✓           | ✓✓    | ✗            |
+| Live Readings    | ✗       | ✗       | ✓✓✓       | ✗           | ✗     | ✓✓✓          |
+| Birth Charts     | ✓✓✓     | ✓✓✓     | ✓✓        | ✓           | ✓✓✓   | ✓            |
+| Social Features  | ✓✓✓     | ✓✓      | ✗         | ✓           | ✓     | ✗            |
+| Learning Tools   | ✓       | ✓       | ✓         | ✓✓✓         | ✓✓    | ✗            |
+| Meditation       | ✗       | ✓✓      | ✗         | ✗           | ✓✓✓   | ✗            |
+| Dating Features  | ✗       | ✓✓✓     | ✗         | ✗           | ✗     | ✗            |
+| Multiple Systems | ✓       | ✓       | ✓         | ✓✓          | ✓✓    | ✓✓✓          |
+| Tarot            | ✗       | ✗       | ✓✓        | ✓✓✓         | ✓     | ✓✓✓          |
+| API Access       | ✗       | ✗       | ✗         | ✗           | ✗     | Partner      |
 
 ### Differentiation Opportunities
 
 **Underserved Features**:
+
 1. **Voice-first interfaces** - Only emerging in newest apps
 2. **AR sky overlay** - Technical possibility, no major implementation
 3. **Group readings** - Social astrology beyond 1:1 comparisons
@@ -303,51 +327,61 @@ The spiritual wellness app market is experiencing explosive growth (14.6% CAGR, 
 
 **Co-Star Model** (Simplicity):
 ```
+
 Home → Chart → Updates → Friends → Add Friends
+
 ```
 
 **The Pattern Model** (Depth):
 ```
+
 Home → Your Pattern → Your Timing → Bonds → Connect → Discover
-         ├─ Foundation
-         ├─ Development
-         └─ Relationships
+├─ Foundation
+├─ Development
+└─ Relationships
+
 ```
 
 **Sanctuary Model** (Marketplace):
 ```
+
 Home → Browse Advisors → Book Reading → Chat/Call → History
-        └─ Filter by: Category, Price, Availability
+└─ Filter by: Category, Price, Availability
+
 ```
 
 **Labyrinthos Model** (Education):
 ```
+
 Home → Daily → Journal → Reading → Learn → Decks
-                          └─ 75+ Spreads  └─ Courses
-                                           └─ Quizzes
+└─ 75+ Spreads └─ Courses
+└─ Quizzes
+
 ```
 
 ### Recommended Hybrid Architecture for Mystic Arcana
 
 ```
+
 Home Dashboard
 ├─ Today's Insights (AI + Human blend)
 ├─ My Journey
-│  ├─ Birth Chart (Interactive)
-│  ├─ Learning Path (Gamified)
-│  └─ Reading History
+│ ├─ Birth Chart (Interactive)
+│ ├─ Learning Path (Gamified)
+│ └─ Reading History
 ├─ Explore
-│  ├─ Live Advisors (Marketplace)
-│  ├─ AI Readings (Instant)
-│  └─ Community (Social)
+│ ├─ Live Advisors (Marketplace)
+│ ├─ AI Readings (Instant)
+│ └─ Community (Social)
 ├─ Tools
-│  ├─ Tarot Decks
-│  ├─ Compatibility
-│  └─ Calendar Sync
+│ ├─ Tarot Decks
+│ ├─ Compatibility
+│ └─ Calendar Sync
 └─ Profile
-   ├─ Settings
-   ├─ Privacy
-   └─ Achievements
+├─ Settings
+├─ Privacy
+└─ Achievements
+
 ```
 
 ## 8. Key Takeaways & Strategic Recommendations
@@ -448,14 +482,12 @@ Home Dashboard
 The spiritual wellness app market offers significant opportunities for a platform that combines technical sophistication with genuine spiritual depth. By learning from current leaders while addressing their limitations, Mystic Arcana can establish itself as the next-generation platform for digital spiritual exploration.
 ```
 
-
-
 ## Prompt:
+
 what is the best approach and process including documentation that I should follow to get a smooth and productive build from start to mvp to finish working with Claude Code and Claude 4 Opus through Cursor.
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -577,14 +609,12 @@ This approach creates a development environment where artificial intelligence am
 
 Remember that building a successful spiritual wellness app requires balancing technical excellence with authentic spiritual depth—something that AI can help you achieve but only through thoughtful human guidance and clear strategic vision.
 
-
-
 ## Prompt:
+
 I need very robust, innovative,but protective and goal-focused user rules for cursor and claude rules for this p roject
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -883,16 +913,14 @@ Your development velocity should actually increase because Claude spends less ti
 
 These rules create a development environment where artificial intelligence serves spiritual wisdom rather than replacing it—exactly the kind of balanced approach that will differentiate Mystic Arcana in a crowded market of spiritual wellness apps.
 
-
-
 ## Prompt:
+
 > File: paste.txt
 
 i put that into user rules which is sent to AI on all chats but there's also a project rules section. what do i put in each? Here's the rules guidance attached.
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -902,7 +930,7 @@ Let me break down the differences:
 
 User Rules:
 - Global to all projects
-- Always applied 
+- Always applied
 - Plain text only (no MDC format)
 - Stored in Cursor settings
 - Good for personal preferences, coding style, communication preferences
@@ -963,6 +991,7 @@ Here's how I'd recommend organizing your `.cursor/rules` directory:
 ### Core Project Rules
 
 **`spiritual-ethics.mdc`** (Always type)
+
 ```markdown
 ---
 description: Ethical guidelines for spiritual technology development
@@ -979,6 +1008,7 @@ alwaysApply: true
 ```
 
 **`api-architecture.mdc`** (Auto Attached to backend files)
+
 ```markdown
 ---
 description: API-first development standards for Mystic Arcana
@@ -998,6 +1028,7 @@ alwaysApply: false
 ```
 
 **`frontend-ux.mdc`** (Auto Attached to frontend files)
+
 ```markdown
 ---
 description: User experience guidelines for spiritual wellness platform
@@ -1020,6 +1051,7 @@ alwaysApply: false
 ### Domain-Specific Rules
 
 **`astronomical-calculations.mdc`** (Auto Attached to calculation files)
+
 ```markdown
 ---
 description: Standards for astronomical accuracy and calculations
@@ -1039,6 +1071,7 @@ alwaysApply: false
 ```
 
 **`ai-content-generation.mdc`** (Auto Attached to AI/ML files)
+
 ```markdown
 ---
 description: Guidelines for AI-generated spiritual content
@@ -1058,6 +1091,7 @@ alwaysApply: false
 ```
 
 **`security-privacy.mdc`** (Manual type for security-related work)
+
 ```markdown
 ---
 description: Security and privacy implementation for sensitive spiritual data
@@ -1067,12 +1101,14 @@ alwaysApply: false
 # Security & Privacy Standards
 
 ## Data Classification
+
 - Public: astronomical positions, educational content
 - Personal: birth info, preferences (standard protection)
 - Sensitive: reading history, private questions (maximum security)
 - Anonymous: usage patterns (no personal identification)
 
 ## Implementation Requirements
+
 - End-to-end encryption for advisor communications
 - Separate databases for different sensitivity levels
 - Zero-knowledge architecture for most sensitive data
@@ -1085,6 +1121,7 @@ alwaysApply: false
 ### Development Workflow Rules
 
 **`testing-standards.mdc`** (Auto Attached to test files)
+
 ```markdown
 ---
 description: Testing standards for spiritual wellness platform
@@ -1121,14 +1158,12 @@ The file reference system (using `@filename`) allows you to include template fil
 
 This rule organization transforms Claude from a general-purpose coding assistant into a specialized Mystic Arcana development expert that understands both your personal development preferences and the unique requirements of building spiritual technology platforms.
 
-
-
 ## Prompt:
+
 the frontend-ux and api-architecture auto-change to manual after saving and it says "this may never be used since it has no description or auto attachments. There is a text box i could have filled out called "file pattern matches" which i didn't put anything for because i wasn't sure
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -1160,11 +1195,13 @@ When you see that "file pattern matches" text box, that's Cursor asking you to s
 ## Fixing Your Auto-Attached Rules
 
 For your `api-architecture.mdc` rule, you should fill in the "file pattern matches" field with these patterns:
+
 ```
 **/api/**, **/backend/**, **/server/**
 ```
 
 For your `frontend-ux.mdc` rule, use these patterns:
+
 ```
 **/frontend/**, **/components/**, **/*.jsx, **/*.tsx
 ```
@@ -1205,11 +1242,13 @@ mystic-arcana/
 ```
 
 Then your patterns should reflect this structure. For API-related rules, you might use:
+
 ```
 **/api/**, **/services/**, packages/astro-calculations/**, packages/ai-content/**
 ```
 
 For frontend rules, you might use:
+
 ```
 apps/mobile/src/**, apps/web/src/**, **/components/**, **/screens/**, **/pages/**
 ```
@@ -1219,6 +1258,7 @@ apps/mobile/src/**, apps/web/src/**, **/components/**, **/screens/**, **/pages/*
 If you want to create rules that Claude can choose to apply based on context (rather than automatic file pattern matching), you need to use the "Agent Requested" type and provide a clear description. This is particularly useful for rules that apply to conceptual work rather than specific file types.
 
 For example, you might create an "Agent Requested" rule called `spiritual-content-review.mdc` with the description:
+
 ```
 Apply when generating or reviewing spiritual content to ensure cultural sensitivity and authentic guidance
 ```
@@ -1230,21 +1270,25 @@ Claude would then decide whether to apply this rule based on the conversation co
 For your Mystic Arcana project, I recommend starting with these specific configurations:
 
 **Core Architecture Rule** (Always applied):
+
 - Type: Always
 - No file patterns needed
 - Contains fundamental spiritual ethics and development principles
 
 **API Development Rule** (Auto Attached):
+
 - Type: Auto Attached
 - File patterns: `**/api/**, **/backend/**, **/server/**, packages/astro-calculations/**, packages/ai-content/**`
 - Contains API design standards, security requirements, astronomical accuracy guidelines
 
 **Frontend Experience Rule** (Auto Attached):
-- Type: Auto Attached  
+
+- Type: Auto Attached
 - File patterns: `**/components/**, **/screens/**, **/pages/**, apps/mobile/**, apps/web/**`
 - Contains UX guidelines, accessibility requirements, mobile-first principles
 
 **Security Review Rule** (Manual):
+
 - Type: Manual
 - Invoked with `@security-review` when working on sensitive features
 - Contains detailed privacy and security implementation guidance
@@ -1259,61 +1303,60 @@ If rules aren't triggering as expected, check that your actual file paths match 
 
 This systematic approach to rule configuration ensures that Claude receives exactly the right guidance for the specific type of development work you're doing, transforming it from a general assistant into a specialized Mystic Arcana development expert.
 
-
-
 ## Prompt:
+
 this is the current file structure: base) kfitz@Mac mystic_arcana_v1000 % tree -L 3 -I 'node_modules|.git|.next' | cat
 .
 ├── docs
-│   ├── ~$stic NotebookLM.docx
-│   ├── 03c-interpreting-tarot-through-astrology.pdf
-│   ├── 2025-05-29_19-15-13_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md
-│   ├── ARABIC PARTS.docx
-│   ├── benebell-wen-astrology-quick-reference-sheets (1).pdf
-│   ├── benebell-wen-astrology-quick-reference-sheets.pdf
-│   ├── Essential Dignities.docx
-│   ├── holistic-tarot-supplement-study-guide-01-beginner3.pdf
-│   ├── Introduction to Past Life.docx
-│   ├── Is AI Validating Psychic.docx
-│   ├── learning-the-thirty-six-decans-2016-09-16.pdf
-│   ├── learning-the-twelve-astrological-houses-2016-09-16.pdf
-│   ├── learning-the-twelve-astrological-signs-2016-09-16.pdf
-│   ├── legal
-│   │   ├── 03a-tarot-ethics-code-of-conduct.docx
-│   │   ├── 03d-sample-reading-template-three-cards1.docx
-│   │   ├── 03e-sample-schedule-of-fees-and-business-policy.docx
-│   │   ├── 03f-sample-privacy-terms-for-tarot-reading-websites.docx
-│   │   ├── 03g-sample-services-agreement-for-events-and-parties.docx
-│   │   ├── 03h-log-of-professional-readings.docx
-│   │   ├── 03i-detailed-summary-of-readings-log.docx
-│   │   ├── benebell-wen-handbook-how-to-earn-50k-from-a-27-hour-work-week.doc
-│   │   ├── benebell-wen-social-inductive-reasoning-and-tarot.docx
-│   │   ├── benebell-wen-tarot-business-plan-template-2-december-2015.doc
-│   │   ├── boilerplate-contract-collaboration-and-joint-works-agreement.docx
-│   │   ├── boilerplate-contract-non-disclosure-agreement-nda-for-a-company.docx
-│   │   ├── boilerplate-contract-non-disclosure-agreement-nda-for-an-individual.docx
-│   │   ├── boilerplate-contract-work-for-hire-independent-contractor-agreement.docx
-│   │   ├── consent-form-for-minor-to-receive-card-reading-with-liability-waiver.docx
-│   │   ├── consent-form-for-minor-to-receive-card-reading.docx
-│   │   ├── contract-templates.zip
-│   │   ├── deck-licensing-agreement-template-v1.docx
-│   │   ├── for-tarot-professionals-premises-insurance-waiver.docx
-│   │   ├── Mystic Arcana
-│   │   ├── Mystic Arcana-20250529T205431Z-1-001.zip
-│   │   ├── podcast-guest-appearance-release-boilerplate-template.docx
-│   │   ├── professional-tarot-templates-reading-sign-up-sheet-for-public-events.docx
-│   │   ├── terrifictarot_sampletemplate_bulletinboardflyer.docx
-│   │   ├── terrifictarot_sampletemplate_corporatepromoflyer.docx
-│   │   ├── terrifictarot_sampletemplate_mediapressrelease1.docx
-│   │   └── terrifictarot_sampletemplate_trifoldbrochure.docx
-│   ├── Mystic NotebookLM.docx
-│   ├── natal-astrology-learning-about-your-moon-sign-by-benebell-wen.pdf
-│   ├── Past Life Astrology.docx
-│   ├── sun-sign-horoscopes-step-by-step-checklist.pdf
-│   ├── The Celestial Bodies.docx
-│   ├── The Twelve Houses.docx
-│   ├── The Twelve Signs.docx
-│   └── your-lot-of-fortune-sign-and-house-1.pdf
+│ ├── ~$stic NotebookLM.docx
+│ ├── 03c-interpreting-tarot-through-astrology.pdf
+│ ├── 2025-05-29_19-15-13_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md
+│ ├── ARABIC PARTS.docx
+│ ├── benebell-wen-astrology-quick-reference-sheets (1).pdf
+│ ├── benebell-wen-astrology-quick-reference-sheets.pdf
+│ ├── Essential Dignities.docx
+│ ├── holistic-tarot-supplement-study-guide-01-beginner3.pdf
+│ ├── Introduction to Past Life.docx
+│ ├── Is AI Validating Psychic.docx
+│ ├── learning-the-thirty-six-decans-2016-09-16.pdf
+│ ├── learning-the-twelve-astrological-houses-2016-09-16.pdf
+│ ├── learning-the-twelve-astrological-signs-2016-09-16.pdf
+│ ├── legal
+│ │ ├── 03a-tarot-ethics-code-of-conduct.docx
+│ │ ├── 03d-sample-reading-template-three-cards1.docx
+│ │ ├── 03e-sample-schedule-of-fees-and-business-policy.docx
+│ │ ├── 03f-sample-privacy-terms-for-tarot-reading-websites.docx
+│ │ ├── 03g-sample-services-agreement-for-events-and-parties.docx
+│ │ ├── 03h-log-of-professional-readings.docx
+│ │ ├── 03i-detailed-summary-of-readings-log.docx
+│ │ ├── benebell-wen-handbook-how-to-earn-50k-from-a-27-hour-work-week.doc
+│ │ ├── benebell-wen-social-inductive-reasoning-and-tarot.docx
+│ │ ├── benebell-wen-tarot-business-plan-template-2-december-2015.doc
+│ │ ├── boilerplate-contract-collaboration-and-joint-works-agreement.docx
+│ │ ├── boilerplate-contract-non-disclosure-agreement-nda-for-a-company.docx
+│ │ ├── boilerplate-contract-non-disclosure-agreement-nda-for-an-individual.docx
+│ │ ├── boilerplate-contract-work-for-hire-independent-contractor-agreement.docx
+│ │ ├── consent-form-for-minor-to-receive-card-reading-with-liability-waiver.docx
+│ │ ├── consent-form-for-minor-to-receive-card-reading.docx
+│ │ ├── contract-templates.zip
+│ │ ├── deck-licensing-agreement-template-v1.docx
+│ │ ├── for-tarot-professionals-premises-insurance-waiver.docx
+│ │ ├── Mystic Arcana
+│ │ ├── Mystic Arcana-20250529T205431Z-1-001.zip
+│ │ ├── podcast-guest-appearance-release-boilerplate-template.docx
+│ │ ├── professional-tarot-templates-reading-sign-up-sheet-for-public-events.docx
+│ │ ├── terrifictarot_sampletemplate_bulletinboardflyer.docx
+│ │ ├── terrifictarot_sampletemplate_corporatepromoflyer.docx
+│ │ ├── terrifictarot_sampletemplate_mediapressrelease1.docx
+│ │ └── terrifictarot_sampletemplate_trifoldbrochure.docx
+│ ├── Mystic NotebookLM.docx
+│ ├── natal-astrology-learning-about-your-moon-sign-by-benebell-wen.pdf
+│ ├── Past Life Astrology.docx
+│ ├── sun-sign-horoscopes-step-by-step-checklist.pdf
+│ ├── The Celestial Bodies.docx
+│ ├── The Twelve Houses.docx
+│ ├── The Twelve Signs.docx
+│ └── your-lot-of-fortune-sign-and-house-1.pdf
 ├── eslint.config.mjs
 ├── netlify.toml
 ├── next-env.d.ts
@@ -1323,39 +1366,38 @@ this is the current file structure: base) kfitz@Mac mystic_arcana_v1000 % tree -
 ├── postcss.config.mjs
 ├── PROJECT_STRUCTURE.md
 ├── public
-│   ├── fonts
-│   ├── icons
-│   │   ├── file.svg
-│   │   ├── globe.svg
-│   │   ├── next.svg
-│   │   ├── vercel.svg
-│   │   └── window.svg
-│   └── images
+│ ├── fonts
+│ ├── icons
+│ │ ├── file.svg
+│ │ ├── globe.svg
+│ │ ├── next.svg
+│ │ ├── vercel.svg
+│ │ └── window.svg
+│ └── images
 ├── README.md
 ├── scripts
 ├── src
-│   └── app
-│       ├── api
-│       ├── components
-│       ├── context
-│       ├── favicon.ico
-│       ├── globals.css
-│       ├── hooks
-│       ├── layout.tsx
-│       ├── lib
-│       ├── page.tsx
-│       ├── styles
-│       └── types
+│ └── app
+│ ├── api
+│ ├── components
+│ ├── context
+│ ├── favicon.ico
+│ ├── globals.css
+│ ├── hooks
+│ ├── layout.tsx
+│ ├── lib
+│ ├── page.tsx
+│ ├── styles
+│ └── types
 ├── tests
-│   ├── e2e
-│   ├── integration
-│   └── unit
+│ ├── e2e
+│ ├── integration
+│ └── unit
 └── tsconfig.json
 22 directories, 66 files
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -1392,6 +1434,7 @@ The extensive documentation in your `docs/` folder shows you're taking a researc
 Based on your actual file structure, here are the precise patterns you should use in the "file pattern matches" fields:
 
 **For your API Architecture rule:**
+
 ```
 src/app/api/**, src/app/lib/**
 ```
@@ -1399,6 +1442,7 @@ src/app/api/**, src/app/lib/**
 This pattern will trigger your API development guidelines whenever you're working on backend endpoints (in the `api` directory) or shared utility functions (in the `lib` directory that typically contains server-side helpers).
 
 **For your Frontend UX rule:**
+
 ```
 src/app/components/**, src/app/**/*.tsx, src/app/**/*.jsx, src/app/page.tsx, src/app/layout.tsx
 ```
@@ -1406,6 +1450,7 @@ src/app/components/**, src/app/**/*.tsx, src/app/**/*.jsx, src/app/page.tsx, src
 This pattern covers your React components, page files, and layout files. The `**/*.tsx` pattern catches any TypeScript React files anywhere under the app directory, while the specific `page.tsx` and `layout.tsx` patterns ensure your main page and layout files trigger the UX guidelines.
 
 **For a Testing Standards rule:**
+
 ```
 tests/**, **/*.test.*, **/*.spec.*
 ```
@@ -1417,6 +1462,7 @@ This covers your organized test directories and any test files that follow stand
 Given your project structure, I recommend creating some additional auto-attached rules that will be particularly valuable:
 
 **Configuration and Build rule:**
+
 ```
 *.config.*, package.json, tsconfig.json, eslint.config.mjs, next.config.ts, netlify.toml
 ```
@@ -1424,6 +1470,7 @@ Given your project structure, I recommend creating some additional auto-attached
 This pattern helps when you're working on build configuration, deployment settings, or dependency management.
 
 **Documentation and Content rule:**
+
 ```
 docs/**, README.md, **/*.md
 ```
@@ -1450,11 +1497,13 @@ For example, a file at `src/app/astrology/calculate/route.ts` is an API endpoint
 Here's a refined approach for your Next.js app router structure:
 
 **Refined API Architecture pattern:**
+
 ```
 src/app/**/route.ts, src/app/api/**, src/app/lib/**
 ```
 
 **Refined Frontend UX pattern:**
+
 ```
 src/app/**/page.tsx, src/app/**/layout.tsx, src/app/components/**, src/app/**/*.tsx
 ```
@@ -1496,14 +1545,12 @@ By configuring your rules to match your actual project structure precisely, you'
 
 Your Next.js app router structure combined with well-configured Cursor rules creates a development environment where spiritual domain knowledge, modern web development best practices, and your specific architectural decisions all work together seamlessly. This level of integration between your project structure, domain expertise, and AI assistance is exactly what will help you build a spiritual technology platform that feels both technically sophisticated and authentically spiritual.
 
-
-
 ## Prompt:
+
 flesh out the config and build rule, doc and content rules. Should I have the pdf files converted to another format? Which one? I also have a claude.md file and other docs that you mentioned including project-overview.md, `TECHNICAL_ARCHITECTURE.md`, `API_SPECIFICATION.md`
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -1538,16 +1585,26 @@ Here's a comprehensive Configuration and Build rule that understands your specif
 ```markdown
 ---
 description: Configuration and build standards for Mystic Arcana spiritual platform
-globs: ["*.config.*", "package.json", "tsconfig.json", "eslint.config.mjs", "next.config.ts", "netlify.toml"]
+globs:
+  [
+    "*.config.*",
+    "package.json",
+    "tsconfig.json",
+    "eslint.config.mjs",
+    "next.config.ts",
+    "netlify.toml",
+  ]
 alwaysApply: false
 ---
 
 # Configuration and Build Standards
 
 ## Core Principles
+
 When modifying configuration files, consider the impact on both technical performance and spiritual user experience. Every build optimization should enhance rather than compromise the authenticity of spiritual guidance delivery.
 
 ## Next.js Configuration (next.config.ts)
+
 - Enable progressive web app features for offline spiritual practice access
 - Configure image optimization for tarot cards, astrological charts, and spiritual imagery
 - Set up environment-specific API endpoints for astronomical data sources
@@ -1555,24 +1612,28 @@ When modifying configuration files, consider the impact on both technical perfor
 - Configure internationalization for diverse spiritual traditions and languages
 
 ## TypeScript Configuration (tsconfig.json)
+
 - Maintain strict type checking to prevent errors in astronomical calculations
 - Configure path mapping for clean imports of spiritual domain modules
 - Enable decorators for potential integration with astrological calculation libraries
 - Set up proper module resolution for both client and server spiritual services
 
 ## Package Management (package.json)
+
 - Prioritize well-maintained astronomical and spiritual calculation libraries
 - Avoid dependencies that conflict with privacy-first spiritual data handling
 - Document the spiritual purpose of each major dependency in package descriptions
 - Maintain security audit practices especially for packages handling sensitive user data
 
 ## Deployment Configuration (netlify.toml)
+
 - Configure environment variables for astronomical data API keys securely
 - Set up proper redirects for SEO while maintaining spiritual content accessibility
 - Enable edge functions for real-time astrological calculations
 - Configure headers for optimal performance during high-traffic spiritual events (new moons, eclipses)
 
 ## ESLint Configuration (eslint.config.mjs)
+
 - Enforce naming conventions that respect spiritual terminology
 - Require accessibility rules that ensure spiritual guidance reaches all users
 - Custom rules for preventing insensitive handling of cultural spiritual practices
@@ -1596,42 +1657,50 @@ alwaysApply: false
 # Documentation and Content Standards
 
 ## Technical Documentation Guidelines
+
 When working with project documentation, maintain clarity that serves both technical and spiritual team members. Every technical decision should be explainable in terms of how it serves authentic spiritual guidance.
 
 ### Architecture Documentation
+
 - Explain technical choices in context of spiritual user needs
 - Document how each system component supports authentic spiritual guidance
 - Include cultural sensitivity considerations for international spiritual traditions
 - Reference specific competitive advantages identified in market research
 
 ### API Documentation
+
 - Provide examples that demonstrate respectful handling of spiritual data
 - Include rate limiting explanations that protect against misuse of spiritual services
 - Document authentication flows with particular attention to vulnerable user protection
 - Explain error handling that maintains dignity during spiritual crises
 
 ## Spiritual Reference Material Integration
+
 When working with traditional spiritual knowledge, maintain academic rigor while ensuring practical application in digital format.
 
 ### Astrological Reference Standards
+
 - Cross-reference calculations against multiple traditional sources
 - Maintain attribution to spiritual teachers and cultural origins
 - Verify interpretations against established astrological authorities
 - Document any modern adaptations or interpretations clearly
 
 ### Tarot Knowledge Preservation
+
 - Respect traditional card meanings while allowing for personal interpretation
 - Maintain connection between digital representations and physical practice
 - Document spread variations with proper attribution to creators
 - Ensure cultural context accompanies appropriated spiritual practices
 
 ### Content Accuracy Requirements
+
 - Fact-check all spiritual claims against authoritative sources
 - Provide historical context for spiritual practices and beliefs
 - Distinguish between traditional knowledge and modern interpretations
 - Include disclaimers that respect both belief and skepticism
 
 ## Documentation Maintenance Practices
+
 - Regular review cycles to ensure spiritual content remains current with scholarship
 - Version control that tracks changes to spiritual interpretations and their sources
 - Collaborative review process involving both technical and spiritual domain experts
@@ -1700,14 +1769,17 @@ Here's how to create powerful file references that make these documents truly us
 
 ```markdown
 # In your always-applied core rule
+
 @docs/claude.md
 @docs/PROJECT_OVERVIEW.md
 
-# In your API architecture rule  
+# In your API architecture rule
+
 @docs/TECHNICAL_ARCHITECTURE.md
 @docs/API_SPECIFICATION.md
 
 # In your spiritual content rule
+
 @docs/benebell-wen-astrology-quick-reference-sheets.md
 @docs/learning-the-twelve-astrological-houses.md
 ```
@@ -1730,14 +1802,12 @@ The true test of this system is whether Claude begins providing spiritual techno
 
 This comprehensive approach transforms your development environment into something unique in the industry: an AI-assisted workflow that truly understands both cutting-edge technology and authentic spiritual wisdom, allowing you to build a platform that honors both domains with equal sophistication.
 
-
-
 ## Prompt:
+
 I am going to pass along docs to you but need to know if its less token usage for you to receive attachments versus scanning on google drive
 
-
-
 ## Response:
+
 ```plaintext
 Thought process
 
@@ -1827,9 +1897,8 @@ The beauty of this approach is that once your core documentation is uploaded as 
 
 This efficiency becomes particularly important as we work through complex topics like integrating astronomical calculations with spiritual interpretations, or designing user experiences that feel both technically sophisticated and spiritually authentic. Having your reference materials immediately accessible means I can provide guidance that's grounded in your specific research and requirements rather than generic advice.
 
-
-
 ## Prompt:
+
 > File: claude.md
 
 > File: PRD.md
@@ -1840,9 +1909,8 @@ This efficiency becomes particularly important as we work through complex topics
 
 here are 4 key docs. we are about to run out of chat allotment so i'll need you to finish as much as you can and then leave me with a prompt ready to keep going forward from here
 
-
-
 ## Response:
+
 Based on your comprehensive documentation, I can now provide you with precisely configured Cursor rules that align with your actual project architecture and spiritual technology vision. Your documents reveal a sophisticated multi-brand platform that requires rules balancing technical excellence with authentic spiritual guidance.
 
 ## Updated Cursor Rules Configuration
@@ -1852,22 +1920,33 @@ Based on your comprehensive documentation, I can now provide you with precisely 
 ```markdown
 ---
 description: Configuration standards for Mystic Arcana multi-brand spiritual platform
-globs: ["*.config.*", "package.json", "tsconfig.json", "eslint.config.mjs", "next.config.ts", "netlify.toml"]
+globs:
+  [
+    "*.config.*",
+    "package.json",
+    "tsconfig.json",
+    "eslint.config.mjs",
+    "next.config.ts",
+    "netlify.toml",
+  ]
 alwaysApply: false
 ---
 
 # Configuration and Build Standards
 
 ## Multi-Brand Architecture Requirements
+
 Configure build processes to support Mystic Arcana, BirthdayGen, and EDM Shuffle brands with shared infrastructure but isolated user experiences and data.
 
 ## Performance Targets for Spiritual Practice
+
 - Galaxy/starfield UI must maintain 60fps with WebGL/Three.js optimizations
 - Real-time astronomical calculations under 200ms response time
 - Mobile-first PWA capabilities for offline spiritual practice access
 - CDN optimization for tarot deck images and celestial chart assets
 
 ## Integration Configuration
+
 - MCP server connections for Claude Code and virtual reader agents
 - Supabase environment variables with proper staging/production separation
 - Swiss Ephemeris and NASA/JPL API configurations for astronomical accuracy
@@ -1889,15 +1968,19 @@ alwaysApply: false
 # Documentation and Spiritual Content Standards
 
 ## Spiritual Knowledge Preservation
+
 Maintain academic rigor when documenting traditional tarot and astrological practices while ensuring practical application in digital format. All spiritual interpretations must reference authoritative sources and acknowledge cultural origins.
 
 ## Multi-Reader Agent Documentation
+
 Document virtual guide personalities with clear attribution between AI-generated content and human expert knowledge. Each reader's memory and personality development must be tracked for consistency across user sessions.
 
 ## API Documentation Standards
+
 Ensure all spiritual guidance features are properly documented for the API-first architecture. Include examples demonstrating respectful handling of sensitive spiritual data and proper error handling during spiritual crises.
 
 ## Community and Legal Compliance
+
 Reference live legal documents for GDPR, CCPA, and spiritual counseling disclaimers. Maintain transparency about AI involvement in spiritual guidance while protecting user privacy as sacred trust.
 
 @docs/claude.md
@@ -1908,6 +1991,7 @@ Reference live legal documents for GDPR, CCPA, and spiritual counseling disclaim
 ## Strategic File Conversion Priority
 
 Convert these PDF files to Markdown immediately for maximum development efficiency:
+
 - `benebell-wen-astrology-quick-reference-sheets.pdf` (essential for accurate astrological calculations)
 - `learning-the-twelve-astrological-houses-2016-09-16.pdf` (core interpretive framework)
 - `learning-the-twelve-astrological-signs-2016-09-16.pdf` (foundational correspondences)
@@ -1916,11 +2000,10 @@ These conversions will provide Claude with direct access to authoritative spirit
 
 ## Continuation Prompt for Next Session
 
-"I need to complete the Cursor rules configuration for Mystic Arcana based on our previous discussion. We've established the Configuration/Build and Documentation rules, and I need help finalizing the remaining auto-attached rules for our Next.js app router structure. The key areas still needed are: API Architecture rule (for src/app/api/**, src/app/lib/**), Frontend UX rule (for src/app/components/**, src/app/**/*.tsx), Virtual Reader Agent rule (for AI/agent-related files), and Testing Standards rule (for tests/**). Please reference our established project documents (claude.md, PRD.md, technical_architecture.md, project_overview.md) and maintain focus on spiritual technology ethics, multi-brand support (Mystic Arcana, BirthdayGen, EDM Shuffle), and the hybrid human-AI approach for authentic spiritual guidance. The platform uses Supabase, Claude Code, MCP agents, and real-time astronomical data integration."
-
-
+"I need to complete the Cursor rules configuration for Mystic Arcana based on our previous discussion. We've established the Configuration/Build and Documentation rules, and I need help finalizing the remaining auto-attached rules for our Next.js app router structure. The key areas still needed are: API Architecture rule (for src/app/api/**, src/app/lib/**), Frontend UX rule (for src/app/components/**, src/app/**/\*.tsx), Virtual Reader Agent rule (for AI/agent-related files), and Testing Standards rule (for tests/\*\*). Please reference our established project documents (claude.md, PRD.md, technical_architecture.md, project_overview.md) and maintain focus on spiritual technology ethics, multi-brand support (Mystic Arcana, BirthdayGen, EDM Shuffle), and the hybrid human-AI approach for authentic spiritual guidance. The platform uses Supabase, Claude Code, MCP agents, and real-time astronomical data integration."
 
 ## Prompt:
+
 I have access to a background agent. tell me how to fully set this up to benefit me the most given the complexity of my project: Background Agents (Preview)
 How to use background agents to parallelize your work.
 
@@ -1982,25 +2065,24 @@ The terminals are meant for your app code. These terminals will run in a tmux se
 The environment.json Spec
 Informally, the environment.json file can look like the following:
 
-
 Copy
 {
-  "snapshot": "snapshot-id",
-  "user": "ubuntu",
-  "install": "./.cursor/install.sh",
-  "start": "sudo service docker start",
-  "terminals": [
-    {
-      "name": "vscode",
-      "command": "cd vscode && nvm use && npm run watch",
-      "description": "Watches the vscode/src folder for changes and recompiles when saved."
-    },
-    {
-      "name": "code.sh",
-      "command": "sleep 120 && cd vscode && nvm use && ./scripts/code.sh",
-      "description": "Runs the vscode app, visible on localhost:6080 using web VNC (noVNC)."
-    },
-  ]
+"snapshot": "snapshot-id",
+"user": "ubuntu",
+"install": "./.cursor/install.sh",
+"start": "sudo service docker start",
+"terminals": [
+{
+"name": "vscode",
+"command": "cd vscode && nvm use && npm run watch",
+"description": "Watches the vscode/src folder for changes and recompiles when saved."
+},
+{
+"name": "code.sh",
+"command": "sleep 120 && cd vscode && nvm use && ./scripts/code.sh",
+"description": "Runs the vscode app, visible on localhost:6080 using web VNC (noVNC)."
+},
+]
 }
 Formally, the spec is defined here.
 
@@ -2021,9 +2103,8 @@ The agent auto-runs all commands (which is how it can be useful for iterating on
 If you have not enabled privacy mode, we collect prompts and dev environments and store them to help improve the product.
 You can enter any secrets that you need for running your dev environment, and they will be stored encrypted-at-rest (using KMS) in our database.
 
-
-
 ## Response:
+
 Background agents represent a transformative opportunity for your Mystic Arcana project, given its complexity spanning spiritual technology, multi-brand architecture, and sophisticated AI integration. The ability to parallelize development work while maintaining the deep contextual understanding your project requires makes this feature particularly valuable for your use case.
 
 ## Strategic Setup Approach for Maximum Benefit
@@ -2080,16 +2161,14 @@ Reserve direct development control for features involving spiritual interpretati
 
 The background agent capability transforms your development capacity for Mystic Arcana, enabling parallel development streams that can simultaneously advance technical infrastructure and spiritual feature development. Your setup strategy should establish robust foundations for astronomical accuracy, spiritual authenticity, and cultural sensitivity while empowering background agents to accelerate development of supporting systems and user experience enhancements.
 
-
-
 ## Prompt:
+
 ![image.png](data:image/webp;base64,UklGRgqmAABXRUJQVlA4IP6lAACQEwKdASq8AnUDPm02lkgkIyKhJXK6UIANiWlu/EsZpEZW8sn5nlUi44zu48blFd6Za9mj0GeYBzrP3O9Q3nF+i3+/eoB+wHq9+qB/TP+z7AH67etJ/7/Za/yfSAf//gj/Ff9d/Jv+qfGT4n+hfzz/Afrp/X//j/nfbf8T+V/rv9n/ZX+9ftp9fHxL+z+TTzz9k/zX+C/dz3G/j/1x+9f2X/Bf8H+5/vd8F/2L+7ftH/a/Qn3tfr39x/bb/EfIL+O/yP+y/2b/Bf8/+4fHR6x/j/9P/rf/P4K+c/3T/N/4X2BfT75H/k/7P/kf+7/ifbW85/sn9X/yP+P/vP///7P0N+Nfzv+5/2H+2f63+2////4foB/Fv5X/fv7t/kf+Z/b////6fpL+5f6n+3/v36Kfz/+9/7j+8/jV9gP8e/oX+W/t3+W/73+K////3/Er9n/339//y//0/0v////Hw1/L/7b/yP8P/nv/r/pf///+f0F/lH9H/2/93/zH/3/1P////X3af/j/Y++L9qv/v/uvhF/Yb/5/53/lf/8kDW4VR/R9uZIMua8X8u742Y+0mTP0rB5To9PxGYhByvlCg8H772H0g1pEoQzxR1vhMtPoez+mTvvakNTaPW9DRH5BrA4L+egVtdiKgki1K+9w/aug0q8nKxdJCWoW4Z5xcGdER0WOY66SzvWpdNKmeIZb/ZuiM78K7vqEbjEhwWL3ua2THMidPbUoarsq6OhwXbt0vzA+e/J5vvh7w+oPyiltqAv8a17K5I9gShzfm0ttKvUtRJ8Anrdxhxvz4+sD0ubRjni4pxD0No6166mSxshpi/aO3Sc5764S5EDvV4GLOUnXz6Lggo2N5WNkMKoBnwxiqITcXiiI+uIkGzT7WK6W9JGKxlxZNcLz91KD9dWQ1n8kOor5GiQkQl4WML5koro2RD54WyCREIQmqIgRUManOj6o+PoT9fC/qQiJtYe62/aKPAtnX71mlQa1azUWBpjZhKt4Cu3fJm2q+DwORBNdeZHGr20o03q22eRAFOqQ+pUrgFnrV8mDATyCP0MgNfG6IZovEza6TUAy0SuJm10moBlooC5Ntpq20uRK4mdvDfNXZRmIeedu4tZa1yBmeP4GNMi99r77JFAZg38wcXzS/uRFn9vIDDSNvzxKQttLqABcrOyUEQxDrNyvOzgrbCG+3or6NMqZr2We/fhCgUKEYXTgccCXP6TqchuFjBcDOtxsWCBItSmFVQrpw1s3GkeSV0yPn65KPIFaHo7KazsfkwahEb8WtOtDEWpOGuT7BdvLbgBpDo/gWvsUB5pTmKalf2xmQmrHeBDpZnzYrgl9LvI0K7UkPd/2GRHxN7QL1RI4Jal2/bRitVez1DcYdIVbF+LjUBYB53c0FojyOvgWb5yDCt55HpYjnQlABZvTYs/tsESJmD/smcSTVxy2QiVt0WQClr7Sw2UlbVYM52ylJsh9FkMeht70P3RDHmsrPiOEm44GOuAizSm2IFyBkVv+GlNaVT1d3MUaZSE907jZ6RfcFbeD+g7cyfgZttjyVftBouvTGroxx3XN36Hb1+Pktrag+mQtOSjQwIiPhLkZ2nLgvIDXQL8ycydAlyyT5VfH+2DBJdhd9aBYjqAy7hsJj8eWl61goKwvhjVWRtxjZF4q5iReFHqK53UlnHqUiY5nh8lSG4fMQHyNBMld0AjZ+rC/WY64dQtC4r5l7p3C3DxiNnmUjAwir2eLI81i4KqUEKFMBpI1BGOIMOBOk1T3M8ZY/YaAkYnl+v/mVhGjt/SEtiyvQEiJ4ep0oIfgKp+8xEa6eYm/21v6oOR1tHReWNDvsI8K9j4fYbAIzsSJ2ma20neJaJ2npQ2Qet+2kqr9ipQZCgwpkOXgv8/AQpWCKJqQH9jtzyM1WrQJ2jvg/VLJYu3qNBZh72E8S4dIWLoDcYxhoRqgNxjGGZPUS29/Tn00LEPvXl5AcqtdDJaxL01arY7VktYl6atO3CW3v6c157vgiZyvZX+qS52XPy6HFYmoR6DWD03b73Y2IHBGIT120QFeo0gjXjkKRA6wUKrEvTVqtjtWS1iXpooSdDswzEjjhrImFxVqxLEBpt/X0ecpemrVbHaslrEoo1wRHVtKG8Vtcp0KrLDGyqWKaYsRn1KBoBoeWr0DnEZcis4CGPJo7UwG+90L942q/whIITnjw92F94LEcKlVHF746Qq2O1ZLWJekJsVXrJdPiIRva3CNSXdN37/KYnz3XO8GBOxA3NfZgRycawepAUqryL26nPNu7LtzvmRps/f1fZ2f8bkLLwmQ3yYCCcCzKtsDi0ROooXc/oBQE91VG3hCzYWn2q8uy68XAMppNKFiONz6fm+jprKtQNXFjEROAoNvwvgRKZfrpaptBMowY/w2Uhgf3zWg8AL4hbwPnxoyqgmfXWoSh8yZWmAGy2SckaH7LxRrgiOramMvfBzxOkISZWIHpcjd01Ru8sDbg/sMAyLFsDDpwwyWsS9NWr7UNxyW8CuIE0YYnfj3Ygoy+UJxUGGYMlZKChuMOkKtjtWS1iXpqtou4AmGJ3Un11PuYqP8CWl1o6rR3c+TxnuacA4fkziescPBNsjlgODTyzlL01arY7VktYl6atVrIijHTGtxmoca5VlAX8M//EvPwjcMS9da+PGA0sYMzG7QQlnjHvIAsstM472rFtDrU4SPBTSG5HRQ1+y52q2AE+zlDYrj+gjWzCswGFGoNhQzWixN8SIXEf8YcOKcKiQoRc3LC0ilhBu5gXPmXy15r8IgsQZBegLHuYCwnE+kVllFieeiqxDeNNWq2MfZM4kmrndY5SDfoZjB0s0kDGn3AmkCgfIIWB64koUMcIirRdy0GEBeZ9PJ85VyXXiJcIuR2AHbK86yWsS7vhSsEUTXT2rJaxL01arY7VktYl6atVsdaXShRWI+ad9iehX+0Wgy0Tx3KMuS+mWYS2inyKnIUQqewaD0EnSUijc9u3PYh0XxObX4hdxmh8QvTgBtvYF6aHXZLWJemrVbHasi5p2GB1bjOV8jbynV4B8vy84x+Mn/bzWf8kwT5kpv9LyzhpUotQ/aOjzRB7/VMD8LJ44Ik1hb/8CY+qlYdYVpdKFFYj7KGM20Zexc09BevcOvODifqPZ4qhXUoIAUq2ELk/y4oDQkSp2gW8Kc0/kTfDW6KLh2EoEseex4zDG1ccCk+SScugupd20CamhChRRssoiU2GoA/Nm0clmTPhzR6leKVBa7KxIcSRHeBrBieeBi6/JazK0CQnRbU8eOY3Sk+i0HjZkNCP77Vviu4e71pe3KiJ5Ex9pTnK5vzojjX++XyzG8caT+HPVcptWE3onn0Uc3buj/78dxYwFlvLMfHL8c16DjEriGPJMVhfn41H9eSyL3iFURT7FnzbvIK2TcFMWdPv59IrKQdW4zPHb9lTsPDpdNYZOatV3Mr3EiOv/TqxL01arYx9kziSaud78bT4KIjTDzx4eyzO07Qf+JXI7ADtlfgB2yvwA7ZX4Adsrj9ZKxQBMMTuk9XcbRN8XdhSRSHrApYlrIuSg+2sr6sPEw0bXy0erVD4Adsr8AO2V+AHbK/ADtldjfwa3Se8SDsMDq3GqUGJqsD8Z/gB2yvwA7ZX4Adsr8AO2V2SOrTy8rVlIOrcZW4SvwpUKXbSxbPot24hATwVZQL01arY7VktYl6atVsdqvLmJF4UeuXUPbpnxnumeSyoz2uBUwjudDLPu31MPB0vOEdgB2yvwA7ZX4Adsr8AO2NJAWWXrSH6X8nZzItPzUHqr1FF5owWiJRCk2Hr9I/NZ6OLOFJaALr4q5HYAdsr8AO2V+AHZ6Osaz2j9wnPmnVx3ob01Pj0BM/6yS092n7Ctcfs5Q3GHSFWx2rJaxL01V0IT4TnzTq478Fs4nl3g4RrpK9ih9UYxGyq7KX0G5rVbHaslrEvTVqtjtVy6eEc529/Tn4/pcIuPf2coavqEvvRD4ys4m2y31a1iXpq1WxfH1gebLgk3z01Wx2rJaxL01arY7VktYl6atNFfhxX6CNbL2zTMhBHNUW121LO92tC4ZNvNHl8axJdOvVAtNg2vkxqpDXwncZYNSnlTj+ODYDzCECLXqNg4JcYdIVbHaslex/QTIx0xrcFr0NZIje1gPSbrXtg/m+62Yl7fApPFQCXiASNnvFzSGLLF15TFXwqhgQM2ondlAaFw49xbODE4NjKpEVQjPOSt0xIh80G2KVYwNPmKxoqw7MrUldWK27BFVouqXxmTa0WouI6Rtij3KJypHH0ZqaKgte3QfdBl+kacMdItTLMxlWfTBBDvSioNBaJn9Wq3/Z8oBcr3t7DsxLYM5NMC54oCQ1BEcE9OrItdAdFJbC9xYQskiQOTTVak8phMOEVTPisB7NjCyjCTfPHE9HUINeXjHqlndCTjXtOUHJhxCZxJIoeX01axVS7vjpCxVQ8a8cHpmYkXhR6458rFUAV2tsRTz0MmrTn8HKOA0fI+jQlarY7VktYl6atVsdquXTwjnO3v6c5HZGmBWXkQ5Zr5n2VHPuzZPlQBSyS66Qq2O1ZLWJemrVbHVgZ6zQAOzDMHWLpfvANP67Uf/QxuPs0ZMWQz0y/yQvykuG3u/qEA8YMlfkR9nKG4w6Qq2O1ZLWJN1bfOJbe/p0ESZI2buPxoWpJMMK06/lzn/J/kAvvVgpUW+FyXVSZDfsAH9Uphjw7Kubc2fQV2wGF8V7zwbci2UaA8fo+pKIykBbBoSHz2oFFwkFPzuAouolqeUwWgwnaa4ZU+XFa+VK6L9BMofWx0HACdUzBBDAqlaP0IjGgHsJBnYbyHqGqm1HIIhnRN1bfOJbe/pz6JiqyAoEpsg110u1kqbUf2Lk86iofqZFo0oihirWC4CrNYl7Vn2cobjDP4wImRjpjW4zqbHCzIosZ5nnPQBbQzXPbAopvWSqXqdlpynVZQXW6EgcMVWGkqURqKsxIMyKspKIDiEbLyWsS9NWq2O01JQFSYLPs3XFyx/XXzdGTLehPN6eS65Z65DrE7YpzpMJ2xTnSYTtinNwPpIAtIHWxtxi31Irp26+P3C9KbGfuF6U2M/cL0psZ+4XpTYz9wvSmxn7hd2oAdiu8rLCnf4vTgV6YPzFFAi8a7X6+SMRRkwWWtYl6atVsdqyWsS9NWq2O1Zbe72KHmwvdGYAbh3izmgpXxykaC2jX5ThhVHj0wC1VyZ+EoTVNW/sfqcOpNvfGW1ZLWJemrVbHaslrFCild1EY8Qgx1kGWJjuQcxBAcDZCqypEAwlLOVcj+rAaXqOGf+8NIES5418eU4OnNL+llcCT2EJ3Tk6j/PLcozlDcYdIVbHaslrEvXAPw6qQ3NVPng16fWFbGjvTq8gs8U+QzL/meVDtj0TV/rTKbT9RWttM4AEWEURyhuMOkKtjtWS1iYLPhkgtNgfJJVSQpw+zkKsvTwIPZQ3GHSFWx2rJaxL01arY80GWLahHLFZiOw0t7LjT3f1mqiev9OIBag0riOd2eddEfr0CQhntjd+DWq2O1ZLWJemrVbHaslrFCilf/OLR4TCAspVJe7bSagGWigLlZ2mrbS6gAXKztNW2l1AAuVnaattLqABcrO01baXT6dm4Bz8tO67i5Wdpq20uoAFys7TVtpdQALlZ2mrbS6gAXKztNW2l1AAuVnaaMAAP6LQe7W4I6TeXjVCv0dx3bfT07u+lgtdR0rz9jVcZoQ3LYjsJeXe+eBU9ARwL+lSSl0LCCew4g76VGb0jm0VpgI5uELu7GCnfvAxlCLW5cU5hh+HgyOSFfvvXBAlbavPdovYRwJQcABN1HOK/UVULHIkGmVq9FWUDvC2zXvdL/cbgLo2Xm1m2xm+/4Wvp7tjf/SDT4hzqUZ3KMKHxzRKRMuNp+sGEaPMWkdFClS6TSpgn5ix5VAEAGaSEhcSBzgwTTsftEEoC3+M1P2WdzXphI8D9PIRLwGoqNvfBcLqlfqJCZYv0/HXDFKHTApVuaTh0iUNIjlknZJq5PxxNdCH+aCnoOKBOtr6nfB3Eu/MrfChuEFmt1CNg+yfLoyjKXPXvvZtml4TZrkITdCknLKx/6lKef6BZ2UDhlhov2jcyWf8hkwoTf+JPY93plLI0FTgfjyWinROLgahOhx+k3pQ1czDvf9pS+2nWJyYoHmiEu8ilOVW8EICSnM76q4STN2QghgRLrcSKUV4oRyI7YyU8PoXTn6M6ndRihnhr48prjljFAl+EpK9WdGbLwnQCFJPW9ttQuWt+951UprYLs/we3A58EJt8W7j+ijPAt8ouuTMiykkxOFndlF96wne5RgnLO9dffJsiaTwO6QIXsGXXP19X+WZvOT7fmdyYn8ntzNOqFQ84836ERmUr2Q1mHbDnKkfA6JhgAkOUYWxHEwl4nlyFLy4JqXC/e2fptz1nd9EQFwXi9kli9mDsW8q+W7RXiNxYA0h8NcipTNLMD/wf2Kogqnp0oqrCH83UClmf/kZBvFwziqDE9Mt6NVA51V6KHaMWiSHThvJVrdI51XE+uKPtYqcbxSojCTspU/ADkCtXWfDHMJc/YYsNVB/oyoJWnFMG2mECBmFVYKHwoAkyRgzz6bvNI6FMbenEcid02IK1pyxe8OOXuvC0zWT70tfOtp7afRWkBWyN6is+g2NH1defE6aAQj43j27gpWHq2kMfJobUvNlO1/6lBOUYSHdgF0+Oa5/yY3vcrE5w79j4VpROk178SgqNAeBU64rjcbaIEuXEj+fVR5uK6C+oWakyPCJ4FHf16VAmWZWUqkOu2xYO5IVILfIl5dIL6dxCD5ewNpdE4mM8+zHDUWV4IZvh629LfmPS8RQCQAYIxNfJ1m7eIT+LgeIeqZITFJAWAe0r6/K5qqRn05ns7Wa310VrbIQzXX0TGZB+YSiuIJ42ugPyaAO1izuMwOk7ckEJRvZAHNSBKxEbJF9gwhM6HnLEuGsLZw2AIOG4yYNpbdNf6Cv+yn9X4KiiSXd752wixl8zDvL/Nj6oi2lWSrOHhFhay5mMd85WX4axMmVDIkT2K9BOL9TMAjNJrkUp6GdolTENnZDh9gABgbIZXBcZy3B04CkBkDxdwN3Bix07YEzVtpLo08xP/L8muUArB0sKqAY5O/KV1wqPztWMExWu8mKlrHaRlVopG8UFdSxbHq7yaehs1lm3y16jtHoVnFNNSYCygeRBjAlsNXNt2hccunnNnmh2YY9xAn6C0QFTnTeYWelvdxQF1GBYCrF4ngtDL9Yx90ZzzSQsamOYEDLv2sgiscLKhOC1J4gCGld760y0oCzITmygCrC1ymBV7yiL45hAY/YIozhxT/+0zRTc7NMmAf/4Dc9lNctD5qQcG24LzCORg37WSwQcGxproNlf38IHpxG/meDWFHBFNvgnUi4FlimqYqmqeX+TkMHjcRqfKS/9ct2hRmSqVxdI7dDcGvDjl09I660cJ00Dwv57kDsD/XJAhA5ybyfWopBNJA0BGaaJnNWu27Lng35nkvy6tGtZr3uW5nY8l0ICPBSO0SJ8zHQGcwpufC9zMfcFI7l42GdmIf7dq0TkOalejjNBTlnS+2r9EIPx2u0+JoDtlJtm91yM0EiFXc54d+YIl3SK9hCg8zKSvI9TV0D8NICfvkXw+OnxHkqivzkivYQbcgD642rPFc6RVLbRzoOfsEwdbbHlkyNb7pBg89XQAXYTKY2oJP6fa46NQ8+ps2bv2Xuj7AN7b1SltG+i39KFUpgEACI6G2wpbBG+k+cUGOo9Euy6GtKV1U5ORoPrAT9uq6WvWMhwyuxbl8jDhRhDK7FuXyMdtd4ePu0ZC898QhvffjiyHGapfdHflO21UedlwLKGCP3MFWIQVjsyjr+Nasn/AcUqiA1GhRSK2t4JE6zt40qZtdZCORD8fB+5EwSAwkS3Xj4HAlgSbOsnMyd7uqHBf71Psfqlz7AnwC0DgMSk5E2XO8/rfXvmsY3ZmeViI7gZG9mPnNSM8jaUA9bLM/xluunKWpm9RtOfa/xDouSWJoRMr1W49EHeHgD80MGB+grlGg7gKJGsZ0jJR8wjor5j3BOL7cb1kls17SDF80UzD3GftlBN0Vhy144ul+tKgnsyOmVmNK6xmEYTsmUKmgT52DjVQJaz4yYZKVbyi6Ocp30LT9uS8G+EKAltbxDQ9Pyb7CuWOHMof1MXEkzkE4u58hlhirYHXEQ/AT834ouJoj9mI7bnSrBvVV/AKlx1Rg8XcVxEJgqSA3hPHwsw/LRe9e1MpI2/771nagmSuu2dCfKTLsYRmCCZ5y+EWx9ZY+n/ACYkxeCqgzDiVvVMyDNX7NZfgEz/EMNx94s9+1tgT1dfAOesNyhlkrVr5IQu3JyFMKDCdXyMRoEx07UHIUQnUZGYqDM4JA5MIWWFkGxwfl9wdpZU43sgK2bKj/NV/IPOPFfkJaBHJKnU55asq+B1ziEqy4ke+uY8s/RjLy3HgFFhMrJK755LbYDAfJkgIJ9/86IEC4RahhabuFxPsTLi7KAhfT/yrBvlymx9J/FwZMgptAWKOxupO7Qzoc1OVMf+09H2WXOhzBH/UAFgfPUILBcSlW2NnfCDPnliEFFN6I8Jwf6L7AyYvZMNjTPB7RK6C12sOwKgjhczwRmb/5tjUD7EEAZwKUozfDFa2UpextMzawmiGIZ0wz9uE5VPJ0sMCKQnWrAe+SfwHuMeGMJzs7ptzvVPR9GWEv9IiuABa8AVhO4AFavAvGwFdFKIZxuBInr5gc4Qojiwd9XoC0k0KlNSbKduFIUR2JdBfF7E2azKdxl0QjqZnGcFd2JQ61yIowD5/S4Lcipu04mZAOrSwnYQtBXhewPjs227P40vpeRbPEbBHZIdDz1t6SJzSLTv1bK1Z8i07AsZAyxTjmj3P/zqJQR3rWW/8uXgVLvsXAlCfkKhhhOPkkhMa5+/xL05m60BxDzexTDiLnZOSu1zqTVHSLI92WJ8CpM7GldyPXy+faadx/x9ANmr25k3zcf7okyiN6kz05y7TXyi9Pfon0uRASdOFQ2/M3tgjXxaPeNk0Ebs8GZA2PhCc7jFRqrgpukq+d9wpTTDgYhmZgg0Arbb2DdwfmFqt0MCSGmVoHAYtb5W4GwkJXB2fzI4shh5Fx1S6nEDbAiBnQkzl1DdgRUwGKH+MPr4MjiO8L0pIxV6Ph2Nfy3Qh2kM34stLt69p5iamJroKbAH3bOd1S1MAZoGAfX+N/aoYvpjUvcKmVvGuLmjPzqRUvGPA1TIkRoUT8YEZsC0dvpXCgUR3qvrePIVNAxU0tPio5uhyEv2gzOOTyfolV4nrVN+n0aDDlW15o/oRFEqhRMWEC+HQS4iyArKBp/e1PWWM2fO8MtM9Hxo0yRHXmlxLDHuq+xXAKXy5gOUMu4e978aSeAM8bbP+nVy6UsMALjDis/zrJoGAMJZU2R4uhkm0quSlQEtimNhfSAPqKrijQodCer7yhvjRozM9N2l9VsRlDAtKIdqBAsRnJH3NrdKFMfP3r2gXAQHeOM9tH3Adp2uBqEFHVxOoiKGWp4/dcP8xE4u+yQMSrs0XH/lRrgI+Jss7xPUCRfUM7Bd02NWDL7GHvVBGiMWXHPMAxVACp0nXBl0ObTAem6AlS4xW3XaA1SJ5RLJ1n1ncbdtRq24aJ08qj2aYL68DgpJ/6b13q315mwdXWoVGPOg5kho5RpabtNfpHuFQv2cQ9m4yvIIipeXOCP63u6S91VIS+T3QN8mue+fOgcHb0tQyKze27ARRQoslNDNCYVzt1i8y977S3rqvVTSw7BQTlCDmyFONhrEMrDjBPZo/oRVTAYBHIpfj+w+TjP81xETon1D0RfDcfmxD4t3qrtwUwFc+4z6knJy/u/O+y9uXjuMUpw4nG/NCDgN3h7Lap9HpajPnAGY1gqGP2YzW3Um6jtVuTInbbscFrwlb5bo0DqWQi56SS9W/zoaseLZvZvLjcdbGGG8U4AENg5KaUdS/kRzYABj4Q/qvu+whJ2xaK6KDbLJN5/29oYmaXyqcp9gH0iOs4beJmMHXujiW32UdaZpnhpbYe2GxfuxCPo2PjcyVp2Q9u6GsiELysP2inMrttAZqoMonIAcx2MMyDb+qIGZgaUj5zz52TYkZMbhKtq9f21r9Yw1oTBCRzTEHuPxg0BCWVvoKplScM57U5KA4w826VrFIfKKLU5msyF/V/FvywBZFoyhmiuCcpqTcLynUii3WGDzNzlr32e3W14sMKfDJ5MDJYKGqfdvjqEuB07f3UzMZ9WZz+SAahkrgkuwXLlNWaLSMrDT/ebA3dLJSEx+4TOc4UvJVEGrlTGw/zaDHvTpZyJorb9B5U0kbOjiNMAC6PqzpfWhYfEwk3zKA7CRTCxy8LrvCSeX4eRC9qUDcNN91j/dqOraWrb45ovNJZCZDmAq2Cvk6qp4r0hvuooICuhRLm+fqpUd+7vACVfjlSNoGXAUTHFH8ONOgwBfyp433OUwn4crLUBoV+6aZg/c57+Ikz0udX9Yq8sC3HM3nqISBvOlCYYs3c8Qig7gcqVElxzMmRdeSgd3KHU9Ojb1y68/LgFLaIeK+Jl+kLVApqO5RQ6/LMjZ+AvmapuCc1zAlDIgHUwpUyWGPZ7O1BMvemVEGJFmSJCjdU7TM0K59Z5of5RTw8daSDxiNYV7Tz/+Z1dVVNFvjGHchSbVFaL97lScUO5fYbbHk/KqETELANOLj7PaKu9mFbLknckThhH4OV7ehdVBBUzYyKIZ0cYDXc4xWtl82/bvCVOVOinGIP+LV690oHPsgrc+2/jvVwDvWZrFHFqGYq/bRrThkB9UGBabXaqKFTcBsGydIzp3KuyEkwqqKcpQG9UYRqMIHczLlEkJl9hq4IbIyO7uf6HbC3YVInWRnqM7OUjl5X+HrNYsIH8k4rwFPoRwm3BQCmGvE1+O/pf1hgUROR2ZwhyMTCJb62CBEOPRVXVwSBz8NfUJWez2Ya6Lh0rPMtZoWWYiL7bf4xQMWQHoBejXspisoSj80pLDOIcsa6nS6jhRHyCY0plVVpclms30y34O8XxhNUfVURqvoLQAvRwdL+X3/KtvNeSr+F8KtPFRoQWDv3IeHEOsoVXzg21CNyt8A6wSZyT/x8w3jvX28SoTa7DDVgld7Dr+gA/Wf+gCxmcsYKwJ3lQm9PNtUw6DVZNCJmEf16VNHMDPsTa1Fvl+r+yvuwJzDW84wMwETFpn2cOjcz+v+0bci9ZV2vspsDUZigrzHmFuNYH75vUsipm5NuzOlwk1zKAZgA2phzfeTDp08j4NvntDDKbxdPeR3tug1FI974lGDpquBTIY0oCcjTgwiOwKlk3kZIz5Z+q+pb3uz617MnLsj2FVR78V46hSvUxXKWp0kgxfSH7atysPbxYqXF0cdqTaKIeGOe2Xq9hqBjlswXrnNqJ+FE8s+JXMDK/9oiCWnjzxti6T7caH+rENXcUZxoC97T+mEX546EkbbVCxQcf9dVeluea7MJxL4oUHVQHbcOMg05j/KOL0kyL+2PrL8Ai8CH4M+XqjJ6kDRuW0wJQQLTxVbIEoHy+1k6h67yvTFl7j5zagA+8U6ce/lyeCQ6DzbFgn89/zmWjcZsNorPhEbT1Yj9Jec4uhnv//0+Fyx61KWqNh2RAVXN8WKVUBFol75i5WPUi7VCVHpBlNTBINhSHVOhvbeqV3p7jDUZjiJWjCuvyESfloYz84U9Q+05xquXEmcvV4d3jtSI3sjj5TB673EnrRAIDq0Cq8cQ1ampstcf3a2kKv9iUfmmrbICydExsAAAY+vgzrRYE8HQuEY7ccS0W3FVBJV4vLApXncCCtRzTZxB+QTiWea6t6xdHUPzjMUO5TN4h6qwMVZlEq81lH5iC+Nf2pqzYp9mH7VyyN0dIJdarXf9jtbLvaglPx8Xa0uIJ0wlyY3HJ4rKQJ4PUlBOiO7bP6azyn3aOsFYdWID3cAqC/FiUXJgEbsa5L4Owcu3WcluKhRD9k6g0+1Zp5xfOJA8I8KYbv6eYmm0MW+lpe6fGGFOsb1FQi00HtaxiQuIWKDk+7fD2hSMJF4zysi2jV8l/n17UijFeYxiY4YUHnQDyJdm/Bi4x31T4jpaSJqHaPXceoYmQyJamYRAntmA8GZM4Js1FpRhHrkJK00n9sG+dJlEa1IoKXpemQBT5DlwJpM2vpJ76Xp5H0xUUBDLR/om97n1yrH67RmvMSrSfWS/dS7aNN9nZm6/Ul36pCOk8YxoIl8dkPthbITGD9wIaFRNWv3JuddzH/2JvOtOjAV6L5+12LSq4bw0pYnQxG3MBH4d+vstBxwuOPSsMT/MwsSF1clesf+3kh3JHQUfBoMmT23vNhOvpXTN4kk8dyC4Oioh7CqSZoIx6fgP+UCfoHfh0KI3IVFteh7OP0BD7L/ISD0HNM7rCOpSosYtaFsIHWRSz+kWaWnk4vvV4w7XPWrtvHITX6+tisMA2PjRGlkvtAKuGyBS95t/NNHj0xCJknXIGaXgjoXqRxsFLQF8nlGjnllAXi7kVSrfdnnDBjdq4y6NgGR+BCh+s/Ym1ZrptEqDHMgfZLPhrYdX+eYND3ejcnN6vKTiNg2hDi9hKoS1MZ4olFwn9IjjCbko4U5ZP5UQHIISMMRIT6fMZcwrX0i2dTyODuOJp2FZc2qTBlVH5UTq8p6zII3/LD0WgcK6ZUdn1h6Krxlu1FjjGyukZhKf5lwb2Ma1OZvpaXhuAX+FWFjQABq7Mw6S1305tocfaky7AB8sPH/MF9x4Wp7BHM1vbzbSpPpmu+4E+lOBvp5LptJCg2AA5twSHeK4ZrAXqLxsRYK7nWBgUiOW1ojJ3UKKCIZZZabw/hOwbvecRChoqtBnMNwxV3vfJZMfE1RR+L4oPE9PlrSPwpGin5pBGr7QB6Wm1kd33+H3ZugTIn4YmRoKQg+nzT9q5mp+N5TW3Poj3v4dTiZQOnx5y5y0kVjp7oVOwlOXshcv8bP7l2GOFsbuwIB4JcmPO1CPqAopyjMPu/MM0/9vOZvgKT3ZTdij2FmXHftkLTqoQAMxh9Z8Id1/ovNBLoUgORgQUSkXp4bkGXASH89jHR70/6Rjy2JCScEYcyIMNntF0xq1x3NQJgB6peItB61G4kvqiNM5fhhlbrjD8kqD6heN/4VkXAdRy99m587iE9oA3C+Fi6WpMTclJOC0mRNRM3Dx6UHPTWRKn6E3JAMIorGXsErW5L8WbYK00mvoxHNhjFYpTrB5cVDdjysmUAwqnF8lOyemtTpKoFrYO75Cw+wOMliMeMP2ic8e7eAFsvsdaRhe66A/mBXTNPq6mJ34Pkr0t2tJuuAzpy4YxzAWfVHPrlduUrxnCJXnmalJnrQLxF01TPWggb/kPESAM0QDCgHrkAmvlpeSWq12zYUkiTPUE11j1c6mqo4D1BYylTc2ZZf6vqgZMTECHXMZvWhk9vz1RY2gqKzouFaEr1NNMIvBx/37kdIVoYsbd3QnpG8CBkBjfY6WENmeYD5D3bKcNv3cBHCReG6bWvY+vYKT/EezBXY7/2AyFtshYuTcvP9mAHYujETV/LStRurdxqGoJ13NAvQasvm70GtUBUI9WIXz3lNjS46fXXD0EUKZnbAsqSYRdbX6FpzeiTuBWDhO2AREg+6e05PCD4TeF05FpUyJPUWEDwVOWTnCqteOE1GMC5+wzlTnktG2P6ZUkXxosLk0pHxIrRU1laNxcfQqFfG9J+kcmURH0ATm+dcuGzM0Cg79rk/w7Y7iXpgFaNCLXCeTWCoKC3ZPa72WpvM7N347Q2KJg+IAd4UHeN50EOR+MxDqHiQOv71Z028ZZeB385NlYZI2/l+NdeIJZE09l4prD9d9IXWF/OBLuOt+rjH9L99fYJktmPIKArgL3Dgk1H2Jr5s04dbgnQgEuxrBss4uBNrvfxBIRlz1cN9FL87ZwcPIPT/UkD8NoT3cgIfW6RXiEpG+Z1QEN/Xcg+I9gzcpd4a3XANeDpnbyzOlMRBv/MSvVaJUPgaAOT78cMbiVnYgvhwGKqp5a5r/+Z6ot80Ch0zTZB+34OikZ7QwkM65a+D7ggVvRpytrnKmxbpi138cQ/QggwluqbSezWFGzIhU2HpiSQfe0LslzQiryTOkGMFHpu/Wpkoc0PehJrKyd33niS1/Zeth4y/89zt8Pp6/q+vArtsCP5irPG5O+rqlfDh46xvfnbs3PgN+D1jBi6OyPTuMcqNuMMi32ygiXIsH1x8bD6ha5tt1kjoajhZtHhWnF2SealG4W9fIBhyFBAW/6Q+CpkDtLuT4zKsAymm+flvOrr37wqpP+89/3wM7ifp0ML5w2GTa6TOquHHkjzQLor5o7yVLd8pjkmgqbWsxluf34X9xnvdkSF8rbz8Q91ZqQp+MJlC+2ywfdBkoOAjjxUZ9bmdN6mBPDPkunowFGz2BE1ATDX1I8WcU8+MM/6FppsRJhdO8ZTO53msLsD2FH/hC60EQUWtpn+krWqsv2Ttoh8LfKZ2i2B4HI0k9ivLmTxx22z4ejLq8ldZ4buH7anfq+ISpqhB9Kb7mhPsXGba8bp0KTbt4MGdvGQl6ke3qzdvh0kYrHMRjHvQAZJEcGUUoubQPbKSDXO3LQqhRtckUUIHZ93MTrxKKEV9if7waaiFC/AC3eblI1bJrmyBEBM3dkG6ljCL5hqLvzPBpNNFoeaFpES3/N8U9RlUHzFKdPLJHOIGEC2Bt9SPqRSIZoo46ys0yQJd0B07rl+E8DSq6hEEj42k8TuPnGhw3e2961SIV5oG3UrW1SUSN+YGIKVZceAor/7j4zHNFwlMqceqHoK86k7GrQFS/s1CnX6+gGCoA/RqwwCj6k4l1K1CtleZosKAnXx+pyRxQ5xcU2sTym4lZHIkt2zGUh0suLM6ZlGwha/cA7PpaA86mSihghAcl7uGT9XUCFqYrhx3jIW5v1XH0R7ewG5bqHrLnmjrQScRnBgbjcDKr2+dgI0phl+oVPAcnQlE2XLrcddA/Hf2DTojHaYbOaa5zGL6hJyXNTFuc+4R/sK2iDq/kgKynK+F4ZOcM/UpUAFFA0gwOm+qBNo4V+x1BiLyVxq1Oz4yjpt+x6gnaEt69aIj2BUthrrwpgzDz3nifD5J6O9c2BpVdQiCR8IgbX4+yYNbqjp7uqaQfasCiEUu0igcw8p+vgEqmT1AZLKW/d0UeB48DrfJT5CZYmcoralZ0/QyBS1Fitj+xGUjERupNVXdICdrp6ZZAWQKMN3wKL6ZaMv5wjf/JqT6KD2fdpyK/ndnnDQ7U4k0N80vOwudSGhEP+ZiFHyLM21dexBLSO1ifrsczHA01d8kNbvKifqT8hemtOT/NgAtdBBjKOLX3+NPO/fvwgHHvdcTRM2JWexaEeuqCKhMXAn6Xh/WLhUnegrnI96jnLu6d/M9fz8reR7jFEGbnTb5z8eG8z5MqxD7PwBJaX1dWqqLJih41aqO9+NSWpzl9PLMWO19VM1tnYOmeAVa3p7MPafuQQp4GkR1pgMxI0hOEiRh++OqZVjYyv+laGcyOtrFxkx7CWhiBFnQYn0mKapTtUlBfuHUtpttyajy3oKMghl1fxdWdX2XKUHKXDKzzhXLU4YGQZdxB7lsqSUsc5J2mMxFTZpYQPOk2x3LhtnI8m6zraC+EFLv2eM2WcBTrdwvPghvkTxk3t3IHEgl0KCBRkesZIJm39CFmcX2rj0JqZ44XE4ETf5QHaaNnnFYC0CfXy0DdoRpJZ2b+P6GvgG3Ctuq6IcD5Em3slz634pk4cocxr7XDGmalbnK+WCNq4TyTUHPUDik5QFAYCIE0zCSo/CsBSzNxYxM6rYXzWHZDtW8LJeeEExfdKjeLJQf5h2le44XvBSfSA+4ufGwJ1FmcZzd3YWbtMPs4G4Nkjze+9lFhURi5oFbytUnvfgZeZ+w98tLQx0iu+HLBibjgWPpkcZvDlBLDc7SavGG5VovYo2m+UBbO7Fq3GObNovkevqa7A1l1e5D63YK4MDa4ZwF8Hv+rUUk0nN+1ttBicZKqT665K05bZV8w0Mf/wrYY0ZCDz/yPw2hylHd3dBgZMN1VGNGY+JN/7vE/kP2EqF5SCRoEoy0JkaWAvGbw4bUZPlFhbd2t9QdQWUY8deMTQ1k6XtxB6a7WjwvLSkAgQE4L41b8WVdgqOxFnKB8ar0r/Y1CGhqZUPSi8/ZrM+k+MpWVPfJ/sD11Il+mW6LkTJx6xVu30wl6iFetZKPiq24CLwImlFlXdHKXzL5kJQe69Gzw4gVnfEysD93J2tvlsWhPp6H3p+LfBG/mMbDxXys4kaAAYknEZLz4QLg9WiDTDe4h5/h015+8S0hOxYFgky9Ox9lEfUAOnpytwhVphDaFVwR868kxBBsD6X4RD4Z7gomcciFFYCT/Kd+OiqKYYQ+e/R96YQlcnDYN+ZM8Vg49/CH0oOq3Fx62qbbj7COPcxYfH5IXeRi55cvuhxzSZsYQ1wunYDvplEgel6Pr/o8tgyD3CxCk6DzcopT7htCWvHck7qzov+SLKDWDadWR0TBlEhDdUbCDR/hp6ZuCan6QZZqdQnsCj51wupCRh38gXYRBB0etu6uXfmNogqiv/6Xuyc5UwFNnO9icovuwA1YdwPlVdTQzX+LYlbnnCk3RVaeHDWO03iqW+qdfJkQGxnOs2tEYo/tNleljj7GELuXDbOR5N3cyaBLWvEmCmxRNo8BNMemvrS/dA1Y3jRYPQOkzaQi4S9g2D3Ou5DRyjgnShb/RSj5TH6s6TekvCgwpy88o4sCs0BHc3LtlpfjMZL1sJrAa6bwvJ/+3rFZof9CLjvixH/2ruNatZ4N3/Sb2m3Cw2H0yDDrsZLv/HUch+OwNFtP00O4yQ6G8sIVhXdYbAx3YjiwFxpOoiozcai9WyFH8rSgnizJkBAT7hV9yoKlXN0HD6BdoAzCktKzEb/MD/6i+fFfqIamEanadhL9v8dyrfelIikA/GCpljWjFfMoZC7xK8D5IkUVrKh65R9xp62dtpNPXuUaLYhjN8CKjxagXlG9dX/wUtSqHRlGb7EJt+YYHvXZjN+l/pKN0lPZJXwow5xbhHoYod0SaDLpsClLt8YkXTZhcp/F+Rg4Z2EklxD7HG8gKixn5rxBmWBaQTXgHeFkflRkQD3VoGBfiQokcyfyA6uUvSjcQ2wPexF1ATG5A3RwQIBqD0juQ02G4ZldYQmD1Hxdo1lry5xT1HC5SA/Rx9GYW7WXkAY6+EXTlh35V/wb+INWgD2e3+GF1jPCVW/3dtiDyG2ilichrqnUnxXyIgDGW2WjIeVKKKrelqA/whqd806sbGzZRclEFXMu13MetFrhVxJAiPrYxVqFjdWrfOIOqAAGfLT7MnE7RmNlKt9GBpeQqHT2smPQuJXnw9razs8KagTxJi9r8d17xGFLLIRZJPsha8PjZT/nSd+PmUBrBNOoK7+V092rUbmTuvjGS5jnmYRsPKFR8nlJzjebY7ob3Mb5siFz7l49VUWHB+EnlnwdJwn4VoRU1Um9/25HngRU+Vyf5wz5hWmC9uaHEoYR0R4feUNW7vfzDbnB3urj7MhiOQHgEx9lpGlEbG964bWedkJZV5xtk2ArxOjSHB4P/gbSwxUReh1j5vRG6nnkBcdqr0ch5r1DIBiAAA6UygKbzr7GydetHyReJ0XRrQnNerI+937SV74h5UZ7gVfB/7+rf6S/eNNA41rwZ+RUMGGT4XTt+NLkVKaZ0qiDLMTeRUSkUebNrv9aCwbj6c8eAO13HDjgP+nn/vkc/FY4Q03Dvq4/bWt9MYzcGNvLVvJIK43pYmk/SsBs9kc00epUI00krUjLEMiZt8EEhMtd7ADjIKWSDJ632iUFrrQ3XuyOC3f40vBd2QQG8gGcU/B3hptqqhCX9PPeKkwpKm2JpweDUlVXtY4x0akMBcmg9nk5e/Xv9+IGN62AAW8yMTkKy3AK9jK6gYAV77mz0GL98tgxAm05YN7lp3Cyz8vOu8uFUgtaM+ME3tlfsY+E0qxs+XOJZ93rT2wjWnIl7nPsu++IBQPRKfmifiFQAS2InSqNsB0uuu5IWhGWa5g4TnCHFdv2b6OvxS0fIlTfTa0x9WLj3zOvvwHRC5ZkYv15cEbc8bGUYV9bmloZKAFxgE7lY4ph8vMHUlAUtpBtOENwGtxE/GIg0iPt6zBfY6/Vo62Gj7bd7ZkAqpdCDNTpMF/Zco9ciCtZDLqlp23vhiV5hLTFSB2DSR17ueORr8zsIfBNgHm9+RE/y0ylol7MojrC+GoBdgWDJ2VK+GRnQC9Q4Ptx/jkrwdIc1DyY29JMQm48EnURluaAUtgh7qkZJMFlctvHU16aOkmGEzBW5nRH5kDaYBUKB1oXbcaAL67tmcFgFqI3qLF/2wzJmecprzgCi2jgKAq/oPSn/yLV8mkKcd8C1saK6kIDjEfDCRth8TBS2kG04Q1yXc+oPQX1+4xIkpVfj3DQBlmGsRHuVRSSLAWDy8ZVmcPA7XmZk20hL/SSU6y6l+woHO5iF07VbC263pBjMtauAT44fWdNpo4/zsEjGTKFC8t4dFirR3vRJgdz7MyX7e7LCOtezZqVEbZM7mpd38PUNomgDW84vhOr+KzE4KNWNaiRtirkYcRiGEY6IZ+/K3ChN/KokpwmsgnjwW8orAgYjarJ5KhFSp41Jl7OLzPmzpds8ag9fqXx3YK9uNstt1dxljbdk3LpaISoeQN/ZEAAJ1EVLorsxisaaeq63t1KeDlq2caMqxDAfDNhBKAPdxF7DCf1OYEZU8lKH8UJYiHS9yrF2hl+FgwzvSDvoeMPk2coFQ73CWOONdgpoOs2IJJYlHocAAA+XHBSawqFCwGQUpuXCBGj+588rn/9v7wezQLK2O/zeJ29JzNfoC6y5/+RQW4AS6DRKFsWeQyFR4n9C/TCX26WX8JyHWVMJVIxCmrYNDY9AXEdMQwMjQ2Tvhdup6rqivixDXVjdqNJKsNJaBATKh3o0Y3A4V1j44qnRW3LomYR6E0JuX0cXFBhIqUk/YjBj+wUUkWX7X/AkrirepW2bkpBzoVxhZiksWUMW+OYrQ8SNwC7OIQ+KEWlkY0TXmsc2qWaM7+PTyr8PxerzsP/GBw1dXnb41pZu1sxMs8PaiSgO6IunFpXsVz1FPxXWyfAXoyWANs/UORb+vCwQMRCq5z0aPVYyMmL7eUD8F0bfpgYRW44p4HcQnjbD1ljANfvX2OVC/CiHVECxuFwy4twKaIuQwSkm8+C7yaapZ8lrsG+rLfwAwccAGs8K9ZdnOSDTLfjihpw5n1+FfFZwg2K1cRE8QFrTISSPydY5Yd4nBK/n8dG/kNR0qFT2rIWMNiD8AjfIlF5myxtv8TKwM6xKELGwerx+OSJmsqRalsxFyb1PNmypYw0mpVooBeCpfwKzFX7bJuEVees26OijAFni6Rp/0y28epSPktLeJXWwAoAnAOt8N6gTyJj70eJyFRjoPE5S+EvICLtOr/5bJm/ur62qZmKhN/jwniEi3sBBqrKvoy9TvAJyAkFYrjr0PON6TvWe2MYP5OYNxb6mS/hCZBRIdNVzVbRhZJelnmfVp6zXvETIE4ylIoje6HFnGzdhJoWrGgf8JT/o/9oFcCUDAfGT6QziAQqVSis8HORma9ec5CGzZvCJKb9moucqVf0E2M/S7G3cVAAAWj20/UqwSpm3dQZlPhzenVCdh89OWwazXyXHt9MHLzar6i1gOz+M2uqXUJxgGL3NcDL0H/fq0T+lWcPPmk9AUPwRrcg8tu+eC9B59kK50/oXLdtX9jQPmDYd3ISmRDio6RCnQhl1uTEF5/BRsjeSuGeF0GzBEdqZPL24wJQplwA2t9qPoQks+0XVYrMeaM0j7docU3H9J4mUCuWzC1RXz2obzoFx9Vb0c98zjCpnxHBvar4ToiMnx+f0Ion4aPvc7HiUi3mkVF6E5VPcBg2hUXu5NIgPpN8mh4vY21TRr65N7cYcrzT8x+mJ7wk2x3NvWl+F+oxq8VFy0BbxOag2SE+HG8l74hAP/0Q7NaNDGWHH3fmbzDY2SQ75pKzrJ7OpYCb8qD+FWhgqnMDoASUm6b1reqkcqaObRJ1p6Xb6ogdIspvvH9nnwrTJ9flCxwQNp8YyukgNthUgd2M5SD5ji88iZfs/yPSQLJcVieUbUznLQqAORpMVIz7Od2ASpu/yFNbXHbStvTYKxNuW7eJ7cZpPaUAazBI0C3FxnDzz5a128z+soW3L9Qa+7Y58FpBE6K3kH/b8QYhLZ3u7zcJDY1bXfpEDEI/MbNbm6COotmG2Xh8ZO5c6yQVtMSF43YvehWbjFXWWLzIj2gASoDfVMbhpg40Z/MNiMy/Fyp1lPMhMEEyi4Nve9bI9+h6ITxVtcoAZrng30MgUlhE3wPfpPbHbvhvOz71uiTX74Vs44gFsE+NtNoJqO5/RLywrYTsIx8A62BF1StKL+n5oOsLF+Oo8nWh+AGI+KR6gBS/E6FQ9VbxJQFuRVCIqQH9VBuANao3m9DDCxp5jm6Hfaxk5I8gtlTYTgsKsBHwtEi/3UnWinACdRSJrwoXHlInxZvMddcPWitPlmrAK2NvSjUnC8l6IZc3HndD5TIPVFRnufbuFwEoSGSEZNhZFNo5uZzBT5tNNqAz2xPwMewzZ2ZChhV56gA/tbLdGZM8om2xD5K6HiYzLEGBvc0yfp3SSohThaxIGN9H6Pm8P+GHPTPEnPH2EkoXQQvoZ0z9fxEbLlbcNiTnA9aOLNfF4eYW36rXKqWnuLgAABmSYlmaIYUBOnu52kqQbvwqp1PVllx4LUCUiFkBwDzdIm/1lK0pB7okrkrJtGUItmokRN4APfGe24DhqekY/Sh85a/QjuSTJExs8pqmMTOaHAgPYwHQF1Ku3v7HbL9z/JQTptuot3js8NBNXrivw/YT8gIWHSU/b48wIE7osdONzlGwhBNzT/VIqZrxlwwI6QIsARcsj3CQhAXSKX4rDDAaKZits7OEW+7jKcp763INhsJkhHQvNLLPdCfmqNu4qgIy5yCLNtP3BJ8REO3zATuJiAQ4iVpMl1B6c9nu9hFZkr2U07H/tRkZE8Zt1AULL9RGFGQBVv6iW1wsuqNHT7ZvKZSry+6G/b1Jkae2YXUrGCCBR7oqitnda1vP21ez5R+xCqkzj7y+k+qTAWjSdSuHfvznfKEcsrM5welnuTnS57ShADsvQjWbId3FLyFhl5MDrlfRDEoWazRscxWDLHUiW+Sw67+Tp3EgAHAOhrek3w128W9PbEHMh7s829oziWJAwM0mi6BCSoKkPtA9ZZKMkY7+N7b5d7pGyBZKWjafNTIwZWkobMKgTgfyQ8vMqcNKf1j83vQsf0EWUICJjEFCvJti2Hl4SxHLjxHJ3qo2sOnjhh7q29ldNcqLLWYVrG3tCv4z5FxvLi43/e5uRWc7+Mn5a6bqDIU7DI8k/ibNNMsYEjTinzU1MEHcbVK2vcCzwcBunkeLmKNb9MrmRIwlqdPM9tEzqB6qclo2aBDtMOH48x5mT+WaFQlvGXmWd/GTPrPINl1rC7hMZw+9/jCk9kt3HpTKiKnStQSyEqkWhR/aSI+qEKg0B3Qd8JUv5VgGh0JTbh+hiFNXpSsf/TkCKL6AaFEbri/6yzKddr1QITZD/AbF8pj91blDY9HtdVLYurpVWsmjpDVBe3ySQS99VQbTnz1iGgm9uQPbroPhhJroRm4rykXE5VxaqG7n6Qo3Zlin7AvCD8/iDXVE9JN1po30JHUR89B+82ZFM927VFM7ENwMf9mYOGzohMWETQ42ttTaJJx+yR5nr2d9EgFYIvYRTzqxH7SXSazbjxHglDmUhMi8vg2DwbT7FZ7+3zsu6isrK/J0UBrvyEd/3Xiv3Wn0L6fVgqUNvNUv08M7qOKpYh3iXk62bqvHvZUBiFkfC+ucWaAU64RxDLeUz3fxpxXoeUXVkWTS0zHHg/h3bUYIKPSI4P7yrnHfumaLBNy8zJdb/zJJy1x7wABnYz6g7MRGbQq1ofaMAHgHbiudT0WoJ3dxkMJ3Wswy0CN/vRtLXoCMq9d2HpPr0M21/PE/DeRb7earhqe9PRxMeKnRk7F8inrj88kifpfVuevrGTDOSvgm58op+47577IdhiE5FTBebwN/qzyFZmFQgBaj+XVH4XRirg10TtuNn7AZV1DXU6+nmrwIsWLC7uI+Jq6ht5ml2yZZ8VUkvD9z+wQ2FlAUSDl4MbUm1ESV0LQYYIlJLckWb3DkLKC7NFh0cTvszvvJ950TGgd2bTYvpf8y+/3khMPQDHZMBRtLOCM1nWMPTGCXkKc9kBy6p6w/Z4WMsIFcTLrDGj959zldaRivOx4yAJUBttdQGxOdIJbOtaUSEVtjV8kx1IfpxYuOqwIzdwQd+9P9Ch1ByX5j4Qiv/Pj/rDmZ/zgemttn2ievOQIN+X3DQ935VyulOJF+yP+nPtYT4Yr5/eGEwL1XlsvRqE3pnAs9A20PpFW4USv2u2GoJU5PP497mp1CRP6T5zkPLIM4bhixJBQAZvjy2kGaFg6U2PNS0zJsSPAK4lH3hExdePMVm/7CGmsu3e+5a/UpnWDGUbYJTVFQ2mSGvJnsLaFz9gXAWAgJIVZJZNpHF7Ve9BO1bg1NXVgvx0pCT7Unei2E/ht9ratmUl+dlQ/SC5T4XwvMjIA3X9yinPa5+1T2zp1LD4pyK+qVIJbJApRW2NhS3i6JXC4M5xFC9SCiMzl4vyfKN6FPUWyTARiLIIc41csBIFSjMx+FXTgP4CQpej0Kc3UKnvqF5Qx+/acl0yw0niK0EiKftIQ26sysIrXHbgd+BFNO2qbA8c/iprMuLKt8by3rqH6JI7/b4eekNIDcwgRpZVO8S1OxSqaSXB8mxPa7NSThskqd7Ra6GBqOhsDDcjL9APdDkxHs5wvexH5z4DvdRd7qOi11a53xFdncWAbn1qEWZkVqsQfe6aljKUUReJo7bw7IZLwwOw1cd20VkE64Z7IBmJfkd9QrdQgWR/gniD0HMhNgSjmOLX+1g8AmEd4jZP7BOQf7QpWoV5I2QV0aoyiMaiRVU8FZPetnYihzI4LMc0VOSPIWYcyv04d1hK6supKBlsIBd3p6cITNhQngzLEOoCKpyT+VJa7riEWKZwTxcS30KAKgcjetN80QmNdnk83lugjaOw2C/JeUSPVvuWzj8DA61NaPxPPxYlrMFGgfhYjqJzt36xNuvFnoZzAFdShxc1GRBLCZ7YJbGIwwDQj1SsHtjW+ZtIsu9crZenZy5s2fEgN/A5KEQhayWKOlbMMmk1b6Do8RQq1mhtSvOPdSzno9J2hksPZfhByIkIkbxC1zkW9X5lp1I7OSHTU5Os2YgZpAh5QM5FzOP4BgkHZ0ecG+KBDPSqhWFU6AfS3jZEtqDHKxiF7HSV2U4+2dG4Zo9rJImsmrOHwgR+IifJXch2sDFX6E7q+hX+AP8G1riKUxaeVGttN7YWWokbdxiuv+ag8RdofWo/R9dp+aNsXWIsctAQZP+eEboYfmXthFnHwz3AB5MeZ0bJon7Vi6izxmSQHwlXBmlXyu1xDC2vTH7ZDFBEDEMSliasGfDcG1IcIA8f9Qxa6dLRifbqy4JaLpMnOtqJwKwlUMoliIM++EVRbKIF+IdKzuPPULSgoO1EMNdTRPUGi0RDNyh0zIUu8BFZCCZXf7HZROx0DHegIlgMk+164Q9NbBWcODYozutpRZgioL91hwIRqCmf+LWGNXHPntcIdVZcr0BphJEngLVwGbzJvbb1R9pcJWJWWaS7vXQbXZ5IYLMAZKUobEiWTvLInvCYsReI/HvU9FfzrQWnt5WUzPZuj+LZ4VlM+m1zWbGejAYe5veBrVRkz2iBi4A5fVNh86onKzXXufD3GEAo7q6i8MSkDVQHh5UC4umwvwmlmFOn/hPZAQDznu40lzuSKIoeH4RPwz02KYUAsC5lTtHI2PbRGql8UhTjVGmOwM/6uMI7mrZYN69Z9zHZMGbmVIRsbrNHffHQvl9iebLlFL57FzZHp9JAT9uG/9rdAv5+5v/6Vn8rDqWSUu/qBUrEMHmz9FEo4uRQQB/VCH23mEOyXv+Y/jyqDMIKcy970uRVEd+XVF1tUF9eo+CcQg/yaoSutPM2A6JJRA+1iBoe8nTprWRbiW/87I1f/BPUQBQP+wjaJ33lIsfDVmDijA/P/oXUM6emVS34112x3xBvztLKtkLpQH3OQ7O9prkq8ArXuXuxtUOpJRdFYJRqfSx7jfgTLifW84u4abf5XrsAr6hDkQ/A0uBA9YxWyaT9w/odjPnOSovWoSu0JhK0oVa+2KY/5rk1EH2hEaEoiwufCerj6ZahcLDJ/l7nYAst6NsfnsLwz0ssItGlE/iT5Zw3Qb5hClCKrNWMeAm7x/8irul3SJEvEpzKJHCH6pqZNVsaVc6wO3sKzJkbmg6uK1D0/0iuLsNmzyyDX0QDGEa0gJ1Jpy6ffu/gK9j4cDTFUxuzUQV19KqLWBJpGhWAWmRT3dOSy4ouEFeAjWDuzqOWJDu7wynaviSoDwGEewOiNoKxaOtUAlvq7FcVL9lzFopFK7kAyCcSzzXVvY8M94Tn1Nby9UsaTIs08e2g82A4S5xXxPLujkq/pJT8rN7IyLq/r4/WQnAsqtznaBaydxTZ8381mmhIFtLM1tarwlWH9LlWoIOfbD2az51g/RBrENMJ0ft+/LaCF+5+C97JSS5Ejc/MKwKWya9fQ/dgyOxKq5A0nlEWuykFe3r1LL0NDJyiTV9n49KLNLyyyj/gDOOXbaAAzJx8SZXssGV9sYVEhCBJS+wwgDBXfPaO7fEb8h0mhU/ICKBZ+07d77kzTaELX2phR8q44jISSX2u0i4GnKEpf+FDU4pRNp6wc22zr4frA0ZHHvye6sXasax9D6PUix4yF8D1e0sgNLfJZxKqvSX+xSYo9FxPZzA8khOxBzLuwsJxsMWEPcOFeqYDmuOdCquy0hOp9TNj+89nPcNUCpnnKWlcSw/deJM5gK6BXQV6iicccVTebKdI3K8I1caNjA+HZuCHVdH6QTw26JpFoqbNSDOKv7yzuSjtfgsErFXkBxj3uqfaiCqF7GviL+SstHExp46HePpIABHcsOONF6KV/1gqRt1Whn3PYoqGftN/S1KgGh6zbtUuivm8UinM7ywoZhNpOf9kFEHXL6EgXCnEe+foAGbEhoKp9T+P6jAVBlJ5qDlVuozLvanlTu+pHdZpQEqY0YYh6gH3REQ/A0uBA9YxWyaT9xERGiN9YLdBn8jPE+CHdkLU8c4P2P+BocjA89JZpPxHIKUDyU/iyO1+okx/GvmDpSLQFp+LU+ajL3cx/xeUkuauYXTncKc3Gz/4ZWG7I8synkYvg5dPFHmKhS9ADGr//VoJ/1kIO40La5Ps61HysLIH7EPbos3hyaOWLpy7guHcnu6BfmFMR8koxQE8lTZ95yYneN5fHVmcMDEiYrpC202QGw7mvXfIC61cAV/pMSAn2ZRH5KxlJ9fbZnT+UwAfR4z8sO+P1t6+LDrUHBcTcGoI4OKg7xDAW8Amf1mCyId+aSJlq27PzNVJD5nz2hkTx57xlmYBWxo5bD+qxXvVKkZqmcfyd6O1LAPK3OTlCjq7aNL2ufGLyg75+xWlEgkHfNLQSME47b4zenlM+9HNjMY7dPVaqvD988x21k77YWfLjOcFYfKk+VEkakAyQZ5YvdB1SrpmHJ9tsOo90bJh5jKC8VZ/KvOHd8UNUip+ZCI5xOPOw6tm+XuyJqP6/6G3ylL4ng8h1lh1gGauI8XgyAvMP/xsJ1NQF1C0ZR6QplDcZeVCfWGVD1+SfxazcoeerssXMo14Z0mgHdMNW0p/C4WOrPRM8lDZAXc9PJfILBU1mP9y7mZLoHhHppzk5A3Oqf1wVg2lG+w726qW7GsOKWwiSec12vgLtQ3X+pS/7oVVFB6sePyDPzAsiqKOLoUZJ4xBDJsn0V+zKAzGN7jdFJmq7Me4QFRCjy0WZ8KHvrHDMPLi0m+bA8A5wxE9WWe0Nd9RL79yFEGgNxN9SAU3iDtFiII6iFsULsbMc/ChTQcckTH6U4Ed2iSe4BmuYWKKQKCZWCNr1itoUw8mQSqwAs45/RYDWc7wPsC8SEKpiiqInVBJ0iFVEt5Rv3xT5B2p8UEaTaqDky3gZBDgtcSrBMas2zMGR1nXYksGRhbJT1WLjc/M7X/ykwoTsIRFf9yrQBubn17jPvPfl/hcbYDufEWJ1GSjUG9reD3e9JohmR6qCDTzoAv/KnIkDF4gsbYygAlz8Er4hnJZAf4UYcPlgbtaqHcBh5HbGRBVVrOVXAvZWqkuu+xRpWlSVzGmBf4+mFaAyehh1hy7l+BrLPAuNtOcAyf9tvK4pXIS7WUCLdc2n/fHP204xVxb+bMNIooieSZwDLPB+EVbisEXYM9c4aXdqZOlOZhz7gMzes1dh9P9GfJFKb3sGovAAqlDAJc5PUlQYGdRSlCe+xUxiH4/i/8NbEenjYv+IP81LYmYi8vU+kew7wXLeXYkfM5okdvSGxviyyoAcibpdX+xwRcQGzqEXqFTJ0wENK98yGAsvc4WzHs8ibdx/3bUlnznwjkE+VhHKJXu1IXvtBEaSZUheGruSTvqqUl9WPjkOuaBWLVkvD//+IWFdedIGBKY1vZZRKnvjKPQylPotcvz9sxevAtoH0SgNFFk3P54ckbVhMwAV9ohKG95mbc1yZMwe1obcCJQUYgrA6uJuOPD8rNNa04CttkD/ea6jl3bhQC0ZtUJUL+icnydClBX9B4EL1X3gN21Xt7Q+B7WgQbjdttRsoh6FQxRb3UEzXNgzlxmknqytKvQHUtCInupVCeuu7O5BZzPwvQQqzlTpkQWiLYAfg0dP2oYUF0YQ8EiGrzCYsLwWF5BfB6e7kZ/pL3BkYs09QXIXvI/LzkIKOgLQzAObIgu8Zx5hC34HxTNiN06C87MGmDk+Ds5Yaf64zPkPvGRoJrMnUSr/nmT+AjPP6CdSkCN8/AxD7EmCOMb1eTR9K/U1jzeXaMFOI9RUhjqk8GSQnVdDOZFNW44g+bvzDejfLeY/Gyr9xTB3t7uCNpYAmVDEoDrDP/8u9qJm3n9GQ3LOB6zFsWeqrrq1DkxYNdfcoGR79LwCbqGnqdyV9rM9IrtmwlDc9s/uo2Nb3TBJ7QUkim5VTOszsBsqn+GJYqVKMJW+GQFJTxI7EarOjto4Lu4ZJViD9Arv5nfAKM4kuVrV+Uo70sBN/5esFzlgfeZvMV2iVrD+ffJtW+fcUBi1asy8mpLEOz1S131X6bESZUtZt9K+f3OucPcLbDnsaY9OuGXHycnup88xhhDW7MXk6jBKH/YoTHUwhwCYKGGr58F5SXCkmHwwvlMTXv1PWZwf2i/7mSW2tAntJSQ38v1WKii2kgAIOdy+QPM1mMPshTHhbsHtBfAP6ugaDzBAAAEybty54Si6EeLHnvoqDQXqPiCbRk84OM9gjDCqQJo8RO2wjN2+O8lSDErPM3YYZkam0M9IuewVgygDaJVpE0pH8sjE2i9oqCab7WWH5yI/dQZxpaGWbmF9hR2CQpN/HbBJ80HAlI6pWbD3Srni1UShnlYkoXCIX3jKrMp0sOOnr8z6ADaoLfqjkyVyFAbrjBRaB92HZDjj4V8+7MgBdgnqbAqgnphwguVRY7IKwKsHyuID3CdO3RZoDhgCt04akAI6gfb/t+YS+Xuqi9+BeTRyoCg3jAie4jKwix8PXA2KCBzS0fC/s13UPhgGMoqsWBsMo7BwGzIJ/+9xGrlfljj6Xs/wsgTsuq+pq2B5xA7rykqRRX/uDdD48jmOlYqGQmSaDer7wisx/OQDw4ITA+kJZSsmgqed4ySARlCCtuN1jTI1z6K+SNUDKJV6q6egEcnO3Wbj8XVW9J9tJKVJAPEiSz50Bq5hR2AoeoJwi749nXowEUbUJGE8M2Bte1kBzfdMow9nOsG1Txgk7xa/k5TYEFjfcR+sUeOOB7Gd5PGSImlRKy9Mo7sTZx7jd8n56tgTNnCt2R1bnQHmHtSR2xMCt/In9CcP2ZfvgkpviH2qimwJYM+860KIOPtTtnBKXJ/igmx3wF0q3EaJC9cC6UyzKfHalGKSbYlkFpDghlLkyNjK5dyUX2s8EgV3PhgT7arF5tqmomuTHOpOeFA+2VwugTDRUIo/lEIWz8RxU4t+sAdsmVv+63KP/ClciTiADnu/a64fVHMfGYTXBabm62b3c+oh9f+3hZ8k3ZXEzGzQt3D1lmNratgpbHhSjnU6RO+1vEoCNlVVbcUja4RrPQpIoVnfL/xSKh24zNvHQ3llAohd0P4Ublo4zp3xNpwDhAW4/SHW3j6oVoFudKMei58C42kzap6rYMYQCTwrr14f0HnYnYSXLI83k7FWAcpeqnbfve86CFP2ruRaegzDJfcKrsGaJj/fir5ab0xX+LvyO8mvycP/EVvhex46p7y0DhW1N9TIbfcEq+yYsDSdsp/v/m6dI0aJ/LtetmbZ5iJtgCbNzORJbGMXsB/GFEYmr/XJKJDzYQTKoesGQNfn5BxOKjGVONkruEW0G8GUy9fDa5CFaB840VQyGVnCzBLdEhlGVeJnFB+1IcibLCVTu6kGX8BRSLa8GDmdkyeeTukD8vWJVXKvDNtC/WTfdN5K2xQkSBkCjZqTSeJK3bcYF4w/FHSYFTAck1xqRbdBkETNkAH8CHpCzo1FJFOoOs7x0HXj636mzcCtZNADNXoBOBXDVpk9Wla18kj2WKxwoZPNAJkDf5QjAgKWv5HauvCibXs8KJ1TtqKZRyynwKjTdaVuem8gCvtPukjUglfgTeIADB9ulmhSk4CZN+RbB9ZBjGeri94EaR92SFOwoez6dOi4kQBOm8FdmA+EA2JQj1byKkQmW0wXynMOvWFrF04dtSupRyHwgM2OHyA5LkBs+NaA5KJZ7IOhpOQN4n0Flf0hyPh37Y62GMKyO+jlzq6UoA/amAG0m8iToMlNGqzwnxnJjS4+sehzN7pZR2K5hgzvYDj1fC5FFzqw608QNXU3umVG4J5EDcKx6eYOguGvySTPsSWtrLtiDDzaP858jHoz6mw42vRHoseiYF5vv6Go9CRE7VajTrzgvfLFwtTWLiCM2T0dAelyXCBGkmho1tU3SIiMSI3gLQ814tiuPOlkFCCjubZHOsqMr3z9M33jrpvFYhG4nZ3qePGnBmJa/rghvaHjL4SKl/OeMOJRk/Qzg4NnCWlGBEX7baxjqVWo5nTG8gKyX+PuOJFlVK3mJ4x8r0K7GsxsUzt2cGEoUmt++0WrS+WWnA7ZBuIn4yB6fvurD8GrQDXy7gIbR78SKH//BNfFgxAuqkassYGoEUK6DTrrqwYQeEm0ARH6IsoVKjTWXnBpuCqGLs60ord8BuY3PZf7cAHcE5DaL2kBLTqaWckrcexYkQxSmJDKMq8TN78CVJ+XrEqrgFQbr5nqWvsRtCjAYierLwyhcKx8hTnNN3ObxUKdpMqSLfKIG0dAQflzgTN/MjrJq9a01OZYwd9wErHon3mOn/TlF34C/KxLoJQr/pLk+05JklhTnVOJxUIZJHYScUKAkKity0d4uuuYH3ooh7PweyWcglYj/0hj8QjCeFfSpwQUs9ap16wZ1b+BH3hUvcTwpsiOlVNI5A0yWF9AmoIpU3trQGDl6HhgxWG8WdviQr6yQ8EtC1dDEvMnk+gWoidBQiCCY7jcRIevjOGokmDMJ1WabtXPJnu16Oo+RB7E9F6liw787CqMttWILIzKfFJZar2u5JqkQHtxrbEcys+ErbdR13cSxn1owZQhxaWpNBolRiGCQERuDrTyM54urBIl3PITLKh/qp6F/7NgwZovFO6G55H7R46t+pQES+IMVjXziTm29r54OMJ/urmvmmx+efPxuwlTmH6jvPZ80zWlawdtdbTuuiJmtbyeyLxyY2SB+JrJtUjfrgM4/tJvChO5SpJ/c0IenRYgyFIA+8eF0Spnhf3VaTj8AxYYxTppQVhPi6ld8l9cRhqEf8ijDvNRJoLUXrdiNrAFN4aeF6/fYuyQb8meyi02KxQHVa+BuMQU8SczU4BQlGN7eqt37dydV7hnokv5QX5mN0OkBpe9nLKPRxgnXi7w93rn4u5Z++CtAKpRukRULj/2cFullyP2YCRhhTuaNnqsOGIF9H5+oTp2Ok3WmfOIWZGgZ2zNWwpNCqkIbwnrLRKROWzjX3+MAml6wvkDAeUPNpA2WStabNyXyEIgtd9gnPYMpDv4MzlAQQcxhVDjtRGJYD5fLhWnoKGWaH8EUdYN1l6P3zY2tGdvG3zVqmGHoycxnDgjk1F4n+xpVLQlJJRY3sOnHM8h7EUKNErEMiqrh+KbVvTFwvPYhRHvsrA5/Qpy45mAeZK9LtioWAtQR5dWJW+3qONYcwm5+bXUKzKXcfU7kKzVPQt4OZk8XkHH6k3uEpLDIMSz0QP8pVfj04Wq5q5bMb3jhHZRVTrnmvffgmjpoCZitnnOFseR8VV18VZ9XboTDZCi+b+Bn0wWRilNdz/oZ2sefcG46UomwijbhSGsOG1PKZBqVc9182DC15KaQdr2DbY20+kFEqnuT/ZEo/mlCooBJxu+v85j0uLu9RDqelTigvGe+a4+bzuaOKwxi1MpvN81ydlnv9pNro+MF4SRo7otlTzIQIudMUqsC2ONE0lPtyWm5MlQ5Up1mwCtiplekIztr2dkuOTaVdd2mnx70fbAFUHMziljq41p9wq2PSBt1j1stM7DyYGsdXUPukOMcVKyGLUn2BTq7jupMiGdHuI4d0LA8UiJcTLBVOy7UelIT0n5X7MVLMQDZjP1vZ0rhHwvW3s678hAEjo9vaOQiI5us+HiXzYELd9Nol/qR0XUZpm8WBbt5nxk9aEOdtNGaAJp1ekAgsRY0npUF4xuNrgjBVUirirdQYqbG8mJQT9KQYOPTTP8urrUGulIGj65E1IcdeZnbP4Qxl2RJoqwn63eu/Jz+avBX7wiiYiHjXRoGgAq56kuKA8kYX9a0YS0vTUoI/akmKqpZQCvEew4SkpzFIM2rvxqWISWIK41h3ey9eBdoydbMWGXtHY76SaP6nO1VOxFGxKgtU2ItJr+Wg5mrBbwaCPiwz9hNuewhfcSVl3Ge4NMJApLGGTAKqhvQYNTAcnD292w3hhFDe59G3Ci06dMbVVR2NZiVTpG7t7GeLUNAyjdaY8BaavO1o07/VxGiwsS+MyTRzfXGbTmO8a8sIajNt4FZGygoIX/2tWKO3f+Mree0IdN3q//iD8KWvH5FbCtzSTFiOlX2xKst5bUGXNBwKw//6Hq7p1KwxUnKew0Mzv+jEiuuDfVKmP6Gt2ujoxQDUTJHZBKUobYZg67SZBMDUE3QCPW13vUQYVJun12kOvHYqE9ZLmuE8o7s/JAaLjfoLi2uoCS9z8fXvopyLjd0AsTdMAAAnx3G2tyN7gIpCSyENjnUwFdzDalHBi6RrsQW0XL7wZVwZNrJNKMeuBy7bG7fNPXQcE7F1/DukyfBHnQaGoXv+IXQr+WnVngHAuV1rR7dBJvXec0/e+rg2AnlAqVd+Xo8SXpURDZVCsp+r3M5g/dywSYHQVpvwsh96zphKzixXerOmSED4LDnhHZZG5Xc8Ov7egeH3uk7MGM72s1ndH01rPFFQvWDrWLLqydbk9+Vh7j7h2wrkEz70F+aKONTgJmSrUZgoV2tDoiaV0zumNCVW5etGcD9lLvzV1cu2UsM8QR3UwMcIowY04jB+0AtvTdAzoGYEVzQdyrJ8LDZi665MFq6/9N0prxndiSvoR8fRTMEec8fuOblSQtK/5wn0hpqdy7wqwwRfxYfOlzEQEFtzCbV/nsPmeT1epyGviiHS7LTvrbegBte4HX/9jxweH47K7duO2BOgwGcIQSqm8AO5caiknQrNEJQ4acbk6divUHOJPGqv6HgqwF3WHe/MImYpMRdQJW/wr2Rn+6DkIssHeH+UbyIhaDP3aVt4xjE8IjhV/JpZ+txiGvIqMR5HHyd0Rhh9YsQDSWrGRyJOCEr5TYpMJafLZDB/L0M5mzi/Ecglh5M9VcqTHxmSYS3JWuEU8fsHz7mHvMmT0ecI9KMSRWCDF+9YSQEIyPxvK7CAFt1f5LqrS27RiQPtg70z/gzrp4upvBKX5cVDS0tF2zJVlG1CBCrirvEXjWlOEOnMRmmtN+ebgsItjpOCHb7AUcvbvj6XLPIVHAa765vE+O8QMvBcEQQ8r0oC6g4o9k6bHap4urs5kVnr6pF23Pll++Zbz0Dez0R7qjkhkezTJ2WqyTA4JGHyXwlQ5ROgh6oGR9vsopPQ8GE1CDkQ0JiQNfr4qUPMjRbxObqpSx/0hglfXh2H34QQllvVzGqYQLvEAZwalBxMQvoXof5Jimv7uO8xwpJMjImyFn28jExLdauii323pfb9VFbpZOCeQng6hHhXJscoqahsk3cK3ZmfAXmSCwaVwq+vqbncxIT7cLH96mbmS9ARQSBWklspjz5CaBx0A7M4Z6+G84R1oF81FE3UdyP/kCZXZY+qx+W2pYqXnm7FSyEyfMYbX6cejnCBqDT4y4mg3g12mAYcIsW8/EF75pJL4kqA1qI7fzpMe/wC+u2X4S/FJfyWZ11ntZSFAvYW5dLTcSOfxkRZ77DmpADlrWKzMpfxELR2SMXgRsyKoZ08rC587przUtFoiTZ1fefOBqfQVKeir2JcoJ9xjnvy0am6S2sgh0TSfklKVC3p8vjrHEyYcFJk5/K4cOTI2Eq9/RntDv045yHWF6yFPHupoesX2EnxIRgfIIxvMUHj+ENWJj0gdBvGsmE7b8ftcp/ULZHOQ1p91a+iciRia8QAI6U7//VGx5XfGUeRymwNYtGhO2fVDMf0Glb1c+RK59ruCa+1Sq809aa/o7UhXE1NUDPcy/LFbF/wc1iQHiA7RowJK3sBBnZObyPw2W0c62a8fBxJXArnDZFhqh8AnPAhZG6ATmILGZ5gkTWl2n04X8FQqyDP8ShXHhz0ljPuLFEkmQHS7TuX+oxt1rOIObxnIlkFBYXKau/Dn4QnnEVdc00uXAwnrRXFkUOVovM+fXS/1thqXFHWCuEUGtwl+eBy/odXZCe0TdJrNGAgItWO54bmxi2z802vVKH06eVg3s2iPONiHuhrWz6/1F2v/NbO1YOnca/QEnZZ3Lw09lNoQ5Z6tbQoujsoDfXrZpp39Ylrk96Rue9Z385mGXK810eUcuZhFKexKqIIS2EahKj1u7Mdr4aSkjzLec4IOETR5Cr460QCWUW9Oz79RVWtNpKDaxrm0GH81fydbAfz0QqSkepE/km80CiziBFTAOgmbpI6tK0+62hSDkq+pRV2ABj+tbnby50eURrlanf6hL4sY6qURcKFtQ8Au54R6VIoMU6EY22exDgls3KiffEuEmrwlb6k3X/e2oYU3raoorhDX9P9BIXLyapgziy7ovEHxr4avFfRF5870V0ivq/VJO+q1sfwZW6eAjumm3euIzNEIx9P3rZzW125ApMNtV+nT6G59pDf7RMLO5d9Pnwc+kEVxPmcKamiUxcB1C4cb2G598IRqJvBDECvG7K7q0iTEIikKZgVsnipPOzYApYAhGOKlLgeQvCoZzCqGh89Ywj8Pvd7m/Pp3YJ5HGNJAWNm8aZhGe884V1YdlueE42/MrzkAJQwWqns6MhtrHicrelQVFvJLAZpT6rQhbzPHp4Kzre2aDiH318od1sZYq6x1bJZuJqTBjyTYpkym5M3V69cKwwSp6KModoPiQqCwGbdYjheJqq15F1J6v7r9S1COVAPsEzOzrd8zQf2azgNSLLWrgMUsdxumNuP7l+CeysBr2NyVJaun9xDw8AfbBFqPtyNlx7QQRHoGPi7p/PecES3n7whVOaW3XDZ9MNsOfguKcyqUsGL015xuggB1xqyR62FpwuNniU3Rj0gflFHA0GxMvEO8v2/+HZEPeYmWvkKy2oQxUqlEoA9KuVyWM4lAIJ6FCBIcYEBF7dVLu9TIyIPAtFvXFSvhCcXS6nTcWWWeksu6SsoNyMVWx3uVHgG5BRpsgJ7+aFzBZClUT0pd6Pa4PqNJ6XDkR8djrrZvKDt10wVHxTzqAfL7z4OSGb1yfvWg6uzOLBQv7IwxF3EU9bklPPTUKwAltb3B40S8mH83M6bm4D4EpUnX8/K+vYqcJdOBCD7FUzbOh8J1LM0q6ZzLOxEHIh1fZXZwe0Z+xcLxnzMofMbH+5GJ2mUmeexOnXEKsnYZqtWHWhDsRYuuyO8kNXm6KaCWNny09+pUo9KOKdmJzJaLPnC3BmVyRKnaf1KrJe4GHN7gInTcljRDCmyvtVVfSDdm7xExzbksMOVuPeXb+z/HeoYdsS5b71/YYPC0oXxlgHwtTZFrVJ++aHgDYpQC6bcpQtAe83auaoRLiSEaQi11pmpj7HdxLVNjhV5zA1bM3MbLJ9NCLfGjINWZqYfuZUHA1cA0kJCeJM5LOMw8gFcqnN9CkAJgXBVhr/L5M9pg1/zPbn55U72EEvbn3f+brc4gj+RtgrSXPhQbeHHp+fJCBM6TkNNVwLx/1GJzRrj8q5GzW4JprOGqvYbFOrOR+I6S0fWP/ejVGn/DrRnBF5vYduVfxH6bQJwEfvlamAkFCTmtuzzfNoleXvfw7a7LWyCALSkj3LUoHn+YnEdcvN08qeuZlTBkEHDxNADQGKdgMJClW7W92N5sZwBTDo+vrGx8UgrNWVpRNjy60PXlTZLjUkPngHy3uv8Q3PnZBZuGSdG6BVepUMuSRdoJF1iVrE9VNGYoxkw5/WovhI7E6qdijtoI4z6EgAtDL5ZtMVLNGewjSWPscTMQ/LXCtBcfcdjPvnD9ebNpcrEiYhARlbL0fCSQ/0lEsnzqM5z2D8WnP5plUERS1U1INKci/KsA/vwApMDcZLqX+Ju+goKPJoiIN6ABlal5wuHYX38xchCGl2aAUW1WSktAwQoxdDhNcNAN4jYmWDylGXThrunKMtPQPpQiu96a0iC8dta19VPUFHOYl1QXN9d2TLKAY8V6kLbYAZa1Ssn0zDyG3uRil+7e3lZE1FP8K5rb6uWd3QGC02Ei0DP5WyqgyDVnQgl4oORHd35lkfBn8Pblc/xj7tobFe7hLpqnBtMLdqafzyA1hrOWQg5dM9/JnZNaf9/TYn1uvHJzKowgq2jGWO9QZB3rZXNH1OsGDKJWnHrZs0s1ZDtYDL1xT6Q7rPYX30K4kz54xGbPXuRjr/vM+8tx64PN9LOSgZw083RMmHfuOB8Dc+7D1Wb6eN/VdUqAK4uzK6SvtZidOeBAyyjR8w7n4dGrvLxn2Z3FgL6K+ULu/22Krt76K4mYRGxqGRJjqrUplgvDZXOMBRMPVxwU5L5B7bK3tTwc6z8IyJbFUOzyHXvflzmP/MFgkp2JP8z6fHl3HUXcFsZgmr1nWgjDlo/rD3hv0LiyYv0xmvP1K2lfxP4Yko5zGSa6nxCW/7ucPw0M2c7VTUTFjONHLAiMbsjGKC3L+4aPOjpteyB8ZcCZbZbM5C+YlAuCMjDx0Q8CHZLTycma8XP9Ut/pANjD8mS41+JgPLIp/haOx6nUDMxUMTkMNqrJkPtAzMVSjmRZAeiIsSpS3j6Mw+gAthyqwvPWoxFZW8pqkqQLoFOogkPfFuoB9pt6QWMMQCoTPNWsOgPdQr9KsGVyFd3yMxm5fO58JrnzxJvq/ZJH3AwDC41kjCWquBEu9hbBr5xWWfJ2m8VSzZdUPXGUuxGXOqZOe78muBC+uTJWvnw2xgMsIcFufyzURb2faFgcpltV9P3h0V77ViApJqS4576akXaQ90cX93pcJpR+oF2Wy5YtpUHMnTNKWnqJLjAFttF0N9uKhjJ/UgDdMs3t25tH5LVHlZor9KnlnUNEor22/RnwCXpr/ZXsCIvrGVVrmS5WrH0ST/d/dypFKdjaT8A0XoTD7aeLDmU/N8+WSD+b7IAlXbP0mMTUOEEhEm1xi+xm12uEivXWPyEAcNN3NV5gfRfGrlT3YH1UkS62FySzh2NZB7IW8CZQRj41ukn2aTU9m4EBuCG65G0SfIePFXqnbo7SMvA19O5/A3O5J41EsG3VJ2lt7WeXR+xGGRMWdzYQLu5jz5YJDETGT3V9GAIXZXGcXFAmdoY6id0Tf7Evu2lLik97TtNGoznNjSF2rXYKqF15wsHYPtwjik/eixTNCVO0NYOhY52xu3lEA1n7PKj9fjw412CikFJFG5hxwaAWCHqpwl2hQC3TOLGM3AjtsYBtZcP9/jX3+SVh5HbA+f+dA7JCWTXWNv1AMzSQXumqqkjpYIY3UMIBSQrEL7LNzz0ZCHvxeEaxOO+b1vdIQI/Zu31MMr5EPX9Mc53+r4V9r5OEzGGUjRZlGzdPSNkNyF0VjGVW71PLo3XKm0JbNUVKWKbWZzhBhLd1cgIU6sJSeWzWmlcazRaG07yZc367LF4VZJoVjY0X1R43Y28boxObYNldMHdBatpWdW71//QYpu1RwfuWiKLkUJqdIby5NuOjLVCL9+XfEgPHBYHuI3ZZjkUtY7FeUMGzvLfKvNvYBjbcMQWs4u9/kSkfgcBWfHx0jlU19ef3qtOPEI+O/scTpUi/fW6/z6sLIl7nB3hPLT5grartL/qKor4pxd0fG+cefRaKzQVQK5FDuXZ5+zZt0hQxHSRN951dpgKEBzuFKq1JlOvo4oRkuibvh0hqFADDRS02p+sMkHicE4p1UIwIRf6Mz+VxGjZ3+qCXxKf7S5YLeCOt/E4HoBT3qJ7w89P878sK1wvqNFJQFfh2TI7Ldfvv6UTo0b3PaMMr8O8TxOb8IGewesPtmx57ftXFezjKNh0fyy+NqMXlmYBqh7cpkQJ3TkKyI4Q6ogq4FC7Y5Rm8daoaeLDEo0eEMjNomY7UxiupHlXoYc8zKtw37AOkUkvZfp2M5WvrpNG+OUhMbIKtzm/vly0yhZNu3P0IlFz6pXev9U4vGViGuFqSZyFqREaqgFAUHUygnN5IGqiXsU5KK8zQ2F0tGuwsyX1s3xHi1eJI3AJ6UPE2XXbgxldxIJxV7c3TELvndny2BNHcwo2B8e40P0+RITDkfgBs88Dt4yyD29AcJTFoL2Avc+b2L8W4ZeQKZN0B+ZjB7C8iz1Lzlv2KQ9pVEC70+MaU71S73eMUkCWmFpPhd4cLkhEwYacu5y3LUCll2M1mOYA4aBcw1OL5vHVBmqrolvHkNz43B8gKods/E8q/MshHjiVS8k7TAUDQOkxHSBj/2TuFRtsRV+eNOX581uOs4keiO1Sh+7SeQjivnF8ERgO0wYpyCxGLGQrzjgbiIjL3Ykaz+y8uuCaJk5Fq4FqKYYNUz7j/Qcx8/ZF/utPej+OvJtI5QibhMEko8ZIFcQikGIJDXStLoq1gYv3nKpkgnY9fGHgnnsvDmnXs6dXWVzbz5iFfFJSi1uNn3xR4fqezJS04phm7cSemR9FSqkKRDoMlAxietp9pnCnkikYANBRLmX+hubbfW0I1abttoG7ctN71j5PTWIu4xOPtxvLbdkBWXgu6YxqYBkt2d3FeoyGzKcos2Gx8js+gn6IUEX6ZzRzzZ/n5TLX7jVsmn7QT+Bik05f75JL3oJ4PKPdrO46ebpZgGu1NaOODYgi/zQxVLLq6TvUw76dbbYZmT9ABuqRsFuOGg3H/KCvk3ol9CHRNJcOqji79ufgJE57Hi2i/Cg0kXOjr9emMzpHdc8ngmoE+tjPLbtFRx/XtS/smwXB4UKEqchTQKv29wsu4qDskkV7LVkHfjd0L8WE9l1E+sRjhReODwVhfI2hZexq2aYsriJFYpm8bRY6juXu7zUT6DZyVv5RGFAh6OyQrYvpxchGV01m7TQTVMiDwE8FMQ0o28mAUbmDaz/BI+jul77lrzmAF0xi4YrOrbzV4RmYMhjIf1cmPEt3REChVszSx6ZJW+7F5W0eXs2EMOMFncdb5hHLcEVfjNfYlO13k5snPB6YcEuT54DX5NNNG886LY5WBXydVdQbOjLl6kv8qPezJXcNassY/tcHdj0fNQxy7ACxN1ZUUti5GeLIEkc4c6vgd4Wm0AbWKpq6O4stooNxyD4Q9nouSBHsHb/UFtMdD2KNfOxCw5zUCnnt3h3n/6oK2IvQmaCXSkzg1IKEplSjIQZq6efcXROsQbJATeytSUVLOWDFNNjtHRaYq1o4qojkE2fv6UE1raYYlMuoAEnlKsdS0RE4urKuLR2ysj7+S9bCqrZe/6L8CZbX1J6PYPJ1Ny8cKVO7DGJNQMVCoX4CaJsbKHMxZjTgoNUVS3Ri2P5dLE0Fo2Pt1+uAyTuhpXo8ByGSldmuOqk1zIzN7knOF9JnMkg6Z2uAJsBrow9JS49sxPToxPcxRlTAvuu4pkyWc1C0Q+l6HZrTnTo+mYR2Pj5Fmsp1+6XTOdTuu2lSstT0uV0zhb7axeSWXJ4qfnHCnVuLEYpdjuICYCJ36i3/YKCA4Lbpgk9zMgiYeiKjGQ/EnVuxBhZUR7GzTtUj4W93gh7UNw5F+GjUEMTAunQVegyGl8z7FZvJuPUu67ThOsvTu9wq+fqySZ7HRL0bNJQPgxCejmMt4+G5ianpVZk4XC4CbM+M8yQnk4dNKPkrurvuwtgKweNHJvABFPRdf38r7GRgAb2MwXwACiixjF9gAAACxIwu7z94SWgwOcl4pqx8fNRnT5qAyIMHK+V2bLUzFzbS6YUazGixum4PPv+FBuHHVuO+fzpI+YFdjijAaw6bCLHh956Om3tbaoTjn/Aip4tEvnLhSN7wp4z63+mTNG1UM4Gb6hBAz4IdOZJp5Jp0y3Abn3wic6dI0eCJAjOZf/fH2RDGzsNg3iwoHPlnwKjS2znvpuFSxXwDaJL37Nyu6XaGDUUaH89g/lTj+sgbq8YGf4BEY5OrBMlXEdSKVU6N0HaaXKIPPABbTDPd+CU1CoLbyLIEM/xPmH53SbVGMSbiiU2ZGZyMqZEGnCcIQdK49X+O7wPnNAxjqBJBrk9537CEPV1SXo6T8zH+diTc30cWc9i88az326Fywz4WYMajBKhZu3CvJr9bviS0tX2FridnIAGdjKPYW6cr7skQf6sGI1CGlaA2ycR8rAxkEQyJ6jY2uJYlz764okdYpGKfOPbZ9p2q99ATBLvkMI/l4sc4XtPnsKWauyOBAnPfN9etfgNFB6gpQ8GkCOqkXTVbAFlr/8k4kPkMWJLdnLsHoHEJYzdfLY6/XZMBQN6YSw3ME9lJXYkZz2MnJkE7nqgp24reMPMlGCGL+DoHaIX1y4vNO86mk67xKh5EEIszLqTJ4SAk68JwVMPf1AHLGRBUkSQU0bn5esE6EmJDSC1zi1Fbb9sM7F4LPGe1fkX9a3i4CAdARAmk0SaQyqmUVARXj+1A6PDHnBK5SiWSF86pRXueIwHIYY0QOo3DgReOJKHUf69alfVhy6cAbaGAC3azH9VuD1nr1umgR4FPItVu/FuYdhax5P8vkMcYNjd+uX/EOHij9pfjJfQSN2fPOWRGfFgX0vyyhEbQleIkxqF/vtaVyh/yBUxO2bC3g4w+iqB9VUndWH06XLytPFUQbDRYZW7pkYDUsjiEqWPaFRjKbCNsARGE1WVXQuAAaIICPFUZMMP8ypP5CukdvGWrfMjbMPzMCuRgLE6mrS+FznCYScFeGBPMeLD4JCOS6/ZIHJQq5bLfLEJqKuzcyznm3VSBcRriDlCX+wj6goYtMqknlgk1VuEibOZlFgHJR7/ufgCpGxJaTraKU2JL1UtKki8LEfzojE5bkW0Fx7+jZ0/EwpEO7yXji+KouB0dwvU3sPwRVKgXlMfY1oHLxD3DrRMte47WmmX1cDOGtW2CCxVJrCuttc4xEC4BSrRFmH+cIPKHNlzyFneQrdlhKrsqQ2HmYdN5FocTRbc5j1bQntC3QCBYPgdzSzdCc9V0QAQ8b7BJLtlv/rQwsJ9HrfR+p8hG15fdoAJCbT995+WrUwj1+xRjgyP1y1fw92Pu3ORlroAy5BZIJhlNtCM7Hnv+AcNx5YBQwOxrSDDp0Eb8WAKKlc6cLBH2vjICrDdQAjwDpJwS7neFmG4gTEyfXPfRMGn84fMmjYxrViZN2ebQJPVTe2xtCZOvCsXg+doABYm6Yv0BjUeo/n6n9hdngGtnliIlBw6Irdbou3h3RkYCZIdUf+QTdJxsiryxYYoa26VqyOXMkst8EOvliPYRsxcTl9lak+JWeApKOnkETQrICHi1O47+0eqTAyPHmRBfVM39GeBwYNoFpcngjCZfbYb1A6MeGxhzIKCTQkaDXHg7ugl5TrLw8HoB/E/nOzw00RmB/F9xGXJs934aTOQ0vgjNx2xnieecrWBYSMn5KRgJJe8QJpqnSP7SMqDXHg7ugl6QMh2vC4OuaPOt/gcqC1SRzucMKVRPsuYdPL8Zr/10SKrhld+cy8bFU0zCKx/GaCQc8BeS2CS0hQUBolqh8ROUmL2Fc6hZrxqXx0+y9lXAlHzAkiRYxt2eKKBqVRyucSdGUiLTbFIr7VxQJDIyj3uBQEOKIAAeOMz9XMapFs0IAF39qJcVQdJJEBcmFmP1pJsk6eAbltylFGMZPrf1PXAuFImtctKoxRP2bZhNAj20b8fIjvpg9Y11ovPMr7hN88d8ch/NYW8+WAQlXCbUvJS4cQja31GSCl3Zz8j5JadWbUnSHTsTr2dH/4kVqHDicZnvJEQzG07iaaDewHLwHBgZgRe1vk1F8tmI31UfBZuAXj7ZYFG6x+IL/xUH4pQlYncLIqouGnZgGxlbqmcod1fxb2DrWsvf9cpq/rEnF8SxvLSWtlhWUbE/2NIuYYMmfuXbUGwq9dOJ4b9G5gLpepIYfVpJRDQ8RzHjcN793ZBrxkqP2fDSC1QRUhDPmU4ymU8zO2lL51ZJAVK5qeHR4SWNyO8vAJEqQbyCCpj7m6H1WyQWmS6c5bqIKBVZ3ek/3E6L3RV95zT7cTwxzvUQCZfofeAvPIkyuRgKMUMOfZ8OcGDAo82cGmkf5IdExGAnN3X1gkkdZRJfCucBrC34SIvww/oPa2C5KiX8Vw5+IBi47ExVgaX+4DHJFnzyYTLIsNdcqjDrbbZ8Zw2x8pAQVVPTV/h9zc8nR38ptlyxzuaGkfWRJShTf8YTmekOWZEcoz+TUx8D/rjldKrDWUKwoJ6e2B2w+cBTpwSFmUvaPOTDi3occqOwLybke4wxBOd8KAyPfdHUdam9a29+gMuSbQb9FahAOBF/2xews/FrjXiNZgDo5L5GN2G0Y16g1Dturs1kiytlNlJdAcbkcsBk6mgAKXGCBCyHOtHuRv0DnkPLRQmzOgXq1LHvoyLKUH6UaRL7nmKomO6YIvhuXVgTZvpVmJlwp9QHScfELm/yF5okGtyde+BjUQzaxtmCLjdzITAKzkCXQEkMZxlY0zYihS/URoe2DzpPfcijSpNOkto2ekGiAy/+5BhE2Xf4yaja7WG9lmxfb2NrOUOGhcAkvk2yOOCL/R3mVuvk4nMz+AAhs+pZRguA1u5ZFTXnPmzE14FmrUV+K2i2AJasHd1JLRO9U3BEF6BC9Oo5cp0jDOtoeVwjWbG8JbL5kYX5XEyoTYLbU7cD1w/S+8V9NK7CEd+gtA0pqMVbyvoUDcGbZUFVk+CqEHHrOIC61OpqnGYr5mn75Oun7pBKVKyPEcINgB2YlWrmnYWQC6tYJ0xzYGVjoo59cO/tHPdQhxtU9w/TqNF4Shv2RkXq9VvEdLnX6H/8JFhyTR6sXq3eB8OtZ1mj8rAYfYyeOpDa6KkneKuPYFr525u5Xau+OHBeTKUVh2JuOzVMUAT40AnOFEsImpcJT9gdJ/UJ+IAzugOs1e1jMV82UQv9uBmhsu0B6VRVW5u0Ph3h4X+uPLU83JcjPU3yPreZOO/WXb9Lv+kP7bOhhoDJAp+oR9eF671CQn+XGEp1G4clEb42OisuzJM/XBH9rfsP6rJykrSKGK4zSUMzHxnhT92ZlXTTSq9m55tYlD3za8MLewYxLyxMLrujdSjdlYgnfaQ7PRotRQvS+iB9wHev85iAxYIB/WU4jAYrZvUrEzGyG9h5+v6+LySopO+8Jy1cdfm2BWdvF43WStup/FlWUbdbOJHxDrTQr3ms9kkIH7JXVqNxP/shnp8ENsiG24YqnlZVvzFBFrE0sHnTzLYchfSnN5c0HIF0fJP5Ikl2IdX1pn1OPax23ViOcmJ+E2ROIzMIxFnplxtkNytviTcGc1OP7gcCFsz6WKiJBO2YdqrsJXCoQiYdVFZdqAeY3pxC8n60l6EmecVow1WyrNfdfOFNGYWcdphr8bxWAgEDH4mu0VbVVYCDKY1f/7lYiVKQPTEVJQCL+XyrCrF8Qx9L88/i2PfisN5O+WPmvYi+jWiKK4zrLB8zhwy3Wq7SBv7aXThSQ0pOqzxG2g/kSrAiqnY2G0vAfEOO/tmDKgRpHEjCak4UxA5tr1pNKCsoDyAJBW8tjHZIw2jHCin5dY7s+pUc5w49UvwFEqdQmjZnZRFApazrUx4tC43YPpB7ByeO1XAtdpPQDUe8KKj6QFIR3kejwGXLfRqYmNDLmSb6CSNb5VIsJZgSdCKpCKSa/UDC5gHYO0VTbDxvmIievbqGZ/6iIadUJNFYxwcGjb7G6ODDB1KentWQBTKrpnWiNQs41DHBOAyCWXEGddWFdyJUS1d35XrmXxwEFx3XloY0zF7i7WEIZ9goNESnSUwkLf2jCLgkpxjcIx1y5bpVx7LVgstjOtvv5ECpP6wLT+FovrUE1awovFPIj9OsTdjRSk5eMskzEwuhXul5HjcaHzHEV6bZTvIfD1NZoqUvc4GzCz9PKsmx5Hme2TpOEPKTGBetwSM+aLHS5SP7BQ8yuAj+vMu6FtVAGqCaIGEk/2OdfIvd/MHkEqt0qOB1Jp9Ad3BCmNvrig/1E+PhLIMZIkMEQkCtjW58SimWQLYWK3ZOG5tvhdZI25OO7BtQIao4cEwGNRYoZj0xVLRA1ZPQN/KHREEddUoe+CGL2SQfFeMfwYRAqL3HgFZJEobKz6KBGzG7CRVyF/a6TdK+17e2BePPljzVl4UpHnEQSIbt69+XUB5uvLOK0m3DS17xjTQ2soANQCVAIC9I0JGq4lD+U1AwToUSouljblmcdFBmBZ5jo5ewggzFK99gKv4W4qm3udxQyBQS1jzufEPxdkWvOIpG+h/ylCRxO3mNW7dMvs9iHPNpeXUfiivxm6rYDSlUziks7QqmaBshxSlQPTU7Uau6Fb5+7jUp8uDUrxcOaWs8EqNke0UjX5b3HiCkS651g3suD/d2r5fhtpzxKjYnUjV7LeeISYob4VyQL7ADilstKzdxgbh8BWykYoVVdcOUexiB9tUr4d2KaXLZnosxsxyvZxVjVYPxAGZJzAsvMeHq5jUjMkvdXqgGgoyXyJSYnDmHZaRJTT/IaoMF5y8Zy7TqXX2MHj1XFJgRT//W/QhaKXx/+Z3GKr2JgL9sEB9rt9PxxkBsZ6v6TMmxKuk67oKXXSvTTmP5od1aXNcBckIXtNOocJX4alMeV/GYz1EKG2VV7OnHnWxpWTUZeWdFyknnAjgMbFrHPv5TQwz/MHz4ueua0amo3dHEL+TP7x6lxJ0lszNQZa4vY2q2jjVAvJPuvPjGHEiDddZecQVGK89qKkJOvOzL5YquHzkWw1WsZT34jxqWSEfRuUIrOwT5QM8CPgxjehsqTfbsHrgtczOKeOs2++sZIt5us15Gdt8ELHTnm33/GvuVwFrj8ajan4Cz97QcOsCTRN3sqhqWBvd9UMbg8gaxk4AT6UVironw2ctlsJNTeRIKnkCH2xTPol6lpx2CVgLCJqBjMrbz9wvuSNio2aAZ7rVK3FSM3UYqZweDY4WQxcaDP4MvMLqL4/axqL8P34JRBAASzzNp0h9GUcCfJtMnoBJTDlPSsn5wqwuVfmn++8YDC+FSJd89meWtGvb/jU8awuvgZG3sLy7vj4yCDvvdvEPawMZ6uR4XJ2bQ3iilgdY63cbjllpU4UAkyn3b1bJXVO3k5v+pNAoTx46a4PESZplRQAODnvizw8nSA6M4LDkopHAum+5u+xvtQlaoEeWFKRHIdGwvWd3NPmu1tHunmUDS/Oh7EfTIaOCHm+AZBvQyBkt68kO6QCbgl2eWfyC70mbvgLbtZN89mosN+uV0sezxZ6zbcnVYdwc7yXEO0IHCP32NCIXJQa3y/ZHD2j9aWEx/bIUdX6J7vcQVDSJCY1QkU/Mm6ORw4oHoCH7SCnCQOzuD6hRbRS9dQRkNUriWKEDVcHdUbLVHf4JrekwHcHpJxkVFJcygBB9cPrx5FWgdB+gIkw+5YyMlEUqy99xq5vAyUBQxFWx0RAJT6wrimLOzhroBHDKS7vBhpjAvEebXLbae5ZQQArOiF1veaw9FlhhQtknzvCPiqG4u5LE/4RT9nMmpx25dJWanKxTKV0PCAKMfMyi5w+pLQlZgBb8aU2LP0PYNLRJSXGBlQDCOW02jxLOzogMUsiWHKpDlnrvr+BX5asi33cnN8CLRB8zsAkD8jdgijGqqhql0zGNduKWQRjavEt7keHmtmsYNRx92MOU+ZlUkYOqUH6ly1tiQqt0dHV/85c/IF9Zfc8LusiWjZk5tzK3ZKyRJaL7mI4iSmyI4ShlICRtqWbs3QjAOhXIF5WoYdyjXEMkVJGtZ/ZJY6dvr/Cgmvo1a3DnOptF+xRlrF5IZdNrKpUxjSBnTyigBkGW5XAziqVwZVd5RJiAbJZVKhtXXWw0LiyvTI+Gaf/3jSHTbKA1/uTwH8nYbtJGSq2AbK9q1Pfge/0ntFwmB68/BeVniFY7R385ugp/CC7vjR5aTicgCTVKhaz2MDy43xLETNZ9hasqhk+jZtQioSEv4tc5H7+6KhiwmLb4wJHbzYLlarx7hzHDkbFMFtqpfTXCR4fNskU+xPUPhlKjb7myyT+7HAkFGAHgJ1yfuXsf/bEGzlcgcAfNjLx+hRTVekvjn8YvK6YodvwEbMUOdW3B0Lv43l1FtHCw9SesyB5GFc7kJAdij5Ieos9cqWO6qZ3GV9ytngtQmxKsuMlCoiJzogCPUT14oElP5LMVk1kAEGQpxe+yonNmcIi8KG64oYpXgBbIOdZT5ntBBjBch/YRQErTHm9ugDDHcaeyWWwnARYHnJFtku+sG0NXVOZDIwtfYYIXmp8avfrrMa/Q7CW33wGrI/Y4DSdig272hKfA2i/8sA2UYf8qzoXXLOVHZOkixSoCugqDWmTNW0suMLz3/qtgLbBseUhCISDoUs4xipuMwCF1/aQiV0KLAuRbG3Uuwt6l1rse0IyhhOAg+pxkpCVcP5i2Fm9RFJeoj+OM23SSDzmsxCAizo4Q+kh+Jnxbq52MM+7//awLvgX9rpN1A7aKb4k+J6+5tp0yzaO4zj4w7BJa/95zgGA4wyHTW1DbS3KObPHNiUZ6/BsVQgIjzRONJnl69sXdWwdYbCILEuhQ8HMd90d29kbTLRn8kafng8JyGJuWZphILrAbmf/YgmtuiGOooaE6VCjBciXkpyj1cXboTDZCi+b+Bn0wWRilNdz/oZ2sefcG46UomwijbhSGsOG1PKZBqVc91812WNNVUWl64lU17sE8qD9ExpuzsHIQNstvHlGkRPmLFaJKe+Fm7tEWt2P3+SyY7kFixB1z63cyg9KOF9NpdC9slTPyhhcAnYVu8AOYDWXoLH3bBMTD/B14c/fSRvSFFd9y8ztQfgGArPKhBmMTlqbclFxDZREaAH9NiA1sNW5w5+hdRkU3cc4gq8xZ7C+97vl706qFQl33VK6e428PeKlfDB1/YrNSp1DR5QNDcdKIZAnurchq2AIqjWwOifJfCAYh2elcTgDDg+rbD7aMoZR0JKmtHBx1fLZyRci5WlggTq2YvQqgcUNAhNN0UHU8w1JPb0dqw6EV3OQFH4neDxABDVYAzfb2SePYal7R2nPG+Sm8uajbMe2HCmc782FQ0K5kqsLjEXnXqp0Cv6n3KVcklLSNqNqTtXr4WI+lq4qNzH55ALLDRYurxUKkka4mjHdvr3K6o++BieIao7/XAnDISKgmc0brKAMM3YPIG1JI37tIHbiTZUd493Iply/ZKU0ZZbg3FycdOmCUqhi2ipCV9dJVWea693tzNIXopVef/VNvTYRB0T0KKsIml3MjejM39SUUEp2AMOZe96XIR+e8QJ38ACfhG0TsTlCUxB+tMv0tZftjY6xQxnVWH2CTyxUfKUSD4jUWaeNL/zKXsuGAT3lWzfDvW1bHjwmgyB9XxfEWDrOWXHKDv/PMOdUQo1Ox1R2mLeQTMcvX1D4beCmIwRkT5OK2bZjAY9GogpCQzO7bTk1iBwc5o+PqMZ3xgADDF3SoiG70bV5Srfi3D+HDaN2dpnF0Y+EG+lz4eGvwZkYDY0EZSqX9GzWQMhoSXRYGyUXblwgPaaXHSsqIvA5f5L1KGmxIyAWXHmV+MP6Kdpy2REndLqxmxl+hLtmboPvatJ336DBfT++9yN/MyeEcoU1w1MtiBKlgJvsXpAF13dv2kBVB4c/NYz+ODK8HD9YLDtwdq1/DIs9asNS/ZBugNz04Isl+Edq8HMPKV86MVCAqxmVbolG3qboYeUcsRuEXoT4nx40c6XKWxwl2LDHBJC6SL/uyp6mdrmbuXLVM9CAVWYKec5APLKu9QmYlpU7Aj47YmTtF2bMaIjYeNBFd5hZTDewgXBjUR4g0BUs+vUWhkes6SJ588IcygzGYL7h2orFfNR5DlDOmHaqmGfA1WNS234nx7YeZoAFCl9XUXHRjQZDitni7djZ/wF5OdBg38NlyT98inWQSm89wJIPbT+er4rxwO7gHqrrrQbqiXqkc7xnAGtjNTmFALxphOGsGbx6KcMgK3Emf8W2LWEtX1m2L7e+YRmcYSIHIbJHOU9sNTqUx3ajgPVIjZOaZZoU6FwEACH8Je0Ql5bC/xyWP6SINtbkeuKwD856fOzCwM7dxdbqsmn/tQsPYOWsTXtsDFWePqSGqPTlik0jvGYlHOfHGmZ4KB2e71Gxna0aBLBt1uFSGwdUAovFZ3cdQj3uUZSRysr+SmpDdwljOqNWrchlXS46/YpUmlqVTYmGYAZwQ2pLzMmV11j8SsLovzmtdksWObwv2mgzJ+BmWsUdMB51TQvWLHLAcqQbrU403FhFAz/UXDpnMx6plg1HwAAB91+36nRJ6Gc4+mz8PVQfoQTw2B9eN9SIw49ge5TPgUUeEYt7dl5w1qQohjF+qePxXUrAjpzRE6/3mtuN7atQ8Su1MVS9V2hXk669kCl3j50TYNIz9A948jfJhGVSuU8JVYtHpnzieALIH8Zu/O1XkjF3TMvBANJ+GLs1DMzJoLXbcg373GGS+YzvY6fFDRhsC69aHSTuMcG1TX5wcA4dAuzhxy2f8EwJbWPs6cNEtjXTB9DETLRTjuKT8qvPwNMo5kZryqy0Ns+7QDsvCOSTm6AG/htosBrLY2f+7dzo0zMokCaCuQwOWRJGNqlEcvuToyATSLWzunDSeDOnKcFkXIgENprF6ja0+BwxDBoUO96GnDv6TQJOZC2wamav1dTJvgwI56f5nGxwMdDZEPyY4yx23Bom3DL05qEM/evXiP55I8KlBtOfxEL4U3wfKwxcL1FFo5eipTaJLEHl1+E8OfEZqMOXjzvLm4NPOhJwkHCSdFJZLwqyiBONann6r4Ew6vLFeCZ7Wn4njrviYyeGhgiNmCNB2Wrgb0pHQKrOVH2ts8gIt+Di7rTQCX81PhlQiQBGIt4plbc9S1cKxMT3s9Nd80NlvvCYA9EIobDFBvnafIuT0SflAB5IALN/eY7limuGiVG8OT4rAMaqfPgR8MfYsAdou5uKKaJY8obo1JzS/knNuaEncP6jx7oTm2coYZBmiHEtcxsn8nS3Fgx0tajVxCpfSNK9amMaFa7yI9uFUHofD9xVzBt3qWYCJkkGrFMeYovFzruXCMBOFMr/7KwZH/CGHKtxMdCO78Wrvl4zmbyzDsQgBWh3JfdEDg5dOck5yffuhNZPf7qfj2LVzs19VbWRugEhQg1QMJzC8JRSLJNP+mE/k3ZyqGxXc/J4SbwIpJ3RSuh5TZhKzctoqTX+x1JwSBeZKS1e5sIUdoWNAeBPj+cEr8zXEWwOWVaM0mjGE3S8Mi1v2T56sQpEHb58A72ETQY2o0AEby7/PoBfrxmz/eGjD4FwI7Sd1cWNCzD1XrAxn9yjPJ2gPwDDVqlREN3om9WRmVN1tQ/o35CvD9fJ1FHTdzA9WfTTKES6q7MLOKpkXwpZJRnFVvFRqmekONHpK1CdWGCWtF/SQ1F37Hq82CIaaUFeXhlAgwux+QjDw4v1iW85FvS+QjAmykSTbkt0KD70eFF04PURlBTYf95/MosX3rJGlFZvCbNkSsZyIyXZHdBdpOkMFV2d7JDKgvTUYH7TCSUhlOQ2TZkWBmWrxnOjVOWmcUVLg0PPtnar1FwSNaJkL1AvOzBpgtaKXDOqI71Y85wTUZTcMNGjdnD7w0ARX223wwjFhec34kpeaw5UmLumbbX3jnwQ6jst5SjaeEolNYegnDQE7ERa7Zkcj5Nzcqpyv/nnt/hoahxkDKZ9RBoPzSxlve8GQSagSIRCDwY5v6LKilyb1j9DRZwaVpYh5nx2h6Z5MSuR7nRV5X8/6J9MaKYHVC3aYiLC+2GdLa88oEm0lpi5clRgCTudet6XT9Qq2CZ7PIgm1ZxhEVG+SdtK6Zk5QhiwdAYy4Obk6rDuCZ43KjoMWl3jaK1adJcylKyqEj7jRIcbTlWhBeI+ZC8n3IHCyZoKVmU1QRqWZi31DJE2zNVTYn7DOvtXJN7MP3hTSA3d2dRlicZoQNAb5VJOR7SgxwMLY0/b6LEzk+NDrG2cTHscO7hJQwSKG3a4zGQvOrCxOaXPY2V0fc4ndBPG8yCrXTciOmfksbHMV3pV2vjld+EiYneDIC0A/4BDFqb2xclUD16Xc4HjNJz8tsh34j4hJJnGTu5601S90ttyK0aPB1/mGqNU6rcnMlHO/IKdFSgpONTHAjb0hPyrH47Km2hfodDU2fJwmMHD0q2MRgw2yP5qNkxnwaPkDbUgRFfhyMCQSza5euJYlXoicEHZ5OjdyUX4BljHZ7dGYSRkAPuGCdSM8CzHuzmhRxtPb3uwIBlp949GmXnkpjnTV36yyyOOENG0gr39UEa0xp6UnAAXlacFdCptLzwBbASIKTq7MSOfO+j30M4BHiQR1X1pwE1FGcmPuuaXekj/cyMIDkVBkO/P4VEd9NiFwz4R3/3kHoILWZzGMwARkbBR80ZeSx+qqZFr71SAYoT2z8dUBWrfRuUIrOwT5TfzpiBaBk4C5R8HBp4uDEpdqDIKDk2X24ev2P0IdmYOFZbYqt4HyxC3tmFfsdYJiwNH+OZ5dx6wSdLWToxN/HbKpS5hgTzy7UEcGVG+9XnYjPaQIcWjKcnpYOlH1Po5EA85UMCqssWKBmUmxe5ggfVKinOvZLBBFvqyqIkxuAcY9AKeKTJtvvn7MfJhIX5tVmMPpRF08yg08le2esKzFs4Jb36+wiAj4CLD8frNyTLDZ2quRo5bOcU4VbgBIg+geMOAE6D+RcGxCtQK7gL5Ehj1Jxfax/TQ1IfSrMW5oxYt7leAWo6ySY9MhXKPQddRG7rYyHlRIGyWMTbIFn9sFTMf5MZfqiNHPTIK0za+ELlRwysjWbKYgP7J54dex9Ew3syWHxqS7CoTRlRWJJauw0GH1oVrG7QobYlMiQiHLhL3QLerTkz6rXJmr3mtt8B6vsSJ97RlXnCYVaovEB8HJwS7RALllg0p35G9T0PzfQg0Avs3gGxdAes7DFiJ7a7OtTMAa7/kZFZgVDgAZKUcywJMaG6NzMOphZrzCoWhe8UsUeIqVFvntz+9teGGt79TWTla/N9JpAoB0Kpai3fB/cBg4PeU5Q/raq+l9qQzHPG6QgPpHXb0hK7mpk1TFUTZVnSJYinl64G7R+Z4+oah8h6uKK+hC7huAcBDeDxZl70ZydNF3YWoCOJJnoEaAgOIQCHKnC7sT+WWXENgrvFsXMT42baEHWXR8Yf8orDcHiPB8LVnrGDhW3GR7+56Mm3rwW9WIzFeJQHK54C2IKnfF+P7ZD3PAFM26WbXgod2MtMC7kAxO+hdvgO8g3oSddDc1ZXPD1n0/t5jANqVxkXrLCUmsU6fKqabdBc6jIblgfGF+ObviFvGbWP+419Ga9iY3Nr1fcB3sf5YJFWnKK+zqUnX+F3pcSB3LXHSk2pI01fDEG0+n9bUJpwcDOZeWHT1as+9kXVrVMpwyi5OqeDIW5QkSa+JpzSCiGDJ2unViB050M84r+lFlk1WxaTzID+dG1db40YqA3EX1WUd4tiNst0HVkA7IsPaw6a6vnT6owDwehSwyPxL2B3XU2R3fGi+NFhlDhTFDRxGogS8f91zhVY48eBQ2hWJyEccdvUmIq12OF3o1LNf2ThgPcN/mPqtTLOEal1yXTg2oSu5B/PGuQYslLteFukhwUfpMX0a/7msYrHu5AMTvoXcD5IY2/MavnpSCJ93zT43X1LFjrgKrYWuFMlxURT/AjKkh+8QJD8nn7gFqYG271JctWpLwRCEJaZKQZvDwEcObagLORb2rKT1xNUZEVgAPQLf8xNXTX36Nv1jKZePZ87u8P8E2h6KRQsAlVFxNx9hoV03Ug4FfgFTinqRwOBnMvLDqXBVz5V08nlIunLXsaLVv9GGXjh9LV8+VFsBfd1Ml4rFiwMMjJG2GSWVxqzKwV7n7YscDr/6etQTO1GoG+HVLuMPloeVFg+rWenIDbsLQ2Eo3O3Fj9q14nIc2SY/JIADgxGxDgEHOdVLd2DAK6q/ZIBEMFnRc732DMj9gaRljcHWhNhmCK8U9tjT/3uWEgY08mUiQgPcPEVg3X8uFJ6mH6xycxRyGrgC9eJaJ8HMAvr6W4fTnT0vhhtzlaSxG20UJyejbmBoUBMu/Mq5lMs8wcm5pvla6Ho2B9O8c14KsXqXKZFCGnPHDu08uLsJUyD05T2i6Udz+pdsNRa4QMCfYxqPuk7DjqDncey+1cE0NX7GdPWe77sUPLwol0v3ec6KNhF09KQZjALPX22ch3cTr0TYbCNbFHlylSZ8pBZeKl4xSCIaF2XLtxvaPlDEBbnQ8PjDCVw4N2DheIjQvm76JhOJKkjPcUZW98oKpBn4fLNpvVmO6wFw/Ug7jnH/DECgapXIvvDeUTTSLd8vbz8hCq9BLmlAmAF1KF9r1qG8i+6b81lI+xeKfrOo3ptIGTb/TEoomE6AVoXx6WaHLKhfXDzmGUJVIvZEnHfpukGzesaDxkTyXOjFUJVs7Kxl/tbMyzIuCRgBbWxYS+IovuhaykR58Ia/ktbIrFhyKiIigv9mPSEliTi+/wzesjwRYsMhQ4iKfDHi1m5PwNN1jxDO0woP7tYjavgAFtW07M2a/43Q4WEQByuBddyyfSXs55tdrEQ4rQSZ9HN6Ah7EgzwMw5J4kRLCL/faWnkL9e/hC/L91xLIQ5hWR2v8C2wiV7QAdo0BJTkeWZd0FVGz1VhxAkNMwaXaUXWFOsPEcILqD+/NdHW/1qJO0idABTNcGX9uVtXeu14D+pZrxIMeQ9NTjweDBDK9CSRHxo72a4BlHT5ydYIcqaWtEv5meHYXhsJn2PdT2m3OAA183kIM5FNNSlZLksPS0/gLNBys3OXKSiCNanzv9V2+x50DdpnwqOwpkYG1L0oYdqqhCJ/SK4jN/i3Qmt0A2SQT1QizpdjOVcZA+xkc2QfaSP+Afpkh0DqzDwDBeYRkh7l+IVfhiOwx5NfhzQidWkvFa761IDqRX4T63ZJ4UVfgQbDVV6+til9ysp8nDSSvqBDGCEKSKHS8WJl8szmQaQ7f3Mty6Nf/jZgmfOMccYrhqK4RZ5fnKhNbYeLSl+Ggq3ywJdPcnqN6c7cwrfFpt2QFRtkTHihHUiNxsEIq5zEnAqI0TLJ7r0zkydMOomPRnOu/M/onVUpqoNg5zr+1GQe3ArtNiafTo/Oc+J4unbgnG/Jt8i56xePMCKqFZYyrVJ0MsqDzKI3MFh+s3yn9cKxOccvkbBisHh1jVKpYTdDco9WZaOYAkQLNEkgBmmv3Ohl+XRP1bg0CQxLd4VqPX9OuhgVdnkChrCH0Del8ZsXfnbxzwB5u5Zf2/5BNfyZ3MgsVS+fWMWfDvyKpK+fsfjrbLZoKE3ya2PpLAG9d1N+SwxXleK8v8Jkfj74v5duJzu7Y+3eIKKEDczOWo+FbotVmkIGYalVf2V9SX1SxB06Kpws1grzLrgYDd08oeR9xt6xhhDfaNqpm6Wk7IjOYTGQB49SR3mzE+PS/2rpdwEa9rOfeijK/C1ZEPIREel96JEI3LEyVOQF3n+qJ5HpAMkf+Y1eF6Q4E4JNzASG94abknC9euyZwAAYJhaypfR5y9Ql5yEoZIWQV9ixXDsInlhCsK7phksj9j0CEbbCNomr+KDktrd9LBZ0I6RpSImCzPgx+Nd7AU8ye1/t6+ZxnvtOqH+gjqOFPMR8KtBKx5WP9Ke1EdXQGXcDMZR1RJHt2Um/CuY1AUXGbfEj3dGJQYn30KCodcOG2vXfPx06tcVjpiy9MHF+gDj/SaR8bRvH57sQXQ1XbWDJHKjtL1I2GSr8UmSgWKFxfa0nw/o3c7lTQycwRq8b3tRjP9xqxHyl8ZUdvnQqWWa9dhiVK37M2dTnIlymERBepB4FiPYD+3JmBa1IggmxvOLa6e5sEdaYEA0BhSrGjvvVg3OsZueC6YmKKfSND7qm0V1z4vHPvJF+KXhn3FwMYVP9WN4ECGWFbmnR8oVC8LgXQb/UXh+m44QOqAKQ/6HAj6Oa7+UnCr/+YWca3VugzuDxNbFdtdum/vTtX6Qc8XA6q33dhnPJTZEDGHPALT+Ux1W5YLiS0NqqGq9wNXR+x3FFg3Tn03nswDTB6xyk68PP0w5DcuyeM5cbvCYKlqAPNCiSbIgfRnZIWv3LHjv7dSRrlEMqYGwqZKxJw9h8hvyrZW3yotgNF7bzzMKhLVUK6fkHOXs6Yx2zkYN82hhHt3hy7Nh2wpIpMs+QIYlLCxQ0VyN8Qv7BFvJse9Q/t3RubS5Wub8+sUK+8PtXcs4iOTJvxBLMtOipBOFXQ9oex/Ypm2LgmUdwqtXipWIPuTaZr5yehcmxB4g8ivxIiBGUEDjAJiOuZTVvUQE5E5MQDRRrjYdfLjq986j3bUJMCC8Ncz/aEMzKtBJN2biE96CPf3dOB4Xhz4APGIsmnCl7sli1HrTYBZ2WHSGQH7pQtJiBvWFqR5rWQ50SUKYSBBVeZ9M9oA2mvDG/ZXoEtiP6tkKPzmm6VojJDev5FPF48U/I9xa1L9ASp18Um6d/h14Vp2aVggNt11oaJsM+Vvi1lAVXSsVKtovGgS7NAGuINu1Fc0pcOkM9pv1mDSnogCcK2DTL4k/r7cVsX24EVliTqxkuHJ2KCubqsO4zh68wplqZRS40ly6jMMoFCUMai8729vFarWEFgRXaMYIGIy4BPjQr8QSZImScRdQweHktqg+Bg0hx/yJYgO7zrVBTwvbs7sbJa25k4ZvSr1hQu+BTHt35zv0np/91wLfMxwFox1K6h1gGG6IVPUAFyaHrA7Eg99Wj09VrI6jSsNFR2JDT+XB4fK/EfJytivvRKLX8qyKdfSgIlvwIb+Mo7y1wyh8XBnAhgQB61eCTHiB9PqTEZ4TLQxu95pxW5S62FTtcKNDUAvwQUSpIfj8E8Q105pbPdAB1VPISCwOc7Vl9XWWy9dUpuehsPnjNcIXnoakgJbMNHy9nd9aGmaQbdj+JFwJiBfYaxQbpbD7p1+6sH+fJNTFNweA9tbzNTBJF1yfCuxZX05hvjpdUYpRwbwYJaXfVAPst5x0t9DsxHBYHG4bw4rWEN7gkrXriDilIlM79gxndsat8OjZK5gy89wRn0xgj6YLJILFEBfQHvE9q4sfxT7eL3IQ1ThbT9tFoI16CHZnvnxoVyk1Jbp8hC5Dkw48rpZksV99wC4pPz6tB7glCwzc7OIVbnc2aEgQNYg8MFKv9O4ocIm+3KD7wAI9pNYA+mEqru/rp3MNMKvtM0SbIG8Qw/yt6cHnq7FUaI8sKlAnWDbA1zUMmBRcoF1b+8ZJb+q3FGru36PAKT/gFpIb7WY51BL2NR80BgVBxQrcnda4GVpugOV6wh/oVYQYLRLKiFG9jZtnz/wyoiRChSsyNKdqNV8VHax2YwWTDgEnCiOsk5vPPhUYxaEf6a9ADCbR5VKw4sWL57cilE1uaSO9zEYO3raElIKjvMcJUqPkJxKTIaWmUD+ocDp4HicIhQcadTReqHukw1R0XNemaKBA/ayt/9eBT2ZUfXuXbWB8Me+Tavbj5ueovbmnWC3/FtDhb+nt67KUbxvWjTmKwDOo7hMtZ7tMoKtFOxBd/AESfaJdrtw8mZPkuukb4E4HuTHBWhcn90NzmvenT4JAhHkfyxRGnPnklUc/8cgptFeyy3n21/a4YXShQS5UfDkmKn75/PPS/UyfyAVAg6GB+S3dUdDmhJ3VukGNnE5kjNtM6y3lVPt568OD8pAJA0tjBgNqDNmiRpPpptf164mGEFME7obR3d5KAs6fT/6gmDWdd0yJ5Pv3QmoujD5tmUbbFNOURZp1k1WjKuwwgIqWGMBLIY+RcoXg3gxqMEp4zaen0cclwiQAGG1zxoCB1ep1U5KM3t+kjBSiwJDTiGnHVGWB+yGGMZo0uF/sxxFhyxXsZteJHsw/F1i9R03UDgmhegZ5SmJ0jhbWvPpYJ8DmLiYHrYB7imNYXl+hMzIDyD3C9TniJ91CFh37qIECTLIAucGUwKv/XROM2PWGFIt+qhuOo3GDoDvCzAFTIZ6qaU7TQPx4Jn8n2zPcQCvScntvJdtvfFuObaexo43BuCulZx76FrSYDptHiocOGuyhfgvvAMG13c6tzwLzwexBLerGvKoeU4MzNBlF+bXEVVsjJXQfoYA0lrqaRsxfhaFf30d0pZUWbXlyHk6teRZ92DeR+E+8YbDZzaJ+1EROG7hiTImj+tHlxgUvXqm11hyLPEYc6wpVV3lMRJGCcKtD9myFOWda8KfZ47WVOpKMLaQFK1PCTMrQc6c4xzI5zjdGSTRRtsFuHA2wW7SNOoITnqauCtzBJkT2Krd579ZsBEaxHmpIFdluDVP2iGvOlZ6L7PiNytTevcr6i2Ae67lPQ7cgAM8O2S/PM1yBfIbJScme93hLAEC+M5kO9Mr9p65wkLjR4H+8qZfEhTB9WCcG1Rp/IHaiJoWzUVt1/CQiuUYmeHanX4zk+t6sdxQQS9hcjSBsA62utTS61Bz1LrP96avgI/BODuqn6FnKzDdqdvQYSPqwb74RapDemQk6HFN9Q/4zTJ1FbSH7mKhYwjwtMhcIHAAAFiwlLVgE2XSxN2+i4SDObemTDQ+FLJO1YscUKCNJq4rEoq9Y4mj3FRJCpOfPQbv/A/dXGjcLPu9ljM7CXkjKPxTdj0rL9GRibFoEdNZptsvSHY55GztdfncamKtZxERz4J6wOb9GV8uK44acLNHM5TwwqH1rIICJykeWFvhhYpQ7IW2YquJ0yDq/lI5zHYiDJEOp9cmA4M6Arh919dRlIvfGEgv1I6rRAXjDeIovuz8lh5o8PPrOlapmesWCACFldVr24tmT1ALfc+0jINOk8n4bkESIpIcCida2/nptR9X6GIvzmDlHCYJS4LsPDLCXJtqSwlab3X1f4IP+AGqxCcsPZrSFOjg3UOBQQ+ZqSYkb/ZTpio2xQUzjApj+bb8Eq2FI1e9o7IFcqeYTZ8Re4iO8DJ4j9BjjoMeXG6i1REIhmPb125Nt90cxzwvDAq81+aZhqJ8vjU/fRDyFs3px+UGIU4GrM0MX+zgLTEx8LYUeji/IyZgwj3r7+tvP+isa++38WsVrqdS9DiyLmuaP5Hzia5Hj6g4BNJ3/+BYtbBJ7XtRoSvrVhuk666cjvnLmTj66mBdyaZ16MNVzFWnVzCzWI4uA4F2Us5pepNx5CBOj6DeAAeF/sWeCECuU2IwqQz4MPpzQPcU6+GlvFp3q4YLNyPONUyB+JvYpVgBkC8IzW8yK5GnF3JiRJyVv1582hdJomTqN7NKjRxuO4f7ZmvKt9eR9ahjhdeXdUggheodvWn6j248Vy15XSID08LPKZY6Bry25trhFwpNaENQVGOKkdepLClOayAFWwx36GSVtoUfNJUgRUw6ZPfDaYkaPSiXA//qmdvv/mu/dHs+TnGvs+Idf+5iaym9Z+O5of8j1vEzJeX5WBz5RQULgKAAIJbJ3sVS1l3t2XN4/uIXPYYXrmEL1zCF65hC9cwheuYQvXMIXrmEL1zCF65hC9cwlgebCwskW1vyZHab2Tb4TAm3gJynN1Vs4okPgZUJ7h07RgdkU9LaF65hC9cwheuYQvXMIXrmEL1zCF65hC9cwheuYQvXMIXrmEL1zCWB5hmCAAA==)
 
 tell me how to fully set the background agent up to benefit me the most given the complexity of my project by telling me what exactly to type and in which files for maximum performance. see ss regarding environment setup, runtime config, and validation
 
-
-
 ## Response:
+
 I will provide you with a comprehensive configuration for your Mystic Arcana background agent setup that optimizes for your spiritual technology platform's specific requirements.
 
 ## Dockerfile Configuration
@@ -2253,20 +2332,20 @@ pytz==2023.3
 Create `scripts/validate_spiritual_references.js`:
 
 ```javascript
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-console.log('Validating spiritual reference materials...');
+console.log("Validating spiritual reference materials...");
 
 const requiredFiles = [
-  'docs/benebell-wen-astrology-quick-reference-sheets.md',
-  'docs/learning-the-twelve-astrological-houses.md',
-  'docs/learning-the-twelve-astrological-signs.md'
+  "docs/benebell-wen-astrology-quick-reference-sheets.md",
+  "docs/learning-the-twelve-astrological-houses.md",
+  "docs/learning-the-twelve-astrological-signs.md",
 ];
 
 let allFilesPresent = true;
 
-requiredFiles.forEach(file => {
+requiredFiles.forEach((file) => {
   if (!fs.existsSync(file)) {
     console.error(`Missing required spiritual reference: ${file}`);
     allFilesPresent = false;
@@ -2276,11 +2355,13 @@ requiredFiles.forEach(file => {
 });
 
 if (!allFilesPresent) {
-  console.error('Some spiritual reference files are missing. Please convert PDFs to Markdown.');
+  console.error(
+    "Some spiritual reference files are missing. Please convert PDFs to Markdown.",
+  );
   process.exit(1);
 }
 
-console.log('All spiritual reference materials validated successfully.');
+console.log("All spiritual reference materials validated successfully.");
 ```
 
 Create `scripts/validate_ephemeris.py`:
@@ -2296,18 +2377,18 @@ def validate_ephemeris():
     try:
         # Set ephemeris path
         swe.set_ephe_path('/usr/share/swisseph:/home/ubuntu/data/ephemeris')
-        
+
         # Test basic planetary calculation
         julian_day = swe.julday(2024, 1, 1, 12.0)
         result = swe.calc_ut(julian_day, swe.SUN)
-        
+
         if result[1] == swe.OK:
             print(f"✓ Ephemeris validation successful. Sun position: {result[0][0]:.4f}°")
             return True
         else:
             print(f"✗ Ephemeris calculation failed: {result}")
             return False
-            
+
     except Exception as e:
         print(f"✗ Ephemeris validation error: {e}")
         return False
@@ -2346,40 +2427,40 @@ Add these scripts to your `package.json` to support background agent operations:
 Create `scripts/content_generation_monitor.js`:
 
 ```javascript
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-console.log('Starting spiritual content validation monitor...');
+console.log("Starting spiritual content validation monitor...");
 
 // Monitor for AI-generated content that needs validation
-const watchDirectories = ['src/app/api', 'src/app/components'];
+const watchDirectories = ["src/app/api", "src/app/components"];
 
 function validateSpiritualContent(filePath) {
-  if (!filePath.endsWith('.tsx') && !filePath.endsWith('.ts')) return;
-  
-  const content = fs.readFileSync(filePath, 'utf8');
-  
+  if (!filePath.endsWith(".tsx") && !filePath.endsWith(".ts")) return;
+
+  const content = fs.readFileSync(filePath, "utf8");
+
   // Check for potential cultural appropriation or insensitive content
-  const sensitiveTerms = ['chakra', 'karma', 'namaste', 'shaman'];
+  const sensitiveTerms = ["chakra", "karma", "namaste", "shaman"];
   const warnings = [];
-  
-  sensitiveTerms.forEach(term => {
+
+  sensitiveTerms.forEach((term) => {
     if (content.toLowerCase().includes(term)) {
       warnings.push(`Cultural sensitivity check needed for term: ${term}`);
     }
   });
-  
+
   if (warnings.length > 0) {
     console.log(`⚠️  ${filePath}:`);
-    warnings.forEach(warning => console.log(`   ${warning}`));
+    warnings.forEach((warning) => console.log(`   ${warning}`));
   }
 }
 
 // Initial validation of existing files
-watchDirectories.forEach(dir => {
+watchDirectories.forEach((dir) => {
   if (fs.existsSync(dir)) {
     const files = fs.readdirSync(dir, { recursive: true });
-    files.forEach(file => {
+    files.forEach((file) => {
       const fullPath = path.join(dir, file);
       if (fs.statSync(fullPath).isFile()) {
         validateSpiritualContent(fullPath);
@@ -2388,7 +2469,9 @@ watchDirectories.forEach(dir => {
   }
 });
 
-console.log('Spiritual content monitoring active. Cultural sensitivity validation in progress...');
+console.log(
+  "Spiritual content monitoring active. Cultural sensitivity validation in progress...",
+);
 ```
 
 ## Optimization Settings for Maximum Performance
@@ -2405,48 +2488,52 @@ This configuration establishes a robust development environment specifically opt
 
 The setup ensures background agents can work effectively on infrastructure and supporting features while maintaining the specialized requirements for accurate astronomical calculations and culturally sensitive spiritual content development that distinguish your Mystic Arcana platform.
 
-
-
 ## Prompt:
-Customize the system prompt used for context condensing. Leave empty to use the default prompt. 
+
+Customize the system prompt used for context condensing. Leave empty to use the default prompt.
 Current prompt: "Your task is to create a detailed summary of the conversation so far, paying close attention to the user's explicit requests and your previous actions.
 This summary should be thorough in capturing technical details, code patterns, and architectural decisions that would be essential for continuing with the conversation and supporting any continuing tasks.
 Your summary should be structured as follows:
 Context: The context to continue the conversation with. If applicable based on the current task, this should include:
-  1. Previous Conversation: High level details about what was discussed throughout the entire conversation with the user. This should be written to allow someone to be able to follow the general overarching conversation flow.
-  2. Current Work: Describe in detail what was being worked on prior to this request to summarize the conversation. Pay special attention to the more recent messages in the conversation.
-  3. Key Technical Concepts: List all important technical concepts, technologies, coding conventions, and frameworks discussed, which might be relevant for continuing with this work.
-  4. Relevant Files and Code: If applicable, enumerate specific files and code sections examined, modified, or created for the task continuation. Pay special attention to the most recent messages and changes.
-  5. Problem Solving: Document problems solved thus far and any ongoing troubleshooting efforts.
-  6. Pending Tasks and Next Steps: Outline all pending tasks that you have explicitly been asked to work on, as well as list the next steps you will take for all outstanding work, if applicable. Include code snippets where they add clarity. For any next steps, include direct quotes from the most recent conversation showing exactly what task you were working on and where you left off. This should be verbatim to ensure there's no information loss in context between tasks.
-Example summary structure:
-1. Previous Conversation:
-  [Detailed description]
-2. Current Work:
-  [Detailed description]
-3. Key Technical Concepts:
-  - [Concept 1]
-  - [Concept 2]
-  - [...]
+
+1. Previous Conversation: High level details about what was discussed throughout the entire conversation with the user. This should be written to allow someone to be able to follow the general overarching conversation flow.
+2. Current Work: Describe in detail what was being worked on prior to this request to summarize the conversation. Pay special attention to the more recent messages in the conversation.
+3. Key Technical Concepts: List all important technical concepts, technologies, coding conventions, and frameworks discussed, which might be relevant for continuing with this work.
+4. Relevant Files and Code: If applicable, enumerate specific files and code sections examined, modified, or created for the task continuation. Pay special attention to the most recent messages and changes.
+5. Problem Solving: Document problems solved thus far and any ongoing troubleshooting efforts.
+6. Pending Tasks and Next Steps: Outline all pending tasks that you have explicitly been asked to work on, as well as list the next steps you will take for all outstanding work, if applicable. Include code snippets where they add clarity. For any next steps, include direct quotes from the most recent conversation showing exactly what task you were working on and where you left off. This should be verbatim to ensure there's no information loss in context between tasks.
+   Example summary structure:
+7. Previous Conversation:
+   [Detailed description]
+8. Current Work:
+   [Detailed description]
+9. Key Technical Concepts:
+
+- [Concept 1]
+- [Concept 2]
+- [...]
+
 4. Relevant Files and Code:
-  - [File Name 1]
-	- [Summary of why this file is important]
-	- [Summary of the changes made to this file, if any]
-	- [Important Code Snippet]
-  - [File Name 2]
-	- [Important Code Snippet]
-  - [...]
+
+- [File Name 1]
+  - [Summary of why this file is important]
+  - [Summary of the changes made to this file, if any]
+  - [Important Code Snippet]
+- [File Name 2]
+  - [Important Code Snippet]
+- [...]
+
 5. Problem Solving:
-  [Detailed description]
+   [Detailed description]
 6. Pending Tasks and Next Steps:
-  - [Task 1 details & next steps]
-  - [Task 2 details & next steps]
-  - [...]
-Output only the summary of the conversation so far, without any additional commentary or explanation."
 
-
+- [Task 1 details & next steps]
+- [Task 2 details & next steps]
+- [...]
+  Output only the summary of the conversation so far, without any additional commentary or explanation."
 
 ## Response:
+
 Based on your Mystic Arcana spiritual technology platform requirements, here is a customized context condensing prompt that will preserve the specialized knowledge and technical nuances critical for your project:
 
 ```
@@ -2482,14 +2569,12 @@ Output only the comprehensive summary without additional commentary.
 
 This customized prompt ensures that context condensing maintains the specialized vocabulary, ethical considerations, and technical requirements specific to your spiritual technology platform, preventing loss of the nuanced understanding required for authentic spiritual guidance development.
 
-
-
 ## Prompt:
-are there any additional mcp servers from this site (https://github.com/modelcontextprotocol/servers)  I should enlist? What about a2a, autonomous agents, and through which platform can i be most effective with claude for developing mystic arcana? Is using an IDE the best option or is the terminal? I'm ready to begin coding and i want to make sure I tell Claude exactly what I need to and to be using the right platform so prep me for the first step which will be ui/ux.
 
-
+are there any additional mcp servers from this site (https://github.com/modelcontextprotocol/servers) I should enlist? What about a2a, autonomous agents, and through which platform can i be most effective with claude for developing mystic arcana? Is using an IDE the best option or is the terminal? I'm ready to begin coding and i want to make sure I tell Claude exactly what I need to and to be using the right platform so prep me for the first step which will be ui/ux.
 
 ## Response:
+
 ## Essential MCP Servers for Mystic Arcana Development
 
 After reviewing the Model Context Protocol servers repository, several servers will significantly enhance your spiritual technology development workflow. The **filesystem server** provides essential file management capabilities for your extensive spiritual reference documentation and project files. The **git server** enables sophisticated version control operations, particularly valuable for managing the complex branching strategy required for multi-brand development across Mystic Arcana, BirthdayGen, and EDM Shuffle.
@@ -2536,9 +2621,6 @@ Establish your component naming conventions that respect spiritual terminology w
 
 The combination of Cursor IDE, Claude Code integration, strategic MCP server utilization, and carefully bounded autonomous agent assistance creates an unprecedented development environment for spiritual technology. Your preparation and clear specification of requirements will determine how effectively this powerful toolset serves your vision of bridging ancient wisdom with modern technology.
 
-
-
-
-
 ---
+
 Powered by [Claude Exporter](https://www.claudexporter.com)

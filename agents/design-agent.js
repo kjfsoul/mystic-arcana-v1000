@@ -82,7 +82,7 @@ class DesignAgent {
       const execAsync = promisify(exec);
 
       await execAsync(
-        `node scripts/update-agent-log.js update-agent ${this.id} ${status} ${health}`
+        `node scripts/update-agent-log.js update-agent ${this.id} ${status} ${health}`,
       );
     } catch (error) {
       // Ignore if update script fails
@@ -100,19 +100,19 @@ class DesignAgent {
 
       if (analysis.success) {
         await this.log(
-          `Found ${analysis.analysis.components.length} components, ${analysis.analysis.pages.length} pages`
+          `Found ${analysis.analysis.components.length} components, ${analysis.analysis.pages.length} pages`,
         );
 
         // Check if we need common components
         const neededComponents = await this.identifyNeededComponents(
-          analysis.analysis
+          analysis.analysis,
         );
 
         if (neededComponents.length > 0) {
           await this.log(
             `Identified ${
               neededComponents.length
-            } needed components: ${neededComponents.join(", ")}`
+            } needed components: ${neededComponents.join(", ")}`,
           );
           await this.generateNeededComponents(neededComponents);
         }
@@ -137,7 +137,7 @@ class DesignAgent {
 
     for (const component of commonComponents) {
       const exists = analysis.components.some((file) =>
-        file.toLowerCase().includes(component.toLowerCase())
+        file.toLowerCase().includes(component.toLowerCase()),
       );
 
       if (!exists) {
@@ -163,7 +163,7 @@ class DesignAgent {
       } catch (error) {
         await this.log(
           `❌ Failed to generate ${componentName}: ${error.message}`,
-          "ERROR"
+          "ERROR",
         );
       }
     }
@@ -204,7 +204,7 @@ class DesignAgent {
         "src",
         "components",
         "generated",
-        componentName
+        componentName,
       );
       await fs.mkdir(componentDir, { recursive: true });
 
@@ -223,7 +223,7 @@ class DesignAgent {
         // Write styles file
         const stylesFile = path.join(
           componentDir,
-          `${componentName}.module.css`
+          `${componentName}.module.css`,
         );
         await fs.writeFile(stylesFile, componentResult.files.styles);
 
@@ -231,11 +231,11 @@ class DesignAgent {
         const indexFile = path.join(componentDir, "index.ts");
         await fs.writeFile(
           indexFile,
-          `export { default } from './${componentName}';\n`
+          `export { default } from './${componentName}';\n`,
         );
 
         await this.log(
-          `📁 Created files for ${componentName} in ${componentDir}`
+          `📁 Created files for ${componentName} in ${componentDir}`,
         );
       }
     } catch (error) {
@@ -254,7 +254,7 @@ class DesignAgent {
         await this.log(
           `Design system has ${
             Object.keys(colors.colors).length
-          } color categories`
+          } color categories`,
         );
 
         // Could add more sophisticated design system monitoring here
@@ -263,7 +263,7 @@ class DesignAgent {
     } catch (error) {
       await this.log(
         `Error monitoring design system: ${error.message}`,
-        "ERROR"
+        "ERROR",
       );
     }
   }
@@ -342,7 +342,7 @@ async function main() {
     default:
       console.log("🎨 Design Agent");
       console.log(
-        "Usage: node agents/design-agent.js [start|stop|status|check]"
+        "Usage: node agents/design-agent.js [start|stop|status|check]",
       );
       console.log("");
       console.log("Commands:");

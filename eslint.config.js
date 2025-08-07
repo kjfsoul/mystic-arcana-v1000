@@ -1,7 +1,7 @@
-import js from '@eslint/js';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import js from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsparser from "@typescript-eslint/parser";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 
 export default [
   {
@@ -240,4 +240,3 @@ export default [
     },
   },
 ];
-    

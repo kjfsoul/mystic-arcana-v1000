@@ -23,7 +23,7 @@
   );
   backdrop-filter: blur(20px) saturate(180%);
   border-right: 2px solid rgba(138, 43, 226, 0.3);
-  box-shadow: 
+  box-shadow:
     inset 0 0 40px rgba(138, 43, 226, 0.1),
     0 20px 60px rgba(0, 0, 0, 0.4);
   z-index: 999;
@@ -172,7 +172,7 @@
 }
 
 .checkboxItem::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -204,7 +204,7 @@
     rgba(255, 215, 0, 0.2) 100%
   );
   border-color: rgba(138, 43, 226, 0.5);
-  box-shadow: 
+  box-shadow:
     inset 0 0 20px rgba(138, 43, 226, 0.2),
     0 4px 12px rgba(138, 43, 226, 0.1);
 }
@@ -338,29 +338,29 @@
     width: 90vw;
     max-width: 400px;
   }
-  
+
   .sidebarHeader {
     padding: 1rem;
   }
-  
+
   .sidebarTitle {
     font-size: 1.1rem;
   }
-  
+
   .sidebarContent {
     padding: 0.75rem;
   }
-  
+
   .checkboxItem,
   .toggleItem {
     padding: 0.625rem;
   }
-  
+
   .checkboxEmoji,
   .toggleEmoji {
     font-size: 1rem;
   }
-  
+
   .checkboxLabel,
   .toggleLabel {
     font-size: 0.8rem;

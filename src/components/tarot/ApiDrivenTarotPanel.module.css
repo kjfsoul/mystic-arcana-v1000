@@ -399,21 +399,21 @@
     padding: 1rem;
     margin: 1rem;
   }
-  
+
   .spreadOptions {
     grid-template-columns: 1fr;
   }
-  
+
   .cardsLayout.threeCard {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .cardsLayout.celticCross {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .tarotCard {
     width: 150px;
     height: 225px;

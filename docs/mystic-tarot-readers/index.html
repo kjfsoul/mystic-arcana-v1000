@@ -1,170 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mystical Tarot Reading Experience</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <h1>Mystical Tarot Reading Experience</h1>
-            <div class="user-controls">
-                <button id="audio-toggle" class="btn btn--secondary">🔊 Audio On</button>
-                <div class="reading-counter">
-                    <span id="session-count">Session: 1</span>
-                </div>
+      <!-- Header -->
+      <header class="header">
+        <h1>Mystical Tarot Reading Experience</h1>
+        <div class="user-controls">
+          <button id="audio-toggle" class="btn btn--secondary">
+            🔊 Audio On
+          </button>
+          <div class="reading-counter">
+            <span id="session-count">Session: 1</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Persona Selection -->
+        <section id="persona-selection" class="persona-selection">
+          <h2>Choose Your Mystical Guide</h2>
+          <div class="persona-grid">
+            <div class="persona-card" data-persona="luna">
+              <div class="persona-avatar luna-avatar">🌙</div>
+              <h3>Luna the Mystic</h3>
+              <p>Ethereal cosmic wisdom flowing like moonbeams</p>
+              <div class="persona-stats">
+                <span class="stat">127 Sessions</span>
+                <span class="stat">89% Positive</span>
+              </div>
+              <div class="evolution-badge">Deepening Intuitive Connections</div>
+              <button class="btn btn--primary persona-btn">Choose Luna</button>
             </div>
-        </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Persona Selection -->
-            <section id="persona-selection" class="persona-selection">
-                <h2>Choose Your Mystical Guide</h2>
-                <div class="persona-grid">
-                    <div class="persona-card" data-persona="luna">
-                        <div class="persona-avatar luna-avatar">🌙</div>
-                        <h3>Luna the Mystic</h3>
-                        <p>Ethereal cosmic wisdom flowing like moonbeams</p>
-                        <div class="persona-stats">
-                            <span class="stat">127 Sessions</span>
-                            <span class="stat">89% Positive</span>
-                        </div>
-                        <div class="evolution-badge">Deepening Intuitive Connections</div>
-                        <button class="btn btn--primary persona-btn">Choose Luna</button>
-                    </div>
-                    
-                    <div class="persona-card" data-persona="sage">
-                        <div class="persona-avatar sage-avatar">📚</div>
-                        <h3>Sage the Scholar</h3>
-                        <p>Ancient wisdom grounded in tarot tradition</p>
-                        <div class="persona-stats">
-                            <span class="stat">156 Sessions</span>
-                            <span class="stat">94% Positive</span>
-                        </div>
-                        <div class="evolution-badge">Integrating Modern Perspectives</div>
-                        <button class="btn btn--primary persona-btn">Choose Sage</button>
-                    </div>
-                    
-                    <div class="persona-card" data-persona="river">
-                        <div class="persona-avatar river-avatar">🌊</div>
-                        <h3>River the Empath</h3>
-                        <p>Gentle healing energy flowing like water</p>
-                        <div class="persona-stats">
-                            <span class="stat">203 Sessions</span>
-                            <span class="stat">97% Positive</span>
-                        </div>
-                        <div class="evolution-badge">Developing Deeper Emotional Resonance</div>
-                        <button class="btn btn--primary persona-btn">Choose River</button>
-                    </div>
-                    
-                    <div class="persona-card" data-persona="phoenix">
-                        <div class="persona-avatar phoenix-avatar">🔥</div>
-                        <h3>Phoenix the Transformer</h3>
-                        <p>Fiery energy of transformation and rebirth</p>
-                        <div class="persona-stats">
-                            <span class="stat">98 Sessions</span>
-                            <span class="stat">91% Positive</span>
-                        </div>
-                        <div class="evolution-badge">Balancing Intensity with Compassion</div>
-                        <button class="btn btn--primary persona-btn">Choose Phoenix</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Reading Interface -->
-            <section id="reading-interface" class="reading-interface hidden">
-                <div class="reading-header">
-                    <div class="selected-persona">
-                        <span id="current-persona-name">Luna the Mystic</span>
-                        <button id="change-persona" class="btn btn--outline btn--sm">Change Guide</button>
-                    </div>
-                    <div class="audio-controls">
-                        <button id="play-intro" class="btn btn--secondary btn--sm">🎵 Hear Introduction</button>
-                        <div id="audio-indicator" class="audio-indicator hidden">
-                            <span>Speaking...</span>
-                            <div class="audio-waves">
-                                <div class="wave"></div>
-                                <div class="wave"></div>
-                                <div class="wave"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Spread Selection -->
-                <div class="spread-selection">
-                    <h3>Choose Your Reading Spread</h3>
-                    <div class="spread-options">
-                        <button class="spread-btn" data-spread="three_card">Past, Present, Future</button>
-                        <button class="spread-btn" data-spread="celtic_cross">Celtic Cross</button>
-                        <button class="spread-btn" data-spread="relationship">Relationship Reading</button>
-                        <button class="spread-btn" data-spread="decision">Decision Making</button>
-                    </div>
-                </div>
-
-                <!-- Card Interface -->
-                <div id="card-interface" class="card-interface hidden">
-                    <div class="deck-area">
-                        <div class="deck-container">
-                            <div id="deck-pile" class="deck-pile">
-                                <div class="card-back">🔮</div>
-                                <div class="deck-label">Tap to shuffle and draw</div>
-                            </div>
-                            <button id="shuffle-btn" class="btn btn--primary">Shuffle Cards</button>
-                        </div>
-                    </div>
-
-                    <div class="spread-area">
-                        <div id="card-positions" class="card-positions"></div>
-                    </div>
-                </div>
-
-                <!-- Interpretation Area -->
-                <div id="interpretation-area" class="interpretation-area hidden">
-                    <div class="interpretation-header">
-                        <h3>Your Reading</h3>
-                        <div class="interpretation-controls">
-                            <button id="read-aloud" class="btn btn--secondary">🔊 Read Aloud</button>
-                            <button id="save-reading" class="btn btn--outline">💾 Save Reading</button>
-                        </div>
-                    </div>
-                    <div id="interpretation-content" class="interpretation-content"></div>
-                    
-                    <!-- Feedback -->
-                    <div class="feedback-section">
-                        <h4>How accurate was this reading?</h4>
-                        <div class="feedback-buttons">
-                            <button class="feedback-btn" data-rating="1">Not Helpful</button>
-                            <button class="feedback-btn" data-rating="2">Somewhat Helpful</button>
-                            <button class="feedback-btn" data-rating="3">Very Helpful</button>
-                            <button class="feedback-btn" data-rating="4">Incredibly Insightful</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="evolution-stats">
-                        <h4>Persona Evolution</h4>
-                        <div id="evolution-display" class="evolution-display"></div>
-                    </div>
-                    <div class="footer-controls">
-                        <button id="new-reading" class="btn btn--primary">New Reading</button>
-                        <button id="view-history" class="btn btn--outline">View History</button>
-                    </div>
-                </div>
+            <div class="persona-card" data-persona="sage">
+              <div class="persona-avatar sage-avatar">📚</div>
+              <h3>Sage the Scholar</h3>
+              <p>Ancient wisdom grounded in tarot tradition</p>
+              <div class="persona-stats">
+                <span class="stat">156 Sessions</span>
+                <span class="stat">94% Positive</span>
+              </div>
+              <div class="evolution-badge">Integrating Modern Perspectives</div>
+              <button class="btn btn--primary persona-btn">Choose Sage</button>
             </div>
-        </footer>
+
+            <div class="persona-card" data-persona="river">
+              <div class="persona-avatar river-avatar">🌊</div>
+              <h3>River the Empath</h3>
+              <p>Gentle healing energy flowing like water</p>
+              <div class="persona-stats">
+                <span class="stat">203 Sessions</span>
+                <span class="stat">97% Positive</span>
+              </div>
+              <div class="evolution-badge">
+                Developing Deeper Emotional Resonance
+              </div>
+              <button class="btn btn--primary persona-btn">Choose River</button>
+            </div>
+
+            <div class="persona-card" data-persona="phoenix">
+              <div class="persona-avatar phoenix-avatar">🔥</div>
+              <h3>Phoenix the Transformer</h3>
+              <p>Fiery energy of transformation and rebirth</p>
+              <div class="persona-stats">
+                <span class="stat">98 Sessions</span>
+                <span class="stat">91% Positive</span>
+              </div>
+              <div class="evolution-badge">
+                Balancing Intensity with Compassion
+              </div>
+              <button class="btn btn--primary persona-btn">
+                Choose Phoenix
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reading Interface -->
+        <section id="reading-interface" class="reading-interface hidden">
+          <div class="reading-header">
+            <div class="selected-persona">
+              <span id="current-persona-name">Luna the Mystic</span>
+              <button id="change-persona" class="btn btn--outline btn--sm">
+                Change Guide
+              </button>
+            </div>
+            <div class="audio-controls">
+              <button id="play-intro" class="btn btn--secondary btn--sm">
+                🎵 Hear Introduction
+              </button>
+              <div id="audio-indicator" class="audio-indicator hidden">
+                <span>Speaking...</span>
+                <div class="audio-waves">
+                  <div class="wave"></div>
+                  <div class="wave"></div>
+                  <div class="wave"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spread Selection -->
+          <div class="spread-selection">
+            <h3>Choose Your Reading Spread</h3>
+            <div class="spread-options">
+              <button class="spread-btn" data-spread="three_card">
+                Past, Present, Future
+              </button>
+              <button class="spread-btn" data-spread="celtic_cross">
+                Celtic Cross
+              </button>
+              <button class="spread-btn" data-spread="relationship">
+                Relationship Reading
+              </button>
+              <button class="spread-btn" data-spread="decision">
+                Decision Making
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Interface -->
+          <div id="card-interface" class="card-interface hidden">
+            <div class="deck-area">
+              <div class="deck-container">
+                <div id="deck-pile" class="deck-pile">
+                  <div class="card-back">🔮</div>
+                  <div class="deck-label">Tap to shuffle and draw</div>
+                </div>
+                <button id="shuffle-btn" class="btn btn--primary">
+                  Shuffle Cards
+                </button>
+              </div>
+            </div>
+
+            <div class="spread-area">
+              <div id="card-positions" class="card-positions"></div>
+            </div>
+          </div>
+
+          <!-- Interpretation Area -->
+          <div id="interpretation-area" class="interpretation-area hidden">
+            <div class="interpretation-header">
+              <h3>Your Reading</h3>
+              <div class="interpretation-controls">
+                <button id="read-aloud" class="btn btn--secondary">
+                  🔊 Read Aloud
+                </button>
+                <button id="save-reading" class="btn btn--outline">
+                  💾 Save Reading
+                </button>
+              </div>
+            </div>
+            <div
+              id="interpretation-content"
+              class="interpretation-content"
+            ></div>
+
+            <!-- Feedback -->
+            <div class="feedback-section">
+              <h4>How accurate was this reading?</h4>
+              <div class="feedback-buttons">
+                <button class="feedback-btn" data-rating="1">
+                  Not Helpful
+                </button>
+                <button class="feedback-btn" data-rating="2">
+                  Somewhat Helpful
+                </button>
+                <button class="feedback-btn" data-rating="3">
+                  Very Helpful
+                </button>
+                <button class="feedback-btn" data-rating="4">
+                  Incredibly Insightful
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="evolution-stats">
+              <h4>Persona Evolution</h4>
+              <div id="evolution-display" class="evolution-display"></div>
+            </div>
+            <div class="footer-controls">
+              <button id="new-reading" class="btn btn--primary">
+                New Reading
+              </button>
+              <button id="view-history" class="btn btn--outline">
+                View History
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

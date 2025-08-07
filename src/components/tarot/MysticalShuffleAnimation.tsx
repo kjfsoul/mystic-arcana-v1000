@@ -1,15 +1,15 @@
-'use client';
- 
-import React, { useState, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshCw } from 'lucide-react';
+"use client";
+
+import React, { useState, useCallback, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { RefreshCw } from "lucide-react";
 interface MysticalShuffleAnimationProps {
   onShuffleComplete?: () => void;
   onShuffleStart?: () => void;
   isShuffling: boolean;
   onTriggerShuffle?: () => void;
   className?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }
 interface StarParticle {
   id: number;
@@ -19,13 +19,15 @@ interface StarParticle {
   duration: number;
   size: number;
 }
-export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> = ({
+export const MysticalShuffleAnimation: React.FC<
+  MysticalShuffleAnimationProps
+> = ({
   onShuffleComplete,
   onShuffleStart,
   isShuffling,
   onTriggerShuffle,
-  className = '',
-  size = 'medium',
+  className = "",
+  size = "medium",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [starParticles, setStarParticles] = useState<StarParticle[]>([]);
@@ -33,24 +35,24 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
   // Size configurations
   const sizeConfig = {
     small: {
-      deck: 'w-16 h-20',
+      deck: "w-16 h-20",
       radius: 60,
-      icon: 'w-8 h-8',
+      icon: "w-8 h-8",
     },
     medium: {
-      deck: 'w-20 h-24',
+      deck: "w-20 h-24",
       radius: 80,
-      icon: 'w-10 h-10',
+      icon: "w-10 h-10",
     },
     large: {
-      deck: 'w-24 h-28',
+      deck: "w-24 h-28",
       radius: 100,
-      icon: 'w-12 h-12',
+      icon: "w-12 h-12",
     },
   };
   const config = sizeConfig[size];
   // Generate star particles
- 
+
   const generateStars = useCallback(() => {
     const stars: StarParticle[] = [];
     for (let i = 0; i < 15; i++) {
@@ -68,37 +70,43 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
     setStarParticles(stars);
   }, []);
   // Play shuffle sound
- 
+
   const playShuffleSound = useCallback(() => {
     try {
-      const audio = new Audio('/sounds/card-shuffle.mp3');
+      const audio = new Audio("/sounds/card-shuffle.mp3");
       audio.volume = 0.3;
       audio.play().catch(() => {
         // Fallback sound generation
         const audioContext = new AudioContext();
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
-        
+
         oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.3);
+        oscillator.frequency.exponentialRampToValueAtTime(
+          100,
+          audioContext.currentTime + 0.3,
+        );
         gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-        
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.01,
+          audioContext.currentTime + 0.3,
+        );
+
         oscillator.start();
         oscillator.stop(audioContext.currentTime + 0.3);
       });
     } catch {
-      console.log('Sound playback not available');
+      console.log("Sound playback not available");
     }
   }, []);
   // Handle shuffle trigger
- 
+
   const handleShuffle = useCallback(() => {
     if (isShuffling) return;
-    
+
     generateStars();
     playShuffleSound();
     onShuffleStart?.();
@@ -109,9 +117,16 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
       setTimeout(() => setShowFlash(false), 300);
       onShuffleComplete?.();
     }, 2500);
-  }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateStars, playShuffleSound]);
+  }, [
+    isShuffling,
+    onShuffleStart,
+    onTriggerShuffle,
+    onShuffleComplete,
+    generateStars,
+    playShuffleSound,
+  ]);
   // Clear particles when shuffling ends
- 
+
   useEffect(() => {
     if (!isShuffling) {
       const timer = setTimeout(() => setStarParticles([]), 500);
@@ -128,24 +143,26 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
         onClick={handleShuffle}
         whileTap={{ scale: 0.95 }}
         style={{
-          background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)',
-          border: '2px solid rgba(139, 92, 246, 0.3)',
-          boxShadow: isHovered || isShuffling 
-            ? '0 0 30px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)'
-            : '0 0 15px rgba(139, 92, 246, 0.3)',
+          background:
+            "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)",
+          border: "2px solid rgba(139, 92, 246, 0.3)",
+          boxShadow:
+            isHovered || isShuffling
+              ? "0 0 30px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)"
+              : "0 0 15px rgba(139, 92, 246, 0.3)",
         }}
         animate={{
           boxShadow: isShuffling
             ? [
-                '0 0 15px rgba(139, 92, 246, 0.3)',
-                '0 0 40px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.4)',
-                '0 0 60px rgba(255, 107, 107, 0.6), inset 0 0 40px rgba(76, 205, 196, 0.3)',
-                '0 0 40px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.4)',
-                '0 0 15px rgba(139, 92, 246, 0.3)',
+                "0 0 15px rgba(139, 92, 246, 0.3)",
+                "0 0 40px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.4)",
+                "0 0 60px rgba(255, 107, 107, 0.6), inset 0 0 40px rgba(76, 205, 196, 0.3)",
+                "0 0 40px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(139, 92, 246, 0.4)",
+                "0 0 15px rgba(139, 92, 246, 0.3)",
               ]
             : isHovered
-            ? '0 0 30px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)'
-            : '0 0 15px rgba(139, 92, 246, 0.3)',
+              ? "0 0 30px rgba(139, 92, 246, 0.6), inset 0 0 20px rgba(251, 191, 36, 0.2)"
+              : "0 0 15px rgba(139, 92, 246, 0.3)",
         }}
         transition={{
           duration: isShuffling ? 2.5 : 0.3,
@@ -167,18 +184,22 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
             animate={{
-              rotate: isShuffling ? [0, 360, 720, 1080] : isHovered ? [0, 5, -5, 0] : 0,
+              rotate: isShuffling
+                ? [0, 360, 720, 1080]
+                : isHovered
+                  ? [0, 5, -5, 0]
+                  : 0,
               scale: isHovered ? 1.1 : 1,
             }}
             transition={{
               duration: isShuffling ? 2.5 : isHovered ? 0.5 : 0.3,
-              ease: isShuffling ? 'easeInOut' : 'easeOut',
+              ease: isShuffling ? "easeInOut" : "easeOut",
             }}
           >
-            <RefreshCw 
+            <RefreshCw
               className={`${config.icon} text-yellow-300 drop-shadow-lg`}
               style={{
-                filter: 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.8))',
+                filter: "drop-shadow(0 0 8px rgba(251, 191, 36, 0.8))",
               }}
             />
           </motion.div>
@@ -192,22 +213,26 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
                   key={i}
                   className="absolute w-4 h-6 bg-gradient-to-br from-purple-600 to-blue-700 rounded-sm border border-yellow-300"
                   style={{
-                    top: '50%',
-                    left: '50%',
-                    marginTop: '-12px',
-                    marginLeft: '-8px',
-                    boxShadow: '0 0 8px rgba(251, 191, 36, 0.6)',
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-8px",
+                    boxShadow: "0 0 8px rgba(251, 191, 36, 0.6)",
                   }}
-                  initial={{ 
-                    x: 0, 
-                    y: 0, 
-                    rotate: 0, 
+                  initial={{
+                    x: 0,
+                    y: 0,
+                    rotate: 0,
                     scale: 0.8,
                     opacity: 0,
                   }}
                   animate={{
-                    x: Math.cos((i * 360 / 8) * Math.PI / 180) * config.radius,
-                    y: Math.sin((i * 360 / 8) * Math.PI / 180) * config.radius,
+                    x:
+                      Math.cos((((i * 360) / 8) * Math.PI) / 180) *
+                      config.radius,
+                    y:
+                      Math.sin((((i * 360) / 8) * Math.PI) / 180) *
+                      config.radius,
                     rotate: [0, 180, 360, 540],
                     scale: [0.8, 1.2, 1, 0.8],
                     opacity: [0, 1, 1, 0],
@@ -215,7 +240,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
                   transition={{
                     duration: 2.5,
                     delay: i * 0.1,
-                    ease: 'easeInOut',
+                    ease: "easeInOut",
                   }}
                 />
               ))}
@@ -229,8 +254,8 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
               key={particle.id}
               className="absolute pointer-events-none"
               style={{
-                top: '50%',
-                left: '50%',
+                top: "50%",
+                left: "50%",
                 width: `${particle.size}px`,
                 height: `${particle.size}px`,
                 marginTop: `-${particle.size / 2}px`,
@@ -255,24 +280,26 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
               transition={{
                 duration: particle.duration,
                 delay: particle.delay,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
               {/* Star shape */}
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'radial-gradient(circle, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.8) 30%, transparent 70%)',
-                  borderRadius: '50%',
-                  filter: 'blur(1px)',
+                  background:
+                    "radial-gradient(circle, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.8) 30%, transparent 70%)",
+                  borderRadius: "50%",
+                  filter: "blur(1px)",
                 }}
               />
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%)',
-                  borderRadius: '50%',
-                  transform: 'scale(0.6)',
+                  background:
+                    "radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%)",
+                  borderRadius: "50%",
+                  transform: "scale(0.6)",
                 }}
               />
             </motion.div>
@@ -299,7 +326,7 @@ export const MysticalShuffleAnimation: React.FC<MysticalShuffleAnimationProps> =
           animate={{ opacity: isHovered ? 1 : 0.6 }}
           transition={{ duration: 0.2 }}
         >
-          {isHovered ? 'Click to shuffle!' : 'Hover to see magic ✨'}
+          {isHovered ? "Click to shuffle!" : "Hover to see magic ✨"}
         </motion.div>
       )}
       {/* Shuffling indicator */}

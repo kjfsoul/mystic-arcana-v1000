@@ -5,6 +5,7 @@ A scalable backend system that replaces hardcoded tarot card arrays with a dynam
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - Supabase account (free tier works)
 - Environment variables configured
@@ -12,6 +13,7 @@ A scalable backend system that replaces hardcoded tarot card arrays with a dynam
 ### Setup
 
 1. **Clone and install dependencies**
+
    ```bash
    git clone <repository>
    cd mystic-arcana-v1000
@@ -19,6 +21,7 @@ A scalable backend system that replaces hardcoded tarot card arrays with a dynam
    ```
 
 2. **Configure environment**
+
    ```bash
    cp .env.local.example .env.local
    # Edit .env.local with your Supabase credentials
@@ -30,6 +33,7 @@ A scalable backend system that replaces hardcoded tarot card arrays with a dynam
    ```
 
 That's it! The setup script will:
+
 - ✅ Verify your environment configuration
 - ✅ Test database connectivity
 - ✅ Seed the database with 78 Rider-Waite cards
@@ -39,30 +43,37 @@ That's it! The setup script will:
 ## 🎯 What This Replaces
 
 **Before (Hardcoded):**
+
 ```typescript
-import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
+import { RIDER_WAITE_DECK } from "./RiderWaiteDeck";
 const cards = RIDER_WAITE_DECK; // Static array of 78 cards
 ```
 
 **After (API-Driven):**
+
 ```typescript
-const response = await fetch('/api/tarot/deck/00000000-0000-0000-0000-000000000001');
+const response = await fetch(
+  "/api/tarot/deck/00000000-0000-0000-0000-000000000001",
+);
 const { cards } = await response.json(); // Dynamic from database
 ```
 
 ## 🏗️ Architecture
 
 ### Database Schema
+
 - **`decks`** table: Stores tarot deck metadata
 - **`cards`** table: Stores individual card data with meanings, images, keywords
 - **Row Level Security**: Public read access, admin-only writes
 
 ### API Endpoints
+
 - **`GET /api/tarot/deck/[deckId]`**: Fetch all cards for a deck
 - Returns transformed data matching frontend `TarotCardData` interface
 - Includes deck info, cards array, and statistics
 
 ### Data Flow
+
 ```
 Database → API Endpoint → Data Transformation → Frontend Components
 ```
@@ -70,6 +81,7 @@ Database → API Endpoint → Data Transformation → Frontend Components
 ## 📊 Features
 
 ### ✅ Complete Rider-Waite Deck
+
 - 22 Major Arcana cards (The Fool to The World)
 - 56 Minor Arcana cards (4 suits × 14 cards each)
 - Upright and reversed meanings
@@ -77,18 +89,21 @@ Database → API Endpoint → Data Transformation → Frontend Components
 - Image URLs for all cards
 
 ### ✅ Performance Optimized
+
 - Single database query fetches all deck data
 - Response caching headers (1 hour cache)
 - Efficient database indexes
 - Response time logging
 
 ### ✅ Error Handling
+
 - Comprehensive error messages with codes
 - Request/response logging
 - Graceful fallbacks
 - Detailed error context
 
 ### ✅ Type Safety
+
 - Full TypeScript support
 - Database types auto-generated
 - Frontend interface compatibility
@@ -97,11 +112,13 @@ Database → API Endpoint → Data Transformation → Frontend Components
 ## 🧪 Testing
 
 ### Automated Tests
+
 ```bash
 npm run test:tarot
 ```
 
 Tests verify:
+
 - Database connectivity
 - Deck existence (Rider-Waite)
 - Card count (should be 78)
@@ -109,6 +126,7 @@ Tests verify:
 - Data transformation accuracy
 
 ### Manual Testing
+
 ```bash
 # Start development server
 npm run dev
@@ -119,16 +137,18 @@ curl "http://localhost:3000/api/tarot/deck/00000000-0000-0000-0000-000000000001"
 
 ## 🔧 Scripts
 
-| Script | Purpose |
-|--------|---------|
+| Script                | Purpose                  |
+| --------------------- | ------------------------ |
 | `npm run setup:tarot` | Complete automated setup |
-| `npm run seed:tarot` | Seed database with cards |
-| `npm run test:tarot` | Run verification tests |
+| `npm run seed:tarot`  | Seed database with cards |
+| `npm run test:tarot`  | Run verification tests   |
 
 ## 📈 Scalability
 
 ### Multiple Deck Support
+
 The system supports unlimited tarot decks:
+
 ```sql
 -- Add new deck
 INSERT INTO decks (name, description) VALUES ('Thoth Tarot', 'Crowley deck');
@@ -138,6 +158,7 @@ INSERT INTO cards (deck_id, name, ...) VALUES (new_deck_id, ...);
 ```
 
 ### Future Enhancements
+
 - 🔮 Deck management API (CRUD operations)
 - 🎨 Image upload and management
 - 👤 User-created custom decks
@@ -155,6 +176,7 @@ INSERT INTO cards (deck_id, name, ...) VALUES (new_deck_id, ...);
 ## 🚨 Troubleshooting
 
 ### Environment Issues
+
 ```bash
 # Check if .env.local exists and has required variables
 cat .env.local
@@ -164,6 +186,7 @@ npm run test:tarot
 ```
 
 ### Database Issues
+
 ```bash
 # Check if tables exist
 npx supabase db push
@@ -173,6 +196,7 @@ npm run seed:tarot
 ```
 
 ### API Issues
+
 ```bash
 # Check development server logs
 npm run dev
@@ -190,12 +214,14 @@ curl -v "http://localhost:3000/api/tarot/deck/00000000-0000-0000-0000-0000000000
 ## 🤝 Contributing
 
 ### Adding New Decks
+
 1. Insert deck record in `decks` table
 2. Add cards with proper `deck_id` reference
 3. Update tests to include new deck
 4. Document the new deck
 
 ### Modifying Card Data
+
 1. Update via database (preserves data integrity)
 2. Use admin client for bulk operations
 3. Test changes with `npm run test:tarot`

@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .header {
@@ -17,7 +17,7 @@
   margin: 0 0 8px 0;
   font-size: 32px;
   font-weight: 700;
-  background: linear-gradient(45deg, #FFD700, #FFA500);
+  background: linear-gradient(45deg, #ffd700, #ffa500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -40,9 +40,9 @@
 .settingsButton {
   padding: 12px 24px;
   background: rgba(255, 215, 0, 0.1);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 8px;
-  color: #FFD700;
+  color: #ffd700;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -69,14 +69,14 @@
 
 .indicator.real {
   background: rgba(0, 255, 127, 0.1);
-  border: 1px solid #00FF7F;
-  color: #00FF7F;
+  border: 1px solid #00ff7f;
+  color: #00ff7f;
 }
 
 .indicator.decorative {
   background: rgba(255, 165, 0, 0.1);
-  border: 1px solid #FFA500;
-  color: #FFA500;
+  border: 1px solid #ffa500;
+  color: #ffa500;
 }
 
 .settingsPanel {
@@ -123,7 +123,7 @@
 .infoPanel h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .infoGrid {
@@ -150,7 +150,7 @@
 
 .starInfo {
   background: rgba(0, 0, 0, 0.9);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 8px;
   padding: 16px;
   backdrop-filter: blur(10px);
@@ -159,7 +159,7 @@
 .starInfo h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .starDetails {
@@ -187,9 +187,9 @@
   width: 100%;
   padding: 8px;
   background: rgba(255, 215, 0, 0.1);
-  border: 1px solid #FFD700;
+  border: 1px solid #ffd700;
   border-radius: 4px;
-  color: #FFD700;
+  color: #ffd700;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -208,7 +208,7 @@
   text-align: center;
   margin: 0 0 32px 0;
   font-size: 24px;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .comparisonGrid {
@@ -229,7 +229,7 @@
 .comparisonItem h3 {
   margin: 0 0 16px 0;
   font-size: 18px;
-  color: #87CEEB;
+  color: #87ceeb;
 }
 
 .comparisonItem ul {
@@ -268,7 +268,7 @@
 }
 
 .disclaimer {
-  color: #FFA500 !important;
+  color: #ffa500 !important;
   font-style: italic;
 }
 
@@ -277,23 +277,23 @@
   .header h1 {
     font-size: 24px;
   }
-  
+
   .headerControls {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .infoOverlay {
     position: static;
     max-width: none;
     margin: 16px;
   }
-  
+
   .comparisonGrid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .mainDisplay {
     height: 50vh;
   }

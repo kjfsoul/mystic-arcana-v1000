@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Star, Clock, Target, Compass, Sparkles } from 'lucide-react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Star, Clock, Target, Compass, Sparkles } from "lucide-react";
 // TODO: Implement ReaderPersona integration
 // import { ReaderPersona } from '@/types/ReaderPersona';
-import { ORION_PERSONA } from '@/agents/readers/orion';
+import { ORION_PERSONA } from "@/agents/readers/orion";
 
 interface OrionCardProps {
   onSelect?: () => void;
@@ -18,24 +18,26 @@ export const OrionCard: React.FC<OrionCardProps> = ({
   onSelect,
   isSelected = false,
   showDetails = false,
-  className = ''
+  className = "",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const persona = ORION_PERSONA;
 
   const specialtyIcons = [
-    { icon: Target, label: 'Career Guidance', color: 'text-blue-400' },
-    { icon: Clock, label: 'Cosmic Timing', color: 'text-purple-400' },
-    { icon: Compass, label: 'Life Purpose', color: 'text-indigo-400' },
-    { icon: Star, label: 'Birth Charts', color: 'text-cyan-400' }
+    { icon: Target, label: "Career Guidance", color: "text-blue-400" },
+    { icon: Clock, label: "Cosmic Timing", color: "text-purple-400" },
+    { icon: Compass, label: "Life Purpose", color: "text-indigo-400" },
+    { icon: Star, label: "Birth Charts", color: "text-cyan-400" },
   ];
 
   return (
     <motion.div
       className={`relative p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer
-                  ${isSelected 
-                    ? 'border-blue-400 bg-gradient-to-br from-blue-900/30 to-indigo-900/30 shadow-lg shadow-blue-500/20' 
-                    : 'border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:border-blue-500/50'}
+                  ${
+                    isSelected
+                      ? "border-blue-400 bg-gradient-to-br from-blue-900/30 to-indigo-900/30 shadow-lg shadow-blue-500/20"
+                      : "border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:border-blue-500/50"
+                  }
                   backdrop-blur-md ${className}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -133,14 +135,16 @@ export const OrionCard: React.FC<OrionCardProps> = ({
 
       {/* Expertise Tags */}
       <div className="flex flex-wrap gap-1 mb-4">
-        {persona.expertise.astrology?.specializations.slice(0, 4).map((specialty) => (
-          <span
-            key={specialty}
-            className="px-2 py-1 text-xs bg-blue-900/30 text-blue-200 rounded-full border border-blue-700/30"
-          >
-            {specialty}
-          </span>
-        ))}
+        {persona.expertise.astrology?.specializations
+          .slice(0, 4)
+          .map((specialty) => (
+            <span
+              key={specialty}
+              className="px-2 py-1 text-xs bg-blue-900/30 text-blue-200 rounded-full border border-blue-700/30"
+            >
+              {specialty}
+            </span>
+          ))}
       </div>
 
       {/* Sample Reading Preview */}
@@ -148,7 +152,7 @@ export const OrionCard: React.FC<OrionCardProps> = ({
         <motion.div
           className="border-t border-slate-600 pt-4"
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
+          animate={{ opacity: 1, height: "auto" }}
           transition={{ duration: 0.3 }}
         >
           <div className="text-xs text-slate-400 mb-2">Sample Guidance</div>

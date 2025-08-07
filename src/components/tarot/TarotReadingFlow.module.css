@@ -40,8 +40,13 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .deckContainer {
@@ -71,7 +76,7 @@
 }
 
 .deckCard::before {
-  content: '✨';
+  content: "✨";
   font-size: 2rem;
   color: #9370db;
 }
@@ -167,20 +172,29 @@
 }
 
 .glowButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transform: rotate(45deg);
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .errorContainer {
@@ -200,23 +214,23 @@
   .container {
     padding: 1rem 0.5rem;
   }
-  
+
   .phaseTitle {
     font-size: 1.5rem;
   }
-  
+
   .phaseDescription {
     font-size: 1rem;
   }
-  
+
   .cardsGrid {
     gap: 1rem;
   }
-  
+
   .cutDeckContainer {
     gap: 1rem;
   }
-  
+
   .deckHalf {
     width: 60px;
     height: 90px;

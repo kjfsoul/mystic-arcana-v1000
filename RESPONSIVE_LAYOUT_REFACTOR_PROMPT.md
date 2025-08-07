@@ -10,24 +10,26 @@ The current Mystic Arcana project has **4 different layout implementations** cau
 
 1. **`src/app/page.tsx`** - Main entry point with "Cosmic Lobby" design
 2. **`src/components/layout/ThreePanelLayout.tsx`** - Original 3-panel layout
-3. **`src/components/layout/EnhancedHomepage.tsx`** - Enhanced homepage variant  
+3. **`src/components/layout/EnhancedHomepage.tsx`** - Enhanced homepage variant
 4. **`src/components/layout/RefactoredHomepage.tsx`** - Refactored 2-panel design
 
 The layout works on desktop (three columns) but fails on mobile, causing panels to be squished or cut off. The desired behavior is a three-column grid on large screens (`lg` breakpoint and up) that collapses into a single-column vertical stack on smaller screens (mobile).
 
 **Current Issues:**
+
 - Multiple layout systems create maintenance complexity
 - Mobile users experience cut-off content and poor UX
 - Panel components don't adapt properly to screen size
 - Touch interactions are not optimized for mobile
 
 **Key Files Involved:**
+
 - `src/app/page.tsx` (main entry point)
 - `src/app/page.module.css` (main styles)
 - `src/components/panels/TarotZonePreview.tsx`
 - `src/components/panels/AstrologyZonePreview.tsx`
 - `src/components/cosmic/CelestialEventsCarousel.tsx`
-</context>
+  </context>
 
 <workflow>
 This is a refactoring task. I will provide the existing code structure, and you will provide the updated, responsive version that consolidates the layout systems and fixes mobile responsiveness.
@@ -99,6 +101,7 @@ const CosmicLobby: React.FC<CosmicLobbyProps> = ({ onEnterTarot, onEnterAstrolog
 ```
 
 **Required Responsive Pattern:**
+
 ```css
 /* Target Layout Behavior */
 Mobile (default):   [Panel 1]     /* Single column stack */
@@ -109,8 +112,9 @@ Desktop (lg+):      [Panel 1] [Panel 2] [Panel 3]  /* Three columns */
 ```
 
 **Responsive Classes to Use:**
+
 - `grid-cols-1 lg:grid-cols-3` - Single column mobile, three columns desktop
-- `gap-4 lg:gap-8` - Smaller gaps on mobile, larger on desktop  
+- `gap-4 lg:gap-8` - Smaller gaps on mobile, larger on desktop
 - `p-4 lg:p-8` - Less padding on mobile, more on desktop
 - `space-y-4 lg:space-y-0` - Vertical spacing on mobile, none on desktop
 

@@ -24,6 +24,7 @@
 **Result**: FAILED - Found multiple conditional gates preventing display
 
 #### Critical Issue #1: State Variable Control
+
 ```typescript
 // Line 156 in UnifiedTarotPanelV2.tsx
 const [showSophia, setShowSophia] = useState(true);
@@ -39,6 +40,7 @@ const [showSophia, setShowSophia] = useState(true);
 **Problem**: The `showSophia` state defaults to `true` but can be modified elsewhere, causing intermittent visibility.
 
 #### Critical Issue #2: VirtualReaderDisplay Internal Logic
+
 ```typescript
 // In VirtualReaderDisplay.tsx - Lines 75-91
 useEffect(() => {
@@ -47,7 +49,7 @@ useEffect(() => {
       // Guest users see level 1
       setEngagementData({
         currentLevel: 1,
-        levelName: 'Guest User',
+        levelName: "Guest User",
         // ...
       });
       setIsLoading(false);
@@ -62,6 +64,7 @@ useEffect(() => {
 **Problem**: Component has complex loading states and authentication dependencies that may cause render delays.
 
 #### Critical Issue #3: Image Loading Failures
+
 ```typescript
 // Lines 218-239 in VirtualReaderDisplay.tsx
 {!imageError ? (
@@ -80,6 +83,7 @@ useEffect(() => {
 ### 🔍 COMPONENT STATE FLOW ANALYSIS
 
 **Initialization Sequence**:
+
 1. `showSophia` starts as `true` ✅
 2. `VirtualReaderDisplay` mounts with `isLoading: true` ⚠️
 3. `loadEngagementData()` executes async ⚠️
@@ -90,6 +94,7 @@ useEffect(() => {
 8. If image fails: shows fallback text display ⚠️
 
 **Test Detection Issues**:
+
 - Loading spinner during initial render (Lines 163-173)
 - Potential async timing issues with engagement data loading
 - Missing image assets causing fallback rendering
@@ -100,12 +105,15 @@ useEffect(() => {
 ## IDENTIFIED ROOT CAUSES
 
 ### PRIMARY CAUSE: Missing Image Assets
+
 The component expects images at `/images/readers/sophia/level_*.png` but these don't exist in the repository.
 
 ### SECONDARY CAUSE: Async Loading Race Condition
+
 The automated tests run quickly and may capture the component during its loading state before the full UI renders.
 
 ### TERTIARY CAUSE: Test Selector Inadequacy
+
 Test selectors in `sophia-integration.spec.ts` don't account for the loading states and fallback rendering.
 
 ---
@@ -122,16 +130,19 @@ Test selectors in `sophia-integration.spec.ts` don't account for the loading sta
 ## RECOMMENDED FIXES
 
 ### IMMEDIATE (Critical)
+
 1. **Add missing image assets** or **modify component to work without images**
 2. **Update test selectors** to account for loading states and fallback content
 3. **Add data-testid attributes** to VirtualReaderDisplay for reliable test detection
 
-### MEDIUM (Important)  
+### MEDIUM (Important)
+
 1. **Add loading state handling** in tests with proper wait conditions
 2. **Implement error boundary** for PersonaLearner failures
 3. **Add development logging** to track component render states
 
 ### LONG-TERM (Enhancement)
+
 1. **Simplify conditional rendering logic** to reduce failure points
 2. **Add proper fallback assets** for all reader levels
 3. **Implement comprehensive component testing** with mock states
@@ -191,7 +202,7 @@ case 'tarot':
 
 Sophia should only appear during tarot readings, not on the main hub. The automated tests need to:
 
-1. Navigate to tarot view: Click "Enter the Tarot Realm" 
+1. Navigate to tarot view: Click "Enter the Tarot Realm"
 2. Then look for Sophia virtual reader
 3. Test the actual user flow, not incorrect assumptions
 

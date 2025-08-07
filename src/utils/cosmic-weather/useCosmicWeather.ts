@@ -1,5 +1,4 @@
- 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 interface CosmicWeatherData {
   moonPhase: string;
   moonSign: string;
@@ -8,14 +7,14 @@ interface CosmicWeatherData {
   planetaryHour: string;
   nextHourTime: string;
   retrogradeAlert?: string;
-  cosmicIntensity: 'calm' | 'active' | 'intense';
+  cosmicIntensity: "calm" | "active" | "intense";
 }
 interface Transit {
   planet: string;
   aspect: string;
   natalPlanet: string;
   orb: number;
-  influence: 'harmonious' | 'challenging' | 'neutral';
+  influence: "harmonious" | "challenging" | "neutral";
 }
 interface CosmicInfluence {
   currentPhase: string;
@@ -25,10 +24,10 @@ interface CosmicInfluence {
 }
 /**
  * useCosmicWeather Hook
- * 
+ *
  * Provides real-time cosmic weather data including moon phases,
  * planetary positions, and astrological influences for readings.
- * 
+ *
  * Features:
  * - Real-time moon phase calculations
  * - Planetary hour tracking
@@ -38,42 +37,48 @@ interface CosmicInfluence {
  */
 export const useCosmicWeather = () => {
   const [cosmicWeather, setCosmicWeather] = useState<CosmicWeatherData>({
-    moonPhase: 'Waxing Crescent',
-    moonSign: 'Moon in Cancer',
-    currentPhase: 'Building Energy',
-    planetaryAlignment: 'Mercury trine Jupiter',
-    planetaryHour: 'Venus',
-    nextHourTime: '3:42 PM',
-    cosmicIntensity: 'active'
+    moonPhase: "Waxing Crescent",
+    moonSign: "Moon in Cancer",
+    currentPhase: "Building Energy",
+    planetaryAlignment: "Mercury trine Jupiter",
+    planetaryHour: "Venus",
+    nextHourTime: "3:42 PM",
+    cosmicIntensity: "active",
   });
   const [currentTransits] = useState<Transit[]>([
     {
-      planet: 'Mars',
-      aspect: 'conjunct',
-      natalPlanet: 'Sun',
+      planet: "Mars",
+      aspect: "conjunct",
+      natalPlanet: "Sun",
       orb: 1.5,
-      influence: 'neutral'
+      influence: "neutral",
     },
     {
-      planet: 'Venus',
-      aspect: 'trine',
-      natalPlanet: 'Moon',
+      planet: "Venus",
+      aspect: "trine",
+      natalPlanet: "Moon",
       orb: 0.8,
-      influence: 'harmonious'
-    }
+      influence: "harmonious",
+    },
   ]);
   const [cosmicInfluence] = useState<CosmicInfluence>({
-    currentPhase: 'Manifestation Window',
-    planetaryAlignment: 'Favorable for new beginnings',
-    favorableFor: ['Romance', 'Creative Projects', 'Spiritual Work'],
-    challengingFor: ['Major Decisions', 'Confrontations']
+    currentPhase: "Manifestation Window",
+    planetaryAlignment: "Favorable for new beginnings",
+    favorableFor: ["Romance", "Creative Projects", "Spiritual Work"],
+    challengingFor: ["Major Decisions", "Confrontations"],
   });
   // Calculate moon phase based on current date
- 
+
   const calculateMoonPhase = useCallback(() => {
     const phases = [
-      'New Moon', 'Waxing Crescent', 'First Quarter', 'Waxing Gibbous',
-      'Full Moon', 'Waning Gibbous', 'Last Quarter', 'Waning Crescent'
+      "New Moon",
+      "Waxing Crescent",
+      "First Quarter",
+      "Waxing Gibbous",
+      "Full Moon",
+      "Waning Gibbous",
+      "Last Quarter",
+      "Waning Crescent",
     ];
     // Simplified moon phase calculation (would use precise ephemeris in production)
     const date = new Date();
@@ -97,9 +102,17 @@ export const useCosmicWeather = () => {
     return phases[phaseIndex];
   }, []);
   // Calculate current planetary hour
- 
+
   const calculatePlanetaryHour = useCallback(() => {
-    const planets = ['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'];
+    const planets = [
+      "Saturn",
+      "Jupiter",
+      "Mars",
+      "Sun",
+      "Venus",
+      "Mercury",
+      "Moon",
+    ];
     const dayOfWeek = new Date().getDay();
     const hour = new Date().getHours();
     // Simplified planetary hour calculation
@@ -107,7 +120,7 @@ export const useCosmicWeather = () => {
     return planets[planetIndex];
   }, []);
   // Update cosmic weather data
- 
+
   const updateCosmicWeather = useCallback(() => {
     const moonPhase = calculateMoonPhase();
     const planetaryHour = calculatePlanetaryHour();
@@ -115,17 +128,17 @@ export const useCosmicWeather = () => {
     const nextHour = new Date();
     nextHour.setHours(nextHour.getHours() + 1, 0, 0, 0);
     const nextHourTime = nextHour.toLocaleTimeString([], {
-      hour: 'numeric',
-      minute: '2-digit'
+      hour: "numeric",
+      minute: "2-digit",
     });
     // Determine cosmic intensity based on current aspects
-    let cosmicIntensity: 'calm' | 'active' | 'intense' = 'active';
-    if (moonPhase === 'Full Moon' || moonPhase === 'New Moon') {
-      cosmicIntensity = 'intense';
-    } else if (moonPhase === 'First Quarter' || moonPhase === 'Last Quarter') {
-      cosmicIntensity = 'active';
+    let cosmicIntensity: "calm" | "active" | "intense" = "active";
+    if (moonPhase === "Full Moon" || moonPhase === "New Moon") {
+      cosmicIntensity = "intense";
+    } else if (moonPhase === "First Quarter" || moonPhase === "Last Quarter") {
+      cosmicIntensity = "active";
     } else {
-      cosmicIntensity = 'calm';
+      cosmicIntensity = "calm";
     }
     setCosmicWeather({
       moonPhase,
@@ -135,36 +148,48 @@ export const useCosmicWeather = () => {
       planetaryHour,
       nextHourTime,
       retrogradeAlert: checkRetrogrades(),
-      cosmicIntensity
+      cosmicIntensity,
     });
   }, [calculateMoonPhase, calculatePlanetaryHour]);
   // Helper functions (would use real ephemeris data in production)
   const getMoonSign = () => {
-    const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+    const signs = [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces",
+    ];
     const dayOfMonth = new Date().getDate();
     return `Moon in ${signs[dayOfMonth % 12]}`;
   };
   const getPhaseDescription = (phase: string): string => {
     const descriptions: Record<string, string> = {
-      'New Moon': 'New Beginnings & Intention Setting',
-      'Waxing Crescent': 'Building Energy & Taking Action',
-      'First Quarter': 'Decision Point & Challenges',
-      'Waxing Gibbous': 'Refinement & Adjustment',
-      'Full Moon': 'Culmination & Release',
-      'Waning Gibbous': 'Gratitude & Sharing',
-      'Last Quarter': 'Release & Forgiveness',
-      'Waning Crescent': 'Rest & Reflection'
+      "New Moon": "New Beginnings & Intention Setting",
+      "Waxing Crescent": "Building Energy & Taking Action",
+      "First Quarter": "Decision Point & Challenges",
+      "Waxing Gibbous": "Refinement & Adjustment",
+      "Full Moon": "Culmination & Release",
+      "Waning Gibbous": "Gratitude & Sharing",
+      "Last Quarter": "Release & Forgiveness",
+      "Waning Crescent": "Rest & Reflection",
     };
-    return descriptions[phase] || 'Cosmic Flow';
+    return descriptions[phase] || "Cosmic Flow";
   };
   const getCurrentAlignment = () => {
     const alignments = [
-      'Sun conjunct Mercury - Clear Communication',
-      'Venus trine Jupiter - Abundance & Joy',
-      'Mars square Saturn - Patience Required',
-      'Mercury sextile Uranus - Innovative Ideas',
-      'Moon opposite Neptune - Heightened Intuition'
+      "Sun conjunct Mercury - Clear Communication",
+      "Venus trine Jupiter - Abundance & Joy",
+      "Mars square Saturn - Patience Required",
+      "Mercury sextile Uranus - Innovative Ideas",
+      "Moon opposite Neptune - Heightened Intuition",
     ];
     const hour = new Date().getHours();
     return alignments[hour % alignments.length];
@@ -173,40 +198,40 @@ export const useCosmicWeather = () => {
     // Simplified retrograde check (would use ephemeris)
     const month = new Date().getMonth();
     if (month % 4 === 0) {
-      return 'Mercury Retrograde - Review & Revise';
+      return "Mercury Retrograde - Review & Revise";
     }
     return undefined;
   };
   // Get tarot timing recommendations
- 
+
   const getTarotTiming = useCallback(() => {
     const { moonPhase, planetaryHour, cosmicIntensity } = cosmicWeather;
     const timing = {
       optimal: false,
-      reason: '',
-      alternatives: [] as string[]
+      reason: "",
+      alternatives: [] as string[],
     };
     // Check if current time is optimal for readings
-    if (moonPhase === 'Full Moon' || moonPhase === 'New Moon') {
+    if (moonPhase === "Full Moon" || moonPhase === "New Moon") {
       timing.optimal = true;
-      timing.reason = 'Powerful lunar energy enhances intuition';
-    } else if (planetaryHour === 'Moon' || planetaryHour === 'Venus') {
+      timing.reason = "Powerful lunar energy enhances intuition";
+    } else if (planetaryHour === "Moon" || planetaryHour === "Venus") {
       timing.optimal = true;
       timing.reason = `${planetaryHour} hour favors emotional and spiritual insights`;
-    } else if (cosmicIntensity === 'calm') {
+    } else if (cosmicIntensity === "calm") {
       timing.optimal = true;
-      timing.reason = 'Calm cosmic weather allows clear reception';
+      timing.reason = "Calm cosmic weather allows clear reception";
     } else {
       timing.alternatives = [
-        'Wait for Moon or Venus hour',
-        'Ground yourself with meditation first',
-        'Focus on specific questions rather than general readings'
+        "Wait for Moon or Venus hour",
+        "Ground yourself with meditation first",
+        "Focus on specific questions rather than general readings",
       ];
     }
     return timing;
   }, [cosmicWeather]);
   // Initialize and update periodically
- 
+
   useEffect(() => {
     updateCosmicWeather();
     // Update every 5 minutes
@@ -218,6 +243,6 @@ export const useCosmicWeather = () => {
     currentTransits,
     cosmicInfluence,
     updateCosmicWeather,
-    getTarotTiming
+    getTarotTiming,
   };
 };

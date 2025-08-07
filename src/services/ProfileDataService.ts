@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client';
+import { supabase } from "@/lib/supabase/client";
 export interface ProfileData {
   birthDate?: string;
   birthTime?: string;
@@ -21,9 +21,9 @@ class ProfileDataServiceClass {
   private constructor() {
     // Initialize auth state change listener
     supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session?.user) {
+      if (event === "SIGNED_IN" && session?.user) {
         this.loadProfile(session.user.id);
-      } else if (event === 'SIGNED_OUT') {
+      } else if (event === "SIGNED_OUT") {
         this.clearCache();
       }
     });
@@ -40,12 +40,14 @@ class ProfileDataServiceClass {
   async loadProfile(userId: string): Promise<ProfileData | null> {
     try {
       const { data, error } = await supabase
-        .from('user_profiles')
-        .select('birth_date, birth_time, birth_location, birth_coordinates, preferred_tarot_reader, timezone')
-        .eq('user_id', userId)
+        .from("user_profiles")
+        .select(
+          "birth_date, birth_time, birth_location, birth_coordinates, preferred_tarot_reader, timezone",
+        )
+        .eq("user_id", userId)
         .single();
       if (error) {
-        console.error('Error loading profile:', error);
+        console.error("Error loading profile:", error);
         return null;
       }
       const profile: ProfileData = {
@@ -54,18 +56,18 @@ class ProfileDataServiceClass {
         birthLocation: data?.birth_location,
         birthCoordinates: data?.birth_coordinates,
         preferredTarotReader: data?.preferred_tarot_reader,
-        timezone: data?.timezone
+        timezone: data?.timezone,
       };
       this.cachedProfile = profile;
       this.notifyListeners(profile);
-      
+
       // Store in localStorage for offline access
       this.saveToLocalStorage(profile);
-      
+
       return profile;
     } catch (error) {
-      console.error('Failed to load profile:', error);
-      
+      console.error("Failed to load profile:", error);
+
       // Try to load from localStorage as fallback
       return this.loadFromLocalStorage();
     }
@@ -73,7 +75,10 @@ class ProfileDataServiceClass {
   /**
    * Save profile data
    */
-  async saveProfile(userId: string, data: Partial<ProfileData>): Promise<boolean> {
+  async saveProfile(
+    userId: string,
+    data: Partial<ProfileData>,
+  ): Promise<boolean> {
     try {
       const updates = {
         user_id: userId,
@@ -83,13 +88,13 @@ class ProfileDataServiceClass {
         birth_coordinates: data.birthCoordinates,
         preferred_tarot_reader: data.preferredTarotReader,
         timezone: data.timezone,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
       const { error } = await supabase
-        .from('user_profiles')
-        .upsert(updates, { onConflict: 'user_id' });
+        .from("user_profiles")
+        .upsert(updates, { onConflict: "user_id" });
       if (error) {
-        console.error('Error saving profile:', error);
+        console.error("Error saving profile:", error);
         return false;
       }
       // Update cache
@@ -98,7 +103,7 @@ class ProfileDataServiceClass {
       this.saveToLocalStorage(this.cachedProfile);
       return true;
     } catch (error) {
-      console.error('Failed to save profile:', error);
+      console.error("Failed to save profile:", error);
       return false;
     }
   }
@@ -109,7 +114,7 @@ class ProfileDataServiceClass {
     if (this.cachedProfile) {
       return this.cachedProfile;
     }
-    
+
     // Try localStorage as fallback
     return this.loadFromLocalStorage();
   }
@@ -118,12 +123,12 @@ class ProfileDataServiceClass {
    */
   subscribe(callback: (profile: ProfileData) => void): () => void {
     this.listeners.add(callback);
-    
+
     // Immediately call with current data if available
     if (this.cachedProfile) {
       callback(this.cachedProfile);
     }
-    
+
     // Return unsubscribe function
     return () => {
       this.listeners.delete(callback);
@@ -140,19 +145,23 @@ class ProfileDataServiceClass {
     preferredTarotReader?: string;
   } {
     const profile = this.getProfile();
-    
+
     return {
       birthDate: profile?.birthDate,
       birthTime: profile?.birthTime,
       birthLocation: profile?.birthLocation,
       birthCoordinates: profile?.birthCoordinates,
-      preferredTarotReader: profile?.preferredTarotReader
+      preferredTarotReader: profile?.preferredTarotReader,
     };
   }
   /**
    * Update specific field
    */
-  async updateField(userId: string, field: keyof ProfileData, value: any): Promise<boolean> {
+  async updateField(
+    userId: string,
+    field: keyof ProfileData,
+    value: any,
+  ): Promise<boolean> {
     const updates = { [field]: value };
     return this.saveProfile(userId, updates);
   }
@@ -161,18 +170,18 @@ class ProfileDataServiceClass {
    */
   private clearCache(): void {
     this.cachedProfile = null;
-    localStorage.removeItem('mystic_arcana_profile');
+    localStorage.removeItem("mystic_arcana_profile");
     this.notifyListeners({});
   }
   /**
    * Notify all listeners
    */
   private notifyListeners(profile: ProfileData): void {
-    this.listeners.forEach(callback => {
+    this.listeners.forEach((callback) => {
       try {
         callback(profile);
       } catch (error) {
-        console.error('Profile listener error:', error);
+        console.error("Profile listener error:", error);
       }
     });
   }
@@ -181,9 +190,9 @@ class ProfileDataServiceClass {
    */
   private saveToLocalStorage(profile: ProfileData): void {
     try {
-      localStorage.setItem('mystic_arcana_profile', JSON.stringify(profile));
+      localStorage.setItem("mystic_arcana_profile", JSON.stringify(profile));
     } catch (error) {
-      console.error('Failed to save profile to localStorage:', error);
+      console.error("Failed to save profile to localStorage:", error);
     }
   }
   /**
@@ -191,12 +200,12 @@ class ProfileDataServiceClass {
    */
   private loadFromLocalStorage(): ProfileData | null {
     try {
-      const stored = localStorage.getItem('mystic_arcana_profile');
+      const stored = localStorage.getItem("mystic_arcana_profile");
       if (stored) {
         return JSON.parse(stored);
       }
     } catch (error) {
-      console.error('Failed to load profile from localStorage:', error);
+      console.error("Failed to load profile from localStorage:", error);
     }
     return null;
   }
@@ -205,8 +214,8 @@ class ProfileDataServiceClass {
    */
   formatBirthDateTime(): string {
     const profile = this.getProfile();
-    if (!profile?.birthDate) return '';
-    
+    if (!profile?.birthDate) return "";
+
     let result = profile.birthDate;
     if (profile.birthTime) {
       result += ` at ${profile.birthTime}`;
@@ -214,7 +223,7 @@ class ProfileDataServiceClass {
     if (profile.birthLocation) {
       result += ` in ${profile.birthLocation}`;
     }
-    
+
     return result;
   }
 }

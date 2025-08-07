@@ -1,8 +1,8 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 // import { Card } from '@ag-ui/core';
-import { RenderConfig, CalculationConfig } from '../../../types/astronomical';
-import styles from './AstronomicalSettings.module.css';
+import { RenderConfig, CalculationConfig } from "../../../types/astronomical";
+import styles from "./AstronomicalSettings.module.css";
 interface AstronomicalSettingsProps {
   className?: string;
   onSettingsChange?: (settings: {
@@ -13,48 +13,58 @@ interface AstronomicalSettingsProps {
 }
 /**
  * AstronomicalSettings Component
- * 
+ *
  * Provides user controls for astronomical accuracy and rendering options.
  * Allows switching between decorative and real star fields.
  */
 export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
-  className = '',
-  onSettingsChange
+  className = "",
+  onSettingsChange,
 }) => {
   const [useRealStars, setUseRealStars] = useState(false);
   const [renderConfig, setRenderConfig] = useState<RenderConfig>({
-    starCatalog: 'hipparcos',
+    starCatalog: "hipparcos",
     maxStars: 25000,
     minMagnitude: 5.5,
     showConstellations: true,
     showPlanets: true,
     showDeepSky: false,
-    coordinateSystem: 'horizontal',
-    projection: 'stereographic'
+    coordinateSystem: "horizontal",
+    projection: "stereographic",
   });
-  const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>({
-    ephemerisAccuracy: 'medium',
-    updateInterval: 1000,
-    precessionCorrection: true,
-    nutationCorrection: true,
-    aberrationCorrection: true,
-    refractionCorrection: true
-  });
-  const handleSettingChange = (newSettings: Partial<{
-    useRealStars: boolean;
-    renderConfig: Partial<RenderConfig>;
-    calculationConfig: Partial<CalculationConfig>;
-  }>) => {
+  const [calculationConfig, setCalculationConfig] = useState<CalculationConfig>(
+    {
+      ephemerisAccuracy: "medium",
+      updateInterval: 1000,
+      precessionCorrection: true,
+      nutationCorrection: true,
+      aberrationCorrection: true,
+      refractionCorrection: true,
+    },
+  );
+  const handleSettingChange = (
+    newSettings: Partial<{
+      useRealStars: boolean;
+      renderConfig: Partial<RenderConfig>;
+      calculationConfig: Partial<CalculationConfig>;
+    }>,
+  ) => {
     const updatedUseRealStars = newSettings.useRealStars ?? useRealStars;
-    const updatedRenderConfig = { ...renderConfig, ...newSettings.renderConfig };
-    const updatedCalculationConfig = { ...calculationConfig, ...newSettings.calculationConfig };
+    const updatedRenderConfig = {
+      ...renderConfig,
+      ...newSettings.renderConfig,
+    };
+    const updatedCalculationConfig = {
+      ...calculationConfig,
+      ...newSettings.calculationConfig,
+    };
     setUseRealStars(updatedUseRealStars);
     setRenderConfig(updatedRenderConfig);
     setCalculationConfig(updatedCalculationConfig);
     onSettingsChange?.({
       useRealStars: updatedUseRealStars,
       renderConfig: updatedRenderConfig,
-      calculationConfig: updatedCalculationConfig
+      calculationConfig: updatedCalculationConfig,
     });
   };
   return (
@@ -70,12 +80,18 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
             <input
               type="checkbox"
               checked={useRealStars}
-              onChange={(e) => handleSettingChange({ useRealStars: e.target.checked })}
+              onChange={(e) =>
+                handleSettingChange({ useRealStars: e.target.checked })
+              }
             />
             <span className={styles.slider}></span>
             <div className={styles.toggleLabel}>
               <strong>Real Astronomical Data</strong>
-              <p>{useRealStars ? 'Using factual star positions' : 'Using decorative star field'}</p>
+              <p>
+                {useRealStars
+                  ? "Using factual star positions"
+                  : "Using decorative star field"}
+              </p>
             </div>
           </label>
         </div>
@@ -87,9 +103,16 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
             <h4>Star Catalog</h4>
             <select
               value={renderConfig.starCatalog}
-              onChange={(e) => handleSettingChange({
-                renderConfig: { starCatalog: e.target.value as 'hipparcos' | 'yale' | 'gaia' }
-              })}
+              onChange={(e) =>
+                handleSettingChange({
+                  renderConfig: {
+                    starCatalog: e.target.value as
+                      | "hipparcos"
+                      | "yale"
+                      | "gaia",
+                  },
+                })
+              }
               className={styles.select}
             >
               <option value="hipparcos">Hipparcos (118,000 stars)</option>
@@ -108,9 +131,11 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                   max="100000"
                   step="1000"
                   value={renderConfig.maxStars}
-                  onChange={(e) => handleSettingChange({
-                    renderConfig: { maxStars: parseInt(e.target.value) }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      renderConfig: { maxStars: parseInt(e.target.value) },
+                    })
+                  }
                   className={styles.slider}
                 />
               </label>
@@ -124,9 +149,13 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                   max="8.0"
                   step="0.1"
                   value={renderConfig.minMagnitude}
-                  onChange={(e) => handleSettingChange({
-                    renderConfig: { minMagnitude: parseFloat(e.target.value) }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      renderConfig: {
+                        minMagnitude: parseFloat(e.target.value),
+                      },
+                    })
+                  }
                   className={styles.slider}
                 />
               </label>
@@ -139,9 +168,11 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={renderConfig.showConstellations}
-                  onChange={(e) => handleSettingChange({
-                    renderConfig: { showConstellations: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      renderConfig: { showConstellations: e.target.checked },
+                    })
+                  }
                 />
                 Show Constellation Lines
               </label>
@@ -149,9 +180,11 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={renderConfig.showPlanets}
-                  onChange={(e) => handleSettingChange({
-                    renderConfig: { showPlanets: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      renderConfig: { showPlanets: e.target.checked },
+                    })
+                  }
                 />
                 Show Planets
               </label>
@@ -159,9 +192,11 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={renderConfig.showDeepSky}
-                  onChange={(e) => handleSettingChange({
-                    renderConfig: { showDeepSky: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      renderConfig: { showDeepSky: e.target.checked },
+                    })
+                  }
                 />
                 Show Deep Sky Objects
               </label>
@@ -171,9 +206,17 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
             <h4>Calculation Accuracy</h4>
             <select
               value={calculationConfig.ephemerisAccuracy}
-              onChange={(e) => handleSettingChange({
-                calculationConfig: { ephemerisAccuracy: e.target.value as 'low' | 'medium' | 'high' | 'ultra' }
-              })}
+              onChange={(e) =>
+                handleSettingChange({
+                  calculationConfig: {
+                    ephemerisAccuracy: e.target.value as
+                      | "low"
+                      | "medium"
+                      | "high"
+                      | "ultra",
+                  },
+                })
+              }
               className={styles.select}
             >
               <option value="low">Low (Fast, ±1 arcminute)</option>
@@ -189,9 +232,13 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={calculationConfig.precessionCorrection}
-                  onChange={(e) => handleSettingChange({
-                    calculationConfig: { precessionCorrection: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      calculationConfig: {
+                        precessionCorrection: e.target.checked,
+                      },
+                    })
+                  }
                 />
                 Precession Correction
               </label>
@@ -199,9 +246,13 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={calculationConfig.nutationCorrection}
-                  onChange={(e) => handleSettingChange({
-                    calculationConfig: { nutationCorrection: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      calculationConfig: {
+                        nutationCorrection: e.target.checked,
+                      },
+                    })
+                  }
                 />
                 Nutation Correction
               </label>
@@ -209,9 +260,13 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
                 <input
                   type="checkbox"
                   checked={calculationConfig.refractionCorrection}
-                  onChange={(e) => handleSettingChange({
-                    calculationConfig: { refractionCorrection: e.target.checked }
-                  })}
+                  onChange={(e) =>
+                    handleSettingChange({
+                      calculationConfig: {
+                        refractionCorrection: e.target.checked,
+                      },
+                    })
+                  }
                 />
                 Atmospheric Refraction
               </label>
@@ -230,9 +285,8 @@ export const AstronomicalSettings: React.FC<AstronomicalSettingsProps> = ({
         <h4>ℹ️ About Astronomical Accuracy</h4>
         <p>
           {useRealStars
-            ? 'Real astronomical data provides factually accurate star positions based on your location and time. Perfect for serious astrological work.'
-            : 'Decorative mode uses randomly generated stars for visual appeal without astronomical accuracy. Faster and suitable for general ambiance.'
-          }
+            ? "Real astronomical data provides factually accurate star positions based on your location and time. Perfect for serious astrological work."
+            : "Decorative mode uses randomly generated stars for visual appeal without astronomical accuracy. Faster and suitable for general ambiance."}
         </p>
       </div>
     </div>

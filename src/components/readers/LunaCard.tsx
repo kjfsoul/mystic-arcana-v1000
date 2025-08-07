@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Heart, Moon, Stars, Feather } from 'lucide-react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Heart, Moon, Stars, Feather } from "lucide-react";
 // TODO: Implement ReaderPersona integration
 // import { ReaderPersona } from '@/types/ReaderPersona';
-import { LUNA_PERSONA } from '@/agents/readers/luna';
+import { LUNA_PERSONA } from "@/agents/readers/luna";
 
 interface LunaCardProps {
   onSelect?: () => void;
@@ -18,16 +18,16 @@ export const LunaCard: React.FC<LunaCardProps> = ({
   onSelect,
   isSelected = false,
   showDetails = false,
-  className = ''
+  className = "",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const persona = LUNA_PERSONA;
 
   const specialtyIcons = [
-    { icon: Heart, label: 'Love & Compatibility', color: 'text-pink-400' },
-    { icon: Moon, label: 'Emotional Wellness', color: 'text-purple-400' },
-    { icon: Stars, label: 'Relationship Patterns', color: 'text-indigo-400' },
-    { icon: Feather, label: 'Shadow Work', color: 'text-violet-400' }
+    { icon: Heart, label: "Love & Compatibility", color: "text-pink-400" },
+    { icon: Moon, label: "Emotional Wellness", color: "text-purple-400" },
+    { icon: Stars, label: "Relationship Patterns", color: "text-indigo-400" },
+    { icon: Feather, label: "Shadow Work", color: "text-violet-400" },
   ];
 
   const floatingElements = [
@@ -39,9 +39,11 @@ export const LunaCard: React.FC<LunaCardProps> = ({
   return (
     <motion.div
       className={`relative p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer overflow-hidden
-                  ${isSelected 
-                    ? 'border-pink-400 bg-gradient-to-br from-pink-900/30 to-purple-900/30 shadow-lg shadow-pink-500/20' 
-                    : 'border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:border-pink-500/50'}
+                  ${
+                    isSelected
+                      ? "border-pink-400 bg-gradient-to-br from-pink-900/30 to-purple-900/30 shadow-lg shadow-pink-500/20"
+                      : "border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:border-pink-500/50"
+                  }
                   backdrop-blur-md ${className}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -63,17 +65,21 @@ export const LunaCard: React.FC<LunaCardProps> = ({
           className="absolute w-2 h-2"
           style={{
             top: `${20 + element.y}%`,
-            right: `${15 + element.x}%`
+            right: `${15 + element.x}%`,
           }}
-          animate={isHovered ? {
-            y: [-5, 5, -5],
-            opacity: [0.3, 0.8, 0.3],
-            scale: [0.8, 1.2, 0.8]
-          } : {}}
+          animate={
+            isHovered
+              ? {
+                  y: [-5, 5, -5],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [0.8, 1.2, 0.8],
+                }
+              : {}
+          }
           transition={{
             duration: 2 + element.delay,
             repeat: Infinity,
-            delay: element.delay
+            delay: element.delay,
           }}
         >
           <div className="w-full h-full bg-pink-400 rounded-full blur-[1px]" />
@@ -87,7 +93,7 @@ export const LunaCard: React.FC<LunaCardProps> = ({
           <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-purple-700 rounded-full flex items-center justify-center">
             <Moon className="w-8 h-8 text-white" />
           </div>
-          
+
           {isSelected && (
             <motion.div
               className="absolute -inset-2 border-2 border-pink-400 rounded-full"
@@ -96,18 +102,22 @@ export const LunaCard: React.FC<LunaCardProps> = ({
               transition={{ duration: 0.3 }}
             />
           )}
-          
+
           {/* Rotating heart */}
           <motion.div
             className="absolute -top-2 -right-2 w-4 h-4"
-            animate={isHovered ? { 
-              rotate: [0, 15, -15, 0],
-              scale: [1, 1.2, 1]
-            } : {}}
-            transition={{ 
-              duration: 2, 
+            animate={
+              isHovered
+                ? {
+                    rotate: [0, 15, -15, 0],
+                    scale: [1, 1.2, 1],
+                  }
+                : {}
+            }
+            transition={{
+              duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           >
             <Heart className="w-4 h-4 text-pink-400 fill-current" />
@@ -156,9 +166,9 @@ export const LunaCard: React.FC<LunaCardProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ 
-              backgroundColor: 'rgba(100, 50, 100, 0.1)',
-              borderColor: 'rgba(236, 72, 153, 0.3)'
+            whileHover={{
+              backgroundColor: "rgba(100, 50, 100, 0.1)",
+              borderColor: "rgba(236, 72, 153, 0.3)",
             }}
           >
             <Icon className={`w-4 h-4 ${color}`} />
@@ -177,14 +187,16 @@ export const LunaCard: React.FC<LunaCardProps> = ({
 
       {/* Expertise Tags */}
       <div className="flex flex-wrap gap-1 mb-4">
-        {persona.expertise.astrology?.specializations.slice(0, 4).map((specialty) => (
-          <span
-            key={specialty}
-            className="px-2 py-1 text-xs bg-pink-900/30 text-pink-200 rounded-full border border-pink-700/30"
-          >
-            {specialty}
-          </span>
-        ))}
+        {persona.expertise.astrology?.specializations
+          .slice(0, 4)
+          .map((specialty) => (
+            <span
+              key={specialty}
+              className="px-2 py-1 text-xs bg-pink-900/30 text-pink-200 rounded-full border border-pink-700/30"
+            >
+              {specialty}
+            </span>
+          ))}
       </div>
 
       {/* Sample Reading Preview */}
@@ -192,7 +204,7 @@ export const LunaCard: React.FC<LunaCardProps> = ({
         <motion.div
           className="border-t border-slate-600 pt-4"
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
+          animate={{ opacity: 1, height: "auto" }}
           transition={{ duration: 0.3 }}
         >
           <div className="text-xs text-slate-400 mb-2">Luna's Wisdom</div>
@@ -213,17 +225,21 @@ export const LunaCard: React.FC<LunaCardProps> = ({
             animate={{ opacity: 0.1 }}
             transition={{ duration: 0.5 }}
           >
-            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
               <motion.path
                 d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z"
                 fill="rgba(236, 72, 153, 0.1)"
                 initial={{ d: "M0,50 Q25,50 50,50 T100,50 L100,100 L0,100 Z" }}
                 animate={{ d: "M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" }}
-                transition={{ 
+                transition={{
                   duration: 3,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  ease: "easeInOut"
+                  ease: "easeInOut",
                 }}
               />
             </svg>
@@ -233,7 +249,7 @@ export const LunaCard: React.FC<LunaCardProps> = ({
 
       {/* Luna Symbol Decoration */}
       <div className="absolute top-3 right-3 w-5 h-5 opacity-30">
-        <motion.div 
+        <motion.div
           className="w-full h-full"
           animate={isHovered ? { rotate: [0, 360] } : {}}
           transition={{ duration: 4, ease: "linear", repeat: Infinity }}

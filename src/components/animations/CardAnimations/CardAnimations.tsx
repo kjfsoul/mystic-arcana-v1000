@@ -1,6 +1,6 @@
-'use client';
-import React from 'react';
-import styles from './CardAnimations.module.css';
+"use client";
+import React from "react";
+import styles from "./CardAnimations.module.css";
 interface CardAnimationsProps {
   children: React.ReactNode;
   isShuffling?: boolean;
@@ -9,22 +9,22 @@ interface CardAnimationsProps {
 }
 /**
  * CardAnimations Component
- * 
+ *
  * Wrapper component that provides smooth animations for tarot cards
  * including shuffle, flip, reveal, and floating effects.
  */
-export const CardAnimations: React.FC<CardAnimationsProps> = ({ 
-  children, 
+export const CardAnimations: React.FC<CardAnimationsProps> = ({
+  children,
   isShuffling = false,
   isRevealing = false,
-  className = ''
+  className = "",
 }) => {
   return (
-    <div 
+    <div
       className={`
         ${styles.cardAnimations} 
-        ${isShuffling ? styles.shuffling : ''} 
-        ${isRevealing ? styles.revealing : ''} 
+        ${isShuffling ? styles.shuffling : ""} 
+        ${isRevealing ? styles.revealing : ""} 
         ${className}
       `}
     >

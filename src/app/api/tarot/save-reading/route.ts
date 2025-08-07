@@ -59,56 +59,56 @@ export async function POST(request: NextRequest) {
           error: "Invalid request body",
           code: "INVALID_BODY",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    
+
     const { spreadType, cards, interpretation } = body;
     // Get the authorization header from the request
-    const authorization = request.headers.get('authorization');
-    
-    if (!authorization || !authorization.startsWith('Bearer ')) {
+    const authorization = request.headers.get("authorization");
+
+    if (!authorization || !authorization.startsWith("Bearer ")) {
       return NextResponse.json(
         {
           success: false,
           error: "Authentication required",
           code: "UNAUTHENTICATED",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
-    const token = authorization.split(' ')[1];
-    
+    const token = authorization.split(" ")[1];
+
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
     const supabase = createClient(supabaseUrl, supabaseAnonKey, {
       global: {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
+          Authorization: `Bearer ${token}`,
+        },
+      },
     });
-    
+
     const {
       data: { user },
-      error: authError
+      error: authError,
     } = await supabase.auth.getUser(token);
-    
+
     if (authError) {
       logger.warn(
         "tarot_save_reading_auth_error",
         undefined,
         { error: authError.message, details: authError },
-        "Authentication error while saving reading."
+        "Authentication error while saving reading.",
       );
       return NextResponse.json(
         {
           success: false,
           error: "Authentication failed - " + authError.message,
           code: "AUTH_ERROR",
-          details: authError.message
+          details: authError.message,
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
     if (!user) {
@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
         "tarot_save_reading_unauthenticated",
         undefined,
         {},
-        "Attempted to save reading without authentication."
+        "Attempted to save reading without authentication.",
       );
       return NextResponse.json(
         {
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
           error: "Authentication required",
           code: "UNAUTHENTICATED",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
     const userId = user.id;
@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
             "Valid spread type is required (single, three-card, celtic-cross)",
           code: "INVALID_SPREAD_TYPE",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (!cards || !Array.isArray(cards) || cards.length === 0) {
@@ -149,7 +149,7 @@ export async function POST(request: NextRequest) {
           error: "Cards array is required and cannot be empty",
           code: "INVALID_CARDS",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (!interpretation || interpretation.trim().length === 0) {
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
           error: "Interpretation is required",
           code: "MISSING_INTERPRETATION",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     // Validate card count matches spread type
@@ -175,7 +175,7 @@ export async function POST(request: NextRequest) {
           error: `${spreadType} spread requires exactly ${expectedCardCounts[spreadType]} cards, got ${cards.length}`,
           code: "CARD_COUNT_MISMATCH",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     // Prepare reading data for database
@@ -218,18 +218,18 @@ export async function POST(request: NextRequest) {
       logger.error(
         "tarot_save_reading_db_error",
         userId,
-        { 
-          error: saveError.message, 
+        {
+          error: saveError.message,
           code: saveError.code,
           details: saveError,
           readingData: {
             spread_type: spreadType,
             cardsCount: cards.length,
-            hasInterpretation: !!interpretation
-          }
+            hasInterpretation: !!interpretation,
+          },
         },
         saveError,
-        "Database error while saving reading."
+        "Database error while saving reading.",
       );
       return NextResponse.json(
         {
@@ -238,7 +238,7 @@ export async function POST(request: NextRequest) {
           code: "SAVE_ERROR",
           details: saveError.message,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const saveTime = Date.now() - startTime;
@@ -259,7 +259,7 @@ export async function POST(request: NextRequest) {
         tags: body.tags,
         saveTime,
       },
-      `Tarot reading (ID: ${savedReading.id}) saved for user ${userId}.`
+      `Tarot reading (ID: ${savedReading.id}) saved for user ${userId}.`,
     );
     return NextResponse.json(response, {
       headers: {
@@ -274,7 +274,7 @@ export async function POST(request: NextRequest) {
       body?.userId,
       { spreadType: body?.spreadType, cardsCount: body?.cards?.length },
       error as Error,
-      "Failed to save tarot reading."
+      "Failed to save tarot reading.",
     );
     return NextResponse.json(
       {
@@ -283,7 +283,7 @@ export async function POST(request: NextRequest) {
         code: "INTERNAL_ERROR",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -301,7 +301,7 @@ export async function GET(request: NextRequest) {
         "tarot_get_save_stats_missing_user_id",
         undefined,
         {},
-        "Attempted to get save statistics without a user ID."
+        "Attempted to get save statistics without a user ID.",
       );
       return NextResponse.json(
         {
@@ -309,7 +309,7 @@ export async function GET(request: NextRequest) {
           error: "User ID is required",
           code: "MISSING_USER_ID",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     // Initialize Supabase client
@@ -321,7 +321,7 @@ export async function GET(request: NextRequest) {
         userId || undefined,
         {},
         undefined,
-        "Database configuration error for save statistics."
+        "Database configuration error for save statistics.",
       );
       return NextResponse.json(
         {
@@ -329,7 +329,7 @@ export async function GET(request: NextRequest) {
           error: "Database configuration error",
           code: "CONFIG_ERROR",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
@@ -347,7 +347,7 @@ export async function GET(request: NextRequest) {
         userId || undefined,
         {},
         error,
-        "Failed to fetch reading statistics from database."
+        "Failed to fetch reading statistics from database.",
       );
       return NextResponse.json(
         {
@@ -355,7 +355,7 @@ export async function GET(request: NextRequest) {
           error: "Failed to fetch reading statistics",
           code: "FETCH_ERROR",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const stats = {
@@ -381,7 +381,7 @@ export async function GET(request: NextRequest) {
         totalReadings: stats.totalReadings,
         readingsByType: stats.readingsByType,
       },
-      "Successfully retrieved tarot save statistics."
+      "Successfully retrieved tarot save statistics.",
     );
     return NextResponse.json({
       success: true,
@@ -394,7 +394,7 @@ export async function GET(request: NextRequest) {
       userId || undefined,
       {},
       error as Error,
-      "Internal server error while getting tarot save statistics."
+      "Internal server error while getting tarot save statistics.",
     );
     return NextResponse.json(
       {
@@ -402,7 +402,7 @@ export async function GET(request: NextRequest) {
         error: "Internal server error",
         code: "INTERNAL_ERROR",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

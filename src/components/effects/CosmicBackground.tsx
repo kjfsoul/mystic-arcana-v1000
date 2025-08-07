@@ -1,10 +1,15 @@
-'use client';
- 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import styles from './CosmicBackground.module.css';
+"use client";
+
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import styles from "./CosmicBackground.module.css";
 export interface CosmicBackgroundProps {
-  intensity?: 'low' | 'medium' | 'high';
-  cosmicWeather?: 'calm' | 'mercury-retrograde' | 'full-moon' | 'eclipse' | 'conjunction';
+  intensity?: "low" | "medium" | "high";
+  cosmicWeather?:
+    | "calm"
+    | "mercury-retrograde"
+    | "full-moon"
+    | "eclipse"
+    | "conjunction";
   className?: string;
 }
 interface Star {
@@ -25,7 +30,7 @@ interface ShootingStar {
 }
 /**
  * Cosmic Background Component - Living animated space environment
- * 
+ *
  * Features:
  * - Canvas-based star field with parallax layers
  * - Real-time cosmic weather effects based on astrological events
@@ -35,9 +40,9 @@ interface ShootingStar {
  * - GPU-accelerated where possible
  */
 export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
-  intensity = 'medium',
-  cosmicWeather = 'calm',
-  className = ''
+  intensity = "medium",
+  cosmicWeather = "calm",
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -46,16 +51,17 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
   const [stars, setStars] = useState<Star[]>([]);
   const [reducedMotion, setReducedMotion] = useState(false);
   // Check for reduced motion preference
- 
+
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mediaQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    const handleChange = (e: MediaQueryListEvent) =>
+      setReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
   // Handle resize
- 
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -63,24 +69,24 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       setDimensions({ width, height });
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
   // Get star color based on cosmic weather
- 
+
   const getStarColor = useCallback(() => {
     const colors = {
-      calm: ['#ffffff', '#e6d7ff', '#ffd700', '#ff6b9d', '#9c88ff'],
-      'mercury-retrograde': ['#ff4757', '#ff6b9d', '#ffa726', '#ffffff'],
-      'full-moon': ['#e6d7ff', '#ffffff', '#c5cae9', '#9c88ff'],
-      eclipse: ['#1a1a2e', '#16213e', '#0f3460', '#533483'],
-      conjunction: ['#ffd700', '#ff6b9d', '#9c88ff', '#ffffff', '#e6d7ff']
+      calm: ["#ffffff", "#e6d7ff", "#ffd700", "#ff6b9d", "#9c88ff"],
+      "mercury-retrograde": ["#ff4757", "#ff6b9d", "#ffa726", "#ffffff"],
+      "full-moon": ["#e6d7ff", "#ffffff", "#c5cae9", "#9c88ff"],
+      eclipse: ["#1a1a2e", "#16213e", "#0f3460", "#533483"],
+      conjunction: ["#ffd700", "#ff6b9d", "#9c88ff", "#ffffff", "#e6d7ff"],
     };
     const colorSet = colors[cosmicWeather] || colors.calm;
     return colorSet[Math.floor(Math.random() * colorSet.length)];
   }, [cosmicWeather]);
   // Create shooting star
- 
+
   const createShootingStar = useCallback(() => {
     if (reducedMotion || Math.random() > 0.005) return null;
     return {
@@ -88,15 +94,16 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       y: Math.random() * dimensions.height * 0.3,
       length: Math.random() * 80 + 20,
       speed: Math.random() * 3 + 2,
-      angle: Math.random() * Math.PI / 4 + Math.PI / 8,
-      opacity: 1
+      angle: (Math.random() * Math.PI) / 4 + Math.PI / 8,
+      opacity: 1,
     };
   }, [reducedMotion, dimensions.width, dimensions.height]);
   // Initialize stars
- 
+
   useEffect(() => {
     if (dimensions.width === 0 || dimensions.height === 0) return;
-    const starCount = intensity === 'low' ? 100 : intensity === 'medium' ? 200 : 300;
+    const starCount =
+      intensity === "low" ? 100 : intensity === "medium" ? 200 : 300;
     const newStars: Star[] = [];
     for (let i = 0; i < starCount; i++) {
       newStars.push({
@@ -105,17 +112,17 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         size: Math.random() * 2 + 0.5,
         brightness: Math.random() * 0.8 + 0.2,
         twinkleSpeed: Math.random() * 0.02 + 0.01,
-        color: getStarColor()
+        color: getStarColor(),
       });
     }
     setStars(newStars);
   }, [dimensions, intensity, getStarColor]);
   // Animation loop
- 
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || dimensions.width === 0 || dimensions.height === 0) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
     canvas.width = dimensions.width;
     canvas.height = dimensions.height;
@@ -124,31 +131,37 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       time += 1;
       // Clear canvas with cosmic background
       const gradient = ctx.createRadialGradient(
-        dimensions.width / 2, dimensions.height / 2, 0,
-        dimensions.width / 2, dimensions.height / 2, dimensions.width
+        dimensions.width / 2,
+        dimensions.height / 2,
+        0,
+        dimensions.width / 2,
+        dimensions.height / 2,
+        dimensions.width,
       );
-      if (cosmicWeather === 'mercury-retrograde') {
-        gradient.addColorStop(0, '#1a0030');
-        gradient.addColorStop(0.5, '#330033');
-        gradient.addColorStop(1, '#0a0015');
-      } else if (cosmicWeather === 'full-moon') {
-        gradient.addColorStop(0, '#1e1e3f');
-        gradient.addColorStop(0.5, '#2d2d5a');
-        gradient.addColorStop(1, '#0a0015');
-      } else if (cosmicWeather === 'eclipse') {
-        gradient.addColorStop(0, '#000000');
-        gradient.addColorStop(0.5, '#1a1a2e');
-        gradient.addColorStop(1, '#16213e');
+      if (cosmicWeather === "mercury-retrograde") {
+        gradient.addColorStop(0, "#1a0030");
+        gradient.addColorStop(0.5, "#330033");
+        gradient.addColorStop(1, "#0a0015");
+      } else if (cosmicWeather === "full-moon") {
+        gradient.addColorStop(0, "#1e1e3f");
+        gradient.addColorStop(0.5, "#2d2d5a");
+        gradient.addColorStop(1, "#0a0015");
+      } else if (cosmicWeather === "eclipse") {
+        gradient.addColorStop(0, "#000000");
+        gradient.addColorStop(0.5, "#1a1a2e");
+        gradient.addColorStop(1, "#16213e");
       } else {
-        gradient.addColorStop(0, '#0a0015');
-        gradient.addColorStop(0.5, '#1a0030');
-        gradient.addColorStop(1, '#0f001a');
+        gradient.addColorStop(0, "#0a0015");
+        gradient.addColorStop(0.5, "#1a0030");
+        gradient.addColorStop(1, "#0f001a");
       }
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, dimensions.width, dimensions.height);
       // Draw stars
       stars.forEach((star) => {
-        const twinkle = reducedMotion ? 1 : Math.sin(time * star.twinkleSpeed) * 0.3 + 0.7;
+        const twinkle = reducedMotion
+          ? 1
+          : Math.sin(time * star.twinkleSpeed) * 0.3 + 0.7;
         const alpha = star.brightness * twinkle;
         ctx.save();
         ctx.globalAlpha = alpha;
@@ -160,7 +173,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         ctx.fill();
         ctx.restore();
         // Cosmic weather effects on stars
-        if (cosmicWeather === 'mercury-retrograde' && !reducedMotion) {
+        if (cosmicWeather === "mercury-retrograde" && !reducedMotion) {
           // Glitch effect
           if (Math.random() < 0.001) {
             star.x += (Math.random() - 0.5) * 5;
@@ -175,40 +188,49 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
           shootingStarsRef.current.push(newShootingStar);
         }
         // Draw and update shooting stars
-        shootingStarsRef.current = shootingStarsRef.current.map(star => {
-          if (star.opacity <= 0) return null;
-          // Draw shooting star
-          ctx.save();
-          ctx.globalAlpha = star.opacity;
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2;
-          ctx.shadowColor = '#ffffff';
-          ctx.shadowBlur = 10;
-          const endX = star.x + Math.cos(star.angle) * star.length;
-          const endY = star.y + Math.sin(star.angle) * star.length;
-          ctx.beginPath();
-          ctx.moveTo(star.x, star.y);
-          ctx.lineTo(endX, endY);
-          ctx.stroke();
-          ctx.restore();
-          // Update shooting star
-          star.x += Math.cos(star.angle) * star.speed;
-          star.y += Math.sin(star.angle) * star.speed;
-          star.opacity -= 0.01;
-          return star;
-        }).filter(Boolean) as ShootingStar[];
+        shootingStarsRef.current = shootingStarsRef.current
+          .map((star) => {
+            if (star.opacity <= 0) return null;
+            // Draw shooting star
+            ctx.save();
+            ctx.globalAlpha = star.opacity;
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 2;
+            ctx.shadowColor = "#ffffff";
+            ctx.shadowBlur = 10;
+            const endX = star.x + Math.cos(star.angle) * star.length;
+            const endY = star.y + Math.sin(star.angle) * star.length;
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            ctx.restore();
+            // Update shooting star
+            star.x += Math.cos(star.angle) * star.speed;
+            star.y += Math.sin(star.angle) * star.speed;
+            star.opacity -= 0.01;
+            return star;
+          })
+          .filter(Boolean) as ShootingStar[];
       }
       // Nebula effect for certain cosmic weather
-      if ((cosmicWeather === 'conjunction' || cosmicWeather === 'full-moon') && !reducedMotion) {
+      if (
+        (cosmicWeather === "conjunction" || cosmicWeather === "full-moon") &&
+        !reducedMotion
+      ) {
         ctx.save();
         ctx.globalAlpha = 0.1;
         const nebulaGradient = ctx.createRadialGradient(
-          dimensions.width * 0.3, dimensions.height * 0.4, 0,
-          dimensions.width * 0.3, dimensions.height * 0.4, dimensions.width * 0.4
+          dimensions.width * 0.3,
+          dimensions.height * 0.4,
+          0,
+          dimensions.width * 0.3,
+          dimensions.height * 0.4,
+          dimensions.width * 0.4,
         );
-        nebulaGradient.addColorStop(0, '#ff6b9d');
-        nebulaGradient.addColorStop(0.5, '#9c88ff');
-        nebulaGradient.addColorStop(1, 'transparent');
+        nebulaGradient.addColorStop(0, "#ff6b9d");
+        nebulaGradient.addColorStop(0.5, "#9c88ff");
+        nebulaGradient.addColorStop(1, "transparent");
         ctx.fillStyle = nebulaGradient;
         ctx.fillRect(0, 0, dimensions.width, dimensions.height);
         ctx.restore();
@@ -230,7 +252,7 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
         aria-hidden="true"
         style={{
           width: dimensions.width,
-          height: dimensions.height
+          height: dimensions.height,
         }}
       />
       {/* CSS-based fallback for reduced motion */}
@@ -242,16 +264,12 @@ export const CosmicBackground: React.FC<CosmicBackgroundProps> = ({
       )}
       {/* Cosmic weather indicator */}
       <div className={styles.weatherOverlay} data-weather={cosmicWeather}>
-        {cosmicWeather === 'mercury-retrograde' && (
+        {cosmicWeather === "mercury-retrograde" && (
           <div className={styles.retrogradeEffect} />
         )}
-        {cosmicWeather === 'full-moon' && (
-          <div className={styles.moonGlow} />
-        )}
-        {cosmicWeather === 'eclipse' && (
-          <div className={styles.eclipseRing} />
-        )}
-        {cosmicWeather === 'conjunction' && (
+        {cosmicWeather === "full-moon" && <div className={styles.moonGlow} />}
+        {cosmicWeather === "eclipse" && <div className={styles.eclipseRing} />}
+        {cosmicWeather === "conjunction" && (
           <div className={styles.conjunctionAura} />
         )}
       </div>

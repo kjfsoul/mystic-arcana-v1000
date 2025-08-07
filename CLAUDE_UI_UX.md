@@ -46,9 +46,10 @@
 </references>
 
 <decision_needed>
-  - [Select: GLSL, Three.js, or WASM for animated backgrounds?]
-  - [Confirm: Exact onboarding flow—ritual intro, persona selection, tutorial?]
-  - [Decide: User-uploaded tarot decks—what file formats, preview UI, moderation?]
-  - [Determine: Should the live cosmic "weather" always match real events, or allow user override?]
-  - [Confirm: Any brand voice constraints for avatar TTS output?]
-</decision_needed>
+
+- [Select: GLSL, Three.js, or WASM for animated backgrounds?]
+- [Confirm: Exact onboarding flow—ritual intro, persona selection, tutorial?]
+- [Decide: User-uploaded tarot decks—what file formats, preview UI, moderation?]
+- [Determine: Should the live cosmic "weather" always match real events, or allow user override?]
+- [Confirm: Any brand voice constraints for avatar TTS output?]
+  </decision_needed>

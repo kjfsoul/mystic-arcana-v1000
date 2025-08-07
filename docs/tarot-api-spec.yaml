@@ -4,7 +4,7 @@ info:
   description: |
     Complete REST API for tarot card reading functionality, including deck management,
     card drawing, reading persistence, and retrieval capabilities.
-    
+
     Built with production-grade error handling, validation, and comprehensive logging.
   version: 1.0.0
   contact:
@@ -85,7 +85,7 @@ paths:
                   allowReversed: true
                   userId: "user-123"
       responses:
-        '200':
+        "200":
           description: Cards drawn successfully
           headers:
             X-Draw-Time:
@@ -99,25 +99,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DrawResponse'
-        '400':
+                $ref: "#/components/schemas/DrawResponse"
+        "400":
           description: Invalid request parameters
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
           description: Deck not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
 
   /tarot/shuffle:
     post:
@@ -164,7 +164,7 @@ paths:
                   algorithm: "riffle"
                   includePreview: true
       responses:
-        '200':
+        "200":
           description: Deck shuffled successfully
           headers:
             X-Shuffle-Time:
@@ -182,19 +182,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShuffleResponse'
-        '404':
+                $ref: "#/components/schemas/ShuffleResponse"
+        "404":
           description: Deck not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
 
   /tarot/save-reading:
     post:
@@ -210,7 +210,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SaveReadingRequest'
+              $ref: "#/components/schemas/SaveReadingRequest"
             examples:
               three-card-reading:
                 summary: Three card reading save
@@ -237,7 +237,7 @@ paths:
                   question: "What does my career path look like?"
                   tags: ["career", "guidance"]
       responses:
-        '201':
+        "201":
           description: Reading saved successfully
           headers:
             X-Save-Time:
@@ -251,25 +251,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SaveReadingResponse'
-        '400':
+                $ref: "#/components/schemas/SaveReadingResponse"
+        "400":
           description: Invalid request data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
           description: User not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
     get:
       summary: Get reading save statistics
       description: Get user reading statistics and save limits
@@ -285,12 +285,12 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Statistics retrieved successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReadingStatsResponse'
+                $ref: "#/components/schemas/ReadingStatsResponse"
 
   /tarot/get-reading:
     get:
@@ -378,7 +378,7 @@ paths:
             enum: [asc, desc]
             default: desc
       responses:
-        '200':
+        "200":
           description: Readings retrieved successfully
           headers:
             X-Total-Count:
@@ -396,19 +396,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetReadingResponse'
-        '404':
+                $ref: "#/components/schemas/GetReadingResponse"
+        "404":
           description: Reading not found (when requesting specific ID)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
     delete:
       summary: Delete tarot reading
       description: Delete a specific reading (only by owner)
@@ -431,7 +431,7 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Reading deleted successfully
           content:
             application/json:
@@ -445,12 +445,12 @@ paths:
                   deletedAt:
                     type: string
                     format: date-time
-        '404':
+        "404":
           description: Reading not found or access denied
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
 
 components:
   schemas:
@@ -492,7 +492,7 @@ components:
 
     DrawnCard:
       allOf:
-        - $ref: '#/components/schemas/TarotCard'
+        - $ref: "#/components/schemas/TarotCard"
         - type: object
           properties:
             position:
@@ -529,9 +529,9 @@ components:
         cards:
           type: array
           items:
-            $ref: '#/components/schemas/DrawnCard'
+            $ref: "#/components/schemas/DrawnCard"
         spread:
-          $ref: '#/components/schemas/SpreadInfo'
+          $ref: "#/components/schemas/SpreadInfo"
         drawId:
           type: string
           description: Unique draw identifier

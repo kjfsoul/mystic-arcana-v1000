@@ -1,21 +1,20 @@
- 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Loader2, AlertCircle, CheckCircle, X, Info } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Loader2, AlertCircle, CheckCircle, X, Info } from "lucide-react";
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   message?: string;
   className?: string;
 }
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
-  size = 'md', 
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  size = "md",
   message,
-  className = "" 
+  className = "",
 }) => {
   const sizeClasses = {
-    sm: 'w-6 h-6',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12'
+    sm: "w-6 h-6",
+    md: "w-8 h-8",
+    lg: "w-12 h-12",
   };
   return (
     <motion.div
@@ -24,10 +23,10 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
       exit={{ opacity: 0 }}
       className={`flex flex-col items-center justify-center ${className}`}
     >
-      <Loader2 className={`${sizeClasses[size]} text-purple-400 animate-spin`} />
-      {message && (
-        <p className="mt-3 text-sm text-gray-400">{message}</p>
-      )}
+      <Loader2
+        className={`${sizeClasses[size]} text-purple-400 animate-spin`}
+      />
+      {message && <p className="mt-3 text-sm text-gray-400">{message}</p>}
     </motion.div>
   );
 };
@@ -37,11 +36,11 @@ interface ErrorMessageProps {
   onClose?: () => void;
   className?: string;
 }
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ 
-  error, 
-  onRetry, 
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  error,
+  onRetry,
   onClose,
-  className = "" 
+  className = "",
 }) => {
   return (
     <motion.div
@@ -53,7 +52,9 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
       <div className="flex items-start gap-3">
         <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
         <div className="flex-1 min-w-0">
-          <p className="text-red-200 text-sm sm:text-base break-words">{error}</p>
+          <p className="text-red-200 text-sm sm:text-base break-words">
+            {error}
+          </p>
           {onRetry && (
             <button
               onClick={onRetry}
@@ -83,14 +84,13 @@ interface SuccessMessageProps {
   duration?: number;
   className?: string;
 }
-export const SuccessMessage: React.FC<SuccessMessageProps> = ({ 
-  message, 
+export const SuccessMessage: React.FC<SuccessMessageProps> = ({
+  message,
   onClose,
   autoHide = true,
   duration = 3000,
-  className = "" 
+  className = "",
 }) => {
- 
   React.useEffect(() => {
     if (autoHide && onClose) {
       const timer = setTimeout(onClose, duration);
@@ -125,10 +125,10 @@ interface InfoMessageProps {
   onClose?: () => void;
   className?: string;
 }
-export const InfoMessage: React.FC<InfoMessageProps> = ({ 
-  message, 
+export const InfoMessage: React.FC<InfoMessageProps> = ({
+  message,
   onClose,
-  className = "" 
+  className = "",
 }) => {
   return (
     <motion.div
@@ -158,10 +158,10 @@ interface LoadingOverlayProps {
   message?: string;
   fullScreen?: boolean;
 }
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ 
-  isLoading, 
+export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+  isLoading,
   message = "Loading...",
-  fullScreen = false 
+  fullScreen = false,
 }) => {
   return (
     <AnimatePresence>
@@ -171,7 +171,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={`${
-            fullScreen ? 'fixed' : 'absolute'
+            fullScreen ? "fixed" : "absolute"
           } inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50`}
         >
           <motion.div
@@ -218,20 +218,20 @@ interface FloatingActionButtonProps {
   onClick: () => void;
   icon: React.ReactNode;
   label: string;
-  position?: 'bottom-right' | 'bottom-left' | 'bottom-center';
+  position?: "bottom-right" | "bottom-left" | "bottom-center";
   className?: string;
 }
 export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   onClick,
   icon,
   label,
-  position = 'bottom-right',
-  className = ""
+  position = "bottom-right",
+  className = "",
 }) => {
   const positionClasses = {
-    'bottom-right': 'bottom-4 right-4 sm:bottom-6 sm:right-6',
-    'bottom-left': 'bottom-4 left-4 sm:bottom-6 sm:left-6',
-    'bottom-center': 'bottom-4 left-1/2 -translate-x-1/2'
+    "bottom-right": "bottom-4 right-4 sm:bottom-6 sm:right-6",
+    "bottom-left": "bottom-4 left-4 sm:bottom-6 sm:left-6",
+    "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
   };
   return (
     <motion.button
@@ -251,10 +251,10 @@ interface PullToRefreshProps {
   children: React.ReactNode;
   threshold?: number;
 }
-export const PullToRefresh: React.FC<PullToRefreshProps> = ({ 
-  onRefresh, 
+export const PullToRefresh: React.FC<PullToRefreshProps> = ({
+  onRefresh,
   children,
-  threshold = 80 
+  threshold = 80,
 }) => {
   const [pullDistance, setPullDistance] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -267,10 +267,10 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
   };
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!startY || isRefreshing) return;
-    
+
     const currentY = e.touches[0].clientY;
     const diff = currentY - startY;
-    
+
     if (diff > 0 && containerRef.current?.scrollTop === 0) {
       setPullDistance(Math.min(diff, threshold * 1.5));
     }
@@ -298,14 +298,20 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
             className="absolute top-0 left-0 right-0 flex justify-center py-4"
             style={{ transform: `translateY(${pullDistance}px)` }}
           >
-            <LoadingSpinner 
-              size="sm" 
-              message={isRefreshing ? "Refreshing..." : pullDistance >= threshold ? "Release to refresh" : "Pull to refresh"} 
+            <LoadingSpinner
+              size="sm"
+              message={
+                isRefreshing
+                  ? "Refreshing..."
+                  : pullDistance >= threshold
+                    ? "Release to refresh"
+                    : "Pull to refresh"
+              }
             />
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <div
         ref={containerRef}
         className="overflow-auto"
@@ -313,8 +319,9 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         style={{
-          transform: pullDistance > 0 ? `translateY(${pullDistance}px)` : undefined,
-          transition: pullDistance > 0 ? 'none' : 'transform 0.3s ease-out'
+          transform:
+            pullDistance > 0 ? `translateY(${pullDistance}px)` : undefined,
+          transition: pullDistance > 0 ? "none" : "transform 0.3s ease-out",
         }}
       >
         {children}

@@ -7,6 +7,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ## 📚 Core Project Documentation
 
 ### Project Overview & Architecture
+
 - **`/claude-mysic-prep-summary.md`** - Research-driven project approach and competitive analysis summary
 - **`/project_overview.md`** - Mission statement, value proposition, and target users
 - **`/technical_architecture.md`** - Tech stack, platform architecture, security patterns
@@ -18,6 +19,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/claude.md`** - Source of truth for Claude and AI agents
 
 ### Development & Frontend
+
 - **`/Frontend_kickoff_prompt.md`** - Frontend development guidelines
 - **`/adaptive_personalization.md`** - Personalization and adaptation strategies
 - **`/tools_services_overview.md`** - Procured tools and services inventory
@@ -30,10 +32,12 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ## 🔮 Spiritual Reference Materials
 
 ### Tarot Resources
+
 - **`/docs/holistic-tarot-supplement-study-guide-01-beginner3.md`** - Comprehensive tarot study guide
 - **`/docs/03c-interpreting-tarot-through-astrology.md`** - Integrating tarot with astrological wisdom
 
 ### Astrology Resources
+
 - **`/docs/benebell-wen-astrology-quick-reference-sheets.md`** - Quick astrology reference guide
 - **`/docs/learning-the-twelve-astrological-signs-2016-09-16.md`** - Deep dive into zodiac signs
 - **`/docs/learning-the-thirty-six-decans-2016-09-16.md`** - Decan system exploration
@@ -47,6 +51,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/docs/your-lot-of-fortune-sign-and-house-1.md`** - Lot of Fortune interpretation
 
 ### Advanced Spiritual Topics
+
 - **`/docs/Past_Life_Astrology.md`** - Past life regression through astrology
 - **`/docs/Introduction_to_Past_Life.md`** - Introduction to past life concepts
 - **`/docs/Is_AI_Validating_Psychic.md`** - AI and psychic phenomena discussion
@@ -56,11 +61,13 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ## 🎭 Voice & Personality Guidelines
 
 ### Virtual Reader Development
+
 - **`/docs/Claude-init-prompts.md`** - Initial prompts for Claude onboarding and context
 - **`/docs/claude-mystic-prep.md`** - Detailed Claude preparation for mystical contexts
 - **`/docs/Mystic_NotebookLM.md`** - NotebookLM integration for mystic knowledge
 
 ### AI Integration & Conversations
+
 - **`/docs/2025-05-29_19-15-13_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md`** - Multi-reader system design
 - **`/docs/2025-05-31_02-39-41_ChatGPT_Mystic Arcana — Multi-Reader Virtual Guide System....md`** - Updated multi-reader specifications
 
@@ -69,13 +76,16 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ## ⚖️ Cultural & Ethical Guidelines
 
 ### Community Standards
+
 - **`/docs/legal/Mystic Arcana/MysticArcana_CommunityGuidelines.md`** - Respectful communication, prohibited behaviors, youth safety
 
 ### Professional Ethics
+
 - **`/docs/legal/03a-tarot-ethics-code-of-conduct.docx`** - Professional tarot reader ethics code
 - **`/docs/legal/benebell-wen-social-inductive-reasoning-and-tarot.docx`** - Social reasoning in tarot practice
 
 ### Business Ethics & Templates
+
 - **`/docs/legal/03e-sample-schedule-of-fees-and-business-policy.docx`** - Transparent pricing policies
 - **`/docs/legal/03d-sample-reading-template-three-cards1.docx`** - Professional reading templates
 - **`/docs/legal/03g-sample-services-agreement-for-events-and-parties.docx`** - Event service agreements
@@ -87,6 +97,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ## 📋 Legal Documentation
 
 ### Core Legal Documents
+
 - **`/docs/legal/Mystic Arcana/MysticArcana_LegalIndex.md`** - Master index of all legal documents
 - **`/docs/legal/Mystic Arcana/MysticArcana_PrivacyPolicy.md`** - GDPR/CCPA compliant privacy policy
 - **`/docs/legal/Mystic Arcana/MysticArcana_PrivacyPolicy_v1.1_FairUse.md`** - Updated privacy policy with fair use
@@ -97,6 +108,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/docs/legal/Mystic Arcana/MysticArcana_ClientAgreement.md`** - Client service agreements
 
 ### Compliance & Business
+
 - **`/docs/legal/Mystic Arcana/MysticArcana_AffiliateDisclosure.md`** - FTC affiliate compliance
 - **`/docs/legal/Mystic Arcana/MysticArcana_AffiliateTemplates.md`** - Affiliate program templates
 - **`/docs/legal/consent-form-for-minor-to-receive-card-reading.docx`** - Minor consent forms
@@ -104,6 +116,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/docs/legal/for-tarot-professionals-premises-insurance-waiver.docx`** - Insurance waiver templates
 
 ### Implementation Guides
+
 - **`/docs/legal/Mystic Arcana/MysticArcana_LegalIntegration.md`** - Legal document integration guide
 - **`/docs/legal/Mystic Arcana/MysticArcana_OnboardingLegalModal.md`** - Legal onboarding modal specs
 - **`/docs/legal/Mystic Arcana/MysticArcana_LegalConsentCheckboxGroup.md`** - Consent UI components
@@ -111,6 +124,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/docs/legal/Mystic Arcana/LegalUI_Tailwind_ReactBundle.md`** - Legal UI React components
 
 ### Business & Marketing
+
 - **`/docs/legal/benebell-wen-tarot-business-plan-template-2-december-2015.doc`** - Tarot business planning
 - **`/docs/legal/benebell-wen-handbook-how-to-earn-50k-from-a-27-hour-work-week.doc`** - Business optimization guide
 - **`/docs/legal/terrifictarot_sampletemplate_mediapressrelease1.docx`** - Press release templates
@@ -120,6 +134,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 - **`/docs/legal/professional-tarot-templates-reading-sign-up-sheet-for-public-events.docx`** - Event signup sheets
 
 ### Contracts & Agreements
+
 - **`/docs/legal/deck-licensing-agreement-template-v1.docx`** - Tarot deck licensing
 - **`/docs/legal/podcast-guest-appearance-release-boilerplate-template.docx`** - Media appearance releases
 - **`/docs/legal/boilerplate-contract-collaboration-and-joint-works-agreement.docx`** - Collaboration agreements
@@ -130,6 +145,7 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 ---
 
 ## 📦 Archives & Bundles
+
 - **`/docs/legal/contract-templates.zip`** - Contract template collection
 - **`/docs/legal/Mystic Arcana-20250529T205431Z-1-001.zip`** - Legal document archive
 - **`/docs/legal/Mystic Arcana/MysticArcana_FinalLegalAdditions.zip`** - Final legal additions
@@ -146,4 +162,4 @@ This comprehensive index organizes all documentation for the Mystic Arcana proje
 
 ---
 
-*This index is maintained as the single source of truth for all Mystic Arcana documentation. Update when adding new documents.*
+_This index is maintained as the single source of truth for all Mystic Arcana documentation. Update when adding new documents._

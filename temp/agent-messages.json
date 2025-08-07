@@ -158,18 +158,12 @@
               "significant_aspects": [
                 {
                   "type": "conjunction",
-                  "planets": [
-                    "sun",
-                    "mercury"
-                  ],
+                  "planets": ["sun", "mercury"],
                   "orb": 1.2
                 },
                 {
                   "type": "trine",
-                  "planets": [
-                    "moon",
-                    "neptune"
-                  ],
+                  "planets": ["moon", "neptune"],
                   "orb": 0.8
                 }
               ],
@@ -177,9 +171,7 @@
                 "intensity": "moderate",
                 "dominant_element": "air",
                 "lunar_phase": "waning_gibbous",
-                "retrograde_planets": [
-                  "pluto"
-                ]
+                "retrograde_planets": ["pluto"]
               },
               "visual_rendering_ready": true
             },

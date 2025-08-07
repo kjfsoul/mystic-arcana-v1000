@@ -11,88 +11,88 @@ No new prompts needed per your note – sticking to the queued 4 (now 3 remainin
 
 n8n Workflow JSON: Daily Horoscope Auto-Poster
 {
-  "name": "Mystic Arcana Daily Horoscope Generator & Poster",
-  "nodes": [
-    {
-      "parameters": {
-        "cron": "0 6 ** *",  // 6AM America/New_York
-        "timezone": "America/New_York"
-      },
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://your-replit-endpoint/api/horoscopes/generate",  // Point to your deployed lunar-transit-narrator
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {"name": "date", "value": "{{new Date().toISOString().split['T'](0)}}"}
-          ]
-        }
-      },
-      "name": "Generate Horoscopes",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO horoscopes (date, data) VALUES ($1, $2)",  // Store to Supabase
+"name": "Mystic Arcana Daily Horoscope Generator & Poster",
+"nodes": [
+{
+"parameters": {
+"cron": "0 6 \*\* \*", // 6AM America/New_York
+"timezone": "America/New_York"
+},
+"name": "Schedule Trigger",
+"type": "n8n-nodes-base.scheduleTrigger",
+"typeVersion": 1
+},
+{
+"parameters": {
+"method": "POST",
+"url": "https://your-replit-endpoint/api/horoscopes/generate", // Point to your deployed lunar-transit-narrator
+"sendBody": true,
+"bodyParameters": {
+"parameters": [
+{"name": "date", "value": "{{new Date().toISOString().split['T'](0)}}"}
+]
+}
+},
+"name": "Generate Horoscopes",
+"type": "n8n-nodes-base.httpRequest",
+"typeVersion": 1
+},
+{
+"parameters": {
+"operation": "executeQuery",
+"query": "INSERT INTO horoscopes (date, data) VALUES ($1, $2)",  // Store to Supabase
         "values": ["{{$node[\"Generate Horoscopes\"].json[\"date\"]}}", "{{$node[\"Generate Horoscopes\"].json}}"]
-      },
-      "name": "Store to Supabase",
-      "type": "n8n-nodes-base.postgres",  // Assumes Supabase Postgres node
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "resource": "search",
-        "query": "latest tarot trends 2025 + horoscope insights"  // Scout trends
-      },
-      "name": "Trend Scout",
-      "type": "n8n-nodes-base.webSearch",  // Use Web Search tool equivalent
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "jsCode": "const horo = items[0].json; const trends = items[1].json.results.slice(0,3); return horo.horoscopes.map(sign => ({ json: { caption: `${sign.horoscope} #MysticArcana #TarotTrends: ${trends[0].title}`, platform: 'Instagram', imagePrompt: `Bioluminescent ${sign.sign} zodiac symbol` } }));"  // Format posts with trends + image gen prompt
-      },
-      "name": "Format Posts",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.instagram.com/post",  // Placeholder; use real API or Zapier-like integration
-        "authentication": "genericCredentialType",
-        "credentialType": "instagramApi"
-      },
-      "name": "Post to Instagram/TikTok",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "channel": "your-discord-channel",
-        "text": "Horoscope post failed: {{$node[\"Post to Instagram/TikTok\"].error.message}}"
-      },
-      "name": "Error Alert",
-      "type": "n8n-nodes-base.discord",
-      "typeVersion": 1
-    }
-  ],
-  "connections": {
-    "Schedule Trigger": { "main": [{ "node": "Generate Horoscopes" }] },
-    "Generate Horoscopes": { "main": [{ "node": "Store to Supabase" }] },
-    "Store to Supabase": { "main": [{ "node": "Trend Scout" }] },
-    "Trend Scout": { "main": [{ "node": "Format Posts" }] },
-    "Format Posts": { "main": [{ "node": "Post to Instagram/TikTok" }] },
-    "Post to Instagram/TikTok": { "main": [{ "node": "Error Alert", "type": "onError" }] }
-  }
+},
+"name": "Store to Supabase",
+"type": "n8n-nodes-base.postgres", // Assumes Supabase Postgres node
+"typeVersion": 1
+},
+{
+"parameters": {
+"resource": "search",
+"query": "latest tarot trends 2025 + horoscope insights" // Scout trends
+},
+"name": "Trend Scout",
+"type": "n8n-nodes-base.webSearch", // Use Web Search tool equivalent
+"typeVersion": 1
+},
+{
+"parameters": {
+"jsCode": "const horo = items[0].json; const trends = items[1].json.results.slice(0,3); return horo.horoscopes.map(sign => ({ json: { caption: `${sign.horoscope} #MysticArcana #TarotTrends: ${trends[0].title}`, platform: 'Instagram', imagePrompt: `Bioluminescent ${sign.sign} zodiac symbol` } }));" // Format posts with trends + image gen prompt
+},
+"name": "Format Posts",
+"type": "n8n-nodes-base.code",
+"typeVersion": 1
+},
+{
+"parameters": {
+"method": "POST",
+"url": "https://api.instagram.com/post", // Placeholder; use real API or Zapier-like integration
+"authentication": "genericCredentialType",
+"credentialType": "instagramApi"
+},
+"name": "Post to Instagram/TikTok",
+"type": "n8n-nodes-base.httpRequest",
+"typeVersion": 1
+},
+{
+"parameters": {
+"channel": "your-discord-channel",
+"text": "Horoscope post failed: {{$node[\"Post to Instagram/TikTok\"].error.message}}"
+},
+"name": "Error Alert",
+"type": "n8n-nodes-base.discord",
+"typeVersion": 1
+}
+],
+"connections": {
+"Schedule Trigger": { "main": [{ "node": "Generate Horoscopes" }] },
+"Generate Horoscopes": { "main": [{ "node": "Store to Supabase" }] },
+"Store to Supabase": { "main": [{ "node": "Trend Scout" }] },
+"Trend Scout": { "main": [{ "node": "Format Posts" }] },
+"Format Posts": { "main": [{ "node": "Post to Instagram/TikTok" }] },
+"Post to Instagram/TikTok": { "main": [{ "node": "Error Alert", "type": "onError" }] }
+}
 }
 
 Setup Steps:

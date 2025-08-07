@@ -16,7 +16,6 @@ agents:
   virtual_reader_sol:
     class: virtual_agent_readers.SolReaderAgent
     enabled: true
-
 # Notes:
 # - Each agent is defined under the `agents:` key
 # - The `class` field specifies the fully qualified Python path to the agent class

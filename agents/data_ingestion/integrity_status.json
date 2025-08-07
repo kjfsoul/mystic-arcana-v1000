@@ -6,7 +6,7 @@
   "test_results": {
     "integration_tests": {
       "web_scraping": "passed",
-      "youtube_processing": "passed", 
+      "youtube_processing": "passed",
       "content_processing": "partial",
       "data_validation": "passed",
       "error_handling": "passed",
@@ -25,15 +25,13 @@
   "dependencies": {
     "required": [
       "beautifulsoup4",
-      "requests", 
+      "requests",
       "youtube-transcript-api",
       "neo4j",
       "lxml",
       "pydantic"
     ],
-    "optional": [
-      "spacy"
-    ],
+    "optional": ["spacy"],
     "missing": []
   },
   "limitations": [

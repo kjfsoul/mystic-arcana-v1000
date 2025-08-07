@@ -25,9 +25,7 @@
       "prideful",
       "dramatic"
     ],
-    "rulerOf": [
-      "Leo"
-    ],
+    "rulerOf": ["Leo"],
     "exaltedIn": "Aries",
     "detrimentIn": "Aquarius",
     "fallIn": "Libra",
@@ -67,9 +65,7 @@
       "reactive",
       "insecure"
     ],
-    "rulerOf": [
-      "Cancer"
-    ],
+    "rulerOf": ["Cancer"],
     "exaltedIn": "Taurus",
     "detrimentIn": "Capricorn",
     "fallIn": "Scorpio",
@@ -109,15 +105,9 @@
       "restless",
       "indecisive"
     ],
-    "rulerOf": [
-      "Gemini",
-      "Virgo"
-    ],
+    "rulerOf": ["Gemini", "Virgo"],
     "exaltedIn": "Virgo",
-    "detrimentIn": [
-      "Sagittarius",
-      "Pisces"
-    ],
+    "detrimentIn": ["Sagittarius", "Pisces"],
     "fallIn": "Pisces",
     "averageSpeed": "1.5° per day",
     "orbitalPeriod": "88 days",
@@ -155,15 +145,9 @@
       "possessive",
       "superficial"
     ],
-    "rulerOf": [
-      "Taurus",
-      "Libra"
-    ],
+    "rulerOf": ["Taurus", "Libra"],
     "exaltedIn": "Pisces",
-    "detrimentIn": [
-      "Scorpio",
-      "Aries"
-    ],
+    "detrimentIn": ["Scorpio", "Aries"],
     "fallIn": "Virgo",
     "averageSpeed": "1.2° per day",
     "orbitalPeriod": "225 days",
@@ -178,14 +162,7 @@
   "mars": {
     "name": "Mars",
     "symbol": "♂",
-    "keywords": [
-      "action",
-      "energy",
-      "courage",
-      "desire",
-      "anger",
-      "passion"
-    ],
+    "keywords": ["action", "energy", "courage", "desire", "anger", "passion"],
     "basicMeaning": "Drive, energy, assertion, and desire",
     "positiveTraits": [
       "courageous",
@@ -201,15 +178,9 @@
       "violent",
       "reckless"
     ],
-    "rulerOf": [
-      "Aries",
-      "Scorpio"
-    ],
+    "rulerOf": ["Aries", "Scorpio"],
     "exaltedIn": "Capricorn",
-    "detrimentIn": [
-      "Libra",
-      "Taurus"
-    ],
+    "detrimentIn": ["Libra", "Taurus"],
     "fallIn": "Cancer",
     "averageSpeed": "0.5° per day",
     "orbitalPeriod": "2 years",
@@ -247,15 +218,9 @@
       "preachy",
       "lazy"
     ],
-    "rulerOf": [
-      "Sagittarius",
-      "Pisces"
-    ],
+    "rulerOf": ["Sagittarius", "Pisces"],
     "exaltedIn": "Cancer",
-    "detrimentIn": [
-      "Gemini",
-      "Virgo"
-    ],
+    "detrimentIn": ["Gemini", "Virgo"],
     "fallIn": "Capricorn",
     "averageSpeed": "0.08° per day",
     "orbitalPeriod": "12 years",
@@ -293,15 +258,9 @@
       "restrictive",
       "fearful"
     ],
-    "rulerOf": [
-      "Capricorn",
-      "Aquarius"
-    ],
+    "rulerOf": ["Capricorn", "Aquarius"],
     "exaltedIn": "Libra",
-    "detrimentIn": [
-      "Cancer",
-      "Leo"
-    ],
+    "detrimentIn": ["Cancer", "Leo"],
     "fallIn": "Aries",
     "averageSpeed": "0.03° per day",
     "orbitalPeriod": "29 years",
@@ -339,9 +298,7 @@
       "detached",
       "revolutionary"
     ],
-    "rulerOf": [
-      "Aquarius"
-    ],
+    "rulerOf": ["Aquarius"],
     "exaltedIn": "Scorpio",
     "detrimentIn": "Leo",
     "fallIn": "Taurus",
@@ -381,9 +338,7 @@
       "addictive",
       "victim-like"
     ],
-    "rulerOf": [
-      "Pisces"
-    ],
+    "rulerOf": ["Pisces"],
     "exaltedIn": "Leo",
     "detrimentIn": "Virgo",
     "fallIn": "Aquarius",
@@ -423,9 +378,7 @@
       "controlling",
       "vengeful"
     ],
-    "rulerOf": [
-      "Scorpio"
-    ],
+    "rulerOf": ["Scorpio"],
     "exaltedIn": "Aries",
     "detrimentIn": "Taurus",
     "fallIn": "Libra",

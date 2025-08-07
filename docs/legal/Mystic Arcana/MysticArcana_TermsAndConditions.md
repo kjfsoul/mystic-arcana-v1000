@@ -1,5 +1,6 @@
-# Mystic Arcana Terms & Conditions (Terms of Use)  
-*Effective Date: [Insert Date]*
+# Mystic Arcana Terms & Conditions (Terms of Use)
+
+_Effective Date: [Insert Date]_
 
 ---
 
@@ -30,6 +31,7 @@ If you do not agree to these Terms, please do not use Mystic Arcana.
 ## 2. Eligibility & Age Requirement
 
 Mystic Arcana is intended for users **age 16 and older**. By using our platform, you confirm that:
+
 - You are at least 16 years old, and
 - If under 18, you have legal guardian consent to use our services.
 
@@ -38,6 +40,7 @@ Mystic Arcana is intended for users **age 16 and older**. By using our platform,
 ## 3. Account Creation & Responsibilities
 
 You must create an account to access most features. When doing so, you agree to:
+
 - Provide truthful, accurate information
 - Maintain the confidentiality of your login credentials
 - Be responsible for any activity under your account
@@ -62,6 +65,7 @@ You agree not to hold Mystic Arcana, LLC liable for any decisions made based on 
 Some features require a paid subscription or one-time purchase. Payments are processed securely via Stripe.
 
 By subscribing, you agree to:
+
 - Pay all applicable fees
 - Understand that subscriptions auto-renew unless canceled
 - Acknowledge that refunds are governed by our [Refund Policy] (coming soon)
@@ -82,9 +86,9 @@ User-generated content (e.g., journal entries) remains yours, but by posting or 
 
 By using Mystic Arcana, you agree to:
 
-- Treat others with kindness and respect  
-- Avoid hate speech, harassment, or exploitation  
-- Not misuse or interfere with the platform’s functionality  
+- Treat others with kindness and respect
+- Avoid hate speech, harassment, or exploitation
+- Not misuse or interfere with the platform’s functionality
 - Not reverse-engineer or attempt to extract proprietary code or AI models
 
 Violation may result in account suspension or termination without refund.
@@ -96,6 +100,7 @@ Violation may result in account suspension or termination without refund.
 You retain rights to your journal entries and personal insights, which are stored privately unless explicitly shared.
 
 We may use anonymized or aggregated usage data to:
+
 - Improve our platform
 - Train or refine our AI models
 - Generate insights about collective trends
@@ -115,6 +120,7 @@ We reserve the right to discontinue or modify services at our discretion.
 You may delete your account at any time.
 
 We may suspend or terminate accounts for:
+
 - Violating these Terms
 - Engaging in abusive or fraudulent behavior
 - Misusing community spaces or services
@@ -126,6 +132,7 @@ In the event of termination, you may lose access to your content and data.
 ## 11. Legal Jurisdiction & Governing Law
 
 Mystic Arcana is owned and operated in the United States. By using our platform, you agree that:
+
 - These Terms are governed by Florida law (or your chosen state)
 - Any disputes will be resolved in accordance with U.S. law
 - You waive any jurisdictional objections to courts located in [Your County/State]
@@ -140,6 +147,7 @@ Mystic Arcana is owned and operated in the United States. By using our platform,
 ---
 
 ## Implementation Notes
+
 - Display in app footer and onboarding
 - Link from account creation and checkout screens
 - Display prior to accepting any subscription

@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
           error: "Database configuration error",
           code: "CONFIG_ERROR",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
           code: "FETCH_ERROR",
           details: fetchError.message,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
     if (!cards || cards.length === 0) {
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
           error: `No cards found for deck ${deckId}`,
           code: "DECK_NOT_FOUND",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
     // Perform shuffle based on algorithm
@@ -153,7 +153,7 @@ export async function POST(request: NextRequest) {
         entropy: shuffleState.entropy,
         shuffleId,
       },
-      `Successfully shuffled ${shuffledCards.length} cards using ${algorithm} algorithm.`
+      `Successfully shuffled ${shuffledCards.length} cards using ${algorithm} algorithm.`,
     );
     return NextResponse.json(response, {
       headers: {
@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
         code: "INTERNAL_ERROR",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -247,7 +247,7 @@ function overhandShuffle(array: Card[]): Card[] {
       // Take a small packet (1-7 cards) from top
       const packetSize = Math.min(
         deck.length,
-        1 + Math.floor(Math.random() * 6)
+        1 + Math.floor(Math.random() * 6),
       );
       const packet = deck.splice(0, packetSize);
       // Place packet on top of new deck

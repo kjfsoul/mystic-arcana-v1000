@@ -1,11 +1,10 @@
- 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { GeoLocation } from '../types/astronomical';
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { GeoLocation } from "../types/astronomical";
 interface GeolocationState {
   location: GeoLocation | null;
   loading: boolean;
   error: string | null;
-  permission: 'granted' | 'denied' | 'prompt' | 'unknown';
+  permission: "granted" | "denied" | "prompt" | "unknown";
 }
 interface UseGeolocationOptions {
   enableHighAccuracy?: boolean;
@@ -15,7 +14,7 @@ interface UseGeolocationOptions {
 }
 /**
  * useGeolocation Hook
- * 
+ *
  * Manages user's geographic location for astronomical calculations.
  * Handles permissions, fallbacks, and timezone detection.
  */
@@ -26,24 +25,30 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
     maximumAge = 300000, // 5 minutes
     fallbackLocation = {
       latitude: 40.7128,
-      longitude: -74.0060,
+      longitude: -74.006,
       elevation: 10,
-      timezone: 'America/New_York'
-    }
+      timezone: "America/New_York",
+    },
   } = options;
   // Memoize fallback location to prevent infinite loops
- 
-  const memoizedFallbackLocation = useMemo(() => fallbackLocation, [fallbackLocation]);
+
+  const memoizedFallbackLocation = useMemo(
+    () => fallbackLocation,
+    [fallbackLocation],
+  );
   // Prevent multiple simultaneous requests
   const isRequestingRef = useRef(false);
   const [state, setState] = useState<GeolocationState>({
     location: null,
     loading: false,
     error: null,
-    permission: 'unknown'
+    permission: "unknown",
   });
   // Get timezone from coordinates
-  const getTimezoneFromCoords = async (lat: number, lon: number): Promise<string> => {
+  const getTimezoneFromCoords = async (
+    lat: number,
+    lon: number,
+  ): Promise<string> => {
     try {
       // Try to use Intl.DateTimeFormat to get timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -52,11 +57,11 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
       const offsetHours = Math.round(lon / 15);
       // This is a rough approximation - in production, use a proper timezone API
       if (offsetHours >= -12 && offsetHours <= 12) {
-        return `UTC${offsetHours >= 0 ? '+' : ''}${offsetHours}`;
+        return `UTC${offsetHours >= 0 ? "+" : ""}${offsetHours}`;
       }
-      return 'UTC';
+      return "UTC";
     } catch {
-      return 'UTC';
+      return "UTC";
     }
   };
   // Get elevation estimate (placeholder - would use elevation API in production)
@@ -66,35 +71,37 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
     return 0;
   };
   // Request geolocation permission and get position
- 
+
   const requestLocation = useCallback(async () => {
     // Prevent multiple simultaneous requests
     if (isRequestingRef.current) {
       return;
     }
-    
+
     if (!navigator.geolocation) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
-        error: 'Geolocation is not supported by this browser',
-        permission: 'denied',
-        location: memoizedFallbackLocation
+        error: "Geolocation is not supported by this browser",
+        permission: "denied",
+        location: memoizedFallbackLocation,
       }));
       return;
     }
     isRequestingRef.current = true;
-    setState(prev => ({ ...prev, loading: true, error: null }));
+    setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       // Check permission status if available
-      if ('permissions' in navigator) {
-        const permission = await navigator.permissions.query({ name: 'geolocation' });
-        setState(prev => ({ ...prev, permission: permission.state }));
-        if (permission.state === 'denied') {
-          setState(prev => ({
+      if ("permissions" in navigator) {
+        const permission = await navigator.permissions.query({
+          name: "geolocation",
+        });
+        setState((prev) => ({ ...prev, permission: permission.state }));
+        if (permission.state === "denied") {
+          setState((prev) => ({
             ...prev,
             loading: false,
-            error: 'Geolocation permission denied',
-            location: memoizedFallbackLocation
+            error: "Geolocation permission denied",
+            location: memoizedFallbackLocation,
           }));
           isRequestingRef.current = false;
           return;
@@ -111,14 +118,14 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               latitude,
               longitude,
               elevation,
-              timezone
+              timezone,
             };
-            setState(prev => ({
+            setState((prev) => ({
               ...prev,
               location,
               loading: false,
               error: null,
-              permission: 'granted'
+              permission: "granted",
             }));
             isRequestingRef.current = false;
           } catch {
@@ -127,52 +134,55 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
               latitude,
               longitude,
               elevation: altitude || 0,
-              timezone: memoizedFallbackLocation.timezone
+              timezone: memoizedFallbackLocation.timezone,
             };
-            setState(prev => ({
+            setState((prev) => ({
               ...prev,
               location,
               loading: false,
               error: null,
-              permission: 'granted'
+              permission: "granted",
             }));
             isRequestingRef.current = false;
           }
         },
         (error) => {
-          let errorMessage = 'Failed to get location';
+          let errorMessage = "Failed to get location";
           switch (error.code) {
             case error.PERMISSION_DENIED:
-              errorMessage = 'Location access denied by user';
+              errorMessage = "Location access denied by user";
               break;
             case error.POSITION_UNAVAILABLE:
-              errorMessage = 'Location information unavailable';
+              errorMessage = "Location information unavailable";
               break;
             case error.TIMEOUT:
-              errorMessage = 'Location request timed out';
+              errorMessage = "Location request timed out";
               break;
           }
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             loading: false,
             error: errorMessage,
-            permission: error.code === error.PERMISSION_DENIED ? 'denied' : prev.permission,
-            location: memoizedFallbackLocation
+            permission:
+              error.code === error.PERMISSION_DENIED
+                ? "denied"
+                : prev.permission,
+            location: memoizedFallbackLocation,
           }));
           isRequestingRef.current = false;
         },
         {
           enableHighAccuracy,
           timeout,
-          maximumAge
-        }
+          maximumAge,
+        },
       );
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         loading: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-        location: memoizedFallbackLocation
+        error: error instanceof Error ? error.message : "Unknown error",
+        location: memoizedFallbackLocation,
       }));
       isRequestingRef.current = false;
     }
@@ -189,43 +199,43 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
           latitude,
           longitude,
           elevation,
-          timezone
+          timezone,
         };
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           location,
-          error: null
+          error: null,
         }));
       },
       (error) => {
-        console.warn('Geolocation watch error:', error);
+        console.warn("Geolocation watch error:", error);
       },
       {
         enableHighAccuracy,
         timeout,
-        maximumAge
-      }
+        maximumAge,
+      },
     );
   };
   // Clear location data
   const clearLocation = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       location: null,
-      error: null
+      error: null,
     }));
   };
   // Use fallback location
   const useFallback = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       location: memoizedFallbackLocation,
       error: null,
-      loading: false
+      loading: false,
     }));
   };
   // Auto-request location on mount (only once)
- 
+
   useEffect(() => {
     requestLocation();
   }, [requestLocation]); // Empty dependency array to run only once
@@ -236,6 +246,6 @@ export const useGeolocation = (options: UseGeolocationOptions = {}) => {
     clearLocation,
     useFallback,
     hasLocation: !!state.location,
-    isLocationAccurate: state.permission === 'granted' && !!state.location
+    isLocationAccurate: state.permission === "granted" && !!state.location,
   };
 };

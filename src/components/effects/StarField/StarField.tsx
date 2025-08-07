@@ -1,7 +1,7 @@
-'use client';
- 
-import React, { useRef, useEffect } from 'react';
-import styles from './StarField.module.css';
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import styles from "./StarField.module.css";
 interface StarFieldProps {
   density?: number;
   className?: string;
@@ -19,26 +19,26 @@ interface Star {
 }
 /**
  * StarField Component
- * 
+ *
  * Creates a parallax star field effect with multiple layers of depth.
  * Stars twinkle and move based on user interaction or auto-motion.
  */
 export const StarField: React.FC<StarFieldProps> = ({
   density = 200,
-  className = '',
+  className = "",
   speed = 1,
-  interactive = true
+  interactive = true,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const starsRef = useRef<Star[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
   const timeRef = useRef(0);
- 
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
     // Set canvas size
     const resizeCanvas = () => {
@@ -54,23 +54,23 @@ export const StarField: React.FC<StarFieldProps> = ({
           y: Math.random() * canvas.height,
           z: Math.random() * 1000,
           brightness: Math.random(),
-          color: getStarColor()
+          color: getStarColor(),
         });
       }
     };
     const getStarColor = () => {
       const colors = [
-        '#FFFFFF', // White
-        '#FFE4B5', // Warm white
-        '#E6E6FA', // Lavender
-        '#FFD700', // Gold
-        '#87CEEB', // Sky blue
-        '#DDA0DD'  // Plum
+        "#FFFFFF", // White
+        "#FFE4B5", // Warm white
+        "#E6E6FA", // Lavender
+        "#FFD700", // Gold
+        "#87CEEB", // Sky blue
+        "#DDA0DD", // Plum
       ];
       return colors[Math.floor(Math.random() * colors.length)];
     };
     const updateStars = (deltaTime: number) => {
-      starsRef.current.forEach(star => {
+      starsRef.current.forEach((star) => {
         // Store previous position for trails
         star.prevX = star.x;
         star.prevY = star.y;
@@ -97,10 +97,15 @@ export const StarField: React.FC<StarFieldProps> = ({
     };
     const drawStars = () => {
       // Clear with slight fade for trails
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      starsRef.current.forEach(star => {
-        if (star.x < 0 || star.x > canvas.width || star.y < 0 || star.y > canvas.height) {
+      starsRef.current.forEach((star) => {
+        if (
+          star.x < 0 ||
+          star.x > canvas.width ||
+          star.y < 0 ||
+          star.y > canvas.height
+        ) {
           return;
         }
         // Calculate size based on distance
@@ -140,16 +145,18 @@ export const StarField: React.FC<StarFieldProps> = ({
       if (interactive) {
         mouseRef.current = {
           x: e.clientX,
-          y: e.clientY
+          y: e.clientY,
         };
       }
     };
     // Initialize
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("mousemove", handleMouseMove);
     // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (!prefersReducedMotion) {
       animate(0);
     } else {
@@ -157,8 +164,8 @@ export const StarField: React.FC<StarFieldProps> = ({
       drawStars();
     }
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }

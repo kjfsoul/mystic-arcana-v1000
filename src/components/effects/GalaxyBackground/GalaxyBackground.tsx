@@ -1,7 +1,7 @@
-'use client';
- 
+"use client";
+
 import React, { useEffect, useRef } from "react";
-import styles from './GalaxyBackground.module.css';
+import styles from "./GalaxyBackground.module.css";
 interface GalaxyBackgroundProps {
   className?: string;
   intensity?: number; // 0-1, controls brightness
@@ -23,7 +23,7 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
   starCount,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
- 
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -40,7 +40,8 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
       canvas.height = height;
       ctx.clearRect(0, 0, width, height);
       // Drastically reduce star count for faster initial render
-      const finalStarCount = starCount || Math.min(25, Math.floor((width * height) / 32000));
+      const finalStarCount =
+        starCount || Math.min(25, Math.floor((width * height) / 32000));
       for (let i = 0; i < finalStarCount; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
@@ -80,7 +81,7 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
           0,
           height * 0.3,
           width,
-          height * 0.7
+          height * 0.7,
         );
         gradient.addColorStop(0, `rgba(139, 69, 19, ${0.1 * intensity})`);
         gradient.addColorStop(0.3, `rgba(160, 82, 45, ${0.15 * intensity})`);
@@ -100,7 +101,7 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
             0,
             nebulaX,
             nebulaY,
-            nebulaSize
+            nebulaSize,
           );
           const colors = [
             `rgba(255, 20, 147, ${0.1 * intensity})`, // Deep pink
@@ -115,7 +116,7 @@ export const GalaxyBackground: React.FC<GalaxyBackgroundProps> = ({
             nebulaX - nebulaSize,
             nebulaY - nebulaSize,
             nebulaSize * 2,
-            nebulaSize * 2
+            nebulaSize * 2,
           );
         }
       }

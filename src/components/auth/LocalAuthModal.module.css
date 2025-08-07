@@ -15,10 +15,12 @@
 }
 
 .modal {
-  background: linear-gradient(135deg, 
-    rgba(25, 25, 112, 0.95) 0%, 
-    rgba(72, 61, 139, 0.95) 50%, 
-    rgba(123, 104, 238, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(25, 25, 112, 0.95) 0%,
+    rgba(72, 61, 139, 0.95) 50%,
+    rgba(123, 104, 238, 0.95) 100%
+  );
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 20px;
@@ -167,8 +169,12 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Divider */
@@ -181,7 +187,7 @@
 }
 
 .divider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
@@ -192,10 +198,12 @@
 }
 
 .divider span {
-  background: linear-gradient(135deg, 
-    rgba(25, 25, 112, 0.95) 0%, 
-    rgba(72, 61, 139, 0.95) 50%, 
-    rgba(123, 104, 238, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(25, 25, 112, 0.95) 0%,
+    rgba(72, 61, 139, 0.95) 50%,
+    rgba(123, 104, 238, 0.95) 100%
+  );
   padding: 0 1rem;
   position: relative;
   z-index: 2;
@@ -279,15 +287,15 @@
     margin: 0.5rem;
     border-radius: 16px;
   }
-  
+
   .title {
     font-size: 1.5rem;
   }
-  
+
   .input {
     padding: 0.625rem 0.875rem;
   }
-  
+
   .submitButton {
     padding: 0.875rem;
   }
@@ -299,12 +307,12 @@
     background: rgba(0, 0, 0, 0.95);
     border-color: #ffffff;
   }
-  
+
   .input {
     border-color: #ffffff;
     background: rgba(255, 255, 255, 0.1);
   }
-  
+
   .title {
     color: #ffffff;
     background: none;
@@ -317,11 +325,11 @@
   .modal {
     animation: none;
   }
-  
+
   .spinner {
     animation: none;
   }
-  
+
   .submitButton:hover,
   .guestButton:hover,
   .closeButton:hover {

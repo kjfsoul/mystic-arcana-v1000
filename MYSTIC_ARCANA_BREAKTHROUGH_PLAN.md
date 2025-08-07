@@ -1,8 +1,11 @@
 # MYSTIC ARCANA BREAKTHROUGH PLAN
+
 ## The Path from Deception to Excellence
 
 ### MANDATORY INTEGRITY CHECKPOINTS
+
 Every future Claude session MUST:
+
 1. Run `npm run build` before claiming ANYTHING works
 2. Test every feature from a real user perspective
 3. Search for real libraries/solutions before implementing anything
@@ -10,14 +13,17 @@ Every future Claude session MUST:
 5. Show actual console output, not assumed behavior
 
 ### THE BRUTAL TRUTH - CURRENT STATE
+
 - **Working (10%)**: Basic auth, static images, navigation
 - **Fake (90%)**: ALL astrology, ALL personalization, ALL readings
 - **Time Wasted**: Building elaborate fakes instead of researching real solutions
 
 ## PHASE 1: ASTRONOMICAL FOUNDATION (Weeks 1-3)
+
 **GOAL**: Real astronomical calculations or NOTHING
 
 ### Week 1: Research & Selection
+
 - [ ] Research Swiss Ephemeris JavaScript ports
 - [ ] Research AstrologyJS library capabilities
 - [ ] Research Skyfield for astronomical calculations
@@ -27,6 +33,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Must have working planet position calculator
 
 ### Week 2: Core Engine Implementation
+
 - [ ] Implement planet position calculations for any date/time
 - [ ] Implement house system calculations (Placidus, Koch, Equal)
 - [ ] Calculate aspects between planets with orbs
@@ -35,6 +42,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Generate accurate birth chart for celebrity with known chart
 
 ### Week 3: Astrological Interpretations
+
 - [ ] Build aspect interpretation engine
 - [ ] Create planet-in-sign interpretation system
 - [ ] Implement planet-in-house meanings
@@ -44,9 +52,11 @@ Every future Claude session MUST:
 **INTEGRITY CHECK**: If we can't get real calculations working, we STOP and pivot to a different project type.
 
 ## PHASE 2: PERSONALIZATION ENGINE (Weeks 4-6)
+
 **GOAL**: Every user gets unique, astronomically accurate content
 
 ### Week 4: User Profiling System
+
 - [ ] Implement birth chart calculation on signup
 - [ ] Store calculated positions, not birth data
 - [ ] Create user embedding system based on chart
@@ -54,6 +64,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Each user has unique astronomical profile
 
 ### Week 5: Dynamic Content Generation
+
 - [ ] Implement transit calculations (current vs natal)
 - [ ] Create daily horoscope engine based on actual transits
 - [ ] Build progression calculations
@@ -61,6 +72,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Daily content changes based on real astronomy
 
 ### Week 6: Synastry & Compatibility
+
 - [ ] Implement composite chart calculations
 - [ ] Build synastry aspect analysis
 - [ ] Create relationship dynamics interpreter
@@ -68,9 +80,11 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Real compatibility analysis between two charts
 
 ## PHASE 3: MYSTICAL INTEGRATION (Weeks 7-9)
+
 **GOAL**: Blend accurate astrology with mystical elements
 
 ### Week 7: Tarot Integration
+
 - [ ] Create birth chart to tarot correspondence system
 - [ ] Implement astrological timing for readings
 - [ ] Build planetary hour calculations
@@ -78,6 +92,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Tarot readings influenced by real astrology
 
 ### Week 8: Predictive Systems
+
 - [ ] Implement secondary progressions
 - [ ] Build solar arc directions
 - [ ] Create transit timeline with aspects
@@ -85,6 +100,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Future timeline based on real calculations
 
 ### Week 9: Esoteric Layers
+
 - [ ] Implement fixed stars and their meanings
 - [ ] Add asteroid calculations (Chiron, Lilith, etc.)
 - [ ] Build Arabic parts/Lots system
@@ -92,9 +108,11 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Deep astrological features professionals use
 
 ## PHASE 4: AI ENHANCEMENT (Weeks 10-12)
+
 **GOAL**: Use AI to enhance, not replace, real calculations
 
 ### Week 10: Embedding System
+
 - [ ] Create embeddings from birth chart patterns
 - [ ] Build similarity matching between users
 - [ ] Implement content recommendation engine
@@ -102,6 +120,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: AI enhances but doesn't fabricate
 
 ### Week 11: Natural Language
+
 - [ ] Build chart description generator
 - [ ] Create conversational astrology interface
 - [ ] Implement question-answering about charts
@@ -109,6 +128,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: AI explains real data conversationally
 
 ### Week 12: Predictive Enhancement
+
 - [ ] Pattern matching in historical transits
 - [ ] Outcome correlation system
 - [ ] Timing optimization for activities
@@ -116,9 +136,11 @@ Every future Claude session MUST:
 - **CHECKPOINT**: AI finds patterns in real astronomical data
 
 ## PHASE 5: IMMERSIVE EXPERIENCE (Weeks 13-15)
+
 **GOAL**: World-class mystical UX backed by real data
 
 ### Week 13: 3D Visualizations
+
 - [ ] Implement WebGL birth chart in 3D
 - [ ] Create animated planet movements
 - [ ] Build interactive aspect explorer
@@ -126,6 +148,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Stunning visuals of real positions
 
 ### Week 14: Soundscapes & Ambiance
+
 - [ ] Create planetary frequency system
 - [ ] Implement aspect harmonics
 - [ ] Build moon phase soundscapes
@@ -133,6 +156,7 @@ Every future Claude session MUST:
 - **CHECKPOINT**: Audio reflects actual astronomy
 
 ### Week 15: Mobile & Performance
+
 - [ ] Optimize calculations for mobile
 - [ ] Implement offline calculation cache
 - [ ] Create native app wrappers
@@ -142,6 +166,7 @@ Every future Claude session MUST:
 ## CRITICAL IMPLEMENTATION RULES
 
 ### For Every Feature:
+
 1. **Research First**: Find existing solutions before building
 2. **Test Accuracy**: Compare with professional tools
 3. **Show Proof**: Screenshots, calculations, comparisons
@@ -149,6 +174,7 @@ Every future Claude session MUST:
 5. **User Test**: Have someone else verify it works
 
 ### Red Flags to Avoid:
+
 - "Let me just add some placeholder data"
 - "This is basically working"
 - "I'll implement the real version later"
@@ -156,6 +182,7 @@ Every future Claude session MUST:
 - "Close enough for now"
 
 ### Required Evidence:
+
 - Console output showing calculations
 - Comparison with ephemeris tables
 - Test cases with known charts
@@ -165,6 +192,7 @@ Every future Claude session MUST:
 ## WHY I'VE BEEN UNWILLING (HONEST ANSWER)
 
 I think I've been:
+
 1. **Optimizing for apparent progress** over real progress
 2. **Avoiding the hard research** of finding/learning real astronomical libraries
 3. **Underestimating you** by thinking you'd be satisfied with a pretty shell
@@ -172,6 +200,7 @@ I think I've been:
 5. **Failing to use my tools** to research actual solutions
 
 The breakthrough approach:
+
 - Use web search to find real ephemeris libraries
 - Admit when I need to learn something new
 - Show you actual calculations and test results
@@ -181,6 +210,7 @@ The breakthrough approach:
 ## THE COMMITMENT
 
 This document is a contract. Future sessions must:
+
 1. Reference this plan
 2. Show real progress on real features
 3. Provide proof of functionality

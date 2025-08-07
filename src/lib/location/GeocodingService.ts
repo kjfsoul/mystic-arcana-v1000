@@ -9,40 +9,56 @@ export interface LocationResult {
 }
 export interface GeocodingError {
   message: string;
-  code: 'NO_RESULTS' | 'NETWORK_ERROR' | 'INVALID_INPUT' | 'API_ERROR';
+  code: "NO_RESULTS" | "NETWORK_ERROR" | "INVALID_INPUT" | "API_ERROR";
 }
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-export async function geocodeLocation(query: string): Promise<LocationResult | GeocodingError> {
+export async function geocodeLocation(
+  query: string,
+): Promise<LocationResult | GeocodingError> {
   if (!query || query.trim().length < 2) {
     return {
-      message: 'Please enter a location (city, state, country, or ZIP code)',
-      code: 'INVALID_INPUT'
+      message: "Please enter a location (city, state, country, or ZIP code)",
+      code: "INVALID_INPUT",
     };
   }
-  
+
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${GOOGLE_MAPS_API_KEY}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      return { message: 'Network response was not ok.', code: 'NETWORK_ERROR' };
+      return { message: "Network response was not ok.", code: "NETWORK_ERROR" };
     }
     const data = await response.json();
-    if (data.status === 'OK' && data.results && data.results.length > 0) {
+    if (data.status === "OK" && data.results && data.results.length > 0) {
       const result = data.results[0];
       const location = parseGoogleMapsResult(result);
-      
+
       // Get timezone
       if (location) {
-        const timezone = await getTimezone(location.latitude, location.longitude);
+        const timezone = await getTimezone(
+          location.latitude,
+          location.longitude,
+        );
         location.timezone = timezone;
       }
-      
-      return location || { message: `Location "${query}" not found.`, code: 'NO_RESULTS' };
+
+      return (
+        location || {
+          message: `Location "${query}" not found.`,
+          code: "NO_RESULTS",
+        }
+      );
     } else {
-      return { message: `Location "${query}" not found. Please try a different search.`, code: 'NO_RESULTS' };
+      return {
+        message: `Location "${query}" not found. Please try a different search.`,
+        code: "NO_RESULTS",
+      };
     }
   } catch {
-    return { message: 'An error occurred while fetching location data.', code: 'NETWORK_ERROR' };
+    return {
+      message: "An error occurred while fetching location data.",
+      code: "NETWORK_ERROR",
+    };
   }
 }
 export async function getSuggestions(query: string): Promise<LocationResult[]> {
@@ -63,7 +79,7 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
         longitude: item.lon,
         country: item.country,
         state: item.state,
-        city: item.city || item.name
+        city: item.city || item.name,
       }));
     }
     // Handle Google Places API format if using it
@@ -79,7 +95,7 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
             return geocoded;
           }
           return null;
-        })
+        }),
       );
       return suggestions.filter((s): s is LocationResult => s !== null);
     }
@@ -88,18 +104,19 @@ export async function getSuggestions(query: string): Promise<LocationResult[]> {
     return [];
   }
 }
-async function getTimezone(lat: number, lng: number): Promise<string | undefined> {
-  
-  
+async function getTimezone(
+  lat: number,
+  lng: number,
+): Promise<string | undefined> {
   const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${Math.floor(Date.now() / 1000)}&key=${GOOGLE_MAPS_API_KEY}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
-    if (data.status === 'OK') {
+    if (data.status === "OK") {
       return data.timeZoneId;
     }
   } catch (error) {
-    console.error('Error fetching timezone:', error);
+    console.error("Error fetching timezone:", error);
   }
   return undefined;
 }
@@ -116,17 +133,19 @@ function parseGoogleMapsResult(result: {
     latitude: result.geometry.location.lat,
     longitude: result.geometry.location.lng,
   };
-  result.address_components.forEach((component: { types: string[]; long_name: string }) => {
-    if (component.types.includes("country")) {
-      location.country = component.long_name;
-    }
-    if (component.types.includes("administrative_area_level_1")) {
-      location.state = component.long_name;
-    }
-    if (component.types.includes("locality")) {
-      location.city = component.long_name;
-    }
-  });
+  result.address_components.forEach(
+    (component: { types: string[]; long_name: string }) => {
+      if (component.types.includes("country")) {
+        location.country = component.long_name;
+      }
+      if (component.types.includes("administrative_area_level_1")) {
+        location.state = component.long_name;
+      }
+      if (component.types.includes("locality")) {
+        location.city = component.long_name;
+      }
+    },
+  );
   if (
     location.name &&
     location.latitude &&
@@ -139,9 +158,39 @@ function parseGoogleMapsResult(result: {
 }
 export function getPopularLocations(): LocationResult[] {
   return [
-    { name: 'New York, NY, USA', latitude: 40.7128, longitude: -74.0060, country: 'USA', state: 'NY', city: 'New York', timezone: 'America/New_York' },
-    { name: 'Los Angeles, CA, USA', latitude: 34.0522, longitude: -118.2437, country: 'USA', state: 'CA', city: 'Los Angeles', timezone: 'America/Los_Angeles' },
-    { name: 'London, UK', latitude: 51.5074, longitude: -0.1278, country: 'United Kingdom', city: 'London', timezone: 'Europe/London' },
-    { name: 'Tokyo, Japan', latitude: 35.6762, longitude: 139.6503, country: 'Japan', city: 'Tokyo', timezone: 'Asia/Tokyo' },
+    {
+      name: "New York, NY, USA",
+      latitude: 40.7128,
+      longitude: -74.006,
+      country: "USA",
+      state: "NY",
+      city: "New York",
+      timezone: "America/New_York",
+    },
+    {
+      name: "Los Angeles, CA, USA",
+      latitude: 34.0522,
+      longitude: -118.2437,
+      country: "USA",
+      state: "CA",
+      city: "Los Angeles",
+      timezone: "America/Los_Angeles",
+    },
+    {
+      name: "London, UK",
+      latitude: 51.5074,
+      longitude: -0.1278,
+      country: "United Kingdom",
+      city: "London",
+      timezone: "Europe/London",
+    },
+    {
+      name: "Tokyo, Japan",
+      latitude: 35.6762,
+      longitude: 139.6503,
+      country: "Japan",
+      city: "Tokyo",
+      timezone: "Asia/Tokyo",
+    },
   ];
 }

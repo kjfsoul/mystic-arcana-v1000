@@ -1,8 +1,10 @@
-
- 
-import type { BirthData, PlanetPosition, HousePosition } from './AstronomicalCalculator';
-import { NasaFallbackHandler } from './nasaFallbackHandler';
-import { resolveGeoLocation } from './geoResolver';
+import type {
+  BirthData,
+  PlanetPosition,
+  HousePosition,
+} from "./AstronomicalCalculator";
+import { NasaFallbackHandler } from "./nasaFallbackHandler";
+import { resolveGeoLocation } from "./geoResolver";
 
 // ... (rest of the file is the same)
 
@@ -20,7 +22,7 @@ export class SwissEphemerisShim {
 
       let finalBirthData = birthData;
       if (!birthData.location) {
-        const geoData = await resolveGeoLocation(birthData.location || '');
+        const geoData = await resolveGeoLocation(birthData.location || "");
         if (geoData) {
           finalBirthData = {
             ...birthData,
@@ -31,7 +33,9 @@ export class SwissEphemerisShim {
         }
       }
 
-      const jd = this.dateToJulianDay(finalBirthData.date || new Date(finalBirthData.birthDate));
+      const jd = this.dateToJulianDay(
+        finalBirthData.date || new Date(finalBirthData.birthDate),
+      );
       const planets: PlanetPosition[] = [];
 
       const PLANET_SYMBOLS: Record<string, string> = {}; // TODO: Define planet symbols
@@ -39,7 +43,11 @@ export class SwissEphemerisShim {
         const pos = this.calculatePlanetPosition(planetName, jd);
         if (pos) {
           const sign = this.getZodiacSign(pos.longitude);
-          const houses = this.calculateHouses(jd, finalBirthData.latitude || 0, finalBirthData.longitude || 0);
+          const houses = this.calculateHouses(
+            jd,
+            finalBirthData.latitude || 0,
+            finalBirthData.longitude || 0,
+          );
           let house = 1;
           for (let i = 0; i < 12; i++) {
             const nextHouse = (i + 1) % 12;
@@ -67,12 +75,16 @@ export class SwissEphemerisShim {
             house: house,
             sign: sign,
             isRetrograde: pos.speed < 0,
-            speed: Math.abs(pos.speed)
+            speed: Math.abs(pos.speed),
           });
         }
       }
 
-      const houseCusps = this.calculateHouses(jd, finalBirthData.latitude || 0, finalBirthData.longitude || 0);
+      const houseCusps = this.calculateHouses(
+        jd,
+        finalBirthData.latitude || 0,
+        finalBirthData.longitude || 0,
+      );
       const houses: HousePosition[] = houseCusps.map((cusp, i) => ({
         number: i + 1,
         longitude: cusp,
@@ -80,7 +92,7 @@ export class SwissEphemerisShim {
         zodiacDegree: cusp % 30,
         cusp: cusp,
         sign: this.getZodiacSign(cusp),
-        ruler: this.getHouseRuler(this.getZodiacSign(cusp))
+        ruler: this.getHouseRuler(this.getZodiacSign(cusp)),
       }));
 
       const ascendant = houseCusps[0];
@@ -88,10 +100,16 @@ export class SwissEphemerisShim {
 
       return { planets, houses, ascendant, midheaven };
     } catch (error) {
-      console.error("SwissEphemerisShim failed, attempting NASA fallback", error);
+      console.error(
+        "SwissEphemerisShim failed, attempting NASA fallback",
+        error,
+      );
       try {
         const fallbackHandler = new NasaFallbackHandler();
-        const fallbackData = await fallbackHandler.handleApiFailure(error, birthData);
+        const fallbackData = await fallbackHandler.handleApiFailure(
+          error,
+          birthData,
+        );
         console.log("Fallback data:", fallbackData);
         console.log("Fallback data:", fallbackData);
         // This is a simplified fallback, returning an empty chart

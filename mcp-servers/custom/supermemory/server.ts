@@ -1,5 +1,4 @@
-
-import express from 'express';
+import express from "express";
 
 const app = express();
 const port = 4001;
@@ -22,20 +21,26 @@ function generateId(): string {
 
 app.use(express.json());
 
-app.get('/status', (req, res) => {
-  res.json({ status: 'ok', serverName: 'supermemory' });
+app.get("/status", (req, res) => {
+  res.json({ status: "ok", serverName: "supermemory" });
 });
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'healthy', serverName: 'supermemory', timestamp: new Date().toISOString() });
+app.get("/health", (req, res) => {
+  res.json({
+    status: "healthy",
+    serverName: "supermemory",
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // POST /record: Saves a new spiritual journey entry
-app.post('/record', async (req, res) => {
+app.post("/record", async (req, res) => {
   const { userId, entryType, data, synthesisPrompt } = req.body;
 
   if (!userId || !entryType) {
-    return res.status(400).json({ error: 'userId and entryType are required.' });
+    return res
+      .status(400)
+      .json({ error: "userId and entryType are required." });
   }
 
   try {
@@ -45,7 +50,7 @@ app.post('/record', async (req, res) => {
       entry_type: entryType,
       data,
       synthesis_prompt: synthesisPrompt,
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     };
 
     if (!mockStorage.has(userId)) {
@@ -54,28 +59,38 @@ app.post('/record', async (req, res) => {
     mockStorage.get(userId)!.push(newEntry);
 
     console.log(`📝 Recorded entry for user ${userId}: ${entryType}`);
-    res.status(201).json({ message: 'Journey entry recorded successfully.', entry: newEntry });
+    res
+      .status(201)
+      .json({
+        message: "Journey entry recorded successfully.",
+        entry: newEntry,
+      });
   } catch (err) {
-    console.error('Unexpected error recording journey entry:', err);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Unexpected error recording journey entry:", err);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 
 // GET /journey/:userId: Retrieves all entries for a given user
-app.get('/journey/:userId', async (req, res) => {
+app.get("/journey/:userId", async (req, res) => {
   const { userId } = req.params;
 
   try {
     const journeyEntries = mockStorage.get(userId) || [];
-    
+
     // Sort by created_at ascending
-    journeyEntries.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-    
-    console.log(`🔍 Retrieved ${journeyEntries.length} entries for user ${userId}`);
+    journeyEntries.sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+    );
+
+    console.log(
+      `🔍 Retrieved ${journeyEntries.length} entries for user ${userId}`,
+    );
     res.status(200).json({ journey: journeyEntries });
   } catch (err) {
-    console.error('Unexpected error retrieving journey entries:', err);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Unexpected error retrieving journey entries:", err);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

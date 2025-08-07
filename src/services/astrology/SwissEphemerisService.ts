@@ -1,4 +1,4 @@
-import Swisseph from 'swisseph-v2';
+import Swisseph from "swisseph-v2";
 // Planet constants from Swiss Ephemeris
 export const PLANETS = {
   SUN: Swisseph.SE_SUN,
@@ -14,8 +14,8 @@ export const PLANETS = {
   CHIRON: Swisseph.SE_CHIRON,
   NORTH_NODE: Swisseph.SE_TRUE_NODE,
   SOUTH_NODE: 11, // Using numeric value for South Node
-  ASCENDANT: -1,  // These need special handling
-  MIDHEAVEN: -2   // These need special handling
+  ASCENDANT: -1, // These need special handling
+  MIDHEAVEN: -2, // These need special handling
 };
 export interface PlanetPosition {
   planet: string;
@@ -55,9 +55,9 @@ class SwissEphemerisService {
     // Set ephemeris path - we'll need to download ephemeris files
     // For now, use built-in Moshier ephemeris (less accurate but works without files)
     try {
-      Swisseph.swe_set_ephe_path('');
+      Swisseph.swe_set_ephe_path("");
     } catch {
-      console.log('Using default ephemeris');
+      console.log("Using default ephemeris");
     }
   }
   /**
@@ -71,7 +71,7 @@ class SwissEphemerisService {
       date.getUTCHours(),
       date.getUTCMinutes(),
       date.getUTCSeconds(),
-      Swisseph.SE_GREG_CAL
+      Swisseph.SE_GREG_CAL,
     );
     return result.julianDayUT;
   }
@@ -81,11 +81,11 @@ class SwissEphemerisService {
   calculatePlanetPosition(date: Date, planet: number): PlanetPosition | null {
     try {
       const jd = this.dateToJulianDay(date);
-      
+
       const result = Swisseph.swe_calc_ut(jd, planet, Swisseph.SEFLG_SPEED);
-      
+
       if (result.error) {
-        console.error('Error calculating planet position:', result.error);
+        console.error("Error calculating planet position:", result.error);
         return null;
       }
       const longitude = result.data[0];
@@ -94,9 +94,21 @@ class SwissEphemerisService {
       const speed = result.data[3];
       // Calculate zodiac sign
       const zodiacIndex = Math.floor(longitude / 30);
-      const zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
-                          'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
-      
+      const zodiacSigns = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+      ];
+
       const planetName = this.getPlanetName(planet);
       return {
         planet: planetName,
@@ -106,21 +118,34 @@ class SwissEphemerisService {
         speed,
         zodiacSign: zodiacSigns[zodiacIndex],
         zodiacDegree: longitude % 30,
-        retrograde: speed < 0
+        retrograde: speed < 0,
       };
     } catch (error) {
-      console.error('Error in calculatePlanetPosition:', error);
+      console.error("Error in calculatePlanetPosition:", error);
       return null;
     }
   }
   /**
    * Calculate all planet positions for a birth chart
    */
-  calculateBirthChart(birthDate: Date, latitude: number, longitude: number): BirthChart {
+  calculateBirthChart(
+    birthDate: Date,
+    latitude: number,
+    longitude: number,
+  ): BirthChart {
     const planetNumbers = [
-      PLANETS.SUN, PLANETS.MOON, PLANETS.MERCURY, PLANETS.VENUS, 
-      PLANETS.MARS, PLANETS.JUPITER, PLANETS.SATURN, PLANETS.URANUS, 
-      PLANETS.NEPTUNE, PLANETS.PLUTO, PLANETS.CHIRON, PLANETS.NORTH_NODE
+      PLANETS.SUN,
+      PLANETS.MOON,
+      PLANETS.MERCURY,
+      PLANETS.VENUS,
+      PLANETS.MARS,
+      PLANETS.JUPITER,
+      PLANETS.SATURN,
+      PLANETS.URANUS,
+      PLANETS.NEPTUNE,
+      PLANETS.PLUTO,
+      PLANETS.CHIRON,
+      PLANETS.NORTH_NODE,
     ];
     const planetPositions: PlanetPosition[] = [];
     // Calculate each planet's position
@@ -139,25 +164,34 @@ class SwissEphemerisService {
       location: {
         latitude,
         longitude,
-        timezone: 'UTC' // We'll implement timezone handling later
+        timezone: "UTC", // We'll implement timezone handling later
       },
       planets: planetPositions,
       houses,
-      aspects
+      aspects,
     };
   }
   /**
    * Calculate house cusps using Placidus system
    */
-  private calculateHouses(date: Date, latitude: number, longitude: number): number[] {
+  private calculateHouses(
+    date: Date,
+    latitude: number,
+    longitude: number,
+  ): number[] {
     try {
       const jd = this.dateToJulianDay(date);
-      
+
       // 'P' for Placidus house system
-      const result = Swisseph.swe_houses(jd, latitude, longitude, 'P'.charCodeAt(0));
-      
+      const result = Swisseph.swe_houses(
+        jd,
+        latitude,
+        longitude,
+        "P".charCodeAt(0),
+      );
+
       if (result.error) {
-        console.error('Error calculating houses:', result.error);
+        console.error("Error calculating houses:", result.error);
         // Return 12 equal houses as fallback
         const houses: number[] = [];
         for (let i = 0; i < 12; i++) {
@@ -172,7 +206,7 @@ class SwissEphemerisService {
       }
       return houses;
     } catch (error) {
-      console.error('Error in calculateHouses:', error);
+      console.error("Error in calculateHouses:", error);
       // Return equal houses as fallback
       const houses: number[] = [];
       for (let i = 0; i < 12; i++) {
@@ -187,11 +221,11 @@ class SwissEphemerisService {
   private calculateAspects(planets: PlanetPosition[]): Aspect[] {
     const aspects: Aspect[] = [];
     const aspectTypes = [
-      { name: 'conjunction', angle: 0, orb: 8 },
-      { name: 'sextile', angle: 60, orb: 6 },
-      { name: 'square', angle: 90, orb: 8 },
-      { name: 'trine', angle: 120, orb: 8 },
-      { name: 'opposition', angle: 180, orb: 8 }
+      { name: "conjunction", angle: 0, orb: 8 },
+      { name: "sextile", angle: 60, orb: 6 },
+      { name: "square", angle: 90, orb: 8 },
+      { name: "trine", angle: 120, orb: 8 },
+      { name: "opposition", angle: 180, orb: 8 },
     ];
     // Check aspects between each pair of planets
     for (let i = 0; i < planets.length; i++) {
@@ -211,7 +245,7 @@ class SwissEphemerisService {
               type: aspectType.name,
               angle: angle,
               orb: orb,
-              applying: this.isAspectApplying(planet1, planet2)
+              applying: this.isAspectApplying(planet1, planet2),
             });
             break;
           }
@@ -223,11 +257,14 @@ class SwissEphemerisService {
   /**
    * Determine if an aspect is applying (getting closer) or separating
    */
-  private isAspectApplying(planet1: PlanetPosition, planet2: PlanetPosition): boolean {
+  private isAspectApplying(
+    planet1: PlanetPosition,
+    planet2: PlanetPosition,
+  ): boolean {
     // Simplified: if faster planet is behind slower planet, it's applying
     const speed1 = Math.abs(planet1.speed);
     const speed2 = Math.abs(planet2.speed);
-    
+
     if (speed1 > speed2) {
       return planet1.longitude < planet2.longitude;
     } else {
@@ -239,52 +276,56 @@ class SwissEphemerisService {
    */
   private getPlanetName(planet: number): string {
     const planetNames: { [key: number]: string } = {
-      [PLANETS.SUN]: 'Sun',
-      [PLANETS.MOON]: 'Moon',
-      [PLANETS.MERCURY]: 'Mercury',
-      [PLANETS.VENUS]: 'Venus',
-      [PLANETS.MARS]: 'Mars',
-      [PLANETS.JUPITER]: 'Jupiter',
-      [PLANETS.SATURN]: 'Saturn',
-      [PLANETS.URANUS]: 'Uranus',
-      [PLANETS.NEPTUNE]: 'Neptune',
-      [PLANETS.PLUTO]: 'Pluto',
-      [PLANETS.CHIRON]: 'Chiron',
-      [PLANETS.NORTH_NODE]: 'North Node',
-      [PLANETS.SOUTH_NODE]: 'South Node'
+      [PLANETS.SUN]: "Sun",
+      [PLANETS.MOON]: "Moon",
+      [PLANETS.MERCURY]: "Mercury",
+      [PLANETS.VENUS]: "Venus",
+      [PLANETS.MARS]: "Mars",
+      [PLANETS.JUPITER]: "Jupiter",
+      [PLANETS.SATURN]: "Saturn",
+      [PLANETS.URANUS]: "Uranus",
+      [PLANETS.NEPTUNE]: "Neptune",
+      [PLANETS.PLUTO]: "Pluto",
+      [PLANETS.CHIRON]: "Chiron",
+      [PLANETS.NORTH_NODE]: "North Node",
+      [PLANETS.SOUTH_NODE]: "South Node",
     };
-    return planetNames[planet] || 'Unknown';
+    return planetNames[planet] || "Unknown";
   }
   /**
    * Test function to verify calculations
    */
   testCalculations(): void {
-    console.log('Testing Swiss Ephemeris calculations...');
-    
+    console.log("Testing Swiss Ephemeris calculations...");
+
     // Test with Einstein's birth data
-    const testDate = new Date('1879-03-14T11:30:00Z');
-    const testLat = 48.4;  // Ulm, Germany
+    const testDate = new Date("1879-03-14T11:30:00Z");
+    const testLat = 48.4; // Ulm, Germany
     const testLon = 10.0;
-    console.log('\nCalculating positions for:', testDate.toISOString());
-    
+    console.log("\nCalculating positions for:", testDate.toISOString());
+
     // Calculate Sun position
     const sunPosition = this.calculatePlanetPosition(testDate, PLANETS.SUN);
     if (sunPosition) {
-      console.log('\nSun Position:');
+      console.log("\nSun Position:");
       console.log(`- Longitude: ${sunPosition.longitude.toFixed(4)}°`);
-      console.log(`- Sign: ${sunPosition.zodiacSign} ${sunPosition.zodiacDegree.toFixed(2)}°`);
+      console.log(
+        `- Sign: ${sunPosition.zodiacSign} ${sunPosition.zodiacDegree.toFixed(2)}°`,
+      );
       console.log(`- Retrograde: ${sunPosition.retrograde}`);
     }
     // Calculate full birth chart
     const birthChart = this.calculateBirthChart(testDate, testLat, testLon);
-    console.log('\nFull Birth Chart:');
+    console.log("\nFull Birth Chart:");
     console.log(`- Planets calculated: ${birthChart.planets.length}`);
     console.log(`- Houses calculated: ${birthChart.houses.length}`);
     console.log(`- Aspects found: ${birthChart.aspects.length}`);
     // Show all planet positions
-    console.log('\nAll Planet Positions:');
-    birthChart.planets.forEach(planet => {
-      console.log(`${planet.planet}: ${planet.zodiacSign} ${planet.zodiacDegree.toFixed(2)}°${planet.retrograde ? ' (R)' : ''}`);
+    console.log("\nAll Planet Positions:");
+    birthChart.planets.forEach((planet) => {
+      console.log(
+        `${planet.planet}: ${planet.zodiacSign} ${planet.zodiacDegree.toFixed(2)}°${planet.retrograde ? " (R)" : ""}`,
+      );
     });
   }
 }

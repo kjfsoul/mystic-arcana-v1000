@@ -1,5 +1,5 @@
 "use client";
- 
+
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
@@ -19,7 +19,7 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
   const { user, isGuest } = useAuth();
   const { cosmicInfluence } = useCosmicWeather();
   const [currentReading, setCurrentReading] = useState<TarotReading | null>(
-    null
+    null,
   );
   const [isPerformingReading, setIsPerformingReading] = useState(false);
   const [selectedSpread, setSelectedSpread] = useState<
@@ -32,7 +32,7 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
   const [isTablet, setIsTablet] = useState(false);
   const [showReadingModal, setShowReadingModal] = useState(false);
   // Responsive breakpoint detection
- 
+
   useEffect(() => {
     const checkResponsive = () => {
       const width = window.innerWidth;
@@ -44,17 +44,17 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
     return () => window.removeEventListener("resize", checkResponsive);
   }, []);
   // Initialize tarot engine with user context
- 
+
   const tarotEngine = useMemo(
     () =>
       new TarotEngine({
         isGuest,
         cosmicInfluence,
       }),
-    [isGuest, cosmicInfluence]
+    [isGuest, cosmicInfluence],
   );
   const availableSpreads = tarotEngine.getAvailableSpreadTypes();
- 
+
   const handleSpreadSelection = useCallback(
     (spreadType: "single" | "three-card" | "celtic-cross") => {
       if (isGuest && spreadType !== "single") {
@@ -66,9 +66,9 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       setFlippedCards(new Set());
       setShowUnlockModal(false);
     },
-    [isGuest]
+    [isGuest],
   );
- 
+
   const performReading = useCallback(async () => {
     setIsPerformingReading(true);
     setFlippedCards(new Set());
@@ -97,11 +97,11 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       setIsPerformingReading(false);
     }
   }, [selectedSpread, isGuest, tarotEngine, user]);
- 
+
   const handleCardFlip = useCallback((cardIndex: number) => {
     setFlippedCards((prev) => new Set([...prev, cardIndex]));
   }, []);
- 
+
   const handleCloseUnlockModal = useCallback(() => {
     setShowUnlockModal(false);
   }, []);
@@ -191,7 +191,7 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
               } ${isGuest && spread.id !== "single" ? "opacity-50" : ""}`}
               onClick={() =>
                 handleSpreadSelection(
-                  spread.id as "single" | "three-card" | "celtic-cross"
+                  spread.id as "single" | "three-card" | "celtic-cross",
                 )
               }
               whileHover={{ scale: 1.02 }}
@@ -203,8 +203,8 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
                   {spread.id === "single"
                     ? "🔮"
                     : spread.id === "three-card"
-                    ? "🌟"
-                    : "✨"}
+                      ? "🌟"
+                      : "✨"}
                 </span>
                 <span className="font-semibold">{spread.name}</span>
                 <span
@@ -233,7 +233,7 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
       >
         <motion.button
           className={`${
-            isMobile ? 'px-8 py-4 text-lg' : 'px-12 py-5 text-xl'
+            isMobile ? "px-8 py-4 text-lg" : "px-12 py-5 text-xl"
           } bg-gradient-to-r from-purple-600 via-purple-500 to-blue-600 hover:from-purple-500 hover:via-purple-400 hover:to-blue-500 text-white rounded-full font-bold shadow-2xl shadow-purple-500/40 hover:shadow-purple-500/60 border-2 border-purple-400/40 hover:border-purple-300/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 min-w-[200px]`}
           onClick={performReading}
           disabled={isPerformingReading}
@@ -254,8 +254,8 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
               selectedSpread === "single"
                 ? "Card"
                 : selectedSpread === "three-card"
-                ? "3 Cards"
-                : "10 Cards"
+                  ? "3 Cards"
+                  : "10 Cards"
             }`
           )}
         </motion.button>
@@ -277,14 +277,15 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
               exit={{ opacity: 0 }}
               onClick={() => setShowReadingModal(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.section
               className={`relative z-10 w-full max-w-7xl bg-gradient-to-br from-purple-900/95 via-indigo-900/90 to-blue-900/85 border-2 border-purple-500/50 rounded-3xl shadow-2xl overflow-hidden ${
-                isMobile ? 'max-h-[95vh] p-4' : 'max-h-[90vh] p-8'
+                isMobile ? "max-h-[95vh] p-4" : "max-h-[90vh] p-8"
               }`}
               style={{
-                boxShadow: '0 0 100px rgba(139, 92, 246, 0.3), 0 0 50px rgba(99, 102, 241, 0.2), inset 0 0 100px rgba(139, 92, 246, 0.1)'
+                boxShadow:
+                  "0 0 100px rgba(139, 92, 246, 0.3), 0 0 50px rgba(99, 102, 241, 0.2), inset 0 0 100px rgba(139, 92, 246, 0.1)",
               }}
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -293,8 +294,16 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
             >
               {/* Modal Header */}
               <div className="flex justify-between items-center mb-6">
-                <h2 className={`font-bold text-white ${isMobile ? 'text-xl' : 'text-3xl'}`}>
-                  Your {selectedSpread === 'single' ? 'Card' : selectedSpread === 'three-card' ? 'Three Card' : 'Celtic Cross'} Reading
+                <h2
+                  className={`font-bold text-white ${isMobile ? "text-xl" : "text-3xl"}`}
+                >
+                  Your{" "}
+                  {selectedSpread === "single"
+                    ? "Card"
+                    : selectedSpread === "three-card"
+                      ? "Three Card"
+                      : "Celtic Cross"}{" "}
+                  Reading
                 </h2>
                 <button
                   onClick={() => setShowReadingModal(false)}
@@ -306,168 +315,180 @@ export const UnifiedTarotPanel: React.FC<UnifiedTarotPanelProps> = ({
               </div>
               {/* Background gradient effect */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-600/10 to-blue-600/20 pointer-events-none" />
-              
+
               {/* Scrollable Content */}
               <div className="overflow-y-auto max-h-[calc(90vh-120px)] pr-2 relative z-10">
                 {/* Cards Display with Enhanced Spacing */}
-                <div className={`${
-                  selectedSpread === 'single' 
-                    ? 'flex justify-center' 
-                    : selectedSpread === 'three-card'
-                    ? isMobile ? 'grid grid-cols-3 gap-2 max-w-sm mx-auto' : 'grid grid-cols-3 gap-8 max-w-4xl mx-auto'
-                    : isMobile ? 'grid grid-cols-3 gap-2 max-w-md mx-auto' : 'grid grid-cols-5 gap-4 max-w-6xl mx-auto'
-                } mb-8`}>
-              {currentReading.cards.map((cardData, index) => (
-                <motion.div
-                  key={`${currentReading.id}-card-${cardData.id}-${index}`}
-                  className="flex flex-col items-center gap-2 relative"
-                  initial={{ opacity: 0, rotateY: 180 }}
-                  animate={{ opacity: 1, rotateY: 0 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: index * 0.2,
-                    type: "spring",
-                    stiffness: 100,
-                  }}
+                <div
+                  className={`${
+                    selectedSpread === "single"
+                      ? "flex justify-center"
+                      : selectedSpread === "three-card"
+                        ? isMobile
+                          ? "grid grid-cols-3 gap-2 max-w-sm mx-auto"
+                          : "grid grid-cols-3 gap-8 max-w-4xl mx-auto"
+                        : isMobile
+                          ? "grid grid-cols-3 gap-2 max-w-md mx-auto"
+                          : "grid grid-cols-5 gap-4 max-w-6xl mx-auto"
+                  } mb-8`}
                 >
-                  <div
-                    className={`relative ${
-                      flippedCards.has(index) ? 'animate-pulse' : ''
-                    }`}
-                    style={{
-                      filter: flippedCards.has(index) ? 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.6))' : 'none',
-                    }}
-                  >
-                    <TarotCard
-                      frontImage={cardData.frontImage}
-                      backImage={cardData.backImage}
-                      cardName={cardData.name}
-                      cardMeaning={cardData.meaning.upright}
-                      isFlipped={flippedCards.has(index)}
-                      onFlip={() => handleCardFlip(index)}
-                      className={`${
-                        isMobile 
-                          ? 'w-24 h-36' 
-                          : selectedSpread === 'single' 
-                          ? 'w-48 h-72' 
-                          : selectedSpread === 'three-card'
-                          ? 'w-36 h-54'
-                          : 'w-28 h-42'
-                      } cursor-pointer transform hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden border-2 ${
-                        flippedCards.has(index) 
-                          ? 'border-purple-400/60' 
-                          : 'border-transparent hover:border-purple-500/30'
-                      }`}
-                      style={{
-                        boxShadow: flippedCards.has(index) 
-                          ? '0 0 30px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.2)' 
-                          : '0 4px 20px rgba(0, 0, 0, 0.3)'
+                  {currentReading.cards.map((cardData, index) => (
+                    <motion.div
+                      key={`${currentReading.id}-card-${cardData.id}-${index}`}
+                      className="flex flex-col items-center gap-2 relative"
+                      initial={{ opacity: 0, rotateY: 180 }}
+                      animate={{ opacity: 1, rotateY: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.2,
+                        type: "spring",
+                        stiffness: 100,
                       }}
-                    />
-                  </div>
-                  {selectedSpread !== "single" && (
-                    <span
-                      className={`text-white bg-purple-600/40 backdrop-blur-sm px-3 py-1 rounded-full text-center font-medium ${
-                        isMobile ? "text-xs" : "text-sm"
-                      }`}
                     >
-                      {currentReading.positions[index]}
-                    </span>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-            {/* Interpretation */}
-            {flippedCards.size > 0 && (
-              <motion.div
-                className="bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <h3
-                  className={`text-white font-bold mb-3 ${
-                    isMobile ? "text-lg" : "text-xl"
-                  }`}
-                >
-                  Reading Interpretation
-                </h3>
-                
-                {/* Individual Card Meanings - Show only for flipped cards */}
-                {selectedSpread !== 'single' && (
-                  <div className="space-y-4 mb-6">
-                    {currentReading.cards.map((card, index) => {
-                      if (!flippedCards.has(index)) return null;
-                      return (
-                        <motion.div
-                          key={`meaning-${index}`}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5 }}
-                          className="bg-purple-900/20 border border-purple-500/20 rounded-lg p-3"
+                      <div
+                        className={`relative ${
+                          flippedCards.has(index) ? "animate-pulse" : ""
+                        }`}
+                        style={{
+                          filter: flippedCards.has(index)
+                            ? "drop-shadow(0 0 20px rgba(139, 92, 246, 0.6))"
+                            : "none",
+                        }}
+                      >
+                        <TarotCard
+                          frontImage={cardData.frontImage}
+                          backImage={cardData.backImage}
+                          cardName={cardData.name}
+                          cardMeaning={cardData.meaning.upright}
+                          isFlipped={flippedCards.has(index)}
+                          onFlip={() => handleCardFlip(index)}
+                          className={`${
+                            isMobile
+                              ? "w-24 h-36"
+                              : selectedSpread === "single"
+                                ? "w-48 h-72"
+                                : selectedSpread === "three-card"
+                                  ? "w-36 h-54"
+                                  : "w-28 h-42"
+                          } cursor-pointer transform hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden border-2 ${
+                            flippedCards.has(index)
+                              ? "border-purple-400/60"
+                              : "border-transparent hover:border-purple-500/30"
+                          }`}
+                          style={{
+                            boxShadow: flippedCards.has(index)
+                              ? "0 0 30px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.2)"
+                              : "0 4px 20px rgba(0, 0, 0, 0.3)",
+                          }}
+                        />
+                      </div>
+                      {selectedSpread !== "single" && (
+                        <span
+                          className={`text-white bg-purple-600/40 backdrop-blur-sm px-3 py-1 rounded-full text-center font-medium ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
                         >
-                          <h4 className="text-purple-200 font-semibold mb-1">
-                            {currentReading.positions[index]} - {card.name}
-                          </h4>
-                          <p className="text-white/80 text-sm">
-                            {card.meaning.upright}
-                          </p>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                )}
-                
-                {/* Overall interpretation - show only when all cards are flipped */}
-                {flippedCards.size === currentReading.cards.length && (
+                          {currentReading.positions[index]}
+                        </span>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+                {/* Interpretation */}
+                {flippedCards.size > 0 && (
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className={`text-white/90 leading-relaxed ${
-                      isMobile ? "text-sm" : "text-base"
-                    }`}
+                    className="bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
                   >
-                    <p className="font-semibold text-purple-200 mb-2">Complete Reading:</p>
-                    {currentReading.interpretation}
-                  </motion.div>
-                )}
-                
-                {/* Single card shows immediately */}
-                {selectedSpread === 'single' && (
-                  <div className={`text-white/90 leading-relaxed ${
-                    isMobile ? "text-sm" : "text-base"
-                  }`}>
-                    {currentReading.interpretation}
-                  </div>
-                )}
-                {/* Cosmic Influence */}
-                {cosmicInfluence && (
-                  <motion.div
-                    className="mt-4 p-3 bg-purple-900/20 border border-purple-500/20 rounded-lg"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
-                  >
-                    <h4
-                      className={`text-purple-200 font-semibold mb-2 ${
-                        isMobile ? "text-sm" : "text-base"
+                    <h3
+                      className={`text-white font-bold mb-3 ${
+                        isMobile ? "text-lg" : "text-xl"
                       }`}
                     >
-                      🌙 Cosmic Influence
-                    </h4>
-                    <p
-                      className={`text-purple-100/80 ${
-                        isMobile ? "text-xs" : "text-sm"
-                      }`}
-                    >
-                      The current lunar phase enhances the mystical energy of
-                      your reading.
-                    </p>
+                      Reading Interpretation
+                    </h3>
+
+                    {/* Individual Card Meanings - Show only for flipped cards */}
+                    {selectedSpread !== "single" && (
+                      <div className="space-y-4 mb-6">
+                        {currentReading.cards.map((card, index) => {
+                          if (!flippedCards.has(index)) return null;
+                          return (
+                            <motion.div
+                              key={`meaning-${index}`}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5 }}
+                              className="bg-purple-900/20 border border-purple-500/20 rounded-lg p-3"
+                            >
+                              <h4 className="text-purple-200 font-semibold mb-1">
+                                {currentReading.positions[index]} - {card.name}
+                              </h4>
+                              <p className="text-white/80 text-sm">
+                                {card.meaning.upright}
+                              </p>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* Overall interpretation - show only when all cards are flipped */}
+                    {flippedCards.size === currentReading.cards.length && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className={`text-white/90 leading-relaxed ${
+                          isMobile ? "text-sm" : "text-base"
+                        }`}
+                      >
+                        <p className="font-semibold text-purple-200 mb-2">
+                          Complete Reading:
+                        </p>
+                        {currentReading.interpretation}
+                      </motion.div>
+                    )}
+
+                    {/* Single card shows immediately */}
+                    {selectedSpread === "single" && (
+                      <div
+                        className={`text-white/90 leading-relaxed ${
+                          isMobile ? "text-sm" : "text-base"
+                        }`}
+                      >
+                        {currentReading.interpretation}
+                      </div>
+                    )}
+                    {/* Cosmic Influence */}
+                    {cosmicInfluence && (
+                      <motion.div
+                        className="mt-4 p-3 bg-purple-900/20 border border-purple-500/20 rounded-lg"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1 }}
+                      >
+                        <h4
+                          className={`text-purple-200 font-semibold mb-2 ${
+                            isMobile ? "text-sm" : "text-base"
+                          }`}
+                        >
+                          🌙 Cosmic Influence
+                        </h4>
+                        <p
+                          className={`text-purple-100/80 ${
+                            isMobile ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          The current lunar phase enhances the mystical energy
+                          of your reading.
+                        </p>
+                      </motion.div>
+                    )}
                   </motion.div>
                 )}
-              </motion.div>
-            )}
               </div>
             </motion.section>
           </motion.div>

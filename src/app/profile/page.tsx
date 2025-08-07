@@ -1,13 +1,13 @@
-'use client';
- 
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext';
-import { profileService } from '../../services/profileService';
-import { GalaxyBackground } from '../../components/effects/GalaxyBackground/GalaxyBackground';
-import { Header } from '../../components/layout/Header';
-import { LocationAutocomplete } from '../../components/common/LocationAutocomplete';
-import styles from './page.module.css';
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useAuth } from "../../contexts/AuthContext";
+import { profileService } from "../../services/profileService";
+import { GalaxyBackground } from "../../components/effects/GalaxyBackground/GalaxyBackground";
+import { Header } from "../../components/layout/Header";
+import { LocationAutocomplete } from "../../components/common/LocationAutocomplete";
+import styles from "./page.module.css";
 interface UserProfile {
   id?: string;
   user_id: string;
@@ -25,31 +25,31 @@ export default function ProfilePage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   // Form state
-  const [birthDate, setBirthDate] = useState('');
-  const [birthTime, setBirthTime] = useState('');
-  const [birthLocation, setBirthLocation] = useState('');
-  const [chosenReader, setChosenReader] = useState('');
- 
+  const [birthDate, setBirthDate] = useState("");
+  const [birthTime, setBirthTime] = useState("");
+  const [birthLocation, setBirthLocation] = useState("");
+  const [chosenReader, setChosenReader] = useState("");
+
   const loadProfile = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const userProfile = await profileService.getProfile(user!.id);
       setProfile(userProfile);
-      
+
       // Populate form fields
-      setBirthDate(userProfile.birth_date || '');
-      setBirthTime(userProfile.birth_time || '');
-      setBirthLocation(userProfile.birth_location || '');
-      setChosenReader(userProfile.chosen_reader || '');
+      setBirthDate(userProfile.birth_date || "");
+      setBirthTime(userProfile.birth_time || "");
+      setBirthLocation(userProfile.birth_location || "");
+      setChosenReader(userProfile.chosen_reader || "");
     } catch (err) {
-      console.error('Error loading profile:', err);
-      setError('Failed to load profile. Please try again.');
+      console.error("Error loading profile:", err);
+      setError("Failed to load profile. Please try again.");
     } finally {
       setLoading(false);
     }
   }, [user]);
- 
+
   useEffect(() => {
     if (user?.id) {
       loadProfile();
@@ -69,13 +69,13 @@ export default function ProfilePage() {
         chosen_reader: chosenReader || undefined,
       });
       setProfile(updatedProfile);
-      setSuccess('Profile updated successfully! ✨');
-      
+      setSuccess("Profile updated successfully! ✨");
+
       // Clear success message after 3 seconds
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      console.error('Error updating profile:', err);
-      setError('Failed to update profile. Please try again.');
+      console.error("Error updating profile:", err);
+      setError("Failed to update profile. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -98,7 +98,7 @@ export default function ProfilePage() {
     <div className={styles.container}>
       <GalaxyBackground />
       <Header />
-      
+
       <div className={styles.content}>
         <motion.div
           className={styles.profileCard}
@@ -112,16 +112,8 @@ export default function ProfilePage() {
               Complete your profile to receive personalized cosmic guidance
             </p>
           </div>
-          {error && (
-            <div className={styles.errorMessage}>
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className={styles.successMessage}>
-              {success}
-            </div>
-          )}
+          {error && <div className={styles.errorMessage}>{error}</div>}
+          {success && <div className={styles.successMessage}>{success}</div>}
           {loading ? (
             <div className={styles.loading}>
               <div className={styles.spinner}></div>
@@ -132,7 +124,8 @@ export default function ProfilePage() {
               <div className={styles.section}>
                 <h2 className={styles.sectionTitle}>🌟 Birth Information</h2>
                 <p className={styles.sectionDescription}>
-                  Your birth details allow us to calculate accurate astrological charts and provide personalized readings.
+                  Your birth details allow us to calculate accurate astrological
+                  charts and provide personalized readings.
                 </p>
                 <div className={styles.formGroup}>
                   <label htmlFor="birthDate" className={styles.label}>
@@ -159,7 +152,8 @@ export default function ProfilePage() {
                     className={styles.input}
                   />
                   <small className={styles.hint}>
-                    More accurate birth time enables precise rising sign calculations
+                    More accurate birth time enables precise rising sign
+                    calculations
                   </small>
                 </div>
                 <div className={styles.formGroup}>
@@ -172,18 +166,19 @@ export default function ProfilePage() {
                     placeholder="Start typing your birth city..."
                     className="w-full"
                     onLocationSelect={(location) => {
-                      console.log('Selected location:', location);
+                      console.log("Selected location:", location);
                       setBirthLocation(location.name);
                     }}
                   />
                   <small className={styles.hint}>
-                    Helps calculate precise planetary positions for your birth chart
+                    Helps calculate precise planetary positions for your birth
+                    chart
                   </small>
                 </div>
               </div>
               <div className={styles.section}>
                 <h2 className={styles.sectionTitle}>🔮 Reading Preferences</h2>
-                
+
                 <div className={styles.formGroup}>
                   <label htmlFor="chosenReader" className={styles.label}>
                     Preferred Tarot Reader
@@ -198,8 +193,12 @@ export default function ProfilePage() {
                     <option value="sophia">Sophia - The Wisdom Keeper</option>
                     <option value="luna">Luna - The Intuitive Guide</option>
                     <option value="sage">Sage - The Ancient Oracle</option>
-                    <option value="phoenix">Phoenix - The Transformative Guide</option>
-                    <option value="cosmic">Cosmic - The Universal Reader</option>
+                    <option value="phoenix">
+                      Phoenix - The Transformative Guide
+                    </option>
+                    <option value="cosmic">
+                      Cosmic - The Universal Reader
+                    </option>
                   </select>
                   <small className={styles.hint}>
                     Your chosen reader will provide personalized interpretations
@@ -220,7 +219,7 @@ export default function ProfilePage() {
                       Saving...
                     </>
                   ) : (
-                    '✨ Save Profile'
+                    "✨ Save Profile"
                   )}
                 </motion.button>
               </div>

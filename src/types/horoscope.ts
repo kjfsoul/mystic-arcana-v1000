@@ -1,12 +1,12 @@
-import { ZodiacSign } from '@/constants/AstrologyConstants';
-import { EnergyLevel } from '@/constants/EventTypes';
+import { ZodiacSign } from "@/constants/AstrologyConstants";
+import { EnergyLevel } from "@/constants/EventTypes";
 
 export interface ZodiacInfo {
   sign: ZodiacSign;
   name: string;
   symbol: string;
-  element: 'fire' | 'earth' | 'air' | 'water';
-  quality: 'cardinal' | 'fixed' | 'mutable';
+  element: "fire" | "earth" | "air" | "water";
+  quality: "cardinal" | "fixed" | "mutable";
   rulingPlanet: string;
   dateRange: string;
   emoji: string;

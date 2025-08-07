@@ -15,14 +15,14 @@ interface GeoResolutionResult {
     lon: number;
   };
   confidenceScore: number;
-  source: 'manual' | 'ipGeo' | 'nasaFallback' | 'unknown';
+  source: "manual" | "ipGeo" | "nasaFallback" | "unknown";
   notes?: string;
 }
 
 function GeoReliabilityEngine({
   manualLocation,
   ipGeoLocation,
-  nasaFallbackLocation
+  nasaFallbackLocation,
 }: {
   manualLocation?: GeoLocationInput;
   ipGeoLocation?: GeoLocationInput;
@@ -32,26 +32,26 @@ function GeoReliabilityEngine({
     return {
       location: manualLocation,
       confidenceScore: 1.0,
-      source: 'manual'
+      source: "manual",
     };
   } else if (ipGeoLocation) {
     return {
       location: ipGeoLocation,
       confidenceScore: 0.8,
-      source: 'ipGeo'
+      source: "ipGeo",
     };
   } else if (nasaFallbackLocation) {
     return {
       location: nasaFallbackLocation,
       confidenceScore: 0.6,
-      source: 'nasaFallback'
+      source: "nasaFallback",
     };
   } else {
     return {
       location: { lat: 0, lon: 0 },
       confidenceScore: 0.0,
-      source: 'unknown',
-      notes: 'No location data available'
+      source: "unknown",
+      notes: "No location data available",
     };
   }
 }

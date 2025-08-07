@@ -85,11 +85,11 @@
   .panelContainer {
     grid-template-columns: 1fr;
   }
-  
+
   .panel:not(.active) {
     display: none;
   }
-  
+
   .mobileNav {
     display: flex;
   }

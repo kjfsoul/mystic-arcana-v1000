@@ -9,6 +9,7 @@ The Tarot Data Engine is a scalable backend system that replaces hardcoded tarot
 ### Database Schema
 
 #### `decks` Table
+
 ```sql
 CREATE TABLE public.decks (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -22,6 +23,7 @@ CREATE TABLE public.decks (
 ```
 
 #### `cards` Table
+
 ```sql
 CREATE TABLE public.cards (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -52,9 +54,11 @@ CREATE TABLE public.cards (
 Fetches all cards for a specific tarot deck.
 
 #### Parameters
+
 - `deckId` (string): UUID of the deck to fetch
 
 #### Response Format
+
 ```typescript
 {
   deck: {
@@ -62,11 +66,11 @@ Fetches all cards for a specific tarot deck.
     name: string;
     description: string | null;
     imageUrl: string | null;
-  };
+  }
   cards: Array<{
     id: string;
     name: string;
-    arcana: 'major' | 'minor';
+    arcana: "major" | "minor";
     suit: string | null;
     number: number | null;
     frontImage: string | null;
@@ -87,15 +91,18 @@ Fetches all cards for a specific tarot deck.
       pentacles: number;
       swords: number;
       wands: number;
-    };
-  };
+    }
+  }
 }
 ```
 
 #### Example Usage
+
 ```typescript
 // Fetch Rider-Waite deck
-const response = await fetch('/api/tarot/deck/00000000-0000-0000-0000-000000000001');
+const response = await fetch(
+  "/api/tarot/deck/00000000-0000-0000-0000-000000000001",
+);
 const data = await response.json();
 
 console.log(`Deck: ${data.deck.name}`);
@@ -103,6 +110,7 @@ console.log(`Total cards: ${data.stats.totalCards}`);
 ```
 
 #### Error Responses
+
 - `400`: Invalid deck ID format
 - `404`: Deck not found or inactive
 - `500`: Internal server error
@@ -138,15 +146,19 @@ npm run test:tarot
 ### Replacing Hardcoded Data
 
 **Before (Hardcoded):**
+
 ```typescript
-import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
+import { RIDER_WAITE_DECK } from "./RiderWaiteDeck";
 
 const cards = RIDER_WAITE_DECK;
 ```
 
 **After (API-Driven):**
+
 ```typescript
-const response = await fetch('/api/tarot/deck/00000000-0000-0000-0000-000000000001');
+const response = await fetch(
+  "/api/tarot/deck/00000000-0000-0000-0000-000000000001",
+);
 const { cards } = await response.json();
 ```
 
@@ -162,8 +174,8 @@ The API automatically transforms database records to match the frontend `TarotCa
   arcana_type: "major",
   meaning_upright: "New beginnings...",
   // ...
-} 
-→ 
+}
+→
 {
   id: "0-the-fool",
   name: "The Fool",
@@ -186,6 +198,7 @@ npm run test:tarot
 ```
 
 Tests include:
+
 - Database connectivity
 - Deck existence verification
 - Card count validation (should be 78)
@@ -207,11 +220,11 @@ The system is designed to support multiple tarot decks:
 
 ```sql
 -- Add new deck
-INSERT INTO decks (name, description) 
+INSERT INTO decks (name, description)
 VALUES ('Thoth Tarot', 'Aleister Crowley Thoth deck');
 
 -- Add cards for new deck
-INSERT INTO cards (deck_id, name, ...) 
+INSERT INTO cards (deck_id, name, ...)
 VALUES (new_deck_id, 'The Fool', ...);
 ```
 
@@ -243,10 +256,11 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_key  # For seeding only
 ### For Frontend Developers
 
 1. **Replace imports**:
+
    ```typescript
    // Remove
-   import { RIDER_WAITE_DECK } from './RiderWaiteDeck';
-   
+   import { RIDER_WAITE_DECK } from "./RiderWaiteDeck";
+
    // Add
    const fetchDeck = async (deckId: string) => {
      const response = await fetch(`/api/tarot/deck/${deckId}`);
@@ -268,6 +282,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_key  # For seeding only
 ## Support
 
 For issues or questions:
+
 1. Check the test output: `npm run test:tarot`
 2. Verify environment variables are set
 3. Ensure Supabase project is active

@@ -11,31 +11,31 @@ The Tarot Reading Room UI is complete and awaiting an intelligent backend. This 
 ## EXECUTION PLAN (BATCH COMMANDS)
 
 **// 1. Spawn and configure the data and validation agents.**
-mcp__claude-flow__agent_spawn { "type": "architect", "name": "SystemDesigner" }
-mcp__claude-flow__agent_spawn { "type": "coder", "name": "ContentIngestor" }
-mcp__claude-flow__agent_spawn { "type": "tester", "name": "QAValidator" }
-mcp__claude-flow__memory_store { "key": "mission/objective", "value": "Build Foundational Knowledge Pool" }
+mcp**claude-flow**agent_spawn { "type": "architect", "name": "SystemDesigner" }
+mcp**claude-flow**agent_spawn { "type": "coder", "name": "ContentIngestor" }
+mcp**claude-flow**agent_spawn { "type": "tester", "name": "QAValidator" }
+mcp**claude-flow**memory_store { "key": "mission/objective", "value": "Build Foundational Knowledge Pool" }
 
 **// 2. Read all relevant knowledge source files in a single batch.**
-Read { "file_path": "tarot-images.json" }
-Read { "file_path": "_**TAROT AND ASTROLOGY DAILY DATABASE ENRICHMENT**.md" }
+Read { "file*path": "tarot-images.json" }
+Read { "file_path": "***TAROT AND ASTROLOGY DAILY DATABASE ENRICHMENT**.md" }
 Read { "file_path": "ASTROLOGICAL SOURCE BLOCK.md" }
 Read { "file_path": "Database Entry for July 26, 2025.md" }
 
 **// 3. Create microtasks for the knowledge ingestion pipeline.**
-mcp__claude-flow__task_create { "name": "Design Knowledge Pool Schema", "parent": "main" }
-mcp__claude-flow__task_create { "name": "Develop Ingestion Script", "parent": "main", "dependencies": ["[ID_FOR_Design_Knowledge_Pool_Schema]"] }
-mcp__claude-flow__task_create { "name": "Execute Seeding and Validate", "parent": "main", "dependencies": ["[ID_FOR_Develop_Ingestion_Script]"] }
+mcp**claude-flow**task_create { "name": "Design Knowledge Pool Schema", "parent": "main" }
+mcp**claude-flow**task_create { "name": "Develop Ingestion Script", "parent": "main", "dependencies": ["[ID_FOR_Design_Knowledge_Pool_Schema]"] }
+mcp**claude-flow**task_create { "name": "Execute Seeding and Validate", "parent": "main", "dependencies": ["[ID_FOR_Develop_Ingestion_Script]"] }
 
 **// 4. Assign tasks and provide instructions.**
-mcp__claude-flow__agent_assign { "taskId": "[ID_FOR_Design_Knowledge_Pool_Schema]", "agentId": "SystemDesigner" }
-mcp__claude-flow__agent_communicate { "to": "SystemDesigner", "message": "Based on the structure of the provided knowledge files, design a new Supabase migration script. Create tables like `tarot_interpretations` (with columns for card, position, context, meaning, keywords) and `astrological_insights` (with columns for transit, aspect, interpretation). Ensure the schema is optimized for querying." }
+mcp**claude-flow**agent_assign { "taskId": "[ID_FOR_Design_Knowledge_Pool_Schema]", "agentId": "SystemDesigner" }
+mcp**claude-flow**agent_communicate { "to": "SystemDesigner", "message": "Based on the structure of the provided knowledge files, design a new Supabase migration script. Create tables like `tarot_interpretations` (with columns for card, position, context, meaning, keywords) and `astrological_insights` (with columns for transit, aspect, interpretation). Ensure the schema is optimized for querying." }
 
-mcp__claude-flow__agent_assign { "taskId": "[ID_FOR_Develop_Ingestion_Script]", "agentId": "ContentIngestor" }
-mcp__claude-flow__agent_communicate { "to": "ContentIngestor", "message": "Create a new script, `scripts/ingest-knowledge-pool.ts`. This script must parse the `tarot-images.json` file and the markdown enrichment documents, transform the data to match the new schema, and insert it into the Supabase tables." }
+mcp**claude-flow**agent_assign { "taskId": "[ID_FOR_Develop_Ingestion_Script]", "agentId": "ContentIngestor" }
+mcp**claude-flow**agent_communicate { "to": "ContentIngestor", "message": "Create a new script, `scripts/ingest-knowledge-pool.ts`. This script must parse the `tarot-images.json` file and the markdown enrichment documents, transform the data to match the new schema, and insert it into the Supabase tables." }
 
-mcp__claude-flow__agent_assign { "taskId": "[ID_FOR_Execute_Seeding_and_Validate]", "agentId": "QAValidator" }
-mcp__claude-flow__agent_communicate { "to": "QAValidator", "message": "Execute the Supabase migration and then run the `ingest-knowledge-pool.ts` script. After execution, write and run a temporary validation script that queries the new tables to confirm that the data has been successfully and accurately populated. Provide a summary of the ingested data (e.g., 'Ingested 78 base tarot interpretations')." }
+mcp**claude-flow**agent_assign { "taskId": "[ID_FOR_Execute_Seeding_and_Validate]", "agentId": "QAValidator" }
+mcp**claude-flow**agent_communicate { "to": "QAValidator", "message": "Execute the Supabase migration and then run the `ingest-knowledge-pool.ts` script. After execution, write and run a temporary validation script that queries the new tables to confirm that the data has been successfully and accurately populated. Provide a summary of the ingested data (e.g., 'Ingested 78 base tarot interpretations')." }
 
 ## DELIVERABLES
 

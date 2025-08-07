@@ -5,12 +5,14 @@ A production-ready CrewAI implementation featuring 12 specialized AI agents for 
 ## 🧙‍♀️ Agent Roster
 
 ### Core Virtual Readers (Production)
+
 - **Sophia** - Mystic Oracle & Primary Tarot Interpreter
-- **Orion** - Cosmic Strategist & Astrological Life Coach  
+- **Orion** - Cosmic Strategist & Astrological Life Coach
 - **Luna** - Emotional Healer & Relationship Guide
 - **Sol** - Shadow Integration Specialist & Transformational Guide
 
 ### Technical Development Agents
+
 - **AstroCalculus** - Astronomical Calculation Engine
 - **CardWeaver** - Adaptive Tarot Logic Engine
 - **PersonaLearner** - User Personalization Specialist
@@ -23,6 +25,7 @@ A production-ready CrewAI implementation featuring 12 specialized AI agents for 
 ## 🚀 Quick Start
 
 ### 1. Environment Setup
+
 ```bash
 # Create environment file
 cp .env.example .env
@@ -33,21 +36,25 @@ RUN_DEMONSTRATION=false
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Test Setup
+
 ```bash
 python test_setup.py
 ```
 
 ### 4. Initialize Crew
+
 ```bash
 python main.py
 ```
 
 ### 5. Run Demonstration (Optional)
+
 ```bash
 # Set in .env file
 RUN_DEMONSTRATION=true
@@ -57,18 +64,21 @@ python main.py
 ## 🔧 Key Features
 
 ### Perplexity API Integration
+
 - **@tool** decorated function for CrewAI compatibility
 - Comprehensive error handling and timeouts
 - Configurable model selection
 - Citation and source tracking
 
 ### Agentic Memory Logging
+
 - All actions logged to `../mystic-arcana-v1000/A-mem/`
 - `@log_invocation` decorator on key functions
 - Development process tracking
 - Agent action history
 
 ### Production-Ready Architecture
+
 - Environment validation
 - Custom exception handling
 - Comprehensive logging
@@ -76,7 +86,9 @@ python main.py
 - Modular agent creation
 
 ### Demonstration Tasks
+
 The framework includes sample tasks showcasing each agent's capabilities:
+
 - Sophia: 3-card tarot reading for career transition
 - Orion: Astrological timing guidance
 - Luna: Emotional healing and relationship patterns
@@ -97,6 +109,7 @@ mystic-tarot-crew/
 ## 🛠️ Development Usage
 
 ### Creating Custom Tasks
+
 ```python
 from main import create_base_task, create_mystic_arcana_agents
 
@@ -110,12 +123,15 @@ custom_task = create_base_task(
 ```
 
 ### Agent Specializations
+
 - **Virtual Readers**: Focus on user-facing spiritual guidance
 - **Technical Agents**: Handle backend calculations and data
 - **Development Agents**: Support platform development and QA
 
 ### Error Handling
+
 All functions include comprehensive error handling:
+
 - API timeout protection
 - Environment validation
 - Graceful degradation
@@ -124,6 +140,7 @@ All functions include comprehensive error handling:
 ## 🔮 Integration with Mystic Arcana
 
 This CrewAI framework integrates with the main Mystic Arcana platform:
+
 - Shares agentic memory system
 - Uses same environment configuration
 - Supports platform's 78-card tarot system
@@ -132,11 +149,13 @@ This CrewAI framework integrates with the main Mystic Arcana platform:
 ## 📊 Monitoring & Logging
 
 ### Agentic Memory
+
 - Development actions logged to `A-mem` store
 - Agent creation and execution tracking
 - Memory events per agent action
 
 ### Application Logs
+
 - Runtime logs in `crew_operations.log`
 - Console output for development
 - Error tracking and debugging
@@ -144,11 +163,13 @@ This CrewAI framework integrates with the main Mystic Arcana platform:
 ## 🧪 Testing
 
 Run the test suite to verify setup:
+
 ```bash
 python test_setup.py
 ```
 
 Tests include:
+
 - Import validation
 - Environment variable checks
 - Agentic memory integration
@@ -157,6 +178,7 @@ Tests include:
 ## 🚀 Production Deployment
 
 For production use:
+
 1. Set appropriate environment variables
 2. Configure logging levels
 3. Set up monitoring for agent performance

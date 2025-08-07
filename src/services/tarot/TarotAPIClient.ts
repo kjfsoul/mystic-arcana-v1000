@@ -5,7 +5,7 @@
 export interface DrawCardsRequest {
   count: number;
   deckId?: string;
-  spread?: 'single' | 'three-card' | 'celtic-cross';
+  spread?: "single" | "three-card" | "celtic-cross";
   allowReversed?: boolean;
   userId?: string;
 }
@@ -21,7 +21,7 @@ export interface DrawnCard {
   id: string;
   name: string;
   card_number: number;
-  arcana_type: 'major' | 'minor';
+  arcana_type: "major" | "minor";
   suit?: string | null;
   meaning_upright: string;
   meaning_reversed: string;
@@ -38,7 +38,7 @@ export interface SpreadInfo {
 }
 export interface ShuffleRequest {
   deckId?: string;
-  algorithm?: 'fisher-yates' | 'riffle' | 'overhand';
+  algorithm?: "fisher-yates" | "riffle" | "overhand";
   includePreview?: boolean;
   userId?: string;
 }
@@ -217,23 +217,26 @@ class TarotAPIClient {
   async saveReading(request: SaveReadingRequest): Promise<SaveReadingResponse> {
     try {
       // Import authentication helper
-      const { APIAuthHelper } = await import('@/utils/apiAuth');
-      
+      const { APIAuthHelper } = await import("@/utils/apiAuth");
+
       // Check authentication first
       const isAuth = await APIAuthHelper.isAuthenticated();
       if (!isAuth) {
-        throw new Error('Authentication required - please sign in');
+        throw new Error("Authentication required - please sign in");
       }
       // Make authenticated request
-      const response = await APIAuthHelper.authenticatedFetch(`${this.baseUrl}/api/tarot/save-reading`, {
-        method: "POST",
-        body: JSON.stringify(request),
-      });
+      const response = await APIAuthHelper.authenticatedFetch(
+        `${this.baseUrl}/api/tarot/save-reading`,
+        {
+          method: "POST",
+          body: JSON.stringify(request),
+        },
+      );
       const data = await response.json();
       if (!response.ok) {
         // Handle specific authentication errors
         if (response.status === 401) {
-          throw new Error('Authentication failed - please sign in again');
+          throw new Error("Authentication failed - please sign in again");
         }
         throw new Error(data.error || `API error: ${response.status}`);
       }
@@ -253,7 +256,7 @@ class TarotAPIClient {
    * Get tarot readings
    */
   async getReadings(
-    params: GetReadingsRequest = {}
+    params: GetReadingsRequest = {},
   ): Promise<GetReadingsResponse> {
     try {
       const queryParams = new URLSearchParams();
@@ -288,7 +291,7 @@ class TarotAPIClient {
    */
   async deleteReading(
     id: string,
-    userId: string
+    userId: string,
   ): Promise<{ success: boolean; error?: string }> {
     try {
       const queryParams = new URLSearchParams({ id, userId });
@@ -297,7 +300,7 @@ class TarotAPIClient {
         {
           method: "DELETE",
           headers: this.defaultHeaders,
-        }
+        },
       );
       const data = await response.json();
       if (!response.ok) {
@@ -323,7 +326,7 @@ class TarotAPIClient {
         {
           method: "GET",
           headers: this.defaultHeaders,
-        }
+        },
       );
       const data: GetReadingStatsResponse = await response.json();
       if (!response.ok) {

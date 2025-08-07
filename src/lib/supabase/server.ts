@@ -1,14 +1,14 @@
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import type { Database } from '../../types/database';
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import type { Database } from "../../types/database";
 /**
  * Server-side Supabase client with Next.js cookie integration
- * 
+ *
  * This is the authoritative client for all server-side usage:
  * - API routes (app/api/*)
  * - Server components
  * - Server actions
- * 
+ *
  * Properly handles session management through Next.js cookies
  * and respects Row Level Security (RLS) policies.
  */
@@ -19,12 +19,17 @@ export async function createClient() {
   if (!supabaseUrl || !supabaseAnonKey) {
     // During build time, environment variables might not be available
     // Return a mock client that will fail gracefully
-    if (process.env.NODE_ENV === 'production' && process.env.NEXT_PHASE === 'phase-production-build') {
-      console.warn('Supabase environment variables not available during build. Using mock client.');
+    if (
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PHASE === "phase-production-build"
+    ) {
+      console.warn(
+        "Supabase environment variables not available during build. Using mock client.",
+      );
       return null as unknown as ReturnType<typeof createServerClient<Database>>;
     }
     throw new Error(
-      'Missing Supabase environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file.'
+      "Missing Supabase environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file.",
     );
   }
   return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
@@ -35,7 +40,7 @@ export async function createClient() {
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
+            cookieStore.set(name, value, options),
           );
         } catch {
           // The `setAll` method was called from a Server Component.
@@ -48,7 +53,7 @@ export async function createClient() {
 }
 /**
  * Administrative server client with service role key
- * 
+ *
  * DANGER: This client bypasses Row Level Security (RLS)!
  * Only use for:
  * - Administrative operations
@@ -61,12 +66,17 @@ export function createAdminClient() {
   if (!supabaseUrl || !supabaseServiceKey) {
     // During build time, environment variables might not be available
     // Return a mock client that will fail gracefully
-    if (process.env.NODE_ENV === 'production' && process.env.NEXT_PHASE === 'phase-production-build') {
-      console.warn('Supabase admin environment variables not available during build. Using mock client.');
+    if (
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PHASE === "phase-production-build"
+    ) {
+      console.warn(
+        "Supabase admin environment variables not available during build. Using mock client.",
+      );
       return null as unknown as ReturnType<typeof createServerClient<Database>>;
     }
     throw new Error(
-      'Missing Supabase admin environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env.local file.'
+      "Missing Supabase admin environment variables. Please check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env.local file.",
     );
   }
   return createServerClient<Database>(supabaseUrl, supabaseServiceKey, {

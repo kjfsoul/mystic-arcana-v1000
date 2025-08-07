@@ -1,18 +1,18 @@
-#  # Mystic Arcana Frontend — Claude Kickoff Prompt & MVP File/UX Spec
+# # Mystic Arcana Frontend — Claude Kickoff Prompt & MVP File/UX Spec
 
-## 1. Claude Opus Kickoff Prompt — *For Galaxy UI & MVP Experience*
+## 1. Claude Opus Kickoff Prompt — _For Galaxy UI & MVP Experience_
 
 <context>
 Mystic Arcana is a next-generation tarot and astrology web app delivering a cosmic, cinematic, interactive experience. All design and branding is based on rich cosmic purples, golds, deep blues, and star-gold accents, as seen in the attached logo and sample images. The interface must be accessible, immersive, and responsive.
 
 You have:
 
-* Logo file and palette reference (see attachments)
-* UI/UX specs and business context from chat history
-* Mystic NotebookLM, astrology/tarot PDFs, competitive/market docs
-* Feature and component requirements as outlined below
-* Supabase, Netlify, and GitHub already set up
-* Asset uploads/links provided as needed
+- Logo file and palette reference (see attachments)
+- UI/UX specs and business context from chat history
+- Mystic NotebookLM, astrology/tarot PDFs, competitive/market docs
+- Feature and component requirements as outlined below
+- Supabase, Netlify, and GitHub already set up
+- Asset uploads/links provided as needed
 
   </context>
 
@@ -39,20 +39,20 @@ Welcome to Mystic Arcana — Where Wonder, Hope, and Magic Converge.
 Step into your personal cosmos: explore the mysteries of tarot and the stars in one seamless journey. Draw your cards, discover your horoscope, and watch as the galaxy shifts with your energy. Ready to see what the universe has in store?
 </example>
 
-\<output\_format>
+\<output_format>
 
-* src/components/GalaxyBackground.tsx
-* src/components/TarotDeck.tsx
-* src/components/OldFrameArchetypes.tsx
-* src/components/AstrologyOrion.tsx
-* src/components/OnboardingModal.tsx
-* src/components/HeaderNav.tsx
-* src/components/FooterNav.tsx
-* src/components/OverlayWidgets.tsx
-* src/assets/{logo.png, palette.json, tarot\_card\_imgs/..., orion\_bg.svg, etc.}
-* src/styles/{tailwind.config.js, main.css, ...}
-* README.md (file/component/asset map and build instructions)
-  \</output\_format>
+- src/components/GalaxyBackground.tsx
+- src/components/TarotDeck.tsx
+- src/components/OldFrameArchetypes.tsx
+- src/components/AstrologyOrion.tsx
+- src/components/OnboardingModal.tsx
+- src/components/HeaderNav.tsx
+- src/components/FooterNav.tsx
+- src/components/OverlayWidgets.tsx
+- src/assets/{logo.png, palette.json, tarot_card_imgs/..., orion_bg.svg, etc.}
+- src/styles/{tailwind.config.js, main.css, ...}
+- README.md (file/component/asset map and build instructions)
+  \</output_format>
 
 <thinking>
 - Review all available context/docs for accessibility, competitive design, and on-brand color/animation choices
@@ -64,22 +64,20 @@ Step into your personal cosmos: explore the mysteries of tarot and the stars in 
 
 ## 2. File & Asset Management Instructions
 
-* Place logo and generated palette in /assets
-* Tarot card and background art in /assets/tarot\_card\_imgs and /assets/bg
-* CSS/Tailwind config in /styles
-* Reference docs and devlog in /reference
-* All code output as .tsx (React/TS)
+- Place logo and generated palette in /assets
+- Tarot card and background art in /assets/tarot_card_imgs and /assets/bg
+- CSS/Tailwind config in /styles
+- Reference docs and devlog in /reference
+- All code output as .tsx (React/TS)
 
 ---
 
 ## 3. Immediate Next Steps
 
-* Claude to execute prompt, create file/component scaffold with example code/comments for each
-* Identify missing assets or component props for next-gen UX (e.g., custom tarot art, star map overlays)
-* User to review and approve or iterate on initial code/UX scaffold
+- Claude to execute prompt, create file/component scaffold with example code/comments for each
+- Identify missing assets or component props for next-gen UX (e.g., custom tarot art, star map overlays)
+- User to review and approve or iterate on initial code/UX scaffold
 
 ---
 
-*This is the definitive Claude Opus kickoff for Mystic Arcana’s cosmic frontend — copy this prompt, update files/links as you go, and keep all major UX/asset/code outputs logged for the next module!*
-
-
+_This is the definitive Claude Opus kickoff for Mystic Arcana’s cosmic frontend — copy this prompt, update files/links as you go, and keep all major UX/asset/code outputs logged for the next module!_

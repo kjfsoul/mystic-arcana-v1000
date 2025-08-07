@@ -125,16 +125,20 @@
 }
 
 .advancedCard {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 107, 107, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.1),
+    rgba(255, 107, 107, 0.05)
+  );
   border: 2px solid rgba(138, 43, 226, 0.3);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 0 50px rgba(138, 43, 226, 0.1);
 }
 
 .advancedCard:hover {
   border-color: rgba(138, 43, 226, 0.6);
-  box-shadow: 
+  box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.4),
     inset 0 0 80px rgba(138, 43, 226, 0.15),
     0 0 100px rgba(138, 43, 226, 0.2);
@@ -145,7 +149,9 @@
     box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
   }
   to {
-    box-shadow: 0 0 30px rgba(255, 107, 107, 0.6), 0 0 40px rgba(255, 215, 0, 0.3);
+    box-shadow:
+      0 0 30px rgba(255, 107, 107, 0.6),
+      0 0 40px rgba(255, 215, 0, 0.3);
   }
 }
 
@@ -251,12 +257,24 @@
   white-space: nowrap;
 }
 
-.planetPosition:nth-child(1) { transform: rotate(30deg) translateX(140px) rotate(-30deg); }
-.planetPosition:nth-child(2) { transform: rotate(90deg) translateX(140px) rotate(-90deg); }
-.planetPosition:nth-child(3) { transform: rotate(150deg) translateX(140px) rotate(-150deg); }
-.planetPosition:nth-child(4) { transform: rotate(210deg) translateX(140px) rotate(-210deg); }
-.planetPosition:nth-child(5) { transform: rotate(270deg) translateX(140px) rotate(-270deg); }
-.planetPosition:nth-child(6) { transform: rotate(330deg) translateX(140px) rotate(-330deg); }
+.planetPosition:nth-child(1) {
+  transform: rotate(30deg) translateX(140px) rotate(-30deg);
+}
+.planetPosition:nth-child(2) {
+  transform: rotate(90deg) translateX(140px) rotate(-90deg);
+}
+.planetPosition:nth-child(3) {
+  transform: rotate(150deg) translateX(140px) rotate(-150deg);
+}
+.planetPosition:nth-child(4) {
+  transform: rotate(210deg) translateX(140px) rotate(-210deg);
+}
+.planetPosition:nth-child(5) {
+  transform: rotate(270deg) translateX(140px) rotate(-270deg);
+}
+.planetPosition:nth-child(6) {
+  transform: rotate(330deg) translateX(140px) rotate(-330deg);
+}
 
 .planetSymbol {
   color: #ffd700;
@@ -339,7 +357,11 @@
 }
 
 .cosmicHighlight {
-  background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(67, 56, 202, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(76, 201, 240, 0.1),
+    rgba(67, 56, 202, 0.1)
+  );
   border: 1px solid rgba(76, 201, 240, 0.3);
   border-radius: 16px;
   padding: 1.5rem;
@@ -382,7 +404,11 @@
 }
 
 .premiumTeaser {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1),
+    rgba(118, 75, 162, 0.1)
+  );
   border: 1px solid rgba(102, 126, 234, 0.3);
   border-radius: 16px;
   padding: 1.5rem;
@@ -423,36 +449,48 @@
   .container {
     padding: 1rem;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .serviceSelection {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .serviceCard {
     padding: 1.5rem;
   }
-  
+
   .chartWheel {
     width: 250px;
     height: 250px;
   }
-  
+
   .wheelCenter {
     width: 120px;
     height: 120px;
   }
-  
-  .planetPosition:nth-child(1) { transform: rotate(30deg) translateX(110px) rotate(-30deg); }
-  .planetPosition:nth-child(2) { transform: rotate(90deg) translateX(110px) rotate(-90deg); }
-  .planetPosition:nth-child(3) { transform: rotate(150deg) translateX(110px) rotate(-150deg); }
-  .planetPosition:nth-child(4) { transform: rotate(210deg) translateX(110px) rotate(-210deg); }
-  .planetPosition:nth-child(5) { transform: rotate(270deg) translateX(110px) rotate(-270deg); }
-  .planetPosition:nth-child(6) { transform: rotate(330deg) translateX(110px) rotate(-330deg); }
+
+  .planetPosition:nth-child(1) {
+    transform: rotate(30deg) translateX(110px) rotate(-30deg);
+  }
+  .planetPosition:nth-child(2) {
+    transform: rotate(90deg) translateX(110px) rotate(-90deg);
+  }
+  .planetPosition:nth-child(3) {
+    transform: rotate(150deg) translateX(110px) rotate(-150deg);
+  }
+  .planetPosition:nth-child(4) {
+    transform: rotate(210deg) translateX(110px) rotate(-210deg);
+  }
+  .planetPosition:nth-child(5) {
+    transform: rotate(270deg) translateX(110px) rotate(-270deg);
+  }
+  .planetPosition:nth-child(6) {
+    transform: rotate(330deg) translateX(110px) rotate(-330deg);
+  }
 
   /* Birth Form Styles */
   .formGrid {
@@ -496,7 +534,7 @@
 }
 
 .formField label {
-  color: #DDA0DD;
+  color: #dda0dd;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -523,7 +561,7 @@
 }
 
 .generateButton {
-  background: linear-gradient(45deg, #FFD700, #FFA500);
+  background: linear-gradient(45deg, #ffd700, #ffa500);
   color: #191970;
   border: none;
   padding: 1rem 2rem;
@@ -557,7 +595,7 @@
 /* Interactive Chart Styles */
 .editBirthData {
   background: rgba(138, 43, 226, 0.2);
-  color: #DDA0DD;
+  color: #dda0dd;
   border: 1px solid rgba(138, 43, 226, 0.4);
   padding: 0.5rem 1rem;
   border-radius: 15px;
@@ -585,7 +623,7 @@
 }
 
 .chartInstructions h4 {
-  color: #DDA0DD;
+  color: #dda0dd;
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -614,12 +652,12 @@
 .signUpLink {
   background: none;
   border: none;
-  color: #FFD700;
+  color: #ffd700;
   cursor: pointer;
   text-decoration: underline;
   font-weight: bold;
 }
 
 .signUpLink:hover {
-  color: #FFA500;
+  color: #ffa500;
 }

@@ -1,7 +1,7 @@
 # GEMINI SESSION INITIATION & TAROT AUDIT
 
-*Last Updated: February 5, 2025*
-*Agent: Claude Code with CLAUDE_INTEGRITY_RULES.md & Gemini Mandates compliance*
+_Last Updated: February 5, 2025_
+_Agent: Claude Code with CLAUDE_INTEGRITY_RULES.md & Gemini Mandates compliance_
 
 ## MANDATORY ONBOARDING COMPLIANCE
 
@@ -9,11 +9,11 @@
 
 - ✅ CLAUDE_INTEGRITY_RULES.md - No fabrication, one microtask at a time
 - ✅ IMPLEMENTATION_MICROTASKS.md - Swiss Ephemeris 100% complete
-- ✅ claudeupdate.md - Enhanced frontend context with production-ready components  
+- ✅ claudeupdate.md - Enhanced frontend context with production-ready components
 - ✅ PRD.md - Multi-reader tarot/astrology platform vision
 - ✅ technical_architecture.md - Next.js, Supabase, MCP servers stack
 - ✅ adaptive_personalization.md - Humanlike logic without intervention
-- ✅ docs/** - 57 files in documentation directory reviewed
+- ✅ docs/\*\* - 57 files in documentation directory reviewed
 - ✅ mystic-tarot-crew/main.py - CrewAI framework with 12 agents
 
 ### Critical Development Mandates
@@ -61,7 +61,7 @@ Based on comprehensive documentation analysis from ChatGPT export, the Agentic M
 #### 🔧 System Components (VERIFIED)
 
 1. **Memory Store (A-mem)**: Central database storing all historical event logs
-2. **CLI Wrapper (memlog.py)**: Python script intercepting and logging shell commands  
+2. **CLI Wrapper (memlog.py)**: Python script intercepting and logging shell commands
 3. **Project Aliases**: Shell aliases directing terminal commands through memlog.py
 4. **Python Decorator (@log_invocation)**: Instruments key Python functions for logging
 
@@ -76,7 +76,7 @@ Based on comprehensive documentation analysis from ChatGPT export, the Agentic M
 mystic-arcana-v1000/
 ├── A-mem/                                    # Agentic Memory module (project root)
 │   ├── agentic_memory/                      # Core memory classes
-│   │   ├── memory_system/                   
+│   │   ├── memory_system/
 │   │   │   └── log_invocation.py           # Python decorator
 │   │   └── retrievers/
 │   └── scripts/
@@ -92,7 +92,7 @@ mystic-arcana-v1000/
 # Mystic Arcana
 alias memlog-ma="/Users/kfitz/mystic-arcana-v1000/.venv/bin/python /Users/kfitz/mystic-arcana-v1000/scripts/memlog.py"
 
-# BirthdayGen  
+# BirthdayGen
 alias memlog-bg="/Users/kfitz/BirthdayGen/aura-celebration-spark/.venv/bin/python /Users/kfitz/BirthdayGen/aura-celebration-spark/scripts/memlog.py"
 
 # EDM Shuffle
@@ -113,7 +113,7 @@ def your_function():
 
 1. **Shell Commands**: `memlog-ma [command]` → logs to A-mem → executes command
 2. **Python Functions**: `@log_invocation` → captures invocation data → stores in memory
-3. **Event Storage**: All actions stored in persistent, queryable memory store  
+3. **Event Storage**: All actions stored in persistent, queryable memory store
 4. **Cross-Project**: Same pattern used across Mystic Arcana, BirthdayGen, EDM Shuffle
 
 #### ✅ Integration Status (VERIFIED)
@@ -130,7 +130,7 @@ def your_function():
 **ALL FUTURE DEVELOPMENT ACTIONS MUST USE A-MEM LOGGING**
 
 - Shell commands: `memlog-ma [command]` (MANDATORY PREFIX)
-- Python functions: `@log_invocation` decorator (MANDATORY INSTRUMENTATION)  
+- Python functions: `@log_invocation` decorator (MANDATORY INSTRUMENTATION)
 - No bypassing allowed - creates complete auditable development history
 - Cross-agent compatibility: Roo Code, Gemini CLI, Claude Code all must comply
 
@@ -259,7 +259,7 @@ def your_function():
 
 ```
 - Test single card reading end-to-end
-- Test 3-card spread functionality  
+- Test 3-card spread functionality
 - Test Celtic Cross (10 cards) spread
 - Verify position mapping displays correctly
 - Test interpretation generation
@@ -347,7 +347,7 @@ def your_function():
 
 1. **STOP all work on advanced features**
 2. **Fix the seeding script syntax error** (5 minutes)
-3. **Run database seeding** (10 minutes)  
+3. **Run database seeding** (10 minutes)
 4. **Test a complete reading flow** (30 minutes)
 5. **Verify 78 cards are accessible** (15 minutes)
 
@@ -375,6 +375,7 @@ def your_function():
 **BOTTOM LINE**: The tarot system is 80% complete but 0% functional due to missing data. Fix the seeding script and the entire system will work.
 
 ---
+
 ---
 
 ## Current ESLint Cleanup Status (2025-08-05)
@@ -504,11 +505,11 @@ scrape_configs:
 3. **Configure Promtail:** Place the `promtail-config.yaml` file on the server.
 4. **Run Promtail:** Start Promtail, pointing it to your configuration file:
 
-    ```bash
-    promtail -config.file=promtail-config.yaml
-    ```
+   ```bash
+   promtail -config.file=promtail-config.yaml
+   ```
 
-    (If using Docker, Promtail would run as a sidecar container or a separate service, mounting the log file volume.)
+   (If using Docker, Promtail would run as a sidecar container or a separate service, mounting the log file volume.)
 
 ### 4. Configuring Index/Query Structure for Admin Dashboard Consumption
 
@@ -522,35 +523,35 @@ Here are example LogQL queries you would use in Grafana's Explore feature or wit
 
 1. **Log Volume by Time:**
 
-    ```logql
-    sum by (level) (count_over_time({job="mystic-arcana-app"}[1h]))
-    ```
+   ```logql
+   sum by (level) (count_over_time({job="mystic-arcana-app"}[1h]))
+   ```
 
-    - This query counts log entries per hour, grouped by their `level` label. You can adjust the time range in Grafana.
+   - This query counts log entries per hour, grouped by their `level` label. You can adjust the time range in Grafana.
 
 2. **Error Spikes:**
 
-    ```logql
-    sum by (service) (count_over_time({job="mystic-arcana-app", level="ERROR"}[5m]))
-    ```
+   ```logql
+   sum by (service) (count_over_time({job="mystic-arcana-app", level="ERROR"}[5m]))
+   ```
 
-    - This query shows the count of `ERROR` level logs over 5-minute intervals, grouped by the `service` that emitted them. Useful for identifying sudden increases in errors.
+   - This query shows the count of `ERROR` level logs over 5-minute intervals, grouped by the `service` that emitted them. Useful for identifying sudden increases in errors.
 
 3. **Action Breakdown:**
 
-    ```logql
-    sum by (action) (count_over_time({job="mystic-arcana-app"}[1h]))
-    ```
+   ```logql
+   sum by (action) (count_over_time({job="mystic-arcana-app"}[1h]))
+   ```
 
-    - This query counts log entries per hour, grouped by the `action` label, giving an overview of frequently performed actions.
+   - This query counts log entries per hour, grouped by the `action` label, giving an overview of frequently performed actions.
 
 4. **Saved Reading Counts by Spread Type:**
 
-    ```logql
-    sum by (spreadType) (count_over_time({job="mystic-arcana-app", action="tarot_reading_saved"} | json metadata="metadata" | unwrap metadata.spreadType[1h]))
-    ```
+   ```logql
+   sum by (spreadType) (count_over_time({job="mystic-arcana-app", action="tarot_reading_saved"} | json metadata="metadata" | unwrap metadata.spreadType[1h]))
+   ```
 
-    - This query specifically targets `tarot_reading_saved` actions, parses the `metadata` field as JSON, extracts the `spreadType` from it, and then counts occurrences per hour, grouped by `spreadType`.
+   - This query specifically targets `tarot_reading_saved` actions, parses the `metadata` field as JSON, extracts the `spreadType` from it, and then counts occurrences per hour, grouped by `spreadType`.
 
 ### 6. Providing Clear Connection Instructions for the Frontend to Consume Logs
 
@@ -560,31 +561,40 @@ The frontend (admin dashboard) should **not** directly query Loki. This would ex
 
 ```typescript
 // src/app/api/admin/logs/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { createAdminClient } from '@/lib/supabase/server'; // Assuming an admin client for auth
-import Logger from '@/utils/logger'; // For internal logging of this API
+import { NextRequest, NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/server"; // Assuming an admin client for auth
+import Logger from "@/utils/logger"; // For internal logging of this API
 
-const logger = new Logger('AdminLogsAPI');
+const logger = new Logger("AdminLogsAPI");
 
 export async function GET(request: NextRequest) {
   // 1. Authentication & Authorization: Ensure only authorized admins can access
   const supabaseAdmin = await createAdminClient(); // Use admin client to bypass RLS for auth check
-  const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabaseAdmin.auth.getUser();
 
-  if (authError || !user /* || !user.is_admin_role */) { // Add actual admin role check
-    logger.warn('admin_logs_unauthorized_access', user?.id, undefined, 'Unauthorized attempt to access admin logs.');
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (authError || !user /* || !user.is_admin_role */) {
+    // Add actual admin role check
+    logger.warn(
+      "admin_logs_unauthorized_access",
+      user?.id,
+      undefined,
+      "Unauthorized attempt to access admin logs.",
+    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // 2. Parse Query Parameters (e.g., level, service, action, time range, search term)
   const { searchParams } = new URL(request.url);
-  const level = searchParams.get('level');
-  const service = searchParams.get('service');
-  const action = searchParams.get('action');
-  const searchTerm = searchParams.get('searchTerm');
-  const limit = parseInt(searchParams.get('limit') || '100');
-  const start = searchParams.get('start'); // ISO string or Unix timestamp
-  const end = searchParams.get('end');     // ISO string or Unix timestamp
+  const level = searchParams.get("level");
+  const service = searchParams.get("service");
+  const action = searchParams.get("action");
+  const searchTerm = searchParams.get("searchTerm");
+  const limit = parseInt(searchParams.get("limit") || "100");
+  const start = searchParams.get("start"); // ISO string or Unix timestamp
+  const end = searchParams.get("end"); // ISO string or Unix timestamp
 
   // 3. Construct LogQL Query based on parameters
   let logQLQuery = `{job="mystic-arcana-app"}`;
@@ -607,16 +617,43 @@ export async function GET(request: NextRequest) {
 
     // For demonstration, return dummy data
     const dummyLogs = [
-      { timestamp: new Date().toISOString(), level: 'INFO', service: 'TarotDrawAPI', action: 'tarot_cards_drawn', message: 'Dummy log entry.' },
-      { timestamp: new Date().toISOString(), level: 'ERROR', service: 'TarotSaveReadingAPI', action: 'tarot_save_reading_error', message: 'Another dummy log entry.' },
+      {
+        timestamp: new Date().toISOString(),
+        level: "INFO",
+        service: "TarotDrawAPI",
+        action: "tarot_cards_drawn",
+        message: "Dummy log entry.",
+      },
+      {
+        timestamp: new Date().toISOString(),
+        level: "ERROR",
+        service: "TarotSaveReadingAPI",
+        action: "tarot_save_reading_error",
+        message: "Another dummy log entry.",
+      },
     ];
 
-    logger.info('admin_logs_fetched', user.id, { query: logQLQuery, limit, start, end }, 'Admin logs fetched successfully.');
-    return NextResponse.json({ success: true, logs: dummyLogs /* Replace with lokiData.data.result */ });
-
+    logger.info(
+      "admin_logs_fetched",
+      user.id,
+      { query: logQLQuery, limit, start, end },
+      "Admin logs fetched successfully.",
+    );
+    return NextResponse.json({
+      success: true,
+      logs: dummyLogs /* Replace with lokiData.data.result */,
+    });
   } catch (error) {
-    logger.error('admin_logs_fetch_error', user.id, error as Error, 'Failed to fetch logs from Loki.');
-    return NextResponse.json({ error: 'Failed to fetch logs' }, { status: 500 });
+    logger.error(
+      "admin_logs_fetch_error",
+      user.id,
+      error as Error,
+      "Failed to fetch logs from Loki.",
+    );
+    return NextResponse.json(
+      { error: "Failed to fetch logs" },
+      { status: 500 },
+    );
   }
 }
 ```
@@ -631,11 +668,11 @@ async function fetchLogs(filters) {
   const params = new URLSearchParams(filters).toString();
   const response = await fetch(`/api/admin/logs?${params}`, {
     headers: {
-      'Authorization': `Bearer ${yourAuthToken}` // Send user's session token
-    }
+      Authorization: `Bearer ${yourAuthToken}`, // Send user's session token
+    },
   });
   if (!response.ok) {
-    throw new Error('Failed to fetch logs');
+    throw new Error("Failed to fetch logs");
   }
   const data = await response.json();
   return data.logs;
@@ -648,11 +685,12 @@ Alerting can be configured directly within **Grafana** once Loki is set up as a 
 
 - **Error Rate Alert:** Create a Grafana Alert rule using a LogQL query like:
 
-    ```logql
-    sum by (service) (count_over_time({job="mystic-arcana-app", level="ERROR"}[5m])) > 10
-    ```
+  ```logql
+  sum by (service) (count_over_time({job="mystic-arcana-app", level="ERROR"}[5m])) > 10
+  ```
 
-    This would trigger an alert if any service logs more than 10 errors in a 5-minute window.
+  This would trigger an alert if any service logs more than 10 errors in a 5-minute window.
+
 - **Unusual Activity:** More complex alerts can be set up based on deviations from baseline log volumes or specific patterns.
 
 ### 8. Blockers for Dashboard Integration

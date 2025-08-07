@@ -6,19 +6,19 @@ Six Decans
 
 Be nebel l Wen
 
-In tradit iona l ast rology,  ea ch zodia c sign is ruled b y a trip licity of decan at es, or decan s.
+In tradit iona l ast rology, ea ch zodia c sign is ruled b y a trip licity of decan at es, or decan s.
 
 The decan at e
 
-wit hin the zodia c sign that  a p lanet  falls under in  your na ta l chart can  offer
+wit hin the zodia c sign that a p lanet falls under in your na ta l chart can offer
 
-grea te r in sights in to how that  p lane t might b ehave or affect  that  sp ecific area of your li fe
+grea te r in sights in to how that p lane t might b ehave or affect that sp ecific area of your li fe
 
 (corresp ondin gtot heh ouse). Thereare 36t rip licit ie sin tot al(3decan at esp erh
 
 ouse, 12
 
-houses).  The first decan  for ea ch house is b etwee n
+houses). The first decan for ea ch house is b etwee n
 
 1°
 
@@ -26,7 +26,7 @@ houses).  The first decan  for ea ch house is b etwee n
 
 10°
 
-,  the second b et wee n
+, the second b et wee n
 
 11°
 
@@ -36,7 +36,7 @@ houses).  The first decan  for ea ch house is b etwee n
 
 ,
 
-an d the t hird decan  b et wee n
+an d the t hird decan b et wee n
 
 21°
 
@@ -46,7 +46,7 @@ an d the t hird decan  b et wee n
 
 .
 
-The Deca na te  Rulership s
+The Deca na te Rulership s
 
 (
 
@@ -180,7 +180,7 @@ Jup it er
 
 M ars
 
-The Deca na te  Rulership s
+The Deca na te Rulership s
 
 (
 
@@ -318,13 +318,13 @@ Not e :
 
 The ast rological wheel p ict ured on the first p age of this study guide is marked b y the
 
-tradit iona l decan at e rulership  corresp onden ces.
+tradit iona l decan at e rulership corresp onden ces.
 
 Decans mark ti me.
 
-F or examp le,  from M ay 21 to M ay 30 of 2 016,  the s un is in  Gemini  under
+F or examp le, from M ay 21 to M ay 30 of 2 016, the s un is in Gemini under
 
-the decan  ruler Jup it er (ob
+the decan ruler Jup it er (ob
 
 servin g tradit iona l rulership s) as the lum in ary makes it s way
 
@@ -338,21 +338,21 @@ to
 
 . OnJune1, theGemin isunmovedunderthedecan rulerM ars
 
-an d remai ns under the influen ce of decan  ruler M ars unti l Jun e 10.  Then  Jun e 11 to Jun e 19,
+an d remai ns under the influen ce of decan ruler M ars unti l Jun e 10. Then Jun e 11 to Jun e 19,
 
-it  moves
+it moves
 
-in to the third decan ,  ruled b y the S un,  b efore it  lands on the cusp  b et wee n Gemini
+in to the third decan , ruled b y the S un, b efore it lands on the cusp b et wee n Gemini
 
-an d Can cer on Jun e 20 .  Thus,  while all those b orn b et wee n M ay 21 an d Jun e 20 may b e
+an d Can cer on Jun e 20 . Thus, while all those b orn b et wee n M ay 21 an d Jun e 20 may b e
 
 tsur á
 
 en t
 
-from the Gemini  b orn b et wee n June 11 an d June 19,  all due to decan rulership .  In other
+from the Gemini b orn b et wee n June 11 an d June 19, all due to decan rulership . In other
 
-words,  thro ugh the dec an s,  metap hysi
+words, thro ugh the dec an s, metap hysi
 
 cally sp ace a nd ti me converge.
 
@@ -374,11 +374,11 @@ on Nat al P lane t
 
 as Characte rized b y H o use an d S ign
 
-A more yan g ap p roac h.  Promisin g of p ersona l success.  Direct s persona l
+A more yan g ap p roac h. Promisin g of p ersona l success. Direct s persona l
 
-en ergy outwa rd.  S ignifican t exp erien ces in  adulthood as p ertai ni ng to this
+en ergy outwa rd. S ignifican t exp erien ces in adulthood as p ertai ni ng to this
 
-area of life.  Area s of sig ni ficant  self
+area of life. Area s of sig ni ficant self
 
 -
 
@@ -386,61 +386,61 @@ act ualizat ion
 
 an d maturit y.
 
-A more yin  ap p roach.  Nurturin g,  in tuit ive,  an d feelin g.  Direct s persona l
+A more yin ap p roach. Nurturin g, in tuit ive, an d feelin g. Direct s persona l
 
-en ergy in ward.  S ignifican t e xp eriences i n childhood as p ertai ni ngto t his a rea
+en ergy in ward. S ignifican t e xp eriences i n childhood as p ertai ni ngto t his a rea
 
-of life.  Ties to p ast  livesor accrued karma.
+of life. Ties to p ast livesor accrued karma.
 
-M ore cereb ral an d  exp ressi ve when it  c
+M ore cereb ral an d exp ressi ve when it c
 
-omes  to this area  of life.  S ee kin g
+omes to this area of life. S ee kin g
 
-exp ressi on,  communi cat ion,  and havin g your  voice heard.  Int ellect ualized
+exp ressi on, communi cat ion, and havin g your voice heard. Int ellect ualized
 
-exp erien ce. S ee ks to exp ress,  spea k out ab out, or ment or/te ach others wit h
+exp erien ce. S ee ks to exp ress, spea k out ab out, or ment or/te ach others wit h
 
-regard to tha t a rea  of lif e.
+regard to tha t a rea of lif e.
 
-Att ract s others to ward  you for s upp ort.
+Att ract s others to ward you for s upp ort.
 
-Ap p lies a more  feelin g an d  se nsi ng
+Ap p lies a more feelin g an d se nsi ng
 
-ap p roach.  S ignificant exp erien ces in  p rep ubescent ,  adolescence ,  or young
+ap p roach. S ignificant exp erien ces in p rep ubescent , adolescence , or young
 
-adult yea rs as p ertai ni ng to this a rea  of life.
+adult yea rs as p ertai ni ng to this a rea of life.
 
-M ore willful.  E mbodyin g the warrior ar chet yp e.  Assertive.  See kin g
+M ore willful. E mbodyin g the warrior ar chet yp e. Assertive. See kin g
 
-achie vemen t here. S igni ficant  e
+achie vemen t here. S igni ficant e
 
 xperien ces bet wee n ages 40 an d 60 as
 
 p ertai ni ng to this area oflife.
 
-L uckie r.  Born wit h b et te r luck.  Divin e b lessings here.  F at e lean s toward
+L uckie r. Born wit h b et te r luck. Divin e b lessings here. F at e lean s toward
 
-success in  this area.  Significan t exp erien ces b et wee n ages 60 an d 70 as
+success in this area. Significan t exp erien ces b et wee n ages 60 an d 70 as
 
 p ertai ni ng to this area oflife.
 
 E ndowedwit hp ragmat isman dcommonsen se. M ayexp erien ceaglassceili ng
 
-wit h regard to this are a of life.  S trong sen se of moral d uty an d obli gat ions
+wit h regard to this are a of life. S trong sen se of moral d uty an d obli gat ions
 
 here.
 
 Takin gtheunconven ti ona lp at h. E ccent rici tyin thisarea.S ta ndin gap artfrom
 
-the rest .  An outli
+the rest . An outli
 
-er.  Mat te rs revisit ed that  come b ack in to focus i n your
+er. Mat te rs revisit ed that come b ack in to focus i n your
 
 twilight yea rs of life.
 
-M ore crea ti ve a nd in tuiti ve i n p ersona l app roach to this a rea  of life.
+M ore crea ti ve a nd in tuiti ve i n p ersona l app roach to this a rea of life.
 
-Adversity b rin gs opp ortuni ty.  Curveb alls or crise s exp erien ced in this area  of
+Adversity b rin gs opp ortuni ty. Curveb alls or crise s exp erien ced in this area of
 
 lifep romp te db y de
 

@@ -1,6 +1,6 @@
 # Mystic Arcana Terms of Service
 
-*Effective Date: June 18, 2025*
+_Effective Date: June 18, 2025_
 
 ---
 
@@ -26,11 +26,13 @@ Mystic Arcana is an AI-powered platform providing:
 ## 3. User Accounts
 
 ### Account Creation
+
 - You must provide accurate information when creating an account
 - You are responsible for maintaining the security of your account
 - You must be at least 16 years old to use our services
 
 ### Account Responsibilities
+
 - Keep your login credentials secure
 - Notify us immediately of any unauthorized access
 - You are responsible for all activities under your account
@@ -52,10 +54,12 @@ You agree to use Mystic Arcana responsibly and not to:
 ## 5. Intellectual Property
 
 ### Our Content
+
 - All content, including tarot interpretations, astrological data, and AI-generated insights, is owned by Mystic Arcana
 - You may not reproduce, distribute, or create derivative works without permission
 
 ### Your Content
+
 - You retain ownership of content you create (journal entries, custom spreads)
 - You grant us a license to use your content to provide and improve our services
 
@@ -70,15 +74,18 @@ Your privacy is important to us. Please review our [Privacy Policy](/legal/priva
 ## 7. Payments and Subscriptions
 
 ### Free Services
+
 - Basic tarot readings and astrological insights are available for free
 - Free users may have limited access to certain features
 
 ### Premium Services
+
 - Premium subscriptions unlock additional features
 - Payments are processed securely through Stripe
 - Subscriptions automatically renew unless cancelled
 
 ### Refunds
+
 - Refunds are handled on a case-by-case basis
 - Contact support@mysticarcana.com for refund requests
 
@@ -87,11 +94,13 @@ Your privacy is important to us. Please review our [Privacy Policy](/legal/priva
 ## 8. Disclaimers
 
 ### Entertainment Purpose
+
 - Our services are for entertainment and spiritual exploration
 - Readings should not be used as the sole basis for important life decisions
 - We do not guarantee the accuracy of predictions or insights
 
 ### AI Limitations
+
 - Our AI systems are continuously learning and improving
 - Interpretations may vary and should be considered as one perspective among many
 
@@ -100,6 +109,7 @@ Your privacy is important to us. Please review our [Privacy Policy](/legal/priva
 ## 9. Limitation of Liability
 
 Mystic Arcana shall not be liable for:
+
 - Any indirect, incidental, or consequential damages
 - Decisions made based on our readings or insights
 - Technical issues or service interruptions
@@ -110,6 +120,7 @@ Mystic Arcana shall not be liable for:
 ## 10. Termination
 
 We may terminate or suspend your account if you:
+
 - Violate these Terms of Service
 - Engage in harmful or disruptive behavior
 - Fail to pay for premium services
@@ -121,6 +132,7 @@ You may terminate your account at any time by contacting us.
 ## 11. Changes to Terms
 
 We may update these Terms from time to time. We will notify you of significant changes via:
+
 - Email notification
 - In-app announcement
 - Website notice
@@ -145,4 +157,4 @@ For questions about these Terms of Service:
 
 ---
 
-*Last updated: June 18, 2025*
+_Last updated: June 18, 2025_

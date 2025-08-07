@@ -1,1 +1,1 @@
-export { ReaderPanel } from './ReaderPanel';
+export { ReaderPanel } from "./ReaderPanel";

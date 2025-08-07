@@ -4,12 +4,7 @@
     "degrees": 0,
     "orb": 8,
     "nature": "Neutral",
-    "keywords": [
-      "unity",
-      "intensity",
-      "fusion",
-      "focus"
-    ],
+    "keywords": ["unity", "intensity", "fusion", "focus"],
     "basicMeaning": "Planetary energies blend and intensify",
     "interpretation": "Powerful combination of planetary forces, can be harmonious or challenging depending on planets involved",
     "inNatalChart": "Represents core personality themes and intense focus areas",
@@ -21,12 +16,7 @@
     "degrees": 60,
     "orb": 6,
     "nature": "Harmonious",
-    "keywords": [
-      "opportunity",
-      "harmony",
-      "cooperation",
-      "talent"
-    ],
+    "keywords": ["opportunity", "harmony", "cooperation", "talent"],
     "basicMeaning": "Harmonious energy that requires effort to activate",
     "interpretation": "Opportunities for growth and positive expression with conscious effort",
     "inNatalChart": "Natural talents that can be developed with effort",
@@ -38,12 +28,7 @@
     "degrees": 90,
     "orb": 8,
     "nature": "Challenging",
-    "keywords": [
-      "tension",
-      "conflict",
-      "growth",
-      "motivation"
-    ],
+    "keywords": ["tension", "conflict", "growth", "motivation"],
     "basicMeaning": "Dynamic tension that motivates action and growth",
     "interpretation": "Challenges that lead to strength and character development",
     "inNatalChart": "Internal tensions that drive personal growth",
@@ -55,12 +40,7 @@
     "degrees": 120,
     "orb": 8,
     "nature": "Harmonious",
-    "keywords": [
-      "harmony",
-      "flow",
-      "ease",
-      "talent"
-    ],
+    "keywords": ["harmony", "flow", "ease", "talent"],
     "basicMeaning": "Harmonious and flowing energy exchange",
     "interpretation": "Natural talents and easy energy flow between planets",
     "inNatalChart": "Natural gifts and areas of ease in life",
@@ -72,12 +52,7 @@
     "degrees": 180,
     "orb": 8,
     "nature": "Challenging",
-    "keywords": [
-      "polarity",
-      "balance",
-      "awareness",
-      "projection"
-    ],
+    "keywords": ["polarity", "balance", "awareness", "projection"],
     "basicMeaning": "Polarity that seeks balance and integration",
     "interpretation": "Opposite energies that need to be balanced and integrated",
     "inNatalChart": "Areas where balance and integration are needed",

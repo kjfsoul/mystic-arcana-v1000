@@ -1,1 +1,1 @@
-export { AstrologyPanel } from './AstrologyPanel';
+export { AstrologyPanel } from "./AstrologyPanel";

@@ -12,7 +12,7 @@ export async function POST() {
         undefined,
         {},
         error,
-        "Logout failed."
+        "Logout failed.",
       );
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
@@ -20,7 +20,7 @@ export async function POST() {
       "auth_logout_success",
       undefined,
       {},
-      "User logged out successfully."
+      "User logged out successfully.",
     );
     return NextResponse.json({ message: "Logged out successfully" });
   } catch (error) {
@@ -29,11 +29,11 @@ export async function POST() {
       undefined,
       {},
       error as Error,
-      "Internal server error during logout."
+      "Internal server error during logout.",
     );
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

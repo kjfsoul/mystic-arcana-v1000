@@ -11,7 +11,7 @@
     "start": "next start",
     "type-check": "tsc --noEmit",
     "check": "npm run type-check && npm run lint",
-    "lint": "eslint . --max-warnings=1000 || true",
+    
     "lint:strict": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "fix-all": "npm run lint -- --fix && npm run typecheck",

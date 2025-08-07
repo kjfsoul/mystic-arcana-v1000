@@ -1,1 +1,1 @@
-export { TarotPanel } from './TarotPanel';
+export { TarotPanel } from "./TarotPanel";

@@ -1,4 +1,3 @@
- 
 import {
   DrawCardsRequest,
   DrawCardsResponse,
@@ -25,7 +24,7 @@ export function useDrawCards() {
     loading: false,
     error: null,
   });
- 
+
   const drawCards = useCallback(async (request: DrawCardsRequest) => {
     setState({ data: null, loading: true, error: null });
     try {
@@ -58,7 +57,7 @@ export function useShuffleDeck() {
     loading: false,
     error: null,
   });
- 
+
   const shuffleDeck = useCallback(async (request?: ShuffleRequest) => {
     setState({ data: null, loading: true, error: null });
     try {
@@ -91,7 +90,7 @@ export function useSaveReading() {
     loading: false,
     error: null,
   });
- 
+
   const saveReading = useCallback(async (request: SaveReadingRequest) => {
     setState({ data: null, loading: true, error: null });
     try {
@@ -124,7 +123,7 @@ export function useGetReadings() {
     loading: false,
     error: null,
   });
- 
+
   const getReadings = useCallback(async (params?: GetReadingsRequest) => {
     setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
@@ -146,7 +145,7 @@ export function useGetReadings() {
       throw error;
     }
   }, []);
- 
+
   const deleteReading = useCallback(
     async (id: string, userId: string) => {
       try {
@@ -162,7 +161,7 @@ export function useGetReadings() {
         throw error;
       }
     },
-    [getReadings, state.data]
+    [getReadings, state.data],
   );
   return { ...state, getReadings, deleteReading };
 }
@@ -187,7 +186,7 @@ export function useReadingStats(userId?: string) {
     loading: false,
     error: null,
   });
- 
+
   const getStats = useCallback(
     async (uid?: string) => {
       const userIdToUse = uid || userId;
@@ -223,7 +222,7 @@ export function useReadingStats(userId?: string) {
         throw error;
       }
     },
-    [userId]
+    [userId],
   );
   return { ...state, getStats };
 }
@@ -239,11 +238,11 @@ export function useTarotReading() {
   const [drawnCards, setDrawnCards] = useState<
     DrawCardsResponse["cards"] | null
   >(null);
- 
+
   const performReading = useCallback(
     async (
       spreadType: "single" | "three-card" | "celtic-cross",
-      userId?: string
+      userId?: string,
     ) => {
       try {
         // 1. Shuffle the deck
@@ -281,16 +280,16 @@ export function useTarotReading() {
         throw error;
       }
     },
-    [draw, shuffle]
+    [draw, shuffle],
   );
- 
+
   const saveCurrentReading = useCallback(
     async (
       userId: string,
       interpretation: string,
       question?: string,
       notes?: string,
-      tags?: string[]
+      tags?: string[],
     ) => {
       if (!drawnCards || !currentDrawId) {
         throw new Error("No active reading to save");
@@ -299,8 +298,8 @@ export function useTarotReading() {
         drawnCards.length === 1
           ? "single"
           : drawnCards.length === 3
-          ? "three-card"
-          : "celtic-cross";
+            ? "three-card"
+            : "celtic-cross";
       const result = await save.saveReading({
         userId,
         spreadType,
@@ -328,40 +327,51 @@ export function useTarotReading() {
       }
       return result;
     },
-    [drawnCards, currentDrawId, save]
+    [drawnCards, currentDrawId, save],
   );
- 
+
   const clearCurrentReading = useCallback(() => {
     setDrawnCards(null);
     setCurrentDrawId(null);
   }, []);
-  return useMemo(() => ({
-    // States
-    isLoading:
-      draw.loading || shuffle.loading || save.loading || readings.loading,
-    error: draw.error || shuffle.error || save.error || readings.error,
-    currentDrawId,
-    drawnCards,
-    // Actions
-    performReading,
-    saveCurrentReading,
-    clearCurrentReading,
-    getReadingHistory: readings.getReadings,
-    deleteReading: readings.deleteReading,
-    // Individual states for fine control
-    draw,
-    shuffle,
-    save,
-    readings,
-  }), [
-    draw.loading, draw.error, draw,
-    shuffle.loading, shuffle.error, shuffle,
-    save.loading, save.error, save,
-    readings.loading, readings.error, readings,
-    currentDrawId,
-    drawnCards,
-    performReading,
-    saveCurrentReading,
-    clearCurrentReading
-  ]);
+  return useMemo(
+    () => ({
+      // States
+      isLoading:
+        draw.loading || shuffle.loading || save.loading || readings.loading,
+      error: draw.error || shuffle.error || save.error || readings.error,
+      currentDrawId,
+      drawnCards,
+      // Actions
+      performReading,
+      saveCurrentReading,
+      clearCurrentReading,
+      getReadingHistory: readings.getReadings,
+      deleteReading: readings.deleteReading,
+      // Individual states for fine control
+      draw,
+      shuffle,
+      save,
+      readings,
+    }),
+    [
+      draw.loading,
+      draw.error,
+      draw,
+      shuffle.loading,
+      shuffle.error,
+      shuffle,
+      save.loading,
+      save.error,
+      save,
+      readings.loading,
+      readings.error,
+      readings,
+      currentDrawId,
+      drawnCards,
+      performReading,
+      saveCurrentReading,
+      clearCurrentReading,
+    ],
+  );
 }

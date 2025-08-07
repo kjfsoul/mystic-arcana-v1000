@@ -1,5 +1,6 @@
-# Mystic Arcana Cookies & Tracking Policy  
-*Effective Date: [Insert Date]*
+# Mystic Arcana Cookies & Tracking Policy
+
+_Effective Date: [Insert Date]_
 
 ---
 
@@ -23,6 +24,7 @@ This modular policy is structured for use across multiple platforms (e.g., Mysti
 Cookies are small files that help us remember you and improve your experience on [Platform Name].
 
 At [Platform Name], cookies help:
+
 - Remember your preferences
 - Secure your sessions
 - Personalize your readings, spreads, or content
@@ -35,12 +37,12 @@ At [Platform Name], cookies help:
 
 ## 2. Types of Cookies We Use
 
-| Type | Purpose | Examples |
-|------|---------|----------|
-| **Essential** | Required for core functionality | Auth tokens, session IDs |
-| **Analytics** | Understand engagement trends | Google Analytics |
-| **Functional** | Enhance personalization | Deck memory, journal styles |
-| **Marketing / Affiliate** | Track promotions or referrals | Affiliate tags, UTM params |
+| Type                      | Purpose                         | Examples                    |
+| ------------------------- | ------------------------------- | --------------------------- |
+| **Essential**             | Required for core functionality | Auth tokens, session IDs    |
+| **Analytics**             | Understand engagement trends    | Google Analytics            |
+| **Functional**            | Enhance personalization         | Deck memory, journal styles |
+| **Marketing / Affiliate** | Track promotions or referrals   | Affiliate tags, UTM params  |
 
 <!-- SETTINGS_PANEL -->
 
@@ -48,7 +50,8 @@ At [Platform Name], cookies help:
 
 ## 3. Consent & Your Choices
 
-You’ll see a cookie banner when you first visit.  
+You’ll see a cookie banner when you first visit.
+
 > You can accept all cookies, decline non-essential ones, or customize preferences in your [Cookie Settings Panel].
 
 You can change your preferences anytime.
@@ -60,6 +63,7 @@ You can change your preferences anytime.
 ## 4. Third-Party Cookies
 
 [Platform Name] may use cookies from:
+
 - Supabase (auth/session)
 - Google Analytics (site behavior)
 - Stripe (checkout)
@@ -72,6 +76,7 @@ You can change your preferences anytime.
 ## 5. Managing & Deleting Cookies
 
 You can manage cookies via:
+
 - Our [Cookie Settings Panel]
 - Your browser settings
 - Extensions like Privacy Badger
@@ -84,6 +89,7 @@ Some features may not work without cookies.
 ## 6. International Rights
 
 Users in the EU, UK, California, and other regions may:
+
 - Refuse non-essential cookies
 - Request data linked to cookie IDs
 - Withdraw consent anytime
@@ -94,10 +100,10 @@ Users in the EU, UK, California, and other regions may:
 
 ## 7. Implementation Tags
 
-| Tag | Purpose |
-|-----|---------|
-| `<!-- COOKIE_BANNER -->` | Use at first app load or visit |
-| `<!-- SETTINGS_PANEL -->` | Toggles and preferences dashboard |
+| Tag                        | Purpose                                    |
+| -------------------------- | ------------------------------------------ |
+| `<!-- COOKIE_BANNER -->`   | Use at first app load or visit             |
+| `<!-- SETTINGS_PANEL -->`  | Toggles and preferences dashboard          |
 | `<!-- CONSENT_LOGGING -->` | Where consent state is captured and stored |
 
 ---

@@ -150,7 +150,7 @@ export class SophiaAgent {
   async getReading(
     cards: TarotCard[],
     spreadType: SpreadType,
-    context: ReadingContext
+    context: ReadingContext,
   ): Promise<SophiaReading> {
     try {
       // First, retrieve user memories for personalization
@@ -158,15 +158,15 @@ export class SophiaAgent {
       if (context.userId) {
         try {
           userMemories = await this.personaLearner.retrieveUserMemories(
-            context.userId
+            context.userId,
           );
           console.log(
-            `Sophia: Retrieved ${userMemories.length} memories for user ${context.userId}`
+            `Sophia: Retrieved ${userMemories.length} memories for user ${context.userId}`,
           );
         } catch (memoryError) {
           console.warn(
             "Sophia: Could not retrieve user memories, proceeding with base reading:",
-            memoryError
+            memoryError,
           );
         }
       }
@@ -185,7 +185,7 @@ export class SophiaAgent {
           .single();
         if (error) {
           console.warn(
-            `No specific interpretation found for ${card.name} in ${positionName}, using fallback`
+            `No specific interpretation found for ${card.name} in ${positionName}, using fallback`,
           );
         }
         // Create personalized interpretation with user memories
@@ -195,7 +195,7 @@ export class SophiaAgent {
           positionName,
           context,
           i,
-          userMemories
+          userMemories,
         );
         cardInterpretations.push(interpretation);
       }
@@ -205,17 +205,17 @@ export class SophiaAgent {
         cardInterpretations,
         spreadType,
         context,
-        userMemories
+        userMemories,
       );
       const overallGuidance = await this.synthesizeOverallGuidance(
         cardInterpretations,
         context,
-        userMemories
+        userMemories,
       );
       const spiritualInsight = await this.generateSpiritualInsight(
         cards,
         context,
-        userMemories
+        userMemories,
       );
       // Fixed: Replace deprecated substr with substring
       const reading: SophiaReading = {
@@ -234,7 +234,7 @@ export class SophiaAgent {
     } catch (error) {
       console.error("Sophia reading generation failed:", error);
       throw new Error(
-        `Unable to channel the cosmic wisdom at this time: ${error}`
+        `Unable to channel the cosmic wisdom at this time: ${error}`,
       );
     }
   }
@@ -247,7 +247,7 @@ export class SophiaAgent {
     currentState: string,
     userInput?: string,
     cards?: TarotCard[],
-    context?: ReadingContext
+    context?: ReadingContext,
   ): Promise<ConversationTurn> {
     try {
       let session = this.conversationSessions.get(sessionId);
@@ -293,7 +293,7 @@ export class SophiaAgent {
    */
   private async processStateTransition(
     session: ConversationSession,
-    userInput?: string
+    userInput?: string,
   ): Promise<ConversationTurn> {
     switch (session.currentState) {
       case ConversationState.AWAITING_DRAW:
@@ -323,7 +323,7 @@ export class SophiaAgent {
    * Handle the initial draw state
    */
   private async handleAwaitingDraw(
-    session: ConversationSession
+    session: ConversationSession,
   ): Promise<ConversationTurn> {
     const signaturePhrase =
       this.personality.signature_phrases[
@@ -344,7 +344,7 @@ export class SophiaAgent {
    * Handle revealing a card
    */
   private async handleRevealingCard(
-    session: ConversationSession
+    session: ConversationSession,
   ): Promise<ConversationTurn> {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     const card = session.cards[cardIndex];
@@ -384,7 +384,7 @@ export class SophiaAgent {
    * Handle interpreting a card
    */
   private async handleInterpretingCard(
-    session: ConversationSession
+    session: ConversationSession,
   ): Promise<ConversationTurn> {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     const card = session.cards[cardIndex];
@@ -394,7 +394,7 @@ export class SophiaAgent {
     if (session.userId) {
       try {
         userMemories = await this.personaLearner.retrieveUserMemories(
-          session.userId
+          session.userId,
         );
       } catch (memoryError) {
         console.warn("Could not retrieve user memories:", memoryError);
@@ -410,7 +410,7 @@ export class SophiaAgent {
       .single();
     if (error) {
       console.warn(
-        `No specific interpretation found for ${card.name} in ${positionName}`
+        `No specific interpretation found for ${card.name} in ${positionName}`,
       );
     }
     // Create personalized interpretation
@@ -420,7 +420,7 @@ export class SophiaAgent {
       positionName,
       session.context,
       cardIndex,
-      userMemories
+      userMemories,
     );
     session.cardInterpretations[cardIndex] = interpretation;
     const dialogue = interpretation.personalized_guidance;
@@ -455,7 +455,7 @@ export class SophiaAgent {
    */
   private async handleAwaitingInput(
     session: ConversationSession,
-    userInput?: string
+    userInput?: string,
   ): Promise<ConversationTurn> {
     const cardIndex = this.getCurrentCardIndex(session.currentState);
     if (!userInput) {
@@ -483,7 +483,7 @@ export class SophiaAgent {
     // Create interactive question for deeper engagement
     const interactiveQuestion = this.createInteractiveQuestion(
       session.cards[cardIndex],
-      session.cardInterpretations[cardIndex]
+      session.cardInterpretations[cardIndex],
     );
     session.currentState = nextState;
     this.conversationSessions.set(session.sessionId, session);
@@ -499,7 +499,7 @@ export class SophiaAgent {
    */
   private async handleInteractiveQuestion(
     session: ConversationSession,
-    userInput?: string
+    userInput?: string,
   ): Promise<ConversationTurn> {
     if (!userInput) {
       throw new Error("User input required for interactive question");
@@ -538,7 +538,7 @@ export class SophiaAgent {
           session_notes: `Interactive response: ${userInput} for card ${card.name}`,
         });
         console.log(
-          `Logged interactive response for user ${session.userId}: ${userInput}`
+          `Logged interactive response for user ${session.userId}: ${userInput}`,
         );
       } catch (error) {
         console.warn("Failed to log interactive response:", error);
@@ -571,14 +571,14 @@ export class SophiaAgent {
    * Handle final synthesis of the three-card reading
    */
   private async handleFinalSynthesis(
-    session: ConversationSession
+    session: ConversationSession,
   ): Promise<ConversationTurn> {
     // Create complete reading for final synthesis
     const userMemories: any[] = [];
     if (session.userId) {
       try {
         const memories = await this.personaLearner.retrieveUserMemories(
-          session.userId
+          session.userId,
         );
         userMemories.push(...memories);
       } catch (error) {
@@ -590,17 +590,17 @@ export class SophiaAgent {
       session.cardInterpretations,
       session.spreadType,
       session.context,
-      userMemories
+      userMemories,
     );
     const overallGuidance = await this.synthesizeOverallGuidance(
       session.cardInterpretations,
       session.context,
-      userMemories
+      userMemories,
     );
     const spiritualInsight = await this.generateSpiritualInsight(
       session.cards,
       session.context,
-      userMemories
+      userMemories,
     );
     const finalReading: SophiaReading = {
       id: `sophia_conversation_${session.sessionId}`,
@@ -656,7 +656,7 @@ export class SophiaAgent {
    */
   private createInteractiveQuestion(
     card: TarotCard,
-    _interpretation: PersonalizedInterpretation
+    _interpretation: PersonalizedInterpretation,
   ): InteractiveQuestion {
     void _interpretation; // Prevent unused variable warning
     const cardQuestions: Record<string, InteractiveQuestion> = {
@@ -789,7 +789,7 @@ export class SophiaAgent {
    */
   private generateResponseToInteractiveAnswer(
     card: TarotCard,
-    userInput: string
+    userInput: string,
   ): string {
     const responseMap: Record<string, string> = {
       deeply:
@@ -843,7 +843,7 @@ export class SophiaAgent {
     positionName: string,
     context: ReadingContext,
     cardIndex: number,
-    userMemories: any[] = []
+    userMemories: any[] = [],
   ): Promise<PersonalizedInterpretation> {
     // Base interpretation from Knowledge Pool or fallback
     const baseInterpretation =
@@ -858,7 +858,7 @@ export class SophiaAgent {
       positionName,
       context,
       personalizationHooks,
-      userMemories
+      userMemories,
     );
     // Extract spiritual wisdom and practical advice
     const spiritualWisdom =
@@ -871,12 +871,12 @@ export class SophiaAgent {
     const readerNotes = this.generateReaderNotes(
       card,
       knowledgePoolData,
-      context
+      context,
     );
     // Calculate confidence score based on data availability
     const confidenceScore = this.calculateConfidenceScore(
       knowledgePoolData,
-      context
+      context,
     );
     // Source references
     const sourceReferences = [
@@ -903,7 +903,7 @@ export class SophiaAgent {
     positionName: string,
     context: ReadingContext,
     personalizationHooks: any[],
-    userMemories: any[] = []
+    userMemories: any[] = [],
   ): Promise<string> {
     const signaturePhrase =
       this.personality.signature_phrases[
@@ -913,7 +913,7 @@ export class SophiaAgent {
     const memoryInsights = this.analyzeUserMemories(card, userMemories);
     // Weave Sophia's enhanced voice into the interpretation with rich personalization
     let guidance = `✨ **Beloved Soul**, ${signaturePhrase.toLowerCase()} as **${card.name}** emerges in your **${positionName}**.\n\n`;
-    
+
     // Add temporal/cosmic context for deeper resonance
     const temporalInsights = this.generateTemporalInsights();
     guidance += `🌙 **Cosmic Timing**: ${temporalInsights} This celestial moment amplifies ${card.name}'s profound message.\n\n`;
@@ -932,10 +932,10 @@ export class SophiaAgent {
     guidance += `💜 **Archetypal Essence**: ${archetypeEnergy.message} `;
     guidance += `**${card.name}** embodies the divine energy of *${archetypeEnergy.essence}*, `;
     guidance += `${archetypeEnergy.positionalMeaning}\n\n`;
-    
+
     // Add base interpretation with enhanced mystical context
     guidance += `🌙 **Core Divine Message**: ${baseInterpretation}\n\n`;
-    
+
     // Synthesize memory patterns with deeper psychological insight
     if (memoryInsights.recurringThemes.length > 0) {
       const primaryTheme = memoryInsights.recurringThemes[0];
@@ -969,7 +969,7 @@ export class SophiaAgent {
    */
   private analyzeUserMemories(
     currentCard: TarotCard,
-    userMemories: any[]
+    userMemories: any[],
   ): {
     previousEncounters: Array<{
       card: string;
@@ -1009,7 +1009,7 @@ export class SophiaAgent {
             // Collect themes for pattern analysis
             if (memoryData.learning_insights?.themes_identified) {
               insights.recurringThemes.push(
-                ...memoryData.learning_insights.themes_identified
+                ...memoryData.learning_insights.themes_identified,
               );
             }
           }
@@ -1032,7 +1032,7 @@ export class SophiaAgent {
     if (insights.previousEncounters.length > 0 && userMemories.length > 1) {
       insights.progressionPattern = this.generateProgressionPattern(
         currentCard,
-        userMemories
+        userMemories,
       );
     }
     return insights;
@@ -1042,7 +1042,7 @@ export class SophiaAgent {
    */
   private generateProgressionPattern(
     currentCard: TarotCard,
-    userMemories: any[]
+    userMemories: any[],
   ): string {
     // Look for meaningful patterns between cards
     const progressionMappings: Record<string, Record<string, string>> = {
@@ -1100,12 +1100,12 @@ export class SophiaAgent {
     interpretations: PersonalizedInterpretation[],
     spreadType: SpreadType,
     context: ReadingContext,
-    _userMemories: any[] = []
+    _userMemories: any[] = [],
   ): Promise<string> {
     void _userMemories; // Prevent unused variable warning
     let narrative = `Beloved seeker, as I gaze upon your ${spreadType.replace(
       "-",
-      " "
+      " ",
     )} spread, `;
     narrative += `I see a beautiful tapestry of wisdom woven by the cosmic forces. `;
     // Opening based on spread type
@@ -1160,7 +1160,7 @@ export class SophiaAgent {
   private async synthesizeOverallGuidance(
     interpretations: PersonalizedInterpretation[],
     context: ReadingContext,
-    _userMemories: any[] = []
+    _userMemories: any[] = [],
   ): Promise<string> {
     void _userMemories; // Prevent unused variable warning
     let guidance = `As I weave together the wisdom of your spread, several key themes emerge. `;
@@ -1184,7 +1184,7 @@ export class SophiaAgent {
   private async generateSpiritualInsight(
     cards: TarotCard[],
     context: ReadingContext,
-    _userMemories: any[] = []
+    _userMemories: any[] = [],
   ): Promise<string> {
     void _userMemories; // Prevent unused variable warning
     let insight = `On a deeper spiritual level, this reading reveals that you are being called `;
@@ -1199,7 +1199,7 @@ export class SophiaAgent {
         "The Sun",
         "Judgment",
         "The World",
-      ].includes(card.name)
+      ].includes(card.name),
     );
     if (spiritualCards.length > 0) {
       insight += `The presence of ${spiritualCards[0].name} `;
@@ -1261,7 +1261,7 @@ export class SophiaAgent {
    */
   private generateFallbackInterpretation(
     card: TarotCard,
-    positionName: string
+    positionName: string,
   ): string {
     const meaning = card.isReversed
       ? card.meaning.reversed ||
@@ -1279,7 +1279,7 @@ export class SophiaAgent {
    */
   private generateSpiritualWisdom(
     card: TarotCard,
-    positionName: string
+    positionName: string,
   ): string {
     return (
       `${card.name} carries the spiritual teaching that every experience serves your highest evolution. ` +
@@ -1291,7 +1291,7 @@ export class SophiaAgent {
    */
   private generatePracticalAdvice(
     card: TarotCard,
-    positionName: string
+    positionName: string,
   ): string {
     return (
       `Consider how the energy of ${card.name} can be practically applied in your daily life. ` +
@@ -1304,7 +1304,7 @@ export class SophiaAgent {
   private generateReaderNotes(
     card: TarotCard,
     knowledgePoolData: any,
-    _context: ReadingContext
+    _context: ReadingContext,
   ): string {
     void _context; // Prevent unused variable warning
     let notes = `Sophia's Notes: ${card.name} appeared with `;
@@ -1325,7 +1325,7 @@ export class SophiaAgent {
    */
   private calculateConfidenceScore(
     knowledgePoolData: any,
-    context: ReadingContext
+    context: ReadingContext,
   ): number {
     let score = 0.6; // Base confidence
     if (knowledgePoolData) score += 0.3; // Knowledge Pool data available
@@ -1337,7 +1337,7 @@ export class SophiaAgent {
    * Extract common themes from multiple interpretations
    */
   private extractCommonThemes(
-    interpretations: PersonalizedInterpretation[]
+    interpretations: PersonalizedInterpretation[],
   ): string[] {
     const themes = [];
     // Simple keyword analysis - could be enhanced with NLP
@@ -1354,7 +1354,7 @@ export class SophiaAgent {
       const count = interpretations.filter(
         (interp) =>
           interp.personalized_guidance.toLowerCase().includes(theme) ||
-          interp.spiritual_wisdom.toLowerCase().includes(theme)
+          interp.spiritual_wisdom.toLowerCase().includes(theme),
       ).length;
       if (count >= Math.ceil(interpretations.length / 2)) {
         themes.push(theme);
@@ -1390,49 +1390,56 @@ export class SophiaAgent {
     const hour = now.getHours();
     // const day = now.getDay();
     const moonPhase = this.getMoonPhase(now);
-    
+
     let insight = "";
-    
+
     // Time of day insights
     if (hour >= 5 && hour < 12) {
       insight += "The morning's fresh energy awakens new possibilities. ";
     } else if (hour >= 12 && hour < 17) {
-      insight += "The afternoon's focused power supports manifestation and action. ";
+      insight +=
+        "The afternoon's focused power supports manifestation and action. ";
     } else if (hour >= 17 && hour < 21) {
-      insight += "The evening's reflective wisdom illuminates deeper understanding. ";
+      insight +=
+        "The evening's reflective wisdom illuminates deeper understanding. ";
     } else {
-      insight += "The night's mystical veil reveals hidden truths and inner knowing. ";
+      insight +=
+        "The night's mystical veil reveals hidden truths and inner knowing. ";
     }
-    
+
     // Moon phase insights
     switch (moonPhase) {
-      case 'new':
-        insight += "Under the New Moon's blessing, this is a time for planting seeds of intention.";
+      case "new":
+        insight +=
+          "Under the New Moon's blessing, this is a time for planting seeds of intention.";
         break;
-      case 'waxing':
-        insight += "The Waxing Moon's growing light supports building and expanding your dreams.";
+      case "waxing":
+        insight +=
+          "The Waxing Moon's growing light supports building and expanding your dreams.";
         break;
-      case 'full':
-        insight += "The Full Moon's radiant power brings completion and profound revelation.";
+      case "full":
+        insight +=
+          "The Full Moon's radiant power brings completion and profound revelation.";
         break;
-      case 'waning':
-        insight += "The Waning Moon's gentle release supports letting go and inner healing.";
+      case "waning":
+        insight +=
+          "The Waning Moon's gentle release supports letting go and inner healing.";
         break;
     }
-    
+
     return insight;
   }
 
   /**
    * Get moon phase for temporal insights
    */
-  private getMoonPhase(date: Date): 'new' | 'waxing' | 'full' | 'waning' {
+  private getMoonPhase(date: Date): "new" | "waxing" | "full" | "waning" {
     // Simplified lunar cycle calculation (approximation)
     const dayOfMonth = date.getDate();
-    if (dayOfMonth <= 7) return 'new';
-    if (dayOfMonth <= 14) return 'waxing';
-    if (dayOfMonth <= 21) return 'full';
-    return 'waning';
+    if (dayOfMonth <= 7) return "new";
+    if (dayOfMonth <= 14) return "waxing";
+    if (dayOfMonth <= 21) return "full";
+    return "waning";
   }
 
   /**
@@ -1447,48 +1454,63 @@ export class SophiaAgent {
     const majorArchetypes: Record<string, any> = {
       "The Fool": {
         essence: "The Innocent Wanderer",
-        message: "Your soul calls you to embrace new beginnings with childlike wonder.",
-        positionalMeaning: "representing pure potential and the courage to step into the unknown."
+        message:
+          "Your soul calls you to embrace new beginnings with childlike wonder.",
+        positionalMeaning:
+          "representing pure potential and the courage to step into the unknown.",
       },
       "The Magician": {
         essence: "The Divine Creator",
-        message: "You possess all the tools needed to manifest your deepest desires.",
-        positionalMeaning: "channeling focused will and creative power into reality."
+        message:
+          "You possess all the tools needed to manifest your deepest desires.",
+        positionalMeaning:
+          "channeling focused will and creative power into reality.",
       },
       "The High Priestess": {
         essence: "The Sacred Keeper of Mysteries",
-        message: "Your intuitive wisdom holds keys to profound spiritual understanding.",
-        positionalMeaning: "guiding you to trust the whispers of your inner knowing."
+        message:
+          "Your intuitive wisdom holds keys to profound spiritual understanding.",
+        positionalMeaning:
+          "guiding you to trust the whispers of your inner knowing.",
       },
-      "Justice": {
+      Justice: {
         essence: "The Divine Balancer",
-        message: "The universe seeks to restore equilibrium through your conscious choices.",
-        positionalMeaning: "bringing clarity to moral decisions and karmic resolution."
-      }
+        message:
+          "The universe seeks to restore equilibrium through your conscious choices.",
+        positionalMeaning:
+          "bringing clarity to moral decisions and karmic resolution.",
+      },
     };
 
     // Minor Arcana suit essences
     const suitArchetypes: Record<string, any> = {
-      "cups": {
+      cups: {
         essence: "The Heart's Sacred Waters",
-        message: "Emotional depths and spiritual love flow through this moment.",
-        positionalMeaning: "inviting you to honor your feelings and spiritual connections."
+        message:
+          "Emotional depths and spiritual love flow through this moment.",
+        positionalMeaning:
+          "inviting you to honor your feelings and spiritual connections.",
       },
-      "pentacles": {
+      pentacles: {
         essence: "The Earth's Abundant Gifts",
-        message: "Material manifestation and practical wisdom ground your spiritual path.",
-        positionalMeaning: "supporting your journey toward material and spiritual prosperity."
+        message:
+          "Material manifestation and practical wisdom ground your spiritual path.",
+        positionalMeaning:
+          "supporting your journey toward material and spiritual prosperity.",
       },
-      "swords": {
+      swords: {
         essence: "The Mind's Sharp Clarity",
         message: "Mental power and clear communication cut through illusion.",
-        positionalMeaning: "offering intellectual breakthrough and decisive action."
+        positionalMeaning:
+          "offering intellectual breakthrough and decisive action.",
       },
-      "wands": {
+      wands: {
         essence: "The Fire of Divine Inspiration",
-        message: "Creative passion and spiritual enthusiasm ignite your soul's purpose.",
-        positionalMeaning: "fueling your creative expression and spiritual growth."
-      }
+        message:
+          "Creative passion and spiritual enthusiasm ignite your soul's purpose.",
+        positionalMeaning:
+          "fueling your creative expression and spiritual growth.",
+      },
     };
 
     // Return specific archetype or suit-based archetype
@@ -1502,66 +1524,79 @@ export class SophiaAgent {
     return {
       essence: "The Sacred Teacher",
       message: "This card carries profound wisdom for your spiritual journey.",
-      positionalMeaning: "offering guidance tailored to your soul's current needs."
+      positionalMeaning:
+        "offering guidance tailored to your soul's current needs.",
     };
   }
 
   /**
    * Generate growth trajectory insights based on card and memories
    */
-  private generateGrowthTrajectoryInsight(card: TarotCard, positionName: string, userMemories: any[]): string {
+  private generateGrowthTrajectoryInsight(
+    card: TarotCard,
+    positionName: string,
+    userMemories: any[],
+  ): string {
     const growthThemes = [
       "Your soul is expanding into greater self-awareness and spiritual maturity",
       "This moment marks a significant evolution in your consciousness and personal power",
       "You are being called to integrate past lessons into present wisdom",
       "Your spiritual journey is entering a new phase of deeper understanding",
-      "The universe is preparing you for a higher level of spiritual service"
+      "The universe is preparing you for a higher level of spiritual service",
     ];
 
-    const baseInsight = growthThemes[Math.floor(Math.random() * growthThemes.length)];
-    
+    const baseInsight =
+      growthThemes[Math.floor(Math.random() * growthThemes.length)];
+
     if (userMemories.length > 0) {
       return `${baseInsight}. Your previous readings show a pattern of growing spiritual sophistication, and ${card.name} now appears to accelerate this beautiful evolution.`;
     }
-    
+
     return `${baseInsight}. ${card.name} in your ${positionName} signals that you are ready for this next level of spiritual understanding.`;
   }
 
   /**
    * Generate integration guidance for practical application
    */
-  private generateIntegrationGuidance(card: TarotCard, positionName: string): string {
+  private generateIntegrationGuidance(
+    card: TarotCard,
+    positionName: string,
+  ): string {
     const practices = [
       "Spend time in quiet meditation with this card's image, allowing its energy to speak directly to your soul",
       "Journal about how this card's message connects to your current life circumstances",
       "Create a sacred ritual or ceremony to honor the wisdom this card brings",
       "Carry the essence of this card's teaching with you throughout your day",
-      "Share this card's wisdom with others who might benefit from its message"
+      "Share this card's wisdom with others who might benefit from its message",
     ];
 
-    const selectedPractice = practices[Math.floor(Math.random() * practices.length)];
-    
+    const selectedPractice =
+      practices[Math.floor(Math.random() * practices.length)];
+
     return `${selectedPractice}. Let ${card.name}'s presence in your ${positionName} guide you toward conscious integration of this divine wisdom into your daily spiritual practice.`;
   }
 
   /**
    * Generate a personalized blessing based on card and user history
    */
-  private generatePersonalBlessing(card: TarotCard, userMemories: any[]): string {
+  private generatePersonalBlessing(
+    card: TarotCard,
+    userMemories: any[],
+  ): string {
     const blessings = [
       "May you walk forward with the confidence that the universe fully supports your highest good",
       "Trust that your path is sacred and your spiritual growth brings light to the world",
       "Know that you are deeply loved by the divine forces that guide your journey",
       "Embrace this moment as a gift from your higher self to your earthly experience",
-      "Remember that every challenge is an opportunity for deeper wisdom and greater compassion"
+      "Remember that every challenge is an opportunity for deeper wisdom and greater compassion",
     ];
 
     const blessing = blessings[Math.floor(Math.random() * blessings.length)];
-    
+
     if (userMemories.length > 0) {
       return `${blessing}. Our continued work together is a testament to your dedication to spiritual growth and truth.`;
     }
-    
+
     return `${blessing}. I am honored to be part of your sacred journey of discovery.`;
   }
 }

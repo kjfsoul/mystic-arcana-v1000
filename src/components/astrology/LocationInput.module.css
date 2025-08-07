@@ -187,7 +187,7 @@
   .input {
     font-size: 16px; /* Prevents zoom on iOS */
   }
-  
+
   .suggestions {
     max-height: 200px;
     overflow-y: auto;

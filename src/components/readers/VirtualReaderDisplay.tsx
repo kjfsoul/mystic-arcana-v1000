@@ -1,12 +1,12 @@
-'use client';
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/contexts/AuthContext';
-import { PersonaLearnerAgentClient } from '@/agents/PersonaLearner-client';
-import { Sparkles, Eye, Lock, Unlock } from 'lucide-react';
+"use client";
+import React, { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
+import { PersonaLearnerAgentClient } from "@/agents/PersonaLearner-client";
+import { Sparkles, Eye, Lock, Unlock } from "lucide-react";
 interface VirtualReaderDisplayProps {
   readerId?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   showLevel?: boolean;
   showProgress?: boolean;
   className?: string;
@@ -29,57 +29,59 @@ interface EngagementData {
   progressToNext?: number;
 }
 export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
-  readerId = 'sophia',
-  size = 'medium',
+  readerId = "sophia",
+  size = "medium",
   showLevel = true,
   showProgress = false,
-  className = ''
+  className = "",
 }) => {
   const { user } = useAuth();
-  const [engagementData, setEngagementData] = useState<EngagementData | null>(null);
+  const [engagementData, setEngagementData] = useState<EngagementData | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [previousLevel, setPreviousLevel] = useState<number | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
-  
+
   const personaLearner = useMemo(() => new PersonaLearnerAgentClient(), []);
   // Size configurations
   const sizeConfig = {
     small: {
-      container: 'w-16 h-24',
-      image: 'w-full h-full',
-      text: 'text-xs',
-      badge: 'text-xs px-2 py-1'
+      container: "w-16 h-24",
+      image: "w-full h-full",
+      text: "text-xs",
+      badge: "text-xs px-2 py-1",
     },
     medium: {
-      container: 'w-32 h-48',
-      image: 'w-full h-full',
-      text: 'text-sm',
-      badge: 'text-sm px-3 py-1'
+      container: "w-32 h-48",
+      image: "w-full h-full",
+      text: "text-sm",
+      badge: "text-sm px-3 py-1",
     },
     large: {
-      container: 'w-48 h-72',
-      image: 'w-full h-full',
-      text: 'text-base',
-      badge: 'text-base px-4 py-2'
-    }
+      container: "w-48 h-72",
+      image: "w-full h-full",
+      text: "text-base",
+      badge: "text-base px-4 py-2",
+    },
   };
   const config = sizeConfig[size];
   // Load engagement data
- 
+
   useEffect(() => {
     const loadEngagementData = async () => {
       if (user) {
         // Guest users see level 1
         setEngagementData({
           currentLevel: 1,
-          levelName: 'Guest User',
+          levelName: "Guest User",
           metrics: {
             completedReadings: 0,
             conversationTurns: 0,
             questionsAnswered: 0,
-            sessionCount: 0
-          }
+            sessionCount: 0,
+          },
         });
         setIsLoading(false);
         return;
@@ -90,37 +92,45 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
           setIsLoading(false);
           return;
         }
-        
+
         const analysis = await personaLearner.getEngagementAnalysis(userId);
-        
+
         // Check if level increased since last view
-        const lastKnownLevel = localStorage.getItem(`last_known_level_${userId}`);
+        const lastKnownLevel = localStorage.getItem(
+          `last_known_level_${userId}`,
+        );
         if (lastKnownLevel) {
           const lastLevel = parseInt(lastKnownLevel);
           if (analysis.currentLevel > lastLevel) {
             setPreviousLevel(lastLevel);
           }
         }
-        
+
         // Store current level
-        localStorage.setItem(`last_known_level_${userId}`, analysis.currentLevel.toString());
-        
+        localStorage.setItem(
+          `last_known_level_${userId}`,
+          analysis.currentLevel.toString(),
+        );
+
         setEngagementData(analysis);
         // Reset image loading states when engagement data changes
         setImageError(false);
         setImageLoaded(false);
       } catch (error) {
-        console.error('VirtualReaderDisplay: Failed to load engagement data:', error);
+        console.error(
+          "VirtualReaderDisplay: Failed to load engagement data:",
+          error,
+        );
         // Fallback to level 1
         setEngagementData({
           currentLevel: 1,
-          levelName: 'Novice Seeker',
+          levelName: "Novice Seeker",
           metrics: {
             completedReadings: 0,
             conversationTurns: 0,
             questionsAnswered: 0,
-            sessionCount: 0
-          }
+            sessionCount: 0,
+          },
         });
       } finally {
         setIsLoading(false);
@@ -129,7 +139,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
     loadEngagementData();
   }, [user, personaLearner]);
   // Clear level up indicator after animation
- 
+
   useEffect(() => {
     if (previousLevel !== null) {
       const timer = setTimeout(() => {
@@ -145,12 +155,18 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   };
   const getLevelColor = (level: number): string => {
     switch (level) {
-      case 1: return 'from-purple-600 to-purple-800';
-      case 2: return 'from-purple-500 to-pink-600';
-      case 3: return 'from-pink-500 to-purple-600';
-      case 4: return 'from-purple-400 to-pink-500';
-      case 5: return 'from-gold-400 to-yellow-500';
-      default: return 'from-purple-600 to-purple-800';
+      case 1:
+        return "from-purple-600 to-purple-800";
+      case 2:
+        return "from-purple-500 to-pink-600";
+      case 3:
+        return "from-pink-500 to-purple-600";
+      case 4:
+        return "from-purple-400 to-pink-500";
+      case 5:
+        return "from-gold-400 to-yellow-500";
+      default:
+        return "from-purple-600 to-purple-800";
     }
   };
   const getLevelIcon = (level: number) => {
@@ -160,11 +176,13 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
   };
   if (isLoading) {
     return (
-      <div className={`${config.container} ${className} flex items-center justify-center`}>
+      <div
+        className={`${config.container} ${className} flex items-center justify-center`}
+      >
         <motion.div
           className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full"
           animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
       </div>
     );
@@ -217,7 +235,10 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
             alt={`${readerId} - Level ${engagementData?.currentLevel || 1}`}
             className={`${config.image} object-cover transition-opacity duration-500`}
             onError={() => {
-              console.log('VirtualReaderDisplay: Image failed to load:', getImagePath(engagementData?.currentLevel || 1));
+              console.log(
+                "VirtualReaderDisplay: Image failed to load:",
+                getImagePath(engagementData?.currentLevel || 1),
+              );
               setImageError(true);
             }}
             onLoad={(e) => {
@@ -227,7 +248,9 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
                 setImageLoaded(true);
                 setImageError(false);
               } else {
-                console.log('VirtualReaderDisplay: Image appears to be invalid');
+                console.log(
+                  "VirtualReaderDisplay: Image appears to be invalid",
+                );
                 setImageError(true);
               }
             }}
@@ -238,84 +261,86 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
           />
         ) : (
           // Enhanced fallback display if image fails to load
-          <div className={`${config.image} bg-gradient-to-br from-purple-800 via-indigo-800 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden`}>
+          <div
+            className={`${config.image} bg-gradient-to-br from-purple-800 via-indigo-800 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden`}
+          >
             {/* Mystical Background Effects */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-t from-purple-900/50 via-transparent to-purple-500/30"
               animate={{
-                opacity: [0.3, 0.7, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            {/* Floating Sparkles */}
-            <motion.div
-              className="absolute top-1/4 left-1/4"
-              animate={{
-                y: [-10, 10, -10],
-                opacity: [0.5, 1, 0.5]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Sparkles className="w-4 h-4 text-purple-300" />
-            </motion.div>
-            
-            <motion.div
-              className="absolute top-3/4 right-1/4"
-              animate={{
-                y: [10, -10, 10],
-                opacity: [0.3, 0.8, 0.3]
+                opacity: [0.3, 0.7, 0.3],
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 1
+              }}
+            />
+
+            {/* Floating Sparkles */}
+            <motion.div
+              className="absolute top-1/4 left-1/4"
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <Sparkles className="w-4 h-4 text-purple-300" />
+            </motion.div>
+
+            <motion.div
+              className="absolute top-3/4 right-1/4"
+              animate={{
+                y: [10, -10, 10],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
               }}
             >
               <Sparkles className="w-3 h-3 text-pink-300" />
             </motion.div>
-            
+
             {/* Main Content */}
             <div className="text-center text-purple-200 relative z-10">
               <motion.div
-                animate={{ 
+                animate={{
                   rotate: [0, 360],
-                  scale: [1, 1.1, 1]
+                  scale: [1, 1.1, 1],
                 }}
-                transition={{ 
+                transition={{
                   rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                 }}
                 className="mb-3"
               >
                 <Sparkles className="w-12 h-12 mx-auto text-purple-300" />
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className={`${config.text} font-semibold mb-1`}
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 {readerId.charAt(0).toUpperCase() + readerId.slice(1)}
               </motion.div>
-              
+
               <div className={`${config.text} text-purple-400`}>
                 Level {engagementData?.currentLevel || 1}
               </div>
-              
+
               <div className={`text-xs text-purple-500 mt-2 px-2 opacity-75`}>
                 Mystical Form Revealing...
               </div>
-              
+
               <div className={`text-xs text-purple-600 mt-1 px-1 opacity-50`}>
                 Add images to /public/images/readers/{readerId}/
               </div>
@@ -340,12 +365,12 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
         <motion.div
           className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-purple-500/10 pointer-events-none"
           animate={{
-            opacity: [0.5, 0.8, 0.5]
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
       </motion.div>
@@ -362,7 +387,7 @@ export const VirtualReaderDisplay: React.FC<VirtualReaderDisplayProps> = ({
               {engagementData.levelName}
             </div>
           )}
-          
+
           {showProgress && engagementData.nextThreshold && (
             <div className="mt-1">
               <div className={`${config.text} text-purple-400 mb-1`}>

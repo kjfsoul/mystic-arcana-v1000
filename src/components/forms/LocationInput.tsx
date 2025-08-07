@@ -1,7 +1,7 @@
-'use client';
- 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 interface LocationData {
   city: string;
   country: string;
@@ -27,9 +27,9 @@ interface GeocodingResult {
 }
 export const LocationInput: React.FC<LocationInputProps> = ({
   onLocationSelect,
-  initialValue = '',
-  className = '',
-  placeholder = 'Enter city, country'
+  initialValue = "",
+  className = "",
+  placeholder = "Enter city, country",
 }) => {
   const [query, setQuery] = useState(initialValue);
   const [suggestions, setSuggestions] = useState<GeocodingResult[]>([]);
@@ -37,11 +37,11 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [gpsLoading, setGpsLoading] = useState(false);
-  
+
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
   // Debounced search
- 
+
   useEffect(() => {
     if (query.length < 2) {
       setSuggestions([]);
@@ -63,21 +63,23 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const searchLocations = async (searchQuery: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/geocode?q=${encodeURIComponent(searchQuery)}`);
+      const response = await fetch(
+        `/api/geocode?q=${encodeURIComponent(searchQuery)}`,
+      );
       if (response.ok) {
         const results = await response.json();
         setSuggestions(results.slice(0, 5)); // Limit to 5 suggestions
         setShowSuggestions(true);
       }
     } catch (error) {
-      console.error('Error searching locations:', error);
+      console.error("Error searching locations:", error);
     } finally {
       setIsLoading(false);
     }
   };
   const getCurrentLocation = async () => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by this browser.');
+      alert("Geolocation is not supported by this browser.");
       return;
     }
     setGpsLoading(true);
@@ -85,8 +87,8 @@ export const LocationInput: React.FC<LocationInputProps> = ({
       (position) => {
         const { latitude, longitude } = position.coords;
         onLocationSelect({
-          city: '',
-          country: '',
+          city: "",
+          country: "",
           latitude: latitude,
           longitude: longitude,
         });
@@ -95,17 +97,17 @@ export const LocationInput: React.FC<LocationInputProps> = ({
         setGpsLoading(false);
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            alert('Location access denied. Please enable location services.');
+            alert("Location access denied. Please enable location services.");
             break;
           case error.POSITION_UNAVAILABLE:
-            alert('Location information is unavailable.');
+            alert("Location information is unavailable.");
             break;
           case error.TIMEOUT:
-            alert('Location request timed out.');
+            alert("Location request timed out.");
             break;
         }
       },
-      { timeout: 10000, enableHighAccuracy: true }
+      { timeout: 10000, enableHighAccuracy: true },
     );
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,23 +117,23 @@ export const LocationInput: React.FC<LocationInputProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!showSuggestions || suggestions.length === 0) return;
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        setSelectedIndex(prev => 
-          prev < suggestions.length - 1 ? prev + 1 : prev
+        setSelectedIndex((prev) =>
+          prev < suggestions.length - 1 ? prev + 1 : prev,
         );
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
-        setSelectedIndex(prev => prev > 0 ? prev - 1 : prev);
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (selectedIndex >= 0) {
           selectLocation(suggestions[selectedIndex]);
         }
         break;
-      case 'Escape':
+      case "Escape":
         setShowSuggestions(false);
         setSelectedIndex(-1);
         break;
@@ -142,13 +144,13 @@ export const LocationInput: React.FC<LocationInputProps> = ({
     setQuery(displayName);
     setShowSuggestions(false);
     setSelectedIndex(-1);
-    
+
     onLocationSelect({
       city: location.name,
       country: location.country,
       latitude: location.lat,
       longitude: location.lon,
-      timezone: location.timezone
+      timezone: location.timezone,
     });
   };
   return (
@@ -164,7 +166,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({
           placeholder={placeholder}
           className="w-full px-4 py-3 bg-gray-900/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent pr-20"
         />
-        
+
         {/* GPS Button */}
         <button
           type="button"
@@ -176,9 +178,24 @@ export const LocationInput: React.FC<LocationInputProps> = ({
           {gpsLoading ? (
             <div className="w-5 h-5 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
           ) : (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
             </svg>
           )}
         </button>
@@ -204,13 +221,14 @@ export const LocationInput: React.FC<LocationInputProps> = ({
                 type="button"
                 onClick={() => selectLocation(location)}
                 className={`w-full px-4 py-3 text-left hover:bg-purple-500/20 border-b border-purple-500/10 last:border-b-0 transition-colors ${
-                  index === selectedIndex ? 'bg-purple-500/20' : ''
+                  index === selectedIndex ? "bg-purple-500/20" : ""
                 }`}
                 whileHover={{ x: 4 }}
               >
                 <div className="text-white font-medium">{location.name}</div>
                 <div className="text-gray-400 text-sm">
-                  {location.state ? `${location.state}, ` : ''}{location.country}
+                  {location.state ? `${location.state}, ` : ""}
+                  {location.country}
                 </div>
               </motion.button>
             ))}

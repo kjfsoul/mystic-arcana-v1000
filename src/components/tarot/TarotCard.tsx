@@ -1,8 +1,8 @@
-'use client';
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import styles from './TarotCard.module.css';
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import styles from "./TarotCard.module.css";
 interface TarotCardProps {
   frontImage: string;
   backImage: string;
@@ -24,32 +24,32 @@ export const TarotCard: React.FC<TarotCardProps> = ({
   isReversed = false,
   onFlip,
   disabled = false,
-  className = '',
-  style
+  className = "",
+  style,
 }) => {
   const [isFlippedState, setIsFlippedState] = useState(isFlipped);
   const handleCardClick = () => {
     if (disabled) {
       return;
     }
-    
+
     const newFlippedState = !isFlippedState;
     setIsFlippedState(newFlippedState);
-    
+
     if (onFlip && newFlippedState) {
       onFlip();
     }
   };
   return (
-    <div 
-      className={`${styles.cardContainer} ${className}`} 
+    <div
+      className={`${styles.cardContainer} ${className}`}
       style={{
         ...style,
-        minHeight: '320px', // Ensure minimum height to prevent cutoff
-        height: '320px', // Fixed height instead of auto
-        display: 'block', // Ensure visibility
-        visibility: 'visible', // Force visibility
-        overflow: 'visible' // Prevent clipping
+        minHeight: "320px", // Ensure minimum height to prevent cutoff
+        height: "320px", // Fixed height instead of auto
+        display: "block", // Ensure visibility
+        visibility: "visible", // Force visibility
+        overflow: "visible", // Prevent clipping
       }}
     >
       <motion.div
@@ -58,16 +58,16 @@ export const TarotCard: React.FC<TarotCardProps> = ({
         whileHover={disabled ? {} : { scale: 1.05, y: -10 }}
         whileTap={disabled ? {} : { scale: 0.95 }}
         style={{
-          cursor: disabled ? 'default' : 'pointer',
-          zIndex: 10 // Ensure card is clickable
+          cursor: disabled ? "default" : "pointer",
+          zIndex: 10, // Ensure card is clickable
         }}
         role="button"
         tabIndex={disabled ? -1 : 0}
-        aria-label={`${cardName} tarot card${isFlippedState ? ` - revealed, meaning: ${cardMeaning}` : ' - press Enter or Space to reveal'}`}
+        aria-label={`${cardName} tarot card${isFlippedState ? ` - revealed, meaning: ${cardMeaning}` : " - press Enter or Space to reveal"}`}
         aria-pressed={isFlippedState}
-        aria-describedby={`card-${cardName.replace(/\s+/g, '-').toLowerCase()}-description`}
+        aria-describedby={`card-${cardName.replace(/\s+/g, "-").toLowerCase()}-description`}
         onKeyDown={(e) => {
-          if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+          if (!disabled && (e.key === "Enter" || e.key === " ")) {
             e.preventDefault();
             handleCardClick();
           }
@@ -79,9 +79,9 @@ export const TarotCard: React.FC<TarotCardProps> = ({
           animate={{ rotateY: isFlippedState ? 180 : 0 }}
           transition={{
             duration: 0.8,
-            type: 'spring',
+            type: "spring",
             stiffness: 100,
-            damping: 15
+            damping: 15,
           }}
         >
           {/* Card Back */}
@@ -98,36 +98,36 @@ export const TarotCard: React.FC<TarotCardProps> = ({
           </div>
           {/* Card Front */}
           <div className={`${styles.cardFace} ${styles.cardFront}`}>
-            <div 
-              style={{ 
-                transform: isReversed ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.3s ease-in-out',
-                height: '100%',
-                width: '100%',
-                position: 'relative'
+            <div
+              style={{
+                transform: isReversed ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease-in-out",
+                height: "100%",
+                width: "100%",
+                position: "relative",
               }}
             >
               <Image
                 src={frontImage}
-                alt={`${cardName}${isReversed ? ' (Reversed)' : ''}`}
+                alt={`${cardName}${isReversed ? " (Reversed)" : ""}`}
                 fill
                 sizes="(max-width: 768px) 200px, 250px"
                 className={styles.cardImage}
               />
               {isReversed && (
-                <div 
+                <div
                   style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    background: 'rgba(139, 69, 19, 0.9)',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '10px',
-                    fontWeight: 'bold',
+                    position: "absolute",
+                    top: "8px",
+                    right: "8px",
+                    background: "rgba(139, 69, 19, 0.9)",
+                    color: "white",
+                    padding: "2px 6px",
+                    borderRadius: "4px",
+                    fontSize: "10px",
+                    fontWeight: "bold",
                     zIndex: 10,
-                    transform: 'rotate(180deg)' // Counter-rotate the text
+                    transform: "rotate(180deg)", // Counter-rotate the text
                   }}
                 >
                   REVERSED
@@ -136,7 +136,7 @@ export const TarotCard: React.FC<TarotCardProps> = ({
             </div>
             <div className={styles.cardInfo}>
               <h3 className={styles.cardName}>
-                {cardName} {isReversed && '(Reversed)'}
+                {cardName} {isReversed && "(Reversed)"}
               </h3>
             </div>
             <div className={styles.revealGlow} />
@@ -155,24 +155,26 @@ export const TarotCard: React.FC<TarotCardProps> = ({
                 opacity: [0, 1, 0.5, 0],
                 scale: [0, 1.2, 0.8, 0],
                 y: [-20, -100],
-                x: [0, (Math.random() - 0.5) * 80]
+                x: [0, (Math.random() - 0.5) * 80],
               }}
               transition={{
                 duration: 2.5,
                 delay: i * 0.08,
-                ease: 'easeOut'
+                ease: "easeOut",
               }}
             />
           ))}
         </div>
       )}
-      
+
       {/* Hidden description for screen readers */}
-      <div 
-        id={`card-${cardName.replace(/\s+/g, '-').toLowerCase()}-description`}
+      <div
+        id={`card-${cardName.replace(/\s+/g, "-").toLowerCase()}-description`}
         className="sr-only"
       >
-        {isFlippedState && cardMeaning ? `Card meaning: ${cardMeaning}` : 'Click to reveal card meaning'}
+        {isFlippedState && cardMeaning
+          ? `Card meaning: ${cardMeaning}`
+          : "Click to reveal card meaning"}
       </div>
     </div>
   );
