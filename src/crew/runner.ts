@@ -208,14 +208,14 @@ class CrewRunner {
       return operationLog;
     } catch (error) {
       const totalDuration = Date.now() - startTime;
-      const operationLog: CrewOperationLog = {
-        operationId,
-        taskName,
-        results: [],
-        totalDuration,
-        success: false,
-        timestamp
-      };
+      // const operationLog: CrewOperationLog = {
+      //   operationId,
+      //   taskName,
+      //   results: [],
+      //   totalDuration,
+      //   success: false,
+      //   timestamp
+      // }; // Removed unused operationLog
       await this.logToMemory({
         event: 'crew_operation_failed',
         operationId,
@@ -230,7 +230,7 @@ class CrewRunner {
   /**
    * Execute the complete Crew Tarot Deck generation process
    */
-  private async executeCrewTarotDeckGeneration(params: any): Promise<CrewResult[]> {
+  private async executeCrewTarotDeckGeneration(_params: any): Promise<CrewResult[]> {
     const tasks: CrewTask[] = [
       {
         id: 'blueprint_generation',
@@ -275,7 +275,7 @@ class CrewRunner {
       }
     ];
     const results: CrewResult[] = [];
-    const taskData: any = {};
+    // const taskData: any = {}; // Removed unused variable
     // Execute tasks in dependency order
     for (const task of tasks) {
       // Check dependencies

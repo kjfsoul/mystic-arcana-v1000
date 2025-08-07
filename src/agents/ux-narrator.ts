@@ -278,6 +278,7 @@ export class UXNarratorAgent extends Agent {
     culturalConsiderations: string[];
   }> {
     try {
+      void contentType; // Indicate intentional unused variable
       // Analyze spiritual language use
       const spiritualTerms = this.identifySpiritualTerms(content);
       const culturalSensitivity = this.assessCulturalSensitivity(content);
@@ -346,21 +347,26 @@ export class UXNarratorAgent extends Agent {
     return this.voiceProfiles.get(profileKey) || this.voiceProfiles.get('sage')!;
   }
   private async applySpiritualRefinements(content: string, profile: SpiritualVoiceProfile): Promise<string> {
+    void profile; // Indicate intentional unused variable
     // TODO: Implement spiritual language refinements
     // Replace problematic terms, enhance inclusive language, etc.
     return content;
   }
   private async enhanceAccessibility(content: string, request: ContentRefinementRequest): Promise<string> {
+    void request; // Indicate intentional unused variable
     // TODO: Implement accessibility enhancements
     // Add explanations for complex terms, improve structure, etc.
     return content;
   }
   private async optimizeReadingLevel(content: string, targetLevel: string): Promise<string> {
+    void targetLevel; // Indicate intentional unused variable
     // TODO: Implement reading level optimization
     // Simplify complex sentences, replace difficult words, etc.
     return content;
   }
   private async adjustTone(content: string, tone: string, profile: SpiritualVoiceProfile): Promise<string> {
+    void tone; // Indicate intentional unused variable
+    void profile; // Indicate intentional unused variable
     // TODO: Implement tone adjustment
     // Modify language patterns to match desired tone
     return content;
@@ -383,6 +389,8 @@ export class UXNarratorAgent extends Agent {
     return trimmed.trim();
   }
   private async analyzeImprovements(original: string, refined: string): Promise<any> {
+    void original; // Indicate intentional unused variable
+    void refined; // Indicate intentional unused variable
     // TODO: Implement improvement analysis
     return {
       readabilityScore: 8.5,
@@ -405,26 +413,33 @@ export class UXNarratorAgent extends Agent {
     };
   }
   private identifySpiritualTerms(content: string): any {
+    void content; // Indicate intentional unused variable
     // TODO: Implement spiritual term identification and analysis
     return { appropriateUse: 0.85 };
   }
   private assessCulturalSensitivity(content: string): number {
+    void content; // Indicate intentional unused variable
     // TODO: Implement cultural sensitivity assessment
     return 0.9;
   }
   private assessEmpowermentLanguage(content: string): number {
+    void content; // Indicate intentional unused variable
     // TODO: Implement empowerment language assessment
     return 0.8;
   }
   private async generateAuthenticityRecommendations(content: string, analysis: any): Promise<string[]> {
+    void content; // Indicate intentional unused variable
+    void analysis; // Indicate intentional unused variable
     // TODO: Generate specific recommendations for improving authenticity
     return ['Use more inclusive spiritual language', 'Emphasize personal empowerment'];
   }
   private identifyCulturalConsiderations(content: string): string[] {
+    void content; // Indicate intentional unused variable
     // TODO: Identify cultural considerations in content
     return ['Avoid religious assumptions', 'Use universal spiritual concepts'];
   }
   private async applyAccessibilityFeature(content: string, feature: AccessibilityFeature): Promise<string> {
+    void feature; // Indicate intentional unused variable
     // TODO: Apply specific accessibility feature to content
     return content;
   }

@@ -46,6 +46,9 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
   const [bioluminescentParticles, setBioluminescentParticles] = useState<BioluminescentParticle[]>([]);
   const [shufflePhase, setShufflePhase] = useState<'idle' | 'gathering' | 'shuffling' | 'spreading' | 'complete'>('idle');
   const [rippleEffect, setRippleEffect] = useState(false);
+  const [mysticalMyst, setMysticalMyst] = useState<Array<{id: number, x: number, y: number, opacity: number, scale: number}>>([]);
+  const [soundEnabled] = useState(true);
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   // Size configurations
   const sizeConfig = {
     small: {
@@ -83,6 +86,91 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
     'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
     'linear-gradient(135deg, #059669 0%, #10b981 100%)'
   ];
+
+  // Initialize Web Audio API for mystical sounds
+  useEffect(() => {
+    if (typeof window !== 'undefined' && soundEnabled) {
+      try {
+        const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+        setAudioContext(context);
+      } catch (error) {
+        console.warn('Web Audio API not supported:', error);
+      }
+    }
+  }, [soundEnabled]);
+
+  // Generate mystical myst particles
+  const generateMysticalMyst = useCallback(() => {
+    const mystParticles = [];
+    for (let i = 0; i < 20; i++) {
+      mystParticles.push({
+        id: i,
+        x: Math.random() * 300 - 150,
+        y: Math.random() * 300 - 150,
+        opacity: Math.random() * 0.8 + 0.2,
+        scale: Math.random() * 0.8 + 0.3
+      });
+    }
+    setMysticalMyst(mystParticles);
+  }, []);
+
+  // Create mystical sound effects
+  const playMysticalSound = useCallback((type: 'shuffle' | 'whoosh' | 'sparkle' | 'completion') => {
+    if (!audioContext || !soundEnabled) return;
+
+    try {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      switch (type) {
+        case 'shuffle':
+          // Deep mystical rumble
+          oscillator.frequency.setValueAtTime(80, audioContext.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(40, audioContext.currentTime + 0.8);
+          filter.type = 'lowpass';
+          filter.frequency.value = 200;
+          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+          break;
+        case 'whoosh':
+          // Swooshing air sound
+          oscillator.type = 'sawtooth';
+          oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.3);
+          filter.type = 'highpass';
+          filter.frequency.value = 300;
+          gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+          break;
+        case 'sparkle':
+          // Sparkling chimes
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+          oscillator.frequency.setValueAtTime(1200, audioContext.currentTime + 0.1);
+          oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.2);
+          gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+          break;
+        case 'completion':
+          // Completion bell
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(528, audioContext.currentTime); // Love frequency
+          gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
+          break;
+      }
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 2);
+    } catch (error) {
+      console.warn('Audio playback failed:', error);
+    }
+  }, [audioContext, soundEnabled]);
   // Generate enhanced card particles with more realistic movement
  
   const generateCardParticles = useCallback(() => {
@@ -137,33 +225,45 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
     onShuffleStart?.();
     onTriggerShuffle?.();
     
-    // Phase 1: Gathering (0-0.5s)
+    // Phase 1: Gathering (0-0.5s) - Create initial mystical atmosphere
     setShufflePhase('gathering');
     setRippleEffect(true);
+    generateMysticalMyst();
+    playMysticalSound('whoosh');
     
     setTimeout(() => {
-      // Phase 2: Main shuffle (0.5-2.5s)
+      // Phase 2: Main shuffle (0.5-2.5s) - Full magical effect
       setShufflePhase('shuffling');
       generateCardParticles();
       generateBioluminescentParticles();
+      playMysticalSound('shuffle');
+      
+      // Add more mystical myst during shuffle
+      setTimeout(() => {
+        generateMysticalMyst();
+        playMysticalSound('sparkle');
+      }, 800);
       
       setTimeout(() => {
-        // Phase 3: Spreading (2.5-3s)
+        // Phase 3: Spreading (2.5-3s) - Cards spread with whoosh
         setShufflePhase('spreading');
+        playMysticalSound('whoosh');
         
         setTimeout(() => {
-          // Phase 4: Complete (3s+)
+          // Phase 4: Complete (3s+) - Completion sound and fade effects
           setShufflePhase('complete');
           setRippleEffect(false);
+          playMysticalSound('completion');
           onShuffleComplete?.();
           
           setTimeout(() => {
             setShufflePhase('idle');
-          }, 500);
+            setMysticalMyst([]); // Clear myst particles
+          }, 1000);
         }, 500);
       }, 2000);
     }, 500);
-  }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateCardParticles, generateBioluminescentParticles]);
+  }, [isShuffling, onShuffleStart, onTriggerShuffle, onShuffleComplete, generateCardParticles, generateBioluminescentParticles, generateMysticalMyst, playMysticalSound]);
   // Clear particles when shuffling ends
  
   useEffect(() => {
@@ -379,6 +479,71 @@ export const EnhancedShuffleAnimation: React.FC<EnhancedShuffleAnimationProps> =
                 ease: 'easeOut'
               }}
             />
+          ))}
+        </AnimatePresence>
+        {/* Mystical Myst Particles */}
+        <AnimatePresence>
+          {mysticalMyst.length > 0 && mysticalMyst.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute pointer-events-none"
+              style={{
+                top: '50%',
+                left: '50%',
+                width: '8px',
+                height: '8px',
+                marginTop: '-4px',
+                marginLeft: '-4px',
+              }}
+              initial={{
+                opacity: 0,
+                scale: 0,
+                x: 0,
+                y: 0
+              }}
+              animate={{
+                opacity: [0, particle.opacity, particle.opacity * 0.8, 0],
+                scale: [0, particle.scale, particle.scale * 1.3, 0],
+                x: [0, particle.x * 0.3, particle.x, particle.x * 1.2],
+                y: [0, particle.y * 0.3, particle.y, particle.y * 1.2],
+                rotate: [0, 180, 360, 540]
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0
+              }}
+              transition={{
+                duration: 3,
+                ease: 'easeOut'
+              }}
+            >
+              {/* Mystical myst effect with multiple layers */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(circle, rgba(173, 216, 230, 0.9) 0%, rgba(144, 238, 144, 0.7) 30%, rgba(221, 160, 221, 0.5) 60%, transparent 80%)',
+                  borderRadius: '50%',
+                  filter: 'blur(2px)',
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 255, 255, 0.6) 40%, transparent 70%)',
+                  borderRadius: '50%',
+                  transform: 'scale(0.7)',
+                  filter: 'blur(1px)',
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255, 255, 255, 1) 0%, transparent 50%)',
+                  borderRadius: '50%',
+                  transform: 'scale(0.3)',
+                }}
+              />
+            </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>

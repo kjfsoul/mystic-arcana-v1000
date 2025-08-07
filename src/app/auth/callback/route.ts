@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 /**
  * OAuth Callback Route
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   console.log('🔄 OAuth callback received:', { code: !!code, next });
   if (code) {
     try {
-      const supabase = await createClient();
+      const supabase = await _createClient();
       
       // Exchange the code for a session
       console.log('🔄 Exchanging code for session...');

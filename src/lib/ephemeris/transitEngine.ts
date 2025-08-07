@@ -2,6 +2,7 @@
  * Transit Engine - Real-time planetary movement analysis
  * Uses Swiss Ephemeris for accurate astronomical calculations
  */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AstronomicalCalculator } from '@/lib/astrology/AstronomicalCalculator';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
 import { BirthData, Planet, AspectType, HouseSystem } from '../../types/astrology';

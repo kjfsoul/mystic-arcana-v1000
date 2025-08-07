@@ -226,7 +226,7 @@ describe("Daily Oracle Astrology Horoscopes", () => {
             gemini: {
               daily:
                 "Uranus in your sign receives supportive energy from Saturn...",
-              transit_specific: "Revolutionary ideas gain practical foundation",
+              transit_specific: "Uranus in Gemini brings revolutionary ideas and practical foundation",
             },
           },
         },

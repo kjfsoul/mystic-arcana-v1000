@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import { Shuffle, Save, Share, RefreshCw, BookOpen, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { Shuffle, Save, /* Share, */ RefreshCw, BookOpen, Sparkles, Eye, EyeOff } from 'lucide-react';
 import { EnhancedTarotSpreadLayouts, SpreadType } from './EnhancedTarotSpreadLayouts';
 import { EnhancedShuffleAnimation } from './EnhancedShuffleAnimation';
 import { TarotCard } from '@/types/tarot';
@@ -11,12 +11,13 @@ import {
   SophiaReading, 
   ConversationState, 
   ConversationTurn, 
-  ConversationOption,
-  InteractiveQuestion,
+  // ConversationOption,
+  // InteractiveQuestion,
   ConversationSession 
 } from '@/agents/sophia';
 import { PersonaLearnerAgent } from '@/agents/PersonaLearner';
 import { VirtualReaderDisplay } from '@/components/readers/VirtualReaderDisplay';
+import { supabase } from '@/lib/supabase/client';
 interface ReadingSession {
   id: string;
   spreadType: SpreadType;
@@ -29,7 +30,7 @@ interface ReadingSession {
 }
 interface InteractiveReadingSurfaceProps {
   selectedSpread: SpreadType;
-  onReadingComplete?: (session: ReadingSession) => void;
+  onReadingComplete?: () => void;
   onBackToSelection?: () => void;
   className?: string;
 }
@@ -55,6 +56,12 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   const [isGeneratingReading, setIsGeneratingReading] = useState(false);
   const [showAllMeanings, setShowAllMeanings] = useState(false);
   const [cardInterpretations, setCardInterpretations] = useState<Record<number, string>>({});
+  const [persistentInterpretations, setPersistentInterpretations] = useState<Array<{
+    cardIndex: number;
+    cardName: string;
+    interpretation: string;
+    timestamp: number;
+  }>>([]);
   
   // Conversational state
   const [conversationState, setConversationState] = useState<ConversationState>(ConversationState.AWAITING_DRAW);
@@ -76,7 +83,9 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   
   // Refs and animations
   const surfaceRef = useRef<HTMLDivElement>(null);
-  const shuffleControls = useAnimation();
+  const shuffleControls = useAnimation(); 
+  // Prevent tree-shaking of shuffleControls 
+  void shuffleControls;
   
   // Auth context (already declared above)
   // Spread configuration mapping - wrapped in useMemo to prevent recreation
@@ -177,40 +186,167 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     const interpretation = generateCardInterpretation(card, index, selectedSpread);
     setCardInterpretations(prev => ({ ...prev, [index]: interpretation }));
     
+    // Add to persistent interpretations canvas
+    setPersistentInterpretations(prev => {
+      // Check if this card interpretation already exists
+      const existingIndex = prev.findIndex(item => item.cardIndex === index);
+      if (existingIndex !== -1) {
+        // Update existing interpretation
+        const updated = [...prev];
+        updated[existingIndex] = {
+          cardIndex: index,
+          cardName: card.name,
+          interpretation,
+          timestamp: Date.now()
+        };
+        return updated;
+      } else {
+        // Add new interpretation
+        return [...prev, {
+          cardIndex: index,
+          cardName: card.name,
+          interpretation,
+          timestamp: Date.now()
+        }];
+      }
+    });
+    
     // Haptic feedback on mobile
     if ('vibrate' in navigator) {
       navigator.vibrate(75);
     }
   }, [selectedSpread, spreadRequirements]);
-  // Generate contextual card interpretation
+  // Generate enhanced contextual card interpretation
   const generateCardInterpretation = (card: TarotCard, position: number, spread: SpreadType): string => {
-    const positionMeanings: Record<SpreadType, string[]> = {
-      'single': ['This card represents the universe\'s guidance for you right now.'],
+    const positionMeanings: Record<SpreadType, Array<{
+      title: string;
+      context: string;
+      focus: string;
+    }>> = {
+      'single': [{
+        title: 'Universal Guidance',
+        context: 'The cosmos has drawn this card to illuminate your current path.',
+        focus: 'What the universe wants you to understand right now'
+      }],
       'three-card': [
-        'This card reveals the foundations and influences from your past.',
-        'This card illuminates your current situation and energy.',
-        'This card shows the potential path ahead and future possibilities.'
+        {
+          title: 'Past Foundations',
+          context: 'The echoes of your past continue to shape your present journey.',
+          focus: 'Hidden influences and lessons from what has been'
+        },
+        {
+          title: 'Present Moment',
+          context: 'Your current reality pulses with this energy and opportunity.',
+          focus: 'The power you hold and challenges you face right now'
+        },
+        {
+          title: 'Future Potential',
+          context: 'The threads of possibility weave toward this emerging outcome.',
+          focus: 'Where your current path may lead if you stay conscious'
+        }
       ],
       'celtic-cross': [
-        'Your present situation and current focus.',
-        'The challenge or opportunity crossing your path.',
-        'Distant past influences and foundations.',
-        'Recent past events affecting you now.',
-        'Possible outcomes if current path continues.',
-        'Immediate future and next steps.',
-        'Your approach and inner resources.',
-        'External influences and environment.',
-        'Your hopes, fears, and subconscious.',
-        'The ultimate outcome and resolution.'
+        {
+          title: 'The Heart of the Matter',
+          context: 'At the center of your situation lies this essential truth.',
+          focus: 'The core issue or blessing defining your current experience'
+        },
+        {
+          title: 'The Cross-Current',
+          context: 'This force moves perpendicular to your main path, creating tension or opportunity.',
+          focus: 'What challenges or helps you in unexpected ways'
+        },
+        {
+          title: 'Distant Foundations',
+          context: 'Deep in your past, these patterns were set in motion.',
+          focus: 'Ancient influences still shaping your current reality'
+        },
+        {
+          title: 'Recent Catalysts',
+          context: 'These recent events have stirred the waters of change.',
+          focus: 'What has recently shifted to bring you to this moment'
+        },
+        {
+          title: 'Potential Crown',
+          context: 'If you continue on your current trajectory, this energy awaits.',
+          focus: 'The outcome that seeks to manifest through your choices'
+        },
+        {
+          title: 'Immediate Horizon',
+          context: 'The immediate future holds this gift or lesson for you.',
+          focus: 'What you can expect to encounter very soon'
+        },
+        {
+          title: 'Your Inner Stance',
+          context: 'Deep within, this is how you approach your situation.',
+          focus: 'Your internal resources and attitude toward the challenge'
+        },
+        {
+          title: 'External Influences',
+          context: 'The world around you reflects this energy back to you.',
+          focus: 'How others see you and the environmental forces at play'
+        },
+        {
+          title: 'Sacred Hopes & Hidden Fears',
+          context: 'In the depths of your psyche, these forces move your soul.',
+          focus: 'Your deepest motivations and the shadows they cast'
+        },
+        {
+          title: 'Final Outcome',
+          context: 'The ultimate resolution of your situation carries this essence.',
+          focus: 'The wisdom and transformation awaiting your embrace'
+        }
       ],
-      'horseshoe': ['Default horseshoe interpretation'],
-      'relationship': ['Default relationship interpretation'],
-      'custom': ['Custom spread interpretation']
+      'horseshoe': [
+        { title: 'Past Influences', context: 'The foundation of your situation', focus: 'What brought you here' },
+        { title: 'Present Challenge', context: 'Your current focal point', focus: 'What demands your attention now' },
+        { title: 'Hidden Influences', context: 'Unseen forces at work', focus: 'What operates beneath the surface' },
+        { title: 'Your Approach', context: 'How you can best proceed', focus: 'The energy you need to embody' },
+        { title: 'Surrounding Energy', context: 'The environment you\'re in', focus: 'External factors affecting you' },
+        { title: 'Likely Outcome', context: 'Where this path leads', focus: 'The resolution seeking to emerge' }
+      ],
+      'relationship': [
+        { title: 'Your Heart', context: 'What you bring to this connection', focus: 'Your emotional truth and desires' },
+        { title: 'Their Heart', context: 'What they bring to this connection', focus: 'Their emotional truth and desires' },
+        { title: 'The Bond Between', context: 'The energy that flows between you', focus: 'The dynamic you create together' },
+        { title: 'Hidden Challenges', context: 'What tests this connection', focus: 'Obstacles and growth opportunities' },
+        { title: 'Relationship Potential', context: 'What this connection can become', focus: 'The highest expression of your bond' }
+      ],
+      'custom': [
+        { title: 'Cosmic Guidance', context: 'The universe speaks through this card', focus: 'Divine wisdom for your path' }
+      ]
     };
-    const positionContext = positionMeanings[spread]?.[position] || `Position ${position + 1} guidance:`;
-    const meaning = card.isReversed ? card.meaning_reversed : card.meaning_upright;
+
+    const positionData = positionMeanings[spread]?.[position] || {
+      title: `Position ${position + 1}`,
+      context: 'The cards speak with ancient wisdom',
+      focus: 'Guidance for your spiritual journey'
+    };
+
+    // Get the appropriate meaning based on reversal
+    const baseMeaning = card.isReversed 
+      ? (card.meaning.reversed || card.meaning_reversed || 'The reversed energy brings a different perspective')
+      : (card.meaning.upright || card.meaning_upright || 'This card carries forward-moving energy');
+
+    // Create a more engaging interpretation
+    const cardType = card.arcana === 'major' ? 'Major Arcana' : `${card.suit?.charAt(0).toUpperCase()}${card.suit?.slice(1)} suit`;
+    const reversalNote = card.isReversed ? ' (Reversed - inviting you to look within or consider the shadow aspects)' : '';
     
-    return `${positionContext} ${meaning}`;
+    // Enhanced interpretation structure
+    const interpretation = `
+🔮 **${positionData.title}** ${reversalNote}
+
+*${positionData.context}*
+
+**${card.name}** from the ${cardType} brings this wisdom:
+${baseMeaning}
+
+💫 **Focus:** ${positionData.focus}
+
+*Let this card's energy guide you toward deeper understanding and conscious action.*
+    `.trim();
+
+    return interpretation;
   };
   // Conversational Flow Methods
   
@@ -315,6 +451,32 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
         if (cardIndex !== -1) {
           setRevealedCards(prev => new Set([...prev, cardIndex]));
           
+          // Add Sophia's interpretation to persistent canvas
+          const sophiaInterpretation = typeof turn.revealedCard.interpretation === 'string' 
+            ? turn.revealedCard.interpretation 
+            : (turn.revealedCard.interpretation?.personalized_guidance || 
+               turn.revealedCard.interpretation?.base_interpretation || '');
+          
+          if (sophiaInterpretation) {
+            setPersistentInterpretations(prev => {
+              const existingIndex = prev.findIndex(item => item.cardIndex === cardIndex);
+              const newEntry = {
+                cardIndex,
+                cardName: turn.revealedCard!.card.name,
+                interpretation: `✨ Sophia's Insight: ${sophiaInterpretation}`,
+                timestamp: Date.now()
+              };
+              
+              if (existingIndex !== -1) {
+                const updated = [...prev];
+                updated[existingIndex] = newEntry;
+                return updated;
+              } else {
+                return [...prev, newEntry];
+              }
+            });
+          }
+          
           // Log card reveal engagement (authenticated users only)
           if (user?.id) {
             await personaLearner.logCardReveal(
@@ -345,10 +507,19 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
   const handleSaveConversationalReading = useCallback(async () => {
     if (!finalReading || !user?.id) return;
     try {
+      // Get the current session token
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        setError('Please sign in to save your reading');
+        return;
+      }
+      
       const response = await fetch('/api/tarot/save-reading', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
         },
         body: JSON.stringify({
           userId: user.id,
@@ -358,7 +529,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
             name: card.name,
             position: drawnCards.indexOf(card).toString(),
             isReversed: card.isReversed,
-            meaning: card.isReversed ? card.meaning.reversed : card.meaning.upright
+            meaning: card.isReversed ? (card.meaning.reversed || card.meaning_reversed) : (card.meaning.upright || card.meaning_upright)
           })),
           interpretation: finalReading.overall_guidance,
           question: '',
@@ -493,14 +664,55 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
     // Save to localStorage for guest users or API for authenticated users
     if (isAuthenticated && user) {
       try {
-        // TODO: Implement API call to save reading
-        console.log('Saving to user account:', sessionWithJournal);
+        // Get the current session token
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session?.access_token) {
+          setError('Please sign in to save your reading');
+          return;
+        }
+        
+        // Save reading via API
+        const response = await fetch('/api/tarot/save-reading', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            spreadType: selectedSpread,
+            cards: drawnCards.map((card, index) => ({
+              id: card.id,
+              name: card.name,
+              position: index.toString(),
+              isReversed: card.isReversed,
+              meaning: card.isReversed ? (card.meaning.reversed || card.meaning_reversed) : (card.meaning.upright || card.meaning_upright),
+              frontImage: card.frontImage,
+              backImage: card.backImage
+            })),
+            interpretation: sessionWithJournal.interpretation,
+            question: '',
+            notes: journalEntry || '',
+            cosmicInfluence: sophiaReading?.spiritual_insight || null,
+            drawId: currentSession?.id,
+            isPublic: false,
+            tags: ['sophia', selectedSpread]
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to save reading');
+        }
+        
+        console.log('Reading saved successfully');
         
         // Check engagement level after successful save
         await checkEngagementLevel();
         
       } catch (err) {
         console.error('Failed to save reading:', err);
+        setError('Unable to save your reading. Please try again.');
       }
     } else {
       // Save to localStorage for guest users
@@ -686,6 +898,99 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
           {phase === 'conversation' ? 'In conversation with Sophia' : `${revealedCards.size} of ${drawnCards.length} cards revealed`}
         </p>
       </motion.div>
+      {/* Persistent Interpretations Canvas */}
+      {persistentInterpretations.length > 0 && (phase === 'revealing' || phase === 'interpreting' || phase === 'conversation') && (
+        <motion.div
+          className="mb-8 bg-gradient-to-br from-indigo-900/30 to-purple-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/30"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="flex items-center space-x-3 mb-6">
+            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
+              <BookOpen className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-indigo-300 font-semibold">Card Interpretations</h3>
+              <p className="text-indigo-400 text-sm">{persistentInterpretations.length} cards revealed</p>
+            </div>
+          </div>
+          
+          <div className="space-y-4 max-h-96 overflow-y-auto">
+            {persistentInterpretations.map((item, index) => (
+              <motion.div
+                key={`${item.cardIndex}-${item.timestamp}`}
+                className="bg-indigo-800/20 rounded-lg p-4 border border-indigo-500/20"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-indigo-300 font-medium flex items-center space-x-2">
+                    <span className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
+                      {item.cardIndex + 1}
+                    </span>
+                    <span>{item.cardName}</span>
+                  </h4>
+                  <span className="text-indigo-400 text-xs">
+                    {new Date(item.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+                <div className="text-indigo-200 text-sm leading-relaxed prose prose-sm prose-invert">
+                  {item.interpretation.split('\n').map((line, lineIndex) => {
+                    if (line.startsWith('🔮 **') && line.includes('**')) {
+                      // Title line
+                      const title = line.replace('🔮 **', '').replace('**', '');
+                      return (
+                        <h4 key={lineIndex} className="text-indigo-300 font-semibold mb-2 flex items-center">
+                          <span className="mr-2">🔮</span>
+                          {title}
+                        </h4>
+                      );
+                    } else if (line.startsWith('*') && line.endsWith('*')) {
+                      // Italic context line
+                      const text = line.replace(/^\*/, '').replace(/\*$/, '');
+                      return (
+                        <p key={lineIndex} className="text-indigo-300 italic mb-2 text-xs">
+                          {text}
+                        </p>
+                      );
+                    } else if (line.startsWith('**') && line.includes('**')) {
+                      // Bold card name line
+                      const parts = line.split('**');
+                      return (
+                        <p key={lineIndex} className="mb-2">
+                          <span className="font-semibold text-indigo-200">{parts[1]}</span>
+                          {parts[2] && <span>{parts[2]}</span>}
+                        </p>
+                      );
+                    } else if (line.startsWith('💫 **Focus:**')) {
+                      // Focus line
+                      const focus = line.replace('💫 **Focus:** ', '');
+                      return (
+                        <p key={lineIndex} className="text-indigo-200 mb-2 flex items-start">
+                          <span className="mr-2 mt-0.5">💫</span>
+                          <span className="font-medium">Focus: </span>
+                          <span className="ml-1">{focus}</span>
+                        </p>
+                      );
+                    } else if (line.trim()) {
+                      // Regular text line
+                      return (
+                        <p key={lineIndex} className="mb-2">
+                          {line}
+                        </p>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+      
       {/* Conversational Reading Display */}
       {phase === 'conversation' && currentTurn && (
         <motion.div
@@ -1229,7 +1534,7 @@ export const InteractiveReadingSurface: React.FC<InteractiveReadingSurfaceProps>
       {/* Sophia Virtual Reader Display - Fixed Position */}
       {(phase === 'revealing' || phase === 'interpreting' || phase === 'conversation' || phase === 'complete') && (
         <motion.div 
-          className="fixed top-20 left-6 z-20"
+          className="fixed top-20 left-6 z-30"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}

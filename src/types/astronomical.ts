@@ -3,6 +3,17 @@
  * 
  * Core types for the astronomical calculation system
  */
+import { Planets, ZodiacSigns, AspectTypes, MoonPhases } from '@/constants/AstrologyConstants';
+export type Planet = typeof Planets[number];
+export type ZodiacSign = typeof ZodiacSigns[number];
+export type AspectType = typeof AspectTypes[number];
+export type MoonPhase = typeof MoonPhases[number];
+export type Planet = typeof Planets[number];
+export type ZodiacSign = typeof ZodiacSigns[number];
+export type AspectType = typeof AspectTypes[number];
+export type MoonPhase = typeof MoonPhases[number];
+import { CosmicIntensity, EnergyLevel, InfluenceType, CosmicWeatherType } from '@/constants/EventTypes';
+
 // Geographic location for observer
 export interface GeoLocation {
   latitude: number;   // degrees, -90 to +90
@@ -76,37 +87,6 @@ export interface PlanetaryData {
   set?: Date;
   aspects?: AspectData[];
 }
-// Planetary bodies
-export enum Planet {
-  SUN = 'Sun',
-  MOON = 'Moon',
-  MERCURY = 'Mercury',
-  VENUS = 'Venus',
-  MARS = 'Mars',
-  JUPITER = 'Jupiter',
-  SATURN = 'Saturn',
-  URANUS = 'Uranus',
-  NEPTUNE = 'Neptune',
-  PLUTO = 'Pluto',
-  CHIRON = 'Chiron',
-  NORTH_NODE = 'North Node',
-  SOUTH_NODE = 'South Node'
-}
-// Zodiac signs
-export enum ZodiacSign {
-  ARIES = 'Aries',
-  TAURUS = 'Taurus',
-  GEMINI = 'Gemini',
-  CANCER = 'Cancer',
-  LEO = 'Leo',
-  VIRGO = 'Virgo',
-  LIBRA = 'Libra',
-  SCORPIO = 'Scorpio',
-  SAGITTARIUS = 'Sagittarius',
-  CAPRICORN = 'Capricorn',
-  AQUARIUS = 'Aquarius',
-  PISCES = 'Pisces'
-}
 // Astrological aspects
 export interface AspectData {
   planet1: Planet | string;      // Can be Planet enum or string
@@ -121,17 +101,6 @@ export interface AspectData {
   exactTime?: Date;              // when aspect becomes exact
   influence?: 'harmonious' | 'challenging' | 'neutral';
   strength?: number;             // 0-1 based on orb and planets
-}
-export enum AspectType {
-  CONJUNCTION = 'Conjunction',
-  OPPOSITION = 'Opposition',
-  TRINE = 'Trine',
-  SQUARE = 'Square',
-  SEXTILE = 'Sextile',
-  QUINCUNX = 'Quincunx',
-  SEMISEXTILE = 'Semisextile',
-  SEMISQUARE = 'Semisquare',
-  SESQUIQUADRATE = 'Sesquiquadrate'
 }
 // Retrograde motion data
 export interface RetrogradeData {
@@ -160,16 +129,6 @@ export interface MoonPhaseData {
     date: Date;
   };
 }
-export enum MoonPhase {
-  NEW_MOON = 'New Moon',
-  WAXING_CRESCENT = 'Waxing Crescent',
-  FIRST_QUARTER = 'First Quarter',
-  WAXING_GIBBOUS = 'Waxing Gibbous',
-  FULL_MOON = 'Full Moon',
-  WANING_GIBBOUS = 'Waning Gibbous',
-  LAST_QUARTER = 'Last Quarter',
-  WANING_CRESCENT = 'Waning Crescent'
-}
 // Cosmic weather data
 export interface CosmicInfluenceData {
   moonPhase: MoonPhaseData;
@@ -184,8 +143,8 @@ export interface CosmicInfluenceData {
   retrogradePlanets?: Planet[];
   retrogrades?: RetrogradeInfo[];
   cosmicWeather?: CosmicWeatherType;
-  cosmicIntensity?: 'calm' | 'active' | 'intense' | 'transformative';
-  intensity?: 'low' | 'medium' | 'high' | 'extreme';
+  cosmicIntensity?: CosmicIntensity;
+  intensity?: EnergyLevel;
   influences?: string[];
   spiritualInfluences?: SpiritualInfluence[];
   optimalActivities?: OptimalActivity[];
@@ -214,7 +173,7 @@ export interface RetrogradeInfo {
   influence?: string;
 }
 export interface SpiritualInfluence {
-  type: 'enhancing' | 'challenging' | 'neutral' | 'transformative';
+  type: InfluenceType;
   source: string;
   areas: string[];
   advice: string;

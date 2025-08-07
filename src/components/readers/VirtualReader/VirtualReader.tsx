@@ -5,6 +5,7 @@ import styles from './VirtualReader.module.css';
 interface VirtualReaderProps {
   mood: 'neutral' | 'mystical' | 'contemplative';
   isTyping: boolean;
+  // eslint-disable-next-line no-unused-vars
   onMoodChange: (mood: 'neutral' | 'mystical' | 'contemplative') => void;
   className?: string;
 }
@@ -23,7 +24,7 @@ interface VirtualReaderProps {
 export const VirtualReader: React.FC<VirtualReaderProps> = ({
   mood,
   isTyping,
-  onMoodChange,
+  onMoodChange: _onMoodChange,
   className = ''
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -128,7 +129,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
         {/* Mood indicators */}
         <div className={styles.moodIndicators}>
           <button
-            onClick={() => onMoodChange('neutral')}
+            onClick={() => _onMoodChange('neutral')}
             className={`${styles.moodButton} ${mood === 'neutral' ? styles.active : ''}`}
             aria-label="Set reader to neutral mood"
             title="Neutral"
@@ -136,7 +137,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
             ⚪
           </button>
           <button
-            onClick={() => onMoodChange('mystical')}
+            onClick={() => _onMoodChange('mystical')}
             className={`${styles.moodButton} ${mood === 'mystical' ? styles.active : ''}`}
             aria-label="Set reader to mystical mood"
             title="Mystical"
@@ -144,7 +145,7 @@ export const VirtualReader: React.FC<VirtualReaderProps> = ({
             ✨
           </button>
           <button
-            onClick={() => onMoodChange('contemplative')}
+            onClick={() => _onMoodChange('contemplative')}
             className={`${styles.moodButton} ${mood === 'contemplative' ? styles.active : ''}`}
             aria-label="Set reader to contemplative mood"
             title="Contemplative"

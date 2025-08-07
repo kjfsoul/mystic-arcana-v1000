@@ -1,11 +1,11 @@
 import functools
 from datetime import datetime
 import time
-from a_mem.store import MemoryStore
+from agentic_memory.memory_system import AgenticMemorySystem
 
 # Initialize the MemoryStore for the Mystic Arcana namespace.
 # This ensures memory is isolated from other projects like BirthdayGen.
-store = MemoryStore(namespace="mystic_arcana")
+store = AgenticMemorySystem(namespace="mystic_arcana")
 
 def log_event(user_id="system", event_type="system_event", payload={}):
     """Directly logs a custom event to the Mystic Arcana memory store."""

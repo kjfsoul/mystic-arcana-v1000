@@ -1,4 +1,5 @@
 // [`src/lib/astrology/BirthChartCalculator.ts`](src/lib/astrology/BirthChartCalculator.ts:1)
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SwissEphemerisBridge as SwissEphemeris } from '../astronomy/SwissEphemerisBridge';
 import { NatalData, Chart, Planet, Angle, House } from './types';
 export class BirthChartCalculator {

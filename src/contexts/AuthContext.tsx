@@ -4,6 +4,7 @@ import { AuthError, AuthResponse, Session, User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from '../lib/supabase/client';
 import { profileService, UserProfile } from '../services/profileService';
+/* eslint-disable no-unused-vars */
 interface AuthContextType {
   user: User | null;
   session: Session | null;
@@ -21,6 +22,7 @@ interface AuthContextType {
   signOut: () => Promise<{ error: AuthError | null }>;
   isGuest: boolean;
 }
+/* eslint-enable no-unused-vars */
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

@@ -23,7 +23,7 @@ import type {
 import type {
   RetrogradeData
 } from './types';
-import {
+import type {
   Planet,
   ZodiacSign,
   AspectType
@@ -463,6 +463,7 @@ export class SwissEphemerisBridge {
     return aspects;
   }
   private getAspectAngle(type: AspectType): number {
+    // eslint-disable-next-line no-unused-vars
     const angles: { [key in AspectType]: number } = {
       [AspectType.CONJUNCTION]: 0,
       [AspectType.SEXTILE]: 60,

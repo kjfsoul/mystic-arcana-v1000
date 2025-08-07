@@ -9,6 +9,7 @@ interface LocationSuggestion {
   center: [number, number]; // [longitude, latitude]
   context?: Array<{ text: string; id: string }>;
 }
+/* eslint-disable no-unused-vars */
 interface LocationInputProps {
   value: string;
   onChange: (value: string, coordinates?: { lat: number; lng: number }) => void;
@@ -18,6 +19,7 @@ interface LocationInputProps {
   className?: string;
   label?: string;
 }
+/* eslint-enable no-unused-vars */
 // Mapbox API endpoint (you can also use other geocoding services)
 const GEOCODING_API = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 export const LocationInput: React.FC<LocationInputProps> = ({

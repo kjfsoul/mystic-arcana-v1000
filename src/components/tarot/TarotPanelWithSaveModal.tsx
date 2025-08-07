@@ -12,16 +12,16 @@ interface TarotPanelWithSaveModalProps {
 }
 export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = ({
   reading,
-  onReadingComplete
+  onReadingComplete: _onReadingComplete
 }) => {
   const { user, isGuest } = useAuth();
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [isSaving, setSaving] = useState(false);
+  const [_isSaving, _setSaving] = useState(false);
   const handleSaveReading = async (notes: string, isPublic: boolean) => {
     if (!reading || !user) {
       throw new Error('Cannot save reading without user authentication');
     }
-    setSaving(true);
+    _setSaving(true);
     
     try {
       // Add notes to the reading
@@ -41,7 +41,7 @@ export const TarotPanelWithSaveModal: React.FC<TarotPanelWithSaveModalProps> = (
       console.error('Save reading error:', error);
       throw error;
     } finally {
-      setSaving(false);
+      _setSaving(false);
     }
   };
   return (

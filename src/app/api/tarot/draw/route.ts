@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import Logger from '@/utils/logger';
+import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   const logger = new Logger('tarot-api');
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       );
     }
     // Initialize Supabase client
-    const supabase = await createClient();
+    const supabase = await _createClient();
     // Fetch deck data
     const { data: deckData, error: deckError } = await supabase
       .from('decks')

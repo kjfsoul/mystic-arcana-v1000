@@ -1,11 +1,12 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-unused-vars */
  
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EnhancedTarotPanel } from './EnhancedTarotPanel';
 import { SpreadType } from './EnhancedTarotSpreadLayouts';
 import { TarotCard } from '@/types/tarot';
-import { Share2, Download, Heart, MessageCircle } from 'lucide-react';
+import { Share2, Download, MessageCircle, Heart } from 'lucide-react';
 interface MobileTarotReaderProps {
   embedMode?: boolean; // For TikTok/Instagram embeds
   showSocialActions?: boolean;
@@ -15,6 +16,7 @@ interface MobileTarotReaderProps {
 export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
   embedMode = false,
   showSocialActions = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onShare,
   className = ''
 }) => {
@@ -24,6 +26,7 @@ export const MobileTarotReader: React.FC<MobileTarotReaderProps> = ({
     timestamp: Date;
   } | null>(null);
   const [showSharePanel, setShowSharePanel] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPortrait, setIsPortrait] = useState(true);
   // Detect orientation changes
  

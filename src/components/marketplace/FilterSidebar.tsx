@@ -11,6 +11,7 @@ export interface FilterState {
   priceRange: [number, number];
   showLimitedEdition: boolean;
 }
+/* eslint-disable no-unused-vars */
 interface FilterSidebarProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,6 +19,7 @@ interface FilterSidebarProps {
   onFiltersChange: (filters: FilterState) => void;
   productCount: number;
 }
+/* eslint-enable no-unused-vars */
 const CELESTIAL_EVENTS: { value: CelestialEventType; label: string; emoji: string }[] = [
   { value: 'mercury_retrograde', label: 'Mercury Retrograde', emoji: '☿' },
   { value: 'full_moon', label: 'Full Moon', emoji: '🌕' },
@@ -133,7 +135,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   const CheckboxFilter: React.FC<{
     items: { value: any; label: string; emoji: string }[];
     selectedItems: any[];
-    onToggle: (value: any) => void;
+    onToggle: (value: any) => void; // eslint-disable-line no-unused-vars
   }> = ({ items, selectedItems, onToggle }) => (
     <div className={styles.checkboxGrid}>
       {items.map(item => (

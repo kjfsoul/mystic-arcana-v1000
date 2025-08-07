@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { BirthData, PlanetPosition } from './AstronomicalCalculator';
 import { SwissEphemerisShim } from './SwissEphemerisShim';
 interface CompatibilityAPIResponse {
@@ -155,7 +156,7 @@ function calculateAspects(planets1: PlanetPosition[], planets2: PlanetPosition[]
   return aspects;
 }
 // Calculate love compatibility score (1-5)
-function calculateLoveCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
+function calculateLoveCompatibility(aspects: any[], _planets1: PlanetPosition[], _planets2: PlanetPosition[]): number {
   let score = 0;
   let maxScore = 0;
   
@@ -204,7 +205,7 @@ function calculateLoveCompatibility(aspects: any[], planets1: PlanetPosition[], 
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
 // Calculate friendship compatibility score (1-5)
-function calculateFriendshipCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
+function calculateFriendshipCompatibility(aspects: any[], _planets1: PlanetPosition[], _planets2: PlanetPosition[]): number {
   let score = 0;
   let maxScore = 0;
   
@@ -246,7 +247,7 @@ function calculateFriendshipCompatibility(aspects: any[], planets1: PlanetPositi
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
 // Calculate teamwork compatibility score (1-5)
-function calculateTeamworkCompatibility(aspects: any[], planets1: PlanetPosition[], planets2: PlanetPosition[]): number {
+function calculateTeamworkCompatibility(aspects: any[], _planets1: PlanetPosition[], _planets2: PlanetPosition[]): number {
   let score = 0;
   let maxScore = 0;
   
@@ -279,7 +280,7 @@ function calculateTeamworkCompatibility(aspects: any[], planets1: PlanetPosition
   return Math.min(5, Math.max(1, Math.round(normalizedScore)));
 }
 // Generate descriptive text for love compatibility
-function getLoveDescription(score: number, aspects: any[]): string {
+function getLoveDescription(score: number, _aspects: any[]): string {
   const descriptions = {
     5: "Exceptional romantic chemistry! Your planetary alignments suggest a deep, passionate connection with natural harmony and magnetic attraction.",
     4: "Strong romantic potential with good emotional and physical compatibility. Your charts show promising aspects for lasting love.",
@@ -290,7 +291,7 @@ function getLoveDescription(score: number, aspects: any[]): string {
   return descriptions[score as keyof typeof descriptions] || descriptions[3];
 }
 // Generate descriptive text for friendship compatibility
-function getFriendshipDescription(score: number, aspects: any[]): string {
+function getFriendshipDescription(score: number, _aspects: any[]): string {
   const descriptions = {
     5: "Outstanding friendship potential! Your charts indicate natural understanding, shared interests, and effortless communication.",
     4: "Excellent friendship compatibility with strong mutual respect and enjoyable interactions.",
@@ -301,7 +302,7 @@ function getFriendshipDescription(score: number, aspects: any[]): string {
   return descriptions[score as keyof typeof descriptions] || descriptions[3];
 }
 // Generate descriptive text for teamwork compatibility
-function getTeamworkDescription(score: number, aspects: any[]): string {
+function getTeamworkDescription(score: number, _aspects: any[]): string {
   const descriptions = {
     5: "Exceptional teamwork synergy! Your planetary patterns suggest you work together seamlessly with complementary strengths.",
     4: "Very good teamwork compatibility with effective collaboration and mutual support in achieving goals.",
@@ -407,7 +408,7 @@ function analyzeElementCompatibility(elements1: Record<string, number>, elements
   return compatibility[person1Dominant]?.[person2Dominant] || "Unique elemental blend creates interesting dynamics";
 }
 // Generate overall summary
-function generateOverallSummary(loveScore: number, friendshipScore: number, teamworkScore: number, keyAspects: string[]): string {
+function generateOverallSummary(loveScore: number, friendshipScore: number, teamworkScore: number, _keyAspects: string[]): string {
   const avgScore = (loveScore + friendshipScore + teamworkScore) / 3;
   
   if (avgScore >= 4.5) {

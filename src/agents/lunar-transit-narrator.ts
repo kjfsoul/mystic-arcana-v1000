@@ -140,8 +140,8 @@ export class LunarTransitNarratorAgent extends Agent {
         this.knowledgeBase.set('techniques', knowledgePool.techniques || {});
         
         console.log('LunarTransitNarrator: Loaded AstrologyGuru knowledge base successfully');
-      } catch (fileError) {
-        console.warn('LunarTransitNarrator: Using fallback knowledge base');
+      } catch (error) {
+        console.warn('LunarTransitNarrator: Using fallback knowledge base:', error instanceof Error ? error.message : 'Unknown error');
         this.loadFallbackKnowledge();
       }
     } catch (error) {
@@ -382,7 +382,7 @@ export class LunarTransitNarratorAgent extends Agent {
     try {
       const signKey = sign.toLowerCase();
       const signData = this.knowledgeBase.get('signs')?.[signKey] || {};
-      const planets = this.knowledgeBase.get('planets') || {};
+      // const planets = this.knowledgeBase.get('planets') || {};
       
       // Calculate sign-specific planetary influences
       const influences = this.calculateSignInfluences(sign, ephemerisData);
@@ -470,20 +470,20 @@ export class LunarTransitNarratorAgent extends Agent {
    */
   // @log_invocation(event_type="moon_phase_analysis", user_id="system")
   async analyzeMoonPhasePatterns(startDate: string, endDate: string): Promise<any> {
-    try {
-      // TODO: Implement comprehensive moon phase pattern analysis
-      // Track emotional cycles, manifestation windows, and release periods
-      
-      return {
-        manifestationWindows: [],
-        releaseOpportunities: [],
-        emotionalIntensityPeaks: [],
-        optimalActionDays: []
-      };
-    } catch (error) {
-      console.error('LunarTransitNarratorAgent: Phase pattern analysis failed:', error);
-      throw new Error('Failed to analyze moon phase patterns');
+    // TODO: Implement comprehensive moon phase pattern analysis
+    // Track emotional cycles, manifestation windows, and release periods
+    
+    // Validate input dates
+    if (!startDate || !endDate) {
+      throw new Error('Start date and end date are required for moon phase pattern analysis');
     }
+    
+    return {
+      manifestationWindows: [],
+      releaseOpportunities: [],
+      emotionalIntensityPeaks: [],
+      optimalActionDays: []
+    };
   }
   /**
    * Calculate moon phase from ephemeris data
@@ -648,7 +648,8 @@ export class LunarTransitNarratorAgent extends Agent {
   /**
    * Calculate how a specific planet influences a sign
    */
-  private calculatePlanetSignInfluence(planetName: string, planetData: any, sign: string, signData: any): any {
+  // eslint-disable-next-line no-unused-vars
+  private calculatePlanetSignInfluence(planetName: string, planetData: any, sign: string, _signData: any): any {
     const influence = {
       planet: planetName,
       type: 'neutral' as 'ruling' | 'supportive' | 'challenging' | 'neutral',
@@ -766,7 +767,7 @@ export class LunarTransitNarratorAgent extends Agent {
       } else {
         return `Steady professional progress is favored. Focus on collaboration and let your ${keywords[0] || 'unique'} perspective contribute to team success.`;
       }
-    } catch (error) {
+    } catch {
       return `Professional growth opportunities are present for focused ${sign} individuals.`;
     }
   }
@@ -787,7 +788,7 @@ export class LunarTransitNarratorAgent extends Agent {
       } else {
         return `Love flows naturally when you embrace your ${keywords[0] || 'true'} ${sign} nature. Be authentic in all romantic interactions.`;
       }
-    } catch (error) {
+    } catch {
       return `Love energy supports authentic ${sign} expression and meaningful connections.`;
     }
   }
@@ -814,7 +815,7 @@ export class LunarTransitNarratorAgent extends Agent {
       if (energyScore >= 4) return 'Moderate';
       return 'Low';
       
-    } catch (error) {
+    } catch {
       return 'Moderate';
     }
   }
@@ -832,7 +833,7 @@ export class LunarTransitNarratorAgent extends Agent {
       } else {
         return `Balance is key today. Honor your ${sign} nature while remaining flexible to cosmic currents and new possibilities.`;
       }
-    } catch (error) {
+    } catch {
       return `Stay true to your ${sign} essence while remaining open to growth and new experiences.`;
     }
   }
@@ -865,7 +866,7 @@ export class LunarTransitNarratorAgent extends Agent {
         career: Math.round((overall + (Math.random() * 0.6 - 0.3)) * 10) / 10,
         health: Math.round((overall + (Math.random() * 0.4 - 0.2)) * 10) / 10
       };
-    } catch (error) {
+    } catch {
       return { overall: 3.0, love: 3.0, career: 3.0, health: 3.0 };
     }
   }
@@ -886,14 +887,15 @@ export class LunarTransitNarratorAgent extends Agent {
       ];
       
       return numbers.sort((a, b) => a - b);
-    } catch (error) {
+    } catch {
       return [7, 14, 21, 28, 35];
     }
   }
   /**
    * Determine favorable colors based on sign and influences
    */
-  private determineColors(sign: string, influences: any): string[] {
+  // eslint-disable-next-line no-unused-vars
+  private determineColors(sign: string, _influences: any): string[] {
     const colorMap: { [key: string]: string[] } = {
       'Aries': ['Red', 'Orange', 'Gold'],
       'Taurus': ['Green', 'Pink', 'Earth tones'],
@@ -945,7 +947,8 @@ export class LunarTransitNarratorAgent extends Agent {
     
     return `Today's lunar energy of ${phaseData.energy} combines with ${transitInfluences.join(', ')} influences`;
   }
-  private analyzeEmotionalWeather(lunarPhase: LunarPhaseData, transits: TransitEvent[]): any {
+  // eslint-disable-next-line no-unused-vars
+  private analyzeEmotionalWeather(_lunarPhase: LunarPhaseData, _transits: TransitEvent[]): any {
     // TODO: Implement sophisticated emotional weather analysis
     return {
       overall: 'flowing',
@@ -954,7 +957,8 @@ export class LunarTransitNarratorAgent extends Agent {
       challenging: ['overthinking', 'sensitivity']
     };
   }
-  private async generateAreaGuidance(lunarPhase: LunarPhaseData, transits: TransitEvent[]): Promise<any> {
+  // eslint-disable-next-line no-unused-vars
+  private async generateAreaGuidance(_lunarPhase: LunarPhaseData, _transits: TransitEvent[]): Promise<any> {
     // TODO: Generate specific guidance for each life area
     return {
       love: 'Venus-Moon harmony supports deep emotional connections',
@@ -963,15 +967,18 @@ export class LunarTransitNarratorAgent extends Agent {
       spiritual: 'Moon phase energy enhances meditation and reflection'
     };
   }
-  private suggestRituals(lunarPhase: LunarPhaseData, transits: TransitEvent[]): string[] {
+  // eslint-disable-next-line no-unused-vars
+  private suggestRituals(lunarPhase: LunarPhaseData, _transits: TransitEvent[]): string[] {
     const phaseData = this.lunarCycles.get('phases')[lunarPhase.phase];
     return [phaseData.ritual, 'moon water creation', 'intention journaling'];
   }
-  private recommendCrystals(lunarPhase: LunarPhaseData, transits: TransitEvent[]): string[] {
+  // eslint-disable-next-line no-unused-vars
+  private recommendCrystals(lunarPhase: LunarPhaseData, _transits: TransitEvent[]): string[] {
     const phaseData = this.lunarCycles.get('phases')[lunarPhase.phase];
     return [phaseData.crystal, 'moonstone', 'labradorite'];
   }
-  private async calculateOptimalTimes(date: string, transits: TransitEvent[]): Promise<any> {
+  // eslint-disable-next-line no-unused-vars
+  private async calculateOptimalTimes(_date: string, _transits: TransitEvent[]): Promise<any> {
     // TODO: Calculate precise optimal timing based on transits
     return {
       manifestation: '14:30 - 16:00',
@@ -979,7 +986,8 @@ export class LunarTransitNarratorAgent extends Agent {
       release: '22:30 - 23:30'
     };
   }
-  private async calculateNatalMoon(birthData: any): Promise<any> {
+  // eslint-disable-next-line no-unused-vars
+  private async calculateNatalMoon(_birthData: any): Promise<any> {
     // TODO: Calculate natal moon position from birth data
     return {
       sign: 'Cancer',
@@ -987,27 +995,34 @@ export class LunarTransitNarratorAgent extends Agent {
       house: 4
     };
   }
-  private async findPersonalTransits(natalMoon: any, date: string): Promise<TransitEvent[]> {
+  // eslint-disable-next-line no-unused-vars
+  private async findPersonalTransits(_natalMoon: any, _date: string): Promise<TransitEvent[]> {
     // TODO: Find transits to personal natal moon
     return [];
   }
-  private generatePersonalThemes(natalMoon: any, transits: TransitEvent[]): string[] {
+  // eslint-disable-next-line no-unused-vars
+  private generatePersonalThemes(_natalMoon: any, _transits: TransitEvent[]): string[] {
     // TODO: Generate personalized themes based on natal moon and transits
     return ['emotional healing', 'family connections', 'intuitive development'];
   }
-  private async generateEmotionalForecast(natalMoon: any, transits: TransitEvent[]): Promise<string> {
+  // eslint-disable-next-line no-unused-vars
+  private async generateEmotionalForecast(_natalMoon: any, _transits: TransitEvent[]): Promise<string> {
     return 'Your emotional landscape is supported by nurturing cosmic influences today';
   }
-  private async generateRelationshipInsights(natalMoon: any, transits: TransitEvent[]): Promise<string> {
+  // eslint-disable-next-line no-unused-vars
+  private async generateRelationshipInsights(_natalMoon: any, _transits: TransitEvent[]): Promise<string> {
     return 'Deep emotional connections are highlighted with opportunities for greater intimacy';
   }
-  private async generateCareerGuidance(natalMoon: any, transits: TransitEvent[]): Promise<string> {
+  // eslint-disable-next-line no-unused-vars
+  private async generateCareerGuidance(_natalMoon: any, _transits: TransitEvent[]): Promise<string> {
     return 'Trust your instincts in professional matters - your intuition is particularly sharp';
   }
-  private async generateSpiritualMessage(natalMoon: any, transits: TransitEvent[]): Promise<string> {
+  // eslint-disable-next-line no-unused-vars
+  private async generateSpiritualMessage(_natalMoon: any, _transits: TransitEvent[]): Promise<string> {
     return 'The moon\'s gentle energy invites you to connect with your inner wisdom and divine feminine';
   }
-  private generateActionItems(natalMoon: any, transits: TransitEvent[]): string[] {
+  // eslint-disable-next-line no-unused-vars
+  private generateActionItems(_natalMoon: any, _transits: TransitEvent[]): string[] {
     return [
       'Practice moon salutations at sunset',
       'Journal about emotional insights',

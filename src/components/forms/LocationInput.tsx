@@ -9,12 +9,14 @@ interface LocationData {
   longitude: number;
   timezone?: string;
 }
+/* eslint-disable no-unused-vars */
 interface LocationInputProps {
   onLocationSelect: (location: LocationData) => void;
   initialValue?: string;
   className?: string;
   placeholder?: string;
 }
+/* eslint-enable no-unused-vars */
 interface GeocodingResult {
   name: string;
   country: string;

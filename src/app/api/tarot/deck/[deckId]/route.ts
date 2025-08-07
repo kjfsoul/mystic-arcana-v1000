@@ -1,6 +1,6 @@
-import { createClient } from '@/lib/supabase/server';
-import { NextRequest, NextResponse } from 'next/server';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import Logger from '@/utils/logger';
+import { NextRequest, NextResponse } from 'next/server';
 const logger = new Logger('TarotDeckAPI');
 /**
  * GET /api/tarot/deck/[deckId]
@@ -39,7 +39,7 @@ export async function GET(
       );
     }
     logger.info('fetching_tarot_deck', undefined, { deckId }, `Fetching deck: ${deckId}`);
-    const supabase = await createClient();
+    const supabase = await _createClient();
     // First, get the deck information
     const { data: deck, error: deckError } = await supabase
       .from('decks')

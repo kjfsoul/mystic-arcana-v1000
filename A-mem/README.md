@@ -79,7 +79,7 @@ pip install -e .
 Here's how to use the Agentic Memory system for basic operations:
 
 ```python
-from agentic_memory.memory_system import AgenticMemorySystem
+from a_mem.store import MemoryStore
 
 # Initialize the memory system 🚀
 memory_system = AgenticMemorySystem(

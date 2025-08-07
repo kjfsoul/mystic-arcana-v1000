@@ -194,6 +194,9 @@ export class SwissEphemerisShimAgent extends Agent {
     date: string
   ): Promise<{ lat: number; lon: number; elevation?: number }> {
     try {
+      void fromSystem; // Indicate intentional unused variable
+      void toSystem; // Indicate intentional unused variable
+      void date; // Indicate intentional unused variable
       // TODO: Implement coordinate system transformations
       // This would handle transformations between:
       // - Geographic (lat/lon on Earth)
@@ -214,6 +217,8 @@ export class SwissEphemerisShimAgent extends Agent {
     timezone?: string, 
     coordinates?: any
   ): Promise<string> {
+    void timezone; // Indicate intentional unused variable
+    void coordinates; // Indicate intentional unused variable
     // TODO: Implement robust timezone conversion
     const inputDate = typeof date === 'string' ? new Date(date) : date;
     return inputDate.toISOString();
@@ -262,6 +267,7 @@ export class SwissEphemerisShimAgent extends Agent {
     return cacheAge < maxAge;
   }
   private async detectTimezone(coordinates: { latitude: number; longitude: number }): Promise<string> {
+    void coordinates; // Indicate intentional unused variable
     // TODO: Implement timezone detection from coordinates
     return 'UTC';
   }

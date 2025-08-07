@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Save, User, Calendar, Clock, MapPin, Sparkles } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { User, Calendar, Clock, Sparkles, Save } from 'lucide-react';
+// import { useAuth } from '@/contexts/AuthContext'; // TODO: Re-enable when user context needed
 import { useProfileAutofill } from '@/hooks/useProfileAutofill';
 import { LocationInput } from '@/components/astrology/LocationInput';
 import styles from './EnhancedProfileForm.module.css';
@@ -20,7 +20,7 @@ export const EnhancedProfileForm: React.FC<EnhancedProfileFormProps> = ({
   onComplete,
   embedded = false
 }) => {
-  const { user } = useAuth();
+  // const { user } = useAuth(); // Removed unused user
   const {
     profileData,
     isLoading,

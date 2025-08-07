@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 interface TarotZonePreviewProps {
+  // eslint-disable-next-line no-unused-vars
   onSelectReading?: (type: string) => void;
 }
 export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
-  onSelectReading
+  onSelectReading: _onSelectReading
 }) => {
   const readings = [
     { id: 'single', name: 'Single Card', description: 'Quick insight' },
@@ -34,7 +35,7 @@ export const TarotZonePreview: React.FC<TarotZonePreviewProps> = ({
             <button
               key={reading.id}
               className="bg-indigo-900/30 border border-indigo-700/50 rounded-lg p-4 lg:p-5 text-left transition-all duration-300 hover:bg-indigo-900/40 hover:border-indigo-700/70 hover:translate-x-1 hover:shadow-lg hover:shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-transparent backdrop-blur-sm"
-              onClick={() => onSelectReading?.(reading.id)}
+              onClick={() => _onSelectReading?.(reading.id)}
               aria-label={`Select ${reading.name} reading`}
             >
               <span className="block text-base lg:text-lg font-medium text-white/90 mb-1">

@@ -1,230 +1,79 @@
 {
-  "agents": [
+  "servers": [
     {
-      "id": "tarot_reader",
-      "class": "TarotReaderAgent",
-      "module": "mystic_arcana_agents",
-      "active": true
+      "id": "_supabase-direct",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "astrology_data",
-      "class": "AstrologyDataAgent",
-      "module": "mystic_arcana_agents",
-      "active": true
+      "id": "@21st-dev/magic",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "card_selector",
-      "class": "CardSelectorAgent",
-      "module": "mystic_arcana_agents",
-      "active": true
+      "id": "agent-orchestrator",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "virtual_reader_nova",
-      "class": "NovaReaderAgent",
-      "module": "virtual_agent_readers",
-      "active": true
+      "id": "astrology-engine",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "virtual_reader_sage",
-      "class": "SageReaderAgent",
-      "module": "virtual_agent_readers",
-      "active": true
+      "id": "brave-search",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "virtual_reader_luna",
-      "class": "LunaReaderAgent",
-      "module": "virtual_agent_readers",
-      "active": true
+      "id": "context7",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "virtual_reader_sol",
-      "class": "SolReaderAgent",
-      "module": "virtual_agent_readers",
-      "active": true
+      "id": "fetch",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "sophia",
-      "class": "SophiaAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Mystic Oracle and Primary Tarot Interpreter",
-      "capabilities": ["tarot_interpretation", "akashic_records", "mystical_guidance"]
+      "id": "filesystem",
+      "type": "mcp",
+      "status": "WORKING"
     },
     {
-      "id": "orion",
-      "class": "OrionAgent", 
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Cosmic Strategist and Astrological Life Coach",
-      "capabilities": ["astronomical_calculations", "strategic_timing", "cosmic_guidance"]
+      "id": "git",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "astro_calculus",
-      "class": "AstroCalculusAgent",
-      "module": "mystic_crew_agents", 
-      "active": true,
-      "role": "Astronomical Calculation Specialist",
-      "capabilities": ["swiss_ephemeris", "birth_charts", "celestial_calculations"]
+      "id": "github",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "card_weaver",
-      "class": "CardWeaverAgent",
-      "module": "mystic_crew_agents",
-      "active": true, 
-      "role": "Adaptive Tarot Logic and Card Selection Engine",
-      "capabilities": ["card_selection", "synchronicity_algorithms", "tarot_logic"]
+      "id": "mem0",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "persona_learner",
-      "class": "PersonaLearnerAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "User Personalization and Continuous Learning Specialist", 
-      "capabilities": ["user_profiling", "behavioral_analysis", "personalization"]
+      "id": "memory",
+      "type": "mcp",
+      "status": "WORKING"
     },
     {
-      "id": "data_oracle",
-      "class": "DataOracleAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Spiritual Data Architecture and Knowledge Management Specialist",
-      "capabilities": ["database_management", "spiritual_data", "privacy_protection"]
+      "id": "perplexityai",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "content_alchemist", 
-      "class": "ContentAlchemistAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Astrological Content Generation and Curation Specialist",
-      "capabilities": ["content_generation", "astrological_writing", "mystical_communication"]
+      "id": "supabase",
+      "type": "mcp",
+      "status": "BROKEN"
     },
     {
-      "id": "community_shaman",
-      "class": "CommunityShamanAgent",
-      "module": "mystic_crew_agents", 
-      "active": true,
-      "role": "Community Building and Social Engagement Specialist",
-      "capabilities": ["community_moderation", "spiritual_guidance", "social_integration"]
-    },
-    {
-      "id": "ui_enchanter",
-      "class": "UIEnchanterAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Mystical User Interface and Experience Designer",
-      "capabilities": ["ui_design", "sacred_geometry", "accessibility"]
-    },
-    {
-      "id": "quality_guardian",
-      "class": "QualityGuardianAgent",
-      "module": "mystic_crew_agents",
-      "active": true,
-      "role": "Quality Assurance and Spiritual Ethics Guardian", 
-      "capabilities": ["quality_assurance", "spiritual_ethics", "user_safety"]
-    },
-    {
-      "id": "astrology-guru",
-      "name": "AstrologyGuruAgent",
-      "class": "AstrologyGuruAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Extend astrology interpretation logic and knowledge pooling",
-      "entrypoint": "src/agents/astrology-guru.ts",
-      "skills": ["ephemeris_interpretation", "aspect_analysis", "house_systems", "knowledge_synthesis"],
-      "dependencies": ["swiss_ephemeris", "astrology_knowledge_base"],
-      "role": "Master Astrology Interpreter and Knowledge Synthesizer",
-      "capabilities": ["deep_chart_analysis", "predictive_astrology", "synastry_compatibility"]
-    },
-    {
-      "id": "tarot-deck-seeder",
-      "name": "TarotDeckSeeder",
-      "class": "TarotDeckSeederAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Seed full 78-card RiderWaiteDeck.ts and fix ESM import issues",
-      "entrypoint": "src/agents/tarot-deck-seeder.ts",
-      "skills": ["database_seeding", "tarot_metadata", "esm_module_fixing", "data_validation"],
-      "dependencies": ["supabase", "tarot_card_data"],
-      "role": "Tarot Deck Data Manager and Seeding Specialist",
-      "capabilities": ["deck_completion", "metadata_enrichment", "database_operations"]
-    },
-    {
-      "id": "personalization-orchestrator",
-      "name": "PersonalizationOrchestrator",
-      "class": "PersonalizationOrchestratorAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Implement adaptive logic from adaptive_personalization.md",
-      "entrypoint": "src/agents/personalization-orchestrator.ts",
-      "skills": ["user_modeling", "adaptive_algorithms", "preference_learning", "context_awareness"],
-      "dependencies": ["user_profiles", "interaction_history", "ml_models"],
-      "role": "Adaptive Personalization Engine and User Experience Optimizer",
-      "capabilities": ["dynamic_adaptation", "preference_prediction", "contextual_recommendations"]
-    },
-    {
-      "id": "validation-runner",
-      "name": "ValidationRunner",
-      "class": "ValidationRunnerAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Create test/astrology/validation.ts with regression tests",
-      "entrypoint": "src/agents/validation-runner.ts",
-      "skills": ["test_creation", "regression_testing", "ephemeris_validation", "accuracy_checking"],
-      "dependencies": ["jest", "ephemeris_test_data", "reference_calculations"],
-      "role": "Astrological Accuracy Validator and Test Suite Manager",
-      "capabilities": ["automated_testing", "accuracy_verification", "regression_detection"]
-    },
-    {
-      "id": "swiss-ephemeris-shim",
-      "name": "SwissEphemerisShimAgent",
-      "class": "SwissEphemerisShimAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Handle API keys and timezone conversions for ephemeris calculations",
-      "entrypoint": "src/agents/swiss-ephemeris-shim.ts",
-      "skills": ["api_management", "timezone_handling", "coordinate_conversion", "ephemeris_access"],
-      "dependencies": ["swiss_ephemeris_api", "timezone_db", "coordinate_systems"],
-      "role": "Ephemeris API Manager and Astronomical Calculation Coordinator",
-      "capabilities": ["api_key_rotation", "timezone_conversion", "precision_calculations"]
-    },
-    {
-      "id": "lunar-transit-narrator",
-      "name": "LunarTransitNarrator",
-      "class": "LunarTransitNarratorAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Generate transit-based daily horoscopes with lunar focus",
-      "entrypoint": "src/agents/lunar-transit-narrator.ts",
-      "skills": ["transit_interpretation", "lunar_phases", "daily_forecasting", "narrative_generation"],
-      "dependencies": ["transit_engine", "lunar_calculator", "content_templates"],
-      "role": "Lunar Transit Interpreter and Daily Horoscope Narrator",
-      "capabilities": ["moon_phase_analysis", "daily_transit_synthesis", "personalized_forecasts"]
-    },
-    {
-      "id": "content-ingestor",
-      "name": "ContentIngestor",
-      "class": "ContentIngestorAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Crawl and ingest astrology sources into JSON knowledge pool",
-      "entrypoint": "src/agents/content-ingestor.ts",
-      "skills": ["web_crawling", "content_parsing", "data_structuring", "source_attribution"],
-      "dependencies": ["web_scraper", "content_parser", "knowledge_graph"],
-      "role": "Astrological Content Aggregator and Knowledge Base Builder",
-      "capabilities": ["source_crawling", "content_extraction", "knowledge_structuring"]
-    },
-    {
-      "id": "ux-narrator",
-      "name": "UXNarrator",
-      "class": "UXNarratorAgent",
-      "module": "mystic_arcana_agents",
-      "active": false,
-      "description": "Ensure outputs are spiritually grounded and UX-readable",
-      "entrypoint": "src/agents/ux-narrator.ts",
-      "skills": ["content_refinement", "spiritual_language", "ux_writing", "accessibility_compliance"],
-      "dependencies": ["content_guidelines", "spiritual_lexicon", "accessibility_standards"],
-      "role": "Spiritual Content Refinement and UX Writing Specialist",
-      "capabilities": ["tone_adjustment", "clarity_enhancement", "spiritual_authenticity"]
+      "id": "tarot-engine",
+      "type": "mcp",
+      "status": "BROKEN"
     }
   ]
 }

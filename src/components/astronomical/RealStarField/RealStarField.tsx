@@ -9,6 +9,7 @@ import {
   ScreenCoordinates
 } from '../../../types/astronomical';
 import styles from './RealStarField.module.css';
+/* eslint-disable no-unused-vars */
 interface RealStarFieldProps {
   className?: string;
   location: GeoLocation;
@@ -17,6 +18,7 @@ interface RealStarFieldProps {
   interactive?: boolean;
   onStarClick?: (star: Star) => void;
 }
+/* eslint-enable no-unused-vars */
 /**
  * RealStarField Component
  * 
@@ -77,7 +79,7 @@ export const RealStarField: React.FC<RealStarFieldProps> = ({
   // Convert star coordinates to screen positions
    
  
-  const getStarScreenPosition = useCallback((_star: Star): ScreenCoordinates => {
+  const getStarScreenPosition = useCallback((): ScreenCoordinates => {
     return astronomicalEngine.transformCoordinates();
   }, []);
   // Get star color based on B-V color index

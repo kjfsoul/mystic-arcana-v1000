@@ -1,9 +1,10 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Users, Heart, Zap, Star, Moon, Crown, Wand2, Shuffle, Play } from 'lucide-react';
+import { Sparkles, Heart, Zap, Star, Moon, Crown, Wand2, Play } from 'lucide-react';
 import { SpreadType } from './EnhancedTarotSpreadLayouts';
-import { TarotCard } from '@/types/tarot';
+// TODO: Implement TarotCard type for card previews
+// import { TarotCard } from '@/types/tarot';
 interface SpreadConfig {
   cardCount: number;
   title: string;
@@ -30,7 +31,8 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
 }) => {
   const [hoveredSpread, setHoveredSpread] = useState<SpreadType | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
+  // TODO: Implement preview functionality
+  // const [showPreview, setShowPreview] = useState(false);
   // Enhanced spread configurations with detailed metadata
   const spreadConfigs: Record<SpreadType, SpreadConfig> = {
     'single': {
@@ -124,17 +126,19 @@ export const CardSelectionSpreadUI: React.FC<CardSelectionSpreadUIProps> = ({
       
       switch (event.key) {
         case 'ArrowLeft':
-        case 'ArrowUp':
+        case 'ArrowUp': {
           event.preventDefault();
           const prevIndex = currentIndex > 0 ? currentIndex - 1 : spreads.length - 1;
           handleSpreadSelect(spreads[prevIndex]);
           break;
+        }
         case 'ArrowRight':
-        case 'ArrowDown':
+        case 'ArrowDown': {
           event.preventDefault();
           const nextIndex = currentIndex < spreads.length - 1 ? currentIndex + 1 : 0;
           handleSpreadSelect(spreads[nextIndex]);
           break;
+        }
         case 'Enter':
         case ' ':
           event.preventDefault();

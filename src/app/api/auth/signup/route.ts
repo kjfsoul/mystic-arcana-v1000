@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import Logger from '@/utils/logger';
+import { NextRequest, NextResponse } from 'next/server';
 const logger = new Logger('AuthSignupAPI');
 export async function POST(request: NextRequest) {
   const { email, password } = await request.json();
-  const supabase = await createClient();
+  const supabase = await _createClient();
   try {
     const { data, error } = await supabase.auth.signUp({
       email,

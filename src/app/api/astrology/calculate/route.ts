@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
       timezone: payload.location.timezone
     };
     // Check cache first for performance
-    const cacheKey = `calculate_${(birthData.date || new Date(birthData.birthDate)).getTime()}_${birthData.latitude}_${birthData.longitude}`;
+    // const cacheKey = `calculate_${(birthData.date || new Date(birthData.birthDate)).getTime()}_${birthData.latitude}_${birthData.longitude}`;
     
     // Try multiple calculation methods with fallbacks
     let chart: any = null;

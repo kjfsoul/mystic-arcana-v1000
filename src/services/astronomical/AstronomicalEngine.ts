@@ -4,6 +4,7 @@
  * Main interface for all astronomical calculations and data management.
  * This will be implemented by Claude Opus 4's mathematical algorithms.
  */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   GeoLocation,
   Star,

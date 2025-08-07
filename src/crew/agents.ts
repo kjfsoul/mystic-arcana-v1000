@@ -115,7 +115,7 @@ export class DataOracle {
   async storeDeckMetadata(blueprint: any): Promise<TaskResult> {
     try {
       // Store deck metadata in database
-      const { data: deckData, error: deckError } = await supabase
+      const { error: deckError } = await supabase
         .from('decks')
         .upsert({
           id: blueprint.deckId,

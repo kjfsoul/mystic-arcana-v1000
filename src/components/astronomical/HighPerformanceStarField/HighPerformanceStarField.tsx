@@ -7,6 +7,7 @@ import { useGeolocation } from '../../../hooks/useGeolocation';
 import { RenderConfig, Star } from '../../../types/astronomical';
 import { GalaxyBackground } from '../../effects/GalaxyBackground/GalaxyBackground';
 import styles from './HighPerformanceStarField.module.css';
+/* eslint-disable no-unused-vars */
 interface HighPerformanceStarFieldProps {
   useRealStars?: boolean;
   renderConfig?: Partial<RenderConfig>;
@@ -19,6 +20,7 @@ interface HighPerformanceStarFieldProps {
     renderTime: number;
   }) => void;
 }
+/* eslint-enable no-unused-vars */
 /**
  * High-Performance Star Field Component
  * 

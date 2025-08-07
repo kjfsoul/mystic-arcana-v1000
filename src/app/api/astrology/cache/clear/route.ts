@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { AstrologyCache } from '@/lib/cache/AstrologyCache';
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     const cache = new AstrologyCache();
     
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-export async function GET(request: NextRequest) {
+export async function GET() {
   // Return cache clear endpoint info
   return NextResponse.json({
     endpoint: '/api/astrology/cache/clear',

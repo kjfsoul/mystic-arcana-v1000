@@ -9,6 +9,7 @@ interface LocationSuggestion {
   lon: string;
   place_id: string;
 }
+/* eslint-disable no-unused-vars */
 interface LocationAutocompleteProps {
   value: string;
   onChange: (value: string) => void;
@@ -16,6 +17,7 @@ interface LocationAutocompleteProps {
   className?: string;
   onLocationSelect?: (location: { name: string; lat: number; lon: number }) => void;
 }
+/* eslint-enable no-unused-vars */
 export const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   value,
   onChange,

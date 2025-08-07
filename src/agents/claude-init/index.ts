@@ -6,6 +6,8 @@
 import { existsSync, readFileSync, writeFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
+import { EnergyLevel } from '@/constants/EventTypes';
+
 interface AgentTask {
   agent_id: string;
   agent_name: string;
@@ -23,8 +25,8 @@ interface AgentRegistry {
   [key: string]: unknown;
 }
 interface TodoItem {
-  priority: string;
-  status: string;
+  priority: EnergyLevel;
+  status: 'in_progress' | 'completed' | 'pending';
   content: string;
 }
 interface MemoryGraph {

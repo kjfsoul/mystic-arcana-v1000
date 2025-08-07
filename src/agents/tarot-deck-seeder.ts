@@ -108,8 +108,8 @@ export class TarotDeckSeederAgent extends Agent {
       const majorArcana = deckData.filter(card => card.arcana === 'major');
       const minorArcana = deckData.filter(card => card.arcana === 'minor');
       
-      const expectedMajor = 22;
-      const expectedMinor = 56;
+      // const expectedMajor = 22;
+      // const expectedMinor = 56;
       const expectedTotal = 78;
       const missingCards: string[] = [];
       const invalidCards: string[] = [];

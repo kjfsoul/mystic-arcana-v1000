@@ -7,11 +7,13 @@ import * as nodemailer from 'nodemailer';
 import { readFileSync, existsSync, writeFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
 import { execSync } from 'child_process';
+import { EnergyLevel } from '@/constants/EventTypes';
+
 interface CompletedTask {
   agent_name: string;
   task_description: string;
   timestamp: string;
-  status: string;
+  status: 'started' | 'completed' | 'failed';
 }
 interface AgentStatus {
   total: number;
@@ -25,8 +27,8 @@ interface SystemHealth {
   active_processes: number;
 }
 interface TodoItem {
-  priority: string;
-  status: string;
+  priority: EnergyLevel;
+  status: 'in_progress' | 'completed' | 'pending';
   content: string;
 }
 interface AgentRegistry {
@@ -62,7 +64,6 @@ class EmailNotificationAgent {
   private lastReportPath: string;
   private registryPath: string;
   private todoPath: string;
-  private taskLogPath: string;
   private messageBusPath: string;
   constructor() {
     const baseDir = process.cwd();
@@ -125,15 +126,16 @@ class EmailNotificationAgent {
             if (new Date(task.timestamp) > lastReportTime && task.status === 'completed') {
               report.completed_tasks.push(task);
             }
-          } catch {
-            // Skip invalid lines
+          } catch (error) {
+            // Skip invalid JSON lines in task log
+            console.warn('Invalid JSON line in task log:', error instanceof Error ? error.message : 'Unknown error');
           }
         }
       }
       // 2. Get current todos
       if (existsSync(this.todoPath)) {
         const todos = JSON.parse(readFileSync(this.todoPath, 'utf-8')) as TodoItem[];
-        report.todos.high_priority = todos.filter((t) => t.priority === 'high' && t.status !== 'completed').map((t) => t.content);
+        report.todos.high_priority = todos.filter((t) => t.priority === EnergyLevel.HIGH && t.status !== 'completed').map((t) => t.content);
         report.todos.in_progress = todos.filter((t) => t.status === 'in_progress').map((t) => t.content);
         report.todos.pending = todos.filter((t) => t.status === 'pending').map((t) => t.content);
       }
@@ -165,8 +167,9 @@ class EmailNotificationAgent {
       try {
         const lastReport = JSON.parse(readFileSync(this.lastReportPath, 'utf-8'));
         return new Date(lastReport.timestamp);
-      } catch {
-        // Default to 24 hours ago
+      } catch (error) {
+        // Failed to parse last report timestamp, defaulting to 24 hours ago
+        console.warn('Could not parse last report timestamp:', error instanceof Error ? error.message : 'Unknown error');
       }
     }
     return new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -183,14 +186,20 @@ class EmailNotificationAgent {
       if (failedAgents.length > 0) {
         challenges.push(`${failedAgents.length} agents are in failed state`);
       }
-    } catch {}
+    } catch (error) {
+      // Failed to read registry for agent status
+      console.warn('Could not read agent registry:', error instanceof Error ? error.message : 'Unknown error');
+    }
     // Check for pending messages
     try {
       const messages = JSON.parse(readFileSync(this.messageBusPath, 'utf-8')) as MessageData;
       if (messages.messages.length > 10) {
         challenges.push(`${messages.messages.length} unprocessed messages in queue`);
       }
-    } catch {}
+    } catch (error) {
+      // Failed to read message bus
+      console.warn('Could not read message bus:', error instanceof Error ? error.message : 'Unknown error');
+    }
     // Known critical issues
     challenges.push('Mobile responsiveness broken in three-panel layout');
     challenges.push('4 competing layout systems need consolidation');
@@ -205,11 +214,14 @@ class EmailNotificationAgent {
     if (existsSync(this.todoPath)) {
       try {
         const todos = JSON.parse(readFileSync(this.todoPath, 'utf-8'));
-        const highPriority = todos.filter((t: TodoItem) => t.priority === 'high' && t.status !== 'completed');
+        const highPriority = todos.filter((t: TodoItem) => t.priority === EnergyLevel.HIGH && t.status !== 'completed');
         if (highPriority.length > 0) {
           urgent.push(`${highPriority.length} high-priority tasks pending`);
         }
-      } catch {}
+      } catch (error) {
+        // Failed to parse todos file
+        console.warn('Could not parse todos file:', error instanceof Error ? error.message : 'Unknown error');
+      }
     }
     // Check for MCP server connectivity
     try {
@@ -217,7 +229,10 @@ class EmailNotificationAgent {
       if (registry.system_health?.mcp_connectivity === '0/5 online') {
         urgent.push('All MCP servers are offline - external integrations unavailable');
       }
-    } catch {}
+    } catch (error) {
+      // Failed to read registry for MCP connectivity check
+      console.warn('Could not check MCP connectivity:', error instanceof Error ? error.message : 'Unknown error');
+    }
     return urgent;
   }
   /**
@@ -233,7 +248,10 @@ class EmailNotificationAgent {
       // Count active processes
       const psCount = execSync('ps aux | grep -E "(tsx|node)" | grep -v grep | wc -l', { encoding: 'utf-8' });
       health.active_processes = parseInt(psCount.trim());
-    } catch {}
+    } catch (error) {
+      // Failed to count active processes
+      console.warn('Could not count active processes:', error instanceof Error ? error.message : 'Unknown error');
+    }
     return health;
   }
   /**
@@ -444,7 +462,7 @@ if (require.main === module) {
       emailNotifier.sendReport().catch(console.error);
       break;
       
-    case 'urgent':
+    case 'urgent': {
       const message = args.slice(1).join(' ');
       if (!message) {
         console.error('Usage: email-notifier urgent <message>');
@@ -452,6 +470,7 @@ if (require.main === module) {
       }
       emailNotifier.sendUrgentNotification(message).catch(console.error);
       break;
+    }
       
     default:
       console.log('Email Notification Agent');

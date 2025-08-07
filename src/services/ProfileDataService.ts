@@ -10,10 +10,10 @@ export interface ProfileData {
   preferredTarotReader?: string;
   timezone?: string;
 }
-interface StoredProfile extends ProfileData {
-  user_id: string;
-  updated_at: string;
-}
+// interface StoredProfile extends ProfileData {
+//   user_id: string;
+//   updated_at: string;
+// } // Commented out - not currently used
 class ProfileDataServiceClass {
   private static instance: ProfileDataServiceClass;
   private cachedProfile: ProfileData | null = null;

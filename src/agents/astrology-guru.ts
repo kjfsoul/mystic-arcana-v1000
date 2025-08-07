@@ -85,6 +85,7 @@ export class AstrologyGuruAgent extends Agent {
         
         console.log(`AstrologyGuru: Loaded ${knowledgePool.metadata.totalEntries} knowledge entries`);
       } catch (fileError) {
+        void fileError; // Indicate intentional unused variable
         console.warn('AstrologyGuru: Could not load knowledge pool, using fallback data');
         this.loadFallbackKnowledge();
       }

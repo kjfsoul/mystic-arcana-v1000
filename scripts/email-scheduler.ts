@@ -216,7 +216,7 @@ if (require.main === module) {
       scheduler.sendTestEmail().catch(console.error);
       break;
       
-    case 'urgent':
+    case 'urgent': {
       const message = args.slice(1).join(' ');
       if (!message) {
         console.error('Usage: email-scheduler urgent <message>');
@@ -224,6 +224,7 @@ if (require.main === module) {
       }
       emailNotifier.sendUrgentNotification(message).catch(console.error);
       break;
+    }
       
     default:
       console.log('Email Scheduler');

@@ -3,10 +3,12 @@
  * Agent: PersonaImplementer (Persona Learner Activation Mission)
  * Purpose: Learn from user interactions and integrate with a-mem system for persistent memory
  */
-import { execSync } from 'child_process';
-import path from 'path';
-import fs from 'fs/promises';
-import { SophiaReading, ConversationSession, ReadingContext } from './sophia';
+import { SophiaReading, ConversationSession /* , ReadingContext */ } from './sophia';
+import axios from 'axios';
+import { EnergyLevel, EmotionalState, SeekingType, ResponsePattern, InfluenceType } from '@/constants/EventTypes';
+// import * as path from 'path';
+// import * as fs from 'fs/promises';
+
 interface UserProfile {
   userId: string;
   name?: string;
@@ -30,6 +32,7 @@ interface UserProfile {
     growth_areas: string[];
   };
 }
+
 interface MemoryNote {
   content: string;
   id?: string;
@@ -43,8 +46,9 @@ interface MemoryNote {
   category?: string;
   tags?: string[];
 }
+
 interface LearningEvent {
-  eventType: 'reading_completed' | 'card_feedback' | 'session_rating' | 'journal_entry' | 'preference_update' | 'conversation_turn' | 'user_response' | 'card_revealed' | 'question_answered';
+  eventType: 'reading_completed' | 'card_feedback' | 'session_rating' | 'journal_entry' | 'preference_update' | 'conversation_turn' | 'user_response' | 'card_revealed' | 'question_answered' | 'interactive_response';
   userId: string;
   sessionId: string;
   data: any;
@@ -56,8 +60,11 @@ interface LearningEvent {
     user_satisfaction?: number;
     conversation_state?: string;
     turn_number?: number;
+    prompt_type?: string;
+    response_time?: number;
   };
 }
+
 /**
  * PersonaLearner - The Adaptive Intelligence
  * 
@@ -66,12 +73,14 @@ interface LearningEvent {
  * Sophia and other virtual readers to become more attuned to each user's needs.
  */
 export class PersonaLearnerAgent {
-  private memorySystemPath: string;
+  private supermemoryMcpUrl: string;
   private userProfiles: Map<string, UserProfile> = new Map();
   private learningQueue: LearningEvent[] = [];
+
   constructor() {
-    this.memorySystemPath = path.join(process.cwd(), 'A-mem/agentic_memory');
+    this.supermemoryMcpUrl = process.env.SUPERMEMORY_MCP_URL || 'http://localhost:4001';
   }
+
   /**
    * Log a completed reading interaction and learn from it
    */
@@ -108,6 +117,7 @@ export class PersonaLearnerAgent {
       };
       // Add to learning queue
       this.learningQueue.push(learningEvent);
+
       // Create a SophiaReading object for the memory note
       const reading: SophiaReading = {
         id: session.sessionId,
@@ -119,21 +129,26 @@ export class PersonaLearnerAgent {
         session_context: session.context,
         created_at: session.startTime
       };
+
       // Create memory note for a-mem system
       const memoryNote = await this.createMemoryNote(reading, userFeedback);
       
       // Log to a-mem system
-      await this.logToAMem(memoryNote);
+      await this.logToAMem(memoryNote, userId, session.sessionId);
+
       // Update user profile
       await this.updateUserProfile(userId, learningEvent);
+
       // Process learning patterns
       await this.processLearningPatterns(userId);
+
       console.log(`PersonaLearner: Logged interaction for user ${userId}, reading ${reading.id}`);
     } catch (error) {
       console.error('PersonaLearner: Failed to log interaction:', error);
       throw error;
     }
   }
+
   /**
    * Create a structured memory note for the a-mem system
    */
@@ -153,6 +168,7 @@ export class PersonaLearnerAgent {
       'sophia_reading',
       'tarot_session'
     ];
+
     const memoryNote: MemoryNote = {
       content: JSON.stringify({
         reading_summary: {
@@ -193,104 +209,52 @@ export class PersonaLearnerAgent {
     };
     return memoryNote;
   }
+
   /**
-   * Log memory note to the a-mem system via Python script
+   * Log memory note to the Supermemory MCP system with robust error handling
    */
-  private async logToAMem(memoryNote: MemoryNote): Promise<void> {
+  private async logToAMem(memoryNote: MemoryNote, userId: string, sessionId: string): Promise<void> {
     try {
-      // Create temporary file with memory note data
-      const tempFilePath = path.join('/tmp', `memory_note_${Date.now()}.json`);
-      await fs.writeFile(tempFilePath, JSON.stringify(memoryNote, null, 2));
-      // Python script to interface with a-mem system
-      const pythonScript = `
-import sys
-import json
-import os
-sys.path.append('${this.memorySystemPath}')
-try:
-    from memory_system import MemoryNote
-    
-    # Load memory note data
-    with open('${tempFilePath}', 'r') as f:
-        data = json.load(f)
-    
-    # Create MemoryNote instance
-    note = MemoryNote(
-        content=data['content'],
-        keywords=data.get('keywords', []),
-        context=data.get('context', ''),
-        category=data.get('category', ''),
-        tags=data.get('tags', []),
-        timestamp=data.get('timestamp')
-    )
-    
-    # Log successful creation
-    print(f"SUCCESS: Memory note created with ID {note.id}")
-    print(f"Keywords: {note.keywords}")
-    print(f"Category: {note.category}")
-    
-except Exception as e:
-    print(f"ERROR: {str(e)}")
-    sys.exit(1)
-`;
-      // Create temporary Python script
-      const pythonScriptPath = path.join('/tmp', `amem_logger_${Date.now()}.py`);
-      await fs.writeFile(pythonScriptPath, pythonScript);
-      // Execute Python script
-      try {
-        const result = execSync(`python3 ${pythonScriptPath}`, { 
-          encoding: 'utf-8',
-          timeout: 30000 // 30 second timeout
-        });
-        
-        console.log('a-mem integration result:', result);
-        
-        // Check if successful
-        if (result.includes('SUCCESS:')) {
-          console.log('PersonaLearner: Successfully logged to a-mem system');
-        } else {
-          throw new Error('a-mem logging did not report success');
+      const payload = {
+        userId: userId,
+        entryType: memoryNote.category || 'general_memory',
+        data: JSON.parse(memoryNote.content),
+        synthesisPrompt: memoryNote.context
+      };
+
+      console.log(`PersonaLearner: Attempting to log to Supermemory MCP at ${this.supermemoryMcpUrl}/record`);
+
+      const response = await axios.post(`${this.supermemoryMcpUrl}/record`, payload, {
+        timeout: 10000, // 10 second timeout
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
-        
-      } catch (execError) {
-        console.warn('a-mem system unavailable, logging locally:', execError);
-        await this.logToLocalMemory(memoryNote);
-      }
-      // Cleanup temporary files
-      try {
-        await fs.unlink(tempFilePath);
-        await fs.unlink(pythonScriptPath);
-      } catch (cleanupError) {
-        console.warn('Failed to cleanup temp files:', cleanupError);
+      });
+
+      if (response.status === 201 || response.status === 200) {
+        console.log(`PersonaLearner: Successfully logged to Supermemory MCP for user ${userId}, session ${sessionId}`);
+      } else {
+        throw new Error(`Supermemory MCP logging failed with status: ${response.status}, body: ${JSON.stringify(response.data)}`);
       }
     } catch (error) {
-      console.error('PersonaLearner: a-mem logging failed:', error);
-      // Fallback to local logging
-      await this.logToLocalMemory(memoryNote);
+      if (axios.isAxiosError(error)) {
+        if (error.code === 'ECONNREFUSED') {
+          console.warn('PersonaLearner: Supermemory MCP server is not available (connection refused)');
+        } else if (error.code === 'TIMEOUT') {
+          console.warn('PersonaLearner: Supermemory MCP request timed out');
+        } else {
+          console.error('PersonaLearner: Supermemory MCP HTTP error:', error.response?.status, error.response?.data);
+        }
+      } else {
+        console.error('PersonaLearner: Supermemory MCP logging failed:', error);
+      }
+      
+      // Don't throw the error - just log it and continue
+      // This ensures the reading process doesn't fail if MCP is unavailable
     }
   }
-  /**
-   * Fallback method to log memory locally when a-mem is unavailable
-   */
-  private async logToLocalMemory(memoryNote: MemoryNote): Promise<void> {
-    try {
-      const logDir = path.join(process.cwd(), 'logs', 'persona-learning');
-      await fs.mkdir(logDir, { recursive: true });
-      
-      const logFile = path.join(logDir, `memory_${new Date().toISOString().split('T')[0]}.jsonl`);
-      const logEntry = JSON.stringify({
-        ...memoryNote,
-        logged_at: new Date().toISOString(),
-        source: 'PersonaLearner_fallback'
-      }) + '\n';
-      
-      await fs.appendFile(logFile, logEntry);
-      console.log(`PersonaLearner: Logged to local memory file: ${logFile}`);
-      
-    } catch (error) {
-      console.error('PersonaLearner: Local memory logging failed:', error);
-    }
-  }
+
   /**
    * Update user profile based on learning event
    */
@@ -314,12 +278,14 @@ except Exception as e:
           last_active: new Date()
         },
         personalization_data: {
+          birth_chart: undefined,
           journal_themes: [],
           recurring_questions: [],
           growth_areas: []
         }
       };
     }
+
     // Update based on the learning event
     if (event.eventType === 'reading_completed') {
       // Update preferred spreads
@@ -327,6 +293,7 @@ except Exception as e:
       if (!profile.preferences.preferred_spreads.includes(spreadType)) {
         profile.preferences.preferred_spreads.push(spreadType);
       }
+
       // Update favorite cards based on positive feedback
       if (event.data.feedback?.helpful_cards) {
         for (const card of event.data.feedback.helpful_cards) {
@@ -335,6 +302,7 @@ except Exception as e:
           }
         }
       }
+
       // Update learning patterns
       profile.learning_patterns.cards_drawn_total += event.data.cards.length;
       profile.learning_patterns.last_active = event.timestamp;
@@ -353,22 +321,120 @@ except Exception as e:
         }
       }
     }
+
     this.userProfiles.set(userId, profile);
   }
+
+  /**
+   * Process in-reading interactive responses
+   */
+  async processInteractiveResponse(
+    userId: string,
+    sessionId: string,
+    promptType: string,
+    response: any,
+    responseTime: number,
+    metadata?: any
+  ): Promise<{ insights: string[], traits: string[] }> {
+    const learningEvent: LearningEvent = {
+      eventType: 'interactive_response',
+      userId,
+      sessionId,
+      data: {
+        prompt_type: promptType,
+        response,
+        metadata
+      },
+      timestamp: new Date(),
+      context: {
+        spread_type: metadata?.spreadType || 'unknown',
+        cards_drawn: metadata?.cards || [],
+        prompt_type: promptType,
+        response_time: responseTime
+      }
+    };
+
+    // Add to learning queue
+    this.learningQueue.push(learningEvent);
+
+    // Analyze response for immediate insights
+    const insights: string[] = [];
+    const traits: string[] = [];
+
+    // Quick response analysis
+    if (responseTime < 2000) {
+      traits.push('decisive');
+      insights.push('Makes quick decisions');
+    } else if (responseTime > 8000) {
+      traits.push('thoughtful');
+      insights.push('Takes time to reflect');
+    }
+
+    // Response content analysis
+    if (typeof response === 'string') {
+      if (response.length > 100) {
+        traits.push('expressive');
+        insights.push('Provides detailed responses');
+      }
+      
+      // Sentiment indicators
+      const positiveWords = ['love', 'happy', 'excited', 'grateful', 'hope'];
+      const negativeWords = ['worried', 'anxious', 'confused', 'lost', 'scared'];
+      
+      const lowerResponse = response.toLowerCase();
+      const hasPositive = positiveWords.some(word => lowerResponse.includes(word));
+      const hasNegative = negativeWords.some(word => lowerResponse.includes(word));
+      
+      if (hasPositive && !hasNegative) {
+        traits.push('optimistic');
+        insights.push('Currently in a positive mindset');
+      } else if (hasNegative && !hasPositive) {
+        traits.push('seeking-guidance');
+        insights.push('Looking for support and clarity');
+      }
+    }
+
+    // Update user profile
+    await this.updateUserProfile(userId, learningEvent);
+
+    // Log to a-mem for persistence
+    const memoryNote: MemoryNote = {
+      content: JSON.stringify({
+        interaction_type: 'in_reading_response',
+        prompt_type: promptType,
+        response,
+        response_time: responseTime,
+        insights,
+        traits
+      }),
+      category: 'interactive_learning',
+      tags: ['interaction', promptType, ...traits],
+      timestamp: new Date().toISOString(),
+      context: `User responded to ${promptType} prompt during reading`
+    };
+
+    await this.logToAMem(memoryNote, userId, sessionId);
+
+    return { insights, traits };
+  }
+
   /**
    * Process learning patterns to identify insights
    */
   private async processLearningPatterns(userId: string): Promise<void> {
     const profile = this.userProfiles.get(userId);
     if (!profile) return;
+
     const recentEvents = this.learningQueue.filter(
       event => event.userId === userId && 
       event.timestamp > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) // Last 30 days
     );
+
     // Identify patterns
     const spreadPreferences = this.analyzeSpreadPreferences(recentEvents);
     const cardAffinities = this.analyzeCardAffinities(recentEvents);
     const engagementPatterns = this.analyzeEngagementPatterns(recentEvents);
+
     // Log insights
     console.log(`PersonaLearner: User ${userId} patterns:`, {
       spread_preferences: spreadPreferences,
@@ -376,6 +442,7 @@ except Exception as e:
       engagementLevel: engagementPatterns.average_satisfaction
     });
   }
+
   /**
    * Get personalization recommendations for a user
    */
@@ -395,8 +462,10 @@ except Exception as e:
         engagementLevel: 'medium'
       };
     }
+
     const engagementLevel = profile.learning_patterns.engagement_score > 0.7 ? 'high' :
                            profile.learning_patterns.engagement_score > 0.4 ? 'medium' : 'low';
+
     return {
       recommended_spreads: profile.preferences.preferred_spreads.slice(0, 3),
       card_preferences: profile.preferences.favorite_cards.slice(0, 5),
@@ -404,6 +473,7 @@ except Exception as e:
       engagementLevel
     };
   }
+
   /**
    * Helper methods for analysis
    */
@@ -417,6 +487,7 @@ except Exception as e:
       text.toLowerCase().includes(theme)
     );
   }
+
   private generateCardCombinations(cardNames: string[]): string[] {
     const combinations = [];
     for (let i = 0; i < cardNames.length - 1; i++) {
@@ -424,6 +495,7 @@ except Exception as e:
     }
     return combinations;
   }
+
   private calculateReadingQuality(reading: SophiaReading): number {
     let quality = 0.5; // Base quality
     
@@ -442,6 +514,7 @@ except Exception as e:
     
     return Math.min(quality, 1.0);
   }
+
   private analyzeSpreadPreferences(events: LearningEvent[]): Record<string, number> {
     const spreadCounts: Record<string, number> = {};
     
@@ -452,6 +525,7 @@ except Exception as e:
     
     return spreadCounts;
   }
+
   private analyzeCardAffinities(events: LearningEvent[]): Record<string, number> {
     const cardCounts: Record<string, number> = {};
     
@@ -463,6 +537,7 @@ except Exception as e:
     
     return cardCounts;
   }
+
   private analyzeEngagementPatterns(events: LearningEvent[]): { 
     average_satisfaction: number;
     session_count: number;
@@ -475,194 +550,379 @@ except Exception as e:
     const averageSatisfaction = satisfactionScores.length > 0 
       ? satisfactionScores.reduce((sum, score) => sum + score, 0) / satisfactionScores.length
       : 0;
+
     return {
       average_satisfaction: averageSatisfaction,
       session_count: events.length,
       feedback_rate: satisfactionScores.length / events.length
     };
   }
+
   /**
-   * Retrieve user memories from a-mem system for personalization
+   * Retrieve user memories from Supermemory MCP for personalization with robust error handling
    */
   async retrieveUserMemories(userId: string): Promise<MemoryNote[]> {
     try {
-      console.log(`PersonaLearner: Retrieving memories for user ${userId}`);
-      
-      // Create a Python script to query user-specific memories
-      const pythonScript = `
-import sys
-import json
-import os
-from pathlib import Path
-# Add a-mem to Python path
-amem_path = Path.cwd() / 'a_mem'
-sys.path.insert(0, str(amem_path))
-try:
-    from store import MemoryStore
-    
-    # Initialize memory store
-    store = MemoryStore(namespace="mystic_arcana")
-    
-    # Query events for specific user
-    user_id = "${userId}"
-    events = store.query_events(limit=50)  # Get recent events
-    
-    # Filter and format for this user
-    user_memories = []
-    for event in events:
-        event_dict = event.to_dict()
-        
-        # Check if event is related to this user
-        if (user_id in str(event_dict.get('content', '')) or 
-            user_id in str(event_dict.get('metadata', {}))):
-            
-            # Convert to MemoryNote format
-            memory_note = {
-                'content': event_dict.get('content', ''),
-                'id': event_dict.get('id', ''),
-                'keywords': event_dict.get('metadata', {}).get('keywords', []),
-                'context': event_dict.get('metadata', {}).get('context', ''),
-                'category': event_dict.get('metadata', {}).get('category', ''),
-                'tags': event_dict.get('metadata', {}).get('tags', []),
-                'timestamp': event_dict.get('timestamp', ''),
-                'retrieval_count': event_dict.get('retrieval_count', 0),
-                'last_accessed': event_dict.get('last_accessed', '')
-            }
-            user_memories.append(memory_note)
-    
-    # Output results as JSON
-    print(json.dumps({
-        'success': True,
-        'user_id': user_id,
-        'memories_found': len(user_memories),
-        'memories': user_memories
-    }))
-    
-except Exception as e:
-    print(json.dumps({
-        'success': False,
-        'error': str(e),
-        'user_id': "${userId}",
-        'memories': []
-    }))
-    sys.exit(1)
-`;
-      // Create temporary Python script
-      const pythonScriptPath = path.join('/tmp', `query_user_memories_${Date.now()}.py`);
-      await fs.writeFile(pythonScriptPath, pythonScript);
-      try {
-        // Execute Python script
-        const result = execSync(`python3 ${pythonScriptPath}`, { 
-          encoding: 'utf-8',
-          timeout: 30000,
-          cwd: process.cwd()
-        });
-        
-        // Parse JSON result
-        const queryResult = JSON.parse(result.trim());
-        
-        if (!queryResult.success) {
-          throw new Error(`Memory query failed: ${queryResult.error}`);
+      console.log(`PersonaLearner: Retrieving memories for user ${userId} from Supermemory MCP`);
+
+      const response = await axios.get(`${this.supermemoryMcpUrl}/journey/${userId}`, {
+        timeout: 15000, // 15 second timeout for retrieval
+        headers: {
+          'Accept': 'application/json'
         }
+      });
+
+      if (response.status === 200) {
+        const journeyData = response.data;
+        const journeyEntries = journeyData.journey || [];
         
-        console.log(`PersonaLearner: Retrieved ${queryResult.memories_found} memories for user ${userId}`);
-        
-        // Cleanup temp file
-        await fs.unlink(pythonScriptPath).catch(() => {});
-        
-        return queryResult.memories as MemoryNote[];
-        
-      } catch (execError) {
-        console.warn(`PersonaLearner: a-mem query failed, falling back to local memories:`, execError);
-        
-        // Fallback to local memory files
-        const memories = await this.retrieveFromLocalMemory(userId);
-        await fs.unlink(pythonScriptPath).catch(() => {});
-        
-        return memories;
+        console.log(`PersonaLearner: Retrieved ${journeyEntries.length} memories for user ${userId} from Supermemory MCP`);
+
+        // Map journey entries to MemoryNote format with proper validation
+        return journeyEntries
+          .filter((entry: any) => entry && entry.id && entry.data) // Validate required fields
+          .map((entry: any) => ({
+            content: typeof entry.data === 'string' ? entry.data : JSON.stringify(entry.data),
+            id: entry.id,
+            keywords: [], // Supermemory doesn't store keywords directly, can be derived from data
+            context: entry.synthesis_prompt || 'Retrieved from Supermemory MCP',
+            category: entry.entry_type || 'general_memory',
+            tags: [], // Supermemory doesn't store tags directly
+            timestamp: entry.created_at || new Date().toISOString(),
+            retrieval_count: 0, // Not tracked by Supermemory
+            last_accessed: entry.created_at || new Date().toISOString()
+          }));
+      } else {
+        throw new Error(`Supermemory MCP retrieval failed with status: ${response.status}, body: ${JSON.stringify(response.data)}`);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.code === 'ECONNREFUSED') {
+          console.warn(`PersonaLearner: Supermemory MCP server is not available for user ${userId} (connection refused)`);
+        } else if (error.code === 'TIMEOUT') {
+          console.warn(`PersonaLearner: Supermemory MCP retrieval request timed out for user ${userId}`);
+        } else if (error.response?.status === 404) {
+          console.log(`PersonaLearner: No memories found for user ${userId} (404 - user journey not found)`);
+        } else {
+          console.error(`PersonaLearner: Supermemory MCP retrieval HTTP error for user ${userId}:`, 
+                       error.response?.status, error.response?.data);
+        }
+      } else {
+        console.error(`PersonaLearner: Failed to retrieve user memories for ${userId}:`, error);
       }
       
-    } catch (error) {
-      console.error('PersonaLearner: Failed to retrieve user memories:', error);
+      // Return empty array instead of throwing - graceful degradation
       return [];
     }
   }
+
   /**
-   * Fallback method to retrieve memories from local files
+   * Progressive Reveal System - Check and increment engagement level
    */
-  private async retrieveFromLocalMemory(userId: string): Promise<MemoryNote[]> {
+  async checkAndIncrementEngagementLevel(userId: string): Promise<{
+    levelIncreased: boolean;
+    newLevel: number;
+    previousLevel: number;
+    thresholdMet?: string;
+  }> {
+    if (!userId) {
+      console.log('PersonaLearner: Skipping engagement level check for guest user');
+      return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
+    }
+
     try {
-      const logDir = path.join(process.cwd(), 'logs', 'persona-learning');
-      const memories: MemoryNote[] = [];
+      console.log(`PersonaLearner: Checking engagement level for user ${userId}`);
+
+      // Step 1: Get current engagement level from database
+      const currentLevel = await this.getCurrentEngagementLevel(userId);
       
-      try {
-        const files = await fs.readdir(logDir);
-        const jsonlFiles = files.filter(f => f.endsWith('.jsonl'));
+      // Step 2: Retrieve user's interaction history
+      const userMemories = await this.retrieveUserMemories(userId);
+      
+      // Step 3: Analyze interaction patterns and calculate metrics
+      const engagementMetrics = this.analyzeEngagementMetrics(userMemories);
+      
+      // Step 4: Check against engagement thresholds
+      const newLevel = this.calculateNewEngagementLevel(engagementMetrics, currentLevel);
+      
+      // Step 5: Update database if level increased
+      if (newLevel > currentLevel) {
+        const updated = await this.updateEngagementLevel(userId, newLevel);
         
-        for (const file of jsonlFiles) {
-          const filePath = path.join(logDir, file);
-          const content = await fs.readFile(filePath, 'utf-8');
-          const lines = content.split('\n').filter(line => line.trim());
+        if (updated) {
+          const thresholdName = this.getThresholdName(newLevel);
+          console.log(`PersonaLearner: User ${userId} leveled up from ${currentLevel} to ${newLevel} (${thresholdName})`);
           
-          for (const line of lines) {
-            try {
-              const entry = JSON.parse(line);
-              
-              // Check if this entry relates to our user
-              if (entry.content && typeof entry.content === 'string') {
-                const contentData = JSON.parse(entry.content);
-                if (contentData.interaction_data?.user_id === userId) {
-                  memories.push({
-                    content: entry.content,
-                    id: entry.id || `local_${Date.now()}`,
-                    keywords: entry.keywords || [],
-                    context: entry.context || '',
-                    category: entry.category || '',
-                    tags: entry.tags || [],
-                    timestamp: entry.timestamp || entry.logged_at,
-                    retrieval_count: entry.retrieval_count || 0
-                  });
-                }
-              }
-            } catch (parseError) {
-              // Skip malformed entries
-              continue;
+          return {
+            levelIncreased: true,
+            newLevel,
+            previousLevel: currentLevel,
+            thresholdMet: thresholdName
+          };
+        }
+      }
+
+      return {
+        levelIncreased: false,
+        newLevel: currentLevel,
+        previousLevel: currentLevel
+      };
+    } catch (error) {
+      console.error('PersonaLearner: Failed to check engagement level:', error);
+      return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
+    }
+  }
+
+  /**
+   * Get current engagement level from database
+   */
+  private async getCurrentEngagementLevel(userId: string): Promise<number> {
+    try {
+      // This would normally query Supabase, but for testing we'll use localStorage
+      const storedLevel = localStorage?.getItem(`engagementLevel_${userId}`);
+      return storedLevel ? parseInt(storedLevel) : 1;
+    } catch (error) {
+      console.warn('PersonaLearner: Could not retrieve current engagement level:', error);
+      return 1; // Default to level 1
+    }
+  }
+
+  /**
+   * Analyze user memories to calculate engagement metrics
+   */
+  private analyzeEngagementMetrics(userMemories: MemoryNote[]): {
+    completedReadings: number;
+    conversationTurns: number;
+    questionsAnswered: number;
+    sessionCount: number;
+    engagementScore: number;
+    consistencyScore: number;
+  } {
+    let completedReadings = 0;
+    let conversationTurns = 0;
+    let questionsAnswered = 0;
+    const uniqueSessions = new Set<string>();
+    let totalEngagement = 0;
+    let engagementCount = 0;
+
+    userMemories.forEach(memory => {
+      try {
+        if (memory.content && typeof memory.content === 'string') {
+          const memoryData = JSON.parse(memory.content);
+          
+          // Count completed readings
+          if (memoryData.reading_summary) {
+            completedReadings++;
+            const sessionId = memoryData.reading_summary.session_id || memoryData.interaction_data?.session_id;
+            if (sessionId) uniqueSessions.add(sessionId);
+          }
+          
+          // Count conversation turns
+          if (memoryData.conversation_data) {
+            conversationTurns++;
+            if (memoryData.conversation_data.session_id) {
+              uniqueSessions.add(memoryData.conversation_data.session_id);
+            }
+          }
+          
+          // Count answered questions
+          if (memoryData.question_data) {
+            questionsAnswered++;
+          }
+          
+          // Calculate engagement metrics
+          if (memoryData.engagement_metrics) {
+            if (typeof memoryData.engagement_metrics.dialogue_length === 'number') {
+              totalEngagement += Math.min(memoryData.engagement_metrics.dialogue_length / 100, 5); // Normalize
+              engagementCount++;
             }
           }
         }
-        
-        console.log(`PersonaLearner: Retrieved ${memories.length} memories from local storage for user ${userId}`);
-        return memories;
-        
-      } catch (dirError) {
-        console.log('PersonaLearner: No local memory files found');
-        return [];
+      } catch {
+        // Skip malformed memory entries
+      }
+    });
+
+    const avgEngagement = engagementCount > 0 ? totalEngagement / engagementCount : 0;
+    
+    // Calculate consistency score based on session frequency
+    const consistencyScore = Math.min(uniqueSessions.size / 10, 1); // Max at 10 sessions
+
+    return {
+      completedReadings,
+      conversationTurns,
+      questionsAnswered,
+      sessionCount: uniqueSessions.size,
+      engagementScore: avgEngagement,
+      consistencyScore
+    };
+  }
+
+  /**
+   * Calculate new engagement level based on metrics
+   */
+  private calculateNewEngagementLevel(metrics: any, currentLevel: number): number {
+    // Engagement thresholds (cumulative)
+    const thresholds = [
+      { level: 1, readings: 0, turns: 0, questions: 0, description: 'Novice Seeker' },
+      { level: 2, readings: 3, turns: 10, questions: 2, description: 'Curious Student' },
+      { level: 3, readings: 10, turns: 30, questions: 8, description: 'Dedicated Practitioner' },
+      { level: 4, readings: 25, turns: 75, questions: 20, description: 'Enlightened Seeker' },
+      { level: 5, readings: 50, turns: 150, questions: 40, description: 'Master Oracle' }
+    ];
+
+    // Find the highest level the user qualifies for
+    let qualifiedLevel = 1;
+    
+    for (const threshold of thresholds) {
+      const meetsReadings = metrics.completedReadings >= threshold.readings;
+      const meetsTurns = metrics.conversationTurns >= threshold.turns;
+      const meetsQuestions = metrics.questionsAnswered >= threshold.questions;
+      
+      // Must meet at least 2 out of 3 criteria, or have exceptional performance in one area
+      const criteriaCount = [meetsReadings, meetsTurns, meetsQuestions].filter(Boolean).length;
+      const exceptionalReadings = metrics.completedReadings >= threshold.readings * 1.5;
+      const exceptionalTurns = metrics.conversationTurns >= threshold.turns * 1.5;
+
+      if (criteriaCount >= 2 || exceptionalReadings || exceptionalTurns) {
+        qualifiedLevel = threshold.level;
+      }
+    }
+
+    // Only allow level increases, never decreases
+    return Math.max(qualifiedLevel, currentLevel);
+  }
+
+  /**
+   * Update engagement level in database
+   */
+  private async updateEngagementLevel(userId: string, newLevel: number): Promise<boolean> {
+    try {
+      // For testing, store in localStorage
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(`engagementLevel_${userId}`, newLevel.toString());
       }
       
-    } catch (error) {
-      console.error('PersonaLearner: Local memory retrieval failed:', error);
-      return [];
-    }
-  }
-  /**
-   * Health check method
-   */
-  async healthCheck(): Promise<boolean> {
-    try {
-      // Check if memory system path exists
-      const memoryPath = this.memorySystemPath;
-      await fs.access(memoryPath);
+      // In production, this would call the Supabase function
+      // const { error } = await supabase.rpc('increment_reader_engagementLevel', {
+      //   user_id: userId,
+      //   new_level: newLevel
+      // });
       
-      // Check if we can create temp files
-      const tempFile = path.join('/tmp', `health_check_${Date.now()}.txt`);
-      await fs.writeFile(tempFile, 'health check');
-      await fs.unlink(tempFile);
-      
+      console.log(`PersonaLearner: Updated engagement level for user ${userId} to ${newLevel}`);
       return true;
-    } catch {
+    } catch (error) {
+      console.error('PersonaLearner: Failed to update engagement level:', error);
       return false;
     }
   }
+
+  /**
+   * Get threshold name for level
+   */
+  private getThresholdName(level: number): string {
+    const names = {
+      1: 'Novice Seeker',
+      2: 'Curious Student',
+      3: 'Dedicated Practitioner', 
+      4: 'Enlightened Seeker',
+      5: 'Master Oracle'
+    };
+    return names[level as keyof typeof names] || 'Unknown Level';
+  }
+
+  /**
+   * Get detailed engagement analysis for user
+   */
+  async getEngagementAnalysis(userId: string): Promise<{
+    currentLevel: number;
+    levelName: string;
+    metrics: any;
+    nextThreshold?: any;
+    progressToNext?: number;
+  }> {
+    if (!userId) {
+      return {
+        currentLevel: 1,
+        levelName: 'Guest User',
+        metrics: {},
+        nextThreshold: undefined,
+        progressToNext: 0
+      };
+    }
+
+    try {
+      const currentLevel = await this.getCurrentEngagementLevel(userId);
+      const userMemories = await this.retrieveUserMemories(userId);
+      const metrics = this.analyzeEngagementMetrics(userMemories);
+      
+      // Calculate progress to next level
+      const thresholds = [
+        { level: 2, readings: 3, turns: 10, questions: 2 },
+        { level: 3, readings: 10, turns: 30, questions: 8 },
+        { level: 4, readings: 25, turns: 75, questions: 20 },
+        { level: 5, readings: 50, turns: 150, questions: 40 }
+      ];
+      
+      const nextThreshold = thresholds.find(t => t.level > currentLevel);
+      let progressToNext = 0;
+      
+      if (nextThreshold) {
+        const readingProgress = metrics.completedReadings / nextThreshold.readings;
+        const turnProgress = metrics.conversationTurns / nextThreshold.turns;
+        const questionProgress = metrics.questionsAnswered / nextThreshold.questions;
+        
+        progressToNext = Math.max(readingProgress, turnProgress, questionProgress) * 100;
+      }
+
+      return {
+        currentLevel,
+        levelName: this.getThresholdName(currentLevel),
+        metrics,
+        nextThreshold,
+        progressToNext: Math.min(progressToNext, 100)
+      };
+    } catch (error) {
+      console.error('PersonaLearner: Failed to get engagement analysis:', error);
+      return {
+        currentLevel: 1,
+        levelName: 'Novice Seeker',
+        metrics: {},
+        nextThreshold: undefined,
+        progressToNext: 0
+      };
+    }
+  }
+
+  /**
+   * Get learning statistics for monitoring
+   */
+  getStats(): {
+    total_users: number;
+    total_events: number;
+    memory_notes_logged: number;
+    last_activity: Date | null;
+    interaction_events: number;
+    conversation_turns: number;
+  } {
+    const lastActivity = this.learningQueue.length > 0 
+      ? this.learningQueue[this.learningQueue.length - 1].timestamp
+      : null;
+    const interactionEvents = this.learningQueue.filter(e => 
+      ['conversation_turn', 'user_response', 'card_revealed', 'question_answered'].includes(e.eventType)
+    ).length;
+    const conversationTurns = this.learningQueue.filter(e => e.eventType === 'conversation_turn').length;
+
+    return {
+      total_users: this.userProfiles.size,
+      total_events: this.learningQueue.length,
+      memory_notes_logged: this.learningQueue.length, // Assuming 1:1 ratio for now
+      last_activity: lastActivity,
+      interaction_events: interactionEvents,
+      conversation_turns: conversationTurns
+    };
+  }
+
   /**
    * Interactive Learning Hooks for Real-time Events
    */
@@ -703,14 +963,17 @@ except Exception as e:
         }
       };
       this.learningQueue.push(learningEvent);
+
       // Create focused memory note for this turn
       const memoryNote = await this.createConversationMemoryNote(learningEvent);
-      await this.logToAMem(memoryNote);
+      await this.logToAMem(memoryNote, learningEvent.userId, learningEvent.sessionId);
+
       console.log(`PersonaLearner: Logged conversation turn ${turnNumber} for user ${userId}`);
     } catch (error) {
       console.error('PersonaLearner: Failed to log conversation turn:', error);
     }
   }
+
   /**
    * Log user response patterns for preference learning
    */
@@ -747,13 +1010,16 @@ except Exception as e:
         }
       };
       this.learningQueue.push(learningEvent);
+
       // Update user profile with response patterns
       await this.updateResponsePatterns(userId, learningEvent);
+
       console.log(`PersonaLearner: Logged user response for user ${userId}`);
     } catch (error) {
       console.error('PersonaLearner: Failed to log user response:', error);
     }
   }
+
   /**
    * Log card reveal engagement for timing optimization
    */
@@ -788,11 +1054,13 @@ except Exception as e:
         }
       };
       this.learningQueue.push(learningEvent);
+
       console.log(`PersonaLearner: Logged card reveal for ${cardName}`);
     } catch (error) {
       console.error('PersonaLearner: Failed to log card reveal:', error);
     }
   }
+
   /**
    * Log interactive question responses for personalization
    */
@@ -828,16 +1096,19 @@ except Exception as e:
         }
       };
       this.learningQueue.push(learningEvent);
+
       // Create memory note for valuable insights
       if (learningEvent.data.provides_new_insight) {
         const memoryNote = await this.createQuestionMemoryNote(learningEvent);
-        await this.logToAMem(memoryNote);
+        await this.logToAMem(memoryNote, learningEvent.userId, learningEvent.sessionId);
       }
+
       console.log(`PersonaLearner: Logged question response for user ${userId}`);
     } catch (error) {
       console.error('PersonaLearner: Failed to log question response:', error);
     }
   }
+
   /**
    * Helper methods for interactive learning
    */
@@ -855,7 +1126,7 @@ except Exception as e:
         },
         engagement_metrics: {
           dialogue_length: event.data.dialogue_length,
-          has_user_response: event.data.has_user_response,
+          has_user_response: !!event.data.has_user_response,
           response_quality: event.data.user_response ? this.analyzeResponseStyle(event.data.user_response) : null
         }
       }),
@@ -872,6 +1143,7 @@ except Exception as e:
       timestamp: new Date().toISOString()
     };
   }
+
   private async createQuestionMemoryNote(event: LearningEvent): Promise<MemoryNote> {
     return {
       content: JSON.stringify({
@@ -901,6 +1173,7 @@ except Exception as e:
       timestamp: new Date().toISOString()
     };
   }
+
   private analyzeResponseStyle(response: string): 'concise' | 'detailed' | 'emotional' | 'analytical' {
     const length = response.length;
     const emotionalWords = ['feel', 'heart', 'soul', 'love', 'fear', 'hope', 'dream'];
@@ -914,6 +1187,7 @@ except Exception as e:
     if (hasAnalyticalWords) return 'analytical';
     return 'detailed';
   }
+
   private analyzeResponseSentiment(response: string): 'positive' | 'neutral' | 'negative' {
     const positiveWords = ['good', 'great', 'love', 'happy', 'excited', 'wonderful', 'amazing'];
     const negativeWords = ['bad', 'hate', 'sad', 'worried', 'terrible', 'awful', 'frustrated'];
@@ -925,6 +1199,7 @@ except Exception as e:
     if (negativeCount > positiveCount) return 'negative';
     return 'neutral';
   }
+
   private calculateEngagementLevel(metrics: { hover_time_ms?: number; clicked?: boolean; interpretation_read?: boolean }): 'low' | 'medium' | 'high' {
     let score = 0;
     
@@ -936,6 +1211,7 @@ except Exception as e:
     if (score >= 2) return 'medium';
     return 'low';
   }
+
   private assessInsightValue(response: string): boolean {
     // Simple heuristic: longer responses with personal references likely contain insights
     return response.length > 100 && (
@@ -944,12 +1220,15 @@ except Exception as e:
       response.toLowerCase().includes('me ')
     );
   }
+
   private async updateResponsePatterns(userId: string, event: LearningEvent): Promise<void> {
     const profile = this.userProfiles.get(userId);
     if (!profile) return;
+
     // Track response patterns
     const responseStyle = event.data.response_style;
-    const responseTime = event.data.response_time;
+    // const responseTime = event.data.response_time;
+
     // Update personalization data based on response patterns
     if (responseStyle === 'emotional') {
       if (!profile.personalization_data.growth_areas.includes('emotional_guidance')) {
@@ -960,294 +1239,7 @@ except Exception as e:
         profile.personalization_data.growth_areas.push('practical_wisdom');
       }
     }
+
     this.userProfiles.set(userId, profile);
-  }
-  /**
-   * Progressive Reveal System - Check and increment engagement level
-   */
-  async checkAndIncrementEngagementLevel(userId: string): Promise<{
-    levelIncreased: boolean;
-    newLevel: number;
-    previousLevel: number;
-    thresholdMet?: string;
-  }> {
-    if (!userId) {
-      console.log('PersonaLearner: Skipping engagement level check for guest user');
-      return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
-    }
-    try {
-      console.log(`PersonaLearner: Checking engagement level for user ${userId}`);
-      // Step 1: Get current engagement level from database
-      const currentLevel = await this.getCurrentEngagementLevel(userId);
-      
-      // Step 2: Retrieve user's interaction history
-      const userMemories = await this.retrieveUserMemories(userId);
-      
-      // Step 3: Analyze interaction patterns and calculate metrics
-      const engagementMetrics = this.analyzeEngagementMetrics(userMemories);
-      
-      // Step 4: Check against engagement thresholds
-      const newLevel = this.calculateNewEngagementLevel(engagementMetrics, currentLevel);
-      
-      // Step 5: Update database if level increased
-      if (newLevel > currentLevel) {
-        const updated = await this.updateEngagementLevel(userId, newLevel);
-        
-        if (updated) {
-          const thresholdName = this.getThresholdName(newLevel);
-          console.log(`PersonaLearner: User ${userId} leveled up from ${currentLevel} to ${newLevel} (${thresholdName})`);
-          
-          return {
-            levelIncreased: true,
-            newLevel,
-            previousLevel: currentLevel,
-            thresholdMet: thresholdName
-          };
-        }
-      }
-      return {
-        levelIncreased: false,
-        newLevel: currentLevel,
-        previousLevel: currentLevel
-      };
-    } catch (error) {
-      console.error('PersonaLearner: Failed to check engagement level:', error);
-      return { levelIncreased: false, newLevel: 1, previousLevel: 1 };
-    }
-  }
-  /**
-   * Get current engagement level from database
-   */
-  private async getCurrentEngagementLevel(userId: string): Promise<number> {
-    try {
-      // This would normally query Supabase, but for testing we'll use localStorage
-      const storedLevel = localStorage?.getItem(`engagementLevel_${userId}`);
-      return storedLevel ? parseInt(storedLevel) : 1;
-    } catch (error) {
-      console.warn('PersonaLearner: Could not retrieve current engagement level:', error);
-      return 1; // Default to level 1
-    }
-  }
-  /**
-   * Analyze user memories to calculate engagement metrics
-   */
-  private analyzeEngagementMetrics(userMemories: MemoryNote[]): {
-    completedReadings: number;
-    conversationTurns: number;
-    questionsAnswered: number;
-    sessionCount: number;
-    engagementScore: number;
-    consistencyScore: number;
-  } {
-    let completedReadings = 0;
-    let conversationTurns = 0;
-    let questionsAnswered = 0;
-    const uniqueSessions = new Set<string>();
-    let totalEngagement = 0;
-    let engagementCount = 0;
-    userMemories.forEach(memory => {
-      try {
-        if (memory.content && typeof memory.content === 'string') {
-          const memoryData = JSON.parse(memory.content);
-          
-          // Count completed readings
-          if (memoryData.reading_summary) {
-            completedReadings++;
-            const sessionId = memoryData.reading_summary.session_id || memoryData.interaction_data?.session_id;
-            if (sessionId) uniqueSessions.add(sessionId);
-          }
-          
-          // Count conversation turns
-          if (memoryData.conversation_data) {
-            conversationTurns++;
-            if (memoryData.conversation_data.session_id) {
-              uniqueSessions.add(memoryData.conversation_data.session_id);
-            }
-          }
-          
-          // Count answered questions
-          if (memoryData.question_data) {
-            questionsAnswered++;
-          }
-          
-          // Calculate engagement metrics
-          if (memoryData.engagement_metrics) {
-            if (typeof memoryData.engagement_metrics.dialogue_length === 'number') {
-              totalEngagement += Math.min(memoryData.engagement_metrics.dialogue_length / 100, 5); // Normalize
-              engagementCount++;
-            }
-          }
-        }
-      } catch (parseError) {
-        // Skip malformed memory entries
-      }
-    });
-    const avgEngagement = engagementCount > 0 ? totalEngagement / engagementCount : 0;
-    
-    // Calculate consistency score based on session frequency
-    const consistencyScore = Math.min(uniqueSessions.size / 10, 1); // Max at 10 sessions
-    return {
-      completedReadings,
-      conversationTurns,
-      questionsAnswered,
-      sessionCount: uniqueSessions.size,
-      engagementScore: avgEngagement,
-      consistencyScore
-    };
-  }
-  /**
-   * Calculate new engagement level based on metrics
-   */
-  private calculateNewEngagementLevel(metrics: any, currentLevel: number): number {
-    // Engagement thresholds (cumulative)
-    const thresholds = [
-      { level: 1, readings: 0, turns: 0, questions: 0, description: 'Novice Seeker' },
-      { level: 2, readings: 3, turns: 10, questions: 2, description: 'Curious Student' },
-      { level: 3, readings: 10, turns: 30, questions: 8, description: 'Dedicated Practitioner' },
-      { level: 4, readings: 25, turns: 75, questions: 20, description: 'Enlightened Seeker' },
-      { level: 5, readings: 50, turns: 150, questions: 40, description: 'Master Oracle' }
-    ];
-    // Find the highest level the user qualifies for
-    let qualifiedLevel = 1;
-    
-    for (const threshold of thresholds) {
-      const meetsReadings = metrics.completedReadings >= threshold.readings;
-      const meetsTurns = metrics.conversationTurns >= threshold.turns;
-      const meetsQuestions = metrics.questionsAnswered >= threshold.questions;
-      
-      // Must meet at least 2 out of 3 criteria, or have exceptional performance in one area
-      const criteriaCount = [meetsReadings, meetsTurns, meetsQuestions].filter(Boolean).length;
-      const exceptionalReadings = metrics.completedReadings >= threshold.readings * 1.5;
-      const exceptionalTurns = metrics.conversationTurns >= threshold.turns * 1.5;
-      
-      if (criteriaCount >= 2 || exceptionalReadings || exceptionalTurns) {
-        qualifiedLevel = threshold.level;
-      }
-    }
-    // Only allow level increases, never decreases
-    return Math.max(qualifiedLevel, currentLevel);
-  }
-  /**
-   * Update engagement level in database
-   */
-  private async updateEngagementLevel(userId: string, newLevel: number): Promise<boolean> {
-    try {
-      // For testing, store in localStorage
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(`engagementLevel_${userId}`, newLevel.toString());
-      }
-      
-      // In production, this would call the Supabase function
-      // const { error } = await supabase.rpc('increment_reader_engagementLevel', {
-      //   user_id: userId,
-      //   new_level: newLevel
-      // });
-      
-      console.log(`PersonaLearner: Updated engagement level for user ${userId} to ${newLevel}`);
-      return true;
-    } catch (error) {
-      console.error('PersonaLearner: Failed to update engagement level:', error);
-      return false;
-    }
-  }
-  /**
-   * Get threshold name for level
-   */
-  private getThresholdName(level: number): string {
-    const names = {
-      1: 'Novice Seeker',
-      2: 'Curious Student',
-      3: 'Dedicated Practitioner', 
-      4: 'Enlightened Seeker',
-      5: 'Master Oracle'
-    };
-    return names[level as keyof typeof names] || 'Unknown Level';
-  }
-  /**
-   * Get detailed engagement analysis for user
-   */
-  async getEngagementAnalysis(userId: string): Promise<{
-    currentLevel: number;
-    levelName: string;
-    metrics: any;
-    nextThreshold?: any;
-    progressToNext?: number;
-  }> {
-    if (!userId) {
-      return {
-        currentLevel: 1,
-        levelName: 'Guest User',
-        metrics: {},
-        nextThreshold: undefined,
-        progressToNext: 0
-      };
-    }
-    try {
-      const currentLevel = await this.getCurrentEngagementLevel(userId);
-      const userMemories = await this.retrieveUserMemories(userId);
-      const metrics = this.analyzeEngagementMetrics(userMemories);
-      
-      // Calculate progress to next level
-      const thresholds = [
-        { level: 2, readings: 3, turns: 10, questions: 2 },
-        { level: 3, readings: 10, turns: 30, questions: 8 },
-        { level: 4, readings: 25, turns: 75, questions: 20 },
-        { level: 5, readings: 50, turns: 150, questions: 40 }
-      ];
-      
-      const nextThreshold = thresholds.find(t => t.level > currentLevel);
-      let progressToNext = 0;
-      
-      if (nextThreshold) {
-        const readingProgress = metrics.completedReadings / nextThreshold.readings;
-        const turnProgress = metrics.conversationTurns / nextThreshold.turns;
-        const questionProgress = metrics.questionsAnswered / nextThreshold.questions;
-        
-        progressToNext = Math.max(readingProgress, turnProgress, questionProgress) * 100;
-      }
-      return {
-        currentLevel,
-        levelName: this.getThresholdName(currentLevel),
-        metrics,
-        nextThreshold,
-        progressToNext: Math.min(progressToNext, 100)
-      };
-    } catch (error) {
-      console.error('PersonaLearner: Failed to get engagement analysis:', error);
-      return {
-        currentLevel: 1,
-        levelName: 'Novice Seeker',
-        metrics: {},
-        nextThreshold: undefined,
-        progressToNext: 0
-      };
-    }
-  }
-  /**
-   * Get learning statistics for monitoring
-   */
-  getStats(): {
-    total_users: number;
-    total_events: number;
-    memory_notes_logged: number;
-    last_activity: Date | null;
-    interaction_events: number;
-    conversation_turns: number;
-  } {
-    const lastActivity = this.learningQueue.length > 0 
-      ? this.learningQueue[this.learningQueue.length - 1].timestamp
-      : null;
-    const interactionEvents = this.learningQueue.filter(e => 
-      ['conversation_turn', 'user_response', 'card_revealed', 'question_answered'].includes(e.eventType)
-    ).length;
-    const conversationTurns = this.learningQueue.filter(e => e.eventType === 'conversation_turn').length;
-    return {
-      total_users: this.userProfiles.size,
-      total_events: this.learningQueue.length,
-      memory_notes_logged: this.learningQueue.length, // Assuming 1:1 ratio for now
-      last_activity: lastActivity,
-      interaction_events: interactionEvents,
-      conversation_turns: conversationTurns
-    };
   }
 }

@@ -17,9 +17,9 @@ const BirthChartPayloadSchema = z.object({
   }, { message: "Invalid location format - must include lat, lon, city, country" })
 });
 type ValidatedBirthChartPayload = z.infer<typeof BirthChartPayloadSchema>;
-interface BirthChartRequest {
+/* interface BirthChartRequest {
   birthData: BirthData;
-}
+} */
 interface BirthChartData {
   svg: string;
   signSummary: string;
@@ -121,6 +121,7 @@ function generateEnhancedSignSummary(chartData: any): string {
     
     return summary;
   } catch (error) {
+    void error; // Indicate intentional unused variable
     return "Birth chart calculated with enhanced astrological methods and house system precision.";
   }
 }
@@ -180,6 +181,7 @@ function generateEnhancedHouseBreakdown(chartData: any): string[] {
     return breakdown;
     
   } catch (error) {
+    void error; // Indicate intentional unused variable
     return [
       "House system: Placidus enhanced",
       "Chart angles: Calculated",

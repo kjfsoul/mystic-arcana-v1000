@@ -1,9 +1,11 @@
-import { SpreadType } from '../types/tarot'; // Corrected path
+import { SpreadType } from './tarot'; // Corrected path
+import { ArcanaType } from '@/constants/EventTypes';
+
 export interface Database {
   tarotCards: {
     id: string;
     name: string;
-    arcana: 'major' | 'minor';
+    arcana: ArcanaType;
     // ... other card properties
   };
   readings: {

@@ -102,7 +102,7 @@ export const InteractiveCareerInsights: React.FC<InteractiveCareerInsightsProps>
   const getPersonalityInsight = () => {
     const maxScore = Math.max(...Object.values(personalityScores));
     const dominantType = Object.entries(personalityScores)
-      .find(([_, score]) => score === maxScore)?.[0];
+      .find(([, score]) => score === maxScore)?.[0];
     const insights = {
       leadership: "Your astrological profile combined with your responses suggests strong leadership potential. You're drawn to positions where you can guide and influence others.",
       analytical: "Your cosmic blueprint aligns with analytical thinking. You excel at processing complex information and finding logical solutions.",

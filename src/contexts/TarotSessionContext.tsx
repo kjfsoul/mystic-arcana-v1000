@@ -26,6 +26,7 @@ interface JournalEntry {
   mood?: string;
   tags: string[];
 }
+/* eslint-disable no-unused-vars */
 interface TarotSessionContextType {
   // Session readings (temporary, before saving to DB)
   sessionReadings: SessionReading[];
@@ -51,6 +52,7 @@ interface TarotSessionContextType {
   // Clear session data
   clearSession: () => void;
 }
+/* eslint-enable no-unused-vars */
 const TarotSessionContext = createContext<TarotSessionContextType | undefined>(undefined);
 const JOURNAL_STORAGE_KEY = 'tarot_journal_entries';
 const SESSION_STORAGE_KEY = 'tarot_session_readings';

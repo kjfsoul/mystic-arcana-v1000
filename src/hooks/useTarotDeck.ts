@@ -33,7 +33,9 @@ interface UseTarotDeckState {
   error: string | null;
   refetch: () => Promise<void>;
   shuffleCards: () => TarotCard[];
+  // eslint-disable-next-line no-unused-vars
   drawCards: (count: number) => TarotCard[];
+  // eslint-disable-next-line no-unused-vars
   getCardById: (id: string) => TarotCard | undefined;
   majorArcana: TarotCard[];
   minorArcana: TarotCard[];

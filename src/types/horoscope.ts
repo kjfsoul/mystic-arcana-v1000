@@ -1,16 +1,6 @@
-export type ZodiacSign = 
-  | 'aries' 
-  | 'taurus' 
-  | 'gemini' 
-  | 'cancer' 
-  | 'leo' 
-  | 'virgo' 
-  | 'libra' 
-  | 'scorpio' 
-  | 'sagittarius' 
-  | 'capricorn' 
-  | 'aquarius' 
-  | 'pisces';
+import { ZodiacSign } from '@/constants/AstrologyConstants';
+import { EnergyLevel } from '@/constants/EventTypes';
+
 export interface ZodiacInfo {
   sign: ZodiacSign;
   name: string;
@@ -25,7 +15,7 @@ export interface DailyHoroscope {
   date: string;
   general: {
     overview: string;
-    energy: 'high' | 'medium' | 'low';
+    energy: EnergyLevel;
     mood: string;
     luckyNumbers: number[];
     luckyColor: string;

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Star, Zap, Eye, Heart } from 'lucide-react';
 import { TransitEngine, DailyTransit, PersonalizedHoroscope } from '@/lib/ephemeris/transitEngine';
 import { BirthData } from '../../types/astrology';
-import { useAuth } from '@/contexts/AuthContext';
+// import { useAuth } from '@/contexts/AuthContext'; // Removed unused import
 interface CosmicCalendarProps {
   birthData?: BirthData;
   className?: string;
@@ -19,7 +19,7 @@ interface CalendarDay {
   lunarPhase: string;
 }
 export default function CosmicCalendar({ birthData, className = '' }: CosmicCalendarProps) {
-  const {} = useAuth();
+  // const {} = useAuth(); // Removed unused auth destructuring
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dailyTransit, setDailyTransit] = useState<DailyTransit | null>(null);

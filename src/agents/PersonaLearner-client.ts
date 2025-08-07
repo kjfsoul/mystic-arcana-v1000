@@ -20,6 +20,7 @@ export interface EngagementAnalysis {
 }
 export class PersonaLearnerAgentClient {
   async getEngagementAnalysis(userId: string): Promise<EngagementAnalysis> {
+    void userId; // Indicate intentional unused variable
     // In client mode, return mock data or fetch from API
     // This would typically call an API endpoint that handles the actual analysis
     return {

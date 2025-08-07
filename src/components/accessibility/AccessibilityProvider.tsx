@@ -9,12 +9,14 @@ interface AccessibilitySettings {
   keyboardNavigation: boolean;
   announcements: boolean;
 }
+/* eslint-disable no-unused-vars */
 interface AccessibilityContextType {
   settings: AccessibilitySettings;
-  updateSetting: (key: keyof AccessibilitySettings, value: AccessibilitySettings[keyof AccessibilitySettings]) => void;
-  announce: (message: string, priority?: 'polite' | 'assertive') => void;
-  focusElement: (selector: string) => boolean;
+  updateSetting(key: keyof AccessibilitySettings, value: AccessibilitySettings[keyof AccessibilitySettings]): void;
+  announce(message: string, priority?: 'polite' | 'assertive'): void;
+  focusElement(selector: string): boolean;
 }
+/* eslint-enable no-unused-vars */
 const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);

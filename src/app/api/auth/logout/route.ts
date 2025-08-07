@@ -1,9 +1,9 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient as _createClient } from "@/lib/supabase/server";
 import Logger from "@/utils/logger";
 import { NextResponse } from "next/server";
 const logger = new Logger("AuthLogoutAPI");
 export async function POST() {
-  const supabase = await createClient();
+  const supabase = await _createClient();
   try {
     const { error } = await supabase.auth.signOut();
     if (error) {

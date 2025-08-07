@@ -2,7 +2,7 @@
  
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Save, Feather, Scroll, Check, AlertCircle } from 'lucide-react';
+import { X, /* Save, Feather, Scroll, */ Check, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase/client';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
@@ -16,10 +16,42 @@ interface CosmicJournalEntryProps {
   question?: string;
 }
 const writingQuills = [
-  { id: 'phoenix', name: 'Phoenix Feather', icon: '🔥', color: 'from-orange-500 to-red-600', description: 'Fiery insights' },
-  { id: 'swan', name: 'Swan Quill', icon: '🦢', color: 'from-blue-400 to-purple-500', description: 'Graceful wisdom' },
-  { id: 'eagle', name: 'Eagle Plume', icon: '🦅', color: 'from-yellow-500 to-amber-600', description: 'Soaring vision' },
-  { id: 'mystic', name: 'Mystic Ink', icon: '✨', color: 'from-purple-500 to-pink-600', description: 'Magical clarity' },
+  { 
+    id: 'phoenix', 
+    name: 'Phoenix Feather', 
+    icon: '🔥', 
+    color: 'from-orange-500 to-red-600', 
+    description: 'Fiery insights',
+    textTransform: 'passionate',
+    cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' fill=\'%23f97316\'><text y=\'20\' font-size=\'20\'>🔥</text></svg>") 16 16, text'
+  },
+  { 
+    id: 'swan', 
+    name: 'Swan Quill', 
+    icon: '🦢', 
+    color: 'from-blue-400 to-purple-500', 
+    description: 'Graceful wisdom',
+    textTransform: 'elegant',
+    cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' fill=\'%2360a5fa\'><text y=\'20\' font-size=\'20\'>🦢</text></svg>") 16 16, text'
+  },
+  { 
+    id: 'eagle', 
+    name: 'Eagle Plume', 
+    icon: '🦅', 
+    color: 'from-yellow-500 to-amber-600', 
+    description: 'Soaring vision',
+    textTransform: 'bold',
+    cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' fill=\'%23eab308\'><text y=\'20\' font-size=\'20\'>🦅</text></svg>") 16 16, text'
+  },
+  { 
+    id: 'mystic', 
+    name: 'Mystic Ink', 
+    icon: '✨', 
+    color: 'from-purple-500 to-pink-600', 
+    description: 'Magical clarity',
+    textTransform: 'mystical',
+    cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' fill=\'%23a855f7\'><text y=\'20\' font-size=\'20\'>✨</text></svg>") 16 16, text'
+  },
 ];
 export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
   isOpen,
@@ -145,19 +177,62 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
   };
   const getQuillStyles = (quillId: string) => {
     const quill = writingQuills.find(q => q.id === quillId);
-    if (!quill) return '';
+    if (!quill) return { className: '', style: {} };
+    
+    const baseStyle = {
+      cursor: quill.cursor,
+      transition: 'all 0.3s ease',
+    };
     
     switch (quillId) {
       case 'phoenix':
-        return 'text-orange-500';
+        return {
+          className: 'text-orange-500',
+          style: {
+            ...baseStyle,
+            fontWeight: 'bold',
+            textShadow: '0 0 10px rgba(249, 115, 22, 0.5)',
+            fontSize: '1.05em',
+            letterSpacing: '0.02em'
+          }
+        };
       case 'swan':
-        return 'text-blue-400';
+        return {
+          className: 'text-blue-400',
+          style: {
+            ...baseStyle,
+            fontStyle: 'italic',
+            fontFamily: 'serif',
+            textShadow: '0 0 8px rgba(96, 165, 250, 0.4)',
+            lineHeight: '1.7'
+          }
+        };
       case 'eagle':
-        return 'text-yellow-500';
+        return {
+          className: 'text-yellow-500',
+          style: {
+            ...baseStyle,
+            fontWeight: '600',
+            textTransform: 'uppercase' as const,
+            textShadow: '0 0 12px rgba(234, 179, 8, 0.6)',
+            letterSpacing: '0.05em'
+          }
+        };
       case 'mystic':
-        return 'text-purple-500';
+        return {
+          className: 'text-purple-500',
+          style: {
+            ...baseStyle,
+            fontFamily: 'fantasy',
+            textShadow: '0 0 15px rgba(168, 85, 247, 0.7)',
+            background: 'linear-gradient(45deg, #a855f7, #ec4899)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontSize: '1.02em'
+          }
+        };
       default:
-        return 'text-gray-400';
+        return { className: 'text-gray-400', style: baseStyle };
     }
   };
   if (!isOpen) return null;
@@ -221,7 +296,8 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                   value={interpretation}
                   onChange={(e) => setInterpretation(e.target.value)}
                   placeholder="What wisdom does this card reveal to you?"
-                  className={`${styles.textarea} ${getQuillStyles(selectedQuill)}`}
+                  className={`${styles.textarea} ${getQuillStyles(selectedQuill).className}`}
+                  style={getQuillStyles(selectedQuill).style}
                   rows={4}
                 />
                 <span className={styles.quillWatermark}>
@@ -245,7 +321,8 @@ export const CosmicJournalEntry: React.FC<CosmicJournalEntryProps> = ({
                   value={additionalNotes}
                   onChange={(e) => setAdditionalNotes(e.target.value)}
                   placeholder="Any additional thoughts, emotions, or mystical observations..."
-                  className={`${styles.textarea} ${getQuillStyles(selectedQuill)}`}
+                  className={`${styles.textarea} ${getQuillStyles(selectedQuill).className}`}
+                  style={getQuillStyles(selectedQuill).style}
                   rows={3}
                 />
               </div>

@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { useAccessibility } from '../../../utils/accessibility/useAccessibility';
 import styles from './ReaderChat.module.css';
 interface ReaderChatProps {
-  onSendMessage: (message: string) => void;
+  onSendMessage: (_message: string) => void;
   disabled?: boolean;
   placeholder?: string;
   className?: string;

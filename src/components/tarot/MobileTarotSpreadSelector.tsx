@@ -12,7 +12,7 @@ interface Spread {
   difficulty: 'beginner' | 'intermediate' | 'advanced';
 }
 interface MobileTarotSpreadSelectorProps {
-  onSelectSpread: (spread: SpreadType) => void;
+  onSelectSpread: (_spread: SpreadType) => void;
   className?: string;
 }
 export const MobileTarotSpreadSelector: React.FC<MobileTarotSpreadSelectorProps> = ({

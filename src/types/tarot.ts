@@ -1,15 +1,17 @@
+import { ArcanaType, TarotCardPosition } from '@/constants/EventTypes';
+
 export interface TarotCard {
   id: string;
   name: string;
-  arcana: 'major' | 'minor';
-  arcana_type?: 'major' | 'minor'; // Compatibility alias
+  arcana: ArcanaType;
+  arcana_type?: ArcanaType; // Compatibility alias
   suit?: 'cups' | 'pentacles' | 'swords' | 'wands';
   number?: number;
   card_number?: number; // Compatibility alias
   frontImage: string;
   backImage: string;
   image_url?: string; // Compatibility alias
-  position?: 'upright' | 'reversed'; // For positioned readings
+  position?: TarotCardPosition; // For positioned readings
   keywords?: string[]; // Direct keywords property
   meaning: {
     upright: string;
@@ -22,7 +24,7 @@ export interface TarotCard {
   description: string;
   isReversed?: boolean;
 }
-export type SpreadType = 'single' | 'three-card' | 'celtic-cross';
+export type SpreadType = 'single' | 'three-card' | 'celtic-cross' | 'horseshoe' | 'relationship' | 'custom';
 export interface TarotDeck {
   id: string;
   name: string;

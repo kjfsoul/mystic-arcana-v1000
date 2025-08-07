@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    const supabase = await createClient();
+    const supabase = await _createClient();
     
     const { data, error } = await supabase.auth.signInWithPassword({
       email,

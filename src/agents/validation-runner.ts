@@ -152,7 +152,7 @@ export class ValidationRunnerAgent extends Agent {
   // @log_invocation(event_type="test_file_creation", user_id="system")
   async createValidationTestFile(outputPath: string = 'tests/astrology/validation.ts'): Promise<boolean> {
     try {
-      const testFileContent = this.generateTestFileContent();
+      // const testFileContent = this.generateTestFileContent();
       
       // TODO: Write test file to specified path
       // TODO: Ensure proper Jest configuration
@@ -171,11 +171,12 @@ export class ValidationRunnerAgent extends Agent {
   // @log_invocation(event_type="regression_testing", user_id="system")
   async runRegressionTests(): Promise<RegressionReport> {
     try {
-      const startTime = Date.now();
+      // const startTime = Date.now();
       const results: ValidationResult[] = [];
       
       // Run all test cases
       for (const [testId, testCase] of this.testSuite) {
+        void testId; // Indicate intentional unused variable
         const result = await this.executeTestCase(testCase);
         results.push(result);
       }
@@ -322,6 +323,9 @@ describe('Astrological Calculations Validation', () => {
   });`;
   }
   private async getReferencePosition(planet: string, date: string, coordinates: any): Promise<any> {
+    void planet; // Indicate intentional unused variable
+    void date; // Indicate intentional unused variable
+    void coordinates; // Indicate intentional unused variable
     // TODO: Fetch from reference ephemeris data
     return { longitude: 0, latitude: 0, distance: 1 };
   }
@@ -341,14 +345,18 @@ describe('Astrological Calculations Validation', () => {
     return tolerances[planet] || 0.1;
   }
   private calculateDeviation(actual: any, expected: any): number {
+    void actual; // Indicate intentional unused variable
+    void expected; // Indicate intentional unused variable
     // TODO: Implement sophisticated deviation calculation
     return 0;
   }
   private detectRegressions(results: ValidationResult[]): ValidationResult[] {
+    void results; // Indicate intentional unused variable
     // TODO: Compare with last results to detect regressions
     return [];
   }
   private detectImprovements(results: ValidationResult[]): ValidationResult[] {
+    void results; // Indicate intentional unused variable
     // TODO: Compare with last results to detect improvements
     return [];
   }

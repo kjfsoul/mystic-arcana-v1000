@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { geocodeLocation, getSuggestions, getPopularLocations, LocationResult } from '@/lib/location/GeocodingService';
 import styles from './LocationSearch.module.css';
+/* eslint-disable no-unused-vars */
 interface LocationSearchProps {
   value?: LocationResult | null;
   onChange: (location: LocationResult | null) => void;
@@ -12,6 +13,7 @@ interface LocationSearchProps {
   error?: string;
   className?: string;
 }
+/* eslint-enable no-unused-vars */
 export const LocationSearch: React.FC<LocationSearchProps> = ({
   value,
   onChange,

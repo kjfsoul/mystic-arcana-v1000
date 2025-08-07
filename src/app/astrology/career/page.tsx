@@ -14,7 +14,7 @@ interface UserProfile {
   longitude: number | null;
 }
 export default function CareerPage() {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [, setProfile] = useState<UserProfile | null>(null);
   const [birthData, setBirthData] = useState<BirthData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -70,9 +70,7 @@ export default function CareerPage() {
     }
     loadUserProfile();
   }, []);
-  const handleBack = () => {
-    window.history.back();
-  };
+  // handleBack function removed - using inline back navigation
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">

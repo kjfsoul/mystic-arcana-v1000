@@ -1,0 +1,320 @@
+
+> mystic_arcana_v1000@0.1.0 lint
+> eslint . --max-warnings=1000 || true
+
+
+/Users/kfitz/mystic-arcana-v1000/src/components/modals/SaveReadingModal.tsx
+  29:12  error  '_reading' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/panels/AstrologyZonePreview.tsx
+   8:20  error  '_onSelectFeature' is defined but never used  no-unused-vars
+  47:28  error  'onSelectFeature' is not defined              no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/panels/TarotZonePreview.tsx
+   8:20  error  '_onSelectReading' is defined but never used  no-unused-vars
+  38:30  error  'onSelectReading' is not defined              no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/readers/ReaderChat/ReaderChat.tsx
+  6:19  error  '_message' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/readers/VirtualReader/VirtualReader.tsx
+   27:17  error  '_onMoodChange' is defined but never used  no-unused-vars
+  132:28  error  'onMoodChange' is not defined              no-undef
+  140:28  error  'onMoodChange' is not defined              no-undef
+  148:28  error  'onMoodChange' is not defined              no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/readings/InteractivePrompt.tsx
+  14:17  error  'response' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/settings/AstronomicalSettings/AstronomicalSettings.tsx
+  8:23  error  'settings' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/ApiDrivenTarotPanel.tsx
+  14:24  error  'reading' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/CardSelectionSpreadUI.tsx
+  19:22  error  'spreadType' is defined but never used  no-unused-vars
+  20:20  error  'spreadType' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/DynamicInterpretationPanel.tsx
+  38:19  error  '_card' is defined but never used      no-unused-vars
+  38:37  error  '_position' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/EnhancedTarotPanel.tsx
+   15:24  error  'cards' is defined but never used                        no-unused-vars
+   15:44  error  'interpretation' is defined but never used               no-unused-vars
+   20:22  error  '_showDeckSelection' is assigned a value but never used  no-unused-vars
+   22:22  error  '_onReadingComplete' is defined but never used           no-unused-vars
+   30:26  error  '_setSelectedDeckId' is assigned a value but never used  no-unused-vars
+   38:12  error  '_cards' is assigned a value but never used              no-unused-vars
+   43:16  error  '_drawCards' is assigned a value but never used          no-unused-vars
+   65:19  error  'drawCards' is not defined                               no-undef
+   73:27  error  'drawCards' is not defined                               no-undef
+   95:28  error  'cards' is not defined                                   no-undef
+  100:24  error  'cards' is not defined                                   no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/EnhancedTarotSpreadLayouts.tsx
+   19:18   error  '_card' is defined but never used                         no-unused-vars
+   19:36   error  '_index' is defined but never used                        no-unused-vars
+   28:16   error  '_onCardClick' is defined but never used                  no-unused-vars
+   31:20   error  '_customPositions' is assigned a value but never used     no-unused-vars
+   35:10   error  '_connectionLines' is assigned a value but never used     no-unused-vars
+   35:28   error  '_setConnectionLines' is assigned a value but never used  no-unused-vars
+   36:10   error  '_energyFlow' is assigned a value but never used          no-unused-vars
+   36:23   error  '_setEnergyFlow' is assigned a value but never used       no-unused-vars
+   42:9    error  'setEnergyFlow' is not defined                            no-undef
+   51:7    error  'setConnectionLines' is not defined                       no-undef
+   56:7    error  'setConnectionLines' is not defined                       no-undef
+  102:17   error  'customPositions' is not defined                          no-undef
+  109:5    error  'onCardClick' is not defined                              no-undef
+  114:12   error  'connectionLines' is not defined                          no-undef
+  171:66   error  'energyFlow' is not defined                               no-undef
+  171:115  error  'energyFlow' is not defined                               no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/MobileTarotReader.tsx
+   2:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+   7:10  error    'SpreadType' is defined but never used                                                                no-unused-vars
+  13:14  error    'cards' is defined but never used                                                                     no-unused-vars
+  13:34  error    'image' is defined but never used                                                                     no-unused-vars
+  19:3   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  20:3   error    'onShare' is defined but never used                                                                   no-unused-vars
+  29:3   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  30:10  error    'isPortrait' is assigned a value but never used                                                       no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/MobileTarotSpreadSelector.tsx
+  15:20  error  '_spread' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/TarotPanelWithSaveModal.tsx
+  15:22  error  '_onReadingComplete' is defined but never used   no-unused-vars
+  19:10  error  '_isSaving' is assigned a value but never used   no-unused-vars
+  19:21  error  '_setSaving' is assigned a value but never used  no-unused-vars
+  24:5   error  'setSaving' is not defined                       no-undef
+  44:7   error  'setSaving' is not defined                       no-undef
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/TarotReadingFlow.tsx
+  10:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  14:17  error    'cards' is defined but never used                                                                     no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/TarotSpreadLayouts.tsx
+   6:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  12:18  error    'card' is defined but never used                                                                      no-unused-vars
+  12:35  error    'index' is defined but never used                                                                     no-unused-vars
+  19:3   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+
+/Users/kfitz/mystic-arcana-v1000/src/components/tarot/UnifiedTarotPanelV2.tsx
+   27:18  error    'cards' is defined but never used                                                                     no-unused-vars
+   27:38  error    'interpretation' is defined but never used                                                            no-unused-vars
+  130:3   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  150:22  error    'setShowSophia' is assigned a value but never used                                                    no-unused-vars
+  185:9   error    'generateInterpretationForFlippedCards' is assigned a value but never used                            no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/components/timeline/UserTimeline.tsx
+   4:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  17:21  error    'events' is defined but never used                                                                    no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/crew/agents.ts
+  434:15  error  'data' is assigned a value but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/crew/runner.ts
+  233:48  error  '_params' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/ag-ui/agent.ts
+  1:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  3:22  error    'id' is defined but never used                                                                        no-unused-vars
+  3:41  error    'name' is defined but never used                                                                      no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astro/nasaClient.ts
+  2:1  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  5:8  error    'path' is defined but never used                                                                      no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astro/nasaFallbackHandler.ts
+  3:8  error  'path' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astrology/BirthChartCalculator.ts
+  2:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  6:25  error    'swissEphemeris' is defined but never used                                                            no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astrology/SwissEphemerisShim.ts
+  2:1  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astrology/SynastryCalculator.ts
+    1:1    warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  159:53   error    '_planets1' is defined but never used                                                                 no-unused-vars
+  159:82   error    '_planets2' is defined but never used                                                                 no-unused-vars
+  208:59   error    '_planets1' is defined but never used                                                                 no-unused-vars
+  208:88   error    '_planets2' is defined but never used                                                                 no-unused-vars
+  250:57   error    '_planets1' is defined but never used                                                                 no-unused-vars
+  250:86   error    '_planets2' is defined but never used                                                                 no-unused-vars
+  283:44   error    '_aspects' is defined but never used                                                                  no-unused-vars
+  294:50   error    '_aspects' is defined but never used                                                                  no-unused-vars
+  305:48   error    '_aspects' is defined but never used                                                                  no-unused-vars
+  411:100  error    '_keyAspects' is defined but never used                                                               no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astrology/interpretations/career.ts
+    1:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+    2:52  error    'AspectData' is defined but never used                                                                no-unused-vars
+   92:11  error    'sixthHouse' is assigned a value but never used                                                       no-unused-vars
+   93:11  error    'secondHouse' is assigned a value but never used                                                      no-unused-vars
+  151:5   error    'sunPosition' is defined but never used                                                               no-unused-vars
+  166:55  error    'houses' is defined but never used                                                                    no-unused-vars
+  194:56  error    'houses' is defined but never used                                                                    no-unused-vars
+  239:60  error    'houses' is defined but never used                                                                    no-unused-vars
+  260:59  error    'houses' is defined but never used                                                                    no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astronomy/AstronomicalEngine.ts
+  13:1  error  Parsing error: Expression expected
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/astronomy/CosmicWeatherAPI.ts
+   54:13  error  'planets' is assigned a value but never used  no-unused-vars
+  118:42  error  '_planets' is defined but never used          no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/ephemeris/transitEngine.ts
+    5:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+    8:41  error    'HouseSystem' is defined but never used                                                               no-unused-vars
+  128:14  error    'error' is defined but never used                                                                     no-unused-vars
+  160:49  error    'targetDate' is assigned a value but never used                                                       no-unused-vars
+  317:14  error    'error' is defined but never used                                                                     no-unused-vars
+  416:67  error    'dailyTransit' is defined but never used                                                              no-unused-vars
+  498:11  error    'times' is assigned a value but never used                                                            no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/knowledge/LovePrompts.ts
+    5:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  259:5   error    'person2Moon' is defined but never used                                                               no-unused-vars
+  260:5   error    'synastryAspects' is defined but never used                                                           no-unused-vars
+  266:11  error    'person2VenusElement' is assigned a value but never used                                              no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/lib/mem/memoryLogger.ts
+  150:17  error  '_key' is assigned a value but never used  no-unused-vars
+  164:17  error  'key' is assigned a value but never used   no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/services/ProfileDataService.ts
+   20:27  error  'profile' is defined but never used  no-unused-vars
+  119:24  error  'profile' is defined but never used  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/services/astronomical/AstronomicalEngine.ts
+    7:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+   27:14  error    'config' is defined but never used                                                                    no-unused-vars
+   28:23  error    'location' is defined but never used                                                                  no-unused-vars
+   30:19  error    'catalog' is defined but never used                                                                   no-unused-vars
+   31:19  error    'time' is defined but never used                                                                      no-unused-vars
+   31:31  error    'renderConfig' is defined but never used                                                              no-unused-vars
+   34:5   error    'ra' is defined but never used                                                                        no-unused-vars
+   35:5   error    'dec' is defined but never used                                                                       no-unused-vars
+   36:5   error    'location' is defined but never used                                                                  no-unused-vars
+   37:5   error    'time' is defined but never used                                                                      no-unused-vars
+   40:5   error    'coords' is defined but never used                                                                    no-unused-vars
+   41:5   error    'location' is defined but never used                                                                  no-unused-vars
+   42:5   error    'time' is defined but never used                                                                      no-unused-vars
+   45:25  error    'time' is defined but never used                                                                      no-unused-vars
+   45:37  error    'location' is defined but never used                                                                  no-unused-vars
+   46:21  error    'planet' is defined but never used                                                                    no-unused-vars
+   46:37  error    'time' is defined but never used                                                                      no-unused-vars
+   46:49  error    'location' is defined but never used                                                                  no-unused-vars
+   48:20  error    'planets' is defined but never used                                                                   no-unused-vars
+   49:21  error    'planet' is defined but never used                                                                    no-unused-vars
+   49:37  error    'timeRange' is defined but never used                                                                 no-unused-vars
+   50:19  error    'time' is defined but never used                                                                      no-unused-vars
+   50:31  error    'location' is defined but never used                                                                  no-unused-vars
+   50:54  error    'system' is defined but never used                                                                    no-unused-vars
+   52:16  error    'time' is defined but never used                                                                      no-unused-vars
+   53:19  error    'time' is defined but never used                                                                      no-unused-vars
+   53:31  error    'location' is defined but never used                                                                  no-unused-vars
+   55:23  error    'epoch' is defined but never used                                                                     no-unused-vars
+   55:36  error    'targetDate' is defined but never used                                                                no-unused-vars
+   56:17  error    'location' is defined but never used                                                                  no-unused-vars
+   56:40  error    'time' is defined but never used                                                                      no-unused-vars
+   62:26  error    'time' is defined but never used                                                                      no-unused-vars
+   63:20  error    'time' is defined but never used                                                                      no-unused-vars
+   63:32  error    'location' is defined but never used                                                                  no-unused-vars
+   65:19  error    'date' is defined but never used                                                                      no-unused-vars
+   66:19  error    'jd' is defined but never used                                                                        no-unused-vars
+   67:19  error    'time' is defined but never used                                                                      no-unused-vars
+   67:31  error    'longitude' is defined but never used                                                                 no-unused-vars
+   69:24  error    'startDate' is defined but never used                                                                 no-unused-vars
+   69:41  error    'endDate' is defined but never used                                                                   no-unused-vars
+  239:27  error    '_planet' is defined but never used                                                                   no-unused-vars
+  239:44  error    '_timeRange' is defined but never used                                                                no-unused-vars
+  244:19  error    '_time' is defined but never used                                                                     no-unused-vars
+  244:32  error    '_location' is defined but never used                                                                 no-unused-vars
+  244:56  error    '_system' is defined but never used                                                                   no-unused-vars
+  249:22  error    '_time' is defined but never used                                                                     no-unused-vars
+  254:25  error    '_time' is defined but never used                                                                     no-unused-vars
+  254:38  error    '_location' is defined but never used                                                                 no-unused-vars
+  259:23  error    '_epoch' is defined but never used                                                                    no-unused-vars
+  259:37  error    '_targetDate' is defined but never used                                                               no-unused-vars
+  298:23  error    '_location' is defined but never used                                                                 no-unused-vars
+  298:47  error    '_time' is defined but never used                                                                     no-unused-vars
+  307:32  error    '_time' is defined but never used                                                                     no-unused-vars
+  312:20  error    '_time' is defined but never used                                                                     no-unused-vars
+  312:33  error    '_location' is defined but never used                                                                 no-unused-vars
+  338:19  error    '_time' is defined but never used                                                                     no-unused-vars
+  338:32  error    '_longitude' is defined but never used                                                                no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/types/astronomical.ts
+    6:1  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+   82:3  error    'SUN' is defined but never used                                                                       no-unused-vars
+   83:3  error    'MOON' is defined but never used                                                                      no-unused-vars
+   84:3  error    'MERCURY' is defined but never used                                                                   no-unused-vars
+   85:3  error    'VENUS' is defined but never used                                                                     no-unused-vars
+   86:3  error    'MARS' is defined but never used                                                                      no-unused-vars
+   87:3  error    'JUPITER' is defined but never used                                                                   no-unused-vars
+   88:3  error    'SATURN' is defined but never used                                                                    no-unused-vars
+   89:3  error    'URANUS' is defined but never used                                                                    no-unused-vars
+   90:3  error    'NEPTUNE' is defined but never used                                                                   no-unused-vars
+   91:3  error    'PLUTO' is defined but never used                                                                     no-unused-vars
+   92:3  error    'CHIRON' is defined but never used                                                                    no-unused-vars
+   93:3  error    'NORTH_NODE' is defined but never used                                                                no-unused-vars
+   94:3  error    'SOUTH_NODE' is defined but never used                                                                no-unused-vars
+   98:3  error    'ARIES' is defined but never used                                                                     no-unused-vars
+   99:3  error    'TAURUS' is defined but never used                                                                    no-unused-vars
+  100:3  error    'GEMINI' is defined but never used                                                                    no-unused-vars
+  101:3  error    'CANCER' is defined but never used                                                                    no-unused-vars
+  102:3  error    'LEO' is defined but never used                                                                       no-unused-vars
+  103:3  error    'VIRGO' is defined but never used                                                                     no-unused-vars
+  104:3  error    'LIBRA' is defined but never used                                                                     no-unused-vars
+  105:3  error    'SCORPIO' is defined but never used                                                                   no-unused-vars
+  106:3  error    'SAGITTARIUS' is defined but never used                                                               no-unused-vars
+  107:3  error    'CAPRICORN' is defined but never used                                                                 no-unused-vars
+  108:3  error    'AQUARIUS' is defined but never used                                                                  no-unused-vars
+  109:3  error    'PISCES' is defined but never used                                                                    no-unused-vars
+  127:3  error    'CONJUNCTION' is defined but never used                                                               no-unused-vars
+  128:3  error    'OPPOSITION' is defined but never used                                                                no-unused-vars
+  129:3  error    'TRINE' is defined but never used                                                                     no-unused-vars
+  130:3  error    'SQUARE' is defined but never used                                                                    no-unused-vars
+  131:3  error    'SEXTILE' is defined but never used                                                                   no-unused-vars
+  132:3  error    'QUINCUNX' is defined but never used                                                                  no-unused-vars
+  133:3  error    'SEMISEXTILE' is defined but never used                                                               no-unused-vars
+  134:3  error    'SEMISQUARE' is defined but never used                                                                no-unused-vars
+  135:3  error    'SESQUIQUADRATE' is defined but never used                                                            no-unused-vars
+  165:3  error    'NEW_MOON' is defined but never used                                                                  no-unused-vars
+  166:3  error    'WAXING_CRESCENT' is defined but never used                                                           no-unused-vars
+  167:3  error    'FIRST_QUARTER' is defined but never used                                                             no-unused-vars
+  168:3  error    'WAXING_GIBBOUS' is defined but never used                                                            no-unused-vars
+  169:3  error    'FULL_MOON' is defined but never used                                                                 no-unused-vars
+  170:3  error    'WANING_GIBBOUS' is defined but never used                                                            no-unused-vars
+  171:3  error    'LAST_QUARTER' is defined but never used                                                              no-unused-vars
+  172:3  error    'WANING_CRESCENT' is defined but never used                                                           no-unused-vars
+  250:3  error    'CALM' is defined but never used                                                                      no-unused-vars
+  251:3  error    'ACTIVE' is defined but never used                                                                    no-unused-vars
+  252:3  error    'TURBULENT' is defined but never used                                                                 no-unused-vars
+  253:3  error    'TRANSFORMATIVE' is defined but never used                                                            no-unused-vars
+  254:3  error    'ECLIPSE' is defined but never used                                                                   no-unused-vars
+  255:3  error    'MERCURY_RETROGRADE' is defined but never used                                                        no-unused-vars
+  256:3  error    'FULL_MOON' is defined but never used                                                                 no-unused-vars
+  257:3  error    'NEW_MOON' is defined but never used                                                                  no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/types/global.d.ts
+  1:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  3:13  error    'Window' is defined but never used                                                                    no-unused-vars
+  8:13  error    'Global' is defined but never used                                                                    no-unused-vars
+
+/Users/kfitz/mystic-arcana-v1000/src/utils/logger.ts
+  2:1  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')
+  4:3  error    'DEBUG' is defined but never used                                                                     no-unused-vars
+  5:3  error    'INFO' is defined but never used                                                                      no-unused-vars
+  6:3  error    'WARN' is defined but never used                                                                      no-unused-vars
+  7:3  error    'ERROR' is defined but never used                                                                     no-unused-vars
+
+✖ 236 problems (216 errors, 20 warnings)
+  0 errors and 20 warnings potentially fixable with the `--fix` option.
+

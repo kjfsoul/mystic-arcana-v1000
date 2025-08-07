@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist-test",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "scripts/test-supermemory-mcp.ts",
+    "src/agents/PersonaLearner.ts",
+    "src/agents/sophia.ts",
+    "src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+    "src/lib/supabase/server.ts",
+    "src/types/tarot.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

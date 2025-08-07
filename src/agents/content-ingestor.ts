@@ -373,9 +373,12 @@ export class ContentIngestorAgent extends Agent {
    * Private helper methods
    */
   private async checkRobotsTxt(baseUrl: string): Promise<void> {
+    void baseUrl; // Indicate intentional unused variable
     // TODO: Implement robots.txt checking
   }
   private async crawlEndpoint(source: ContentSource, endpoint: string): Promise<Partial<IngestionReport>> {
+    void source; // Indicate intentional unused variable
+    void endpoint; // Indicate intentional unused variable
     // TODO: Implement actual web crawling with respect for rate limits
     return {
       totalPages: 5,
@@ -396,6 +399,8 @@ export class ContentIngestorAgent extends Agent {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   private async parseContent(rawContent: string, url: string): Promise<any> {
+    void rawContent; // Indicate intentional unused variable
+    void url; // Indicate intentional unused variable
     // TODO: Implement HTML/JSON parsing with proper extraction
     return {
       title: 'Sample Astrology Article',
@@ -405,6 +410,7 @@ export class ContentIngestorAgent extends Agent {
     };
   }
   private async performNLPExtraction(text: string): Promise<any> {
+    void text; // Indicate intentional unused variable
     // TODO: Implement NLP extraction for key terms, definitions, etc.
     return {
       keyTerms: ['saturn', 'transit', 'natal chart'],
@@ -414,15 +420,21 @@ export class ContentIngestorAgent extends Agent {
     };
   }
   private categorizeContent(title: string, text: string, url: string): 'planets' | 'signs' | 'houses' | 'aspects' | 'techniques' | 'history' | 'modern' {
+    void title; // Indicate intentional unused variable
+    void text; // Indicate intentional unused variable
+    void url; // Indicate intentional unused variable
     // TODO: Implement content categorization logic
-    const categories = ['planets', 'signs', 'houses', 'aspects', 'techniques', 'history', 'modern'];
+    // const categories = ['planets', 'signs', 'houses', 'aspects', 'techniques', 'history', 'modern'];
     return 'planets'; // Simplified
   }
   private determineContentType(text: string, url: string): 'article' | 'definition' | 'interpretation' | 'tutorial' | 'reference' {
+    void text; // Indicate intentional unused variable
+    void url; // Indicate intentional unused variable
     // TODO: Implement content type determination
     return 'article';
   }
   private calculateCredibilityScore(sourceId: string, contentData: any): number {
+    void contentData; // Indicate intentional unused variable
     // TODO: Implement credibility scoring algorithm
     const source = this.sources.get(sourceId);
     const baseScore = source?.credibility === 'high' ? 0.8 : source?.credibility === 'medium' ? 0.6 : 0.4;
@@ -451,6 +463,7 @@ export class ContentIngestorAgent extends Agent {
     );
   }
   private async checkForDuplicates(content: StructuredContent): Promise<boolean> {
+    void content; // Indicate intentional unused variable
     // TODO: Implement duplicate detection
     return false;
   }

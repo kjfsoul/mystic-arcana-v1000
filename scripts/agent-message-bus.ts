@@ -346,7 +346,7 @@ if (require.main === module) {
       console.log(JSON.stringify(messageBus.getStats(), null, 2));
       break;
       
-    case 'messages':
+    case 'messages': {
       const agentId = args[1];
       if (!agentId) {
         console.error('Usage: agent-message-bus.ts messages <agentId>');
@@ -356,8 +356,9 @@ if (require.main === module) {
       console.log(`Messages for ${agentId}:`);
       console.log(JSON.stringify(messages, null, 2));
       break;
+    }
       
-    case 'broadcast':
+    case 'broadcast': {
       const from = args[1];
       const type = args[2];
       const message = args[3];
@@ -368,6 +369,7 @@ if (require.main === module) {
       const msgId = messageBus.broadcast(from, type, { message });
       console.log(`Broadcast sent: ${msgId}`);
       break;
+    }
       
     default:
       console.log('Available commands:');

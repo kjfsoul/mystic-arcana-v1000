@@ -9,9 +9,16 @@ const config: Config.InitialOptions = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/tests/e2e/'],
   transform: {
-    '^.+\.(ts|tsx)$': 'ts-jest',
+    '^.+\.(ts|tsx)$' : 'ts-jest',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(cheerio|.*\\.mjs$))'
+  ],
+  globals: {
+    'ts-jest': {
+      useESM: true
+    }
+  }
 };
 
 export default config;
-

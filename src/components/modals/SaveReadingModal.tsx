@@ -1,13 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Save, Feather, Scroll, Check } from 'lucide-react';
+import { X, Feather, Scroll, Check, Save } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { TarotReading } from '@/lib/tarot/TarotEngine';
 interface SaveReadingModalProps {
   isOpen: boolean;
   onClose: () => void;
   reading: TarotReading;
+  // eslint-disable-next-line no-unused-vars
   onSave: (notes: string, isPublic: boolean) => Promise<void>;
 }
 const quillStyles = [

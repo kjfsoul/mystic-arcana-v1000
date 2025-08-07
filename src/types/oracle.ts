@@ -2,6 +2,9 @@
  * Daily Oracle type definitions
  */
 import { BirthData } from './astrology';
+import { ArcanaType, DailySpreadType, EnergyLevel } from '@/constants/EventTypes';
+import { ZodiacSign, MoonPhase, Planet } from '@/constants/AstrologyConstants';
+
 export interface DailyOracleRequest {
   birthData: BirthData;
   userId?: string;
@@ -10,7 +13,7 @@ export interface TarotCardOracleData {
   id: string;
   name: string;
   suit?: string;
-  arcana_type: string;
+  arcana_type: ArcanaType;
   card_number: number;
   image_url: string;
   meaning_upright: string;
@@ -23,7 +26,7 @@ export interface TarotCardOracleData {
   astrological_association?: string;
 }
 export interface HoroscopeOracleData {
-  sign: string;
+  sign: ZodiacSign;
   degrees: number;
   daily: string;
   element?: string;
@@ -31,9 +34,9 @@ export interface HoroscopeOracleData {
   rulingPlanet?: string;
 }
 export interface CosmicFocusData {
-  moonPhase: string;
-  moonSign: string;
-  dominantPlanet: string;
+  moonPhase: MoonPhase;
+  moonSign: ZodiacSign;
+  dominantPlanet: Planet;
   keyAspects: string[];
   energyTheme: string;
   recommendation: string;
@@ -44,7 +47,7 @@ export interface DailySpreadCard {
   personalizedMessage: string;
 }
 export interface DailySpread {
-  type: 'daily_guidance';
+  type: DailySpreadType;
   theme: string;
   cards: {
     morning: DailySpreadCard;

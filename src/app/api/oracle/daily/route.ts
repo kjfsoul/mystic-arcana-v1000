@@ -1,17 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-import Logger from '@/utils/logger';
-import { 
-  DailyOracleRequest, 
-  DailyOracleData, 
-  DailyOracleResponse,
-  TarotCardOracleData,
-  HoroscopeOracleData,
-  CosmicFocusData,
-  DailySpread,
-  CompatibilityInsight
-} from '@/types/oracle';
+import { createClient as _createClient } from '@/lib/supabase/server';
 import { BirthData } from '@/types/astrology';
+import {
+  CompatibilityInsight,
+  CosmicFocusData,
+  DailyOracleData,
+  DailyOracleRequest,
+  DailySpread,
+  HoroscopeOracleData,
+  TarotCardOracleData
+} from '@/types/oracle';
+import Logger from '@/utils/logger';
+import { NextRequest, NextResponse } from 'next/server';
 /**
  * Daily Oracle API - Comprehensive mystical guidance combining tarot, astrology, and cosmic insights
  * 
@@ -38,7 +37,7 @@ function getTodayKey(userId?: string): string {
  */
 async function getDailyTarotSpread(): Promise<TarotCardOracleData[]> {
   try {
-    const supabase = await createClient();
+    const supabase = await _createClient();
     
     // Fetch crew deck cards (daily oracle uses crew deck)
     const { data: cardData, error } = await supabase
@@ -312,7 +311,7 @@ function generatePersonalizedInterpretation(card: TarotCardOracleData, position:
  */
 function generateOverallTheme(cards: TarotCardOracleData[], horoscope: HoroscopeOracleData, cosmic: CosmicFocusData): string {
   const cardThemes = cards.map(card => card.keywords[0]).join(', ');
-  const moonElement = cosmic.moonSign;
+  // const moonElement = cosmic.moonSign; // eslint: variable assigned but not used
   
   const themes = [
     `Today's cosmic symphony weaves ${cardThemes} through ${horoscope.sign}'s ${horoscope.element} energy under the ${cosmic.moonPhase}, creating a day of ${cosmic.energyTheme.toLowerCase()}.`,
@@ -556,7 +555,7 @@ async function Bash(command: string) {
       const process = spawn('bash', ['-c', command]);
       process.on('close', resolve);
     });
-  } catch (error) {
+  } catch {
     // Silent fail for coordination commands
   }
 }

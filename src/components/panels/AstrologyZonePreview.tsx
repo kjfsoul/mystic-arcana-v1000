@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 interface AstrologyZonePreviewProps {
+  // eslint-disable-next-line no-unused-vars
   onSelectFeature?: (feature: string) => void;
 }
 export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
-  onSelectFeature
+  onSelectFeature: _onSelectFeature
 }) => {
   const features = [
     {
@@ -43,7 +44,7 @@ export const AstrologyZonePreview: React.FC<AstrologyZonePreviewProps> = ({
           <button
             key={feature.id}
             className="bg-amber-900/10 border border-amber-600/30 rounded-lg p-4 lg:p-5 transition-all duration-300 hover:bg-amber-900/20 hover:border-amber-600/50 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-transparent flex items-center gap-3 lg:gap-4"
-            onClick={() => onSelectFeature?.(feature.id)}
+            onClick={() => _onSelectFeature?.(feature.id)}
             aria-label={`Select ${feature.name}`}
           >
             <span className="text-2xl lg:text-3xl flex-shrink-0">{feature.icon}</span>

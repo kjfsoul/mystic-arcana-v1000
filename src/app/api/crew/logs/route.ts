@@ -61,7 +61,7 @@ async function getRecentOperations(limit: number) {
     // Create directory if it doesn't exist
     try {
       await fs.mkdir(logDir, { recursive: true });
-    } catch (error) {
+    } catch {
       // Directory might already exist
     }
     const files = await fs.readdir(logDir);
@@ -90,7 +90,7 @@ async function getRecentOperations(limit: number) {
         timestamp: new Date().toISOString()
       }
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({
       success: true,
       operations: [],
@@ -105,49 +105,45 @@ async function getRecentOperations(limit: number) {
   }
 }
 async function getMemoryLogs(limit: number) {
+  const memLogFile = path.join(process.cwd(), 'A-mem', 'crew-operations.log');
+  
   try {
-    const memLogFile = path.join(process.cwd(), 'A-mem', 'crew-operations.log');
+    const logData = await fs.readFile(memLogFile, 'utf-8');
+    const lines = logData.trim().split('\n');
+    const recentLines = lines.slice(-limit);
     
-    try {
-      const logData = await fs.readFile(memLogFile, 'utf-8');
-      const lines = logData.trim().split('\n');
-      const recentLines = lines.slice(-limit);
-      
-      const logs = recentLines
-        .map(line => {
-          try {
-            return JSON.parse(line);
-          } catch (error) {
-            return { rawLine: line, parseError: true };
-          }
-        })
-        .reverse(); // Most recent first
-      return NextResponse.json({
-        success: true,
-        logs,
-        metadata: {
-          totalLines: lines.length,
-          returned: logs.length,
-          limit,
-          logFile: memLogFile,
-          timestamp: new Date().toISOString()
+    const logs = recentLines
+      .map(line => {
+        try {
+          return JSON.parse(line);
+        } catch {
+          return { rawLine: line, parseError: true };
         }
-      });
-    } catch (error) {
-      return NextResponse.json({
-        success: true,
-        logs: [],
-        metadata: {
-          totalLines: 0,
-          returned: 0,
-          limit,
-          note: 'No memory logs found - this is normal for a new system',
-          timestamp: new Date().toISOString()
-        }
-      });
-    }
-  } catch (error) {
-    throw error;
+      })
+      .reverse(); // Most recent first
+    return NextResponse.json({
+      success: true,
+      logs,
+      metadata: {
+        totalLines: lines.length,
+        returned: logs.length,
+        limit,
+        logFile: memLogFile,
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch {
+    return NextResponse.json({
+      success: true,
+      logs: [],
+      metadata: {
+        totalLines: 0,
+        returned: 0,
+        limit,
+        note: 'No memory logs found - this is normal for a new system',
+        timestamp: new Date().toISOString()
+      }
+    });
   }
 }
 // DELETE endpoint to clean up old logs

@@ -1,7 +1,7 @@
 'use client';
  
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { EnhancedTarotCard } from './EnhancedTarotCard';
 import { TarotCard } from '@/types/tarot';
 export type SpreadType = 'single' | 'three-card' | 'celtic-cross' | 'horseshoe' | 'relationship' | 'custom';
@@ -16,7 +16,7 @@ interface SpreadPosition {
 interface EnhancedTarotSpreadLayoutsProps {
   spreadType: SpreadType;
   cards: TarotCard[];
-  onCardClick?: (card: TarotCard, index: number) => void;
+  onCardClick?: (_card: TarotCard, _index: number) => void;
   isRevealing?: boolean;
   showBioluminescence?: boolean;
   customPositions?: SpreadPosition[];
@@ -25,21 +25,21 @@ interface EnhancedTarotSpreadLayoutsProps {
 export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProps> = ({
   spreadType,
   cards,
-  onCardClick,
+  onCardClick: _onCardClick,
   isRevealing = false,
   showBioluminescence = true,
-  customPositions = [],
+  customPositions: _customPositions = [],
   isMobile = false
 }) => {
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
-  const [connectionLines, setConnectionLines] = useState<Array<{ from: number; to: number; strength: number }>>([]);
-  const [energyFlow, setEnergyFlow] = useState(0);
+  const [_connectionLines, _setConnectionLines] = useState<Array<{ from: number; to: number; strength: number }>>([]);
+  const [_energyFlow, _setEnergyFlow] = useState(0);
   // Energy flow animation
  
   useEffect(() => {
     if (isRevealing) {
       const interval = setInterval(() => {
-        setEnergyFlow(prev => (prev + 0.1) % 1);
+        _setEnergyFlow(prev => (prev + 0.1) % 1);
       }, 100);
       return () => clearInterval(interval);
     }
@@ -48,12 +48,12 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
  
   useEffect(() => {
     if (spreadType === 'three-card' && cards.length === 3) {
-      setConnectionLines([
+      _setConnectionLines([
         { from: 0, to: 1, strength: 0.8 },
         { from: 1, to: 2, strength: 0.9 }
       ]);
     } else if (spreadType === 'celtic-cross' && cards.length >= 6) {
-      setConnectionLines([
+      _setConnectionLines([
         { from: 0, to: 1, strength: 1.0 },
         { from: 0, to: 2, strength: 0.6 },
         { from: 0, to: 3, strength: 0.6 },
@@ -106,12 +106,12 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
   const positions = getSpreadPositions(spreadType);
   const handleCardReveal = (card: TarotCard, index: number) => {
     setRevealedCards(prev => new Set([...prev, index]));
-    onCardClick?.(card, index);
+        onCardClick?.(card, index);
   };
   // Generate bioluminescent connection lines
   const renderConnectionLines = () => {
     if (!showBioluminescence || !isRevealing) return null;
-    return connectionLines.map((connection, index) => {
+    return _connectionLines.map((connection, index) => {
       const fromPos = positions[connection.from];
       const toPos = positions[connection.to];
       
@@ -168,7 +168,7 @@ export const EnhancedTarotSpreadLayouts: React.FC<EnhancedTarotSpreadLayoutsProp
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at ${50 + Math.sin(energyFlow * Math.PI * 2) * 20}% ${50 + Math.cos(energyFlow * Math.PI * 2) * 20}%, 
+          background: `radial-gradient(circle at ${50 + Math.sin(_energyFlow * Math.PI * 2) * 20}% ${50 + Math.cos(_energyFlow * Math.PI * 2) * 20}%, 
             rgba(0, 255, 255, 0.1) 0%, 
             rgba(127, 255, 212, 0.05) 30%, 
             transparent 70%)`,

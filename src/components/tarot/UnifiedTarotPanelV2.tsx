@@ -127,6 +127,7 @@ function getThreeCardSynthesis(cards: DrawnCard[]): string {
 } */
 export const UnifiedTarotPanelV2: React.FC<UnifiedTarotPanelV2Props> = ({
   className = "",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onInterpret,
 }) => {
   const { user, isGuest } = useAuth();

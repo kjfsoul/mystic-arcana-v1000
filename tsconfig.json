@@ -33,14 +33,17 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/agents/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     ".next",
     "tests",
-    "scripts",
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "mcp-servers/**/*",
+    "dist-test/**/*",
+    "scripts/**/*"
   ]
 }

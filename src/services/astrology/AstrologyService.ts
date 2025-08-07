@@ -67,7 +67,7 @@ export interface LocationData {
   city: string;
   country: string;
 }
-class AstrologyService {
+export class AstrologyService {
   private apiEndpoint = '/api/astrology';
   /**
    * Calculate a complete birth chart

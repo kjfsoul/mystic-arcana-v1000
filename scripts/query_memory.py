@@ -5,13 +5,13 @@ from pprint import pprint
 # Add project root to path to allow imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from a_mem.store import MemoryStore
+from agentic_memory.memory_system import AgenticMemorySystem
 
 def query_latest_events(namespace="mystic_arcana", limit=10):
     """Queries and prints the most recent events from the memory store."""
     print(f"\n--- Querying latest {limit} events from '{namespace}' ---")
     try:
-        store = MemoryStore(namespace=namespace)
+        store = AgenticMemorySystem(namespace=namespace)
         events = store.query_events(limit=limit)
         if not events:
             print("No events found.")

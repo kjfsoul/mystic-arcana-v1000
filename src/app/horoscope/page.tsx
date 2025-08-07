@@ -2,7 +2,7 @@
  
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, Globe, Settings } from 'lucide-react';
+import { Calendar, User, Globe } from 'lucide-react';
 import CosmicCalendar from './calendar';
 import { InteractiveBirthChart } from '@/components/astrology/InteractiveBirthChart';
 import { useAuth } from '@/contexts/AuthContext';

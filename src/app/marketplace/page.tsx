@@ -1,12 +1,12 @@
 'use client';
  
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { MYSTIC_PRODUCTS, createCheckoutSession, ProductMetadata, CelestialEventType } from '@/lib/stripe/initStripe';
 import { MercuryRetrogradeBanner } from '@/components/astrology/MercuryRetrogradeBanner';
 import { FilterSidebar, FilterState } from '@/components/marketplace/FilterSidebar';
-import { WishlistService, useWishlist, ProductKey } from '@/lib/marketplace/wishlist';
+import { useWishlist, ProductKey } from '@/lib/marketplace/wishlist';
 import { useAuth } from '@/contexts/AuthContext';
 interface Product {
   key: keyof typeof MYSTIC_PRODUCTS;
@@ -19,8 +19,8 @@ interface Product {
   featured?: boolean;
 }
 export default function MarketplacePage() {
-  const { user, isGuest } = useAuth();
-  const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist, wishlistCount } = useWishlist();
+  const { isGuest } = useAuth();
+  const { addToWishlist, removeFromWishlist, isInWishlist, wishlistCount } = useWishlist();
   
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);

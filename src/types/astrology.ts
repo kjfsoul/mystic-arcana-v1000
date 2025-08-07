@@ -1,6 +1,8 @@
 /**
  * Core astrology type definitions
  */
+import { AspectType, HouseSystem, Planet } from '@/constants/AstrologyConstants';
+
 /**
  * Birth data required for astrological calculations
  */
@@ -68,23 +70,6 @@ export interface AspectData {
   orb: number;
   isApplying: boolean;
 }
-/**
- * Aspect types used in astrological calculations
- */
-export type AspectType =
-  | "conjunction"
-  | "sextile"
-  | "square"
-  | "trine"
-  | "opposition";
-/**
- * House systems used in astrological calculations
- */
-export type HouseSystem = "Placidus" | "Koch" | "Equal" | "WholeSign";
-/**
- * Planet names for transit calculations
- */
-export type Planet = 'sun' | 'moon' | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune' | 'pluto';
 /**
  * Additional utility types for compatibility
  */

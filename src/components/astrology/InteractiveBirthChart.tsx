@@ -1,11 +1,12 @@
 'use client';
  
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BirthData, PlanetPosition, HousePosition } from '@/lib/astrology/AstronomicalCalculator';
 import { SwissEphemerisShim } from '@/lib/astrology/SwissEphemerisShim';
 import { TransitEngine, PlanetaryPosition, TransitAspect } from '@/lib/ephemeris/transitEngine';
 import styles from './InteractiveBirthChart.module.css';
+/* eslint-disable no-unused-vars */
 interface ChartProps {
   birthData: BirthData;
   onPlanetClick?: (planet: PlanetPosition) => void;
@@ -14,6 +15,7 @@ interface ChartProps {
   transitDate?: Date;
   className?: string;
 }
+/* eslint-enable no-unused-vars */
 // Zodiac signs configuration
 const ZODIAC_SIGNS = [
   { name: 'Aries', symbol: '♈', startDegree: 0, element: 'fire' },

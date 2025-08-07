@@ -48,7 +48,7 @@ export async function getRealCareerPlacements(birthData: BirthData): Promise<Rec
   // Extract real planetary positions from the calculated chart
   chart.planets.forEach(planet => {
     const planetName = planet.name.toLowerCase();
-    if (placements.hasOwnProperty(planetName)) {
+    if (Object.prototype.hasOwnProperty.call(placements, planetName)) {
       placements[planetName] = planet.longitude;
     }
   });

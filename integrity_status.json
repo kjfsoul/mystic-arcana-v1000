@@ -1,0 +1,47 @@
+{
+  "status": "build_passing_with_stubs",
+  "missing_implementations": [
+    {
+      "module": "nasaFallbackHandler",
+      "files": [
+        "/Users/kfitz/mystic-arcana-v1000/src/lib/astro/nasaFallbackHandler.ts"
+      ],
+      "description": "Stub created to resolve import errors. Original implementation is missing."
+    },
+    {
+      "module": "geoResolver",
+      "files": [],
+      "description": "No explicit file found, but likely a missing module based on context."
+    },
+    {
+      "module": "SwissEphemerisBridge",
+      "files": [
+        "/Users/kfitz/mystic-arcana-v1000/src/lib/astronomy/AstronomicalEngine.ts",
+        "/Users/kfitz/mystic-arcana-v1000/src/lib/astrology/BirthChartCalculator.ts"
+      ],
+      "description": "Stub created to resolve import errors. Original implementation is missing."
+    }
+  ],
+  "resolved_errors": {
+    "parsing_errors": [
+      "/Users/kfitz/mystic-arcana-v1000/src/agents/DataOracle.ts",
+      "/Users/kfitz/mystic-arcana-v1000/src/agents/PersonaLearner.ts",
+      "/Users/kfitz/mystic-arcana-v1000/src/agents/claude-init/index.ts",
+      "/Users/kfitz/mystic-arcana-v1000/src/lib/astronomy/AstronomicalEngine.ts"
+    ],
+    "no_undef_errors": [
+      "onSelectFeature in src/components/panels/AstrologyZonePreview.tsx",
+      "onSelectReading in src/components/panels/TarotZonePreview.tsx",
+      "onMoodChange in src/components/readers/VirtualReader/VirtualReader.tsx",
+      "drawCards in src/components/tarot/EnhancedTarotPanel.tsx",
+      "cards in src/components/tarot/EnhancedTarotPanel.tsx",
+      "setEnergyFlow in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "setConnectionLines in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "customPositions in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "onCardClick in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "connectionLines in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "energyFlow in src/components/tarot/EnhancedTarotSpreadLayouts.tsx",
+      "setSaving in src/components/tarot/TarotPanelWithSaveModal.tsx"
+    ]
+  }
+}

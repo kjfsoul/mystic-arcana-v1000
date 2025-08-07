@@ -6068,7 +6068,7 @@ Add this file to `backend/agents/memory/` (create the folder if it doesn't exist
 ```python
 # backend/agents/memory/memory_manager.py
 
-from agentic_memory.memory_system import AgenticMemorySystem
+from a_mem.store import MemoryStore
 
 # 🌌 Initialize with Claude/Gemini/OpenAI-compatible backend
 memory_system = AgenticMemorySystem(
@@ -7192,7 +7192,7 @@ Run Python REPL and test import:
 
 ```bash
 python
->>> from agentic_memory.memory_system import AgenticMemorySystem
+>>> from a_mem.store import MemoryStore
 >>> exit()
 ```
 
@@ -7206,7 +7206,7 @@ Create a file in your `mystic/src/agents/` folder:
 
 ```python
 # memory_agent.py
-from agentic_memory.memory_system import AgenticMemorySystem
+from a_mem.store import MemoryStore
 
 memory = AgenticMemorySystem(
     model_name='all-MiniLM-L6-v2',
@@ -21942,4 +21942,3 @@ Would you like me to generate:
     
 
 Let me know how you'd like to proceed.
-

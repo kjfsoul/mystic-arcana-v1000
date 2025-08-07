@@ -1,0 +1,4 @@
+{
+  "matcher": "tool_used:edit",
+  "command": "../../scripts/log_edit.sh"
+}

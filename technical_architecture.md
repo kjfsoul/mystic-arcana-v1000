@@ -30,7 +30,14 @@
   * Deck images: Custom or RW Tarot (open source)
   * Astrology/tarot PDFs, community content, docs/legal assets in `/docs`
 
-### 2. Security, Privacy, and Compliance
+### 2. MCP Servers
+
+* **supermemory**: Manages long-term memory and knowledge base.
+* **finrobot**: Financial data analysis and reporting.
+* **archon**: Orchestrates and governs the agentic ecosystem.
+* **browser**: Provides web browsing and data extraction capabilities.
+
+### 3. Security, Privacy, and Compliance
 
 * User data encrypted at rest/in transit (Supabase/PG, HTTPS)
 * Opt-in analytics, privacy-first by design
@@ -38,7 +45,7 @@
 * Automated monitoring, error handling, and feedback loops
 * Legal compliance: GDPR, CCPA, data minimization, template agreements in `/docs/legal`
 
-### 3. Key Integration Points
+### 4. Key Integration Points
 
 * **Virtual Guide System:**
 
@@ -58,7 +65,7 @@
   * User profiles, logs, feedback, group rituals, and community features
   * Email/SMS for onboarding, reminders, feedback requests
 
-### 4. Folders & Files (Reflecting Your Project Structure)
+### 5. Folders & Files (Reflecting Your Project Structure)
 
 * `/docs`: All research, PDFs, legal, and domain content
 * `/public`: Images, fonts, icons
@@ -66,16 +73,14 @@
 * `/scripts`: ETL, crawlers, NLP, data prep
 * `/tests`: e2e, integration, and unit test suites
 
-### 5. Architectural Diagram
+### 6. Architectural Diagram
 
 * (Prompt Claude or Gemini to render a Mermaid.js or Figma diagram using above components)
 
-### 6. Next Steps & Considerations
+### 7. Next Steps & Considerations
 
 * Finalize UI/UX for MVP (galaxy, overlays, onboarding, multi-reader selection)
 * Prioritize API endpoints & security patterns
 * Establish daily workflow: AI codegen in Cursor/Claude, with reference to `/docs` context
 * Integrate MCP/AGUI agents and feedback loops for adaptive personalization
 * Continuously update docs as infra evolves
-
-

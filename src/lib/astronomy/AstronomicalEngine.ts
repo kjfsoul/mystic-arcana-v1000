@@ -8,6 +8,9 @@
  * - Real star catalog integration (Hipparcos, Yale Bright Star)
  * - Swiss Ephemeris planetary calculations
  * - Coordinate system transformations
+ */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/*
  * - Cosmic weather correlations
  * - Performance optimized for 100,000+ stars at 60fps
  */

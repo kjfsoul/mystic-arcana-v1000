@@ -179,6 +179,7 @@ export async function POST(request: NextRequest) {
       );
     }
     // Prepare reading data for database
+    // Note: metadata column doesn't exist yet, so we'll include that data in cards_drawn
     const readingData = {
       user_id: userId,
       spread_type: spreadType,
@@ -196,15 +197,14 @@ export async function POST(request: NextRequest) {
         drawId: body.drawId,
         question: body.question,
         tags: body.tags || [],
-      },
-      interpretation_text: interpretation,
-      cosmic_influence: body.cosmicInfluence || null,
-      metadata: {
+        // Include metadata fields here until database is updated
         isPublic: body.isPublic || false,
         notes: body.notes,
         savedAt: new Date().toISOString(),
         version: "1.0",
       },
+      interpretation_text: interpretation,
+      cosmic_influence: body.cosmicInfluence || null,
     };
     // Save reading to database
     const startTime = Date.now();

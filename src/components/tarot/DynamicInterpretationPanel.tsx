@@ -1,12 +1,11 @@
 'use client';
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Book, 
   Lightbulb, 
   Heart, 
   Briefcase, 
-  Sparkles, 
   Moon, 
   Sun, 
   Star,
@@ -36,7 +35,7 @@ interface DynamicInterpretationPanelProps {
   selectedPosition?: number;
   allCards: TarotCard[];
   spreadType: SpreadType;
-  onCardSelect?: (card: TarotCard, position: number) => void;
+  onCardSelect?: (_card: TarotCard, _position: number) => void;
   onClose?: () => void;
   className?: string;
 }
@@ -52,13 +51,14 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
   selectedPosition = 0,
   allCards,
   spreadType,
-  onCardSelect,
+  onCardSelect: _onCardSelect,
   onClose,
   className = ''
 }) => {
   const [activeTab, setActiveTab] = useState<'meaning' | 'context' | 'guidance' | 'connections'>('meaning');
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
-  const [showReversedMeaning, setShowReversedMeaning] = useState(false);
+  // TODO: Implement reversed meaning toggle
+  // const [showReversedMeaning, setShowReversedMeaning] = useState(false);
   const [bookmarkedSections, setBookmarkedSections] = useState<Set<string>>(new Set());
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['core-meaning']));
   // Position meanings for different spreads
@@ -192,8 +192,10 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
     return `As the "${positionName}" in your ${context.spread.replace('-', ' ')} spread, ${card.name} ${context.isReversed ? '(reversed)' : ''} suggests: ${baseMeaning}\n\nThis position represents a crucial aspect of your current situation and offers specific guidance for this area of your life.`;
   }
   function generateEmotionalGuidance(card: TarotCard, context: InterpretationContext): string {
-    const emotionalKeywords = ['love', 'fear', 'joy', 'anxiety', 'peace', 'anger', 'compassion', 'grief'];
-    const cardKeywords = card.keywords ? card.keywords.filter(k => emotionalKeywords.some(ek => k.toLowerCase().includes(ek))) : [];
+    // TODO: Implement keyword-based emotional guidance
+    // const emotionalKeywords = ['love', 'fear', 'joy', 'anxiety', 'peace', 'anger', 'compassion', 'grief'];
+    // TODO: Implement keyword-based emotional analysis
+    // const cardKeywords = card.keywords ? card.keywords.filter(k => emotionalKeywords.some(ek => k.toLowerCase().includes(ek))) : [];
     
     const baseGuidance = `${card.name} invites you to explore your emotional landscape with curiosity and compassion.`;
     
@@ -263,7 +265,7 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.8;
       utterance.pitch = 0.9;
-      speechSynthesis.speak(utterance);
+      window.speechSynthesis.speak(utterance);
     }
   }, [isAudioEnabled]);
   // Section management
@@ -513,7 +515,7 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
                       className="flex items-center space-x-2 px-3 py-2 bg-purple-600/30 rounded-lg text-purple-300 hover:bg-purple-600/50 transition-colors"
                       onClick={() => {
                         const prevIndex = selectedPosition > 0 ? selectedPosition - 1 : allCards.length - 1;
-                        onCardSelect?.(allCards[prevIndex], prevIndex);
+                        _onCardSelect?.(allCards[prevIndex], prevIndex);
                       }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -530,7 +532,7 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
                       className="flex items-center space-x-2 px-3 py-2 bg-purple-600/30 rounded-lg text-purple-300 hover:bg-purple-600/50 transition-colors"
                       onClick={() => {
                         const nextIndex = selectedPosition < allCards.length - 1 ? selectedPosition + 1 : 0;
-                        onCardSelect?.(allCards[nextIndex], nextIndex);
+                        _onCardSelect?.(allCards[nextIndex], nextIndex);
                       }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -561,11 +563,11 @@ export const DynamicInterpretationPanel: React.FC<DynamicInterpretationPanelProp
               <div className="space-y-4">
                 <h3 className="font-semibold text-white mb-4">Card Relationships</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {allCards.filter((_, index) => index !== selectedPosition).slice(0, 4).map((card, index) => (
+                  {allCards.filter((_, idx) => idx !== selectedPosition).slice(0, 4).map((card) => (
                     <motion.button
                       key={card.id}
                       className="bg-purple-900/30 rounded-lg p-3 text-left hover:bg-purple-600/30 transition-colors"
-                      onClick={() => onCardSelect?.(card, allCards.indexOf(card))}
+                      onClick={() => _onCardSelect?.(card, allCards.indexOf(card))}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
